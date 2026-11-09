@@ -1,5 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const vm = require('node:vm');
 
 const source = path.join(__dirname, '..', 'index.html');
 const outDir = path.join(__dirname, '..', 'www');
@@ -45,5 +46,15 @@ const navigation = `<script id="carthage-native-navigation">(function(){if(windo
 if (!html.includes('</body>')) throw new Error('Missing closing body tag for navigation controls.');
 html = html.replace('</body>', navigation + '</body>');
 
+const inlineScripts = [...html.matchAll(/<script\\b([^>]*)>([\\s\\S]*?)<\\/script>/gi)];
+let executable = 0;
+for (const [, attrs, body] of inlineScripts) {
+  if (!body.trim() || /type\\s*=\\s*["']application\\/(?:json|ld\\+json)["']/i.test(attrs)) continue;
+  new vm.Script(body, { filename: `carthage-inline-${executable}.js` });
+  executable++;
+}
+for (const required of ['window.__carthageSaveNow', 'window.__carthageStartPart3', 'carthage-home-return', 'plugins.Filesystem', 'plugins.Share']) {
+  if (!html.includes(required)) throw new Error('Missing patched runtime feature: ' + required);
+}
 fs.writeFileSync(target, html);
-console.log('Prepared Carthage APK: verified autosave, native save-file sharing, Part 3 entry, home-return control.');
+console.log('Prepared Carthage APK: ' + executable + ' inline scripts parsed; autosave, native export, Part 3, and home return verified.');
