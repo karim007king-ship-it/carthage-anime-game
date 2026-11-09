@@ -54,8 +54,8 @@ for (const [, attrs, body] of inlineScripts) {
   new vm.Script(body, { filename: `carthage-inline-${executable}.js` });
   executable++;
 }
-for (const required of ['window.__carthageSaveNow', 'window.__carthageStartPart3', 'carthage-home-return', 'plugins.Filesystem', 'plugins.Share']) {
+for (const required of ['window.__carthageSaveNow', 'window.__carthageStartPart3', 'window.__carthageCanStartPart3', 'window.__carthageContinue', 'carthage-home-return', 'carthage-save-now', 'carthage-continue-last', 'plugins.Filesystem', 'plugins.Share']) {
   if (!html.includes(required)) throw new Error('Missing patched runtime feature: ' + required);
 }
 fs.writeFileSync(target, html);
-console.log('Prepared Carthage APK: ' + executable + ' inline scripts parsed; autosave, native export, Part 3, and home return verified.');
+console.log('Prepared Carthage APK: ' + executable + ' inline scripts parsed; autosave, one-tap continue, gated Part 3, and home/save controls verified.');
