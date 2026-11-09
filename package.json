@@ -5,12 +5,14 @@
   "description": "Carthage interactive story game - cinematic anime pilot",
   "scripts": {
     "test": "node tests/smoke-test.cjs",
-    "prepare:web": "node -e \"require('node:fs').mkdirSync('www',{recursive:true});require('node:fs').copyFileSync('index.html','www/index.html')\"",
+    "prepare:web": "node scripts/prepare-web.cjs",
     "android:sync": "npm run prepare:web && cap sync android"
   },
   "dependencies": {
     "@capacitor/android": "8.6.0",
-    "@capacitor/core": "8.6.0"
+    "@capacitor/core": "8.6.0",
+    "@capacitor/filesystem": "8.0.0",
+    "@capacitor/share": "8.0.0"
   },
   "devDependencies": {
     "@capacitor/cli": "8.6.0"
