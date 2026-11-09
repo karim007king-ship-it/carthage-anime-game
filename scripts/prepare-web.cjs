@@ -355,7 +355,7 @@ const fixedHomeViewport = "<style id=\"carthage-fixed-home-style\">\nhtml.cartha
 html = html.replace('</body>', fixedHomeViewport + '</body>');
 
 const qartonHomeRuntime = fs.readFileSync(path.join(__dirname, 'qarton-premium-home.js'), 'utf8');
-html = html.replace('</body>', '<script id="qarton-premium-home-runtime">\\n' + qartonHomeRuntime + '\\n</script></body>');
+html = html.replace('</body>', '<script id="qarton-premium-home-runtime">' + String.fromCharCode(10) + qartonHomeRuntime + String.fromCharCode(10) + '</script></body>');
 
 const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
 let executable = 0;
