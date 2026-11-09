@@ -220,7 +220,7 @@ html = html.replace('</body>', cinematicExpansion + '</body>');
 
 // Cinematic scene cuts: fade through black when the main story artwork changes.
 // This is presentation-only; it never touches story state, timers, choices, or saves.
-const cinematicTransitions = \`<style id="carthage-scene-transition-style">
+const cinematicTransitions = `<style id="carthage-scene-transition-style">
 @keyframes carthageSceneFadeThrough{0%{opacity:1}100%{opacity:0}}
 #carthage-scene-transition{position:fixed;inset:0;z-index:2147483001;pointer-events:none;background:#050509;opacity:0}
 #carthage-scene-transition.is-cutting{animation:carthageSceneFadeThrough .72s cubic-bezier(.7,0,.2,1) both}
@@ -266,7 +266,7 @@ const cinematicTransitions = \`<style id="carthage-scene-transition-style">
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
-</script>\`;
+</script>`
 html = html.replace('</body>', cinematicTransitions + '</body>');
 
 // Instrument the real ES module and React mount, not a detached JavaScript test.
