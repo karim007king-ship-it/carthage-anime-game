@@ -32,6 +32,9 @@ assert.ok(!androidPrep.includes('if(!loading&&bodyText.length>80)return;'), 'sta
 assert.ok(androidPrep.includes('Visible by default'), 'startup fallback must be visible without CSS animation or JavaScript timers');
 assert.ok(androidPrep.includes('carthage-startup-watchdog'), 'static startup watchdog fallback must be included in the Android page');
 assert.ok(!androidPrep.includes('carthage-watchdog-reveal'), 'startup fallback must not depend on CSS animation to become visible');
+const watchdogStyle = androidPrep.match(/const watchdogFallback = `<style[^>]*>([\\s\\S]*?)<\\/style>`;/);
+assert.ok(watchdogStyle, 'startup fallback CSS must be present');
+assert.ok(!/opacity\\s*:\\s*0|visibility\\s*:\\s*hidden|animation\\s*:/.test(watchdogStyle[1]), 'startup fallback must not be hidden or animated before the game mounts');
 assert.ok(androidPrep.includes('Resource load'), 'Android startup diagnostic must capture failed resource loads');
 assert.ok(androidPrep.includes('carthage-startup-errors'), 'Android startup diagnostic must retain captured errors for display');
 assert.ok(androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
