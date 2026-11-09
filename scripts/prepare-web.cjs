@@ -269,6 +269,66 @@ const cinematicTransitions = `<style id="carthage-scene-transition-style">
 </script>`
 html = html.replace('</body>', cinematicTransitions + '</body>');
 
+// Great Wall destruction sequence: dust bloom, shock ring, flying stone fragments and impact flash.
+const cinematicDestruction = String.raw\`<style id="carthage-wall-impact-style">
+@keyframes carthageWallFlash{0%,100%{opacity:0}7%{opacity:.72}19%{opacity:.12}30%{opacity:.28}48%{opacity:0}}
+@keyframes carthageDustBloom{0%{opacity:0;transform:translate(-50%,-50%) scale(.12)}18%{opacity:.78}100%{opacity:0;transform:translate(-50%,-50%) scale(2.8)}}
+@keyframes carthageShockRing{0%{opacity:.9;transform:translate(-50%,-50%) scale(.08)}75%{opacity:.3}100%{opacity:0;transform:translate(-50%,-50%) scale(2.4)}}
+@keyframes carthageRubbleFly{0%{opacity:0;transform:translate3d(0,0,0) rotate(0) scale(.45)}12%{opacity:1}100%{opacity:0;transform:translate3d(var(--dx),var(--dy),0) rotate(var(--rot)) scale(.12)}}
+#carthage-wall-impact-fx{position:fixed;inset:0;z-index:2147483002;overflow:hidden;pointer-events:none;opacity:0}
+#carthage-wall-impact-fx.is-active{opacity:1}
+#carthage-wall-impact-fx .wall-flash{position:absolute;inset:0;background:radial-gradient(ellipse at 52% 48%,rgba(255,238,196,.9),rgba(255,174,82,.22) 28%,transparent 68%);animation:carthageWallFlash .72s ease-out both}
+#carthage-wall-impact-fx .wall-dust{position:absolute;left:52%;top:55%;width:min(95vw,760px);height:min(95vw,760px);border-radius:50%;background:radial-gradient(circle,rgba(221,190,145,.72) 0%,rgba(157,121,91,.44) 34%,rgba(73,58,52,.18) 58%,transparent 72%);filter:blur(13px);animation:carthageDustBloom 2.6s cubic-bezier(.12,.6,.2,1) both}
+#carthage-wall-impact-fx .wall-ring{position:absolute;left:52%;top:51%;width:min(72vw,560px);aspect-ratio:1;border:3px solid rgba(255,220,164,.72);border-radius:50%;box-shadow:0 0 28px rgba(255,177,94,.55),inset 0 0 24px rgba(255,220,164,.2);animation:carthageShockRing 1.15s ease-out both}
+#carthage-wall-impact-fx .wall-stone{position:absolute;left:52%;top:48%;width:var(--size);height:var(--size);border-radius:22% 38% 18% 42%;background:linear-gradient(135deg,#d7b58b,#62564e 68%,#29262a);box-shadow:0 2px 8px #160f0b;animation:carthageRubbleFly 1.9s cubic-bezier(.12,.62,.22,1) var(--delay) both}
+@media(prefers-reduced-motion:reduce){#carthage-wall-impact-fx,#carthage-wall-impact-fx *{animation:none!important;opacity:0!important}}
+</style>
+<script id="carthage-wall-impact-runtime">
+(function(){
+ if(window.__carthageWallImpact)return;
+ window.__carthageWallImpact=true;
+ var root=null,fx=null,wasImpact=false,removeTimer=0;
+ var stones=[
+  ["-34vw","-27vh","-18deg","0ms","13px"],["-25vw","-39vh","42deg","35ms","9px"],
+  ["-12vw","-32vh","-68deg","70ms","16px"],["8vw","-38vh","24deg","20ms","11px"],
+  ["22vw","-29vh","76deg","90ms","14px"],["35vw","-18vh","-32deg","55ms","8px"],
+  ["-39vw","-5vh","58deg","110ms","12px"],["-29vw","13vh","-44deg","45ms","17px"],
+  ["-17vw","22vh","92deg","80ms","10px"],["2vw","-23vh","-74deg","15ms","15px"],
+  ["17vw","-15vh","38deg","100ms","9px"],["31vw","4vh","-56deg","65ms","13px"],
+  ["-36vw","24vh","28deg","125ms","8px"],["-21vw","-11vh","-88deg","30ms","11px"],
+  ["12vw","26vh","64deg","75ms","16px"],["38vw","19vh","-24deg","140ms","10px"],
+  ["-7vw","-42vh","48deg","50ms","7px"],["27vw","-41vh","-42deg","115ms","12px"]
+ ];
+ function mount(){
+  if(fx)return;
+  fx=document.createElement("div");fx.id="carthage-wall-impact-fx";fx.setAttribute("aria-hidden","true");
+  var flash=document.createElement("i");flash.className="wall-flash";
+  var dust=document.createElement("i");dust.className="wall-dust";
+  var ring=document.createElement("i");ring.className="wall-ring";
+  fx.append(flash,dust,ring);
+  stones.forEach(function(s){var piece=document.createElement("i");piece.className="wall-stone";piece.style.setProperty("--dx",s[0]);piece.style.setProperty("--dy",s[1]);piece.style.setProperty("--rot",s[2]);piece.style.setProperty("--delay",s[3]);piece.style.setProperty("--size",s[4]);fx.appendChild(piece)});
+  document.body.appendChild(fx);
+ }
+ function trigger(){
+  if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  mount();fx.classList.remove("is-active");void fx.offsetWidth;fx.classList.add("is-active");
+  window.clearTimeout(removeTimer);removeTimer=window.setTimeout(function(){if(fx)fx.classList.remove("is-active")},2750);
+ }
+ function apply(){
+  root=document.getElementById("root");if(!root)return;
+  var story=(root.innerText||"");
+  var active=!!(root.querySelector(".game-timer")&&/(السور يتكسر|لحظة الكسر|تحطم السور)/.test(story));
+  if(active&&!wasImpact)trigger();
+  wasImpact=active;
+ }
+ var queued=false;
+ var observer=new MutationObserver(function(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;apply()})});
+ function start(){root=document.getElementById("root");if(!root)return;apply();observer.observe(root,{subtree:true,childList:true,characterData:true})}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>\`;
+html = html.replace('</body>', cinematicDestruction + '</body>');
+
 // Instrument the real ES module and React mount, not a detached JavaScript test.
 replaceOnce('<script type="module">', '<script type="module">window.__CARTHAGE_MODULE_STARTED__=true;', 'main story module start marker');
 replaceOnce('yz.createRoot(document.getElementById("root")).render(u(bz.default.StrictMode,{children:u(vu,{})}));',
