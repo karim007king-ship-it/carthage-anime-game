@@ -85,8 +85,21 @@ const startupDiagnostics = `<script id="carthage-startup-diagnostics">
 </script>`;
 if (!html.includes('</head>')) throw new Error('Missing closing head tag for startup diagnostics.');
 html = html.replace('</head>', startupDiagnostics + '</head>');
+const watchdogFallback = `<style id="carthage-watchdog-style">
+@keyframes carthage-watchdog-reveal{0%{opacity:0;visibility:hidden;pointer-events:none}99%{opacity:0;visibility:hidden;pointer-events:none}100%{opacity:1;visibility:visible;pointer-events:auto}}
+#carthage-startup-watchdog{position:fixed;inset:0;z-index:2147483646;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;overflow:auto;box-sizing:border-box;padding:28px;background:#100d12;color:#fff;text-align:center;font:15px/1.9 system-ui;opacity:0;visibility:hidden;animation:carthage-watchdog-reveal .01s linear 12s forwards}
+#carthage-startup-watchdog h2{margin:0;color:#e8a33d;font-size:23px;font-weight:900}
+#carthage-startup-watchdog p{max-width:34rem;margin:0}
+</style>`;
+const watchdogMarkup = `<section id="carthage-startup-watchdog" dir="rtl" role="alert">
+<h2>اللعبة ما زالت عالقة في التحميل</h2>
+<p>لم تظهر واجهة قرطاج بعد 12 ثانية. هذا تنبيه مستقل عن كود اللعبة. إذا ظهرت شاشة التشخيص التفصيلية بعدها، انسخ المعلومات وأرسلها.</p>
+<p>لا تحذف اللعبة ولا تمسح بياناتها حتى نحافظ على تقدمك.</p>
+</section>`;
+if (!html.includes('</head>')) throw new Error('Missing closing head tag for watchdog fallback.');
+html = html.replace('</head>', watchdogFallback + '</head>');
 if (!html.includes('</body>')) throw new Error('Missing closing body tag for navigation controls.');
-html = html.replace('</body>', navigation + '</body>');
+html = html.replace('</body>', watchdogMarkup + navigation + '</body>');
 
 const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
 let executable = 0;
