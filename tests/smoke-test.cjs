@@ -15,6 +15,10 @@ assert.match(html, /السور يتكسر/);
 
 const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
 assert.ok(cinematicPilot.includes('carthage-cinematic-pilot-runtime'), 'cinematic pilot runtime must be injected into the Android build');
+assert.ok(cinematicPilot.includes('carthage-save-transfer'), 'save export/import transfer controls must be injected');
+assert.ok(cinematicPilot.includes('carthage-export-backup'), 'one-tap save backup export button must exist');
+assert.ok(cinematicPilot.includes('carthage-import-backup'), 'save backup import button must exist');
+assert.ok(cinematicPilot.includes('shiganshina-autosave-v1'), 'save import must restore autosave for one-tap continue');
 assert.ok(cinematicPilot.includes('carthageSlowPushIn'), 'cinematic pilot must include a slow camera push-in');
 assert.ok(cinematicPilot.includes('carthageCinematicLight'), 'cinematic pilot must include a restrained moving light pass');
 assert.ok(cinematicPilot.includes('carthageCinematicImpact'), 'Great Wall break must trigger a brief impact camera shake');
