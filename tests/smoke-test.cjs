@@ -17,8 +17,8 @@ const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'pr
 assert.ok(cinematicPilot.includes('carthage-cinematic-pilot-runtime'), 'cinematic pilot runtime must be injected into the Android build');
 assert.ok(cinematicPilot.includes('carthage-save-transfer'), 'save export/import transfer controls must be injected');
 assert.ok(cinematicPilot.includes('carthage-drive-recovery-seed'), 'the confirmed Drive save must be included as a clean-install recovery seed');
-assert.ok(cinematicPilot.includes('"chapter":5'), 'recovery seed must preserve chapter 5');
-assert.ok(cinematicPilot.includes('"sceneIdx":4'), 'recovery seed must preserve the saved scene index');
+assert.ok(cinematicPilot.includes('chapter\\":5'), 'recovery seed must preserve chapter 5');
+assert.ok(cinematicPilot.includes('sceneIdx\\":4'), 'recovery seed must preserve the saved scene index');
 assert.ok(cinematicPilot.includes('slots.some(valid)||valid(auto))return'), 'recovery seed must never overwrite a valid existing save');
 assert.ok(cinematicPilot.includes('carthage-export-backup'), 'one-tap save backup export button must exist');
 assert.ok(cinematicPilot.includes('carthage-import-backup'), 'save backup import button must exist');
