@@ -11,7 +11,7 @@ assert.match(html, /V17\.1/);
 assert.match(html, /c17-audio-control/);
 assert.match(html, /c17-audio-volume/);
 assert.match(html, /prefers-reduced-motion/);
-assert.match(html, /السور يتكسر/);
+assert.match(html, /السور يتكسر/);\n\nconst androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');\nassert.match(androidPrep, /Zn\\.includes\\(\\\"light\\\"\\).*Zn\\.includes\\(\\\"shadow\\\"\\)/);\nassert.match(androidPrep, /carthage-save-now/);\nassert.match(androidPrep, /carthage-continue-last/);\nassert.match(androidPrep, /window\\.__carthageCanStartPart3/);
 
 const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(m => m[1]);
 const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
