@@ -1,0 +1,64 @@
+name: Carthage Minimal WebView Diagnostic
+
+on:
+  push:
+    branches: [diagnostic/webview-minimal]
+    paths:
+      - "diagnostics/webview.html"
+      - ".github/workflows/webview-diagnostic.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build-diagnostic:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
+
+      - name: Install Android SDK packages
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Install JavaScript dependencies
+        run: npm install
+
+      - name: Prepare isolated diagnostic app
+        run: |
+          node -e "const fs=require('fs');const p=require('./capacitor.config.json');p.appId='com.carthage.animegame.webviewtest';p.appName='اختبار WebView قرطاج';p.webDir='www';fs.writeFileSync('capacitor.config.json',JSON.stringify(p,null,2));"
+          mkdir -p www
+          cp diagnostics/webview.html www/index.html
+
+      - name: Generate Android project
+        run: npx cap add android
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build diagnostic APK
+        working-directory: android
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Upload diagnostic APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: carthage-webview-diagnostic-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
