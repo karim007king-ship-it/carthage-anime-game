@@ -29,9 +29,9 @@ assert.ok(androidPrep.includes("removeWatchdogWhenReady"), "startup watchdog mus
 
 assert.ok(androidPrep.includes('window.setTimeout(showIfStuck,12000)'), 'Android startup diagnostic must appear for a stuck or blank startup');
 assert.ok(!androidPrep.includes('if(!loading&&bodyText.length>80)return;'), 'startup diagnostics must not be suppressed by long static loading text');
-assert.ok(androidPrep.includes('carthage-watchdog-reveal'), 'CSS watchdog must reveal even when JavaScript timers are blocked');
+assert.ok(androidPrep.includes('Visible by default'), 'startup fallback must be visible without CSS animation or JavaScript timers');
 assert.ok(androidPrep.includes('carthage-startup-watchdog'), 'static startup watchdog fallback must be included in the Android page');
-assert.ok(androidPrep.includes('12s forwards'), 'CSS watchdog must use an independent 12-second delay');
+assert.ok(!androidPrep.includes('carthage-watchdog-reveal'), 'startup fallback must not depend on CSS animation to become visible');
 assert.ok(androidPrep.includes('Resource load'), 'Android startup diagnostic must capture failed resource loads');
 assert.ok(androidPrep.includes('carthage-startup-errors'), 'Android startup diagnostic must retain captured errors for display');
 assert.ok(androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
