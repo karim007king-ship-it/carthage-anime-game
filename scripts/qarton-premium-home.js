@@ -1,54 +1,42 @@
 (function(){
-  if(window.__qartonPremiumHomeInstalled)return;
-  window.__qartonPremiumHomeInstalled=true;
-  var css=`
-  :root{--qarton-gold:#e8bd68;--qarton-gold2:#fff0bd;--qarton-red:#7b1f2a;--qarton-ink:#090b12;--qarton-blue:#111b2d}
-  html.carthage-home-locked,body.carthage-home-locked{background:#080a10!important}
-  body.carthage-home-locked:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 12%,rgba(123,31,42,.42),transparent 48%),radial-gradient(ellipse at 10% 85%,rgba(190,139,58,.13),transparent 42%),linear-gradient(155deg,#080a10 0%,#111827 52%,#090b12 100%)}
-  #root.carthage-home-locked{box-sizing:border-box!important;padding:clamp(84px,13vh,118px) 14px clamp(66px,10vh,88px)!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important}
-  #root.carthage-home-locked #qarton-home-brand{position:fixed;z-index:1000;top:calc(env(safe-area-inset-top,0px) + 12px);left:0;right:0;text-align:center;pointer-events:none}
-  #qarton-home-brand .qarton-mark{display:inline-flex;align-items:center;justify-content:center;width:43px;height:43px;border:1px solid rgba(232,189,104,.85);border-radius:13px;transform:rotate(45deg);background:linear-gradient(145deg,rgba(123,31,42,.9),rgba(12,17,29,.96));box-shadow:0 0 24px rgba(232,189,104,.2),inset 0 0 14px rgba(232,189,104,.12);vertical-align:middle;margin-inline-end:12px}
-  #qarton-home-brand .qarton-mark span{transform:rotate(-45deg);font:900 20px Georgia,serif;color:var(--qarton-gold2)}
-  #qarton-home-brand .qarton-word{display:inline-block;vertical-align:middle;text-align:left}
-  #qarton-home-brand strong{display:block;color:var(--qarton-gold2);font:900 21px/1.05 Georgia,serif;letter-spacing:3px;text-shadow:0 2px 16px #d7a64b55}
-  #qarton-home-brand small{display:block;margin-top:5px;color:#c8b58e;font:700 8px/1.2 system-ui;letter-spacing:2px}
-  #qarton-home-brand .qarton-game-title{display:block;margin-top:9px;color:#fff2d0;font:900 19px/1.25 system-ui;letter-spacing:.2px;text-shadow:0 3px 18px #000}
-  #qarton-home-brand .qarton-game-sub{display:block;margin-top:3px;color:#b9bdc9;font:500 10px system-ui;letter-spacing:1px}
-  #root.carthage-home-locked .home-actions.grid{width:min(100%,460px)!important;max-width:460px!important;margin:0 auto!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important;align-content:center!important}
-  #root.carthage-home-locked .home-actions.grid:before{content:"اختر رحلتك";grid-column:1/-1;display:block;text-align:center;color:#e7d5b2;font:800 12px system-ui;letter-spacing:2px;margin:0 0 5px}
-  #root.carthage-home-locked .home-actions.grid button{min-height:54px!important;border:1px solid rgba(232,189,104,.58)!important;border-radius:15px!important;background:linear-gradient(145deg,rgba(34,43,59,.96),rgba(13,17,28,.98))!important;color:#fff0d0!important;font:800 13px/1.45 system-ui!important;box-shadow:0 8px 22px #0006,inset 0 1px 0 #ffffff12!important;transition:transform .18s ease,border-color .18s ease,filter .18s ease!important}
-  #root.carthage-home-locked .home-actions.grid button:active{transform:scale(.975)!important;filter:brightness(1.18)!important}
-  #root.carthage-home-locked .home-actions.grid button:first-of-type{grid-column:1/-1!important;min-height:62px!important;background:linear-gradient(110deg,#8a2630,#54202c 55%,#17243a)!important;border:1px solid #f0ca7c!important;color:#fff4d8!important;font-size:15px!important;box-shadow:0 10px 30px #0008,0 0 22px #c08b4230!important}
-  #root.carthage-home-locked #carthage-continue-last{grid-column:1/-1!important;width:100%!important;min-height:58px!important;margin:0!important;background:linear-gradient(110deg,#243e45,#172b3c)!important;border-color:#e8bd68!important}
-  #root.carthage-home-locked #carthage-part3-start{grid-column:1/-1!important;width:100%!important;margin:0!important}
-  #root.carthage-home-locked #qarton-home-info{position:fixed;z-index:900;left:14px;right:14px;bottom:calc(env(safe-area-inset-bottom,0px) + 13px);display:flex;justify-content:center;align-items:center;gap:9px;color:#c8c3b9;font:600 9px system-ui;letter-spacing:.6px;pointer-events:none}
-  #qarton-home-info .qarton-line{height:1px;flex:1;max-width:48px;background:linear-gradient(90deg,transparent,#c39b5b)}
-  #qarton-home-info .qarton-line:last-child{transform:scaleX(-1)}
-  @media(max-height:690px){#root.carthage-home-locked{padding-top:78px!important;padding-bottom:58px!important}#qarton-home-brand .qarton-mark{width:34px;height:34px}#qarton-home-brand .qarton-game-title{font-size:16px;margin-top:5px}#root.carthage-home-locked .home-actions.grid{gap:7px!important}#root.carthage-home-locked .home-actions.grid button{min-height:46px!important;padding:8px!important}}
-  @media(prefers-reduced-motion:reduce){#root.carthage-home-locked .home-actions.grid button{transition:none!important}}
-  `;
-  function installStyle(){if(!document.getElementById("qarton-premium-home-style")){var st=document.createElement("style");st.id="qarton-premium-home-style";st.textContent=css;document.head.appendChild(st)}}
-  function mount(){
-    var root=document.getElementById("root");
-    if(!root||root.querySelector(".game-timer")){var old=document.getElementById("qarton-home-brand");if(old)old.remove();var foot=document.getElementById("qarton-home-info");if(foot)foot.remove();return}
-    var menu=root.querySelector(".home-actions.grid");
-    var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ الجزء الأول/.test(b.textContent||"")});
-    if(!menu&&!start)return;
-    installStyle();
-    if(!document.getElementById("qarton-home-brand")){
-      var brand=document.createElement("div");brand.id="qarton-home-brand";brand.dir="rtl";
-      brand.innerHTML='<span class="qarton-mark"><span>Q</span></span><span class="qarton-word"><strong>QARTON</strong><small>CULTURE • POWER • CINEMA</small></span><span class="qarton-game-title">قــــرطــــاج</span><span class="qarton-game-sub">حكاية من التاريخ… تُروى بأسلوب سينمائي</span>';
-      root.appendChild(brand);
-    }
-    if(!document.getElementById("qarton-home-info")){
-      var foot=document.createElement("div");foot.id="qarton-home-info";foot.dir="rtl";
-      foot.innerHTML='<span class="qarton-line"></span><span>رحلتك • اختياراتك • مصيرك</span><span class="qarton-line"></span>';
-      root.appendChild(foot);
-    }
-  }
-  var queued=false;
-  function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount()})}
-  var observer=new MutationObserver(schedule);
-  function start(){var root=document.getElementById("root");if(root)observer.observe(root,{subtree:true,childList:true,characterData:true});mount()}
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+if(window.__qartonPremiumHomeInstalled)return;
+window.__qartonPremiumHomeInstalled=true;
+var css="\n:root{--q-gold:#e8c477;--q-bright:#fff0c5}\nbody.carthage-home-locked{background:#07090f!important}\nbody.carthage-home-locked:before{content:\"\";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 50% 12%,#842d3555,transparent 45%),radial-gradient(ellipse at 10% 85%,#c7994b22,transparent 40%),radial-gradient(ellipse at 90% 65%,#27425b33,transparent 42%),linear-gradient(155deg,#07090f,#101827 55%,#080a11)}\nbody.carthage-home-locked:after{content:\"\";position:fixed;inset:12px;z-index:-1;pointer-events:none;border:1px solid #e8c47720;border-radius:22px;box-shadow:inset 0 0 70px #0004}\n#root.carthage-home-locked{box-sizing:border-box!important;position:relative!important;isolation:isolate;padding:clamp(106px,17vh,148px) 14px clamp(70px,11vh,92px)!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important}\n#root.carthage-home-locked #qarton-home-brand{position:fixed;z-index:1000;top:calc(env(safe-area-inset-top,0px) + 16px);left:0;right:0;text-align:center;pointer-events:none;animation:qBrand .8s ease both}\n#qarton-home-brand .qarton-brand-row{display:flex;align-items:center;justify-content:center;gap:13px}\n#qarton-home-brand .qarton-mark{display:inline-flex;align-items:center;justify-content:center;width:43px;height:43px;border:1px solid #e8c477;border-radius:12px;transform:rotate(45deg);background:linear-gradient(145deg,#842d35,#0a0f19);box-shadow:0 0 26px #e8c47733,inset 0 0 15px #e8c47720}\n#qarton-home-brand .qarton-mark span{transform:rotate(-45deg);color:var(--q-bright);font:900 20px Georgia,serif}\n#qarton-home-brand .qarton-word{text-align:left}\n#qarton-home-brand strong{display:block;color:var(--q-bright);font:900 22px/1 Georgia,serif;letter-spacing:3.5px;text-shadow:0 2px 18px #d7a64b55}\n#qarton-home-brand small{display:block;margin-top:6px;color:#c9b995;font:700 8px/1.2 system-ui;letter-spacing:2px}\n#qarton-home-brand .qarton-game-title{display:block;margin-top:13px;color:#fff2d4;font:900 clamp(21px,5vw,27px)/1.2 system-ui;letter-spacing:1px;text-shadow:0 3px 22px #000}\n#qarton-home-brand .qarton-game-sub{display:block;margin-top:5px;color:#b9c0cd;font:500 10px/1.4 system-ui}\n#root.carthage-home-locked .home-actions.grid{box-sizing:border-box!important;width:min(100%,440px)!important;max-width:440px!important;margin:0 auto!important;padding:15px!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:10px!important;align-content:center!important;border:1px solid #e8c47755!important;border-radius:21px!important;background:linear-gradient(150deg,#161e2cee,#080c14f2)!important;box-shadow:0 18px 48px #0008,inset 0 1px 0 #ffffff0e,0 0 34px #842d3518!important;backdrop-filter:blur(12px);animation:qMenu .75s .12s ease both}\n#root.carthage-home-locked .home-actions.grid:before{content:\"اختر فصل رحلتك\";grid-column:1/-1;display:block;padding:0 0 9px;margin:0 0 2px;border-bottom:1px solid #e8c47733;text-align:center;color:#e8d8b8;font:800 11px/1.3 system-ui;letter-spacing:2px}\n#root.carthage-home-locked .home-actions.grid button,#root.carthage-home-locked #carthage-part3-start{box-sizing:border-box!important;min-width:0!important;min-height:54px!important;margin:0!important;padding:11px 9px!important;border:1px solid #e8c47777!important;border-radius:14px!important;background:linear-gradient(145deg,#273141,#0d121d)!important;color:#fff0d2!important;font:800 12px/1.45 system-ui!important;text-align:center!important;white-space:normal!important;box-shadow:0 7px 17px #0005,inset 0 1px 0 #ffffff12!important;transition:transform .18s,border-color .18s,filter .18s!important}\n#root.carthage-home-locked .home-actions.grid button:before,#root.carthage-home-locked #carthage-part3-start:before{content:attr(data-qarton-icon);display:block;min-height:19px;margin-bottom:4px;color:var(--q-gold);font:700 17px/1 system-ui}\n#root.carthage-home-locked .home-actions.grid button:active,#root.carthage-home-locked #carthage-part3-start:active{transform:scale(.975)!important;filter:brightness(1.18)!important}\n#root.carthage-home-locked .home-actions.grid button[data-qarton-kind=primary]{grid-column:1/-1!important;min-height:62px!important;border-color:#ffe29d!important;background:linear-gradient(105deg,#8b3039,#57232e 53%,#18263a)!important;color:#fff5df!important;font-size:14px!important;box-shadow:0 10px 28px #0007,0 0 24px #c08b4229!important}\n#root.carthage-home-locked .home-actions.grid button[data-qarton-kind=continue]{grid-column:1/-1!important;min-height:57px!important;border-color:#e8c477!important;background:linear-gradient(105deg,#23464a,#172b3d)!important}\n#root.carthage-home-locked #carthage-part3-start{grid-column:1/-1!important;width:min(100%,440px)!important;min-height:54px!important;border-color:#e8c47788!important;background:linear-gradient(105deg,#282033,#151c2b)!important}\n#root.carthage-home-locked #carthage-part3-start:disabled{opacity:.68!important;filter:saturate(.65)}\n#root.carthage-home-locked #qarton-home-info{position:fixed;z-index:900;left:18px;right:18px;bottom:calc(env(safe-area-inset-bottom,0px) + 15px);display:flex;justify-content:center;align-items:center;gap:10px;color:#c9c2b4;font:700 9px/1.3 system-ui;letter-spacing:.8px;pointer-events:none}\n#qarton-home-info .qarton-line{height:1px;flex:1;max-width:52px;background:linear-gradient(90deg,transparent,#c39b5b)}\n#qarton-home-info .qarton-line:last-child{transform:scaleX(-1)}\n@keyframes qBrand{from{opacity:0;transform:translateY(-9px)}to{opacity:1;transform:translateY(0)}}\n@keyframes qMenu{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}\n@media(max-height:740px){#root.carthage-home-locked{padding-top:96px!important;padding-bottom:62px!important}#root.carthage-home-locked #qarton-home-brand{top:calc(env(safe-area-inset-top,0px) + 8px)}#qarton-home-brand .qarton-mark{width:34px;height:34px}#qarton-home-brand strong{font-size:18px}#qarton-home-brand .qarton-game-title{margin-top:7px;font-size:19px}#qarton-home-brand .qarton-game-sub{margin-top:3px;font-size:9px}#root.carthage-home-locked .home-actions.grid{padding:10px!important;gap:7px!important}#root.carthage-home-locked .home-actions.grid button,#root.carthage-home-locked #carthage-part3-start{min-height:44px!important;padding:7px!important;font-size:11px!important}#root.carthage-home-locked .home-actions.grid button:before,#root.carthage-home-locked #carthage-part3-start:before{min-height:15px;font-size:14px;margin-bottom:2px}}\n@media(max-height:610px){#root.carthage-home-locked{padding-top:83px!important;padding-bottom:52px!important}#qarton-home-brand .qarton-game-title{margin-top:4px;font-size:16px}#qarton-home-brand .qarton-game-sub{display:none}#root.carthage-home-locked .home-actions.grid{padding:7px!important;gap:5px!important}#root.carthage-home-locked .home-actions.grid button,#root.carthage-home-locked #carthage-part3-start{min-height:38px!important;padding:5px!important}#root.carthage-home-locked .home-actions.grid button:before,#root.carthage-home-locked #carthage-part3-start:before{display:none}}\n@media(prefers-reduced-motion:reduce){#root.carthage-home-locked #qarton-home-brand,#root.carthage-home-locked .home-actions.grid{animation:none!important}#root.carthage-home-locked .home-actions.grid button,#root.carthage-home-locked #carthage-part3-start{transition:none!important}}\n";
+function style(){if(document.getElementById("qarton-premium-home-style"))return;var s=document.createElement("style");s.id="qarton-premium-home-style";s.textContent=css;document.head.appendChild(s)}
+function playing(root){return !!(root&&root.querySelector(".game-timer"))}
+function decorate(root){
+var menu=root.querySelector(".home-actions.grid");if(!menu)return;
+Array.from(menu.querySelectorAll("button")).forEach(function(b,i){
+var t=(b.textContent||"").trim(),kind="secondary",icon="✦";
+if(/متابعة|استكمال|آخر حفظ/.test(t)||b.id==="carthage-continue-last"){kind="continue";icon="▶"}
+else if(/ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test(t)){kind="primary";icon="⚔"}
+else if(/الجزء الثالث|الجزء 3/.test(t)){kind="part3";icon="◆"}
+else if(/الجزء الثاني/.test(t)){icon="◈"}
+else if(/حفظ|استيراد|تصدير/.test(t)){icon="▣"}
+else if(/إعدادات|الخيارات/.test(t)){icon="⚙"}
+b.dataset.qartonKind=kind;b.dataset.qartonIcon=icon;b.setAttribute("data-qarton-home-action",String(i+1));
+});
+}
+function mount(){
+var root=document.getElementById("root");if(!root)return;
+if(playing(root)){var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();return}
+var menu=root.querySelector(".home-actions.grid");
+var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ الجزء الأول/.test(b.textContent||"")});
+if(!menu&&!start)return;
+style();
+if(!document.getElementById("qarton-home-brand")){
+var brand=document.createElement("div");brand.id="qarton-home-brand";brand.dir="rtl";
+brand.innerHTML='<div class="qarton-brand-row"><span class="qarton-mark"><span>Q</span></span><span class="qarton-word"><strong>QARTON</strong><small>CULTURE • POWER • CINEMA</small></span></div><span class="qarton-game-title">قــــرطــــاج</span><span class="qarton-game-sub">حكاية من التاريخ… تُروى بأسلوب سينمائي</span>';
+root.appendChild(brand);
+}
+if(!document.getElementById("qarton-home-info")){
+var foot=document.createElement("div");foot.id="qarton-home-info";foot.dir="rtl";
+foot.innerHTML='<span class="qarton-line"></span><span>رحلتك • اختياراتك • مصيرك</span><span class="qarton-line"></span>';root.appendChild(foot);
+}
+decorate(root);
+}
+var queued=false;
+function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount()})}
+function boot(){var root=document.getElementById("root");if(root)new MutationObserver(schedule).observe(root,{subtree:true,childList:true,characterData:true});mount()}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 })();
