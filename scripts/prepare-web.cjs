@@ -71,7 +71,9 @@ const startupDiagnostics = `<script id="carthage-startup-diagnostics">
   },10000);
 })();
 </script>`;
-if (!html.includes('</head>')) throw new Error('Missing closing head tag for startup diagnostics.');\nhtml = html.replace('</head>', startupDiagnostics + '</head>');\nif (!html.includes('</body>')) throw new Error('Missing closing body tag for navigation controls.');
+if (!html.includes('</head>')) throw new Error('Missing closing head tag for startup diagnostics.');
+html = html.replace('</head>', startupDiagnostics + '</head>');
+if (!html.includes('</body>')) throw new Error('Missing closing body tag for navigation controls.');
 html = html.replace('</body>', navigation + '</body>');
 
 const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
