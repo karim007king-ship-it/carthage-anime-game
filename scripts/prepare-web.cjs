@@ -104,8 +104,8 @@ const watchdogFallback = `<style id="carthage-watchdog-style">
 #carthage-startup-watchdog p{max-width:34rem;margin:0}
 </style>`;
 const watchdogMarkup = `<section id="carthage-startup-watchdog" dir="rtl" role="alert">
-<h2>اللعبة ما زالت عالقة في التحميل</h2>
-<p>لم تظهر واجهة قرطاج بعد 12 ثانية. هذا تنبيه مستقل عن كود اللعبة. إذا ظهرت شاشة التشخيص التفصيلية بعدها، انسخ المعلومات وأرسلها.</p>
+<h2>جاري تشغيل لعبة قرطاج</h2>
+<p>إذا بقيت هذه الشاشة ولم تظهر القائمة خلال 12 ثانية، ستظهر معلومات التشخيص تلقائياً.</p>
 <p>لا تحذف اللعبة ولا تمسح بياناتها حتى نحافظ على تقدمك.</p>
 </section>`;
 if (!html.includes('</head>')) throw new Error('Missing closing head tag for watchdog fallback.');
