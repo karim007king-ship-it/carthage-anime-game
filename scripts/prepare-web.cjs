@@ -98,8 +98,8 @@ const startupDiagnostics = `<script id="carthage-startup-diagnostics">
 if (!html.includes('</head>')) throw new Error('Missing closing head tag for startup diagnostics.');
 html = html.replace('</head>', startupDiagnostics + '</head>');
 const watchdogFallback = `<style id="carthage-watchdog-style">
-@keyframes carthage-watchdog-reveal{0%{opacity:0;visibility:hidden;pointer-events:none}99%{opacity:0;visibility:hidden;pointer-events:none}100%{opacity:1;visibility:visible;pointer-events:auto}}
-#carthage-startup-watchdog{position:fixed;inset:0;z-index:2147483646;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;overflow:auto;box-sizing:border-box;padding:28px;background:#100d12;color:#fff;text-align:center;font:15px/1.9 system-ui;opacity:0;visibility:hidden;animation:carthage-watchdog-reveal .01s linear 12s forwards}
+/* Visible by default: never depend on CSS animation, timers, or reduced-motion settings to reveal the fallback. */
+#carthage-startup-watchdog{position:fixed;inset:0;z-index:2147483646;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;overflow:auto;box-sizing:border-box;padding:28px;background:#100d12;color:#fff;text-align:center;font:15px/1.9 system-ui}
 #carthage-startup-watchdog h2{margin:0;color:#e8a33d;font-size:23px;font-weight:900}
 #carthage-startup-watchdog p{max-width:34rem;margin:0}
 </style>`;
