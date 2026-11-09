@@ -21,6 +21,12 @@ assert.ok(androidPrep.includes('window.__carthageCanStartPart3'), 'Part 3 lock s
 assert.ok(androidPrep.includes('رجوع للقائمة'), 'new-game cancel action must be clearly labeled as returning to menu');
 assert.ok(androidPrep.includes('shiganshina-autosave-v1'), 'continue flow must recognize autosave fallback');
 assert.ok(androidPrep.includes('window.__carthageContinue=()=>{'), 'continue action must restore the newest valid local save');
+assert.ok(androidPrep.includes("window.__CARTHAGE_MODULE_STARTED__=true"), "Android build must instrument the actual story ES module");
+assert.ok(androidPrep.includes("window.__CARTHAGE_RENDER_REQUESTED__=true"), "Android build must verify the React render request");
+assert.ok(androidPrep.includes("window.__CARTHAGE_REACT_MOUNTED__"), "Android build must detect actual React UI mounting");
+assert.ok(androidPrep.includes("React root render instrumentation"), "Android build must wrap the real React root startup");
+assert.ok(androidPrep.includes("removeWatchdogWhenReady"), "startup watchdog must disappear after the real game UI mounts");
+
 assert.ok(androidPrep.includes('window.setTimeout(showIfStuck,12000)'), 'Android startup diagnostic must appear for a stuck or blank startup');
 assert.ok(androidPrep.includes('carthage-watchdog-reveal'), 'CSS watchdog must reveal even when JavaScript timers are blocked');
 assert.ok(androidPrep.includes('carthage-startup-watchdog'), 'static startup watchdog fallback must be included in the Android page');
