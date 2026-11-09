@@ -217,6 +217,58 @@ const cinematicExpansion = `<style id="carthage-cinematic-scene-style">
 </script>`;
 html = html.replace('</body>', cinematicExpansion + '</body>');
 
+
+// Cinematic scene cuts: fade through black when the main story artwork changes.
+// This is presentation-only; it never touches story state, timers, choices, or saves.
+const cinematicTransitions = \`<style id="carthage-scene-transition-style">
+@keyframes carthageSceneFadeThrough{0%{opacity:1}100%{opacity:0}}
+#carthage-scene-transition{position:fixed;inset:0;z-index:2147483001;pointer-events:none;background:#050509;opacity:0}
+#carthage-scene-transition.is-cutting{animation:carthageSceneFadeThrough .72s cubic-bezier(.7,0,.2,1) both}
+@media(prefers-reduced-motion:reduce){#carthage-scene-transition.is-cutting{animation:none;opacity:0}}
+</style>
+<script id="carthage-scene-transition-runtime">
+(function(){
+ if(window.__carthageSceneTransitions)return;
+ window.__carthageSceneTransitions=true;
+ var root=null,lastScene="",overlay=null,queued=false;
+ function mainArtwork(){
+  root=document.getElementById("root");
+  if(!root||!root.querySelector(".game-timer"))return "";
+  var candidates=Array.from(root.querySelectorAll("img")).filter(function(img){
+   var r=img.getBoundingClientRect();
+   return img.complete&&img.naturalWidth>0&&r.width>180&&r.height>110&&getComputedStyle(img).visibility!=="hidden";
+  });
+  candidates.sort(function(a,b){var x=a.getBoundingClientRect(),y=b.getBoundingClientRect();return y.width*y.height-x.width*x.height});
+  var img=candidates[0];
+  return img?(img.currentSrc||img.src||""):"";
+ }
+ function cutTo(scene){
+  if(!scene)return;
+  if(!lastScene){lastScene=scene;return}
+  if(scene===lastScene)return;
+  lastScene=scene;
+  if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  if(!overlay){overlay=document.createElement("div");overlay.id="carthage-scene-transition";overlay.setAttribute("aria-hidden","true");document.body.appendChild(overlay)}
+  overlay.classList.remove("is-cutting");
+  void overlay.offsetWidth;
+  overlay.classList.add("is-cutting");
+ }
+ function apply(){queued=false;cutTo(mainArtwork())}
+ var observer=new MutationObserver(function(){
+  if(queued)return;queued=true;
+  requestAnimationFrame(apply);
+ });
+ function start(){
+  root=document.getElementById("root");
+  if(!root)return;
+  apply();
+  observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["src","class","style"]});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>\`;
+html = html.replace('</body>', cinematicTransitions + '</body>');
+
 // Instrument the real ES module and React mount, not a detached JavaScript test.
 replaceOnce('<script type="module">', '<script type="module">window.__CARTHAGE_MODULE_STARTED__=true;', 'main story module start marker');
 replaceOnce('yz.createRoot(document.getElementById("root")).render(u(bz.default.StrictMode,{children:u(vu,{})}));',
