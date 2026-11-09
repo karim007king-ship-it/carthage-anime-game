@@ -9,6 +9,7 @@ on:
       - "package.json"
       - "capacitor.config.json"
       - "tests/**"
+      - "scripts/**"
       - ".github/workflows/android-apk.yml"
 
 permissions:
@@ -57,6 +58,9 @@ jobs:
 
       - name: Sync Capacitor
         run: npx cap sync android
+
+      - name: Apply Carthage launcher icon
+        run: node scripts/apply-android-branding.cjs
 
       - name: Build debug APK
         working-directory: android
