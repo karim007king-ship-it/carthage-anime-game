@@ -270,7 +270,7 @@ const cinematicTransitions = `<style id="carthage-scene-transition-style">
 html = html.replace('</body>', cinematicTransitions + '</body>');
 
 // Great Wall destruction sequence: dust bloom, shock ring, flying stone fragments and impact flash.
-const cinematicDestruction = String.raw\`<style id="carthage-wall-impact-style">
+const cinematicDestruction = String.raw`<style id="carthage-wall-impact-style">
 @keyframes carthageWallFlash{0%,100%{opacity:0}7%{opacity:.72}19%{opacity:.12}30%{opacity:.28}48%{opacity:0}}
 @keyframes carthageDustBloom{0%{opacity:0;transform:translate(-50%,-50%) scale(.12)}18%{opacity:.78}100%{opacity:0;transform:translate(-50%,-50%) scale(2.8)}}
 @keyframes carthageShockRing{0%{opacity:.9;transform:translate(-50%,-50%) scale(.08)}75%{opacity:.3}100%{opacity:0;transform:translate(-50%,-50%) scale(2.4)}}
@@ -326,7 +326,7 @@ const cinematicDestruction = String.raw\`<style id="carthage-wall-impact-style">
  function start(){root=document.getElementById("root");if(!root)return;apply();observer.observe(root,{subtree:true,childList:true,characterData:true})}
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
-</script>\`;
+</script>`;
 html = html.replace('</body>', cinematicDestruction + '</body>');
 
 // Instrument the real ES module and React mount, not a detached JavaScript test.
