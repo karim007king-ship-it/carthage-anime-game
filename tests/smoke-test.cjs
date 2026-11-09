@@ -39,6 +39,11 @@ assert.ok(cinematicPilot.includes('carthageCinematicImpact'), 'Great Wall break 
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce'), 'cinematic animation must respect reduced-motion accessibility');
 assert.ok(cinematicPilot.includes('/(السور|لحظة الكسر|السور يتكسر)/'), 'cinematic pilot must activate only for the Great Wall story scene');
 
+assert.ok(cinematicPilot.includes('carthage-wall-impact-runtime'), 'Great Wall destruction runtime must be injected into Android builds');
+assert.ok(cinematicPilot.includes('carthageDustBloom'), 'Great Wall destruction must include an expanding dust cloud');
+assert.ok(cinematicPilot.includes('carthageShockRing'), 'Great Wall destruction must include a visible shock ring');
+assert.ok(cinematicPilot.includes('carthageRubbleFly'), 'Great Wall destruction must animate flying stone fragments');
+assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#carthage-wall-impact-fx'), 'destruction effects must respect reduced-motion accessibility');
 const androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
 assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
 assert.ok(androidPrep.includes('carthage-save-now'), 'simple save button must exist');
