@@ -11,7 +11,13 @@ assert.match(html, /V17\.1/);
 assert.match(html, /c17-audio-control/);
 assert.match(html, /c17-audio-volume/);
 assert.match(html, /prefers-reduced-motion/);
-assert.match(html, /السور يتكسر/);\n\nconst androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');\nassert.match(androidPrep, /Zn\\.includes\\(\\\"light\\\"\\).*Zn\\.includes\\(\\\"shadow\\\"\\)/);\nassert.match(androidPrep, /carthage-save-now/);\nassert.match(androidPrep, /carthage-continue-last/);\nassert.match(androidPrep, /window\\.__carthageCanStartPart3/);
+assert.match(html, /السور يتكسر/);
+
+const androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
+assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
+assert.ok(androidPrep.includes('carthage-save-now'), 'simple save button must exist');
+assert.ok(androidPrep.includes('carthage-continue-last'), 'one-tap continue button must exist');
+assert.ok(androidPrep.includes('window.__carthageCanStartPart3'), 'Part 3 lock state must be exposed');
 
 const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(m => m[1]);
 const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
