@@ -109,7 +109,9 @@ jobs:
             'carthage-export-backup',
             'carthage-import-backup',
             'carthageCinematicLight',
-            'carthageCinematicImpact'
+            'carthageCinematicImpact',
+            'qarton-premium-home-runtime',
+            'CULTURE • POWER • CINEMA'
           ];
           const html = dst.toString('utf8');
           const missing = markers.filter(marker => !html.includes(marker));
