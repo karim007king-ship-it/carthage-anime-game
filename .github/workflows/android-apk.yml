@@ -46,6 +46,9 @@ jobs:
       - name: Run game integrity tests
         run: npm test
 
+      - name: Diagnose save and navigation hooks
+        run: node tests/diagnose-game.cjs
+
       - name: Prepare web assets
         run: npm run prepare:web
 
