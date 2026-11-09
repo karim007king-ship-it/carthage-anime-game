@@ -113,6 +113,39 @@ html = html.replace('</head>', watchdogFallback + '</head>');
 if (!html.includes('</body>')) throw new Error('Missing closing body tag for navigation controls.');
 html = html.replace('</body>', watchdogMarkup + navigation + '</body>');
 
+const cinematicPilot = `<style id="carthage-cinematic-pilot">
+@keyframes carthageSlowPushIn{from{transform:scale(1)}to{transform:scale(1.045)}}
+#root.carthage-cinematic-pilot{isolation:isolate}
+#root.carthage-cinematic-pilot:before{content:"";position:fixed;inset:0;z-index:8;pointer-events:none;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.42) 100%);box-shadow:inset 0 5vh 0 rgba(0,0,0,.88),inset 0 -5vh 0 rgba(0,0,0,.88)}
+#root.carthage-cinematic-pilot img.carthage-cinematic-subject{animation:carthageSlowPushIn 14s ease-in-out infinite alternate;transform-origin:center center;will-change:transform}
+@media(prefers-reduced-motion:reduce){#root.carthage-cinematic-pilot img.carthage-cinematic-subject{animation:none;will-change:auto}}
+</style>
+<script id="carthage-cinematic-pilot-runtime">
+(function(){
+ if(window.__carthageCinematicPilot)return;
+ window.__carthageCinematicPilot=true;
+ var root=document.getElementById("root"),last=null;
+ function apply(){
+  root=document.getElementById("root");if(!root)return;
+  var text=(root.innerText||"");
+  var pilot=!!(root.querySelector(".game-timer")&&/(السور|لحظة الكسر|السور يتكسر)/.test(text));
+  root.classList.toggle("carthage-cinematic-pilot",pilot);
+  if(!pilot){if(last)last.classList.remove("carthage-cinematic-subject");last=null;return}
+  var imgs=Array.from(root.querySelectorAll("img")).filter(function(img){var r=img.getBoundingClientRect();return img.complete&&img.naturalWidth>0&&r.width>120&&r.height>100&&getComputedStyle(img).visibility!=="hidden"});
+  imgs.sort(function(a,b){var x=a.getBoundingClientRect(),y=b.getBoundingClientRect();return y.width*y.height-x.width*x.height});
+  var target=imgs[0]||null;
+  if(last&&last!==target)last.classList.remove("carthage-cinematic-subject");
+  if(target){target.classList.add("carthage-cinematic-subject");last=target}
+ }
+ var queued=false;
+ var observer=new MutationObserver(function(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;apply()})});
+ function start(){apply();observer.observe(document.getElementById("root")||document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["src","class","style"]})}
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>`;
+
+html = html.replace('</body>', cinematicPilot + '</body>');
+
 // Instrument the real ES module and React mount, not a detached JavaScript test.
 replaceOnce('<script type="module">', '<script type="module">window.__CARTHAGE_MODULE_STARTED__=true;', 'main story module start marker');
 replaceOnce('yz.createRoot(document.getElementById("root")).render(u(bz.default.StrictMode,{children:u(vu,{})}));',
