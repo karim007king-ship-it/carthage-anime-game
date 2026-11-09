@@ -49,26 +49,38 @@ const startupDiagnostics = `<script id="carthage-startup-diagnostics">
   var errors=[];
   function record(kind,message,source,line){
     var item={kind:kind,message:String(message||"unknown"),source:String(source||""),line:line||0,time:new Date().toISOString()};
-    errors.push(item);if(errors.length>8)errors.shift();
+    errors.push(item);if(errors.length>12)errors.shift();
     try{sessionStorage.setItem("carthage-startup-errors",JSON.stringify(errors))}catch(e){}
   }
-  window.addEventListener("error",function(e){record("JavaScript",e.message,e.filename,e.lineno)});
+  window.addEventListener("error",function(e){
+    if(e.target&&e.target!==window){record("Resource load",e.target.src||e.target.href||e.target.tagName||"resource");return}
+    record("JavaScript",e.message,e.filename,e.lineno);
+  },true);
   window.addEventListener("unhandledrejection",function(e){var r=e.reason;record("Promise",r&&r.stack||r&&r.message||r)});
-  window.setTimeout(function(){
+  var originalError=console.error;
+  console.error=function(){try{record("console.error",Array.prototype.map.call(arguments,function(v){return v&&v.stack||v&&v.message||String(v)}).join(" "))}catch(e){}return originalError.apply(console,arguments)};
+  function showIfStuck(){
+    if(document.getElementById("carthage-startup-error"))return;
     var root=document.getElementById("root");
-    if(!root||!root.innerText||root.innerText.indexOf("جاري تحميل اللعبة")<0)return;
+    var bodyText=(root&&root.innerText||document.body&&document.body.innerText||"").trim();
+    var loading=/جاري.{0,18}(تحميل|التحم)|loading|starting/i.test(bodyText);
+    var appReady=!!(root&&root.querySelector("button,[role=button],canvas,.game-timer"));
+    if(!loading&&appReady)return;
+    if(!loading&&bodyText.length>80)return;
     var panel=document.createElement("section");
-    panel.id="carthage-startup-error";
-    panel.dir="rtl";
+    panel.id="carthage-startup-error";panel.dir="rtl";
     panel.style.cssText="position:fixed;inset:0;z-index:2147483647;overflow:auto;background:#100d12;color:#fff;padding:24px;font:14px/1.8 system-ui;text-align:right";
     var title=document.createElement("h2");title.textContent="تعذّر تشغيل اللعبة";title.style.cssText="color:#e8a33d;font-size:22px;font-weight:900";
-    var desc=document.createElement("p");desc.textContent="توقّف تشغيل واجهة اللعبة قبل ظهور القائمة. هذه معلومات التشخيص حتى نصلح السبب بدل التخمين.";
+    var desc=document.createElement("p");desc.textContent="توقّف تشغيل واجهة اللعبة قبل ظهور القائمة. هذه معلومات تشخيص من الهاتف؛ لم يتم تغيير القصة أو بيانات الحفظ.";
     var pre=document.createElement("pre");pre.style.cssText="white-space:pre-wrap;overflow-wrap:anywhere;background:#241c24;border:1px solid #75552b;border-radius:12px;padding:12px;color:#ffe5a0";
-    pre.textContent=errors.length?errors.map(function(e){return e.kind+": "+e.message+(e.source?"\\n"+e.source+":"+e.line:"")}).join("\\n\\n"):"لم يصل خطأ JavaScript واضح. قد يكون WebView لم يشغّل ملف اللعبة أو منع تحميله.";
+    var stored=[];try{stored=JSON.parse(sessionStorage.getItem("carthage-startup-errors")||"[]")}catch(e){}
+    var all=errors.length?errors:stored;
+    pre.textContent=(all.length?all.map(function(e){return e.kind+": "+e.message+(e.source?"\\n"+e.source+":"+e.line:"")}).join("\\n\\n"):"لم يُلتقط خطأ JavaScript واضح.")+"\\n\\nحالة الصفحة: "+(loading?"ما زالت تعرض شاشة التحميل":"لم تظهر واجهة اللعبة")+"\\nنص الصفحة: "+(bodyText.slice(0,500)||"(فارغ)");
     var btn=document.createElement("button");btn.textContent="نسخ معلومات التشخيص";btn.style.cssText="background:#e8a33d;color:#160f08;border:0;border-radius:12px;padding:12px 18px;font-weight:900";
-    btn.onclick=function(){var report="قرطاج Android startup\\n"+pre.textContent;if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(report).then(function(){btn.textContent="تم النسخ"}).catch(function(){pre.textContent=report});else{var t=document.createElement("textarea");t.value=report;document.body.appendChild(t);t.select();try{document.execCommand("copy");btn.textContent="تم النسخ"}catch(e){}t.remove()}};
+    btn.onclick=function(){var report="Carthage Android startup diagnostic\\n"+pre.textContent;if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(report).then(function(){btn.textContent="تم النسخ"}).catch(function(){pre.textContent=report});else{var t=document.createElement("textarea");t.value=report;document.body.appendChild(t);t.select();try{document.execCommand("copy");btn.textContent="تم النسخ"}catch(e){}t.remove()}};
     panel.append(title,desc,pre,btn);document.body.appendChild(panel);
-  },10000);
+  }
+  window.setTimeout(showIfStuck,12000);
 })();
 </script>`;
 if (!html.includes('</head>')) throw new Error('Missing closing head tag for startup diagnostics.');
