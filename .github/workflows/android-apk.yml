@@ -90,6 +90,9 @@ jobs:
             'carthage-continue-last',
             'carthage-save-now',
             'carthage-cinematic-pilot-runtime',
+            'carthage-save-transfer',
+            'carthage-export-backup',
+            'carthage-import-backup',
             'carthageCinematicLight',
             'carthageCinematicImpact'
           ];
