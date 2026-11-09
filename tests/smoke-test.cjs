@@ -43,6 +43,7 @@ assert.ok(cinematicPilot.includes('carthage-wall-impact-runtime'), 'Great Wall d
 assert.ok(cinematicPilot.includes('carthageDustBloom'), 'Great Wall destruction must include an expanding dust cloud');
 assert.ok(cinematicPilot.includes('carthageShockRing'), 'Great Wall destruction must include a visible shock ring');
 assert.ok(cinematicPilot.includes('carthageRubbleFly'), 'Great Wall destruction must animate flying stone fragments');
+assert.ok(cinematicPilot.includes('.wall-stone{position:absolute;display:block;'), 'flying rubble fragments must be positioned visible blocks');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#carthage-wall-impact-fx'), 'destruction effects must respect reduced-motion accessibility');
 const androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
 assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
