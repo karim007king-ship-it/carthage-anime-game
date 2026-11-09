@@ -18,6 +18,10 @@ assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'),
 assert.ok(androidPrep.includes('carthage-save-now'), 'simple save button must exist');
 assert.ok(androidPrep.includes('carthage-continue-last'), 'one-tap continue button must exist');
 assert.ok(androidPrep.includes('window.__carthageCanStartPart3'), 'Part 3 lock state must be exposed');
+assert.ok(androidPrep.includes('رجوع للقائمة'), 'new-game cancel action must be clearly labeled as returning to menu');
+assert.ok(androidPrep.includes('shiganshina-autosave-v1'), 'continue flow must recognize autosave fallback');
+assert.ok(androidPrep.includes('window.__carthageContinue=()=>{'), 'continue action must restore the newest valid local save');
+assert.ok(androidPrep.includes('يُفتح بعد إتمام الجزء الثاني') || androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
 
 const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(m => m[1]);
 const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
