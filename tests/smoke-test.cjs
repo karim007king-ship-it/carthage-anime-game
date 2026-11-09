@@ -16,6 +16,8 @@ assert.match(html, /السور يتكسر/);
 const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
 assert.ok(cinematicPilot.includes('carthage-cinematic-pilot-runtime'), 'cinematic pilot runtime must be injected into the Android build');
 assert.ok(cinematicPilot.includes('carthageSlowPushIn'), 'cinematic pilot must include a slow camera push-in');
+assert.ok(cinematicPilot.includes('carthageCinematicLight'), 'cinematic pilot must include a restrained moving light pass');
+assert.ok(cinematicPilot.includes('carthageCinematicImpact'), 'Great Wall break must trigger a brief impact camera shake');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce'), 'cinematic animation must respect reduced-motion accessibility');
 assert.ok(cinematicPilot.includes('/(السور|لحظة الكسر|السور يتكسر)/'), 'cinematic pilot must activate only for the Great Wall story scene');
 
