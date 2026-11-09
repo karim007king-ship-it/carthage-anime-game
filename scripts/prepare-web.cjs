@@ -114,22 +114,29 @@ if (!html.includes('</body>')) throw new Error('Missing closing body tag for nav
 html = html.replace('</body>', watchdogMarkup + navigation + '</body>');
 
 const cinematicPilot = `<style id="carthage-cinematic-pilot">
-@keyframes carthageSlowPushIn{from{transform:scale(1)}to{transform:scale(1.045)}}
+@keyframes carthageSlowPushIn{from{transform:scale(1) translate3d(0,0,0);filter:saturate(1) contrast(1)}to{transform:scale(1.07) translate3d(-.7%,.25%,0);filter:saturate(1.12) contrast(1.06)}}
+@keyframes carthageCinematicLight{0%,58%{transform:translateX(-125%) skewX(-18deg);opacity:0}66%{opacity:.34}82%,100%{transform:translateX(125%) skewX(-18deg);opacity:0}}
+@keyframes carthageCinematicImpact{0%,100%{transform:translate3d(0,0,0)}18%{transform:translate3d(-2px,1px,0)}36%{transform:translate3d(2px,-1px,0)}54%{transform:translate3d(-1px,1px,0)}72%{transform:translate3d(1px,0,0)}}
 #root.carthage-cinematic-pilot{isolation:isolate}
-#root.carthage-cinematic-pilot:before{content:"";position:fixed;inset:0;z-index:8;pointer-events:none;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.42) 100%);box-shadow:inset 0 5vh 0 rgba(0,0,0,.88),inset 0 -5vh 0 rgba(0,0,0,.88)}
-#root.carthage-cinematic-pilot img.carthage-cinematic-subject{animation:carthageSlowPushIn 14s ease-in-out infinite alternate;transform-origin:center center;will-change:transform}
-@media(prefers-reduced-motion:reduce){#root.carthage-cinematic-pilot img.carthage-cinematic-subject{animation:none;will-change:auto}}
+#root.carthage-cinematic-pilot:before{content:"";position:fixed;inset:0;z-index:8;pointer-events:none;background:radial-gradient(ellipse at center,transparent 43%,rgba(0,0,0,.48) 100%);box-shadow:inset 0 5vh 0 rgba(0,0,0,.9),inset 0 -5vh 0 rgba(0,0,0,.9)}
+#root.carthage-cinematic-pilot:after{content:"";position:fixed;z-index:9;top:-15%;bottom:-15%;left:-35%;width:24%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,226,166,.14),rgba(255,255,255,.22),transparent);mix-blend-mode:screen;animation:carthageCinematicLight 12s ease-in-out infinite}
+#root.carthage-cinematic-pilot img.carthage-cinematic-subject{animation:carthageSlowPushIn 18s cubic-bezier(.2,.65,.25,1) infinite alternate;transform-origin:center center;will-change:transform,filter}
+#root.carthage-cinematic-pilot.carthage-cinematic-impact{animation:carthageCinematicImpact .42s ease-out}
+@media(prefers-reduced-motion:reduce){#root.carthage-cinematic-pilot:after,#root.carthage-cinematic-pilot img.carthage-cinematic-subject,#root.carthage-cinematic-pilot.carthage-cinematic-impact{animation:none;will-change:auto}}
 </style>
 <script id="carthage-cinematic-pilot-runtime">
 (function(){
  if(window.__carthageCinematicPilot)return;
  window.__carthageCinematicPilot=true;
- var root=document.getElementById("root"),last=null;
+ var root=document.getElementById("root"),last=null,impactTimer=0,impactSeen=false;
  function apply(){
   root=document.getElementById("root");if(!root)return;
   var text=(root.innerText||"");
   var pilot=!!(root.querySelector(".game-timer")&&/(السور|لحظة الكسر|السور يتكسر)/.test(text));
   root.classList.toggle("carthage-cinematic-pilot",pilot);
+  var impact=pilot&&/(السور يتكسر|لحظة الكسر)/.test(text);
+  if(impact&&!impactSeen){impactSeen=true;root.classList.remove("carthage-cinematic-impact");void root.offsetWidth;root.classList.add("carthage-cinematic-impact");window.clearTimeout(impactTimer);impactTimer=window.setTimeout(function(){root&&root.classList.remove("carthage-cinematic-impact")},460)}
+  if(!impact)impactSeen=false;
   if(!pilot){if(last)last.classList.remove("carthage-cinematic-subject");last=null;return}
   var imgs=Array.from(root.querySelectorAll("img")).filter(function(img){var r=img.getBoundingClientRect();return img.complete&&img.naturalWidth>0&&r.width>120&&r.height>100&&getComputedStyle(img).visibility!=="hidden"});
   imgs.sort(function(a,b){var x=a.getBoundingClientRect(),y=b.getBoundingClientRect();return y.width*y.height-x.width*x.height});
