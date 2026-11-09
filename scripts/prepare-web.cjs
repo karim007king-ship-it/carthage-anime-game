@@ -78,7 +78,7 @@ const startupDiagnostics = `<script id="carthage-startup-diagnostics">
     var loading=/جاري.{0,18}(تحميل|التحم)|loading|starting/i.test(bodyText);
     var appReady=!!(root&&root.querySelector("button,[role=button],canvas,.game-timer"));
     if(!loading&&appReady){removeWatchdogWhenReady();return;}
-    if(!loading&&bodyText.length>80)return;
+    // Show diagnostics whenever the game UI is not actually mounted, even if static text is present.
     var panel=document.createElement("section");
     panel.id="carthage-startup-error";panel.dir="rtl";
     panel.style.cssText="position:fixed;inset:0;z-index:2147483647;overflow:auto;background:#100d12;color:#fff;padding:24px;font:14px/1.8 system-ui;text-align:right";
