@@ -4,11 +4,18 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 
 const source = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
-const declaration = source.match(/const recoverySeed = ("(?:\\\\.|[^"\\\\])*");/s);
-assert.ok(declaration, 'recovery seed declaration must exist');
-
-const seedHtml = vm.runInNewContext(declaration[1]);
-const seedScript = seedHtml.match(/<script[^>]*>([\\s\\S]*?)<\\/script>/i);
+const declarationStart = source.indexOf('const recoverySeed = ');
+assert.notEqual(declarationStart, -1, 'recovery seed declaration must exist');
+const valueStart = source.indexOf('"', declarationStart);
+assert.notEqual(valueStart, -1, 'recovery seed must be a quoted string');
+let valueEnd = valueStart + 1;
+for (; valueEnd < source.length; valueEnd++) {
+  if (source[valueEnd] === '\\') { valueEnd++; continue; }
+  if (source[valueEnd] === '"') break;
+}
+assert.ok(valueEnd < source.length, 'recovery seed string must terminate');
+const seedHtml = vm.runInNewContext(source.slice(valueStart, valueEnd + 1));
+const seedScript = seedHtml.match(/<script[^>]*>([\s\S]*?)<\/script>/i);
 assert.ok(seedScript, 'recovery seed must contain an executable script');
 
 function boot(initial = {}) {
