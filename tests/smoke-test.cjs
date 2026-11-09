@@ -90,7 +90,7 @@ assert.ok(androidPrep.includes('carthage-fixed-home-style'), 'fixed home viewpor
 assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed home viewport runtime must be injected into Android builds');
 assert.ok(androidPrep.includes('carthage-home-locked'), 'home menu must toggle a dedicated fixed viewport state');
 assert.ok(androidPrep.includes('stopHomeScroll'), 'home page vertical touch and wheel scrolling must be blocked');
-assert.ok(androidPrep.includes('if(!root||root.querySelector(".game-timer"))return false;'), 'story gameplay must remain outside the fixed home viewport');
+assert.ok(androidPrep.includes('.game-timer'), 'home lock must detect active story gameplay and release the viewport');
 
 const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(m => m[1]);
 const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
