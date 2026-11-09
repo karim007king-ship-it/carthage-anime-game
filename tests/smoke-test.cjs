@@ -43,6 +43,12 @@ assert.ok(cinematicPilot.includes('carthage-wall-impact-runtime'), 'Great Wall d
 assert.ok(cinematicPilot.includes('carthageDustBloom'), 'Great Wall destruction must include an expanding dust cloud');
 assert.ok(cinematicPilot.includes('carthageShockRing'), 'Great Wall destruction must include a visible shock ring');
 assert.ok(cinematicPilot.includes('carthageRubbleFly'), 'Great Wall destruction must animate flying stone fragments');
+assert.ok(cinematicPilot.includes('carthage-character-performance-style'), 'emotional character motion must be injected into Android builds');
+assert.ok(cinematicPilot.includes('carthageStageGrief'), 'grief scenes must add restrained character movement');
+assert.ok(cinematicPilot.includes('carthageStageTension'), 'fear and anger scenes must add subtle portrait tension');
+assert.ok(cinematicPilot.includes('carthageStageMemory'), 'wise candlelit scenes must add gentle breathing light');
+assert.ok(cinematicPilot.includes('stage-slide:has(.tear-drop)'), 'grief motion must only target the existing tear overlay');
+assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){.stage-slide:has(.tear-drop)'), 'character motion must respect reduced-motion accessibility');
 assert.ok(cinematicPilot.includes('.wall-stone{position:absolute;display:block;'), 'flying rubble fragments must be positioned visible blocks');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#carthage-wall-impact-fx'), 'destruction effects must respect reduced-motion accessibility');
 const androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
