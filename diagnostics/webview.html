@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>اختبار تشغيل قرطاج</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#10131c;color:#f4f1e9;font:16px/1.8 system-ui,sans-serif;display:grid;place-items:center;padding:22px}
+main{width:min(100%,520px);border:1px solid #a77c42;border-radius:22px;padding:24px;background:#1b2030;box-shadow:0 18px 50px #0008}
+h1{margin:0 0 8px;color:#f2c46e;font-size:25px}p{margin:8px 0}.status{padding:12px;border-radius:12px;background:#111827;margin:12px 0}.ok{color:#80e0a4}.bad{color:#ff9b9b}.muted{color:#c1c5d0;font-size:14px}
+</style>
+</head>
+<body><main>
+<h1>اختبار تشغيل قرطاج</h1>
+<p>هذه شاشة اختبار مستقلة. لا تحتوي على قصة اللعبة ولا تقرأ أو تغيّر ملفات الحفظ.</p>
+<div class="status">1. عرض صفحة Android WebView: <strong id="html" class="ok">نجح</strong></div>
+<div class="status">2. تشغيل JavaScript: <strong id="js">جارٍ الاختبار...</strong></div>
+<div class="status">3. التخزين المحلي: <strong id="storage">جارٍ الاختبار...</strong></div>
+<div class="status">4. مؤقّت JavaScript: <strong id="timer">في الانتظار...</strong></div>
+<p id="details" class="muted">إذا ظهرت هذه الصفحة وبقيت مفتوحة، فهذا يعني أن WebView الأساسي قادر على عرض صفحة مستقلة.</p>
+<p class="muted">نسخة تشخيص منفصلة — لا تستبدل تطبيق قرطاج الأصلي ولا تمسح تقدّمك.</p>
+</main>
+<script>
+(function(){
+ var js=document.getElementById('js'),storage=document.getElementById('storage'),timer=document.getElementById('timer'),details=document.getElementById('details');
+ try{js.textContent='نجح';js.className='ok'}catch(e){}
+ try{var k='carthage-webview-diagnostic';localStorage.setItem(k,'ok');storage.textContent=localStorage.getItem(k)==='ok'?'نجح':'لم يرجع نفس القيمة';storage.className=storage.textContent==='نجح'?'ok':'bad'}catch(e){storage.textContent='فشل: '+String(e);storage.className='bad'}
+ setTimeout(function(){timer.textContent='نجح بعد 3 ثوانٍ';timer.className='ok';details.textContent='اكتمل اختبار العرض وJavaScript والتخزين والمؤقّت. أرسل صورة لهذه الشاشة.'},3000);
+ window.addEventListener('error',function(e){details.textContent='JavaScript error: '+(e.message||'unknown');details.className='bad'});
+})();
+</script></body></html>
