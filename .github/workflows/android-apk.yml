@@ -47,7 +47,7 @@ jobs:
         run: |
           set -euo pipefail
           if [ -z "${CARTHAGE_KEYSTORE_BASE64}" ]; then
-            echo "::error::Add the CARTHAGE_KEYSTORE_BASE64 repository secret before building. See the repository README signing instructions."
+            echo "::error::Add CARTHAGE_KEYSTORE_BASE64 under Settings > Secrets and variables > Actions > New repository secret."
             exit 1
           fi
           mkdir -p "$HOME/.android"
