@@ -13,6 +13,12 @@ assert.match(html, /c17-audio-volume/);
 assert.match(html, /prefers-reduced-motion/);
 assert.match(html, /السور يتكسر/);
 
+const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
+assert.ok(cinematicPilot.includes('carthage-cinematic-pilot-runtime'), 'cinematic pilot runtime must be injected into the Android build');
+assert.ok(cinematicPilot.includes('carthageSlowPushIn'), 'cinematic pilot must include a slow camera push-in');
+assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce'), 'cinematic animation must respect reduced-motion accessibility');
+assert.ok(cinematicPilot.includes('/(السور|لحظة الكسر|السور يتكسر)/'), 'cinematic pilot must activate only for the Great Wall story scene');
+
 const androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
 assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
 assert.ok(androidPrep.includes('carthage-save-now'), 'simple save button must exist');
