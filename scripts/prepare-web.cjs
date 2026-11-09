@@ -329,6 +329,20 @@ const cinematicDestruction = String.raw`<style id="carthage-wall-impact-style">
 </script>`;
 html = html.replace('</body>', cinematicDestruction + '</body>');
 
+// Character performance pass: restrained emotional motion on the existing theatre portraits.
+// It reads the emotion overlays already rendered by the story; no story state or save data is changed.
+const characterPerformance = `<style id="carthage-character-performance-style">
+@keyframes carthageStageGrief{0%,100%{transform:scale(1.012) translate3d(0,0,0) rotate(0)}50%{transform:scale(1.018) translate3d(-1px,1px,0) rotate(-.22deg)}}
+@keyframes carthageStageTension{0%,100%{transform:scale(1.018) translate3d(0,0,0)}25%{transform:scale(1.02) translate3d(-1px,0,0)}75%{transform:scale(1.018) translate3d(1px,-1px,0)}}
+@keyframes carthageStageMemory{0%,100%{transform:scale(1.012);filter:brightness(1)}50%{transform:scale(1.024);filter:brightness(1.045)}}
+.stage-slide:has(.tear-drop) .stage-breath{animation:carthageStageGrief 3.8s ease-in-out infinite;transform-origin:50% 76%}
+.stage-slide.expression-shake .stage-breath{animation:carthageStageTension .65s ease-in-out infinite;transform-origin:50% 76%}
+.stage-slide:has(.candle-flame) .stage-breath{animation:carthageStageMemory 6.2s ease-in-out infinite;transform-origin:50% 76%}
+@media(prefers-reduced-motion:reduce){.stage-slide:has(.tear-drop) .stage-breath,.stage-slide.expression-shake .stage-breath,.stage-slide:has(.candle-flame) .stage-breath{animation:none!important;transform:none!important}}
+</style>`;
+html = html.replace('</body>', characterPerformance + '</body>');
+
+
 // Instrument the real ES module and React mount, not a detached JavaScript test.
 replaceOnce('<script type="module">', '<script type="module">window.__CARTHAGE_MODULE_STARTED__=true;', 'main story module start marker');
 replaceOnce('yz.createRoot(document.getElementById("root")).render(u(bz.default.StrictMode,{children:u(vu,{})}));',
