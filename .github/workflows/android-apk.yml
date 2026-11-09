@@ -88,7 +88,10 @@ jobs:
             'window.__CARTHAGE_MODULE_STARTED__=true',
             'window.__CARTHAGE_RENDER_REQUESTED__=true',
             'carthage-continue-last',
-            'carthage-save-now'
+            'carthage-save-now',
+            'carthage-cinematic-pilot-runtime',
+            'carthageCinematicLight',
+            'carthageCinematicImpact'
           ];
           const html = dst.toString('utf8');
           const missing = markers.filter(marker => !html.includes(marker));
