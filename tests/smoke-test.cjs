@@ -28,6 +28,7 @@ assert.ok(androidPrep.includes("React root render instrumentation"), "Android bu
 assert.ok(androidPrep.includes("removeWatchdogWhenReady"), "startup watchdog must disappear after the real game UI mounts");
 
 assert.ok(androidPrep.includes('window.setTimeout(showIfStuck,12000)'), 'Android startup diagnostic must appear for a stuck or blank startup');
+assert.ok(!androidPrep.includes('if(!loading&&bodyText.length>80)return;'), 'startup diagnostics must not be suppressed by long static loading text');
 assert.ok(androidPrep.includes('carthage-watchdog-reveal'), 'CSS watchdog must reveal even when JavaScript timers are blocked');
 assert.ok(androidPrep.includes('carthage-startup-watchdog'), 'static startup watchdog fallback must be included in the Android page');
 assert.ok(androidPrep.includes('12s forwards'), 'CSS watchdog must use an independent 12-second delay');
