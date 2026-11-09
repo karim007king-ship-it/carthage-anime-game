@@ -1,19 +1,20 @@
 const fs = require('node:fs');
 const html = fs.readFileSync('index.html', 'utf8');
-const patterns = [
-  /localStorage/ig, /sessionStorage/ig, /indexedDB/ig,
-  /saveGame|saveState|saveProgress|loadGame|loadState|loadProgress/ig,
-  /الجزء\s*[123]|الفصل\s*[123]|ابدأ الجزء|متابعة|استكمال|الرئيسية|القائمة الرئيسية/ig,
-  /homeScreen|mainMenu|home-menu|episode|chapter|partSelect|startGame|continueGame/ig,
-  /history\.back|popstate|backbutton|backButton/ig
+const targets = [
+  'X3=', 'P3=', 'vd=', 'Gu=', 'shiganshina-autosave-v1',
+  'ابدأ الجزء', 'الجزء الثالث', 'ابدأ المغامرة', 'تابع من حيث وصلت',
+  'القائمة الرئيسية', 'العودة للرئيسية', 'الرئيسية', 'الإعدادات',
+  'n("home")', 'n("menu")', 'n("game")', 'f==="game"', 'f!=="game"',
+  'onBackButton', 'App.addListener', 'history.pushState'
 ];
-for (const re of patterns) {
-  const hits = [...html.matchAll(re)].slice(0, 12);
-  console.log('\n### ' + re);
-  for (const m of hits) {
-    const start = Math.max(0, m.index - 350);
-    const end = Math.min(html.length, m.index + m[0].length + 550);
-    console.log('\n--- offset ' + m.index + ' ---\n' + html.slice(start, end).replace(/\s+/g, ' ').slice(0, 1000));
+for (const target of targets) {
+  let from = 0, count = 0, index;
+  while ((index = html.indexOf(target, from)) !== -1 && count < 5) {
+    console.log('\n### TARGET ' + target + ' OFFSET ' + index);
+    console.log(html.slice(Math.max(0, index - 1400), Math.min(html.length, index + 2600)).replace(/\s+/g, ' '));
+    from = index + target.length;
+    count++;
   }
 }
-console.log('\n### HTML size ' + html.length);
+console.log('\n### TAIL RENDER WINDOW');
+console.log(html.slice(3700000, 3720000).replace(/\s+/g, ' '));
