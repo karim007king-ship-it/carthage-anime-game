@@ -36,9 +36,9 @@ const autosaveHook = `;window.__carthageSaveNow=()=>ur(cz,!0);y.useEffect(()=>{i
 html = html.slice(0, us) + saveHandler + autosaveHook + html.slice(ue + saveEnd.length);
 
 // Expose a genuine Part 3 start action, beginning at story chapter 15.
-const part3 = `pu=()=>{let inventory=L.inventory&&L.inventory.length?[...L.inventory]:sz,clues=L.clues&&L.clues.length?[...L.clues]:["crack","alley","oldmap","file","stone"];e3("part3"),z9(!0),W((b)=>({...b,time:60,health:Math.max(85,b.health||0),courage:Math.max(60,b.courage||0),inventory:[...inventory],clues:[...new Set(clues)],trust:{...b.trust,lina:Math.max(b.trust.lina||0,60)}})),q((b)=>[...new Set([...b,"part2","part3"])]),Ct(),m(14),x(0),p("dialogue"),Q8([14]),t9(!0),ve([]),n3(0),v3(!1),f3((b)=>[...b,"الجزء الثالث — ما بعد الحقيقة"]),K8("ابدأ الجزء الثالث"),fr(!0),uv(null),Gn(null),Hn(!1),n("game"),G("الجزء الثالث — ما بعد الحقيقة");try{Of(),_.tick()}catch{}}`;
+const part3 = `carthageStartPart3=()=>{let inventory=L.inventory&&L.inventory.length?[...L.inventory]:sz,clues=L.clues&&L.clues.length?[...L.clues]:["crack","alley","oldmap","file","stone"];e3("part3"),z9(!0),W((b)=>({...b,time:60,health:Math.max(85,b.health||0),courage:Math.max(60,b.courage||0),inventory:[...inventory],clues:[...new Set(clues)],trust:{...b.trust,lina:Math.max(b.trust.lina||0,60)}})),q((b)=>[...new Set([...b,"part2","part3"])]),Ct(),m(14),x(0),p("dialogue"),Q8([14]),t9(!0),ve([]),n3(0),v3(!1),f3((b)=>[...b,"الجزء الثالث — ما بعد الحقيقة"]),K8("ابدأ الجزء الثالث"),fr(!0),uv(null),Gn(null),Hn(!1),n("game"),G("الجزء الثالث — ما بعد الحقيقة");try{Of(),_.tick()}catch{}}`;
 replaceOnce(',Bu=(P)=>{', ',' + part3 + ',Bu=(P)=>{', 'Part 3 start function');
-replaceOnce('Bu=(P)=>{if(P===9)', 'Bu=(P)=>{if(P===15)Pe(!1),pu();else if(P===9)', 'Part 3 selection branch');
+replaceOnce('Bu=(P)=>{if(P===9)', 'Bu=(P)=>{if(P===15)Pe(!1),carthageStartPart3();else if(P===9)', 'Part 3 selection branch');
 replaceOnce(',Zu=()=>{', ';window.__carthageStartPart3=()=>Bu(15);let Zu=()=>{', 'Part 3 public entry point');
 
 // Native home control: autosave first, then return to the initial menu without clearing slots.
