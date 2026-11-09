@@ -22,6 +22,9 @@ assert.ok(androidPrep.includes('رجوع للقائمة'), 'new-game cancel acti
 assert.ok(androidPrep.includes('shiganshina-autosave-v1'), 'continue flow must recognize autosave fallback');
 assert.ok(androidPrep.includes('window.__carthageContinue=()=>{'), 'continue action must restore the newest valid local save');
 assert.ok(androidPrep.includes('window.setTimeout(showIfStuck,12000)'), 'Android startup diagnostic must appear for a stuck or blank startup');
+assert.ok(androidPrep.includes('carthage-watchdog-reveal'), 'CSS watchdog must reveal even when JavaScript timers are blocked');
+assert.ok(androidPrep.includes('carthage-startup-watchdog'), 'static startup watchdog fallback must be included in the Android page');
+assert.ok(androidPrep.includes('12s forwards'), 'CSS watchdog must use an independent 12-second delay');
 assert.ok(androidPrep.includes('Resource load'), 'Android startup diagnostic must capture failed resource loads');
 assert.ok(androidPrep.includes('carthage-startup-errors'), 'Android startup diagnostic must retain captured errors for display');
 assert.ok(androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
