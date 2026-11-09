@@ -59,13 +59,25 @@ const startupDiagnostics = `<script id="carthage-startup-diagnostics">
   window.addEventListener("unhandledrejection",function(e){var r=e.reason;record("Promise",r&&r.stack||r&&r.message||r)});
   var originalError=console.error;
   console.error=function(){try{record("console.error",Array.prototype.map.call(arguments,function(v){return v&&v.stack||v&&v.message||String(v)}).join(" "))}catch(e){}return originalError.apply(console,arguments)};
+  function removeWatchdogWhenReady(){
+    var root=document.getElementById("root");
+    var bodyText=(root&&root.innerText||"").trim();
+    var ready=!!(root&&root.querySelector("button,[role=button],canvas,.game-timer"))&&!/جاري.{0,18}(تحميل|التحم)|loading|starting/i.test(bodyText);
+    if(!ready)return;
+    window.__CARTHAGE_REACT_MOUNTED__=true;
+    var watchdog=document.getElementById("carthage-startup-watchdog");
+    if(watchdog)watchdog.remove();
+  }
+  var readinessObserver=new MutationObserver(removeWatchdogWhenReady);
+  readinessObserver.observe(document.documentElement,{childList:true,subtree:true});
+  window.addEventListener("DOMContentLoaded",removeWatchdogWhenReady);
   function showIfStuck(){
     if(document.getElementById("carthage-startup-error"))return;
     var root=document.getElementById("root");
     var bodyText=(root&&root.innerText||document.body&&document.body.innerText||"").trim();
     var loading=/جاري.{0,18}(تحميل|التحم)|loading|starting/i.test(bodyText);
     var appReady=!!(root&&root.querySelector("button,[role=button],canvas,.game-timer"));
-    if(!loading&&appReady)return;
+    if(!loading&&appReady){removeWatchdogWhenReady();return;}
     if(!loading&&bodyText.length>80)return;
     var panel=document.createElement("section");
     panel.id="carthage-startup-error";panel.dir="rtl";
@@ -75,7 +87,7 @@ const startupDiagnostics = `<script id="carthage-startup-diagnostics">
     var pre=document.createElement("pre");pre.style.cssText="white-space:pre-wrap;overflow-wrap:anywhere;background:#241c24;border:1px solid #75552b;border-radius:12px;padding:12px;color:#ffe5a0";
     var stored=[];try{stored=JSON.parse(sessionStorage.getItem("carthage-startup-errors")||"[]")}catch(e){}
     var all=errors.length?errors:stored;
-    pre.textContent=(all.length?all.map(function(e){return e.kind+": "+e.message+(e.source?"\\n"+e.source+":"+e.line:"")}).join("\\n\\n"):"لم يُلتقط خطأ JavaScript واضح.")+"\\n\\nحالة الصفحة: "+(loading?"ما زالت تعرض شاشة التحميل":"لم تظهر واجهة اللعبة")+"\\nنص الصفحة: "+(bodyText.slice(0,500)||"(فارغ)");
+    pre.textContent=(all.length?all.map(function(e){return e.kind+": "+e.message+(e.source?"\\n"+e.source+":"+e.line:"")}).join("\\n\\n"):"لم يُلتقط خطأ JavaScript واضح.")+"\\n\\nحالة الوحدة: "+(window.__CARTHAGE_MODULE_STARTED__?"بدأ تنفيذ ملف المحرك":"لم يبدأ تنفيذ ملف المحرك")+"\\nطلب React: "+(window.__CARTHAGE_RENDER_REQUESTED__?"تم إرسال طلب إنشاء الواجهة":"لم يصل التنفيذ إلى إنشاء الواجهة")+"\\nتركيب الواجهة: "+(window.__CARTHAGE_REACT_MOUNTED__?"نجح ظهور عناصر اللعبة":"لم تظهر عناصر اللعبة")+"\\nخطأ العرض: "+(window.__CARTHAGE_RENDER_ERROR__||"لا يوجد خطأ متزامن مسجل")+"\\nحالة الصفحة: "+(loading?"ما زالت تعرض شاشة التحميل":"لم تظهر واجهة اللعبة")+"\\nنص الصفحة: "+(bodyText.slice(0,500)||"(فارغ)");
     var btn=document.createElement("button");btn.textContent="نسخ معلومات التشخيص";btn.style.cssText="background:#e8a33d;color:#160f08;border:0;border-radius:12px;padding:12px 18px;font-weight:900";
     btn.onclick=function(){var report="Carthage Android startup diagnostic\\n"+pre.textContent;if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(report).then(function(){btn.textContent="تم النسخ"}).catch(function(){pre.textContent=report});else{var t=document.createElement("textarea");t.value=report;document.body.appendChild(t);t.select();try{document.execCommand("copy");btn.textContent="تم النسخ"}catch(e){}t.remove()}};
     panel.append(title,desc,pre,btn);document.body.appendChild(panel);
@@ -100,6 +112,12 @@ if (!html.includes('</head>')) throw new Error('Missing closing head tag for wat
 html = html.replace('</head>', watchdogFallback + '</head>');
 if (!html.includes('</body>')) throw new Error('Missing closing body tag for navigation controls.');
 html = html.replace('</body>', watchdogMarkup + navigation + '</body>');
+
+// Instrument the real ES module and React mount, not a detached JavaScript test.
+replaceOnce('<script type="module">', '<script type="module">window.__CARTHAGE_MODULE_STARTED__=true;', 'main story module start marker');
+replaceOnce('yz.createRoot(document.getElementById("root")).render(u(bz.default.StrictMode,{children:u(vu,{})}));',
+  'window.__CARTHAGE_RENDER_ATTEMPTED__=true;try{var __carthageRoot=yz.createRoot(document.getElementById("root"));__carthageRoot.render(u(bz.default.StrictMode,{children:u(vu,{})}));window.__CARTHAGE_RENDER_REQUESTED__=true}catch(__carthageError){window.__CARTHAGE_RENDER_ERROR__=String(__carthageError&&(__carthageError.stack||__carthageError.message)||__carthageError);console.error("Carthage React startup failed",__carthageError);throw __carthageError}',
+  'React root render instrumentation');
 
 const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
 let executable = 0;
