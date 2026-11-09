@@ -1,0 +1,12 @@
+{
+  "name": "carthage-anime-pilot",
+  "version": "17.1.0",
+  "private": true,
+  "description": "Carthage interactive story game - cinematic anime pilot",
+  "scripts": {
+    "test": "node tests/smoke-test.cjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
