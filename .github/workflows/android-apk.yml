@@ -56,6 +56,51 @@ jobs:
       - name: Sync Capacitor
         run: npx cap sync android
 
+      - name: Verify packaged game HTML
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const crypto = require('node:crypto');
+          const source = path.resolve('www/index.html');
+          const assetsRoot = path.resolve('android/app/src/main/assets');
+          if (!fs.existsSync(source)) throw new Error('Missing prepared web file: ' + source);
+          function findPackaged(dir) {
+            if (!fs.existsSync(dir)) return null;
+            for (const entry of fs.readdirSync(dir, {withFileTypes:true})) {
+              const full = path.join(dir, entry.name);
+              if (entry.isDirectory()) {
+                const found = findPackaged(full);
+                if (found) return found;
+              } else if (entry.name === 'index.html' && full.split(path.sep).includes('public')) {
+                return full;
+              }
+            }
+            return null;
+          }
+          const packaged = findPackaged(assetsRoot);
+          if (!packaged) throw new Error('Capacitor did not place index.html under Android assets/**/public/.');
+          const src = fs.readFileSync(source);
+          const dst = fs.readFileSync(packaged);
+          const markers = [
+            'carthage-startup-diagnostics',
+            'carthage-startup-watchdog',
+            'window.__CARTHAGE_MODULE_STARTED__=true',
+            'window.__CARTHAGE_RENDER_REQUESTED__=true',
+            'carthage-continue-last',
+            'carthage-save-now'
+          ];
+          const html = dst.toString('utf8');
+          const missing = markers.filter(marker => !html.includes(marker));
+          if (missing.length) throw new Error('Packaged HTML is missing runtime markers: ' + missing.join(', '));
+          const hash = b => crypto.createHash('sha256').update(b).digest('hex');
+          if (hash(src) !== hash(dst)) throw new Error('Packaged HTML differs from www/index.html; refusing to build a stale APK.');
+          if (dst.length < 1000000) throw new Error('Packaged game HTML is unexpectedly small: ' + dst.length);
+          console.log('PASS: packaged HTML verified at ' + packaged);
+          console.log('Bytes: ' + dst.length + ' | SHA-256: ' + hash(dst));
+          console.log('Startup diagnostics, watchdog, real story module, save and continue controls are present.');
+          NODE
+
       - name: Apply Carthage launcher icon
         run: node scripts/apply-android-branding.cjs
 
