@@ -1,0 +1,23 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const source = path.join(__dirname, '..', 'index.html');
+const out = path.join(__dirname, '..', 'www', 'index.html');
+fs.mkdirSync(path.dirname(out), { recursive: true });
+let html = fs.readFileSync(source, 'utf8');
+const marker = '<script type="module">';
+const start = html.indexOf(marker);
+if (start < 0) throw new Error('Original game module script was not found.');
+const end = html.indexOf('</script>', start);
+if (end < 0) throw new Error('Original game module script is not closed.');
+const replacement = `<script type="module">
+  const root = document.getElementById('root');
+  if (root) root.innerHTML = '<div style="font:700 22px system-ui;color:#f2c46e">اختبار هيكل قرطاج</div><p style="font:16px system-ui;color:white">نجح تشغيل JavaScript Module داخل صفحة اللعبة الأصلية.</p><p style="font:14px system-ui;color:#a8e6b0">تم تعطيل محرك القصة مؤقتاً في هذا الاختبار فقط.</p>';
+  window.__carthageModuleTest = 'PASS';
+  const status = document.getElementById('carthage-shell-status');
+  if (status) status.textContent = 'نجح: Module JavaScript';
+</script>`;
+html = html.slice(0, start) + replacement + html.slice(end + '</script>'.length);
+const overlay = `<div id="carthage-shell-status" style="position:fixed;z-index:2147483647;bottom:12px;left:12px;right:12px;background:#18243a;color:#fff;border:2px solid #e7bb62;border-radius:14px;padding:12px;text-align:center;font:700 14px system-ui">تم تحميل هيكل HTML/CSS الأصلي — نختبر Module JavaScript...</div>`;
+html = html.replace('</body>', overlay + '</body>');
+fs.writeFileSync(out, html);
+console.log('Prepared original Carthage HTML/CSS with only the large story module replaced.');
