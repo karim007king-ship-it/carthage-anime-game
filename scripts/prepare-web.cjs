@@ -176,6 +176,47 @@ const cinematicPilot = `<style id="carthage-cinematic-pilot">
 
 html = html.replace('</body>', cinematicPilot + '</body>');
 
+
+const cinematicExpansion = `<style id="carthage-cinematic-scene-style">
+@keyframes carthageSceneDrift{from{transform:scale(1) translate3d(0,0,0);filter:saturate(1) contrast(1)}to{transform:scale(1.035) translate3d(-.35%,.15%,0);filter:saturate(1.06) contrast(1.03)}}
+#root.carthage-cinematic-scene{isolation:isolate}
+#root.carthage-cinematic-scene:before{content:"";position:fixed;inset:0;z-index:7;pointer-events:none;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.24) 100%)}
+#root.carthage-cinematic-scene img.carthage-cinematic-scene-subject{animation:carthageSceneDrift 26s cubic-bezier(.2,.65,.25,1) infinite alternate;transform-origin:center center;will-change:transform,filter}
+@media(prefers-reduced-motion:reduce){#root.carthage-cinematic-scene img.carthage-cinematic-scene-subject{animation:none;will-change:auto}}
+</style>
+<script id="carthage-cinematic-scene-runtime">
+(function(){
+ if(window.__carthageCinematicScene)return;
+ window.__carthageCinematicScene=true;
+ var root=null,last=null,queued=false;
+ function apply(){
+  root=document.getElementById("root");if(!root)return;
+  var active=!!root.querySelector(".game-timer");
+  var images=active?Array.from(root.querySelectorAll("img")).filter(function(img){
+   var r=img.getBoundingClientRect();
+   return img.complete&&img.naturalWidth>0&&r.width>160&&r.height>100&&getComputedStyle(img).visibility!=="hidden";
+  }):[];
+  images.sort(function(a,b){var x=a.getBoundingClientRect(),y=b.getBoundingClientRect();return y.width*y.height-x.width*x.height});
+  var target=images[0]||null;
+  var enabled=!!(active&&target);
+  root.classList.toggle("carthage-cinematic-scene",enabled);
+  if(last&&last!==target)last.classList.remove("carthage-cinematic-scene-subject");
+  if(target){target.classList.add("carthage-cinematic-scene-subject");last=target}
+  else if(last){last.classList.remove("carthage-cinematic-scene-subject");last=null}
+ }
+ var observer=new MutationObserver(function(){
+  if(queued)return;queued=true;
+  requestAnimationFrame(function(){queued=false;apply()});
+ });
+ function start(){
+  apply();
+  observer.observe(document.getElementById("root")||document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["src","class","style"]});
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+})();
+</script>`;
+html = html.replace('</body>', cinematicExpansion + '</body>');
+
 // Instrument the real ES module and React mount, not a detached JavaScript test.
 replaceOnce('<script type="module">', '<script type="module">window.__CARTHAGE_MODULE_STARTED__=true;', 'main story module start marker');
 replaceOnce('yz.createRoot(document.getElementById("root")).render(u(bz.default.StrictMode,{children:u(vu,{})}));',
