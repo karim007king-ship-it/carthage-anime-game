@@ -24,6 +24,10 @@ assert.ok(cinematicPilot.includes('carthage-export-backup'), 'one-tap save backu
 assert.ok(cinematicPilot.includes('carthage-import-backup'), 'save backup import button must exist');
 assert.ok(cinematicPilot.includes('shiganshina-autosave-v1'), 'save import must restore autosave for one-tap continue');
 assert.ok(cinematicPilot.includes('carthageSlowPushIn'), 'cinematic pilot must include a slow camera push-in');
+assert.ok(cinematicPilot.includes('carthage-cinematic-scene-runtime'), 'cinematic scene expansion must be injected into Android builds');
+assert.ok(cinematicPilot.includes('carthageSceneDrift'), 'story images must receive restrained camera drift');
+assert.ok(cinematicPilot.includes('carthage-cinematic-scene-subject'), 'the cinematic runtime must target the main scene image');
+assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#root.carthage-cinematic-scene'), 'expanded scene motion must respect reduced-motion settings');
 assert.ok(cinematicPilot.includes('carthageCinematicLight'), 'cinematic pilot must include a restrained moving light pass');
 assert.ok(cinematicPilot.includes('carthageCinematicImpact'), 'Great Wall break must trigger a brief impact camera shake');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce'), 'cinematic animation must respect reduced-motion accessibility');
