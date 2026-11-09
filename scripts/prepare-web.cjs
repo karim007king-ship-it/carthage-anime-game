@@ -46,10 +46,10 @@ const navigation = `<script id="carthage-native-navigation">(function(){if(windo
 if (!html.includes('</body>')) throw new Error('Missing closing body tag for navigation controls.');
 html = html.replace('</body>', navigation + '</body>');
 
-const inlineScripts = [...html.matchAll(/<script\\b([^>]*)>([\\s\\S]*?)<\\/script>/gi)];
+const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
 let executable = 0;
 for (const [, attrs, body] of inlineScripts) {
-  if (!body.trim() || /type\\s*=\\s*["']application\\/(?:json|ld\\+json)["']/i.test(attrs)) continue;
+  if (!body.trim() || /type\s*=\s*["']application\/(?:json|ld\+json)["']/i.test(attrs)) continue;
   new vm.Script(body, { filename: `carthage-inline-${executable}.js` });
   executable++;
 }
