@@ -280,7 +280,7 @@ const cinematicDestruction = String.raw`<style id="carthage-wall-impact-style">
 #carthage-wall-impact-fx .wall-flash{position:absolute;inset:0;background:radial-gradient(ellipse at 52% 48%,rgba(255,238,196,.9),rgba(255,174,82,.22) 28%,transparent 68%);animation:carthageWallFlash .72s ease-out both}
 #carthage-wall-impact-fx .wall-dust{position:absolute;left:52%;top:55%;width:min(95vw,760px);height:min(95vw,760px);border-radius:50%;background:radial-gradient(circle,rgba(221,190,145,.72) 0%,rgba(157,121,91,.44) 34%,rgba(73,58,52,.18) 58%,transparent 72%);filter:blur(13px);animation:carthageDustBloom 2.6s cubic-bezier(.12,.6,.2,1) both}
 #carthage-wall-impact-fx .wall-ring{position:absolute;left:52%;top:51%;width:min(72vw,560px);aspect-ratio:1;border:3px solid rgba(255,220,164,.72);border-radius:50%;box-shadow:0 0 28px rgba(255,177,94,.55),inset 0 0 24px rgba(255,220,164,.2);animation:carthageShockRing 1.15s ease-out both}
-#carthage-wall-impact-fx .wall-stone{position:absolute;left:52%;top:48%;width:var(--size);height:var(--size);border-radius:22% 38% 18% 42%;background:linear-gradient(135deg,#d7b58b,#62564e 68%,#29262a);box-shadow:0 2px 8px #160f0b;animation:carthageRubbleFly 1.9s cubic-bezier(.12,.62,.22,1) var(--delay) both}
+#carthage-wall-impact-fx .wall-stone{position:absolute;display:block;left:52%;top:48%;width:var(--size);height:var(--size);border-radius:22% 38% 18% 42%;background:linear-gradient(135deg,#d7b58b,#62564e 68%,#29262a);box-shadow:0 2px 8px #160f0b;animation:carthageRubbleFly 1.9s cubic-bezier(.12,.62,.22,1) var(--delay) both}
 @media(prefers-reduced-motion:reduce){#carthage-wall-impact-fx,#carthage-wall-impact-fx *{animation:none!important;opacity:0!important}}
 </style>
 <script id="carthage-wall-impact-runtime">
