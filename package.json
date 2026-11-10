@@ -4,7 +4,7 @@
   "private": true,
   "description": "Carthage interactive story game - cinematic anime pilot",
   "scripts": {
-    "test": "node tests/smoke-test.cjs && node tests/save-recovery-test.cjs && node tests/qarton-home-contract-test.cjs",
+    "test": "node tests/smoke-test.cjs && node tests/save-recovery-test.cjs && node tests/qarton-home-contract-test.cjs && node tests/qarton-main-tree-test.cjs",
     "prepare:web": "node scripts/prepare-web.cjs",
     "android:sync": "npm run prepare:web && cap sync android"
   },
