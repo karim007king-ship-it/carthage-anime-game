@@ -18,7 +18,7 @@ assert.ok(home.includes('classList.add("qarton-home-shell")'), 'the live menu sh
 // The fixed viewport and compact two-column action grid are explicit layout contracts.
 assert.ok(home.includes('grid-template-columns:repeat(2,minmax(0,1fr))!important'), 'home actions must use a two-column grid');
 assert.ok(home.includes('grid-auto-rows:minmax(37px,auto)!important'), 'compact buttons must retain touchable row height');
-assert.ok(home.includes('button{\\nbox-sizing:border-box!important;display:flex!important'), 'real menu buttons must remain visible and fill their grid cells');
+assert.ok(home.includes('button{\\n box-sizing:border-box!important;display:flex!important'), 'real menu buttons must remain visible and fill their grid cells');
 assert.ok(home.includes('padding-top:calc(env(safe-area-inset-top,0px) + 69px)'), 'short screens must reserve the measured QARTON header');
 assert.ok(home.includes('padding-bottom:calc(env(safe-area-inset-bottom,0px) + 23px)'), 'short screens must reserve the footer and safe area');
 assert.ok(home.includes('@media(max-height:740px)'), 'compact viewport rules must be present');
