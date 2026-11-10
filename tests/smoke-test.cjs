@@ -79,6 +79,11 @@ assert.ok(androidPrep.includes('Resource load'), 'Android startup diagnostic mus
 assert.ok(androidPrep.includes('carthage-startup-errors'), 'Android startup diagnostic must retain captured errors for display');
 assert.ok(androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
 assert.ok(androidPrep.includes('menuActions.insertBefore(continueButton'), 'Continue must appear directly in the home menu');
+assert.ok(androidPrep.includes('var homeScreen=!!root.querySelector'), 'navigation must distinguish the home menu from other non-game screens');
+assert.ok(androidPrep.includes('if(!playing&&homeScreen&&hasSave'), 'Continue must only be injected on the home menu');
+assert.ok(androidPrep.includes('playing||!homeScreen||!hasSave'), 'Continue must be removed outside the home menu');
+assert.ok(androidPrep.includes('if(!playing&&homeScreen&&typeof window.__carthageStartPart3'), 'Part 3 control must only appear on the home menu');
+assert.ok(androidPrep.includes('playing||!homeScreen)&&partButton'), 'Part 3 control must be removed outside the home menu');
 assert.ok(androidPrep.includes('originalContinue.style.display=(!playing&&hasSave&&continueButton)?\\"none\\":\\"\\"'), 'The original React Continue button must be hidden when the enhanced continue control is inserted, avoiding duplicates');
 assert.ok(androidPrep.includes('part2Button.insertAdjacentElement'), 'Part 3 must appear directly after Part 2 in the home menu');
 assert.ok(androidPrep.includes('if(partButton.textContent!==part3Label)'), 'navigation observer must not rewrite the Part 3 label on every mutation');
