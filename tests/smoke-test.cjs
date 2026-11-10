@@ -84,7 +84,7 @@ assert.ok(androidPrep.includes('if(!playing&&homeScreen&&hasSave'), 'Continue mu
 assert.ok(androidPrep.includes('playing||!homeScreen||!hasSave'), 'Continue must be removed outside the home menu');
 assert.ok(androidPrep.includes('if(!playing&&homeScreen&&typeof window.__carthageStartPart3'), 'Part 3 control must only appear on the home menu');
 assert.ok(androidPrep.includes('playing||!homeScreen)&&partButton'), 'Part 3 control must be removed outside the home menu');
-assert.ok(androidPrep.includes('originalContinue.style.display=(!playing&&hasSave&&continueButton)?\\"none\\":\\"\\"'), 'The original React Continue button must be hidden when the enhanced continue control is inserted, avoiding duplicates');
+assert.ok(androidPrep.includes('originalContinue.style.display=(!playing&&homeScreen&&hasSave&&continueButton)?\\"none\\":\\"\\"'), 'The original React Continue button must be hidden only on the home menu when the enhanced continue control is inserted');
 assert.ok(androidPrep.includes('part2Button.insertAdjacentElement'), 'Part 3 must appear directly after Part 2 in the home menu');
 assert.ok(androidPrep.includes('if(partButton.textContent!==part3Label)'), 'navigation observer must not rewrite the Part 3 label on every mutation');
 assert.ok(androidPrep.includes('رجوع للقائمة'), 'new-game cancel action must be clearly labeled as returning to menu');
