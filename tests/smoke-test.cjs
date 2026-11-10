@@ -119,6 +119,15 @@ assert.ok(androidPrep.includes('carthage-home-locked'), 'home menu must toggle a
 assert.ok(androidPrep.includes('stopHomeScroll'), 'home page vertical touch and wheel scrolling must be blocked');
 assert.ok(androidPrep.includes('.game-timer'), 'home lock must detect active story gameplay and release the viewport');
 
+const qartonInspector = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-home-inspector.js'), 'utf8');
+assert.ok(androidPrep.includes('qarton-home-inspector-runtime'), 'read-only home measurement probe must be injected into Android builds');
+assert.ok(qartonInspector.includes('window.__qartonMeasureHome=report'), 'home measurement report must be exposed for on-device inspection');
+assert.ok(qartonInspector.includes('viewport:{width:innerWidth,height:innerHeight'), 'home measurement must capture the actual viewport');
+assert.ok(qartonInspector.includes('audioControls:audio'), 'home measurement must inspect rendered audio controls');
+assert.ok(qartonInspector.includes('carthage-continue-last'), 'home measurement must inspect the continue control');
+assert.ok(!/localStorage\\.(setItem|removeItem|clear)/.test(qartonInspector), 'home measurement must never modify game saves');
+new vm.Script(qartonInspector, {filename:'qarton-home-inspector.js'});
+
 const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(m => m[1]);
 const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
 assert.deepEqual([...new Set(duplicates)], [], 'HTML ids must be unique');
