@@ -3,7 +3,7 @@ name: Build Carthage Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, "design/qarton-central-home-tree"]
     paths:
       - "index.html"
       - "package.json"
