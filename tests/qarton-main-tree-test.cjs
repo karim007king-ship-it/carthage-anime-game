@@ -49,6 +49,19 @@ assert.ok(!home.includes('if(overlay)overlay.style.display="none";restoreLegacy(
 assert.ok(home.includes('function showProgress()'), 'Progress branch must expose original backup actions');
 assert.ok(home.includes('function cleanupForGame()'), 'tree must disappear during gameplay');
 
+// Every main card must route to its own dedicated subview.
+for (const marker of [
+  'card("01","⚔","القصة"',
+  'card("02","⌖","عالم قرطاج"',
+  'card("03","▣","التقدم والحفظ"',
+  'card("04","⚙","الإعدادات"'
+]) assert.ok(home.includes(marker), 'missing main card route: ' + marker);
+assert.ok(home.includes('true,showStory') && home.includes('true,showProgress'), 'Story and Progress cards must open their dedicated views');
+assert.ok(home.includes('function proxyStoryAction(') && home.includes('live.click()'), 'Story actions must invoke the live original game buttons');
+assert.ok(home.includes('root.querySelector(".home-actions.grid button:first-child")'), 'New Game must target the original first home action');
+assert.ok(home.includes('root.querySelector("#btn-part2")') || home.includes('root.querySelector("#carthage-part3-start")'), 'Story must retain the original chapter entry controls');
+assert.ok(home.includes('actionButton(panel,"carthage-continue-last"') && home.includes('actionButton(panel,"carthage-export-backup"') && home.includes('actionButton(panel,"carthage-import-backup"'), 'Progress must expose all original save actions when available');
+
 // World and Settings are functional subviews backed only by existing game content and controls.
 assert.ok(home.includes('card("02","⌖","عالم قرطاج"') && home.includes('card("04","⚙","الإعدادات"'), 'World and Settings must remain explicit main-tree branches');
 assert.ok(home.includes('true,showWorld') && home.includes('true,showSettings'), 'World and Settings cards must open real subviews');
