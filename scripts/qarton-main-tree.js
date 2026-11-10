@@ -120,7 +120,7 @@
   function card(num,icon,title,desc,enabled,handler){var b=el("button","qt-card");b.type="button";b.disabled=!enabled;b.append(el("span","qt-num",num),el("span","qt-icon",icon),el("strong","",title),el("small","",desc));if(!enabled)b.append(el("span","qt-status","قيد التطوير"));if(enabled)b.addEventListener("click",handler);return b;}
   function renderTree(){if(!overlay)return;overlay.replaceChildren();var brandRow=el("div","qt-brand");brandRow.append(el("span","qt-mark","Q"));var word=el("span","qt-word");word.append(el("strong","","QARTON"),el("small","","CULTURE • POWER • CINEMA"));brandRow.appendChild(word);var title=el("h1","qt-title");title.append(el("strong","","قَرْطَاج"),el("span","","آخر يوم في قرطاج"));var summary=el("p","qt-summary","حكاية تفاعلية من التاريخ… قراراتك ترسم الطريق ومصير قرطاج.");var grid=el("div","qt-grid");grid.append(card("01","⚔","القصة","بداية جديدة • الأجزاء المتاحة",true,showStory),card("02","⌖","عالم قرطاج","الشخصيات • الأماكن • دليل المدينة",true,showWorld),card("03","▣","التقدم والحفظ","متابعة تقدمك • النسخ الاحتياطية",true,showProgress),card("04","⚙","الإعدادات","الصوت السينمائي • مستوى الصوت",true,showSettings));var foot=el("div","qt-footer");foot.append(el("span","qt-line"),el("span","","QARTON — رحلتك • اختياراتك • مصيرك"),el("span","qt-line"));overlay.append(brandRow,title,summary,grid,foot);}
   function cleanupForGame(){if(overlay){overlay.remove();overlay=null;}clearReturn();restoreLegacy();view="game";}
-  function mount(){root=document.getElementById("root");if(!root)return;if(isPlaying()){cleanupForGame();return;}shell=findShell();/* The tree is the home screen: do not make its rendering depend on legacy menu class names. */if(view==="story")return;if(view==="progress"){hideLegacy();if(overlay)return;showProgress();return;}if(view==="world"){hideLegacy();if(overlay)return;showWorld();return;}if(view==="settings"){hideLegacy();if(overlay)return;showSettings();return;}if(view==="tree"&&overlay){hideLegacy();return;}addStyle();goTree();}
+  function mount(){root=document.getElementById("root");if(!root)return;if(isPlaying()){if(view!=="game"||overlay)cleanupForGame();return;}shell=findShell();/* The tree is the home screen: do not make its rendering depend on legacy menu class names. */if(view==="story")return;if(view==="progress"){hideLegacy();if(overlay)return;showProgress();return;}if(view==="world"){hideLegacy();if(overlay)return;showWorld();return;}if(view==="settings"){hideLegacy();if(overlay)return;showSettings();return;}if(view==="tree"&&overlay){hideLegacy();return;}addStyle();goTree();}
   function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount();});}
   function attachToApp(){
     if(started)return;
@@ -130,7 +130,7 @@
     if(rootWaiter){rootWaiter.disconnect();rootWaiter=null;}
     addStyle();
     observer=new MutationObserver(schedule);
-    observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class","style"]});
+    observer.observe(root,{subtree:true,childList:true});
     mount();
   }
   function boot(){
