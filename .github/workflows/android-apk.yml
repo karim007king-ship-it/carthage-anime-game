@@ -11,6 +11,15 @@ on:
       - "tests/**"
       - "scripts/**"
       - ".github/workflows/android-apk.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "package.json"
+      - "capacitor.config.json"
+      - "tests/**"
+      - "scripts/**"
+      - ".github/workflows/android-apk.yml"
 
 permissions:
   contents: read
