@@ -58,7 +58,7 @@
   function proxyTextAction(parent,match,label,detail){
     var b=el("button","qt-action");b.type="button";b.append(el("span","",label),el("span","","↻"));if(detail)b.setAttribute("aria-label",detail);
     b.addEventListener("click",function(){
-      var live=root&&Array.from(root.querySelectorAll("button")).find(function(node){return (node.textContent||"").replace(/\\s+/g," ").trim().includes(match);});
+      var live=root&&Array.from(root.querySelectorAll("button")).find(function(node){return (node.textContent||"").replace(/\s+/g," ").trim().includes(match);});
       if(live&&!live.disabled)live.click();
       else b.querySelector("span:last-child").textContent="غير متاح";
     });
