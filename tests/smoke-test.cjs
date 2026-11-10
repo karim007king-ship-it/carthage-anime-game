@@ -94,7 +94,7 @@ assert.ok(qartonHome.includes('CULTURE • POWER • CINEMA'), 'premium home mus
 assert.ok(qartonHome.includes('قــــرطــــاج'), 'premium home must show the Carthage title');
 assert.ok(qartonHome.includes('.home-actions.grid button'), 'premium home must professionally style the existing real menu actions');
 assert.ok(qartonHome.includes('game-timer'), 'premium home must disappear during gameplay');
-assert.ok(androidPrep.includes('qarton-premium-home-runtime'), 'premium home runtime must be included in the Android package');
+assert.ok(!androidPrep.includes('qarton-premium-home-runtime'), 'experimental premium home overlay must stay disabled until the native layout is measured and redesigned');
 assert.ok(androidPrep.includes('carthage-home-locked'), 'home menu must toggle a dedicated fixed viewport state');
 assert.ok(androidPrep.includes('stopHomeScroll'), 'home page vertical touch and wheel scrolling must be blocked');
 assert.ok(androidPrep.includes('.game-timer'), 'home lock must detect active story gameplay and release the viewport');
