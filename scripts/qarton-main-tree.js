@@ -55,15 +55,6 @@
   function goTree(){view="tree";hideLegacy();ensureOverlay();renderTree();clearReturn();overlay.style.display="flex";}
   function proxyStoryAction(parent,selector,label,detail,disabled){var b=el("button","qt-action");b.type="button";b.append(el("span","",label),el("span","","‹"));if(detail)b.setAttribute("aria-label",detail);b.disabled=!!disabled;b.addEventListener("click",function(){var live=root&&root.querySelector(selector);if(live&&!live.disabled)live.click();});parent.appendChild(b);return b;}
   function showStory(){view="story";hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren();var head=el("div","qt-subhead");head.append(el("h2","","القصة — اختر بداية رحلتك"));var back=el("button","qt-back","⌂ الرئيسية");back.type="button";back.addEventListener("click",goTree);head.appendChild(back);var panel=el("section","qt-panel");panel.appendChild(el("p","","اختر بداية رحلتك أو افتح فصلاً متاحاً. لاستكمال تقدمك السابق، انتقل إلى قسم التقدم والحفظ."));var menu=root&&root.querySelector(".home-actions.grid");var start=menu&&menu.querySelector("button:first-child");if(start)proxyStoryAction(panel,".home-actions.grid button:first-child","▶ بداية جديدة — الجزء الأول","بدء القصة من الفصل الأول",false);var part2=root&&root.querySelector("#btn-part2");if(part2)proxyStoryAction(panel,"#btn-part2",part2.textContent.trim()||"الجزء الثاني","فتح الجزء الثاني حسب شروط اللعبة",!!part2.disabled);var part3=root&&root.querySelector("#carthage-part3-start");if(part3)proxyStoryAction(panel,"#carthage-part3-start",part3.textContent.trim()||"الجزء الثالث","الجزء الثالث يفتح بعد إتمام الجزء الثاني",!!part3.disabled);if(!start&&!part2&&!part3)panel.appendChild(el("div","qt-empty","لم تُعثر على خيارات القصة الأصلية. أعد المحاولة بعد اكتمال تحميل اللعبة."));overlay.append(head,panel);overlay.style.display="flex";}
-  function proxyTextAction(parent,match,label,detail){
-    var b=el("button","qt-action");b.type="button";b.append(el("span","",label),el("span","","↻"));if(detail)b.setAttribute("aria-label",detail);
-    b.addEventListener("click",function(){
-      var live=root&&Array.from(root.querySelectorAll("button")).find(function(node){return (node.textContent||"").replace(/\s+/g," ").trim().includes(match);});
-      if(live&&!live.disabled)live.click();
-      else b.querySelector("span:last-child").textContent="غير متاح";
-    });
-    parent.appendChild(b);return true;
-  }
   function showWorld(){
     view="world";hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren();
     var head=el("div","qt-subhead");head.append(el("h2","","عالم قرطاج"));var back=el("button","qt-back","رجوع");back.type="button";back.addEventListener("click",goTree);head.appendChild(back);
