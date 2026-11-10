@@ -95,6 +95,9 @@ assert.ok(qartonHome.includes('قــــرطــــاج'), 'premium home must 
 assert.ok(qartonHome.includes('.home-actions.grid button'), 'premium home must professionally style the existing real menu actions');
 assert.ok(qartonHome.includes('game-timer'), 'premium home must disappear during gameplay');
 assert.ok(qartonHome.includes('function findMenu(root)'), 'QARTON runtime must detect the live menu even when its original CSS classes differ');
+assert.ok(qartonHome.includes('candidate.querySelectorAll("button").length>=3'), 'QARTON runtime must recover the menu when the original grid class is missing');
+assert.ok(qartonHome.includes('menu.classList.add("home-actions","grid")'), 'recovered menu must receive the expected grid styling hook');
+assert.ok(qartonHome.includes('if(!shell&&menu.parentElement&&menu.parentElement!==root)shell=menu.parentElement'), 'QARTON runtime must fall back to the real parent shell when utility classes differ');
 assert.ok(qartonHome.includes('menu.closest(".home-actions.flex")'), 'QARTON runtime must anchor styling to the actual outer home shell');
 assert.ok(qartonHome.includes('classList.add("qarton-home-shell")'), 'QARTON runtime must mark the actual home shell for layout styling');
 assert.ok(qartonHome.includes('root.classList.add("carthage-home-locked")'), 'QARTON runtime must activate the CSS scope on the live root');
