@@ -1,7 +1,7 @@
 (function(){
   if (window.__qartonMainTreeInstalled) return;
   window.__qartonMainTreeInstalled = true;
-  var root=null,shell=null,overlay=null,backButton=null,observer=null,queued=false,view="tree",brand=null,footer=null,measure=null;
+  var root=null,shell=null,overlay=null,backButton=null,observer=null,rootWaiter=null,queued=false,started=false,view="tree",brand=null,footer=null,measure=null;
   var css = `
   #qarton-main-tree{position:fixed;inset:0;z-index:2147482000;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:clamp(7px,1.8vh,14px);padding:calc(env(safe-area-inset-top,0px) + 13px) 16px calc(env(safe-area-inset-bottom,0px) + 12px);overflow:hidden;direction:rtl;color:#fff0d2;background:radial-gradient(ellipse at 50% 5%,#7c293a55,transparent 38%),radial-gradient(ellipse at 8% 80%,#d2a65a20,transparent 34%),linear-gradient(155deg,#080b13 0%,#131d2c 55%,#090c14 100%);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
   #qarton-main-tree *{box-sizing:border-box}
@@ -122,6 +122,24 @@
   function cleanupForGame(){if(overlay){overlay.remove();overlay=null;}clearReturn();restoreLegacy();view="game";}
   function mount(){root=document.getElementById("root");if(!root)return;if(isPlaying()){cleanupForGame();return;}shell=findShell();if(!shell)return;if(view==="story")return;if(view==="progress"){hideLegacy();if(overlay)return;showProgress();return;}if(view==="world"){hideLegacy();if(overlay)return;showWorld();return;}if(view==="settings"){hideLegacy();if(overlay)return;showSettings();return;}if(view==="tree"&&overlay){hideLegacy();return;}addStyle();goTree();}
   function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount();});}
-  function boot(){root=document.getElementById("root");if(!root)return;addStyle();observer=new MutationObserver(schedule);observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class","style"]});mount();}
+  function attachToApp(){
+    if(started)return;
+    root=document.getElementById("root");
+    if(!root)return;
+    started=true;
+    if(rootWaiter){rootWaiter.disconnect();rootWaiter=null;}
+    addStyle();
+    observer=new MutationObserver(schedule);
+    observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class","style"]});
+    mount();
+  }
+  function boot(){
+    attachToApp();
+    if(started||rootWaiter||!document.documentElement)return;
+    rootWaiter=new MutationObserver(function(){
+      if(document.getElementById("root"))attachToApp();
+    });
+    rootWaiter.observe(document.documentElement,{subtree:true,childList:true});
+  }
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 })();
