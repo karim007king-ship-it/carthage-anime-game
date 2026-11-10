@@ -1,11 +1,15 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
+const vm = require('node:vm');
 const root = path.join(__dirname, '..');
 const home = fs.readFileSync(path.join(root, 'scripts/qarton-main-tree.js'), 'utf8');
 const prep = fs.readFileSync(path.join(root, 'scripts/prepare-web.cjs'), 'utf8');
 const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 const workflow = fs.readFileSync(path.join(root, '.github/workflows/android-apk.yml'), 'utf8');
+
+// Parse the runtime before checking its behavior contracts.
+new vm.Script(home, {filename:'qarton-main-tree.js'});
 
 // The approved fixed home is a real four-branch 2x2 tree, not a restyled old menu.
 for (const marker of [
