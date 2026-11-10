@@ -54,6 +54,14 @@ assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){.stage-slide .
 assert.ok(cinematicPilot.includes('.wall-stone{position:absolute;display:block;'), 'flying rubble fragments must be positioned visible blocks');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#carthage-wall-impact-fx'), 'destruction effects must respect reduced-motion accessibility');
 const androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
+const homeInspector = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-home-inspector.js'), 'utf8');
+assert.ok(androidPrep.includes('qarton-home-inspector-runtime'), 'temporary home measurement probe must be injected into Android builds');
+assert.ok(homeInspector.includes('window.__qartonMeasureHome=report'), 'home measurement report must be available for verification');
+assert.ok(homeInspector.includes('viewport:{width:innerWidth,height:innerHeight'), 'home measurement must capture the real viewport');
+assert.ok(homeInspector.includes('audioControls:audio'), 'home measurement must inspect actual audio controls');
+assert.ok(homeInspector.includes('carthage-continue-last'), 'home measurement must inspect existing save controls');
+assert.ok(!/localStorage\\.(setItem|removeItem|clear)/.test(homeInspector), 'home measurement must not modify saved game data');
+
 assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
 assert.ok(androidPrep.includes('carthage-save-now'), 'simple save button must exist');
 assert.ok(androidPrep.includes('carthage-continue-last'), 'one-tap continue button must exist');
