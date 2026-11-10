@@ -27,7 +27,7 @@
   #qarton-main-tree .qt-card .qt-status{margin-top:2px;padding:3px 8px;border:1px solid #8a8e98;border-radius:999px;color:#d5d0c4;font-size:9px;font-weight:800}
   #qarton-main-tree .qt-footer{flex:0 0 auto;display:flex;align-items:center;justify-content:center;gap:9px;color:#bca77f;font-size:9px;font-weight:800;letter-spacing:.7px}
   #qarton-main-tree .qt-line{width:25px;height:1px;background:linear-gradient(90deg,transparent,#e8c477,transparent)}
-  #qarton-main-tree .qt-subview{width:100%;max-width:520px;flex:1;min-height:0;display:flex;flex-direction:column;gap:12px}
+  #qarton-main-tree .qt-subview{width:100%;max-width:520px;flex:1;min-height:0;display:flex;flex-direction:column;gap:12px}\n  #qarton-main-tree .qt-scroll{width:100%;max-width:520px;flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;display:flex;flex-direction:column;gap:10px;padding-bottom:8px}\n  #qarton-main-tree .qt-entry{padding:10px 11px;border:1px solid #e8c47744;border-radius:12px;background:#080f1bb8}\n  #qarton-main-tree .qt-entry summary{cursor:pointer;color:#ffe6ad;font-size:12px;font-weight:850;line-height:1.6}\n  #qarton-main-tree .qt-entry p{margin:7px 0 0;color:#c9c1b2;font-size:11px;line-height:1.65}
   #qarton-main-tree .qt-subhead{display:flex;align-items:center;justify-content:space-between;gap:10px;flex:0 0 auto}
   #qarton-main-tree .qt-subhead h2{margin:0;color:#fff0d2;font-size:21px;font-weight:900}
   #qarton-main-tree .qt-back{border:1px solid #e8c477;border-radius:999px;background:#111b2a;color:#ffe6ad;padding:9px 13px;font:800 12px system-ui}
@@ -51,10 +51,70 @@
   function goTree(){view="tree";hideLegacy();ensureOverlay();renderTree();clearReturn();overlay.style.display="flex";}
   function proxyStoryAction(parent,selector,label,detail,disabled){var b=el("button","qt-action");b.type="button";b.append(el("span","",label),el("span","","‹"));if(detail)b.setAttribute("aria-label",detail);b.disabled=!!disabled;b.addEventListener("click",function(){var live=root&&root.querySelector(selector);if(live&&!live.disabled)live.click();});parent.appendChild(b);return b;}
   function showStory(){view="story";hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren();var head=el("div","qt-subhead");head.append(el("h2","","القصة — اختر بداية رحلتك"));var back=el("button","qt-back","⌂ الرئيسية");back.type="button";back.addEventListener("click",goTree);head.appendChild(back);var panel=el("section","qt-panel");panel.appendChild(el("p","","اختر بداية رحلتك أو افتح فصلاً متاحاً. لاستكمال تقدمك السابق، انتقل إلى قسم التقدم والحفظ."));var menu=root&&root.querySelector(".home-actions.grid");var start=menu&&menu.querySelector("button:first-child");if(start)proxyStoryAction(panel,".home-actions.grid button:first-child","▶ بداية جديدة — الجزء الأول","بدء القصة من الفصل الأول",false);var part2=root&&root.querySelector("#btn-part2");if(part2)proxyStoryAction(panel,"#btn-part2",part2.textContent.trim()||"الجزء الثاني","فتح الجزء الثاني حسب شروط اللعبة",!!part2.disabled);var part3=root&&root.querySelector("#carthage-part3-start");if(part3)proxyStoryAction(panel,"#carthage-part3-start",part3.textContent.trim()||"الجزء الثالث","الجزء الثالث يفتح بعد إتمام الجزء الثاني",!!part3.disabled);if(!start&&!part2&&!part3)panel.appendChild(el("div","qt-empty","لم تُعثر على خيارات القصة الأصلية. أعد المحاولة بعد اكتمال تحميل اللعبة."));overlay.append(head,panel);overlay.style.display="flex";}
+  function proxyTextAction(parent,match,label,detail){
+    var b=el("button","qt-action");b.type="button";b.append(el("span","",label),el("span","","↻"));if(detail)b.setAttribute("aria-label",detail);
+    b.addEventListener("click",function(){
+      var live=root&&Array.from(root.querySelectorAll("button")).find(function(node){return (node.textContent||"").replace(/\\s+/g," ").trim().includes(match);});
+      if(live&&!live.disabled)live.click();
+      else b.querySelector("span:last-child").textContent="غير متاح";
+    });
+    parent.appendChild(b);return true;
+  }
+  function showWorld(){
+    view="world";hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren();
+    var head=el("div","qt-subhead");head.append(el("h2","","عالم قرطاج"));var back=el("button","qt-back","رجوع");back.type="button";back.addEventListener("click",goTree);head.appendChild(back);
+    var scroll=el("div","qt-scroll");
+    var intro=el("section","qt-panel");intro.appendChild(el("p","","دليل تعريفي بعالم اللعبة، مستخرج من الشخصيات والأماكن الموجودة في القصة. هذا القسم للقراءة فقط ولا يغيّر وقت اللعب أو تقدمك."));
+    var chars=el("section","qt-panel");chars.appendChild(el("strong","","الشخصيات"));
+    var characters=[
+      ["ريان","البطل • 16 سنة","ولد قرطاج الذي وعد أخته ألا يتركها وحدها. قراراته ترسم نهاية المدينة."],
+      ["سارة","الأم","قلب الدار؛ تحاول حماية أبنائها بهدوء رغم إحساسها المبكر بالخطر."],
+      ["لينا","الأخت • 8 سنوات","أخت ريان الصغيرة؛ خائفة، لكن ثقتها في أخيها لا تهتز."],
+      ["سليم","الصاحب الذكي","صاحب ريان في السوق؛ ذكي ويلاحظ التفاصيل، لكنه يريد العودة إلى الدار بسرعة."],
+      ["عم منصور","الجندي القديم","جندي قديم يحمل سيفه وخريطته ذاكرة ثلاثين سنة من الحرب."],
+      ["القائدة نور","قائدة البوابة • 29 سنة","تقف بثبات وسط الفوضى، وتقرر من يركب في القوارب الأخيرة."],
+      ["الأب يوسف","الأب • طبيب المستشفى • 42 سنة","طبيب هادئ وحازم؛ يرفض ترك جرحاه وحدهم حتى وهو مصاب."],
+      ["إيلاس","الغامض المقنّع","يظهر وقت الخطر، ويهمس بالحقيقة قبل وقوعها؛ ماضيه مجهول."],
+      ["أمين","الناجي من وراء السور • 23 سنة","عاش سبع سنوات وراء السور، ويعرف الكثير عن العمالقة لكنه لا يثق بسهولة."],
+      ["مريم","المهندسة • 17 سنة","من القرية المخفية في غابة زغوان؛ تصلح البوابات والآلات."],
+      ["عم الهادي","حارس الأرشيف • 62 سنة","عمل مع الأب يوسف في البيمارستان، ويعرف أسرار سور قرطاج."],
+      ["ياسمين","اليتيمة • 10 سنوات","عثرت عليها مريم في الغابة؛ تذكّر ريان بوعده لأخته."],
+      ["القائد كريم","قائد المجموعة الثانية • 35 سنة","يقود مجموعة ناجين من وراء السور، ويميل إلى فرض النظام بالقوة."]
+    ];
+    characters.forEach(function(item,index){var d=el("details","qt-entry");var summary=el("summary","",""+(index+1)+". "+item[0]+" — "+item[1]);var p=el("p","",""+item[2]);d.append(summary,p);chars.appendChild(d);});
+    var places=el("section","qt-panel");places.appendChild(el("strong","","أماكن قرطاج"));
+    var locations=[
+      ["الدار","لينا والأم؛ نقطة مرتبطة بالعائلة وبداية الرحلة."],
+      ["السوق","مكان لقاء سليم وإيلاس."],
+      ["السور","موضع مرتبط بأدلة الحقيقة وأسرار المدينة."],
+      ["دار عم منصور","مكان السيف والخريطة وذاكرة الجندي القديم."],
+      ["المستشفى","مكان الأب يوسف والجرحى."],
+      ["الجسر","منطقة خطر تتطلب قرارات سريعة."],
+      ["البوابة","نقطة القرار الأخير ونهايات القصة."]
+    ];
+    locations.forEach(function(item,index){var d=el("details","qt-entry");d.append(el("summary","",""+(index+1)+". "+item[0]));d.append(el("p","",item[1]));places.appendChild(d);});
+    scroll.append(intro,chars,places);overlay.append(head,scroll);overlay.style.display="flex";
+  }
+  function showSettings(){
+    view="settings";hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren();
+    var head=el("div","qt-subhead");head.append(el("h2","","الإعدادات"));var back=el("button","qt-back","رجوع");back.type="button";back.addEventListener("click",goTree);head.appendChild(back);
+    var panel=el("section","qt-panel");panel.appendChild(el("p","","هذه الأزرار تستدعي إعدادات اللعبة الأصلية مباشرة. لا ننشئ تفضيلات منفصلة ولا نغيّر بيانات الحفظ."));
+    var count=0;
+    count+=proxyTextAction(panel,"صوت:","الصوت العام — تشغيل / إيقاف","تبديل الصوت العام عبر إعداد اللعبة الأصلي");
+    count+=proxyTextAction(panel,"موسيقى:","الموسيقى — تشغيل / إيقاف","تبديل موسيقى اللعبة الأصلية");
+    count+=proxyTextAction(panel,"أصوات الشخصيات","أصوات الشخصيات — تشغيل / إيقاف","تبديل أصوات الشخصيات الأصلية");
+    count+=proxyTextAction(panel,"خط كبير","حجم الخط — عادي / كبير","تبديل حجم النص الأصلي");
+    count+=proxyTextAction(panel,"أقل اهتزاز","تقليل الاهتزاز — تشغيل / إيقاف","تبديل تقليل الاهتزاز الأصلي");
+    count+=proxyTextAction(panel,"عادية","جودة الحركة — عادية","اختيار جودة الحركة العادية");
+    count+=proxyTextAction(panel,"سينمائية ثقيلة","جودة الحركة — سينمائية ثقيلة","اختيار جودة الحركة السينمائية");
+    panel.appendChild(el("p","","ملاحظة: بعض إعدادات الصوت قد تتطلب أول تفاعل على الشاشة بسبب قيود تشغيل الصوت في Android."));
+    if(!count)panel.appendChild(el("div","qt-empty","لم يتم العثور على عناصر الإعدادات الأصلية. لم يتم تغيير أي إعداد."));
+    overlay.append(head,panel);overlay.style.display="flex";
+  }
   function actionButton(parent,id,label,detail){var original=document.getElementById(id);if(!original)return false;var b=el("button","qt-action");b.type="button";b.append(el("span","",label),el("span","","‹"));if(detail)b.setAttribute("aria-label",detail);b.addEventListener("click",function(){var live=document.getElementById(id);if(live&&!live.disabled)live.click();});parent.appendChild(b);return true;}
   function showProgress(){view="progress";hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren();var head=el("div","qt-subhead");head.append(el("h2","","التقدم والحفظ"));var back=el("button","qt-back","رجوع");back.type="button";back.addEventListener("click",goTree);head.appendChild(back);var panel=el("section","qt-panel");panel.appendChild(el("p","","إدارة تقدمك ونسخك الاحتياطية. تُستخدم وظائف اللعبة الأصلية دون إنشاء نظام حفظ جديد."));var found=0;found+=actionButton(panel,"carthage-continue-last","متابعة آخر حفظ","متابعة آخر حفظ صالح");found+=actionButton(panel,"carthage-export-backup","تصدير نسخة احتياطية","تصدير ملف الحفظ");found+=actionButton(panel,"carthage-import-backup","استيراد نسخة احتياطية","استيراد ملف الحفظ");if(!found)panel.appendChild(el("div","qt-empty","لا توجد حالياً أدوات حفظ متاحة في هذه الشاشة."));else if(!document.getElementById("carthage-continue-last"))panel.appendChild(el("div","qt-empty","لا يوجد حفظ سابق للمتابعة بعد. يمكنك إنشاء لعبة جديدة من قسم القصة."));overlay.append(head,panel);overlay.style.display="flex";}
   function card(num,icon,title,desc,enabled,handler){var b=el("button","qt-card");b.type="button";b.disabled=!enabled;b.append(el("span","qt-num",num),el("span","qt-icon",icon),el("strong","",title),el("small","",desc));if(!enabled)b.append(el("span","qt-status","قيد التطوير"));if(enabled)b.addEventListener("click",handler);return b;}
-  function renderTree(){if(!overlay)return;overlay.replaceChildren();var brandRow=el("div","qt-brand");brandRow.append(el("span","qt-mark","Q"));var word=el("span","qt-word");word.append(el("strong","","QARTON"),el("small","","CULTURE • POWER • CINEMA"));brandRow.appendChild(word);var title=el("h1","qt-title");title.append(el("strong","","قَرْطَاج"),el("span","","آخر يوم في قرطاج"));var summary=el("p","qt-summary","حكاية تفاعلية من التاريخ… قراراتك ترسم الطريق ومصير قرطاج.");var grid=el("div","qt-grid");grid.append(card("01","⚔","القصة","بداية جديدة • متابعة • فصول القصة",true,showStory),card("02","⌖","عالم قرطاج","الشخصيات • الأماكن • خريطة العالم",false,null),card("03","▣","التقدم والحفظ","متابعة تقدمك • النسخ الاحتياطية",true,showProgress),card("04","⚙","الإعدادات","الصوت • العرض • إمكانية الوصول",false,null));var foot=el("div","qt-footer");foot.append(el("span","qt-line"),el("span","","QARTON — رحلتك • اختياراتك • مصيرك"),el("span","qt-line"));overlay.append(brandRow,title,summary,grid,foot);}
+  function renderTree(){if(!overlay)return;overlay.replaceChildren();var brandRow=el("div","qt-brand");brandRow.append(el("span","qt-mark","Q"));var word=el("span","qt-word");word.append(el("strong","","QARTON"),el("small","","CULTURE • POWER • CINEMA"));brandRow.appendChild(word);var title=el("h1","qt-title");title.append(el("strong","","قَرْطَاج"),el("span","","آخر يوم في قرطاج"));var summary=el("p","qt-summary","حكاية تفاعلية من التاريخ… قراراتك ترسم الطريق ومصير قرطاج.");var grid=el("div","qt-grid");grid.append(card("01","⚔","القصة","بداية جديدة • متابعة • فصول القصة",true,showStory),card("02","⌖","عالم قرطاج","الشخصيات • الأماكن • خريطة المدينة",true,showWorld),card("03","▣","التقدم والحفظ","متابعة تقدمك • النسخ الاحتياطية",true,showProgress),card("04","⚙","الإعدادات","الصوت • العرض • إمكانية الوصول",true,showSettings));var foot=el("div","qt-footer");foot.append(el("span","qt-line"),el("span","","QARTON — رحلتك • اختياراتك • مصيرك"),el("span","qt-line"));overlay.append(brandRow,title,summary,grid,foot);}
   function cleanupForGame(){if(overlay){overlay.remove();overlay=null;}clearReturn();restoreLegacy();view="game";}
   function mount(){root=document.getElementById("root");if(!root)return;if(isPlaying()){cleanupForGame();return;}shell=findShell();if(!shell)return;if(view==="story")return;if(view==="progress"){hideLegacy();if(overlay)return;showProgress();return;}if(view==="tree"&&overlay){hideLegacy();return;}addStyle();goTree();}
   function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount();});}
