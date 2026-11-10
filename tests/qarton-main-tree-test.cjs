@@ -10,6 +10,7 @@ const workflow = fs.readFileSync(path.join(root, '.github/workflows/android-apk.
 
 // Parse the runtime before checking its behavior contracts.
 new vm.Script(home, {filename:'qarton-main-tree.js'});
+assert.ok(!home.includes('}\\n  #qarton-main-tree'), 'CSS rules must be separated by real newlines, not literal backslash-n text');
 
 // The approved fixed home is a real four-branch 2x2 tree, not a restyled old menu.
 for (const marker of [
