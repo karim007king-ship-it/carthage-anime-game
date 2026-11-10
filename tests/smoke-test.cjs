@@ -79,6 +79,7 @@ assert.ok(androidPrep.includes('Resource load'), 'Android startup diagnostic mus
 assert.ok(androidPrep.includes('carthage-startup-errors'), 'Android startup diagnostic must retain captured errors for display');
 assert.ok(androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
 assert.ok(androidPrep.includes('menuActions.insertBefore(continueButton'), 'Continue must appear directly in the home menu');
+assert.ok(androidPrep.includes('originalContinue.style.display=(!playing&&hasSave&&continueButton)?\\"none\\":\\"\\"'), 'The original React Continue button must be hidden when the enhanced continue control is inserted, avoiding duplicates');
 assert.ok(androidPrep.includes('part2Button.insertAdjacentElement'), 'Part 3 must appear directly after Part 2 in the home menu');
 assert.ok(androidPrep.includes('if(partButton.textContent!==part3Label)'), 'navigation observer must not rewrite the Part 3 label on every mutation');
 assert.ok(androidPrep.includes('رجوع للقائمة'), 'new-game cancel action must be clearly labeled as returning to menu');
@@ -106,6 +107,7 @@ assert.ok(qartonHome.includes('observer.observe(document.documentElement'), 'QAR
 assert.ok(qartonHome.includes('border:1px solid #e8c47788'), 'QARTON home shell must have a visibly distinct premium card frame');
 assert.ok(!qartonHome.includes('css += "\\\\n#root'), 'QARTON CSS append must not contain a literal backslash-n that invalidates the selector');
 assert.ok(qartonHome.includes('css += "\\n#root.carthage-home-locked .qarton-home-shell{background:'), 'QARTON shell and brand styling must be appended with a real CSS line break');
+assert.ok(!qartonHome.includes('.qarton-home-shell>div.mt-4.grid{display:none!important}'), 'QARTON must never hide the direct child that contains the primary home menu');
 
 
 assert.ok(androidPrep.includes('qarton-premium-home-runtime'), 'approved QARTON home presentation runtime must be injected into Android builds');
