@@ -10,6 +10,8 @@ const workflow = fs.readFileSync(path.join(root, '.github/workflows/android-apk.
 
 // Parse the runtime before checking its behavior contracts.
 new vm.Script(home, {filename:'qarton-main-tree.js'});
+assert.ok(home.includes('function attachToApp()') && home.includes('rootWaiter=new MutationObserver'), 'main tree must wait for the app root if the game mounts after DOMContentLoaded');
+assert.ok(home.includes('if(started)return;') && home.includes('rootWaiter.disconnect()'), 'late app-root attachment must happen once and release its waiter');
 assert.ok(!home.includes('}\\n  #qarton-main-tree'), 'CSS rules must be separated by real newlines, not literal backslash-n text');
 assert.ok(!home.includes('/\\\\s+/g'), 'settings action matching must use a whitespace regex, not a literal backslash-s pattern');
 
