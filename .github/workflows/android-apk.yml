@@ -110,7 +110,10 @@ jobs:
             'carthage-import-backup',
             'carthageCinematicLight',
             'carthageCinematicImpact',
-            'carthage-fixed-home-runtime'
+            'carthage-fixed-home-runtime',
+            'qarton-premium-home-runtime',
+            'qarton-brand-row',
+            'qarton-home-info'
           ];
           const html = dst.toString('utf8');
           const missing = markers.filter(marker => !html.includes(marker));
