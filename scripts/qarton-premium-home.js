@@ -8,8 +8,16 @@ css += "\n#root.carthage-home-locked #qarton-home-brand{position:fixed!important
 
 function style(){if(document.getElementById("qarton-premium-home-style"))return;var s=document.createElement("style");s.id="qarton-premium-home-style";s.textContent=css;document.head.appendChild(s)}
 function playing(root){return !!(root&&root.querySelector(".game-timer"))}
+function findMenu(root){
+var menu=root.querySelector(".home-actions.grid");if(menu)return menu;
+var candidates=Array.from(root.querySelectorAll("main,section,div")).map(function(el){return {el:el,buttons:el.querySelectorAll("button").length,depth:el.querySelectorAll("*").length}}).filter(function(x){return x.buttons>=3});
+candidates.sort(function(a,b){return a.depth-b.depth});
+menu=candidates.length?candidates[0].el:null;
+if(menu){menu.classList.add("home-actions","grid");if(menu.parentElement)menu.parentElement.classList.add("home-actions","flex")}
+return menu;
+}
 function decorate(root){
-var menu=root.querySelector(".home-actions.grid");if(!menu)return;
+var menu=findMenu(root);if(!menu)return;
 Array.from(menu.querySelectorAll("button")).forEach(function(b,i){
 var t=(b.textContent||"").trim(),kind="secondary",icon="✦";
 if(/متابعة|استكمال|آخر حفظ/.test(t)||b.id==="carthage-continue-last"){kind="continue";icon="▶"}
@@ -32,10 +40,11 @@ if(candidates[0])candidates[0].classList.add("qarton-achievements");
 }
 function mount(){
 var root=document.getElementById("root");if(!root)return;
-if(playing(root)){var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();return}
-var menu=root.querySelector(".home-actions.grid");
-var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ الجزء الأول/.test(b.textContent||"")});
+if(playing(root)){var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");return}
+var menu=findMenu(root);
+var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ|متابعة|الجزء/.test(b.textContent||"")});
 if(!menu&&!start)return;
+root.classList.add("carthage-home-locked");document.documentElement.classList.add("carthage-home-locked");document.body.classList.add("carthage-home-locked");
 style();markAchievements(root);
 if(!document.getElementById("qarton-home-brand")){
 var brand=document.createElement("div");brand.id="qarton-home-brand";brand.dir="rtl";
