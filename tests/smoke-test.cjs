@@ -57,10 +57,11 @@ const androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepa
 const homeInspector = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-home-inspector.js'), 'utf8');
 assert.ok(androidPrep.includes('qarton-home-inspector-runtime'), 'temporary home measurement probe must be injected into Android builds');
 assert.ok(homeInspector.includes('window.__qartonMeasureHome=report'), 'home measurement report must be available for verification');
+new vm.Script(homeInspector, {filename:'qarton-home-inspector.js'});
 assert.ok(homeInspector.includes('viewport:{width:innerWidth,height:innerHeight'), 'home measurement must capture the real viewport');
 assert.ok(homeInspector.includes('audioControls:audio'), 'home measurement must inspect actual audio controls');
 assert.ok(homeInspector.includes('carthage-continue-last'), 'home measurement must inspect existing save controls');
-assert.ok(!/localStorage\\.(setItem|removeItem|clear)/.test(homeInspector), 'home measurement must not modify saved game data');
+assert.ok(!/localStorage\.(setItem|removeItem|clear)/.test(homeInspector), 'home measurement must not modify saved game data');
 
 assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
 assert.ok(androidPrep.includes('carthage-save-now'), 'simple save button must exist');
