@@ -41,7 +41,7 @@
   @media(prefers-reduced-motion:reduce){#qarton-main-tree .qt-card{transition:none!important}#qarton-main-tree .qt-card:active{transform:none!important}}
   `;
   function addStyle(){if(document.getElementById("qarton-main-tree-style"))return;var s=document.createElement("style");s.id="qarton-main-tree-style";s.textContent=css;document.head.appendChild(s);}
-  function findShell(){if(!root)return null;var menu=root.querySelector(".home-actions.grid");if(!menu)return root.querySelector(".qarton-home-shell");return menu.closest(".home-actions.flex")||menu.parentElement;}
+  function findShell(){if(!root)return null;var menu=root.querySelector(".home-actions.grid");if(!menu)return root.querySelector(".qarton-home-shell");var shell=menu.closest(".home-actions.flex")||menu.parentElement;return shell===root?menu:shell;}
   function isPlaying(){return !!(root&&root.querySelector(".game-timer"));}
   function el(tag,cls,txt){var n=document.createElement(tag);if(cls)n.className=cls;if(txt!==undefined)n.textContent=txt;return n;}
   function hideLegacy(){shell=findShell();if(shell){if(shell.style.visibility!=="hidden")shell.style.visibility="hidden";if(shell.style.pointerEvents!=="none")shell.style.pointerEvents="none";}brand=document.getElementById("qarton-home-brand");footer=document.getElementById("qarton-home-info");if(brand)brand.style.display="none";if(footer)footer.style.display="none";measure=document.getElementById("qarton-home-measure");if(measure)measure.style.display="none";}
