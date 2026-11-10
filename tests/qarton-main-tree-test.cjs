@@ -58,7 +58,7 @@ for (const marker of [
 ]) assert.ok(home.includes(marker), 'missing main card route: ' + marker);
 assert.ok(home.includes('true,showStory') && home.includes('true,showProgress'), 'Story and Progress cards must open their dedicated views');
 assert.ok(home.includes('function proxyStoryAction(') && home.includes('live.click()'), 'Story actions must invoke the live original game buttons');
-assert.ok(home.includes('root.querySelector(".home-actions.grid button:first-child")'), 'New Game must target the original first home action');
+assert.ok(home.includes('menu.querySelector("button:first-child")') && home.includes('".home-actions.grid button:first-child"'), 'New Game must target the original first home action');
 assert.ok(home.includes('root.querySelector("#btn-part2")') || home.includes('root.querySelector("#carthage-part3-start")'), 'Story must retain the original chapter entry controls');
 assert.ok(home.includes('actionButton(panel,"carthage-continue-last"') && home.includes('actionButton(panel,"carthage-export-backup"') && home.includes('actionButton(panel,"carthage-import-backup"'), 'Progress must expose all original save actions when available');
 
