@@ -102,17 +102,26 @@
   function showSettings(){
     view="settings";hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren();
     var head=el("div","qt-subhead");head.append(el("h2","","الإعدادات"));var back=el("button","qt-back","رجوع");back.type="button";back.addEventListener("click",goTree);head.appendChild(back);
-    var panel=el("section","qt-panel");panel.appendChild(el("p","","هذه الأزرار تستدعي إعدادات اللعبة الأصلية مباشرة. لا ننشئ تفضيلات منفصلة ولا نغيّر بيانات الحفظ."));
-    var count=0;
-    count+=proxyTextAction(panel,"صوت:","الصوت العام — تشغيل / إيقاف","تبديل الصوت العام عبر إعداد اللعبة الأصلي");
-    count+=proxyTextAction(panel,"موسيقى:","الموسيقى — تشغيل / إيقاف","تبديل موسيقى اللعبة الأصلية");
-    count+=proxyTextAction(panel,"أصوات الشخصيات","أصوات الشخصيات — تشغيل / إيقاف","تبديل أصوات الشخصيات الأصلية");
-    count+=proxyTextAction(panel,"خط كبير","حجم الخط — عادي / كبير","تبديل حجم النص الأصلي");
-    count+=proxyTextAction(panel,"أقل اهتزاز","تقليل الاهتزاز — تشغيل / إيقاف","تبديل تقليل الاهتزاز الأصلي");
-    count+=proxyTextAction(panel,"عادية","جودة الحركة — عادية","اختيار جودة الحركة العادية");
-    count+=proxyTextAction(panel,"سينمائية ثقيلة","جودة الحركة — سينمائية ثقيلة","اختيار جودة الحركة السينمائية");
-    panel.appendChild(el("p","","ملاحظة: بعض إعدادات الصوت قد تتطلب أول تفاعل على الشاشة بسبب قيود تشغيل الصوت في Android."));
-    if(!count)panel.appendChild(el("div","qt-empty","لم يتم العثور على عناصر الإعدادات الأصلية. لم يتم تغيير أي إعداد."));
+    var panel=el("section","qt-panel");panel.appendChild(el("p","","إعدادات الصوت المتاحة فعلياً في اللعبة. نربط عناصر التحكم الأصلية مباشرة ولا نعرض خيارات غير موجودة."));
+    var audio=document.getElementById("c17-audio-control");
+    var volume=document.getElementById("c17-audio-volume");
+    var found=0;
+    if(audio){
+      var toggle=el("button","qt-action");toggle.type="button";toggle.append(el("span","","الصوت السينمائي — تشغيل / كتم"),el("span","","♪"));
+      toggle.addEventListener("click",function(){var live=document.getElementById("c17-audio-control");if(live&&!live.disabled)live.click();});
+      panel.appendChild(toggle);found++;
+    }
+    if(volume&&("value" in volume)){
+      var wrap=el("label","qt-entry");wrap.style.display="flex";wrap.style.flexDirection="column";wrap.style.gap="8px";
+      var title=el("span","","مستوى الصوت");title.style.color="#ffe6ad";title.style.fontWeight="800";
+      var range=el("input","");range.type="range";range.min=volume.min||"0";range.max=volume.max||"100";range.step=volume.step||"1";range.value=volume.value||"0";range.setAttribute("aria-label","مستوى الصوت");
+      var value=el("span","",String(range.value));value.style.color="#c9c1b2";value.style.fontSize="11px";
+      range.addEventListener("input",function(){var live=document.getElementById("c17-audio-volume");if(!live)return;live.value=range.value;value.textContent=String(range.value);live.dispatchEvent(new Event("input",{bubbles:true}));});
+      range.addEventListener("change",function(){var live=document.getElementById("c17-audio-volume");if(live){live.value=range.value;live.dispatchEvent(new Event("change",{bubbles:true}));}});
+      wrap.append(title,range,value);panel.appendChild(wrap);found++;
+    }
+    if(!found)panel.appendChild(el("div","qt-empty","لم يتم العثور على عناصر الصوت الأصلية. لم يتم إنشاء أزرار وهمية أو تغيير إعدادات اللعبة."));
+    panel.appendChild(el("p","","تُحترم إعدادات تقليل الحركة في الجهاز. إعدادات العرض الأخرى غير متاحة كعناصر مستقلة في النسخة الحالية."));
     overlay.append(head,panel);overlay.style.display="flex";
   }
   function actionButton(parent,id,label,detail){var original=document.getElementById(id);if(!original)return false;var b=el("button","qt-action");b.type="button";b.append(el("span","",label),el("span","","‹"));if(detail)b.setAttribute("aria-label",detail);b.addEventListener("click",function(){var live=document.getElementById(id);if(live&&!live.disabled)live.click();});parent.appendChild(b);return true;}
