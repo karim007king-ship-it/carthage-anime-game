@@ -356,6 +356,10 @@ html = html.replace('</body>', fixedHomeViewport + '</body>');
 
 // QARTON visual overlay disabled: keep the game's native home layout until a measured redesign is ready.
 
+// Temporary, non-invasive home layout probe for measuring the real Android React screen.
+const qartonHomeInspector = fs.readFileSync(path.join(__dirname, 'qarton-home-inspector.js'), 'utf8');
+html = html.replace('</body>', '<script id="qarton-home-inspector-runtime">\\n' + qartonHomeInspector + '\\n</script></body>');
+
 const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
 let executable = 0;
 for (const [, attrs, body] of inlineScripts) {
