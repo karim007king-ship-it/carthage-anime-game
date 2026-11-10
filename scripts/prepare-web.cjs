@@ -356,6 +356,10 @@ html = html.replace('</body>', fixedHomeViewport + '</body>');
 
 // QARTON visual overlay disabled: keep the game's native home layout until a measured redesign is ready.
 
+
+const qartonHomeRuntime = fs.readFileSync(path.join(__dirname, 'qarton-premium-home.js'), 'utf8');
+html = html.replace('</body>', '<script id="qarton-premium-home-runtime">' + qartonHomeRuntime + '</script></body>');
+
 const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
 let executable = 0;
 for (const [, attrs, body] of inlineScripts) {
