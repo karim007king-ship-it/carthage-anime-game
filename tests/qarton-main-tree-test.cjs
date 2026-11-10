@@ -23,6 +23,10 @@ const mountSource = home.slice(mountStart, mountEnd);
 assert.ok(mountSource.includes('root=document.getElementById("root")') && mountSource.includes('if(!root)return'), 'mount must still wait for the application root');
 assert.ok(!/if\\s*\\(\\s*!shell\\s*\\)\\s*return/.test(mountSource), 'QARTON home must not disappear when the legacy menu selector is missing');
 assert.ok(mountSource.includes('addStyle();goTree();'), 'mount must render the QARTON tree once the app root exists');
+assert.ok(mountSource.includes('if(view!=="game"||overlay)cleanupForGame()'), 'game mutations must not repeatedly run cleanup after gameplay has already started');
+assert.ok(home.includes('observer.observe(root,{subtree:true,childList:true})'), 'main-tree observer must avoid expensive attribute and text mutation tracking during gameplay');
+assert.ok(!home.includes('observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true'), 'main-tree observer must not watch every animated style/class mutation');
+
 
 // The approved fixed home is a real four-branch 2x2 tree, not a restyled old menu.
 for (const marker of [
