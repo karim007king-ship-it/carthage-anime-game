@@ -124,7 +124,10 @@ jobs:
             'qarton-brand-row',
             'qarton-home-info',
             'qarton-home-inspector-runtime',
-            'qarton-home-measure-output'
+            'qarton-home-measure-output',
+            'qarton-main-tree-runtime',
+            'آخر يوم في قرطاج',
+            'التقدم والحفظ'
           ];
           const html = dst.toString('utf8');
           const missing = markers.filter(marker => !html.includes(marker));
