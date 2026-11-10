@@ -104,6 +104,8 @@ assert.ok(qartonHome.includes('root.classList.add("carthage-home-locked")'), 'QA
 assert.ok(qartonHome.includes('attributes:true,attributeFilter:["class"]'), 'QARTON runtime must restore its presentation after React updates wrapper classes');
 assert.ok(qartonHome.includes('observer.observe(document.documentElement'), 'QARTON runtime must detect the home screen even if React mounts after the runtime starts');
 assert.ok(qartonHome.includes('border:1px solid #e8c47788'), 'QARTON home shell must have a visibly distinct premium card frame');
+assert.ok(!qartonHome.includes('css += "\\\\n#root'), 'QARTON CSS append must not contain a literal backslash-n that invalidates the selector');
+assert.ok(qartonHome.includes('css += "\\n#root.carthage-home-locked .qarton-home-shell{background:'), 'QARTON shell and brand styling must be appended with a real CSS line break');
 
 
 assert.ok(androidPrep.includes('qarton-premium-home-runtime'), 'approved QARTON home presentation runtime must be injected into Android builds');
