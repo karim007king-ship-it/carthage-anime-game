@@ -358,7 +358,7 @@ html = html.replace('</body>', fixedHomeViewport + '</body>');
 
 // Temporary, non-invasive home layout probe for measuring the real Android React screen.
 const qartonHomeInspector = fs.readFileSync(path.join(__dirname, 'qarton-home-inspector.js'), 'utf8');
-html = html.replace('</body>', '<script id="qarton-home-inspector-runtime">\\n' + qartonHomeInspector + '\\n</script></body>');
+html = html.replace('</body>', '<script id="qarton-home-inspector-runtime">\n' + qartonHomeInspector + '\n</script></body>');
 
 const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
 let executable = 0;
