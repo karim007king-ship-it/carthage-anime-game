@@ -56,9 +56,12 @@ assert.ok(home.includes('function showWorld()') && home.includes('function showS
 for (const marker of ['ريان','لينا','عم منصور','القائدة نور','أمين','مريم','عم الهادي','ياسمين','القائد كريم','السوق','المستشفى','الجسر','البوابة']) {
   assert.ok(home.includes(marker), 'World guide is missing existing game content: ' + marker);
 }
-assert.ok(home.includes('function proxyTextAction('), 'settings must bridge to existing controls');
-for (const marker of ['صوت:','موسيقى:','أصوات الشخصيات','خط كبير','أقل اهتزاز','سينمائية ثقيلة']) {
-  assert.ok(home.includes(marker), 'Settings view is missing an original setting: ' + marker);
+assert.ok(home.includes('function showSettings()'), 'Settings must open a dedicated view');
+assert.ok(home.includes('document.getElementById("c17-audio-control")'), 'Settings must bridge to the real cinematic audio toggle');
+assert.ok(home.includes('document.getElementById("c17-audio-volume")'), 'Settings must bridge to the real audio volume control');
+assert.ok(home.includes('live.dispatchEvent(new Event("input",{bubbles:true}))'), 'volume changes must reach the original input handler');
+for (const invented of ['أصوات الشخصيات — تشغيل / إيقاف','حجم الخط — عادي / كبير','تقليل الاهتزاز — تشغيل / إيقاف','جودة الحركة — سينمائية ثقيلة']) {
+  assert.ok(!home.includes(invented), 'Settings must not advertise a control that the game does not provide: ' + invented);
 }
 assert.ok(home.includes('if(view==="world")') && home.includes('if(view==="settings")'), 'mutation observer must preserve both subviews');
 assert.ok(home.includes('لا يغيّر وقت اللعب أو تقدمك'), 'World guide must be read-only');
