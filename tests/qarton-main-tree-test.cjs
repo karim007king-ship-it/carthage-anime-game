@@ -57,6 +57,8 @@ for (const marker of [
   'card("04","⚙","الإعدادات"'
 ]) assert.ok(home.includes(marker), 'missing main card route: ' + marker);
 assert.ok(home.includes('true,showStory') && home.includes('true,showProgress'), 'Story and Progress cards must open their dedicated views');
+assert.ok(home.includes('بداية جديدة • الأجزاء المتاحة') && !home.includes('بداية جديدة • متابعة • فصول القصة'), 'Story card must not promise Continue Save in the wrong section');
+assert.ok(home.includes('الصوت السينمائي • مستوى الصوت') && !home.includes('الصوت • العرض • إمكانية الوصول'), 'Settings card must list only implemented settings');
 assert.ok(home.includes('function proxyStoryAction(') && home.includes('live.click()'), 'Story actions must invoke the live original game buttons');
 assert.ok(home.includes('menu.querySelector("button:first-child")') && home.includes('".home-actions.grid button:first-child"'), 'New Game must target the original first home action');
 assert.ok(home.includes('root.querySelector("#btn-part2")') || home.includes('root.querySelector("#carthage-part3-start")'), 'Story must retain the original chapter entry controls');
