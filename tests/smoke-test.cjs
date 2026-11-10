@@ -119,7 +119,7 @@ assert.ok(qartonHome.includes('grid-auto-rows:minmax(39px,auto)'), 'measured hom
 assert.ok(qartonHome.includes('#carthage-part3-start{grid-column:2'), 'chapter two and locked chapter three must share a compact world-actions row');
 assert.ok(qartonHome.includes('#carthage-export-backup') && qartonHome.includes('#carthage-import-backup') && qartonHome.includes('grid-column:auto!important;min-height:43px!important'), 'save export and import must share one compact row');
 assert.ok(qartonHome.includes('position:absolute!important;inset:0!important;width:100%!important;height:100%!important;') && qartonHome.includes('object-fit:cover!important;opacity:.16!important'), 'home artwork must become a non-layout background instead of pushing actions below the viewport');
-assert.ok(qartonHome.includes('padding:calc(env(safe-area-inset-top,0px) + 69px)'), 'compact home layout must reserve a measured header area on short screens');
+assert.ok(qartonHome.includes('padding-top:calc(env(safe-area-inset-top,0px) + 69px)'), 'compact home layout must reserve a measured header area on short screens');
 
 assert.ok(androidPrep.includes('carthage-home-locked'), 'home menu must toggle a dedicated fixed viewport state');
 assert.ok(androidPrep.includes('stopHomeScroll'), 'home page vertical touch and wheel scrolling must be blocked');
