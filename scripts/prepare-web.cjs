@@ -364,6 +364,10 @@ html = html.replace('</body>', '<script id="qarton-premium-home-runtime">' + qar
 const qartonHomeInspector = fs.readFileSync(path.join(__dirname, 'qarton-home-inspector.js'), 'utf8');
 html = html.replace('</body>', '<script id="qarton-home-inspector-runtime">\n' + qartonHomeInspector + '\n</script></body>');
 
+// QARTON fixed main-tree home; invokes existing React-owned controls without cloning them.
+const qartonMainTree = fs.readFileSync(path.join(__dirname, 'qarton-main-tree.js'), 'utf8');
+html = html.replace('</body>', '<script id="qarton-main-tree-runtime">\n' + qartonMainTree + '\n</script></body>');
+
 const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
 let executable = 0;
 for (const [, attrs, body] of inlineScripts) {
