@@ -126,6 +126,8 @@ jobs:
             'qarton-home-inspector-runtime',
             'qarton-home-measure-output',
             'qarton-main-tree-runtime',
+            'rootWaiter=new MutationObserver',
+            'function attachToApp()',
             'آخر يوم في قرطاج',
             'التقدم والحفظ'
           ];
