@@ -9,6 +9,77 @@ css += "\n#root.carthage-home-locked #qarton-home-brand{position:fixed!important
 
 css += "\n#root.carthage-home-locked .qarton-home-shell{background:linear-gradient(155deg,rgba(24,31,46,.97),rgba(7,10,17,.98))!important;border:1px solid #e8c47788!important;border-radius:26px!important;box-shadow:0 18px 48px #000b,inset 0 1px #fff2!important}\n#root.carthage-home-locked .qarton-home-shell>div.absolute{opacity:.2!important}\n#root.carthage-home-locked .home-actions.grid button{border-radius:14px!important;min-height:48px!important;letter-spacing:.1px!important;transition:transform .18s ease,border-color .18s ease,filter .18s ease!important}\n#root.carthage-home-locked .home-actions.grid button:active{transform:scale(.975)!important;filter:brightness(1.18)!important}\n#root.carthage-home-locked .home-actions.grid button[data-qarton-kind=continue]{border-color:#e8c477!important;background:linear-gradient(110deg,#253d3c,#111d26)!important}\n#root.carthage-home-locked .home-actions.grid button[data-qarton-kind=part2],#root.carthage-home-locked .home-actions.grid button[data-qarton-kind=part3]{border-color:#9d83c7!important;background:linear-gradient(110deg,#29243b,#111827)!important}\n#root.carthage-home-locked .home-tog label{border-radius:13px!important}\n#root.carthage-home-locked .home-set button{border-radius:10px!important}\n@media(max-height:740px){#root.carthage-home-locked .qarton-home-shell{border-radius:19px!important;padding-left:12px!important;padding-right:12px!important}#root.carthage-home-locked .home-actions.grid button{min-height:40px!important}}";
 
+css += `
+/* Measured compact home layout: keep every primary action inside a 320x700 viewport. */
+#root.carthage-home-locked .qarton-home-shell{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;
+ box-sizing:border-box!important;width:100%!important;height:100dvh!important;max-height:100dvh!important;
+ min-height:0!important;overflow:hidden!important;gap:2px!important;
+ padding:calc(env(safe-area-inset-top,0px) + 72px) 12px calc(env(safe-area-inset-bottom,0px) + 25px)!important;
+}
+#root.carthage-home-locked .qarton-home-shell>img{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ max-height:none!important;object-fit:cover!important;opacity:.16!important;pointer-events:none!important;z-index:0!important;
+}
+#root.carthage-home-locked .qarton-home-shell>div.absolute{
+ position:absolute!important;inset:0!important;pointer-events:none!important;z-index:0!important;
+}
+#root.carthage-home-locked .qarton-home-shell>*:not(img):not(.absolute){position:relative!important;z-index:1!important}
+#root.carthage-home-locked .qarton-home-shell>p.font-display{margin:0!important;font-size:10px!important;line-height:1.1!important;letter-spacing:3px!important}
+#root.carthage-home-locked .qarton-home-shell>h1{margin:1px 0!important;font-size:clamp(22px,6vw,27px)!important;line-height:1.05!important}
+#root.carthage-home-locked .qarton-home-shell>p.mt-3{margin:2px auto!important;font-size:10px!important;line-height:1.25!important;max-width:95%!important}
+#root.carthage-home-locked .qarton-home-shell>div[aria-label='اختار الصعوبة']{
+ display:flex!important;flex:0 0 auto!important;justify-content:center!important;gap:5px!important;margin:4px 0 0!important;
+}
+#root.carthage-home-locked .qarton-home-shell>div[aria-label='اختار الصعوبة'] button{
+ min-height:32px!important;padding:5px 10px!important;font-size:10px!important;
+}
+#root.carthage-home-locked .qarton-home-shell>p.mt-2{margin:1px 0!important;font-size:9px!important;line-height:1.1!important}
+#root.carthage-home-locked .qarton-home-shell>div.rounded-2xl{
+ flex:0 0 auto!important;margin:3px 0 0!important;padding:5px 8px!important;border-radius:10px!important;
+ max-height:44px!important;overflow:hidden!important;font-size:10px!important;
+}
+#root.carthage-home-locked .home-actions.grid{
+ flex:0 0 auto!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ grid-auto-rows:minmax(39px,auto)!important;gap:6px!important;align-content:start!important;align-items:stretch!important;
+ width:100%!important;max-width:100%!important;min-height:0!important;max-height:none!important;
+ margin:5px 0 0!important;padding:7px!important;box-sizing:border-box!important;
+ border:1px solid #e8c47788!important;border-radius:17px!important;
+ background:linear-gradient(145deg,rgba(24,32,48,.97),rgba(7,11,19,.98))!important;
+ box-shadow:0 10px 26px #0009,inset 0 1px #fff2!important;
+}
+#root.carthage-home-locked .home-actions.grid button{
+ box-sizing:border-box!important;display:flex!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-width:0!important;min-height:39px!important;height:auto!important;margin:0!important;
+ padding:5px 6px!important;border:1px solid #b99b62aa!important;border-radius:11px!important;
+ background:linear-gradient(145deg,#253044,#101723)!important;color:#fff0d2!important;
+ font:800 clamp(9px,2.7vw,11px)/1.2 system-ui!important;text-align:center!important;
+ white-space:normal!important;overflow-wrap:anywhere!important;box-shadow:0 3px 9px #0006!important;
+}
+#root.carthage-home-locked .home-actions.grid button:first-child,
+#root.carthage-home-locked .home-actions.grid button[data-qarton-kind='primary']{
+ grid-column:1/-1!important;min-height:43px!important;border-color:#f0cf87!important;
+ background:linear-gradient(105deg,#8b3039,#57232e 55%,#18263a)!important;font-size:12px!important;
+}
+#root.carthage-home-locked #carthage-continue-last{grid-column:1/-1!important;min-height:39px!important;background:linear-gradient(105deg,#25433f,#14252b)!important;border-color:#d6bd7b!important}
+#root.carthage-home-locked .home-actions.grid #btn-part2,
+#root.carthage-home-locked .home-actions.grid button[data-qarton-kind='part2']{grid-column:1!important;min-height:47px!important}
+#root.carthage-home-locked #carthage-part3-start{grid-column:2!important;min-height:47px!important;font-size:9px!important}
+#root.carthage-home-locked #carthage-export-backup,
+#root.carthage-home-locked #carthage-import-backup{grid-column:auto!important;min-height:43px!important;padding:5px 4px!important;font-size:9px!important}
+#root.carthage-home-locked #carthage-part3-start:disabled{opacity:.58!important;border-style:dashed!important}
+#root.carthage-home-locked .qarton-home-shell .home-tog,
+#root.carthage-home-locked .qarton-home-shell .home-set{flex:0 0 auto!important;margin:3px 0 0!important}
+@media(max-height:740px){
+ #root.carthage-home-locked .qarton-home-shell{padding-top:calc(env(safe-area-inset-top,0px) + 69px)!important;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 23px)!important}
+ #root.carthage-home-locked .qarton-home-shell>p.mt-3{font-size:9px!important}
+ #root.carthage-home-locked .home-actions.grid{margin-top:4px!important;gap:5px!important;padding:6px!important;grid-auto-rows:minmax(37px,auto)!important}
+ #root.carthage-home-locked .home-actions.grid button{min-height:37px!important}
+ #root.carthage-home-locked .home-actions.grid button:first-child{min-height:41px!important}
+ #root.carthage-home-locked #carthage-part3-start,#root.carthage-home-locked .home-actions.grid #btn-part2{min-height:43px!important}
+ #root.carthage-home-locked #carthage-export-backup,#root.carthage-home-locked #carthage-import-backup{min-height:40px!important}
+}
+`;
 function style(){if(document.getElementById("qarton-premium-home-style"))return;var s=document.createElement("style");s.id="qarton-premium-home-style";s.textContent=css;document.head.appendChild(s)}
 function playing(root){return !!(root&&root.querySelector(".game-timer"))}
 function findMenu(root){

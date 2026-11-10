@@ -122,7 +122,9 @@ jobs:
             'carthage-fixed-home-runtime',
             'qarton-premium-home-runtime',
             'qarton-brand-row',
-            'qarton-home-info'
+            'qarton-home-info',
+            'qarton-home-inspector-runtime',
+            'qarton-home-measure-output'
           ];
           const html = dst.toString('utf8');
           const missing = markers.filter(marker => !html.includes(marker));
