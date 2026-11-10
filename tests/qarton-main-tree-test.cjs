@@ -26,7 +26,11 @@ for (const id of [
   'carthage-continue-last', 'carthage-export-backup', 'carthage-import-backup'
 ]) assert.ok(home.includes(id), 'missing existing action bridge: ' + id);
 assert.ok(home.includes('live.click()'), 'the tree must invoke original handlers, not recreate them');
-assert.ok(home.includes('function showStory()'), 'Story branch must open the original game menu');
+assert.ok(home.includes('function showStory()'), 'Story branch must open a dedicated story subview');
+assert.ok(home.includes('function proxyStoryAction('), 'Story actions must proxy original controls');
+assert.ok(home.includes('.home-actions.grid button:first-child'), 'Story subview must expose the original new-game action');
+assert.ok(home.includes('hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren()'), 'Story subview must keep the legacy home hidden');
+assert.ok(!home.includes('if(overlay)overlay.style.display="none";restoreLegacy()'), 'Story subview must not reveal the legacy home');
 assert.ok(home.includes('function showProgress()'), 'Progress branch must expose original backup actions');
 assert.ok(home.includes('function cleanupForGame()'), 'tree must disappear during gameplay');
 
