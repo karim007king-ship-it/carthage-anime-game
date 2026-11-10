@@ -101,6 +101,10 @@ assert.ok(qartonHome.includes('if(!shell&&menu.parentElement&&menu.parentElement
 assert.ok(qartonHome.includes('menu.closest(".home-actions.flex")'), 'QARTON runtime must anchor styling to the actual outer home shell');
 assert.ok(qartonHome.includes('classList.add("qarton-home-shell")'), 'QARTON runtime must mark the actual home shell for layout styling');
 assert.ok(qartonHome.includes('root.classList.add("carthage-home-locked")'), 'QARTON runtime must activate the CSS scope on the live root');
+assert.ok(qartonHome.includes('attributes:true,attributeFilter:["class"]'), 'QARTON runtime must restore its presentation after React updates wrapper classes');
+assert.ok(qartonHome.includes('observer.observe(document.documentElement'), 'QARTON runtime must detect the home screen even if React mounts after the runtime starts');
+assert.ok(qartonHome.includes('border:1px solid #e8c47788'), 'QARTON home shell must have a visibly distinct premium card frame');
+
 
 assert.ok(androidPrep.includes('qarton-premium-home-runtime'), 'approved QARTON home presentation runtime must be injected into Android builds');
 assert.ok(qartonHome.includes('#qarton-home-brand{position:fixed'), 'QARTON brand header must be anchored inside the fixed home viewport');
