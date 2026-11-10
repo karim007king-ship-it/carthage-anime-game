@@ -52,6 +52,7 @@ assert.ok(home.includes('function cleanupForGame()'), 'tree must disappear durin
 // World and Settings are functional subviews backed only by existing game content and controls.
 assert.ok(home.includes('card("02","⌖","عالم قرطاج"') && home.includes('card("04","⚙","الإعدادات"'), 'World and Settings must remain explicit main-tree branches');
 assert.ok(home.includes('true,showWorld') && home.includes('true,showSettings'), 'World and Settings cards must open real subviews');
+assert.ok(home.includes('الشخصيات • الأماكن • دليل المدينة') && !home.includes('الشخصيات • الأماكن • خريطة المدينة'), 'World card must not promise an interactive map that is not implemented');
 assert.ok(home.includes('function showWorld()') && home.includes('function showSettings()'), 'both branches must render dedicated views');
 for (const marker of ['ريان','لينا','عم منصور','القائدة نور','أمين','مريم','عم الهادي','ياسمين','القائد كريم','السوق','المستشفى','الجسر','البوابة']) {
   assert.ok(home.includes(marker), 'World guide is missing existing game content: ' + marker);
