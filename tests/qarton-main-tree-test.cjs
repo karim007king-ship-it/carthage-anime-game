@@ -15,6 +15,15 @@ assert.ok(home.includes('if(started)return;') && home.includes('rootWaiter.disco
 assert.ok(!home.includes('}\\n  #qarton-main-tree'), 'CSS rules must be separated by real newlines, not literal backslash-n text');
 assert.ok(!home.includes('/\\\\s+/g'), 'settings action matching must use a whitespace regex, not a literal backslash-s pattern');
 
+// The main tree must mount even when the legacy menu's class names differ or it is absent.
+const mountStart = home.indexOf('function mount(){');
+const mountEnd = home.indexOf('function schedule(){', mountStart);
+assert.ok(mountStart >= 0 && mountEnd > mountStart, 'mount function boundaries must remain testable');
+const mountSource = home.slice(mountStart, mountEnd);
+assert.ok(mountSource.includes('root=document.getElementById("root")') && mountSource.includes('if(!root)return'), 'mount must still wait for the application root');
+assert.ok(!/if\\s*\\(\\s*!shell\\s*\\)\\s*return/.test(mountSource), 'QARTON home must not disappear when the legacy menu selector is missing');
+assert.ok(mountSource.includes('addStyle();goTree();'), 'mount must render the QARTON tree once the app root exists');
+
 // The approved fixed home is a real four-branch 2x2 tree, not a restyled old menu.
 for (const marker of [
   'grid-template-columns:repeat(2,minmax(0,1fr))',
