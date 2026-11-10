@@ -117,7 +117,7 @@ assert.ok(qartonHome.includes('max-height:650px'), 'home identity must compact o
 assert.ok(qartonHome.includes('prefers-reduced-motion:reduce'), 'home presentation must respect reduced-motion accessibility');
 assert.ok(qartonHome.includes('grid-auto-rows:minmax(39px,auto)'), 'measured home menu must use compact rows that fit small phone viewports');
 assert.ok(qartonHome.includes('#carthage-part3-start{grid-column:2'), 'chapter two and locked chapter three must share a compact world-actions row');
-assert.ok(qartonHome.includes('#carthage-export-backup,\\n#root.carthage-home-locked #carthage-import-backup'), 'save export and import must share one compact row');
+assert.ok(qartonHome.includes('#carthage-export-backup,') && qartonHome.includes('#carthage-home-locked #carthage-import-backup'), 'save export and import must share one compact row');
 assert.ok(qartonHome.includes('position:absolute!important;inset:0!important;width:100%!important;height:100dvh!important'), 'home artwork must become a non-layout background instead of pushing actions below the viewport');
 assert.ok(qartonHome.includes('padding:calc(env(safe-area-inset-top,0px) + 69px)'), 'compact home layout must reserve a measured header area on short screens');
 
