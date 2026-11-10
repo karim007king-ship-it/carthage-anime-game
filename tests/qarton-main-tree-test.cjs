@@ -27,6 +27,19 @@ for (const id of [
 ]) assert.ok(home.includes(id), 'missing existing action bridge: ' + id);
 assert.ok(home.includes('live.click()'), 'the tree must invoke original handlers, not recreate them');
 assert.ok(home.includes('function showStory()'), 'Story branch must open a dedicated story subview');
+// Continue-last-save belongs only to Progress & Saves, never the Story subview.
+const storyStart = home.indexOf('function showStory(){');
+const storyEnd = home.indexOf('function actionButton(', storyStart);
+assert.ok(storyStart >= 0 && storyEnd > storyStart, 'Story subview boundaries must remain testable');
+const storySubview = home.slice(storyStart, storyEnd);
+assert.ok(!storySubview.includes('carthage-continue-last'), 'Story must not render a duplicate Continue Last Save action');
+assert.ok(!storySubview.includes('متابعة آخر حفظ'), 'Story must not label a duplicate continue action');
+const progressStart = home.indexOf('function showProgress(){');
+const progressEnd = home.indexOf('function card(', progressStart);
+assert.ok(progressStart >= 0 && progressEnd > progressStart, 'Progress subview boundaries must remain testable');
+const progressSubview = home.slice(progressStart, progressEnd);
+assert.ok(progressSubview.includes('carthage-continue-last'), 'Progress & Saves must own the continue action');
+assert.ok(progressSubview.includes('carthage-export-backup') && progressSubview.includes('carthage-import-backup'), 'Progress & Saves must retain backup actions');
 assert.ok(home.includes('function proxyStoryAction('), 'Story actions must proxy original controls');
 assert.ok(home.includes('.home-actions.grid button:first-child'), 'Story subview must expose the original new-game action');
 assert.ok(home.includes('hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren()'), 'Story subview must keep the legacy home hidden');
