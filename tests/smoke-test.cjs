@@ -94,7 +94,16 @@ assert.ok(qartonHome.includes('CULTURE • POWER • CINEMA'), 'premium home mus
 assert.ok(qartonHome.includes('قــــرطــــاج'), 'premium home must show the Carthage title');
 assert.ok(qartonHome.includes('.home-actions.grid button'), 'premium home must professionally style the existing real menu actions');
 assert.ok(qartonHome.includes('game-timer'), 'premium home must disappear during gameplay');
-assert.ok(!androidPrep.includes('qarton-premium-home-runtime'), 'experimental premium home overlay must stay disabled until the native layout is measured and redesigned');
+assert.ok(qartonHome.includes('function findMenu(root)'), 'QARTON runtime must detect the live menu even when its original CSS classes differ');
+assert.ok(qartonHome.includes('menu.closest(".home-actions.flex")'), 'QARTON runtime must anchor styling to the actual outer home shell');
+assert.ok(qartonHome.includes('classList.add("qarton-home-shell")'), 'QARTON runtime must mark the actual home shell for layout styling');
+assert.ok(qartonHome.includes('root.classList.add("carthage-home-locked")'), 'QARTON runtime must activate the CSS scope on the live root');
+
+assert.ok(androidPrep.includes('qarton-premium-home-runtime'), 'approved QARTON home presentation runtime must be injected into Android builds');
+assert.ok(qartonHome.includes('#qarton-home-brand{position:fixed'), 'QARTON brand header must be anchored inside the fixed home viewport');
+assert.ok(qartonHome.includes('#qarton-home-info{position:fixed'), 'QARTON footer must be anchored inside the fixed home viewport');
+assert.ok(qartonHome.includes('max-height:650px'), 'home identity must compact on short phone screens');
+assert.ok(qartonHome.includes('prefers-reduced-motion:reduce'), 'home presentation must respect reduced-motion accessibility');
 assert.ok(androidPrep.includes('carthage-home-locked'), 'home menu must toggle a dedicated fixed viewport state');
 assert.ok(androidPrep.includes('stopHomeScroll'), 'home page vertical touch and wheel scrolling must be blocked');
 assert.ok(androidPrep.includes('.game-timer'), 'home lock must detect active story gameplay and release the viewport');
