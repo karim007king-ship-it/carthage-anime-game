@@ -65,7 +65,7 @@ for (const invented of ['أصوات الشخصيات — تشغيل / إيقاف
 }
 assert.ok(home.includes('if(view==="world")') && home.includes('if(view==="settings")'), 'mutation observer must preserve both subviews');
 assert.ok(home.includes('لا يغيّر وقت اللعب أو تقدمك'), 'World guide must be read-only');
-assert.ok(home.includes('لا ننشئ تفضيلات منفصلة'), 'Settings must use native game settings');
+assert.ok(home.includes('إعدادات الصوت المتاحة فعلياً في اللعبة'), 'Settings must describe the real available audio controls');
 
 // Do not read, write, clear, migrate, clone, or move game-save data/controls.
 assert.ok(!/localStorage|sessionStorage|shiganshina-(slots|autosave)/.test(home), 'home navigation must not access save storage');
