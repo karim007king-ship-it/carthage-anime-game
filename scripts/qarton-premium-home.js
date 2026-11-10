@@ -10,8 +10,22 @@ function style(){if(document.getElementById("qarton-premium-home-style"))return;
 function playing(root){return !!(root&&root.querySelector(".game-timer"))}
 function findMenu(root){
 var menu=root.querySelector(".home-actions.grid");
+// Recover gracefully if the game's original menu wrapper loses one of its utility classes.
+if(!menu){
+var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ الجزء الأول|ابدأ|متابعة/.test(b.textContent||"")});
+if(start){
+var candidate=start.parentElement;
+while(candidate&&candidate!==root){
+if(candidate.querySelectorAll("button").length>=3){menu=candidate;break}
+candidate=candidate.parentElement;
+}
+if(menu)menu.classList.add("home-actions","grid");
+}
+}
 if(!menu)return null;
+// The React wrapper may vary between builds; use its actual parent as the layout shell.
 var shell=menu.closest(".home-actions.flex");
+if(!shell&&menu.parentElement&&menu.parentElement!==root)shell=menu.parentElement;
 if(shell)shell.classList.add("qarton-home-shell");
 return menu;
 }
