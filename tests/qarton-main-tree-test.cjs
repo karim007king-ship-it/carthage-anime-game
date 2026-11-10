@@ -47,9 +47,20 @@ assert.ok(!home.includes('if(overlay)overlay.style.display="none";restoreLegacy(
 assert.ok(home.includes('function showProgress()'), 'Progress branch must expose original backup actions');
 assert.ok(home.includes('function cleanupForGame()'), 'tree must disappear during gameplay');
 
-// The two unfinished branches must remain visibly unavailable.
-assert.ok(home.includes('card("02","⌖","عالم قرطاج"') && home.includes('card("04","⚙","الإعدادات"'), 'future branches must be explicit cards');
-assert.ok(home.includes('if(!enabled)b.append(el("span","qt-status","قيد التطوير"))'), 'unfinished branches must be marked in development');
+// World and Settings are functional subviews backed only by existing game content and controls.
+assert.ok(home.includes('card("02","⌖","عالم قرطاج"') && home.includes('card("04","⚙","الإعدادات"'), 'World and Settings must remain explicit main-tree branches');
+assert.ok(home.includes('true,showWorld') && home.includes('true,showSettings'), 'World and Settings cards must open real subviews');
+assert.ok(home.includes('function showWorld()') && home.includes('function showSettings()'), 'both branches must render dedicated views');
+for (const marker of ['ريان','لينا','عم منصور','القائدة نور','أمين','مريم','عم الهادي','ياسمين','القائد كريم','السوق','المستشفى','الجسر','البوابة']) {
+  assert.ok(home.includes(marker), 'World guide is missing existing game content: ' + marker);
+}
+assert.ok(home.includes('function proxyTextAction('), 'settings must bridge to existing controls');
+for (const marker of ['صوت:','موسيقى:','أصوات الشخصيات','خط كبير','أقل اهتزاز','سينمائية ثقيلة']) {
+  assert.ok(home.includes(marker), 'Settings view is missing an original setting: ' + marker);
+}
+assert.ok(home.includes('if(view==="world")') && home.includes('if(view==="settings")'), 'mutation observer must preserve both subviews');
+assert.ok(home.includes('لا يغيّر وقت اللعب أو تقدمك'), 'World guide must be read-only');
+assert.ok(home.includes('لا ننشئ تفضيلات منفصلة'), 'Settings must use native game settings');
 
 // Do not read, write, clear, migrate, clone, or move game-save data/controls.
 assert.ok(!/localStorage|sessionStorage|shiganshina-(slots|autosave)/.test(home), 'home navigation must not access save storage');
