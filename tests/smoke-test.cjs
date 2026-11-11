@@ -120,6 +120,14 @@ assert.ok(qartonHome.includes('#qarton-home-brand{position:fixed'), 'QARTON bran
 assert.ok(qartonHome.includes('#qarton-home-info{position:fixed'), 'QARTON footer must be anchored inside the fixed home viewport');
 assert.ok(qartonHome.includes('max-height:650px'), 'home identity must compact on short phone screens');
 assert.ok(qartonHome.includes('prefers-reduced-motion:reduce'), 'home presentation must respect reduced-motion accessibility');
+assert.doesNotThrow(() => new vm.Script(qartonHome, { filename: 'qarton-premium-home.js' }), 'premium home runtime must parse as executable JavaScript');
+assert.ok(qartonHome.includes('if(window.__qartonPremiumHomeInstalled)return'), 'premium home runtime must be idempotent across repeated injection');
+assert.ok(qartonHome.includes('function playing(root)'), 'home runtime must distinguish gameplay from the home menu');
+assert.ok(qartonHome.includes('if(playing(root))'), 'home styling must be released when gameplay begins');
+assert.ok(qartonHome.includes('if(!menu&&!start)return'), 'home lock must not activate before a real menu action exists');
+assert.ok(qartonHome.includes('requestAnimationFrame(function(){queued=false;mount()})'), 'DOM mutation bursts must be coalesced into one animation-frame update');
+assert.ok(qartonHome.includes('observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true'), 'runtime must recover when React replaces or updates the menu');
+
 assert.ok(androidPrep.includes('carthage-home-locked'), 'home menu must toggle a dedicated fixed viewport state');
 assert.ok(androidPrep.includes('stopHomeScroll'), 'home page vertical touch and wheel scrolling must be blocked');
 assert.ok(androidPrep.includes('.game-timer'), 'home lock must detect active story gameplay and release the viewport');
