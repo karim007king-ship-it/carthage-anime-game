@@ -58,7 +58,7 @@ const progressSubview = home.slice(progressStart, progressEnd);
 assert.ok(progressSubview.includes('carthage-continue-last'), 'Progress & Saves must own the continue action');
 assert.ok(progressSubview.includes('carthage-export-backup') && progressSubview.includes('carthage-import-backup'), 'Progress & Saves must retain backup actions');
 assert.ok(home.includes('function proxyStoryAction('), 'Story actions must proxy original controls');
-assert.ok(home.includes('.home-actions.grid button:first-child'), 'Story subview must expose the original new-game action');
+assert.ok(home.includes('function findNewGameButton(container)'), 'Story subview must resolve the original new-game action');
 assert.ok(home.includes('hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren()'), 'Story subview must keep the legacy home hidden');
 assert.ok(!home.includes('if(overlay)overlay.style.display="none";restoreLegacy()'), 'Story subview must not reveal the legacy home');
 assert.ok(home.includes('function showProgress()'), 'Progress branch must expose original backup actions');
