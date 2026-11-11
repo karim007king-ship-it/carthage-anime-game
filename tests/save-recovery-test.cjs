@@ -87,7 +87,7 @@ const chooseStart = validEnd;
 const chooseEnd = transfer.indexOf(' async function exportSave()', chooseStart);
 assert.ok(validStart >= 0 && validEnd > validStart && chooseEnd > chooseStart, 'save import must validate saves and select a safe target slot');
 const chooseImportSlot = vm.runInNewContext(transfer.slice(validStart, validEnd) + transfer.slice(chooseStart, chooseEnd) + ';chooseImportSlot');
-const validSave = {sceneIdx:4,state:{time:52,health:100,courage:112}};
+const validSave = {sceneIdx:4,flags:[],visited:[],usedHotspots:[],choicesHistory:[],state:{time:52,health:100,courage:112,clues:[],inventory:[]}};
 assert.equal(chooseImportSlot({}, [validSave, null, null]), 2, 'an unassigned backup must use the first empty slot');
 assert.equal(chooseImportSlot({}, [validSave, validSave, validSave]), 0, 'an unassigned backup must be rejected when all slots are occupied');
 assert.equal(chooseImportSlot({slot:3}, [validSave, validSave, null]), 3, 'an explicitly assigned backup must retain its selected slot when empty');
