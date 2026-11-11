@@ -76,7 +76,9 @@ const chooseImportSlot = vm.runInNewContext(transfer.slice(validStart, validEnd)
 const validSave = {sceneIdx:4,state:{time:52,health:100,courage:112}};
 assert.equal(chooseImportSlot({}, [validSave, null, null]), 2, 'an unassigned backup must use the first empty slot');
 assert.equal(chooseImportSlot({}, [validSave, validSave, validSave]), 0, 'an unassigned backup must be rejected when all slots are occupied');
-assert.equal(chooseImportSlot({slot:3}, [validSave, validSave, validSave]), 3, 'an explicitly assigned backup must retain its selected slot');
+assert.equal(chooseImportSlot({slot:3}, [validSave, validSave, null]), 3, 'an explicitly assigned backup must retain its selected slot when empty');
+assert.equal(chooseImportSlot({slot:2}, [validSave, validSave, null]), 3, 'an occupied source slot must fall back to another empty slot instead of overwriting');
+assert.equal(chooseImportSlot({slot:3}, [validSave, validSave, validSave]), 0, 'an explicitly assigned backup must also be rejected when all slots are occupied');
 assert.ok(transfer.includes('if(!slot)throw new Error("خانات الحفظ الثلاث ممتلئة.'), 'a full set of saves must produce a clear import error instead of overwriting slot one');
 
 console.log('PASS: recovery seed restores chapter 5 on clean installs and preserves every valid existing save.');
