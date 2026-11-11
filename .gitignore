@@ -4,3 +4,5 @@ node_modules/
 *.aab
 android/.gradle/
 android/local.properties
+www/
+android/
