@@ -105,6 +105,8 @@ assert.ok(home.includes("function getSubviewSignature()"), "Story and Progress m
 assert.ok(home.includes('if(view==="story"){hideLegacy();if(!overlay||getSubviewSignature()!==viewSignature)showStory();return;}'), "Story view must refresh when original new-game or chapter controls arrive after the view opens");
 assert.ok(home.includes('if(view==="progress"){hideLegacy();if(!overlay||getSubviewSignature()!==viewSignature)showProgress();return;}'), "Progress view must refresh when continue or backup controls arrive after the view opens");
 assert.ok(home.includes("viewSignature=getSubviewSignature();"), "subviews must remember the rendered control signature to avoid unnecessary redraws");
+assert.ok(home.includes('if(view==="settings"){var audio=document.getElementById("c17-audio-control");var volume=document.getElementById("c17-audio-volume");'), "Settings must detect late-loaded original audio controls");
+assert.ok(home.includes('if(view==="settings"){hideLegacy();if(!overlay||getSubviewSignature()!==viewSignature)showSettings();return;}'), "Settings view must refresh when original audio controls arrive after opening");
 assert.ok(home.includes('لا يغيّر وقت اللعب أو تقدمك'), 'World guide must be read-only');
 assert.ok(home.includes('إعدادات الصوت المتاحة فعلياً في اللعبة'), 'Settings must describe the real available audio controls');
 
