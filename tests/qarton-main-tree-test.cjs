@@ -81,6 +81,7 @@ assert.ok(home.includes('الصوت السينمائي • مستوى الصوت
 assert.ok(home.includes('function proxyStoryAction(') && home.includes('live.click()'), 'Story actions must invoke the live original game buttons');
 assert.ok(home.includes("function findNewGameButton(container)") && home.includes('proxyStoryAction(panel,"@new-game"'), "New Game must resolve the real primary story action instead of assuming a fixed button position");
 assert.ok(home.includes('b.dataset.qartonKind==="primary"') && home.includes("/ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/"), "New Game lookup must recognize the primary action by semantic label");
+assert.ok(home.includes("if(primary)return primary;return null;"), "New Game lookup must fail closed instead of clicking an unrelated menu button when no semantic start action is found");
 assert.ok(home.includes('root.querySelector("#btn-part2")') || home.includes('root.querySelector("#carthage-part3-start")'), 'Story must retain the original chapter entry controls');
 assert.ok(home.includes('actionButton(panel,"carthage-continue-last"') && home.includes('actionButton(panel,"carthage-export-backup"') && home.includes('actionButton(panel,"carthage-import-backup"'), 'Progress must expose all original save actions when available');
 
