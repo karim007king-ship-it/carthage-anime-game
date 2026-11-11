@@ -67,6 +67,8 @@ const startupDiagnostics = `<script id="carthage-startup-diagnostics">
     window.__CARTHAGE_REACT_MOUNTED__=true;
     var watchdog=document.getElementById("carthage-startup-watchdog");
     if(watchdog)watchdog.remove();
+    readinessObserver.disconnect();
+    window.removeEventListener("DOMContentLoaded",removeWatchdogWhenReady);
   }
   var readinessObserver=new MutationObserver(removeWatchdogWhenReady);
   readinessObserver.observe(document.documentElement,{childList:true,subtree:true});
