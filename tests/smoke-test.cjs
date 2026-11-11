@@ -16,6 +16,9 @@ assert.match(html, /السور يتكسر/);
 const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
 assert.ok(cinematicPilot.includes('carthage-cinematic-pilot-runtime'), 'cinematic pilot runtime must be injected into the Android build');
 assert.ok(cinematicPilot.includes('carthage-save-transfer'), 'save export/import transfer controls must be injected');
+assert.ok(cinematicPilot.includes('function stop(){if(observer){observer.disconnect();observer=null}}'), 'save-transfer observer must have an explicit cleanup path');
+assert.ok(cinematicPilot.includes('if(document.querySelector(".game-timer")){stop();return}'), 'save-transfer observer must stop as soon as gameplay begins');
+assert.ok(cinematicPilot.includes('if(document.querySelector(".game-timer"))return;observer.observe(document.documentElement'), 'save-transfer observer must not start after gameplay is already active');
 assert.ok(cinematicPilot.includes('carthage-drive-recovery-seed'), 'the confirmed Drive save must be included as a clean-install recovery seed');
 assert.ok(cinematicPilot.includes('chapter\\":5'), 'recovery seed must preserve chapter 5');
 assert.ok(cinematicPilot.includes('sceneIdx\\":4'), 'recovery seed must preserve the saved scene index');
@@ -120,9 +123,24 @@ assert.ok(qartonHome.includes('#qarton-home-brand{position:fixed'), 'QARTON bran
 assert.ok(qartonHome.includes('#qarton-home-info{position:fixed'), 'QARTON footer must be anchored inside the fixed home viewport');
 assert.ok(qartonHome.includes('max-height:650px'), 'home identity must compact on short phone screens');
 assert.ok(qartonHome.includes('prefers-reduced-motion:reduce'), 'home presentation must respect reduced-motion accessibility');
+assert.ok(qartonHome.includes('grid-auto-rows:minmax(39px,auto)'), 'measured home menu must use compact rows that fit small phone viewports');
+assert.ok(qartonHome.includes('#carthage-part3-start{grid-column:2'), 'chapter two and locked chapter three must share a compact world-actions row');
+assert.ok(qartonHome.includes('#carthage-export-backup') && qartonHome.includes('#carthage-import-backup') && qartonHome.includes('grid-column:auto!important;min-height:43px!important'), 'save export and import must share one compact row');
+assert.ok(qartonHome.includes('position:absolute!important;inset:0!important;width:100%!important;height:100%!important;') && qartonHome.includes('object-fit:cover!important;opacity:.16!important'), 'home artwork must become a non-layout background instead of pushing actions below the viewport');
+assert.ok(qartonHome.includes('padding-top:calc(env(safe-area-inset-top,0px) + 69px)'), 'compact home layout must reserve a measured header area on short screens');
+
 assert.ok(androidPrep.includes('carthage-home-locked'), 'home menu must toggle a dedicated fixed viewport state');
 assert.ok(androidPrep.includes('stopHomeScroll'), 'home page vertical touch and wheel scrolling must be blocked');
 assert.ok(androidPrep.includes('.game-timer'), 'home lock must detect active story gameplay and release the viewport');
+
+const qartonInspector = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-home-inspector.js'), 'utf8');
+assert.ok(androidPrep.includes('qarton-home-inspector-runtime'), 'read-only home measurement probe must be injected into Android builds');
+assert.ok(qartonInspector.includes('window.__qartonMeasureHome=report'), 'home measurement report must be exposed for on-device inspection');
+assert.ok(qartonInspector.includes('viewport:{width:innerWidth,height:innerHeight'), 'home measurement must capture the actual viewport');
+assert.ok(qartonInspector.includes('audioControls:audio'), 'home measurement must inspect rendered audio controls');
+assert.ok(qartonInspector.includes('carthage-continue-last'), 'home measurement must inspect the continue control');
+assert.ok(!/localStorage\\.(setItem|removeItem|clear)/.test(qartonInspector), 'home measurement must never modify game saves');
+new vm.Script(qartonInspector, {filename:'qarton-home-inspector.js'});
 
 const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(m => m[1]);
 const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
