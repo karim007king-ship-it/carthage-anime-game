@@ -127,10 +127,11 @@ if(candidates[0])candidates[0].classList.add("qarton-achievements");
 }
 function mount(){
 var root=document.getElementById("root");if(!root)return;
-if(playing(root)){var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");return}
+if(playing(root)){if(seenHome&&observer)observer.disconnect();var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");return}
 var menu=findMenu(root);
 var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ|متابعة|الجزء/.test(b.textContent||"")});
 if(!menu&&!start)return;
+seenHome=true;
 root.classList.add("carthage-home-locked");document.documentElement.classList.add("carthage-home-locked");document.body.classList.add("carthage-home-locked");
 style();markAchievements(root);
 if(!document.getElementById("qarton-home-brand")){
@@ -144,7 +145,7 @@ foot.innerHTML='<span class="qarton-line"></span><span>رحلتك • اختيا
 }
 decorate(root);
 }
-var queued=false;
+var queued=false,seenHome=false;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount()})}
 var observer=new MutationObserver(schedule);function boot(){style();observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class"]});mount()}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
