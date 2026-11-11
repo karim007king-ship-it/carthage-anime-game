@@ -81,4 +81,11 @@ assert.equal(chooseImportSlot({slot:2}, [validSave, validSave, null]), 3, 'an oc
 assert.equal(chooseImportSlot({slot:3}, [validSave, validSave, validSave]), 0, 'an explicitly assigned backup must also be rejected when all slots are occupied');
 assert.ok(transfer.includes('if(!slot)throw new Error("خانات الحفظ الثلاث ممتلئة.'), 'a full set of saves must produce a clear import error instead of overwriting slot one');
 
+// Save UI state must only be updated after the persisted slot has been read back successfully.
+const saveHandlerStart = source.indexOf('const saveHandler = `');
+const saveHandlerEnd = source.indexOf('`;\nconst autosaveHook', saveHandlerStart);
+assert.ok(saveHandlerStart >= 0 && saveHandlerEnd > saveHandlerStart, 'save handler must remain isolated for verification');
+const saveHandler = source.slice(saveHandlerStart, saveHandlerEnd);
+assert.ok(saveHandler.indexOf('verify=JSON.parse') >= 0 && saveHandler.indexOf('$8((b)=>') > saveHandler.indexOf('verify=JSON.parse'), 'React save-slot state must update only after storage verification');
+
 console.log('PASS: recovery seed restores chapter 5 on clean installs and preserves every valid existing save.');
