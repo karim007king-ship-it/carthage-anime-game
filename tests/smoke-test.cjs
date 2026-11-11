@@ -44,6 +44,8 @@ assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#root.carthage
 assert.ok(cinematicPilot.includes('carthageCinematicLight'), 'cinematic pilot must include a restrained moving light pass');
 assert.ok(cinematicPilot.includes('carthageCinematicImpact'), 'Great Wall break must trigger a brief impact camera shake');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce'), 'cinematic animation must respect reduced-motion accessibility');
+assert.equal((cinematicPilot.match(/attributeFilter:\[\"src\"\]/g)||[]).length,3,'cinematic image observers must ignore unrelated class/style mutations');
+assert.ok(!cinematicPilot.includes('attributeFilter:[\"src\",\"class\",\"style\"]'),'cinematic observers must not rescan all story images for every styling mutation');
 assert.ok(cinematicPilot.includes('/(السور|لحظة الكسر|السور يتكسر)/'), 'cinematic pilot must activate only for the Great Wall story scene');
 
 assert.ok(cinematicPilot.includes('carthage-wall-impact-runtime'), 'Great Wall destruction runtime must be injected into Android builds');
