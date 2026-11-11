@@ -59,5 +59,7 @@ assert.ok(workflow.includes('npm test'), 'Android workflow must run regression t
 assert.ok(workflow.includes('qarton-home-inspector-runtime'), 'packaged HTML verification must include the probe');
 assert.ok(workflow.includes('qarton-home-measure-output'), 'packaged HTML verification must include the report UI');
 assert.ok(prep.includes('seenHome&&observer)observer.disconnect()'), 'fixed home viewport observer must stop after gameplay begins');
+assert.ok(prep.includes('if(document.querySelector(\\".game-timer\\"))observer.disconnect()'), 'native navigation observer must stop after gameplay begins');
+assert.ok(prep.includes('if(!document.querySelector(\\".game-timer\\"))observer.observe(document.documentElement'), 'native navigation observer must not start during gameplay');
 
 console.log('PASS: QARTON home layout, responsive contracts, React lifecycle, measurement probe, and Android packaging checks.');
