@@ -65,6 +65,12 @@ const invalid = boot({
 });
 assert.equal(invalid.get('shiganshina-slots-v1')[0].chapter, 5, 'invalid save data must fall back to the confirmed recovery seed');
 
+const incomplete = boot({
+  'shiganshina-slots-v1': [{ chapter: 8, sceneIdx: 9, state: { time: 40, health: 90, courage: 80 } }],
+  'shiganshina-autosave-v1': null
+});
+assert.equal(incomplete.get('shiganshina-slots-v1')[0].chapter, 5, 'structurally incomplete saves must not block the confirmed recovery seed');
+
 
 // Import slot selection must never silently replace a valid save when a backup has no slot number.
 const transferStart = source.indexOf('const saveTransfer = `');
