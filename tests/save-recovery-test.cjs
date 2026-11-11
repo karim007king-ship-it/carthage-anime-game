@@ -80,6 +80,7 @@ assert.equal(chooseImportSlot({slot:3}, [validSave, validSave, null]), 3, 'an ex
 assert.equal(chooseImportSlot({slot:2}, [validSave, validSave, null]), 3, 'an occupied source slot must fall back to another empty slot instead of overwriting');
 assert.equal(chooseImportSlot({slot:3}, [validSave, validSave, validSave]), 0, 'an explicitly assigned backup must also be rejected when all slots are occupied');
 assert.ok(transfer.includes('if(!slot)throw new Error("خانات الحفظ الثلاث ممتلئة.'), 'a full set of saves must produce a clear import error instead of overwriting slot one');
+assert.ok(transfer.includes('slotCheck=JSON.parse(localStorage.getItem("shiganshina-slots-v1")||"[]")') && transfer.includes('!valid(slotCheck[slot-1])'), 'import must verify both the selected slot and the autosave after writing');
 
 // Save UI state must only be updated after the persisted slot has been read back successfully.
 const saveHandlerStart = source.indexOf('const saveHandler = `');
