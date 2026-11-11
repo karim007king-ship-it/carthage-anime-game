@@ -1,7 +1,7 @@
 (function(){
  if(window.__qartonHomeInspectorInstalled)return;
  window.__qartonHomeInspectorInstalled=true;
- var root=null,button=null,panel=null,observer=null,queued=false;
+ var root=null,button=null,panel=null,observer=null,queued=false,seenHome=false;
  function isHome(){
   root=document.getElementById("root");
   return !!(root&&!root.querySelector(".game-timer")&&(root.querySelector(".home-actions.grid")||Array.from(root.querySelectorAll("button")).some(function(b){return /ابدأ الجزء الأول/.test(b.textContent||"")})));
@@ -35,6 +35,8 @@
  }
  function mount(){
   var home=isHome();
+  if(home)seenHome=true;
+  else if(seenHome&&observer)observer.disconnect();
   if(home&&!button){
    button=document.createElement("button");button.id="qarton-home-measure";button.type="button";button.textContent="قياس الواجهة";button.setAttribute("aria-label","قياس واجهة الشاشة الرئيسية");
    button.style.cssText="position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);transform:translateX(-50%);z-index:2147483001;border:1px solid #c5a15a;border-radius:999px;background:rgba(13,20,34,.94);color:#f5dfad;padding:8px 14px;font:700 12px system-ui;box-shadow:0 4px 16px #0008";
