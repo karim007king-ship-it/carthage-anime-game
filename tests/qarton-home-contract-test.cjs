@@ -62,6 +62,6 @@ assert.ok(prep.includes('seenHome&&observer)observer.disconnect()'), 'fixed home
 assert.ok(prep.includes('if(document.querySelector(\\".game-timer\\"))observer.disconnect()'), 'native navigation observer must stop after gameplay begins');
 assert.ok(prep.includes('if(!document.querySelector(\\".game-timer\\"))observer.observe(document.documentElement'), 'native navigation observer must not start during gameplay');
 assert.ok(prep.includes('readinessObserver.disconnect()'), 'startup readiness observer must disconnect after the real game UI mounts');
-assert.ok(prep.includes('window.removeEventListener(\\"DOMContentLoaded\\",removeWatchdogWhenReady)'), 'startup readiness listener must be removed after the real game UI mounts');
+assert.ok(prep.includes('window.removeEventListener("DOMContentLoaded",removeWatchdogWhenReady)'), 'startup readiness listener must be removed after the real game UI mounts');
 
 console.log('PASS: QARTON home layout, responsive contracts, React lifecycle, measurement probe, and Android packaging checks.');
