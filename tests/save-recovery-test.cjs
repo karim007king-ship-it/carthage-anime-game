@@ -4,6 +4,10 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 
 const source = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
+
+// Both recovery seeding and the Continue action must reject structurally incomplete records.
+assert.ok(source.includes('Array.isArray(s.flags)&&Array.isArray(s.visited)&&Array.isArray(s.usedHotspots)&&Array.isArray(s.choicesHistory)&&Array.isArray(s.state.clues)&&Array.isArray(s.state.inventory)'), 'recovery seed must validate every required restoration collection');
+assert.ok(source.includes('Array.isArray(v.flags)&&Array.isArray(v.visited)&&Array.isArray(v.usedHotspots)&&Array.isArray(v.choicesHistory)&&Array.isArray(v.state.clues)&&Array.isArray(v.state.inventory)'), 'Continue must reject incomplete saves before selecting the newest record');
 const declarationStart = source.indexOf('const recoverySeed = ');
 assert.notEqual(declarationStart, -1, 'recovery seed declaration must exist');
 const valueStart = source.indexOf('"', declarationStart);
