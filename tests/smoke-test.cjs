@@ -80,6 +80,8 @@ assert.ok(androidPrep.includes('carthage-startup-errors'), 'Android startup diag
 assert.ok(androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
 assert.ok(androidPrep.includes('menuActions.insertBefore(continueButton'), 'Continue must appear directly in the home menu');
 assert.ok(androidPrep.includes('var homeScreen=!!root.querySelector'), 'navigation must distinguish the home menu from other non-game screens');
+assert.ok(androidPrep.includes('function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount()})}'), 'navigation DOM updates must be coalesced to one animation frame');
+assert.ok(androidPrep.includes('var observer=new MutationObserver(schedule)'), 'navigation observer must use the coalesced scheduler instead of rescanning synchronously for every DOM mutation');
 assert.ok(androidPrep.includes('if(!playing&&homeScreen&&hasSave'), 'Continue must only be injected on the home menu');
 assert.ok(androidPrep.includes('playing||!homeScreen||!hasSave'), 'Continue must be removed outside the home menu');
 assert.ok(androidPrep.includes('if(!playing&&homeScreen&&typeof window.__carthageStartPart3'), 'Part 3 control must only appear on the home menu');
