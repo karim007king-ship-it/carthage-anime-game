@@ -25,6 +25,7 @@ assert.ok(!/if\\s*\\(\\s*!shell\\s*\\)\\s*return/.test(mountSource), 'QARTON hom
 assert.ok(mountSource.includes('addStyle();goTree();'), 'mount must render the QARTON tree once the app root exists');
 assert.ok(mountSource.includes('if(view!=="game"||overlay)cleanupForGame()'), 'game mutations must not repeatedly run cleanup after gameplay has already started');
 assert.ok(home.includes('observer.observe(root,{subtree:true,childList:true})'), 'main-tree observer must avoid expensive attribute and text mutation tracking during gameplay');
+assert.ok(home.includes('observer.disconnect();observer=null;'), 'main-tree observer must stop completely after gameplay starts');
 assert.ok(!home.includes('observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true'), 'main-tree observer must not watch every animated style/class mutation');
 
 
