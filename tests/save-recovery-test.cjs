@@ -44,7 +44,11 @@ const newer = {
   chapter: 7,
   sceneIdx: 12,
   savedAtMs: 1900000000000,
-  state: { time: 31, health: 77, courage: 140 }
+  state: { time: 31, health: 77, courage: 140, clues: ["crack"], inventory: ["sword"] },
+  flags: ["followedElias"],
+  visited: [0, 1, 4],
+  usedHotspots: ["photo"],
+  choicesHistory: ["followed Elias"]
 };
 const existingSlots = [null, newer, null];
 const existingAuto = { ...newer, slot: 2 };
@@ -61,4 +65,10 @@ const invalid = boot({
 });
 assert.equal(invalid.get('shiganshina-slots-v1')[0].chapter, 5, 'invalid save data must fall back to the confirmed recovery seed');
 
-console.log('PASS: recovery seed restores chapter 5 on clean installs and preserves every valid existing save.');
+const malformed = boot({
+  "shiganshina-slots-v1": [{ slot: 1, sceneIdx: 9, savedAtMs: 2000000000000, state: { time: 40, health: 80, courage: 90, clues: [], inventory: [] } }],
+  "shiganshina-autosave-v1": null
+});
+assert.equal(malformed.get("shiganshina-slots-v1")[0].chapter, 5, "save records missing required restoration arrays must fall back to the recovery seed");
+
+console.log('PASS: recovery seed restores chapter 5, preserves complete saves, and rejects incomplete save records.');
