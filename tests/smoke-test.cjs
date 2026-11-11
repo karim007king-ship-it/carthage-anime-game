@@ -61,6 +61,7 @@ assert.ok(androidPrep.includes('window.__carthageCanStartPart3'), 'Part 3 lock s
 assert.ok(androidPrep.includes('رجوع للقائمة'), 'new-game cancel action must be clearly labeled as returning to menu');
 assert.ok(androidPrep.includes('shiganshina-autosave-v1'), 'continue flow must recognize autosave fallback');
 assert.ok(androidPrep.includes('window.__carthageContinue=()=>{'), 'continue action must restore the newest valid local save');
+assert.ok(androidPrep.includes('Array.isArray(v.flags)&&Array.isArray(v.visited)&&Array.isArray(v.usedHotspots)&&Array.isArray(v.choicesHistory)&&Array.isArray(v.state.clues)&&Array.isArray(v.state.inventory)'), 'continue action must reject incomplete saves before restoring them');
 assert.ok(androidPrep.includes("window.__CARTHAGE_MODULE_STARTED__=true"), "Android build must instrument the actual story ES module");
 assert.ok(androidPrep.includes("window.__CARTHAGE_RENDER_REQUESTED__=true"), "Android build must verify the React render request");
 assert.ok(androidPrep.includes("window.__CARTHAGE_REACT_MOUNTED__"), "Android build must detect actual React UI mounting");
