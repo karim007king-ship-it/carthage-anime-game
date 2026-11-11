@@ -117,6 +117,7 @@ b.dataset.qartonKind=kind;b.dataset.qartonIcon=icon;b.setAttribute("data-qarton-
 });
 }
 function markAchievements(root){
+if(root.querySelector(".qarton-achievements"))return;
 var candidates=Array.from(root.querySelectorAll("*")).filter(function(el){
 if(el.children.length>8)return false;
 var t=(el.innerText||"").trim();
