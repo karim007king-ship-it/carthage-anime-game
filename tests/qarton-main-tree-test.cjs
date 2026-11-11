@@ -101,6 +101,10 @@ for (const invented of ['أصوات الشخصيات — تشغيل / إيقاف
   assert.ok(!home.includes(invented), 'Settings must not advertise a control that the game does not provide: ' + invented);
 }
 assert.ok(home.includes('if(view==="world")') && home.includes('if(view==="settings")'), 'mutation observer must preserve both subviews');
+assert.ok(home.includes("function getSubviewSignature()"), "Story and Progress must expose a stable signature for their live original controls");
+assert.ok(home.includes('if(view==="story"){hideLegacy();if(!overlay||getSubviewSignature()!==viewSignature)showStory();return;}'), "Story view must refresh when original new-game or chapter controls arrive after the view opens");
+assert.ok(home.includes('if(view==="progress"){hideLegacy();if(!overlay||getSubviewSignature()!==viewSignature)showProgress();return;}'), "Progress view must refresh when continue or backup controls arrive after the view opens");
+assert.ok(home.includes("viewSignature=getSubviewSignature();"), "subviews must remember the rendered control signature to avoid unnecessary redraws");
 assert.ok(home.includes('لا يغيّر وقت اللعب أو تقدمك'), 'World guide must be read-only');
 assert.ok(home.includes('إعدادات الصوت المتاحة فعلياً في اللعبة'), 'Settings must describe the real available audio controls');
 
