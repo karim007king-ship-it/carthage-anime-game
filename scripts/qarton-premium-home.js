@@ -117,7 +117,7 @@ b.dataset.qartonKind=kind;b.dataset.qartonIcon=icon;b.setAttribute("data-qarton-
 });
 }
 function markAchievements(root){
-if(root.querySelector(".qarton-achievements"))return;
+if(root.querySelector(".qarton-achievements")||!root.textContent.includes("إنجازاتي"))return;
 var candidates=Array.from(root.querySelectorAll("*")).filter(function(el){
 if(el.children.length>8)return false;
 var t=(el.innerText||"").trim();
@@ -132,7 +132,7 @@ if(playing(root)){if(observer)observer.disconnect();var a=document.getElementByI
 var menu=findMenu(root);
 var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ|متابعة|الجزء/.test(b.textContent||"")});
 if(!menu&&!start)return;
-seenHome=true;
+
 root.classList.add("carthage-home-locked");document.documentElement.classList.add("carthage-home-locked");document.body.classList.add("carthage-home-locked");
 style();markAchievements(root);
 if(!document.getElementById("qarton-home-brand")){
@@ -146,7 +146,7 @@ foot.innerHTML='<span class="qarton-line"></span><span>رحلتك • اختيا
 }
 decorate(root);
 }
-var queued=false,seenHome=false;
+var queued=false;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount()})}
 var observer=new MutationObserver(schedule);function boot(){style();observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class"]});mount()}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
