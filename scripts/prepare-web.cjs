@@ -173,7 +173,7 @@ const cinematicPilot = `<style id="carthage-cinematic-pilot">
  }
  var queued=false;
  var observer=new MutationObserver(function(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;apply()})});
- function start(){apply();observer.observe(document.getElementById("root")||document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["src","class","style"]})}
+ function start(){apply();observer.observe(document.getElementById("root")||document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["src"]})}
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
 </script>`;
@@ -214,7 +214,7 @@ const cinematicExpansion = `<style id="carthage-cinematic-scene-style">
  });
  function start(){
   apply();
-  observer.observe(document.getElementById("root")||document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["src","class","style"]});
+  observer.observe(document.getElementById("root")||document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["src"]});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
@@ -266,7 +266,7 @@ const cinematicTransitions = `<style id="carthage-scene-transition-style">
   root=document.getElementById("root");
   if(!root)return;
   apply();
-  observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["src","class","style"]});
+  observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["src"]});
  }
  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
