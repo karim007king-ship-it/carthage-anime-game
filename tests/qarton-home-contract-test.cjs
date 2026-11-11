@@ -42,6 +42,10 @@ assert.ok(home.includes('new MutationObserver(schedule)'), 'runtime must recover
 assert.ok(home.includes('if(observer)observer.disconnect()'), 'legacy home styling observer must stop after gameplay begins');
 assert.ok(inspector.includes('root&&root.querySelector(".game-timer")&&observer)observer.disconnect()'), 'read-only measurement observer must stop after leaving home');
 
+// Achievement discovery must short-circuit when the label is absent; keep the observer inexpensive.
+assert.ok(home.includes('root.querySelector(".qarton-achievements")||!root.textContent.includes("إنجازاتي")'), "achievement scan must avoid traversing the whole tree when the section is absent");
+assert.ok(!home.includes("seenHome"), "unused home-state flag must not remain in the runtime");
+
 // The diagnostic report must measure actual rendered controls without reading or exposing save payloads.
 for (const marker of [
   'getBoundingClientRect()', 'scrollWidth:document.documentElement.scrollWidth',
