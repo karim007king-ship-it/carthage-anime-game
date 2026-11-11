@@ -133,7 +133,7 @@
     if(rootWaiter){rootWaiter.disconnect();rootWaiter=null;}
     addStyle();
     observer=new MutationObserver(schedule);
-    observer.observe(root,{subtree:true,childList:true});
+    observer.observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:["disabled","id"],characterData:true});
     mount();
   }
   function boot(){
