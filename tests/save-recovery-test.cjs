@@ -48,7 +48,11 @@ const newer = {
   chapter: 7,
   sceneIdx: 12,
   savedAtMs: 1900000000000,
-  state: { time: 31, health: 77, courage: 140 }
+  flags: [],
+  visited: [],
+  usedHotspots: [],
+  choicesHistory: [],
+  state: { time: 31, health: 77, courage: 140, clues: [], inventory: [] }
 };
 const existingSlots = [null, newer, null];
 const existingAuto = { ...newer, slot: 2 };
