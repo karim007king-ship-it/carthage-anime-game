@@ -61,4 +61,20 @@ const invalid = boot({
 });
 assert.equal(invalid.get('shiganshina-slots-v1')[0].chapter, 5, 'invalid save data must fall back to the confirmed recovery seed');
 
+
+// Import slot selection must never silently replace a valid save when a backup has no slot number.
+const transferStart = source.indexOf('const saveTransfer = `');
+const transferEnd = source.indexOf('`;\nif (!html.includes', transferStart);
+assert.ok(transferStart >= 0 && transferEnd > transferStart, 'save-transfer runtime boundaries must remain testable');
+const transfer = source.slice(transferStart, transferEnd);
+const validMatch = transfer.match(/function valid\\(s\\)\\{[^}]+\\}/);
+const chooseMatch = transfer.match(/function chooseImportSlot\\(save,slots\\)\\{[^}]+\\}/);
+assert.ok(validMatch && chooseMatch, 'save import must validate saves and select a safe target slot');
+const chooseImportSlot = vm.runInNewContext(validMatch[0] + ';' + chooseMatch[0] + ';chooseImportSlot');
+const validSave = {sceneIdx:4,state:{time:52,health:100,courage:112}};
+assert.equal(chooseImportSlot({}, [validSave, null, null]), 2, 'an unassigned backup must use the first empty slot');
+assert.equal(chooseImportSlot({}, [validSave, validSave, validSave]), 0, 'an unassigned backup must be rejected when all slots are occupied');
+assert.equal(chooseImportSlot({slot:3}, [validSave, validSave, validSave]), 3, 'an explicitly assigned backup must retain its selected slot');
+assert.ok(transfer.includes('if(!slot)throw new Error("خانات الحفظ الثلاث ممتلئة.'), 'a full set of saves must produce a clear import error instead of overwriting slot one');
+
 console.log('PASS: recovery seed restores chapter 5 on clean installs and preserves every valid existing save.');
