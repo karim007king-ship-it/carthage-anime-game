@@ -64,7 +64,7 @@ assert.ok(home.includes('if(overlay)overlay.style.display="none";restoreLegacy()
 assert.ok(home.includes('if(live&&!live.disabled)handoffStoryAction(live);'), 'new game and chapter actions must use the safe story handoff');
 assert.ok(home.includes('function findNewGameButton(container)'), 'Story subview must resolve the original new-game action');
 assert.ok(home.includes('hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren()'), 'Story subview must keep the legacy home hidden');
-assert.ok(!home.includes('if(overlay)overlay.style.display="none";restoreLegacy()'), 'Story subview must not reveal the legacy home');
+assert.ok(!storySubview.includes('restoreLegacy()') && !storySubview.includes('overlay.style.display="none"'), 'Story subview must keep the legacy home hidden until a native story action is invoked');
 assert.ok(home.includes('function showProgress()'), 'Progress branch must expose original backup actions');
 assert.ok(home.includes('function cleanupForGame()'), 'tree must disappear during gameplay');
 
