@@ -39,6 +39,18 @@ for (const marker of [
   '@media(max-height:650px)', 'prefers-reduced-motion:reduce'
 ]) assert.ok(home.includes(marker), 'missing main-tree design contract: ' + marker);
 
+// Exercise the semantic new-game resolver against button-like controls, not only source markers.
+const findStart = home.indexOf('function findNewGameButton(container){');
+const findEnd = home.indexOf('function handoffStoryAction(', findStart);
+assert.ok(findStart >= 0 && findEnd > findStart, 'new-game resolver boundaries must remain testable');
+const findNewGameButton = vm.runInNewContext(home.slice(findStart, findEnd) + ';findNewGameButton');
+const makeButton = (text, disabled=false, kind='') => ({textContent:text,disabled,dataset:{qartonKind:kind}});
+const unrelated = makeButton('الإعدادات');
+const primaryStart = makeButton('ابدأ الجزء الأول');
+assert.equal(findNewGameButton({querySelectorAll:()=>[unrelated,primaryStart]}), primaryStart, 'new-game resolver must select the real story-start control');
+assert.equal(findNewGameButton({querySelectorAll:()=>[makeButton('الإعدادات'),makeButton('تصدير الحفظ')]}), null, 'new-game resolver must fail closed when no start control exists');
+assert.equal(findNewGameButton({querySelectorAll:()=>[makeButton('لعبة جديدة',true)]}), null, 'new-game resolver must not activate a disabled start control');
+
 // Story and backup actions must invoke the existing app controls by ID at click time.
 for (const id of [
   'carthage-continue-last', 'carthage-export-backup', 'carthage-import-backup'
