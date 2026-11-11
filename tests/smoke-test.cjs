@@ -120,6 +120,8 @@ assert.ok(!qartonHome.includes('.qarton-home-shell>div.mt-4.grid{display:none!im
 
 assert.ok(androidPrep.includes('qarton-premium-home-runtime'), 'approved QARTON home presentation runtime must be injected into Android builds');
 assert.ok(qartonHome.includes('#qarton-home-brand{position:fixed'), 'QARTON brand header must be anchored inside the fixed home viewport');
+assert.ok(!qartonHome.includes('#root.carthage-home-locked \\n#root.carthage-home-locked #qarton-home-brand'), 'QARTON hide-rule selector must not contain an impossible root descendant');
+assert.ok(qartonHome.includes('#root.carthage-home-locked #qarton-home-brand,#root.carthage-home-locked #qarton-home-info{display:none!important}'), 'QARTON home identity hide rule must target the two fixed overlays directly');
 assert.ok(qartonHome.includes('#qarton-home-info{position:fixed'), 'QARTON footer must be anchored inside the fixed home viewport');
 assert.ok(qartonHome.includes('max-height:650px'), 'home identity must compact on short phone screens');
 assert.ok(qartonHome.includes('prefers-reduced-motion:reduce'), 'home presentation must respect reduced-motion accessibility');
