@@ -39,6 +39,8 @@ assert.ok(home.includes('root.classList.remove("carthage-home-locked")'), 'gamep
 assert.ok(home.includes('if(!document.getElementById("qarton-home-brand"))'), 'brand insertion must be idempotent');
 assert.ok(home.includes('if(!document.getElementById("qarton-home-info"))'), 'footer insertion must be idempotent');
 assert.ok(home.includes('new MutationObserver(schedule)'), 'runtime must recover after React DOM updates');
+assert.ok(home.includes('seenHome&&observer)observer.disconnect()'), 'legacy home styling observer must stop after gameplay begins');
+assert.ok(inspector.includes('seenHome&&observer)observer.disconnect()'), 'read-only measurement observer must stop after leaving home');
 
 // The diagnostic report must measure actual rendered controls without reading or exposing save payloads.
 for (const marker of [
@@ -56,5 +58,6 @@ assert.ok(prep.includes('qarton-home-inspector-runtime'), 'measurement probe mus
 assert.ok(workflow.includes('npm test'), 'Android workflow must run regression tests before building');
 assert.ok(workflow.includes('qarton-home-inspector-runtime'), 'packaged HTML verification must include the probe');
 assert.ok(workflow.includes('qarton-home-measure-output'), 'packaged HTML verification must include the report UI');
+assert.ok(prep.includes('seenHome&&observer)observer.disconnect()'), 'fixed home viewport observer must stop after gameplay begins');
 
 console.log('PASS: QARTON home layout, responsive contracts, React lifecycle, measurement probe, and Android packaging checks.');
