@@ -40,7 +40,7 @@ assert.ok(home.includes('if(!document.getElementById("qarton-home-brand"))'), 'b
 assert.ok(home.includes('if(!document.getElementById("qarton-home-info"))'), 'footer insertion must be idempotent');
 assert.ok(home.includes('new MutationObserver(schedule)'), 'runtime must recover after React DOM updates');
 assert.ok(home.includes('if(observer)observer.disconnect()'), 'legacy home styling observer must stop after gameplay begins');
-assert.ok(inspector.includes('root&&root.querySelector(".game-timer")&&observer)observer.disconnect()'), 'read-only measurement observer must stop after leaving home');
+assert.ok(inspector.includes('if(!home&&root&&root.querySelector(".game-timer")&&observer){observer.disconnect();observer=null;}'), 'read-only measurement observer must disconnect and release its reference after leaving home');
 
 // Achievement discovery must short-circuit when the label is absent; keep the observer inexpensive.
 assert.ok(home.includes('root.querySelector(".qarton-achievements")||!root.textContent.includes("إنجازاتي")'), "achievement scan must avoid traversing the whole tree when the section is absent");
