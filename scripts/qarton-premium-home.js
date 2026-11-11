@@ -127,7 +127,7 @@ if(candidates[0])candidates[0].classList.add("qarton-achievements");
 }
 function mount(){
 var root=document.getElementById("root");if(!root)return;
-if(playing(root)){if(seenHome&&observer)observer.disconnect();var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");return}
+if(playing(root)){if(observer)observer.disconnect();var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");return}
 var menu=findMenu(root);
 var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ|متابعة|الجزء/.test(b.textContent||"")});
 if(!menu&&!start)return;
