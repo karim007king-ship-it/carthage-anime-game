@@ -26,7 +26,7 @@ assert.ok(mountSource.includes('addStyle();goTree();'), 'mount must render the Q
 assert.ok(mountSource.includes('if(view!=="game"||overlay)cleanupForGame()'), 'game mutations must not repeatedly run cleanup after gameplay has already started');
 assert.ok(home.includes('observer.observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:["disabled","id"],characterData:true})'), 'main-tree observer must track only control availability, identity, and label changes while home UI is active');
 assert.ok(home.includes('observer.disconnect();observer=null;'), 'main-tree observer must stop completely after gameplay starts');
-assert.ok(!home.includes('attributes:true,characterData:true}),'), 'main-tree observer must not watch every animated style/class mutation');
+assert.ok(!/attributeFilter:\[[^\]]*(?:class|style)/.test(home), 'main-tree observer must not watch every animated style/class mutation');
 
 
 // The approved fixed home is a real four-branch 2x2 tree, not a restyled old menu.
