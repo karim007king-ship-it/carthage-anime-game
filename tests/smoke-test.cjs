@@ -16,6 +16,10 @@ assert.match(html, /السور يتكسر/);
 const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
 assert.ok(cinematicPilot.includes('carthage-cinematic-pilot-runtime'), 'cinematic pilot runtime must be injected into the Android build');
 assert.ok(cinematicPilot.includes('carthage-save-transfer'), 'save export/import transfer controls must be injected');
+assert.ok(cinematicPilot.includes('var menu=root.querySelector(".home-actions.grid");if(!menu)return;'), 'save-transfer controls must wait for the actual home menu instead of attaching to an incomplete app root');
+assert.ok(cinematicPilot.includes('if(!exp){exp=document.createElement("button")') && cinematicPilot.includes('if(!imp){imp=document.createElement("button")'), 'save-transfer mount must recover either control independently after a partial React rerender');
+assert.ok(cinematicPilot.includes('var input=document.getElementById("carthage-import-file");if(!input){'), 'save-transfer mount must restore its file input independently');
+
 assert.ok(cinematicPilot.includes('function stop(){if(observer){observer.disconnect();observer=null}}'), 'save-transfer observer must have an explicit cleanup path');
 assert.ok(cinematicPilot.includes('if(document.querySelector(".game-timer")){stop();return}'), 'save-transfer observer must stop as soon as gameplay begins');
 assert.ok(cinematicPilot.includes('if(document.querySelector(".game-timer"))return;observer.observe(document.documentElement'), 'save-transfer observer must not start after gameplay is already active');
