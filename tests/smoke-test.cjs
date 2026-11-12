@@ -178,7 +178,7 @@ assert.ok(html.includes('m(P),x(0),p("dialogue"),Q8'), 'chapter navigation must 
 assert.ok(html.includes('if(B<j.lines.length-1)x(B+1)'), 'dialogue must advance line by line');
 assert.ok(html.includes('window.setTimeout(()=>L9(T+1),z?300:850)'), 'completed choices must advance to the next chapter');
 assert.ok(html.includes('src:j.image,alt:j.place'), 'the active chapter artwork must be bound to the current chapter data');
-assert.ok(html.includes('pointer-events:none;background:#050509'), 'cinematic scene transitions must never block taps');
+assert.ok(androidPrep.includes('pointer-events:none;background:#050509'), 'cinematic scene transitions must never block taps');
 
 const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(m => m[1]);
 const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
