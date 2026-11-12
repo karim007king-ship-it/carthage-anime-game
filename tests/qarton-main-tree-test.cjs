@@ -57,6 +57,7 @@ for (const id of [
 ]) assert.ok(home.includes(id), 'missing existing action bridge: ' + id);
 assert.ok(home.includes('live.click()'), 'the tree must invoke original handlers, not recreate them');
 assert.ok(home.includes('function showStory()'), 'Story branch must open a dedicated story subview');
+assert.ok(home.includes('root.querySelector(".home-actions.grid")||root.querySelector(".home-actions")||root'), 'Story start lookup must fall back to semantic search across the app root when legacy menu classes differ');
 // Continue-last-save belongs only to Progress & Saves, never the Story subview.
 const storyStart = home.indexOf('function showStory(){');
 const storyEnd = home.indexOf('function actionButton(', storyStart);
