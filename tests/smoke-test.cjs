@@ -124,6 +124,16 @@ assert.ok(qartonHome.includes('function markAchievements(root){\nif(root.querySe
 assert.ok(qartonHome.includes('var hasPartOne=buttons.some'), 'QARTON must require the real Part 1 selector before treating a screen as home');
 assert.ok(qartonHome.includes('var hasPartTwo=buttons.some'), 'QARTON must require the real Part 2 selector before treating a screen as home');
 assert.ok(qartonHome.includes('if(!hasPartOne||!hasPartTwo)return null'), 'story screens with generic start/continue buttons must not be styled as the home menu');
+assert.ok(qartonHome.includes('var menu=root.querySelector(".home-actions.grid")'), 'the native home grid must be recognized even while React is rendering/rewording its buttons');
+assert.ok(qartonHome.includes('if(menu&&Array.from(menu.querySelectorAll("button")).length<2)menu=null'), 'an incomplete or empty action grid must not be misclassified as the home menu');
+assert.ok(!qartonHome.includes('if(!hasPartOne||!hasPartTwo)return null;\\nvar menu=root.querySelector(".home-actions.grid")'), 'missing Part 1/Part 2 labels must not disable an already identified native home grid');
+const findMenuSource = qartonHome.slice(qartonHome.indexOf('function findMenu(root){'), qartonHome.indexOf('\\nfunction decorate(root){'));
+const findMenu = vm.runInNewContext('(' + findMenuSource + ')');
+const nativeMenu = { querySelectorAll: () => [{}, {}], closest: () => null, parentElement: null };
+const stagedHomeRoot = { querySelector: selector => selector === '.home-actions.grid' ? nativeMenu : null, querySelectorAll: () => [] };
+assert.equal(findMenu(stagedHomeRoot), nativeMenu, 'QARTON must detect the real home grid before localized action labels finish rendering');
+const genericStoryRoot = { querySelector: () => null, querySelectorAll: () => [{textContent:'ابدأ'}, {textContent:'متابعة'}] };
+assert.equal(findMenu(genericStoryRoot), null, 'generic story buttons must not be mistaken for the home menu');
 assert.ok(qartonHome.includes('candidateButtons.length>=3&&candidateHasPartTwo'), 'recovered menu must contain the Part 2 selector as well as multiple actions');
 assert.ok(qartonHome.includes('menu.classList.add("home-actions","grid")'), 'recovered menu must receive the expected grid styling hook');
 assert.ok(qartonHome.includes('if(!shell&&menu.parentElement&&menu.parentElement!==root)shell=menu.parentElement'), 'QARTON runtime must fall back to the real parent shell when utility classes differ');
