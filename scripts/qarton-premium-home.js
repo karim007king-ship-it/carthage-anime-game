@@ -80,16 +80,6 @@ if(candidates[0])candidates[0].classList.add("qarton-achievements");
 }
 function mount(){
 var root=document.getElementById("root");if(!root)return;
-// The isolated overlay is the only active home renderer. Keep this adapter for gameplay styling only.
-if(window.__qartonHomeIsolationInstalled&&!playing(root)){
-root.classList.remove("carthage-home-locked");
-document.documentElement.classList.remove("carthage-home-locked");
-document.body.classList.remove("carthage-home-locked");
-var sheet=document.getElementById("qarton-premium-home-style");if(sheet)sheet.media="not all";
-var brand=document.getElementById("qarton-home-brand"),info=document.getElementById("qarton-home-info");
-if(brand)brand.remove();if(info)info.remove();
-return;
-}
 if(playing(root)){decorateGameplay(root);var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");if(observer){observer.disconnect();observer=null}watchGameplayEnd(root);return}root.classList.remove("qarton-game-ui");
 var menu=findMenu(root);
 if(!menu)return;

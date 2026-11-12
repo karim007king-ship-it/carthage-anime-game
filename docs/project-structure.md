@@ -13,7 +13,7 @@ The project currently has four layers:
 
 - `index.html` is the source of truth for the original game. `www/` and `android/` are generated build outputs, ignored by Git, and must not become competing hand-edited sources.
 - The QARTON stylesheet is the canonical home for shared design tokens and reusable component primitives.
-- The QARTON runtime may add presentation classes and wrappers, but must preserve the original buttons, callbacks, story data, and save keys. It activates `qarton-carthage-home.css` only after finding a verified native home menu; Android viewport locking uses the same native-grid-first detection rule. The prepared page carries the stylesheet with `media="not all"`; the adapter enables it only after home detection, so the Carthage home rules do not leak into gameplay.
+- The isolated QARTON home may hide the React home only after identifying a valid native action group. Its cards call the original React buttons; the game engine, callbacks, story data, and save keys remain the source of truth. The premium adapter must stay inactive as a home renderer while `window.__qartonHomeIsolationInstalled` is set. The isolated screen uses shared QARTON CSS tokens with safe fallbacks.
 - Android-only behavior belongs in the preparation/build layer until it can be implemented safely in the shared game source.
 - Save keys such as `shiganshina-slots-v1` and `shiganshina-autosave-v1` are compatibility contracts. Never rename or clear them as part of visual cleanup.
 
@@ -23,7 +23,7 @@ The project currently has four layers:
 | --- | --- | --- |
 | `index.html` | Original story and game engine | QARTON-wide design tokens |
 | `styles/qarton-design-system.css` | Shared QARTON visual primitives and semantic tokens | Story progression or Carthage-only layout rules |\n| `styles/qarton-carthage-home.css` | Carthage-specific home layout and fixed viewport rules | Shared studio tokens or story logic |
-| `scripts/qarton-premium-home.js` | DOM presentation adapter and home/game lifecycle styling | Reimplementation of story actions |
+| `scripts/qarton-premium-home.js` | Gameplay presentation adapter and legacy home lifecycle fallback | Reimplementation of story actions or a competing isolated home screen |\n| `scripts/qarton-isolated-home.js` | Independent QARTON home renderer; delegates all actions to native React buttons | Story progression, save schema, or duplicate game actions |
 | `scripts/prepare-web.cjs` | Deterministic Android preparation and compatibility patches | Manual edits to generated Android assets |
 | `scripts/apply-android-branding.cjs` | Launcher artwork and manifest icon references | Game UI or save behavior |
 | `tests/` | Regression checks for source, saves, and build helpers | Runtime production behavior |
