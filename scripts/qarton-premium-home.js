@@ -12,21 +12,27 @@ css += "\n#root.carthage-home-locked .qarton-home-shell{background:linear-gradie
 function style(){if(document.getElementById("qarton-premium-home-style"))return;var s=document.createElement("style");s.id="qarton-premium-home-style";s.textContent=css;document.head.appendChild(s)}
 function playing(root){return !!(root&&root.querySelector(".game-timer"))}
 function findMenu(root){
+var buttons=Array.from(root.querySelectorAll("button"));
+var hasPartOne=buttons.some(function(b){return /ابدأ الجزء الأول/.test((b.textContent||"").trim())});
+var hasPartTwo=buttons.some(function(b){return /الجزء الثاني/.test((b.textContent||"").trim())||b.id==="btn-part2"});
+// A story/action screen can also contain buttons named "ابدأ" or "متابعة".
+// Treat the screen as the home menu only when both real part selectors exist.
+if(!hasPartOne||!hasPartTwo)return null;
 var menu=root.querySelector(".home-actions.grid");
-// Recover gracefully if the game's original menu wrapper loses one of its utility classes.
 if(!menu){
-var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ الجزء الأول|ابدأ|متابعة/.test(b.textContent||"")});
+var start=buttons.find(function(b){return /ابدأ الجزء الأول/.test((b.textContent||"").trim())});
 if(start){
 var candidate=start.parentElement;
 while(candidate&&candidate!==root){
-if(candidate.querySelectorAll("button").length>=3){menu=candidate;break}
+var candidateButtons=Array.from(candidate.querySelectorAll("button"));
+var candidateHasPartTwo=candidateButtons.some(function(b){return /الجزء الثاني/.test((b.textContent||"").trim())||b.id==="btn-part2"});
+if(candidateButtons.length>=3&&candidateHasPartTwo){menu=candidate;break}
 candidate=candidate.parentElement;
 }
 if(menu)menu.classList.add("home-actions","grid");
 }
 }
 if(!menu)return null;
-// The React wrapper may vary between builds; use its actual parent as the layout shell.
 var shell=menu.closest(".home-actions.flex");
 if(!shell&&menu.parentElement&&menu.parentElement!==root)shell=menu.parentElement;
 if(shell)shell.classList.add("qarton-home-shell");
@@ -57,10 +63,9 @@ if(candidates[0])candidates[0].classList.add("qarton-achievements");
 }
 function mount(){
 var root=document.getElementById("root");if(!root)return;
-if(playing(root)){var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");return}
+if(playing(root)){var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");if(observer){observer.disconnect();observer=null}watchGameplayEnd(root);return}
 var menu=findMenu(root);
-var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ|متابعة|الجزء/.test(b.textContent||"")});
-if(!menu&&!start)return;
+if(!menu)return;
 root.classList.add("carthage-home-locked");document.documentElement.classList.add("carthage-home-locked");document.body.classList.add("carthage-home-locked");
 style();markAchievements(root);
 if(!document.getElementById("qarton-home-brand")){
@@ -74,8 +79,22 @@ foot.innerHTML='<span class="qarton-line"></span><span>رحلتك • اختيا
 }
 decorate(root);
 }
-var queued=false;
+var queued=false,observer=null,gameplayObserver=null,returnTimer=0;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount()})}
-var observer=new MutationObserver(schedule);function boot(){style();observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class"]});mount()}
+function watchGameplayEnd(root){
+if(gameplayObserver||!root)return;
+gameplayObserver=new MutationObserver(function(){
+if(playing(document.getElementById("root"))){if(returnTimer){clearTimeout(returnTimer);returnTimer=0}return}
+if(returnTimer)return;
+returnTimer=window.setTimeout(function(){
+returnTimer=0;
+var current=document.getElementById("root");
+if(!current||playing(current))return;
+gameplayObserver.disconnect();gameplayObserver=null;boot();
+},120);
+});
+gameplayObserver.observe(root,{subtree:true,childList:true,characterData:true});
+}
+function boot(){style();if(observer)return;observer=new MutationObserver(schedule);observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class"]});mount()}
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 })();
