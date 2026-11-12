@@ -12,17 +12,30 @@ button.classList.add("qarton-game-control");
 });
 }
 function findMenu(root){
-// The native home-actions grid is the strongest home-screen identity.
-// React may localize/reword its buttons or render them in stages; do not
-// abandon QARTON merely because the Part 1/Part 2 labels are not ready yet.
+// Prefer the native action grid; tolerate a wrapper whose utility "grid" class was lost.
 var menu=root.querySelector(".home-actions.grid");
 if(menu&&Array.from(menu.querySelectorAll("button")).length<2)menu=null;
+if(!menu){
+var looseMenu=root.querySelector(".home-actions");
+if(looseMenu&&Array.from(looseMenu.querySelectorAll("button")).length>=2){
+menu=looseMenu;menu.classList.add("grid");
+}
+}
 if(!menu){
 var buttons=Array.from(root.querySelectorAll("button"));
 var hasPartOne=buttons.some(function(b){return /ابدأ الجزء الأول/.test((b.textContent||"").trim())});
 var hasPartTwo=buttons.some(function(b){return /الجزء الثاني/.test((b.textContent||"").trim())||b.id==="btn-part2"});
-// Generic story actions are never enough to classify a screen as home.
-if(!hasPartOne||!hasPartTwo)return null;
+var difficulty=!!root.querySelector('[aria-label="اختار الصعوبة"]');
+// The difficulty selector is unique to the home screen and remains stable if React changes button wording.
+if(!hasPartOne||!hasPartTwo){
+if(!difficulty||buttons.length<3)return null;
+var first=buttons.find(function(b){return /ابدأ|جديد|الجزء|متابعة|حفظ|إعدادات/.test((b.textContent||"").trim())})||buttons[0];
+var fallback=first&&first.parentElement;
+while(fallback&&fallback!==root){
+if(Array.from(fallback.querySelectorAll("button")).length>=3){menu=fallback;break}
+fallback=fallback.parentElement;
+}
+}else{
 var start=buttons.find(function(b){return /ابدأ الجزء الأول/.test((b.textContent||"").trim())});
 if(start){
 var candidate=start.parentElement;
@@ -32,8 +45,9 @@ var candidateHasPartTwo=candidateButtons.some(function(b){return /الجزء ا�
 if(candidateButtons.length>=3&&candidateHasPartTwo){menu=candidate;break}
 candidate=candidate.parentElement;
 }
-if(menu)menu.classList.add("home-actions","grid");
 }
+}
+if(menu)menu.classList.add("home-actions","grid");
 }
 if(!menu)return null;
 var shell=menu.closest(".home-actions.flex");
