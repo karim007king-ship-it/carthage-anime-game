@@ -5,7 +5,7 @@
 The project currently has four layers:
 
 1. **Game source** — `index.html` contains the original self-contained React game, story data, scene rendering, and core save behavior.
-2. **QARTON presentation** — `styles/qarton-design-system.css` defines reusable studio tokens/components. `scripts/qarton-premium-home.js` adapts the existing game DOM to those components without replacing its event handlers.
+2. **QARTON presentation** — `styles/qarton-design-system.css` defines reusable studio tokens/components. `styles/qarton-carthage-home.css` owns Carthage-only home layout rules. `scripts/qarton-premium-home.js` activates that stylesheet only after verifying the native home menu, then adapts the existing game DOM without replacing its event handlers.
 3. **Android preparation** — `scripts/prepare-web.cjs` copies the source into `www/`, applies the Android-specific compatibility and save/navigation patches, embeds the QARTON stylesheet/runtime, and parses the resulting inline scripts.
 4. **Android packaging** — Capacitor syncs the prepared web assets; `scripts/apply-android-branding.cjs` creates launcher resources and updates the generated manifest; GitHub Actions builds and uploads the APK.
 
@@ -13,7 +13,7 @@ The project currently has four layers:
 
 - `index.html` is the source of truth for the original game. `www/` and `android/` are generated build outputs, ignored by Git, and must not become competing hand-edited sources.
 - The QARTON stylesheet is the canonical home for shared design tokens and reusable component primitives.
-- The QARTON runtime may add presentation classes and wrappers, but must preserve the original buttons, callbacks, story data, and save keys.
+- The QARTON runtime may add presentation classes and wrappers, but must preserve the original buttons, callbacks, story data, and save keys. It activates `qarton-carthage-home.css` only after finding a verified native home menu; Android viewport locking uses the same native-grid-first detection rule.
 - Android-only behavior belongs in the preparation/build layer until it can be implemented safely in the shared game source.
 - Save keys such as `shiganshina-slots-v1` and `shiganshina-autosave-v1` are compatibility contracts. Never rename or clear them as part of visual cleanup.
 
@@ -22,7 +22,7 @@ The project currently has four layers:
 | File or folder | Owns | Must not own |
 | --- | --- | --- |
 | `index.html` | Original story and game engine | QARTON-wide design tokens |
-| `styles/qarton-design-system.css` | Shared QARTON visual primitives | Story progression or save logic |
+| `styles/qarton-design-system.css` | Shared QARTON visual primitives and semantic tokens | Story progression or Carthage-only layout rules |\n| `styles/qarton-carthage-home.css` | Carthage-specific home layout and fixed viewport rules | Shared studio tokens or story logic |
 | `scripts/qarton-premium-home.js` | DOM presentation adapter and home/game lifecycle styling | Reimplementation of story actions |
 | `scripts/prepare-web.cjs` | Deterministic Android preparation and compatibility patches | Manual edits to generated Android assets |
 | `scripts/apply-android-branding.cjs` | Launcher artwork and manifest icon references | Game UI or save behavior |
