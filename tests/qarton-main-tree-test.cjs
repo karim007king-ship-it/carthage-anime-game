@@ -79,10 +79,10 @@ assert.ok(progressSubview.includes('carthage-continue-last'), 'Progress & Saves 
 assert.ok(progressSubview.includes('carthage-export-backup') && progressSubview.includes('carthage-import-backup'), 'Progress & Saves must retain backup actions');
 assert.ok(home.includes('function proxyStoryAction('), 'Story actions must proxy original controls');
 assert.ok(home.includes('function handoffStoryAction(live)'), 'story actions must hand off to the original screen so confirmation dialogs remain visible');
-assert.ok(home.includes('if(overlay)overlay.style.display="none";hideLegacy();clearReturn();'), 'story handoff must keep the legacy home hidden while invoking the original start action');
+assert.ok(home.includes('if(overlay)overlay.style.display="none";restoreLegacy();clearReturn();'), 'story handoff must restore the original game container before invoking the start action');
 assert.ok(home.includes('if(live&&!live.disabled)handoffStoryAction(live);'), 'new game and chapter actions must use the safe story handoff');
-assert.ok(home.includes('view="handoff";if(overlay)overlay.style.display="none";hideLegacy();'), "story handoff must enter a persistent handoff state without exposing the duplicate legacy home");
-assert.ok(mountSource.includes('if(view==="handoff"){hideLegacy();if(overlay)overlay.style.display="none";return;}'), "mutation-driven remounts must keep the duplicate legacy home hidden during story handoff");
+assert.ok(home.includes('view="handoff";if(overlay)overlay.style.display="none";restoreLegacy();'), "story handoff must restore the game container before entering the original story flow");
+assert.ok(mountSource.includes('if(view==="handoff"){if(overlay)overlay.style.display="none";return;}'), "mutation-driven remounts must not re-hide the original game container during story handoff");
 assert.ok(home.includes('function findNewGameButton(container)'), 'Story subview must resolve the original new-game action');
 assert.ok(home.includes('hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren()'), 'Story subview must keep the legacy home hidden');
 assert.ok(!storySubview.includes('restoreLegacy()') && !storySubview.includes('overlay.style.display="none"'), 'Story subview must keep the legacy home hidden until a native story action is invoked');
@@ -179,12 +179,15 @@ const handoffContext = {
   liveClicks: 0,
   appended: [],
   hideCount: 0,
+  restoreCount: 0,
+  eventOrder: [],
   clearCount: 0,
   goTreeCount: 0,
   root: null,
   overlay: { style: { display: 'flex' } },
   document: { body: { appendChild(node) { handoffContext.appended.push(node); } } },
-  hideLegacy() { handoffContext.hideCount++; },
+  hideLegacy() { handoffContext.hideCount++; handoffContext.eventOrder.push("hide"); },
+  restoreLegacy() { handoffContext.restoreCount++; handoffContext.eventOrder.push("restore"); },
   clearReturn() { handoffContext.clearCount++; },
   goTree() { handoffContext.goTreeCount++; },
   findNewGameButton(container) {
@@ -209,7 +212,7 @@ handoffContext.root = {
 };
 const liveNewGame = {
   textContent: 'ابدأ الجزء الأول', disabled: false,
-  click() { handoffContext.liveClicks++; }
+  click() { handoffContext.liveClicks++; handoffContext.eventOrder.push("live-click"); }
 };
 const menuForHandoff = {
   querySelectorAll() { return [makeButton('الإعدادات'), liveNewGame]; }
@@ -228,7 +231,9 @@ const handoffResult = vm.runInNewContext(
 assert.equal(handoffResult.view, 'handoff', 'New Game proxy must enter the persistent handoff state');
 assert.equal(handoffResult.backButton && handoffResult.backButton.id, 'qarton-tree-return', 'handoff must retain the actual return-to-QARTON control reference');
 assert.equal(handoffContext.liveClicks, 1, 'New Game proxy must click the original live story-start control exactly once');
-assert.equal(handoffContext.hideCount, 1, 'story handoff must hide the legacy home before the original click');
+assert.equal(handoffContext.hideCount, 0, 'story handoff must not hide the game container before the original click');
+assert.equal(handoffContext.restoreCount, 1, 'story handoff must restore the original game container');
+assert.ok(handoffContext.eventOrder.indexOf("restore") < handoffContext.eventOrder.indexOf("live-click"), 'the game container must be restored before the original start handler runs');
 assert.equal(handoffContext.clearCount, 1, 'story handoff must clear any stale return control');
 assert.equal(handoffContext.overlay.style.display, 'none', 'story handoff must hide the QARTON overlay before opening the original confirmation flow');
 assert.ok(handoffContext.appended.some(node => node.id === 'qarton-tree-return'), 'story handoff must provide a return-to-QARTON control');
