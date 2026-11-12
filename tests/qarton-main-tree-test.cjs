@@ -167,3 +167,69 @@ if (fs.existsSync(inspectorPath)) {
 }
 
 console.log('PASS: QARTON main-tree structure, safe original-control bridges, save isolation, and Android packaging.');
+
+
+// Execute the actual Story proxy click path with a lightweight DOM double.
+// This verifies that New Game reaches the original React-owned button and enters handoff.
+const handoffStart = home.indexOf('function handoffStoryAction(live){');
+const handoffEnd = home.indexOf('function showStory(){', handoffStart);
+assert.ok(handoffStart >= 0 && handoffEnd > handoffStart, 'story handoff helpers must remain extractable');
+const handoffSource = home.slice(handoffStart, handoffEnd);
+const handoffContext = {
+  liveClicks: 0,
+  appended: [],
+  hideCount: 0,
+  clearCount: 0,
+  root: null,
+  overlay: { style: { display: 'flex' } },
+  document: { body: { appendChild(node) { handoffContext.appended.push(node); } } },
+  hideLegacy() { handoffContext.hideCount++; },
+  clearReturn() { handoffContext.clearCount++; },
+  goTree() {},
+  findNewGameButton(container) {
+    return Array.from(container.querySelectorAll('button')).find(b =>
+      !b.disabled && /ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test(b.textContent || '')
+    ) || null;
+  },
+  el(tag, cls, txt) {
+    return {
+      tagName: tag, className: cls, textContent: txt || '', children: [], listeners: {},
+      append(...nodes) { this.children.push(...nodes); },
+      addEventListener(type, fn) { this.listeners[type] = fn; },
+      setAttribute() {},
+      click() { if (this.listeners.click) this.listeners.click(); }
+    };
+  }
+};
+handoffContext.root = {
+  querySelector(selector) {
+    return selector === '.home-actions.grid' ? menuForHandoff : null;
+  }
+};
+const liveNewGame = {
+  textContent: 'ابدأ الجزء الأول', disabled: false,
+  click() { handoffContext.liveClicks++; }
+};
+const menuForHandoff = {
+  querySelectorAll() { return [makeButton('الإعدادات'), liveNewGame]; }
+};
+vm.runInNewContext(
+  'var view="story",backButton=null;' + handoffSource +
+  ';proxyStoryAction(handoffParent,"@new-game","بداية جديدة","بدء قصة جديدة",false);',
+  {
+    ...handoffContext,
+    handoffParent: {
+      children: [],
+      appendChild(node) { this.children.push(node); this.proxy = node; }
+    }
+  }
+);
+const proxyHarness = vm.runInNewContext(
+  '({view:view,backButton:backButton})',
+  { view: 'story', backButton: null }
+);
+assert.equal(handoffContext.liveClicks, 1, 'New Game proxy must click the original live story-start control exactly once');
+assert.equal(handoffContext.hideCount, 1, 'story handoff must hide the legacy home before the original click');
+assert.equal(handoffContext.clearCount, 1, 'story handoff must clear any stale return control');
+assert.equal(handoffContext.overlay.style.display, 'none', 'story handoff must hide the QARTON overlay before opening the original confirmation flow');
+assert.ok(handoffContext.appended.some(node => node.id === 'qarton-tree-return'), 'story handoff must provide a return-to-QARTON control');
