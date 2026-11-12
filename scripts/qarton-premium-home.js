@@ -120,6 +120,6 @@ gameplayObserver.disconnect();gameplayObserver=null;boot();
 });
 gameplayObserver.observe(root,{subtree:true,childList:true,characterData:true});
 }
-function boot(){if(observer)return;observer=new MutationObserver(schedule);observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class"]});mount()}\nwindow.addEventListener("qarton:statechange",schedule);
+function boot(){if(observer)return;observer=new MutationObserver(schedule);observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class"]});mount()}window.addEventListener("qarton:statechange",schedule);
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 })();
