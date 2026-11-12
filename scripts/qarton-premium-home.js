@@ -82,9 +82,7 @@ function mount(){
 var root=document.getElementById("root");if(!root)return;
 // The isolated overlay is the only active home renderer. Keep this adapter for gameplay styling only.
 if(window.__qartonHomeIsolationInstalled&&!playing(root)){
-root.classList.remove("carthage-home-locked");
-document.documentElement.classList.remove("carthage-home-locked");
-document.body.classList.remove("carthage-home-locked");
+// The fixed-home runtime owns viewport locking; do not clear its state here.
 var sheet=document.getElementById("qarton-premium-home-style");if(sheet)sheet.media="not all";
 var brand=document.getElementById("qarton-home-brand"),info=document.getElementById("qarton-home-info");
 if(brand)brand.remove();if(info)info.remove();
