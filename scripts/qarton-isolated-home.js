@@ -32,7 +32,7 @@ function clean(s){return(s||"").replace(/\s+/g," ").trim()}
 function kind(t,b){if(b.id==="carthage-continue-last"||/متابعة|استكمال|آخر حفظ/.test(t))return"continue";if(/ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test(t))return"primary";if(/الجزء الثالث|الجزء 3/.test(t))return"locked";return"secondary"}
 function ensureOverlay(){if(overlay)return;overlay=document.createElement("main");overlay.id="qarton-home-screen";overlay.setAttribute("aria-label","QARTON Carthage home");document.body.appendChild(overlay)}
 function hideLegacy(){if(!root)return;root.style.visibility="hidden";root.setAttribute("data-qarton-legacy-home-hidden","true")}
-function showGame(){if(root&&root.getAttribute("data-qarton-legacy-home-hidden")==="true"){root.style.visibility="";root.removeAttribute("data-qarton-legacy-home-hidden")}if(overlay){overlay.remove();overlay=null}window.__QARTON_HOME_READY__=false}
+function restoreNativeMenu(){if(menu&&menu.getAttribute("data-qarton-transition-hidden")==="true"){menu.style.visibility="";menu.removeAttribute("data-qarton-transition-hidden")}}\nfunction showTransition(){if(root&&root.getAttribute("data-qarton-legacy-home-hidden")==="true"){root.style.visibility="";root.removeAttribute("data-qarton-legacy-home-hidden")}if(!menu||!root.contains(menu))menu=findNativeMenu();if(menu){menu.style.visibility="hidden";menu.setAttribute("data-qarton-transition-hidden","true")}if(overlay){overlay.remove();overlay=null}window.__QARTON_HOME_READY__=false}\nfunction showGame(){restoreNativeMenu();if(root&&root.getAttribute("data-qarton-legacy-home-hidden")==="true"){root.style.visibility="";root.removeAttribute("data-qarton-legacy-home-hidden")}if(overlay){overlay.remove();overlay=null}window.__QARTON_HOME_READY__=false}
 function render(){
  root=document.getElementById("root");
  if(state==="GAME"){showGame();return}
@@ -58,7 +58,7 @@ function render(){
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;root=document.getElementById("root");if(state==="HOME"){menu=findNativeMenu()||menu;if(menu&&root&&!root.contains(menu))menu=null}render()})}
 function start(){
  root=document.getElementById("root");window.__QARTON_APP_STATE__=state;
- if(root){observer=new MutationObserver(schedule);observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class","aria-label","disabled"]})}
+ if(root){observer=new MutationObserver(schedule);observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class","aria-label","disabled"]});root.addEventListener("click",function(e){var b=e.target&&e.target.closest?e.target.closest("button"):null;if(!b||state!=="TRANSITION")return;var label=clean(b.textContent);if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))window.setTimeout(function(){if(state==="TRANSITION")setState("HOME","transition-cancel")},0)},true)}
  bodyObserver=new MutationObserver(function(){var next=document.getElementById("root");if(next!==root){if(observer)observer.disconnect();root=next;if(root){observer=new MutationObserver(schedule);observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true})}schedule()}});
  bodyObserver.observe(document.body,{childList:true});render();
 }
