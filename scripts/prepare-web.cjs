@@ -20,6 +20,14 @@ function replaceOnce(needle, replacement, label) {
   html = html.slice(0, index) + replacement + html.slice(index + needle.length);
 }
 
+// A new game enters the intro with a special-scene state. Clear that state on
+// every chapter entry; chapter-specific wall/bridge/gate cutscenes set it again below.
+replaceOnce(
+  'L9=(P)=>{if(P>=8)e3("part2");if(dr.current="",Ct(),Gn(null),h(null),Hn(!1),Ae(!1),Hf(!1),Bf(!1),r3(null),m(P),x(0),p("dialogue")',
+  'L9=(P)=>{if(P>=8)e3("part2");if(dr.current="",Ct(),Gn(null),h(null),Hn(!1),Ae(!1),Hf(!1),Bf(!1),r3(null),uv(null),m(P),x(0),p("dialogue")',
+  'clear stale intro/cutscene state before entering a chapter'
+);
+
 // Android-native JSON save export. Browser builds retain Web Share / download fallbacks.
 const exportStart = 'X3=(P)=>{';
 const exportEnd = ',n6=(P)=>{';
