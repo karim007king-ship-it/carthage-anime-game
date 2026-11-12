@@ -20,14 +20,17 @@ button.classList.add("qarton-game-control");
 });
 }
 function findMenu(root){
+// The native home-actions grid is the strongest home-screen identity.
+// React may localize/reword its buttons or render them in stages; do not
+// abandon QARTON merely because the Part 1/Part 2 labels are not ready yet.
+var menu=root.querySelector(".home-actions.grid");
+if(menu&&Array.from(menu.querySelectorAll("button")).length<2)menu=null;
+if(!menu){
 var buttons=Array.from(root.querySelectorAll("button"));
 var hasPartOne=buttons.some(function(b){return /ابدأ الجزء الأول/.test((b.textContent||"").trim())});
 var hasPartTwo=buttons.some(function(b){return /الجزء الثاني/.test((b.textContent||"").trim())||b.id==="btn-part2"});
-// A story/action screen can also contain buttons named "ابدأ" or "متابعة".
-// Treat the screen as the home menu only when both real part selectors exist.
+// Generic story actions are never enough to classify a screen as home.
 if(!hasPartOne||!hasPartTwo)return null;
-var menu=root.querySelector(".home-actions.grid");
-if(!menu){
 var start=buttons.find(function(b){return /ابدأ الجزء الأول/.test((b.textContent||"").trim())});
 if(start){
 var candidate=start.parentElement;
