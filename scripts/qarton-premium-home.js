@@ -11,6 +11,14 @@ css += "\n#root.carthage-home-locked .qarton-home-shell{background:linear-gradie
 
 function style(){if(document.getElementById("qarton-premium-home-style"))return;var s=document.createElement("style");s.id="qarton-premium-home-style";s.textContent=css;document.head.appendChild(s)}
 function playing(root){return !!(root&&root.querySelector(".game-timer"))}
+function decorateGameplay(root){
+if(!root)return;
+root.classList.add("qarton-game-ui");
+Array.from(root.querySelectorAll(".dialogue-panel,.theatre-text,.search-layer")).forEach(function(node){node.classList.add("qarton-game-card")});
+Array.from(root.querySelectorAll(".dialogue-panel button,.choice-stack button,.game-choices button,.game-pill-btn,.map-pill")).forEach(function(button){
+button.classList.add("qarton-game-control");
+});
+}
 function findMenu(root){
 var buttons=Array.from(root.querySelectorAll("button"));
 var hasPartOne=buttons.some(function(b){return /ابدأ الجزء الأول/.test((b.textContent||"").trim())});
@@ -63,7 +71,7 @@ if(candidates[0])candidates[0].classList.add("qarton-achievements");
 }
 function mount(){
 var root=document.getElementById("root");if(!root)return;
-if(playing(root)){var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");if(observer){observer.disconnect();observer=null}watchGameplayEnd(root);return}
+if(playing(root)){decorateGameplay(root);var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");if(observer){observer.disconnect();observer=null}watchGameplayEnd(root);return}root.classList.remove("qarton-game-ui");
 var menu=findMenu(root);
 if(!menu)return;
 root.classList.add("carthage-home-locked");document.documentElement.classList.add("carthage-home-locked");document.body.classList.add("carthage-home-locked");
@@ -84,7 +92,7 @@ function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(
 function watchGameplayEnd(root){
 if(gameplayObserver||!root)return;
 gameplayObserver=new MutationObserver(function(){
-if(playing(document.getElementById("root"))){if(returnTimer){clearTimeout(returnTimer);returnTimer=0}return}
+var currentRoot=document.getElementById("root");if(playing(currentRoot)){decorateGameplay(currentRoot);if(returnTimer){clearTimeout(returnTimer);returnTimer=0}return}
 if(returnTimer)return;
 returnTimer=window.setTimeout(function(){
 returnTimer=0;
