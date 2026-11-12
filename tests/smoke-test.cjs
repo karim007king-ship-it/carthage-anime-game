@@ -92,7 +92,11 @@ assert.ok(androidPrep.includes('Resource load'), 'Android startup diagnostic mus
 assert.ok(androidPrep.includes('carthage-startup-errors'), 'Android startup diagnostic must retain captured errors for display');
 assert.ok(androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
 assert.ok(androidPrep.includes('menuActions.insertBefore(continueButton'), 'Continue must appear directly in the home menu');
-assert.ok(androidPrep.includes('var homeScreen=!!root.querySelector'), 'navigation must distinguish the home menu from other non-game screens');
+assert.ok(androidPrep.includes('var homeButtons=Array.from(root.querySelectorAll(\\"button\\"))'), 'navigation must inspect actual home selectors rather than a generic grid class');
+assert.ok(androidPrep.includes('var homeScreen=homeButtons.some'), 'home-only navigation must verify the Part 1 selector');
+assert.ok(androidPrep.includes('&&homeButtons.some'), 'home-only navigation must also verify the Part 2 selector');
+assert.ok(androidPrep.includes('qarton-button--primary'), 'injected continue control must use the shared QARTON primary button');
+assert.ok(androidPrep.includes('qarton-button--locked'), 'injected Part 3 control must use the shared QARTON locked button');
 assert.ok(androidPrep.includes('function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount()})}'), 'navigation DOM updates must be coalesced to one animation frame');
 assert.ok(androidPrep.includes('var observer=new MutationObserver(schedule)'), 'navigation observer must use the coalesced scheduler instead of rescanning synchronously for every DOM mutation');
 assert.ok(androidPrep.includes('if(!playing&&homeScreen&&hasSave'), 'Continue must only be injected on the home menu');
