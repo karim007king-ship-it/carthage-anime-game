@@ -376,6 +376,10 @@ html = html.replace('</body>', fixedHomeViewport + '</body>');
 const qartonHomeRuntime = fs.readFileSync(path.join(__dirname, 'qarton-premium-home.js'), 'utf8');
 html = html.replace('</body>', '<script id="qarton-premium-home-runtime">' + qartonHomeRuntime + '</script></body>');
 
+// Isolated QARTON home is rendered outside React; native controls remain the action bridge.
+const qartonIsolatedHomeRuntime = fs.readFileSync(path.join(__dirname, 'qarton-isolated-home.js'), 'utf8');
+html = html.replace('</body>', '<script id="qarton-isolated-home-runtime">' + qartonIsolatedHomeRuntime + '</script></body>');
+
 const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
 let executable = 0;
 for (const [, attrs, body] of inlineScripts) {
