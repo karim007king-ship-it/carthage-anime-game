@@ -150,6 +150,20 @@ const stagedHomeRoot = { querySelector: selector => selector === '.home-actions.
 assert.equal(findMenu(stagedHomeRoot), nativeMenu, 'QARTON must detect the real home grid before localized action labels finish rendering');
 const genericStoryRoot = { querySelector: () => null, querySelectorAll: () => [{textContent:'ابدأ'}, {textContent:'متابعة'}] };
 assert.equal(findMenu(genericStoryRoot), null, 'generic story buttons must not be mistaken for the home menu');
+const fallbackButtons = [{textContent:'قائمة',parentElement:null},{textContent:'متابعة',parentElement:null},{textContent:'إعدادات',parentElement:null}];
+const fallbackShell = {classList:{add(){} }};
+const fallbackMenu = {
+  parentElement:fallbackShell,
+  classList:{add(){}},
+  closest:()=>null,
+  querySelectorAll:()=>fallbackButtons
+};
+fallbackButtons.forEach(button=>{button.parentElement=fallbackMenu});
+const difficultyHomeRoot = {
+  querySelector:selector=>selector==='[aria-label="اختار الصعوبة"]'?{}:null,
+  querySelectorAll:()=>fallbackButtons
+};
+assert.equal(findMenu(difficultyHomeRoot), fallbackMenu, 'QARTON must recover a home action group from the stable difficulty selector when button labels have changed');
 assert.ok(qartonHome.includes('candidateButtons.length>=3&&candidateHasPartTwo'), 'recovered menu must contain the Part 2 selector as well as multiple actions');
 assert.ok(qartonHome.includes('menu.classList.add("home-actions","grid")'), 'recovered menu must receive the expected grid styling hook');
 assert.ok(qartonHome.includes('if(!shell&&menu.parentElement&&menu.parentElement!==root)shell=menu.parentElement'), 'QARTON runtime must fall back to the real parent shell when utility classes differ');
