@@ -10,7 +10,7 @@ Status: shared foundation — adopted by QARTON Carthage; intended for every fut
 - The studio identity is shared; each game retains its own world, art direction, language, and interaction model.
 
 ## Shared tokens
-The canonical CSS tokens live in `styles/qarton-design-system.css`. Do not duplicate or redefine the palette in each game. Game-specific themes may override semantic tokens only inside a game-scoped root, without changing the QARTON brand values.
+The canonical CSS tokens and legacy-compatible aliases (`--q-gold`, `--q-cream`, `--q-ink`) live in `styles/qarton-design-system.css`. Adapters consume these aliases; they must not redefine them. Do not duplicate or redefine the palette in each game. Game-specific themes may override semantic tokens only inside a game-scoped root, without changing the QARTON brand values.
 
 ## Shared components
 - `.qarton-ui`: typography and foreground baseline.
