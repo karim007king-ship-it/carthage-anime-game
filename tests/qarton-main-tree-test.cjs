@@ -145,6 +145,7 @@ assert.ok(prep.includes('else if(!playing&&saveButton)saveButton.remove();if(pla
 // Android packaging must inject and verify the new runtime.
 assert.ok(prep.includes('qarton-main-tree-runtime'), 'Android preparation must inject the main tree');
 assert.ok(prep.includes('function isQartonScrollable(target)') && prep.includes('#qarton-main-tree .qt-scroll'), 'fixed home scroll lock must allow scrolling inside QARTON guide subviews');
+assert.ok(prep.includes('overscroll-behavior:none!important;touch-action:auto}') && !prep.includes('touch-action:pan-x}'), 'fixed home viewport must not block vertical touch gestures inside scrollable guide panels');
 assert.ok(pkg.scripts.test.includes('qarton-main-tree-test.cjs'), 'npm test must run the main-tree contract test');
 for (const marker of ['qarton-main-tree-runtime', 'التقدم والحفظ']) {
   assert.ok(workflow.includes(marker), 'Android APK verification must include ' + marker);
