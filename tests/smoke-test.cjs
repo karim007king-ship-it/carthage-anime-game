@@ -140,6 +140,7 @@ assert.ok(qartonIsolatedHome.includes('n.click()'), 'every QARTON card must dele
 assert.ok(qartonIsolatedHome.includes('forEach(function(n,index){var t=clean(n.textContent);if(!t)return'), 'every native action button must receive its own QARTON card');
 assert.ok(!qartonIsolatedHome.includes('seen.has(t)'), 'duplicate native labels must not silently drop action cards');
 assert.ok(qartonIsolatedHome.includes('if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))'), 'canceling a native confirmation must restore QARTON HOME');
+assert.ok(qartonIsolatedHome.includes("qarton-transition-return"), "TRANSITION must provide a safe return control if a native action does not enter gameplay");
 assert.ok(!qartonHome.includes('findMenu')&&!qartonHome.includes('.game-timer')&&!qartonHome.includes('home-actions'), 'gameplay adapter must not detect or render the home menu');
 assert.ok(qartonHome.includes('window.__QARTON_APP_STATE__!=="GAME"'), 'gameplay adapter must use the central lifecycle state');
 assert.ok(qartonHome.includes('function decorateGameplay(node)'), 'QARTON adapter must style active gameplay');
