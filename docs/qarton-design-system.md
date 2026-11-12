@@ -17,6 +17,8 @@ The canonical CSS tokens live in `styles/qarton-design-system.css`. Do not dupli
 - `.qarton-card`: premium panel/card surface.
 - `.qarton-button`: accessible touch target and interaction baseline.
 - `.qarton-button--primary`, `--secondary`, `--locked`: semantic button variants.
+- `.qarton-game-card`: shared surface primitive for dialogue, theatre, and search panels.
+- `.qarton-game-control`: shared accessible control primitive for story choices, HUD actions, and map controls.
 
 ## Rules for every QARTON game
 1. Keep the QARTON logo/tagline consistent across game launch and home surfaces.
@@ -29,7 +31,7 @@ The canonical CSS tokens live in `styles/qarton-design-system.css`. Do not dupli
 8. A legacy UI element may be removed only after its action has a tested QARTON replacement.
 
 ## Carthage adapter
-Carthage is the first implementation adapter. It may style the existing native menu actions while preserving their handlers. The QARTON adapter must detect the actual home menu using both the Part 1 and Part 2 selectors; generic story buttons such as “ابدأ” or “متابعة” are never sufficient evidence that the user is on the home screen.
+Carthage is the first implementation adapter. It maps the existing native home actions, dialogue surfaces, story choices, HUD controls, and map controls to shared QARTON components while preserving their handlers. The QARTON adapter must detect the actual home menu using both the Part 1 and Part 2 selectors; generic story buttons such as “ابدأ” or “متابعة” are never sufficient evidence that the user is on the home screen.
 
 ## Validation before removing legacy UI
 - Confirm menu detection against the real rendered DOM.
