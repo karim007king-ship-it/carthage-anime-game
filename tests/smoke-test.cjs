@@ -160,7 +160,7 @@ assert.doesNotThrow(() => new vm.Script(qartonHome, { filename: 'qarton-premium-
 assert.doesNotThrow(() => new vm.Script(qartonIsolatedHome, { filename: 'qarton-isolated-home.js' }), 'isolated home runtime must parse as executable JavaScript');
 assert.ok(qartonHome.includes('if(window.__qartonPremiumHomeInstalled)return'), 'gameplay adapter must be idempotent');
 assert.ok(qartonIsolatedHome.includes('if(window.__qartonHomeIsolationInstalled)return'), 'isolated home must be idempotent');
-assert.ok(qartonHome.includes('root.classList.add("qarton-game-ui")'), 'active gameplay must receive a dedicated QARTON scope');
+assert.ok(qartonHome.includes('node.classList.add("qarton-game-ui")'), 'active gameplay must receive a dedicated QARTON scope');
 
 /* Story-flow guards: new game -> intro -> chapter 1 -> dialogue -> next chapter. */
 assert.ok(html.includes('let Vv=()=>{let P=Ff[jf]'), 'new game handler must remain present');
