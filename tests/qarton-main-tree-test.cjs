@@ -79,10 +79,10 @@ assert.ok(progressSubview.includes('carthage-continue-last'), 'Progress & Saves 
 assert.ok(progressSubview.includes('carthage-export-backup') && progressSubview.includes('carthage-import-backup'), 'Progress & Saves must retain backup actions');
 assert.ok(home.includes('function proxyStoryAction('), 'Story actions must proxy original controls');
 assert.ok(home.includes('function handoffStoryAction(live)'), 'story actions must hand off to the original screen so confirmation dialogs remain visible');
-assert.ok(home.includes('if(overlay)overlay.style.display="none";restoreLegacy();clearReturn();'), 'story handoff must reveal the native app layer before invoking its original action');
+assert.ok(home.includes('if(overlay)overlay.style.display="none";hideLegacy();clearReturn();'), 'story handoff must keep the legacy home hidden while invoking the original start action');
 assert.ok(home.includes('if(live&&!live.disabled)handoffStoryAction(live);'), 'new game and chapter actions must use the safe story handoff');
-assert.ok(home.includes('view="handoff";if(overlay)overlay.style.display="none";restoreLegacy();'), "story handoff must enter a persistent handoff state before clicking the native control");
-assert.ok(mountSource.includes('if(view==="handoff"){restoreLegacy();if(overlay)overlay.style.display="none";return;}'), "mutation-driven remounts must not hide the native confirmation dialog during story handoff");
+assert.ok(home.includes('view="handoff";if(overlay)overlay.style.display="none";hideLegacy();'), "story handoff must enter a persistent handoff state without exposing the duplicate legacy home");
+assert.ok(mountSource.includes('if(view==="handoff"){hideLegacy();if(overlay)overlay.style.display="none";return;}'), "mutation-driven remounts must keep the duplicate legacy home hidden during story handoff");
 assert.ok(home.includes('function findNewGameButton(container)'), 'Story subview must resolve the original new-game action');
 assert.ok(home.includes('hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren()'), 'Story subview must keep the legacy home hidden');
 assert.ok(!storySubview.includes('restoreLegacy()') && !storySubview.includes('overlay.style.display="none"'), 'Story subview must keep the legacy home hidden until a native story action is invoked');
