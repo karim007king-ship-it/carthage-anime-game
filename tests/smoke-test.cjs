@@ -173,6 +173,8 @@ assert.ok(androidPrep.includes('.game-timer'), 'home lock must detect active sto
 /* Story-flow guards: new game -> intro -> chapter 1 -> dialogue -> next chapter. */
 assert.ok(html.includes('let Vv=()=>{let P=Ff[jf]'), 'new game handler must remain present');
 assert.ok(html.includes('n("intro"),uv("intro")'), 'new game must enter the intro sequence before chapter 1');
+assert.ok(androidPrep.includes('r3(null),uv(null),m(P),x(0),p("dialogue")'), 'chapter entry must clear the intro/cutscene state so dialogue can type');
+assert.ok(androidPrep.includes('clear stale intro/cutscene state before entering a chapter'), 'the first-scene dialogue regression fix must be included in the Android preparation step');
 assert.ok(html.includes('o<4?a(o+1):L9(0)'), 'the final intro action must enter the first story chapter');
 assert.ok(html.includes('m(P),x(0),p("dialogue"),Q8'), 'chapter navigation must update the chapter index and reset dialogue');
 assert.ok(html.includes('if(B<j.lines.length-1)x(B+1)'), 'dialogue must advance line by line');
