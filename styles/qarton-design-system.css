@@ -31,3 +31,10 @@
 .qarton-button--locked{border-color:rgba(157,131,199,.7);background:linear-gradient(110deg,#29243b,#111827)}
 .qarton-button:disabled,.qarton-button[aria-disabled="true"]{cursor:not-allowed;opacity:.68;filter:saturate(.65)}
 @media(prefers-reduced-motion:reduce){.qarton-button{transition:none}.qarton-button:active{transform:none}}
+
+/* Generic gameplay surfaces and controls: adapters map their native elements to these classes. */
+.qarton-game-card{box-sizing:border-box;border:1px solid var(--qarton-line);border-radius:var(--qarton-radius-lg);box-shadow:var(--qarton-shadow-card)}
+.qarton-game-control{box-sizing:border-box;min-height:44px;border:1px solid var(--qarton-line);border-radius:var(--qarton-radius-md);color:var(--qarton-cream);font-weight:800;transition:transform var(--qarton-motion-fast) var(--qarton-ease),filter var(--qarton-motion-fast) ease,border-color var(--qarton-motion-fast) ease}
+.qarton-game-control:focus-visible{outline:2px solid var(--qarton-focus);outline-offset:3px}
+.qarton-game-control:active{transform:scale(.985)}
+@media(prefers-reduced-motion:reduce){.qarton-game-control{transition:none}.qarton-game-control:active{transform:none}}
