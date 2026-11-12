@@ -124,6 +124,7 @@ jobs:
             'carthageCinematicImpact',
             'carthage-fixed-home-runtime',
             'qarton-premium-home-runtime',
+            'qarton-premium-home-style',
             'qarton-design-system',
             'qarton-brand-row',
             'qarton-home-info'
