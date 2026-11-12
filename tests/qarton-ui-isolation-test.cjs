@@ -26,9 +26,9 @@ assert.ok(!runtime.includes('seen.has(t)'),'no native action may be silently dro
 assert.ok(runtime.includes('window.__QARTON_HOME_READY__=true'),'QARTON home must expose a readiness marker');
 assert.ok(runtime.includes('b.disabled=!!n.disabled'),'disabled native actions must remain disabled in the matching QARTON card');
 assert.ok(runtime.includes('if(!menu||!root||!root.contains(menu))'),'missing menu must keep the QARTON shell active instead of revealing legacy UI');
-assert.ok(premium.includes('window.__qartonHomeIsolationInstalled&&!playing(root)'),'legacy premium adapter must not render a competing home screen');
-const guard=premium.slice(premium.indexOf('if(window.__qartonHomeIsolationInstalled&&!playing(root)){'),premium.indexOf('if(playing(root)){'));
-assert.ok(!guard.includes('classList.remove("carthage-home-locked")'),'legacy adapter must not release the fixed viewport lock owned by the isolated home runtime');
+assert.ok(!premium.includes('findMenu')&&!premium.includes('.game-timer')&&!premium.includes('home-actions'),'gameplay adapter must not infer home/game state from DOM selectors');
+assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'gameplay adapter must obey the central lifecycle state');
+assert.ok(premium.includes('window.addEventListener("qarton:statechange",schedule)'),'gameplay adapter must react to central lifecycle events');
 assert.ok(prep.includes('window.__qartonSetAppState(f==="game"?"GAME"'),'Android preparation must wire central state to the actual React screen state');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__==="GAME"'),'premium adapter must use the central lifecycle instead of timer detection');
 assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||\\"HOME\\"'),'navigation controls must use the central app state');
