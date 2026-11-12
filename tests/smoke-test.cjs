@@ -113,7 +113,9 @@ assert.ok(androidPrep.includes('يُفتح بعد إتمام الجزء الثا
 
 assert.ok(androidPrep.includes('carthage-fixed-home-style'), 'fixed home viewport CSS must be injected into Android builds');
 assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed home viewport runtime must be injected into Android builds');
-assert.ok(androidPrep.includes('var nativeMenu=root.querySelector(\\".home-actions.grid\\")'), 'fixed viewport and QARTON adapter must recognize the same native home grid during staged React rendering');
+assert.ok(androidPrep.includes('var nativeMenu=root.querySelector(\\".home-actions\\")'), 'fixed viewport and QARTON adapter must recognize the native home grid even if its grid utility class is missing');
+assert.ok(androidPrep.includes('hasDifficulty&&buttons.length>=3'), 'fixed viewport must recover the home screen when button labels differ but the difficulty selector remains');
+assert.ok(androidPrep.includes('hasDifficulty&&homeButtons.length>=3'), 'home-only navigation must share the robust difficulty-selector fallback');
 const qartonHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-premium-home.js'), 'utf8');
 const carthageHomeCss = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-carthage-home.css'), 'utf8');
 assert.ok(androidPrep.includes('qarton-carthage-home.css'), 'Android preparation must load Carthage-specific QARTON home CSS');
@@ -135,8 +137,10 @@ assert.ok(qartonHome.includes('function findMenu(root)'), 'QARTON runtime must d
 assert.ok(qartonHome.includes('function markAchievements(root){\nif(root.querySelector(".qarton-achievements"))return;'), 'achievement discovery must not rescan the full home DOM after its section is already marked');
 assert.ok(qartonHome.includes('var hasPartOne=buttons.some'), 'QARTON must require the real Part 1 selector before treating a screen as home');
 assert.ok(qartonHome.includes('var hasPartTwo=buttons.some'), 'QARTON must require the real Part 2 selector before treating a screen as home');
-assert.ok(qartonHome.includes('if(!hasPartOne||!hasPartTwo)return null'), 'story screens with generic start/continue buttons must not be styled as the home menu');
+assert.ok(qartonHome.includes('if(!difficulty||buttons.length<3)return null'), 'generic story screens must not be styled as home when the unique difficulty selector is absent');
 assert.ok(qartonHome.includes('var menu=root.querySelector(".home-actions.grid")'), 'the native home grid must be recognized even while React is rendering/rewording its buttons');
+assert.ok(qartonHome.includes('var looseMenu=root.querySelector(".home-actions")'), 'QARTON must recover if the native menu loses only its grid utility class');
+assert.ok(qartonHome.includes('[aria-label="اختار الصعوبة"]'), 'QARTON must use the unique difficulty selector as a stable fallback home identity');
 assert.ok(qartonHome.includes('if(menu&&Array.from(menu.querySelectorAll("button")).length<2)menu=null'), 'an incomplete or empty action grid must not be misclassified as the home menu');
 assert.ok(!qartonHome.includes('if(!hasPartOne||!hasPartTwo)return null;\nvar menu=root.querySelector(".home-actions.grid")'), 'missing Part 1/Part 2 labels must not disable an already identified native home grid');
 const findMenuSource = qartonHome.slice(qartonHome.indexOf('function findMenu(root){'), qartonHome.indexOf('function decorate(root){'));
