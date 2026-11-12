@@ -113,6 +113,7 @@ assert.ok(androidPrep.includes('يُفتح بعد إتمام الجزء الثا
 
 assert.ok(androidPrep.includes('carthage-fixed-home-style'), 'fixed home viewport CSS must be injected into Android builds');
 assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed home viewport runtime must be injected into Android builds');
+assert.ok(androidPrep.includes('var nativeMenu=root.querySelector(\\".home-actions.grid\\")'), 'fixed viewport and QARTON adapter must recognize the same native home grid during staged React rendering');
 const qartonHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-premium-home.js'), 'utf8');
 assert.ok(qartonHome.includes('QARTON'), 'premium home must show the QARTON studio identity');
 assert.ok(qartonHome.includes('CULTURE • POWER • CINEMA'), 'premium home must show the studio tagline');
