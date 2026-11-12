@@ -11,7 +11,7 @@ The project currently has four layers:
 
 ## Source-of-truth rules
 
-- `index.html` is the source of truth for the original game. `www/` and `android/` are generated build outputs and must not become competing hand-edited sources.
+- `index.html` is the source of truth for the original game. `www/` and `android/` are generated build outputs, ignored by Git, and must not become competing hand-edited sources.
 - The QARTON stylesheet is the canonical home for shared design tokens and reusable component primitives.
 - The QARTON runtime may add presentation classes and wrappers, but must preserve the original buttons, callbacks, story data, and save keys.
 - Android-only behavior belongs in the preparation/build layer until it can be implemented safely in the shared game source.
@@ -42,6 +42,7 @@ The project currently has four layers:
 
 ## Known technical debt
 
+- There is currently no committed npm lockfile; the direct Capacitor dependency versions are pinned in `package.json`, but transitive versions can still drift between clean builds. Add a reviewed `package-lock.json` and switch CI to `npm ci` before treating builds as fully reproducible.
 - The original game source is a large bundled HTML file. Splitting it into modules may improve maintainability, but it is a high-risk structural change because story state, React hooks, and save handlers are tightly coupled. Do not perform a blind minifier/de-minifier or module extraction.
 - `scripts/prepare-web.cjs` contains several string-based patches against exact source fragments. Keep each patch guarded by a unique-match check; a missing or duplicated anchor must fail the build rather than silently create a partial APK.
 - The QARTON home runtime contains game-specific layout rules alongside shared component classes. Move only genuinely reusable rules into the design system; keep Carthage-specific selectors in the adapter.
