@@ -113,9 +113,8 @@ assert.ok(androidPrep.includes('يُفتح بعد إتمام الجزء الثا
 
 assert.ok(androidPrep.includes('carthage-fixed-home-style'), 'fixed home viewport CSS must be injected into Android builds');
 assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed home viewport runtime must be injected into Android builds');
-assert.ok(androidPrep.includes('var actionGrid=root.querySelector'), 'home navigation must recognize the native action grid even if its grid utility class is missing');
-assert.ok(androidPrep.includes('hasDifficulty&&buttons.length>=3'), 'fixed viewport must recover the home screen when button labels differ but the difficulty selector remains');
-assert.ok(androidPrep.includes('hasDifficulty&&homeButtons.length>=3'), 'home-only navigation must share the robust difficulty-selector fallback');
+assert.ok(androidPrep.includes('var actionGrid=root.querySelector'), 'Continue must be inserted into the native home action grid when available');
+assert.ok(androidPrep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'), 'fixed viewport must not infer HOME from difficulty or action DOM');
 const qartonHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-premium-home.js'), 'utf8');
 const qartonIsolatedHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-isolated-home.js'), 'utf8');
 const carthageHomeCss = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-carthage-home.css'), 'utf8');
