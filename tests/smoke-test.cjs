@@ -105,7 +105,10 @@ assert.ok(qartonHome.includes('.home-actions.grid button'), 'premium home must p
 assert.ok(qartonHome.includes('game-timer'), 'premium home must disappear during gameplay');
 assert.ok(qartonHome.includes('function findMenu(root)'), 'QARTON runtime must detect the live menu even when its original CSS classes differ');
 assert.ok(qartonHome.includes('function markAchievements(root){\nif(root.querySelector(".qarton-achievements"))return;'), 'achievement discovery must not rescan the full home DOM after its section is already marked');
-assert.ok(qartonHome.includes('candidate.querySelectorAll("button").length>=3'), 'QARTON runtime must recover the menu when the original grid class is missing');
+assert.ok(qartonHome.includes('var hasPartOne=buttons.some'), 'QARTON must require the real Part 1 selector before treating a screen as home');
+assert.ok(qartonHome.includes('var hasPartTwo=buttons.some'), 'QARTON must require the real Part 2 selector before treating a screen as home');
+assert.ok(qartonHome.includes('if(!hasPartOne||!hasPartTwo)return null'), 'story screens with generic start/continue buttons must not be styled as the home menu');
+assert.ok(qartonHome.includes('candidateButtons.length>=3&&candidateHasPartTwo'), 'recovered menu must contain the Part 2 selector as well as multiple actions');
 assert.ok(qartonHome.includes('menu.classList.add("home-actions","grid")'), 'recovered menu must receive the expected grid styling hook');
 assert.ok(qartonHome.includes('if(!shell&&menu.parentElement&&menu.parentElement!==root)shell=menu.parentElement'), 'QARTON runtime must fall back to the real parent shell when utility classes differ');
 assert.ok(qartonHome.includes('menu.closest(".home-actions.flex")'), 'QARTON runtime must anchor styling to the actual outer home shell');
@@ -130,7 +133,11 @@ assert.doesNotThrow(() => new vm.Script(qartonHome, { filename: 'qarton-premium-
 assert.ok(qartonHome.includes('if(window.__qartonPremiumHomeInstalled)return'), 'premium home runtime must be idempotent across repeated injection');
 assert.ok(qartonHome.includes('function playing(root)'), 'home runtime must distinguish gameplay from the home menu');
 assert.ok(qartonHome.includes('if(playing(root))'), 'home styling must be released when gameplay begins');
-assert.ok(qartonHome.includes('if(!menu&&!start)return'), 'home lock must not activate before a real menu action exists');
+assert.ok(qartonHome.includes('var menu=findMenu(root);\nif(!menu)return;'), 'QARTON home lock must only activate after a verified home menu is found');
+assert.ok(!qartonHome.includes('var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ|متابعة|الجزء/'), 'generic story buttons must never trigger home styling');
+assert.ok(qartonHome.includes('function watchGameplayEnd(root)'), 'home observer must restart only after gameplay actually ends');
+assert.ok(qartonHome.includes('if(observer){observer.disconnect();observer=null}watchGameplayEnd(root)'), 'home observer must pause during gameplay and avoid reclassifying story screens');
+assert.ok(qartonHome.includes('gameplayObserver.observe(root,{subtree:true,childList:true,characterData:true})'), 'gameplay lifecycle observer must watch for a real return to the menu');
 assert.ok(qartonHome.includes('requestAnimationFrame(function(){queued=false;mount()})'), 'DOM mutation bursts must be coalesced into one animation-frame update');
 assert.ok(qartonHome.includes('observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true'), 'runtime must recover when React replaces or updates the menu');
 
