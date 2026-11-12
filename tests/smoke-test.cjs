@@ -92,9 +92,9 @@ assert.ok(androidPrep.includes('Resource load'), 'Android startup diagnostic mus
 assert.ok(androidPrep.includes('carthage-startup-errors'), 'Android startup diagnostic must retain captured errors for display');
 assert.ok(androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
 assert.ok(androidPrep.includes('menuActions.insertBefore(continueButton'), 'Continue must appear directly in the home menu');
-assert.ok(androidPrep.includes('var homeButtons=Array.from(root.querySelectorAll(\\"button\\"))'), 'navigation must inspect actual home selectors rather than a generic grid class');
-assert.ok(androidPrep.includes('var homeScreen=!playing&&((hasPartOne&&hasPartTwo)'), 'home-only navigation must require the Part 1 and Part 2 selectors or a verified native menu fallback');
-assert.ok(androidPrep.includes('actionGrid&&actionGrid.querySelectorAll'), 'home-only navigation must accept a populated native action grid as a stable selector');
+assert.ok(androidPrep.includes('var appState=window.__QARTON_APP_STATE__||\\"HOME\\"'), 'navigation must read the central QARTON state');
+assert.ok(androidPrep.includes('var homeScreen=appState===\\"HOME\\"'), 'home-only navigation must use the explicit HOME state');
+assert.ok(androidPrep.includes('window.addEventListener("qarton:statechange",schedule)'), 'navigation must update when the central lifecycle changes');
 assert.ok(androidPrep.includes('qarton-button--primary'), 'injected continue control must use the shared QARTON primary button');
 assert.ok(androidPrep.includes('qarton-button--locked'), 'injected Part 3 control must use the shared QARTON locked button');
 assert.ok(androidPrep.includes('function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount()})}'), 'navigation DOM updates must be coalesced to one animation frame');
