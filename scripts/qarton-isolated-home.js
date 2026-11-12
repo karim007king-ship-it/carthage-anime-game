@@ -16,12 +16,16 @@ function addStyle(){if(document.getElementById("qarton-isolated-home-style"))ret
 function isPlaying(){return !!(root&&root.querySelector(".game-timer"))}
 function findNativeMenu(){
  if(!root)return null;
+ var difficultyNode=root.querySelector('[aria-label="اختار الصعوبة"]');
  var menu=root.querySelector(".home-actions");
- if(menu&&menu.querySelectorAll("button").length>=2)return menu;
+ if(menu){
+  var nativeActions=Array.from(menu.querySelectorAll("button")).filter(function(b){return !difficultyNode||!difficultyNode.contains(b)});
+  if(nativeActions.length>=2)return menu;
+ }
  var buttons=Array.from(root.querySelectorAll("button"));
  var partOne=buttons.find(function(b){return /ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test((b.textContent||"").trim())});
  var partTwo=buttons.find(function(b){return /الجزء الثاني/.test((b.textContent||"").trim())||b.id==="btn-part2"});
- var difficulty=!!root.querySelector('[aria-label="اختار الصعوبة"]');
+ var difficulty=!!difficultyNode;
  if(partOne&&partTwo){
   var candidate=partOne.parentElement;
   while(candidate&&candidate!==root){
