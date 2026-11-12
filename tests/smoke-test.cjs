@@ -65,7 +65,7 @@ assert.ok(qartonDesignSystem.includes(':focus-visible'), 'shared QARTON controls
 assert.ok(qartonDesignSystem.includes('prefers-reduced-motion:reduce'), 'shared QARTON motion must respect reduced-motion settings');
 assert.ok(androidPrep.includes('var hasPartOne=buttons.some'), 'fixed home viewport must require the real Part 1 selector');
 assert.ok(androidPrep.includes('var hasPartTwo=buttons.some'), 'fixed home viewport must require the real Part 2 selector');
-assert.ok(androidPrep.includes('return hasPartOne&&hasPartTwo'), 'story/cutscene screens must not trigger the home viewport lock');
+assert.ok(androidPrep.includes('return (hasPartOne&&hasPartTwo)||(hasDifficulty&&buttons.length>=3)'), 'home viewport lock must require the real Part 1/Part 2 selectors or the stable difficulty fallback');
 assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
 assert.ok(androidPrep.includes('carthage-save-now'), 'simple save button must exist');
 assert.ok(androidPrep.includes('carthage-continue-last'), 'one-tap continue button must exist');
