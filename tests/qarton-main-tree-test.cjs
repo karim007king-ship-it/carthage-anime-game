@@ -58,6 +58,7 @@ for (const id of [
 assert.ok(home.includes('live.click()'), 'the tree must invoke original handlers, not recreate them');
 assert.ok(home.includes('function showStory()'), 'Story branch must open a dedicated story subview');
 assert.ok(home.includes('root.querySelector(".home-actions.grid")||root.querySelector(".home-actions")||root'), 'Story start lookup must fall back to semantic search across the app root when legacy menu classes differ');
+assert.ok(home.includes('var menu=root&&(root.querySelector(".home-actions.grid")||root.querySelector(".home-actions")||root);var live=selector==="@new-game"?findNewGameButton(menu)'), 'New Game proxy click must use the same resilient menu lookup as the visible story action');
 // Continue-last-save belongs only to Progress & Saves, never the Story subview.
 const storyStart = home.indexOf('function showStory(){');
 const storyEnd = home.indexOf('function actionButton(', storyStart);
