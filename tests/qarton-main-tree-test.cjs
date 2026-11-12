@@ -215,7 +215,7 @@ const menuForHandoff = {
 };
 vm.runInNewContext(
   'var view="story",backButton=null;' + handoffSource +
-  ';proxyStoryAction(handoffParent,"@new-game","بداية جديدة","بدء قصة جديدة",false);',
+  ';proxyStoryAction(handoffParent,"@new-game","بداية جديدة","بدء قصة جديدة",false);handoffParent.proxy.click();',
   {
     ...handoffContext,
     handoffParent: {
