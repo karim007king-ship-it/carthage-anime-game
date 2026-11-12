@@ -124,7 +124,7 @@ assert.ok(qartonHome.includes('candidateButtons.length>=3&&candidateHasPartTwo')
 assert.ok(qartonHome.includes('menu.classList.add("home-actions","grid")'), 'recovered menu must receive the expected grid styling hook');
 assert.ok(qartonHome.includes('if(!shell&&menu.parentElement&&menu.parentElement!==root)shell=menu.parentElement'), 'QARTON runtime must fall back to the real parent shell when utility classes differ');
 assert.ok(qartonHome.includes('menu.closest(".home-actions.flex")'), 'QARTON runtime must anchor styling to the actual outer home shell');
-assert.ok(qartonHome.includes('classList.add("qarton-home-shell")'), 'QARTON runtime must mark the actual home shell for layout styling');
+assert.ok(qartonHome.includes('classList.add("qarton-home-shell","qarton-card","qarton-ui")'), 'QARTON runtime must mark the home shell with shared design-system components');
 assert.ok(qartonHome.includes('root.classList.add("carthage-home-locked")'), 'QARTON runtime must activate the CSS scope on the live root');
 assert.ok(qartonHome.includes('attributes:true,attributeFilter:["class"]'), 'QARTON runtime must restore its presentation after React updates wrapper classes');
 assert.ok(qartonHome.includes('observer.observe(document.documentElement'), 'QARTON runtime must detect the home screen even if React mounts after the runtime starts');
