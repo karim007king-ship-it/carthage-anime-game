@@ -180,12 +180,13 @@ const handoffContext = {
   appended: [],
   hideCount: 0,
   clearCount: 0,
+  goTreeCount: 0,
   root: null,
   overlay: { style: { display: 'flex' } },
   document: { body: { appendChild(node) { handoffContext.appended.push(node); } } },
   hideLegacy() { handoffContext.hideCount++; },
   clearReturn() { handoffContext.clearCount++; },
-  goTree() {},
+  goTree() { handoffContext.goTreeCount++; },
   findNewGameButton(container) {
     return Array.from(container.querySelectorAll('button')).find(b =>
       !b.disabled && /ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test(b.textContent || '')
@@ -231,3 +232,5 @@ assert.equal(handoffContext.hideCount, 1, 'story handoff must hide the legacy ho
 assert.equal(handoffContext.clearCount, 1, 'story handoff must clear any stale return control');
 assert.equal(handoffContext.overlay.style.display, 'none', 'story handoff must hide the QARTON overlay before opening the original confirmation flow');
 assert.ok(handoffContext.appended.some(node => node.id === 'qarton-tree-return'), 'story handoff must provide a return-to-QARTON control');
+handoffResult.backButton.click();
+assert.equal(handoffContext.goTreeCount, 1, 'return-to-QARTON control must invoke the tree navigation callback exactly once');
