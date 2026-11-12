@@ -4,7 +4,7 @@ name: Build Carthage Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [main, fix/new-game-qarton-home-regression]
+    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation]
     paths:
       - "index.html"
       - "package.json"
@@ -14,7 +14,7 @@ on:
       - "styles/**"
       - ".github/workflows/android-apk.yml"
   pull_request:
-    branches: [main, fix/new-game-qarton-home-regression]
+    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation]
     paths:
       - "index.html"
       - "package.json"
