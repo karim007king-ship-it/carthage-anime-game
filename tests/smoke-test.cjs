@@ -154,19 +154,19 @@ assert.ok(qartonHome.includes('classList.add("qarton-home-shell","qarton-card","
 assert.ok(qartonHome.includes('root.classList.add("carthage-home-locked")'), 'QARTON runtime must activate the CSS scope on the live root');
 assert.ok(qartonHome.includes('attributes:true,attributeFilter:["class"]'), 'QARTON runtime must restore its presentation after React updates wrapper classes');
 assert.ok(qartonHome.includes('observer.observe(document.documentElement'), 'QARTON runtime must detect the home screen even if React mounts after the runtime starts');
-assert.ok(qartonHome.includes('border:1px solid #e8c47788'), 'QARTON home shell must have a visibly distinct premium card frame');
-assert.ok(!qartonHome.includes('css += "\\\\n#root'), 'QARTON CSS append must not contain a literal backslash-n that invalidates the selector');
-assert.ok(qartonHome.includes('css += "\\n#root.carthage-home-locked .qarton-home-shell{background:'), 'QARTON shell and brand styling must be appended with a real CSS line break');
-assert.ok(!qartonHome.includes('.qarton-home-shell>div.mt-4.grid{display:none!important}'), 'QARTON must never hide the direct child that contains the primary home menu');
+assert.ok(carthageHomeCss.includes('border:1px solid #e8c47788'), 'QARTON home shell must have a visibly distinct premium card frame');
+assert.ok(!carthageHomeCss.includes('\\\\n#root'), 'extracted QARTON CSS must not contain a literal backslash-n that invalidates the selector');
+assert.ok(carthageHomeCss.includes('#root.carthage-home-locked .qarton-home-shell{background:'), 'extracted QARTON CSS must include the premium home shell styling');
+assert.ok(!carthageHomeCss.includes('.qarton-home-shell>div.mt-4.grid{display:none!important}'), 'QARTON must never hide the direct child that contains the primary home menu');
 
 
 assert.ok(androidPrep.includes('qarton-premium-home-runtime'), 'approved QARTON home presentation runtime must be injected into Android builds');
-assert.ok(qartonHome.includes('#qarton-home-brand{position:fixed'), 'QARTON brand header must be anchored inside the fixed home viewport');
-assert.ok(!qartonHome.includes('#root.carthage-home-locked \\n#root.carthage-home-locked #qarton-home-brand'), 'QARTON hide-rule selector must not contain an impossible root descendant');
-assert.ok(qartonHome.includes('#root.carthage-home-locked #qarton-home-brand,#root.carthage-home-locked #qarton-home-info{display:none!important}'), 'QARTON home identity hide rule must target the two fixed overlays directly');
-assert.ok(qartonHome.includes('#qarton-home-info{position:fixed'), 'QARTON footer must be anchored inside the fixed home viewport');
-assert.ok(qartonHome.includes('max-height:650px'), 'home identity must compact on short phone screens');
-assert.ok(qartonHome.includes('prefers-reduced-motion:reduce'), 'home presentation must respect reduced-motion accessibility');
+assert.ok(carthageHomeCss.includes('#qarton-home-brand{position:fixed'), 'QARTON brand header must be anchored inside the fixed home viewport');
+assert.ok(!carthageHomeCss.includes('#root.carthage-home-locked \\n#root.carthage-home-locked #qarton-home-brand'), 'QARTON hide-rule selector must not contain an impossible root descendant');
+assert.ok(carthageHomeCss.includes('#root.carthage-home-locked #qarton-home-brand,#root.carthage-home-locked #qarton-home-info{display:none!important}'), 'QARTON home identity hide rule must target the two fixed overlays directly');
+assert.ok(carthageHomeCss.includes('#qarton-home-info{position:fixed'), 'QARTON footer must be anchored inside the fixed home viewport');
+assert.ok(carthageHomeCss.includes('max-height:650px'), 'home identity must compact on short phone screens');
+assert.ok(carthageHomeCss.includes('prefers-reduced-motion:reduce'), 'home presentation must respect reduced-motion accessibility');
 assert.doesNotThrow(() => new vm.Script(qartonHome, { filename: 'qarton-premium-home.js' }), 'premium home runtime must parse as executable JavaScript');
 assert.ok(qartonHome.includes('if(window.__qartonPremiumHomeInstalled)return'), 'premium home runtime must be idempotent across repeated injection');
 assert.ok(qartonHome.includes('function playing(root)'), 'home runtime must distinguish gameplay from the home menu');
