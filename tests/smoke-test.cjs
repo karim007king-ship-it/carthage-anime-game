@@ -148,6 +148,14 @@ assert.ok(qartonHome.includes('prefers-reduced-motion:reduce'), 'home presentati
 assert.doesNotThrow(() => new vm.Script(qartonHome, { filename: 'qarton-premium-home.js' }), 'premium home runtime must parse as executable JavaScript');
 assert.ok(qartonHome.includes('if(window.__qartonPremiumHomeInstalled)return'), 'premium home runtime must be idempotent across repeated injection');
 assert.ok(qartonHome.includes('function playing(root)'), 'home runtime must distinguish gameplay from the home menu');
+assert.ok(qartonHome.includes('function decorateGameplay(root)'), 'QARTON adapter must apply the shared design system during gameplay');
+assert.ok(qartonHome.includes('root.classList.add("qarton-game-ui")'), 'active gameplay must receive a dedicated QARTON scope');
+assert.ok(qartonHome.includes('.dialogue-panel,.theatre-text,.search-layer'), 'QARTON adapter must style dialogue and search surfaces');
+assert.ok(qartonHome.includes('.dialogue-panel button,.choice-stack button,.game-choices button,.game-pill-btn,.map-pill'), 'QARTON adapter must style story choices and HUD controls');
+assert.ok(qartonHome.includes('decorateGameplay(currentRoot)'), 'newly rendered gameplay controls must be styled after React updates');
+assert.ok(qartonDesignSystem.includes('.qarton-game-card{'), 'shared QARTON gameplay surface primitive must exist');
+assert.ok(qartonDesignSystem.includes('.qarton-game-control{'), 'shared QARTON gameplay control primitive must exist');
+assert.ok(qartonDesignSystem.includes('.qarton-game-control:focus-visible'), 'gameplay controls must retain visible keyboard focus');
 assert.ok(qartonHome.includes('if(playing(root))'), 'home styling must be released when gameplay begins');
 assert.ok(qartonHome.includes('var menu=findMenu(root);\nif(!menu)return;'), 'QARTON home lock must only activate after a verified home menu is found');
 assert.ok(!qartonHome.includes('var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ|متابعة|الجزء/'), 'generic story buttons must never trigger home styling');
@@ -160,6 +168,17 @@ assert.ok(qartonHome.includes('observer.observe(document.documentElement,{subtre
 assert.ok(androidPrep.includes('carthage-home-locked'), 'home menu must toggle a dedicated fixed viewport state');
 assert.ok(androidPrep.includes('stopHomeScroll'), 'home page vertical touch and wheel scrolling must be blocked');
 assert.ok(androidPrep.includes('.game-timer'), 'home lock must detect active story gameplay and release the viewport');
+
+
+/* Story-flow guards: new game -> intro -> chapter 1 -> dialogue -> next chapter. */
+assert.ok(html.includes('let Vv=()=>{let P=Ff[jf]'), 'new game handler must remain present');
+assert.ok(html.includes('n("intro"),uv("intro")'), 'new game must enter the intro sequence before chapter 1');
+assert.ok(html.includes('o<4?a(o+1):L9(0)'), 'the final intro action must enter the first story chapter');
+assert.ok(html.includes('m(P),x(0),p("dialogue"),Q8'), 'chapter navigation must update the chapter index and reset dialogue');
+assert.ok(html.includes('if(B<j.lines.length-1)x(B+1)'), 'dialogue must advance line by line');
+assert.ok(html.includes('window.setTimeout(()=>L9(T+1),z?300:850)'), 'completed choices must advance to the next chapter');
+assert.ok(html.includes('src:j.image,alt:j.place'), 'the active chapter artwork must be bound to the current chapter data');
+assert.ok(html.includes('pointer-events:none;background:#050509'), 'cinematic scene transitions must never block taps');
 
 const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(m => m[1]);
 const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
