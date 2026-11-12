@@ -1,4 +1,5 @@
 name: Build Carthage Android APK
+# QARTON shared UI adapters and story-flow regression checks are part of the Android gate.
 
 on:
   workflow_dispatch:
