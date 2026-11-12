@@ -1,5 +1,5 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');const root=path.join(__dirname,'..');const runtime=fs.readFileSync(path.join(root,'scripts','qarton-isolated-home.js'),'utf8');
-assert.ok(runtime.includes('var difficulty=!!root.querySelector'), 'isolated home must recover when native menu labels change');
+assert.ok(runtime.includes('var difficultyNode=root.querySelector'), 'isolated home must recover when native menu labels change');
 assert.ok(runtime.includes('var actionButtons=buttons.filter(function(b){return !difficultyNode.contains(b)})'), 'difficulty buttons must never be mistaken for home actions');
 assert.ok(runtime.includes('filter(function(n){return !nativeDifficulty||!nativeDifficulty.contains(n)})'), 'difficulty buttons must never be cloned into the action cards');
 assert.ok(runtime.includes('var nativeActions=Array.from(menu.querySelectorAll("button")).filter(function(b){return !difficultyNode||!difficultyNode.contains(b)})'), 'native menu fast path must count action buttons separately from difficulty controls');
