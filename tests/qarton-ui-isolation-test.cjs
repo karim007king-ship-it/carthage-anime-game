@@ -31,7 +31,7 @@ const guard=premium.slice(premium.indexOf('if(window.__qartonHomeIsolationInstal
 assert.ok(!guard.includes('classList.remove("carthage-home-locked")'),'legacy adapter must not release the fixed viewport lock owned by the isolated home runtime');
 assert.ok(prep.includes('window.__qartonSetAppState(f==="game"?"GAME"'),'Android preparation must wire central state to the actual React screen state');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__==="GAME"'),'premium adapter must use the central lifecycle instead of timer detection');
-assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||\\\\"HOME\\\\"'),'navigation controls must use the central app state');
+assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||\\"HOME\\"'),'navigation controls must use the central app state');
 assert.ok(prep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'),'fixed viewport behavior must use the central app state');
 assert.ok(prep.includes('window.addEventListener("qarton:statechange",schedule)'),'state changes must update the shared UI adapters');
 assert.ok(runtime.includes('reason:"init"'),'initial HOME state must be broadcast to all adapters');
