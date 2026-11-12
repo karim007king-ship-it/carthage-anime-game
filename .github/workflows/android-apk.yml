@@ -121,6 +121,8 @@ jobs:
             'carthageCinematicImpact',
             'carthage-fixed-home-runtime',
             'qarton-premium-home-runtime',
+            'qarton-main-tree-runtime',
+            'التقدم والحفظ',
             'qarton-brand-row',
             'qarton-home-info'
           ];
