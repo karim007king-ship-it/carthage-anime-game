@@ -20,6 +20,7 @@ on:
       - "capacitor.config.json"
       - "tests/**"
       - "scripts/**"
+      - "styles/**"
       - ".github/workflows/android-apk.yml"
 
 permissions:
