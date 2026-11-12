@@ -213,9 +213,9 @@ const liveNewGame = {
 const menuForHandoff = {
   querySelectorAll() { return [makeButton('الإعدادات'), liveNewGame]; }
 };
-vm.runInNewContext(
+const handoffResult = vm.runInNewContext(
   'var view="story",backButton=null;' + handoffSource +
-  ';proxyStoryAction(handoffParent,"@new-game","بداية جديدة","بدء قصة جديدة",false);handoffParent.proxy.click();',
+  ';proxyStoryAction(handoffParent,"@new-game","بداية جديدة","بدء قصة جديدة",false);handoffParent.proxy.click();({view:view,backButton:backButton})',
   {
     ...handoffContext,
     handoffParent: {
@@ -224,10 +224,8 @@ vm.runInNewContext(
     }
   }
 );
-const proxyHarness = vm.runInNewContext(
-  '({view:view,backButton:backButton})',
-  { view: 'story', backButton: null }
-);
+assert.equal(handoffResult.view, 'handoff', 'New Game proxy must enter the persistent handoff state');
+assert.equal(handoffResult.backButton && handoffResult.backButton.id, 'qarton-tree-return', 'handoff must retain the actual return-to-QARTON control reference');
 assert.equal(handoffContext.liveClicks, 1, 'New Game proxy must click the original live story-start control exactly once');
 assert.equal(handoffContext.hideCount, 1, 'story handoff must hide the legacy home before the original click');
 assert.equal(handoffContext.clearCount, 1, 'story handoff must clear any stale return control');
