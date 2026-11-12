@@ -29,13 +29,18 @@ function findNativeMenu(){
    candidate=candidate.parentElement;
   }
  }
- // The difficulty selector is a stable home-screen signature when labels change.
- if(difficulty&&buttons.length>=3){
-  var first=buttons.find(function(b){return /ابدأ|جديد|الجزء|متابعة|حفظ|إعدادات/.test((b.textContent||"").trim())})||buttons[0];
-  var fallback=first&&first.parentElement;
-  while(fallback&&fallback!==root){
-   if(fallback.querySelectorAll("button").length>=3)return fallback;
-   fallback=fallback.parentElement;
+ // Use the difficulty selector only as a home signature; never treat its buttons as actions.
+ if(difficulty){
+  var difficultyNode=root.querySelector('[aria-label="اختار الصعوبة"]');
+  var actionButtons=buttons.filter(function(b){return !difficultyNode.contains(b)});
+  if(actionButtons.length>=2){
+   var first=actionButtons.find(function(b){return /ابدأ|جديد|الجزء|متابعة|حفظ|إعدادات/.test((b.textContent||"").trim())})||actionButtons[0];
+   var fallback=first&&first.parentElement;
+   while(fallback&&fallback!==root){
+    var fallbackActions=Array.from(fallback.querySelectorAll("button")).filter(function(b){return !difficultyNode.contains(b)});
+    if(fallbackActions.length>=2)return fallback;
+    fallback=fallback.parentElement;
+   }
   }
  }
  return null;
@@ -58,7 +63,7 @@ function mount(){
  if(nativeDifficulty){var dh=document.createElement("div");dh.className="qh-section";dh.textContent="اختار مستوى التحدّي";sc.appendChild(dh);var ds=document.createElement("div");ds.className="qh-difficulties";Array.from(nativeDifficulty.querySelectorAll("button")).forEach(function(n){var b=document.createElement("button");b.type="button";b.className="qh-difficulty";b.textContent=cleanLabel(n.textContent);b.setAttribute("aria-pressed",String(n.getAttribute("aria-pressed")==="true"||n.classList.contains("selected")||n.classList.contains("active")));b.addEventListener("click",function(){n.click();Array.from(ds.children).forEach(function(x){x.setAttribute("aria-pressed",String(x===b))})});ds.appendChild(b)});if(ds.children.length)sc.appendChild(ds)}
  var heading=document.createElement("div");heading.className="qh-section";heading.textContent="رحلتك تبدأ من هنا";sc.appendChild(heading);
  var actions=document.createElement("div");actions.className="qh-actions";sc.appendChild(actions);var seen=new Set();
- Array.from(nativeMenu.querySelectorAll("button")).forEach(function(n){var t=cleanLabel(n.textContent);if(!t||seen.has(t))return;seen.add(t);var b=document.createElement("button");b.type="button";b.className="qh-action";b.dataset.kind=kind(t,n);b.textContent=t;b.disabled=!!n.disabled;b.addEventListener("click",function(){n.click()});actions.appendChild(b)});
+ Array.from(nativeMenu.querySelectorAll("button")).filter(function(n){return !nativeDifficulty||!nativeDifficulty.contains(n)}).forEach(function(n){var t=cleanLabel(n.textContent);if(!t||seen.has(t))return;seen.add(t);var b=document.createElement("button");b.type="button";b.className="qh-action";b.dataset.kind=kind(t,n);b.textContent=t;b.disabled=!!n.disabled;b.addEventListener("click",function(){n.click()});actions.appendChild(b)});
  if(!actions.children.length){var e=document.createElement("div");e.className="qh-footer";e.textContent="تعذر تحميل خيارات القائمة";actions.appendChild(e)}
  var foot=document.createElement("div");foot.className="qh-footer";foot.textContent="رحلتك • اختياراتك • مصيرك";overlay.appendChild(foot);
  window.__QARTON_HOME_READY__=true;
