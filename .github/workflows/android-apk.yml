@@ -72,8 +72,11 @@ jobs:
       - name: Install JavaScript dependencies
         run: npm install
 
-      - name: Syntax-check Android preparation script
-        run: node --check scripts/prepare-web.cjs
+      - name: Syntax-check Android and QARTON runtime scripts
+        run: |
+          node --check scripts/prepare-web.cjs
+          node --check scripts/qarton-isolated-home.js
+          node --check scripts/qarton-premium-home.js
 
       - name: Run game integrity tests
         run: npm test
