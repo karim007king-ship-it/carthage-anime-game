@@ -36,7 +36,7 @@ npm run android:sync
 | --- | --- |
 | `index.html` | اللعبة الأصلية: القصة، المشاهد، المحرك، والحفظ الأساسي |
 | `styles/qarton-design-system.css` | ألوان QARTON ومكوّناته المشتركة |
-| `scripts/qarton-premium-home.js` | محوّل واجهة QARTON للقائمة واللعب |
+| `styles/qarton-carthage-home.css` | تنسيق شاشة قرطاج الرئيسية وقفل مساحة العرض |\n| `scripts/qarton-premium-home.js` | محوّل واجهة QARTON للقائمة واللعب |
 | `scripts/prepare-web.cjs` | تجهيز نسخة الويب وحقن تكامل Android |
 | `scripts/apply-android-branding.cjs` | توليد أيقونات Android وربطها بالـ Manifest |
 | `tests/` | اختبارات سلامة اللعبة والحفظ وتكامل Android |
