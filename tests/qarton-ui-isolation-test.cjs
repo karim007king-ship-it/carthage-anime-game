@@ -20,6 +20,9 @@ assert.ok(runtime.includes('if(/^(رجوع للقائمة|إلغاء|لا)$/.tes
 assert.ok(runtime.includes('hideLegacy();ensureOverlay()'),'HOME and TRANSITION must keep the legacy root hidden');
 assert.ok(runtime.includes('setState("TRANSITION","home-action")'),'home actions must enter TRANSITION before invoking the native handler');
 assert.ok(runtime.includes('n.click()'),'QARTON cards must delegate to original React button handlers');
+assert.ok(runtime.includes('forEach(function(n,index){var t=clean(n.textContent);if(!t)return'),'every native action button must produce its own QARTON card, including duplicate labels');
+assert.ok(runtime.includes('b.dataset.actionIndex=String(index)'),'each QARTON action card must retain a stable source-button index');
+assert.ok(!runtime.includes('seen.has(t)'),'no native action may be silently dropped by duplicate-label filtering');
 assert.ok(runtime.includes('window.__QARTON_HOME_READY__=true'),'QARTON home must expose a readiness marker');
 assert.ok(runtime.includes('b.disabled=!!n.disabled'),'disabled native actions must remain disabled in the matching QARTON card');
 assert.ok(runtime.includes('if(!menu||!root||!root.contains(menu))'),'missing menu must keep the QARTON shell active instead of revealing legacy UI');
