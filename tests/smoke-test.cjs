@@ -116,6 +116,10 @@ assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed home viewp
 const qartonHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-premium-home.js'), 'utf8');
 assert.ok(qartonHome.includes('QARTON'), 'premium home must show the QARTON studio identity');
 assert.ok(qartonHome.includes('CULTURE • POWER • CINEMA'), 'premium home must show the studio tagline');
+assert.ok(qartonDesignSystem.includes('--q-gold:var(--qarton-gold)'), 'legacy-compatible QARTON aliases must be owned by the shared design system');
+assert.ok(qartonDesignSystem.includes('--q-cream:var(--qarton-cream)'), 'shared cream alias must be defined centrally');
+assert.ok(!qartonHome.includes('--q-gold:'), 'Carthage adapter must not duplicate shared design tokens');
+assert.ok(qartonHome.includes('function boot(){if(observer)return;'), 'home-only stylesheet must not be injected before a verified home menu exists');
 assert.ok(qartonHome.includes('قــــرطــــاج'), 'premium home must show the Carthage title');
 assert.ok(qartonHome.includes('.home-actions.grid button'), 'premium home must professionally style the existing real menu actions');
 assert.ok(qartonHome.includes('game-timer'), 'premium home must disappear during gameplay');
