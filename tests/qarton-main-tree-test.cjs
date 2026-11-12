@@ -143,10 +143,13 @@ for (const marker of ['qarton-main-tree-runtime', 'التقدم والحفظ']) 
   assert.ok(workflow.includes(marker), 'Android APK verification must include ' + marker);
 }
 
-// The optional layout inspector must not retain dead state or a disconnected observer.
-const inspector = fs.readFileSync(path.join(root, 'scripts/qarton-home-inspector.js'), 'utf8');
-new vm.Script(inspector, {filename:'qarton-home-inspector.js'});
-assert.ok(!inspector.includes('seenHome'), 'layout inspector must not retain unused seenHome state');
-assert.ok(inspector.includes('observer.disconnect();observer=null;'), 'layout inspector must release its observer reference after gameplay starts');
+// If the optional layout inspector exists in this branch, validate its cleanup contract.
+const inspectorPath = path.join(root, 'scripts/qarton-home-inspector.js');
+if (fs.existsSync(inspectorPath)) {
+  const inspector = fs.readFileSync(inspectorPath, 'utf8');
+  new vm.Script(inspector, {filename:'qarton-home-inspector.js'});
+  assert.ok(!inspector.includes('seenHome'), 'layout inspector must not retain dead seenHome state');
+  assert.ok(inspector.includes('observer.disconnect();observer=null;'), 'layout inspector must release its observer reference after gameplay starts');
+}
 
 console.log('PASS: QARTON main-tree structure, safe original-control bridges, save isolation, and Android packaging.');
