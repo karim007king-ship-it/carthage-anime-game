@@ -17,6 +17,7 @@ assert.ok(runtime.includes('if(state==="GAME"){showGame();return}'),'only explic
 assert.ok(runtime.includes('if(state==="TRANSITION"){showTransition();return}'),'TRANSITION must use its own explicit rendering path');
 assert.ok(runtime.includes('menu.style.visibility="hidden";menu.setAttribute("data-qarton-transition-hidden","true")'),'native home actions must stay hidden while native confirmation dialogs remain accessible');
 assert.ok(runtime.includes('if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))'),'native cancellation must restore the QARTON HOME state');
+assert.ok(runtime.includes('qarton-transition-return'),'TRANSITION must provide a safe return control when a native action does not start gameplay');
 assert.ok(runtime.includes('hideLegacy();ensureOverlay()'),'HOME and TRANSITION must keep the legacy root hidden');
 assert.ok(runtime.includes('setState("TRANSITION","home-action")'),'home actions must enter TRANSITION before invoking the native handler');
 assert.ok(runtime.includes('n.click()'),'QARTON cards must delegate to original React button handlers');
