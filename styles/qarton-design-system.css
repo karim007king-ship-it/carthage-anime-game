@@ -1,6 +1,9 @@
 /* QARTON Design System v1 — shared visual foundation for every QARTON game. */
 :root{
   --qarton-ink:#080b12;
+  --q-gold:var(--qarton-gold);
+  --q-cream:var(--qarton-cream);
+  --q-ink:var(--qarton-ink);
   --qarton-night:#101827;
   --qarton-panel:#161e2c;
   --qarton-panel-raised:#202b3c;
