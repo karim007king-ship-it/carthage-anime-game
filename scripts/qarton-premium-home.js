@@ -2,7 +2,7 @@
 if(window.__qartonPremiumHomeInstalled)return;
 window.__qartonPremiumHomeInstalled=true;
 function style(){var sheet=document.getElementById("qarton-premium-home-style");if(sheet)sheet.media="all"}
-function playing(root){return !!(root&&root.querySelector(".game-timer"))}
+function playing(root){return window.__QARTON_APP_STATE__==="GAME"}
 function decorateGameplay(root){
 if(!root)return;
 root.classList.add("qarton-game-ui");
@@ -120,6 +120,6 @@ gameplayObserver.disconnect();gameplayObserver=null;boot();
 });
 gameplayObserver.observe(root,{subtree:true,childList:true,characterData:true});
 }
-function boot(){if(observer)return;observer=new MutationObserver(schedule);observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class"]});mount()}
+function boot(){if(observer)return;observer=new MutationObserver(schedule);observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class"]});mount()}\nwindow.addEventListener("qarton:statechange",schedule);
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
 })();
