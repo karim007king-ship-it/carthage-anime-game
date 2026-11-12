@@ -36,9 +36,9 @@ npm run android:sync
 | --- | --- |
 | `index.html` | اللعبة الأصلية: القصة، المشاهد، المحرك، والحفظ الأساسي |
 | `styles/qarton-design-system.css` | ألوان QARTON ومكوّناته المشتركة |
-| `styles/qarton-carthage-home.css` | تنسيق واجهة اللعب/القائمة الأصلية القديمة عند الحاجة، وقواعد Carthage المرتبطة بها |
-| `scripts/qarton-premium-home.js` | محوّل تنسيق واجهة اللعب، مع تعطيل قائمة QARTON القديمة عند تفعيل العزل |
-| `scripts/qarton-isolated-home.js` | شاشة QARTON الرئيسية المستقلة، وتفويض الأزرار إلى معالجات React الأصلية |
+| `styles/qarton-carthage-home.css` | قواعد واجهة Carthage السابقة محفوظة ومعطّلة افتراضياً للرجوع الآمن |
+| `scripts/qarton-premium-home.js` | تنسيق عناصر اللعب فقط اعتماداً على حالة QARTON المركزية |
+| `scripts/qarton-isolated-home.js` | إدارة HOME/GAME/TRANSITION، وعرض الشاشة المستقلة وربط كل بطاقة بمعالج React الأصلي |
 | `scripts/prepare-web.cjs` | تجهيز نسخة الويب وحقن تكامل Android |
 | `scripts/apply-android-branding.cjs` | توليد أيقونات Android وربطها بالـ Manifest |
 | `tests/` | اختبارات سلامة اللعبة والحفظ وتكامل Android |
@@ -46,6 +46,14 @@ npm run android:sync
 | `.github/workflows/android-apk.yml` | الاختبارات وبناء APK ورفع artifact |
 
 للتفاصيل وقواعد إضافة لعبة جديدة إلى منظومة QARTON، راجع `docs/project-structure.md` و`docs/qarton-design-system.md`.
+
+### دورة حياة واجهة QARTON
+
+- `HOME`: تعرض واجهة QARTON وتبقي جذر React القديم مخفياً حتى لو تأخر ظهور عناصر القائمة.
+- `TRANSITION`: تكشف شاشة React الانتقالية مع إخفاء أزرار القائمة القديمة، وتوفر رجوعاً آمناً إلى QARTON.
+- `GAME`: تكشف اللعبة وتفعّل محوّل تنسيق اللعب فقط.
+- تتلقى الحالة الفعلية من حالة شاشة React (`f === "game"`) عبر `window.__qartonSetAppState`؛ لا تعتمد رؤية واجهة البداية على `.game-timer` أو تخمين عناصر DOM.
+- تُستخدم عناصر DOM الأصلية فقط كجسر لتنفيذ الأزرار والاختيارات، ولا تُستبدل معالجات القصة أو الحفظ.
 
 ## قواعد الحفاظ على اللعبة
 
