@@ -32,11 +32,14 @@ function clean(s){return(s||"").replace(/\s+/g," ").trim()}
 function kind(t,b){if(b.id==="carthage-continue-last"||/متابعة|استكمال|آخر حفظ/.test(t))return"continue";if(/ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test(t))return"primary";if(/الجزء الثالث|الجزء 3/.test(t))return"locked";return"secondary"}
 function ensureOverlay(){if(overlay)return;overlay=document.createElement("main");overlay.id="qarton-home-screen";overlay.setAttribute("aria-label","QARTON Carthage home");document.body.appendChild(overlay)}
 function hideLegacy(){if(!root)return;root.style.visibility="hidden";root.setAttribute("data-qarton-legacy-home-hidden","true")}
-function restoreNativeMenu(){if(menu&&menu.getAttribute("data-qarton-transition-hidden")==="true"){menu.style.visibility="";menu.removeAttribute("data-qarton-transition-hidden")}}\nfunction showTransition(){if(root&&root.getAttribute("data-qarton-legacy-home-hidden")==="true"){root.style.visibility="";root.removeAttribute("data-qarton-legacy-home-hidden")}if(!menu||!root.contains(menu))menu=findNativeMenu();if(menu){menu.style.visibility="hidden";menu.setAttribute("data-qarton-transition-hidden","true")}if(overlay){overlay.remove();overlay=null}window.__QARTON_HOME_READY__=false}\nfunction showGame(){restoreNativeMenu();if(root&&root.getAttribute("data-qarton-legacy-home-hidden")==="true"){root.style.visibility="";root.removeAttribute("data-qarton-legacy-home-hidden")}if(overlay){overlay.remove();overlay=null}window.__QARTON_HOME_READY__=false}
+function restoreNativeMenu(){if(menu&&menu.getAttribute("data-qarton-transition-hidden")==="true"){menu.style.visibility="";menu.removeAttribute("data-qarton-transition-hidden")}}
+function showTransition(){if(root&&root.getAttribute("data-qarton-legacy-home-hidden")==="true"){root.style.visibility="";root.removeAttribute("data-qarton-legacy-home-hidden")}if(!menu||!root.contains(menu))menu=findNativeMenu();if(menu){menu.style.visibility="hidden";menu.setAttribute("data-qarton-transition-hidden","true")}if(overlay){overlay.remove();overlay=null}window.__QARTON_HOME_READY__=false}
+function showGame(){restoreNativeMenu();if(root&&root.getAttribute("data-qarton-legacy-home-hidden")==="true"){root.style.visibility="";root.removeAttribute("data-qarton-legacy-home-hidden")}if(overlay){overlay.remove();overlay=null}window.__QARTON_HOME_READY__=false}
 function render(){
  root=document.getElementById("root");
  if(state==="GAME"){showGame();return}
- hideLegacy();ensureOverlay();addStyle();overlay.replaceChildren();
+ if(state==="TRANSITION"){showTransition();return}
+ restoreNativeMenu();hideLegacy();ensureOverlay();addStyle();overlay.replaceChildren();
  var sc=document.createElement("div");sc.className="qh-scroll";overlay.appendChild(sc);
  var brand=document.createElement("div");brand.className="qh-brand";brand.innerHTML='<span class="qh-mark">Q</span><span><strong>QARTON</strong><small>CULTURE • POWER • CINEMA</small></span>';sc.appendChild(brand);
  var title=document.createElement("h1");title.className="qh-title";title.textContent="آخر يوم في قرطاج";sc.appendChild(title);
