@@ -13,7 +13,7 @@ The project currently has four layers:
 
 - `index.html` is the source of truth for the original game. `www/` and `android/` are generated build outputs, ignored by Git, and must not become competing hand-edited sources.
 - The QARTON stylesheet is the canonical home for shared design tokens and reusable component primitives.
-- The QARTON runtime may add presentation classes and wrappers, but must preserve the original buttons, callbacks, story data, and save keys. It activates `qarton-carthage-home.css` only after finding a verified native home menu; Android viewport locking uses the same native-grid-first detection rule.
+- The QARTON runtime may add presentation classes and wrappers, but must preserve the original buttons, callbacks, story data, and save keys. It activates `qarton-carthage-home.css` only after finding a verified native home menu; Android viewport locking uses the same native-grid-first detection rule. The prepared page carries the stylesheet with `media="not all"`; the adapter enables it only after home detection, so the Carthage home rules do not leak into gameplay.
 - Android-only behavior belongs in the preparation/build layer until it can be implemented safely in the shared game source.
 - Save keys such as `shiganshina-slots-v1` and `shiganshina-autosave-v1` are compatibility contracts. Never rename or clear them as part of visual cleanup.
 
