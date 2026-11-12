@@ -9,8 +9,8 @@ for(const state of ['HOME','GAME','TRANSITION'])assert.ok(runtime.includes(state
 assert.ok(runtime.includes('window.__qartonSetAppState'),'central state setter must be public to the React screen lifecycle');
 assert.ok(runtime.includes('window.__qartonGetAppState'),'central state getter must be available for diagnostics');
 assert.ok(runtime.includes('window.dispatchEvent(new CustomEvent("qarton:statechange"'),'state changes must emit a single lifecycle event');
-assert.ok(runtime.includes('f==="game"?"GAME"'),'actual React screen state must explicitly enter GAME');
-assert.ok(runtime.includes('window.__QARTON_APP_STATE__==="TRANSITION"?"TRANSITION":"HOME"'),'React non-game screen must resolve to HOME unless a transition is active');
+assert.ok(prep.includes('f==="game"?"GAME"'),'actual React screen state must explicitly enter GAME');
+assert.ok(prep.includes('window.__QARTON_APP_STATE__==="TRANSITION"?"TRANSITION":"HOME"'),'React non-game screen must resolve to HOME unless a transition is active');
 assert.ok(!runtime.includes('.game-timer'),'home/game lifecycle must not be inferred from the presence of a timer element');
 assert.ok(!runtime.includes('isPlaying'),'legacy DOM-based isPlaying heuristic must be removed');
 assert.ok(runtime.includes('if(state==="GAME"){showGame();return}'),'only explicit GAME state may reveal the React root');
