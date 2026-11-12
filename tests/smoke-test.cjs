@@ -115,6 +115,13 @@ assert.ok(androidPrep.includes('carthage-fixed-home-style'), 'fixed home viewpor
 assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed home viewport runtime must be injected into Android builds');
 assert.ok(androidPrep.includes('var nativeMenu=root.querySelector(\\".home-actions.grid\\")'), 'fixed viewport and QARTON adapter must recognize the same native home grid during staged React rendering');
 const qartonHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-premium-home.js'), 'utf8');
+const carthageHomeCss = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-carthage-home.css'), 'utf8');
+assert.ok(androidPrep.includes('qarton-carthage-home.css'), 'Android preparation must load Carthage-specific QARTON home CSS');
+assert.ok(androidPrep.includes('id="qarton-premium-home-style" media="not all"'), 'Carthage home CSS must remain inactive until the home screen is verified');
+assert.ok(qartonHome.includes('function style(){var sheet=document.getElementById("qarton-premium-home-style");if(sheet)sheet.media="all"}'), 'QARTON runtime must activate the dedicated stylesheet only after finding the home menu');
+assert.ok(!qartonHome.includes('var css='), 'QARTON runtime must not embed a duplicate stylesheet string');
+assert.ok(carthageHomeCss.includes('.home-actions.grid button'), 'Carthage home stylesheet must own native menu presentation');
+assert.ok(carthageHomeCss.includes('body.carthage-home-locked'), 'Carthage home stylesheet must own the fixed viewport rules');
 assert.ok(qartonHome.includes('QARTON'), 'premium home must show the QARTON studio identity');
 assert.ok(qartonHome.includes('CULTURE • POWER • CINEMA'), 'premium home must show the studio tagline');
 assert.ok(qartonDesignSystem.includes('--q-gold:var(--qarton-gold)'), 'legacy-compatible QARTON aliases must be owned by the shared design system');
