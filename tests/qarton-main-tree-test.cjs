@@ -88,6 +88,10 @@ assert.ok(home.includes('hideLegacy();clearReturn();ensureOverlay();overlay.repl
 assert.ok(!storySubview.includes('restoreLegacy()') && !storySubview.includes('overlay.style.display="none"'), 'Story subview must keep the legacy home hidden until a native story action is invoked');
 assert.ok(home.includes('function showProgress()'), 'Progress branch must expose original backup actions');
 assert.ok(home.includes('function cleanupForGame()'), 'tree must disappear during gameplay');
+const cleanupStart = home.indexOf('function cleanupForGame(){');
+const cleanupEnd = home.indexOf('function mount(){', cleanupStart);
+assert.ok(cleanupStart >= 0 && cleanupEnd > cleanupStart, 'game cleanup boundaries must remain testable');
+assert.ok(!home.slice(cleanupStart, cleanupEnd).includes('restoreLegacy()'), 'gameplay transition must not reveal the legacy home behind the story screen');
 
 // Every main card must route to its own dedicated subview.
 for (const marker of [
