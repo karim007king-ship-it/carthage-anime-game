@@ -1,5 +1,7 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');const root=path.join(__dirname,'..');const runtime=fs.readFileSync(path.join(root,'scripts','qarton-isolated-home.js'),'utf8');
 assert.ok(runtime.includes('var difficulty=!!root.querySelector'), 'isolated home must recover when native menu labels change');
+assert.ok(runtime.includes('var actionButtons=buttons.filter(function(b){return !difficultyNode.contains(b)})'), 'difficulty buttons must never be mistaken for home actions');
+assert.ok(runtime.includes('filter(function(n){return !nativeDifficulty||!nativeDifficulty.contains(n)})'), 'difficulty buttons must never be cloned into the action cards');
 assert.ok(runtime.includes('if(menu&&menu.querySelectorAll("button").length>=2)'), 'isolated home must reject incomplete native menus');
 const premium=fs.readFileSync(path.join(root,'scripts','qarton-premium-home.js'),'utf8');
 assert.ok(premium.includes('window.__qartonHomeIsolationInstalled&&!playing(root)'), 'legacy premium adapter must not render a competing home screen');
