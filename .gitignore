@@ -4,3 +4,9 @@ node_modules/
 *.aab
 android/.gradle/
 android/local.properties
+
+# Generated web and native build outputs
+www/
+android/
+dist/
+coverage/

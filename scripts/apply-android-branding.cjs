@@ -1,8 +1,14 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const root = path.join('android','app','src','main');
-const res = path.join(root,'res');
-const write = (p, s) => { fs.mkdirSync(path.dirname(p), {recursive:true}); fs.writeFileSync(p,s); };
+
+const root = path.join('android', 'app', 'src', 'main');
+const res = path.join(root, 'res');
+
+function write(filePath, contents) {
+  fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  fs.writeFileSync(filePath, contents);
+}
+
 const foreground = `<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp" android:height="108dp"
@@ -18,11 +24,13 @@ const foreground = `<?xml version="1.0" encoding="utf-8"?>
     <path android:fillColor="#FFFFFF" android:pathData="M72,17a10,10 0,1 0,12 14a8,8 0,1 1,-12 -14z"/>
     <path android:fillColor="#FFFFFF" android:pathData="M87,20l2,5 5,0 -4,3 1,5 -4,-3 -4,3 1,-5 -4,-3 5,0z"/>
 </vector>`;
+
 const adaptive = `<?xml version="1.0" encoding="utf-8"?>
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
     <background android:drawable="@color/carthage_icon_background"/>
     <foreground android:drawable="@drawable/ic_carthage_foreground"/>
 </adaptive-icon>`;
+
 const legacy = `<?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp" android:height="108dp"
@@ -36,17 +44,41 @@ const legacy = `<?xml version="1.0" encoding="utf-8"?>
     <path android:fillColor="#FFFFFF" android:pathData="M73,17a10,10 0,1 0,12 14a8,8 0,1 1,-12 -14z"/>
     <path android:fillColor="#FFFFFF" android:pathData="M88,20l2,5 5,0 -4,3 1,5 -4,-3 -4,3 1,-5 -4,-3 5,0z"/>
 </vector>`;
-write(path.join(res,'drawable','ic_carthage_foreground.xml'),foreground);
-write(path.join(res,'values','carthage_icon.xml'),`<?xml version="1.0" encoding="utf-8"?>\n<resources><color name="carthage_icon_background">#17243D</color></resources>\n`);
-for (const name of ['ic_launcher','ic_launcher_round']) {
-  write(path.join(res,'mipmap-anydpi-v26',name+'.xml'),adaptive);
-  write(path.join(res,'mipmap-anydpi',name+'.xml'),legacy);
+
+write(path.join(res, 'drawable', 'ic_carthage_foreground.xml'), foreground);
+write(
+  path.join(res, 'values', 'carthage_icon.xml'),
+  `<?xml version="1.0" encoding="utf-8"?>\n<resources><color name="carthage_icon_background">#17243D</color></resources>\n`
+);
+
+for (const name of ['ic_launcher', 'ic_launcher_round']) {
+  write(path.join(res, 'mipmap-anydpi-v26', name + '.xml'), adaptive);
+  write(path.join(res, 'mipmap-anydpi', name + '.xml'), legacy);
 }
-const manifestPath = path.join(root,'AndroidManifest.xml');
-let manifest = fs.readFileSync(manifestPath,'utf8');
-manifest = manifest.replace(/<application\\b([^>]*)>/, (all, attrs) => {
-  let next = attrs.replace(/\\s+android:icon="[^"]*"/,'').replace(/\\s+android:roundIcon="[^"]*"/,'');
-  return '<application'+next+' android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round">';
-});
-fs.writeFileSync(manifestPath,manifest);
+
+const manifestPath = path.join(root, 'AndroidManifest.xml');
+let manifest = fs.readFileSync(manifestPath, 'utf8');
+const applicationPattern = /<application\b([^>]*)>/;
+const match = manifest.match(applicationPattern);
+
+if (!match) {
+  throw new Error('AndroidManifest.xml does not contain an application element.');
+}
+
+const attributes = match[1]
+  .replace(/\s+android:icon="[^"]*"/g, '')
+  .replace(/\s+android:roundIcon="[^"]*"/g, '');
+const replacement =
+  '<application' +
+  attributes +
+  ' android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round">';
+
+manifest = manifest.replace(applicationPattern, replacement);
+
+if (!/<application\b[^>]*android:icon="@mipmap\/ic_launcher"/.test(manifest) ||
+    !/<application\b[^>]*android:roundIcon="@mipmap\/ic_launcher_round"/.test(manifest)) {
+  throw new Error('Failed to apply the Carthage launcher icon references.');
+}
+
+fs.writeFileSync(manifestPath, manifest);
 console.log('Android launcher icon applied: Carthage red, gold, and navy adaptive icon.');
