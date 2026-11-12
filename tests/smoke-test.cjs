@@ -93,8 +93,8 @@ assert.ok(androidPrep.includes('carthage-startup-errors'), 'Android startup diag
 assert.ok(androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
 assert.ok(androidPrep.includes('menuActions.insertBefore(continueButton'), 'Continue must appear directly in the home menu');
 assert.ok(androidPrep.includes('var homeButtons=Array.from(root.querySelectorAll(\\"button\\"))'), 'navigation must inspect actual home selectors rather than a generic grid class');
-assert.ok(androidPrep.includes('var homeScreen=homeButtons.some'), 'home-only navigation must verify the Part 1 selector');
-assert.ok(androidPrep.includes('&&homeButtons.some'), 'home-only navigation must also verify the Part 2 selector');
+assert.ok(androidPrep.includes('var homeScreen=!playing&&((hasPartOne&&hasPartTwo)'), 'home-only navigation must require the Part 1 and Part 2 selectors or a verified native menu fallback');
+assert.ok(androidPrep.includes('actionGrid&&actionGrid.querySelectorAll(\\"button\\").length>=2'), 'home-only navigation must accept a populated native action grid as a stable selector');
 assert.ok(androidPrep.includes('qarton-button--primary'), 'injected continue control must use the shared QARTON primary button');
 assert.ok(androidPrep.includes('qarton-button--locked'), 'injected Part 3 control must use the shared QARTON locked button');
 assert.ok(androidPrep.includes('function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount()})}'), 'navigation DOM updates must be coalesced to one animation frame');
@@ -113,7 +113,7 @@ assert.ok(androidPrep.includes('يُفتح بعد إتمام الجزء الثا
 
 assert.ok(androidPrep.includes('carthage-fixed-home-style'), 'fixed home viewport CSS must be injected into Android builds');
 assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed home viewport runtime must be injected into Android builds');
-assert.ok(androidPrep.includes('var nativeMenu=root.querySelector(\\".home-actions\\")'), 'fixed viewport and QARTON adapter must recognize the native home grid even if its grid utility class is missing');
+assert.ok(androidPrep.includes('var actionGrid=root.querySelector(\\".home-actions\\")'), 'home navigation must recognize the native action grid even if its grid utility class is missing');
 assert.ok(androidPrep.includes('hasDifficulty&&buttons.length>=3'), 'fixed viewport must recover the home screen when button labels differ but the difficulty selector remains');
 assert.ok(androidPrep.includes('hasDifficulty&&homeButtons.length>=3'), 'home-only navigation must share the robust difficulty-selector fallback');
 const qartonHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-premium-home.js'), 'utf8');
