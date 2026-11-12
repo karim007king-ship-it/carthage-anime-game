@@ -54,6 +54,18 @@ assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){.stage-slide .
 assert.ok(cinematicPilot.includes('.wall-stone{position:absolute;display:block;'), 'flying rubble fragments must be positioned visible blocks');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#carthage-wall-impact-fx'), 'destruction effects must respect reduced-motion accessibility');
 const androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
+const qartonDesignSystem = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-design-system.css'), 'utf8');
+assert.ok(androidPrep.includes('qarton-design-system.css'), 'Android build must load the shared QARTON design system');
+assert.ok(androidPrep.includes('id="qarton-design-system"'), 'shared QARTON styles must be embedded in the packaged game');
+assert.ok(qartonDesignSystem.includes('--qarton-gold:#e8c477'), 'QARTON gold token must be defined centrally');
+assert.ok(qartonDesignSystem.includes('--qarton-red:#8b3039'), 'QARTON deep red token must be defined centrally');
+assert.ok(qartonDesignSystem.includes('.qarton-card{'), 'shared QARTON card component must exist');
+assert.ok(qartonDesignSystem.includes('.qarton-button--primary{'), 'shared QARTON primary button variant must exist');
+assert.ok(qartonDesignSystem.includes(':focus-visible'), 'shared QARTON controls must preserve visible keyboard focus');
+assert.ok(qartonDesignSystem.includes('prefers-reduced-motion:reduce'), 'shared QARTON motion must respect reduced-motion settings');
+assert.ok(androidPrep.includes('var hasPartOne=buttons.some'), 'fixed home viewport must require the real Part 1 selector');
+assert.ok(androidPrep.includes('var hasPartTwo=buttons.some'), 'fixed home viewport must require the real Part 2 selector');
+assert.ok(androidPrep.includes('return hasPartOne&&hasPartTwo'), 'story/cutscene screens must not trigger the home viewport lock');
 assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
 assert.ok(androidPrep.includes('carthage-save-now'), 'simple save button must exist');
 assert.ok(androidPrep.includes('carthage-continue-last'), 'one-tap continue button must exist');
