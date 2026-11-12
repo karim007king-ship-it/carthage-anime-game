@@ -22,8 +22,10 @@ The project currently has four layers:
 | File or folder | Owns | Must not own |
 | --- | --- | --- |
 | `index.html` | Original story and game engine | QARTON-wide design tokens |
-| `styles/qarton-design-system.css` | Shared QARTON visual primitives and semantic tokens | Story progression or Carthage-only layout rules |\n| `styles/qarton-carthage-home.css` | Carthage-specific home layout and fixed viewport rules | Shared studio tokens or story logic |
-| `scripts/qarton-premium-home.js` | Gameplay presentation adapter and legacy home lifecycle fallback | Reimplementation of story actions or a competing isolated home screen |\n| `scripts/qarton-isolated-home.js` | Independent QARTON home renderer; delegates all actions to native React buttons | Story progression, save schema, or duplicate game actions |
+| `styles/qarton-design-system.css` | Shared QARTON visual primitives and semantic tokens | Story progression or Carthage-only layout rules |
+| `styles/qarton-carthage-home.css` | Carthage-specific home layout and fixed viewport rules | Shared studio tokens or story logic |
+| `scripts/qarton-premium-home.js` | Gameplay presentation adapter and legacy home lifecycle fallback | Reimplementation of story actions or a competing isolated home screen |
+| `scripts/qarton-isolated-home.js` | Independent QARTON home renderer; delegates all actions to native React buttons | Story progression, save schema, or duplicate game actions |
 | `scripts/prepare-web.cjs` | Deterministic Android preparation and compatibility patches | Manual edits to generated Android assets |
 | `scripts/apply-android-branding.cjs` | Launcher artwork and manifest icon references | Game UI or save behavior |
 | `tests/` | Regression checks for source, saves, and build helpers | Runtime production behavior |
