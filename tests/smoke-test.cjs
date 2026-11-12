@@ -129,7 +129,7 @@ assert.ok(qartonDesignSystem.includes('--q-cream:var(--qarton-cream)'), 'shared 
 assert.ok(!qartonHome.includes('--q-gold:'), 'Carthage adapter must not duplicate shared design tokens');
 assert.ok(qartonHome.includes('function boot(){if(observer)return;'), 'home-only stylesheet must not be injected before a verified home menu exists');
 assert.ok(qartonHome.includes('قــــرطــــاج'), 'premium home must show the Carthage title');
-assert.ok(qartonHome.includes('.home-actions.grid button'), 'premium home must professionally style the existing real menu actions');
+assert.ok(carthageHomeCss.includes('.home-actions.grid button,#root.carthage-home-locked #carthage-part3-start'), 'Carthage home stylesheet must professionally style the existing real menu actions');
 assert.ok(qartonHome.includes('game-timer'), 'premium home must disappear during gameplay');
 assert.ok(qartonHome.includes('function findMenu(root)'), 'QARTON runtime must detect the live menu even when its original CSS classes differ');
 assert.ok(qartonHome.includes('function markAchievements(root){\nif(root.querySelector(".qarton-achievements"))return;'), 'achievement discovery must not rescan the full home DOM after its section is already marked');
