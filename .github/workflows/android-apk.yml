@@ -10,6 +10,7 @@ on:
       - "capacitor.config.json"
       - "tests/**"
       - "scripts/**"
+      - "styles/**"
       - ".github/workflows/android-apk.yml"
   pull_request:
     branches: [main]
@@ -121,6 +122,7 @@ jobs:
             'carthageCinematicImpact',
             'carthage-fixed-home-runtime',
             'qarton-premium-home-runtime',
+            'qarton-design-system',
             'qarton-brand-row',
             'qarton-home-info'
           ];
