@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const root = path.join(__dirname, '..');
 const home = fs.readFileSync(path.join(root, 'scripts/qarton-main-tree.js'), 'utf8');
+const premium = fs.readFileSync(path.join(root, 'scripts/qarton-premium-home.js'), 'utf8');
 const prep = fs.readFileSync(path.join(root, 'scripts/prepare-web.cjs'), 'utf8');
 const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 const workflow = fs.readFileSync(path.join(root, '.github/workflows/android-apk.yml'), 'utf8');
@@ -134,6 +135,12 @@ assert.ok(home.includes('إعدادات الصوت المتاحة فعلياً �
 assert.ok(!/localStorage|sessionStorage|shiganshina-(slots|autosave)/.test(home), 'home navigation must not access save storage');
 assert.ok(!/cloneNode|replaceWith\(|insertBefore\(|appendChild\(original/.test(home), 'original React-owned controls must not be cloned or moved');
 assert.ok(home.includes('shell.style.visibility="hidden"'), 'original story menu must be hidden behind the tree, not deleted');
+
+// Home-only observers must stop doing broad scans during gameplay, then resume after a stable return.
+assert.ok(premium.includes('if(observer){observer.disconnect();observer=null}'), 'premium home observer must disconnect while the story is active');
+assert.ok(premium.includes('gameplayObserver.observe(root,{subtree:true,childList:true})'), 'premium home must use a lightweight gameplay return watcher');
+assert.ok(premium.includes('returnTimer=window.setTimeout(function(){returnTimer=0;var current=document.getElementById("root");if(!current||playing(current))return;gameplayObserver.disconnect();gameplayObserver=null;boot()},120)'), 'premium home must debounce the return transition before restarting its home observer');
+assert.ok(prep.includes('else if(!playing&&saveButton)saveButton.remove();if(playing)return;var continueButton='), 'native navigation must skip home-menu and save scans while gameplay is active');
 
 // Android packaging must inject and verify the new runtime.
 assert.ok(prep.includes('qarton-main-tree-runtime'), 'Android preparation must inject the main tree');
