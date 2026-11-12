@@ -16,12 +16,29 @@ function addStyle(){if(document.getElementById("qarton-isolated-home-style"))ret
 function isPlaying(){return !!(root&&root.querySelector(".game-timer"))}
 function findNativeMenu(){
  if(!root)return null;
- var m=root.querySelector(".home-actions");if(m&&m.querySelectorAll("button").length)return m;
- var bs=Array.from(root.querySelectorAll("button"));
- var a=bs.find(function(b){return /ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test((b.textContent||"").trim())});
- var c=bs.find(function(b){return /الجزء الثاني/.test((b.textContent||"").trim())||b.id==="btn-part2"});
- if(!a||!c)return null;
- var p=a.parentElement;while(p&&p!==root){if(p.contains(c)&&p.querySelectorAll("button").length>=2)return p;p=p.parentElement}return null;
+ var menu=root.querySelector(".home-actions");
+ if(menu&&menu.querySelectorAll("button").length>=2)return menu;
+ var buttons=Array.from(root.querySelectorAll("button"));
+ var partOne=buttons.find(function(b){return /ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test((b.textContent||"").trim())});
+ var partTwo=buttons.find(function(b){return /الجزء الثاني/.test((b.textContent||"").trim())||b.id==="btn-part2"});
+ var difficulty=!!root.querySelector('[aria-label="اختار الصعوبة"]');
+ if(partOne&&partTwo){
+  var candidate=partOne.parentElement;
+  while(candidate&&candidate!==root){
+   if(candidate.contains(partTwo)&&candidate.querySelectorAll("button").length>=2)return candidate;
+   candidate=candidate.parentElement;
+  }
+ }
+ // The difficulty selector is a stable home-screen signature when labels change.
+ if(difficulty&&buttons.length>=3){
+  var first=buttons.find(function(b){return /ابدأ|جديد|الجزء|متابعة|حفظ|إعدادات/.test((b.textContent||"").trim())})||buttons[0];
+  var fallback=first&&first.parentElement;
+  while(fallback&&fallback!==root){
+   if(fallback.querySelectorAll("button").length>=3)return fallback;
+   fallback=fallback.parentElement;
+  }
+ }
+ return null;
 }
 function cleanLabel(s){return(s||"").replace(/\s+/g," ").trim()}
 function kind(t,b){if(b.id==="carthage-continue-last"||/متابعة|استكمال|آخر حفظ/.test(t))return"continue";if(/ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test(t))return"primary";if(/الجزء الثالث|الجزء 3/.test(t))return"locked";return"secondary"}
