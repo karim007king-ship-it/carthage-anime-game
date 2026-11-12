@@ -117,98 +117,50 @@ assert.ok(androidPrep.includes('var actionGrid=root.querySelector'), 'home navig
 assert.ok(androidPrep.includes('hasDifficulty&&buttons.length>=3'), 'fixed viewport must recover the home screen when button labels differ but the difficulty selector remains');
 assert.ok(androidPrep.includes('hasDifficulty&&homeButtons.length>=3'), 'home-only navigation must share the robust difficulty-selector fallback');
 const qartonHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-premium-home.js'), 'utf8');
+const qartonIsolatedHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-isolated-home.js'), 'utf8');
 const carthageHomeCss = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-carthage-home.css'), 'utf8');
-assert.ok(androidPrep.includes('qarton-carthage-home.css'), 'Android preparation must load Carthage-specific QARTON home CSS');
-assert.ok(androidPrep.includes('id="qarton-premium-home-style" media="not all"'), 'Carthage home CSS must remain inactive until the home screen is verified');
-assert.ok(qartonHome.includes('function style(){var sheet=document.getElementById("qarton-premium-home-style");if(sheet)sheet.media="all"}'), 'QARTON runtime must activate the dedicated stylesheet only after finding the home menu');
-assert.ok(!qartonHome.includes('var css='), 'QARTON runtime must not embed a duplicate stylesheet string');
-assert.ok(carthageHomeCss.includes('.home-actions.grid button'), 'Carthage home stylesheet must own native menu presentation');
-assert.ok(carthageHomeCss.includes('body.carthage-home-locked'), 'Carthage home stylesheet must own the fixed viewport rules');
-assert.ok(qartonHome.includes('QARTON'), 'premium home must show the QARTON studio identity');
-assert.ok(qartonHome.includes('CULTURE • POWER • CINEMA'), 'premium home must show the studio tagline');
+assert.ok(androidPrep.includes('qarton-carthage-home.css'), 'Android preparation must retain the legacy Carthage stylesheet as an inactive rollback asset');
+assert.ok(androidPrep.includes('id="qarton-premium-home-style" media="not all"'), 'legacy Carthage home CSS must remain disabled');
+assert.ok(carthageHomeCss.includes('body.carthage-home-locked'), 'legacy home CSS must remain available for rollback');
 assert.ok(qartonDesignSystem.includes('--q-gold:var(--qarton-gold)'), 'legacy-compatible QARTON aliases must be owned by the shared design system');
 assert.ok(qartonDesignSystem.includes('--q-cream:var(--qarton-cream)'), 'shared cream alias must be defined centrally');
-assert.ok(!qartonHome.includes('--q-gold:'), 'Carthage adapter must not duplicate shared design tokens');
-assert.ok(qartonHome.includes('function boot(){if(observer)return;'), 'home-only stylesheet must not be injected before a verified home menu exists');
-assert.ok(qartonHome.includes('قــــرطــــاج'), 'premium home must show the Carthage title');
-assert.ok(carthageHomeCss.includes('.home-actions.grid button,#root.carthage-home-locked #carthage-part3-start'), 'Carthage home stylesheet must professionally style the existing real menu actions');
-assert.ok(qartonHome.includes('game-timer'), 'premium home must disappear during gameplay');
-assert.ok(qartonHome.includes('function findMenu(root)'), 'QARTON runtime must detect the live menu even when its original CSS classes differ');
-assert.ok(qartonHome.includes('function markAchievements(root){\nif(root.querySelector(".qarton-achievements"))return;'), 'achievement discovery must not rescan the full home DOM after its section is already marked');
-assert.ok(qartonHome.includes('var hasPartOne=buttons.some'), 'QARTON must require the real Part 1 selector before treating a screen as home');
-assert.ok(qartonHome.includes('var hasPartTwo=buttons.some'), 'QARTON must require the real Part 2 selector before treating a screen as home');
-assert.ok(qartonHome.includes('if(!difficulty||buttons.length<3)return null'), 'generic story screens must not be styled as home when the unique difficulty selector is absent');
-assert.ok(qartonHome.includes('var menu=root.querySelector(".home-actions.grid")'), 'the native home grid must be recognized even while React is rendering/rewording its buttons');
-assert.ok(qartonHome.includes('var looseMenu=root.querySelector(".home-actions")'), 'QARTON must recover if the native menu loses only its grid utility class');
-assert.ok(qartonHome.includes('[aria-label="اختار الصعوبة"]'), 'QARTON must use the unique difficulty selector as a stable fallback home identity');
-assert.ok(qartonHome.includes('if(menu&&Array.from(menu.querySelectorAll("button")).length<2)menu=null'), 'an incomplete or empty action grid must not be misclassified as the home menu');
-assert.ok(!qartonHome.includes('if(!hasPartOne||!hasPartTwo)return null;\nvar menu=root.querySelector(".home-actions.grid")'), 'missing Part 1/Part 2 labels must not disable an already identified native home grid');
-const findMenuSource = qartonHome.slice(qartonHome.indexOf('function findMenu(root){'), qartonHome.indexOf('function decorate(root){'));
-const findMenu = vm.runInNewContext('(' + findMenuSource + ')');
-const nativeMenu = { querySelectorAll: () => [{}, {}], closest: () => null, parentElement: null };
-const stagedHomeRoot = { querySelector: selector => selector === '.home-actions.grid' ? nativeMenu : null, querySelectorAll: () => [] };
-assert.equal(findMenu(stagedHomeRoot), nativeMenu, 'QARTON must detect the real home grid before localized action labels finish rendering');
-const genericStoryRoot = { querySelector: () => null, querySelectorAll: () => [{textContent:'ابدأ'}, {textContent:'متابعة'}] };
-assert.equal(findMenu(genericStoryRoot), null, 'generic story buttons must not be mistaken for the home menu');
-const fallbackButtons = [{textContent:'قائمة',parentElement:null},{textContent:'متابعة',parentElement:null},{textContent:'إعدادات',parentElement:null}];
-const fallbackShell = {classList:{add(){} }};
-const fallbackMenu = {
-  parentElement:fallbackShell,
-  classList:{add(){}},
-  closest:()=>null,
-  querySelectorAll:()=>fallbackButtons
-};
-fallbackButtons.forEach(button=>{button.parentElement=fallbackMenu});
-const difficultyHomeRoot = {
-  querySelector:selector=>selector==='[aria-label="اختار الصعوبة"]'?{}:null,
-  querySelectorAll:()=>fallbackButtons
-};
-assert.equal(findMenu(difficultyHomeRoot), fallbackMenu, 'QARTON must recover a home action group from the stable difficulty selector when button labels have changed');
-assert.ok(qartonHome.includes('candidateButtons.length>=3&&candidateHasPartTwo'), 'recovered menu must contain the Part 2 selector as well as multiple actions');
-assert.ok(qartonHome.includes('menu.classList.add("home-actions","grid")'), 'recovered menu must receive the expected grid styling hook');
-assert.ok(qartonHome.includes('if(!shell&&menu.parentElement&&menu.parentElement!==root)shell=menu.parentElement'), 'QARTON runtime must fall back to the real parent shell when utility classes differ');
-assert.ok(qartonHome.includes('menu.closest(".home-actions.flex")'), 'QARTON runtime must anchor styling to the actual outer home shell');
-assert.ok(qartonHome.includes('classList.add("qarton-home-shell","qarton-card","qarton-ui")'), 'QARTON runtime must mark the home shell with shared design-system components');
-assert.ok(qartonHome.includes('root.classList.add("carthage-home-locked")'), 'QARTON runtime must activate the CSS scope on the live root');
-assert.ok(qartonHome.includes('attributes:true,attributeFilter:["class"]'), 'QARTON runtime must restore its presentation after React updates wrapper classes');
-assert.ok(qartonHome.includes('observer.observe(document.documentElement'), 'QARTON runtime must detect the home screen even if React mounts after the runtime starts');
-assert.ok(carthageHomeCss.includes('border:1px solid #e8c47788'), 'QARTON home shell must have a visibly distinct premium card frame');
-assert.ok(!carthageHomeCss.includes('\\\\n#root'), 'extracted QARTON CSS must not contain a literal backslash-n that invalidates the selector');
-assert.ok(carthageHomeCss.includes('#root.carthage-home-locked .qarton-home-shell{background:'), 'extracted QARTON CSS must include the premium home shell styling');
-assert.ok(!carthageHomeCss.includes('.qarton-home-shell>div.mt-4.grid{display:none!important}'), 'QARTON must never hide the direct child that contains the primary home menu');
-
-
-assert.ok(androidPrep.includes('qarton-premium-home-runtime'), 'approved QARTON home presentation runtime must be injected into Android builds');
-assert.ok(carthageHomeCss.includes('#qarton-home-brand{position:fixed'), 'QARTON brand header must be anchored inside the fixed home viewport');
-assert.ok(!carthageHomeCss.includes('#root.carthage-home-locked \\n#root.carthage-home-locked #qarton-home-brand'), 'QARTON hide-rule selector must not contain an impossible root descendant');
-assert.ok(carthageHomeCss.includes('#root.carthage-home-locked #qarton-home-brand,#root.carthage-home-locked #qarton-home-info{display:none!important}'), 'QARTON home identity hide rule must target the two fixed overlays directly');
-assert.ok(carthageHomeCss.includes('#qarton-home-info{position:fixed'), 'QARTON footer must be anchored inside the fixed home viewport');
-assert.ok(carthageHomeCss.includes('max-height:650px'), 'home identity must compact on short phone screens');
-assert.ok(carthageHomeCss.includes('prefers-reduced-motion:reduce'), 'home presentation must respect reduced-motion accessibility');
-assert.doesNotThrow(() => new vm.Script(qartonHome, { filename: 'qarton-premium-home.js' }), 'premium home runtime must parse as executable JavaScript');
-assert.ok(qartonHome.includes('if(window.__qartonPremiumHomeInstalled)return'), 'premium home runtime must be idempotent across repeated injection');
-assert.ok(qartonHome.includes('function playing(root)'), 'home runtime must distinguish gameplay from the home menu');
-assert.ok(qartonHome.includes('function decorateGameplay(root)'), 'QARTON adapter must apply the shared design system during gameplay');
-assert.ok(qartonHome.includes('root.classList.add("qarton-game-ui")'), 'active gameplay must receive a dedicated QARTON scope');
-assert.ok(qartonHome.includes('.dialogue-panel,.theatre-text,.search-layer'), 'QARTON adapter must style dialogue and search surfaces');
-assert.ok(qartonHome.includes('.dialogue-panel button,.choice-stack button,.game-choices button,.game-pill-btn,.map-pill'), 'QARTON adapter must style story choices and HUD controls');
-assert.ok(qartonHome.includes('decorateGameplay(currentRoot)'), 'newly rendered gameplay controls must be styled after React updates');
 assert.ok(qartonDesignSystem.includes('.qarton-game-card{'), 'shared QARTON gameplay surface primitive must exist');
 assert.ok(qartonDesignSystem.includes('.qarton-game-control{'), 'shared QARTON gameplay control primitive must exist');
-assert.ok(qartonDesignSystem.includes('.qarton-game-control:focus-visible'), 'gameplay controls must retain visible keyboard focus');
-assert.ok(qartonHome.includes('if(playing(root))'), 'home styling must be released when gameplay begins');
-assert.ok(qartonHome.includes('var menu=findMenu(root);\nif(!menu)return;'), 'QARTON home lock must only activate after a verified home menu is found');
-assert.ok(!qartonHome.includes('var start=Array.from(root.querySelectorAll("button")).find(function(b){return /ابدأ|متابعة|الجزء/'), 'generic story buttons must never trigger home styling');
-assert.ok(qartonHome.includes('function watchGameplayEnd(root)'), 'home observer must restart only after gameplay actually ends');
-assert.ok(qartonHome.includes('if(observer){observer.disconnect();observer=null}watchGameplayEnd(root)'), 'home observer must pause during gameplay and avoid reclassifying story screens');
-assert.ok(qartonHome.includes('gameplayObserver.observe(root,{subtree:true,childList:true,characterData:true})'), 'gameplay lifecycle observer must watch for a real return to the menu');
-assert.ok(qartonHome.includes('requestAnimationFrame(function(){queued=false;mount()})'), 'DOM mutation bursts must be coalesced into one animation-frame update');
-assert.ok(qartonHome.includes('observer.observe(document.documentElement,{subtree:true,childList:true,characterData:true,attributes:true'), 'runtime must recover when React replaces or updates the menu');
-
-assert.ok(androidPrep.includes('carthage-home-locked'), 'home menu must toggle a dedicated fixed viewport state');
-assert.ok(androidPrep.includes('stopHomeScroll'), 'home page vertical touch and wheel scrolling must be blocked');
-assert.ok(androidPrep.includes('.game-timer'), 'home lock must detect active story gameplay and release the viewport');
-
+assert.ok(qartonIsolatedHome.includes('QARTON'), 'isolated home must show the QARTON studio identity');
+assert.ok(qartonIsolatedHome.includes('CULTURE • POWER • CINEMA'), 'isolated home must show the studio tagline');
+assert.ok(qartonIsolatedHome.includes('آخر يوم في قرطاج'), 'isolated home must show the Carthage game title');
+assert.ok(qartonIsolatedHome.includes('HOME:"HOME",GAME:"GAME",TRANSITION:"TRANSITION"'), 'isolated home must own the three explicit lifecycle states');
+assert.ok(qartonIsolatedHome.includes('window.__qartonSetAppState'), 'React screen lifecycle must have a central state setter');
+assert.ok(qartonIsolatedHome.includes('window.__QARTON_HOME_READY__=true'), 'QARTON home must expose an explicit ready marker');
+assert.ok(!qartonIsolatedHome.includes('.game-timer')&&!qartonIsolatedHome.includes('isPlaying'), 'isolated home visibility must never be inferred from timer DOM');
+assert.ok(qartonIsolatedHome.includes('if(state==="GAME"){showGame();return}'), 'only explicit GAME state may reveal the story root');
+assert.ok(qartonIsolatedHome.includes('if(state==="TRANSITION"){showTransition();return}'), 'TRANSITION must have a dedicated handoff path');
+assert.ok(qartonIsolatedHome.includes('menu.style.visibility="hidden";menu.setAttribute("data-qarton-transition-hidden","true")'), 'native home actions must stay hidden while confirmation dialogs remain usable');
+assert.ok(qartonIsolatedHome.includes('n.click()'), 'every QARTON card must delegate to its original React handler');
+assert.ok(qartonIsolatedHome.includes('forEach(function(n,index){var t=clean(n.textContent);if(!t)return'), 'every native action button must receive its own QARTON card');
+assert.ok(!qartonIsolatedHome.includes('seen.has(t)'), 'duplicate native labels must not silently drop action cards');
+assert.ok(qartonIsolatedHome.includes('if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))'), 'canceling a native confirmation must restore QARTON HOME');
+assert.ok(!qartonHome.includes('findMenu')&&!qartonHome.includes('.game-timer')&&!qartonHome.includes('home-actions'), 'gameplay adapter must not detect or render the home menu');
+assert.ok(qartonHome.includes('window.__QARTON_APP_STATE__!=="GAME"'), 'gameplay adapter must use the central lifecycle state');
+assert.ok(qartonHome.includes('function decorateGameplay(node)'), 'QARTON adapter must style active gameplay');
+assert.ok(qartonHome.includes('.dialogue-panel,.theatre-text,.search-layer'), 'QARTON adapter must style dialogue and search surfaces');
+assert.ok(qartonHome.includes('.dialogue-panel button,.choice-stack button,.game-choices button,.game-pill-btn,.map-pill'), 'QARTON adapter must style story choices and HUD controls');
+assert.ok(qartonHome.includes('window.addEventListener("qarton:statechange",schedule)'), 'gameplay adapter must respond to central state changes');
+assert.ok(qartonHome.includes('observer.observe(root,{subtree:true,childList:true,characterData:true})'), 'newly rendered gameplay controls must be styled after React updates');
+assert.ok(androidPrep.includes('var appState=window.__QARTON_APP_STATE__'), 'navigation visibility must use central QARTON state');
+assert.ok(androidPrep.includes('var homeScreen=appState==='), 'home navigation controls must be visible only in HOME');
+assert.ok(androidPrep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'), 'fixed viewport behavior must use central state, not DOM selectors');
+assert.ok(androidPrep.includes('window.addEventListener("qarton:statechange",schedule)'), 'all navigation and viewport adapters must react to central state changes');
+assert.ok(androidPrep.includes('window.__qartonSetAppState(f==="game"?"GAME"'), 'Android preparation must wire the actual React screen state to QARTON');
+assert.ok(androidPrep.includes('qarton-isolated-home-runtime'), 'isolated QARTON home must be injected into Android builds');
+assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed viewport runtime must remain in Android builds');
+assert.ok(androidPrep.includes('carthage-home-locked'), 'HOME state must retain the fixed viewport lock');
+assert.ok(carthageHomeCss.includes('prefers-reduced-motion:reduce'), 'legacy home presentation must retain reduced-motion accessibility');
+assert.doesNotThrow(() => new vm.Script(qartonHome, { filename: 'qarton-premium-home.js' }), 'gameplay adapter must parse as executable JavaScript');
+assert.doesNotThrow(() => new vm.Script(qartonIsolatedHome, { filename: 'qarton-isolated-home.js' }), 'isolated home runtime must parse as executable JavaScript');
+assert.ok(qartonHome.includes('if(window.__qartonPremiumHomeInstalled)return'), 'gameplay adapter must be idempotent');
+assert.ok(qartonIsolatedHome.includes('if(window.__qartonHomeIsolationInstalled)return'), 'isolated home must be idempotent');
+assert.ok(qartonHome.includes('root.classList.add("qarton-game-ui")'), 'active gameplay must receive a dedicated QARTON scope');
 
 /* Story-flow guards: new game -> intro -> chapter 1 -> dialogue -> next chapter. */
 assert.ok(html.includes('let Vv=()=>{let P=Ff[jf]'), 'new game handler must remain present');
