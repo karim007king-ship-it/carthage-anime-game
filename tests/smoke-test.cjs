@@ -126,8 +126,8 @@ assert.ok(qartonHome.includes('var hasPartTwo=buttons.some'), 'QARTON must requi
 assert.ok(qartonHome.includes('if(!hasPartOne||!hasPartTwo)return null'), 'story screens with generic start/continue buttons must not be styled as the home menu');
 assert.ok(qartonHome.includes('var menu=root.querySelector(".home-actions.grid")'), 'the native home grid must be recognized even while React is rendering/rewording its buttons');
 assert.ok(qartonHome.includes('if(menu&&Array.from(menu.querySelectorAll("button")).length<2)menu=null'), 'an incomplete or empty action grid must not be misclassified as the home menu');
-assert.ok(!qartonHome.includes('if(!hasPartOne||!hasPartTwo)return null;\\nvar menu=root.querySelector(".home-actions.grid")'), 'missing Part 1/Part 2 labels must not disable an already identified native home grid');
-const findMenuSource = qartonHome.slice(qartonHome.indexOf('function findMenu(root){'), qartonHome.indexOf('\\nfunction decorate(root){'));
+assert.ok(!qartonHome.includes('if(!hasPartOne||!hasPartTwo)return null;\nvar menu=root.querySelector(".home-actions.grid")'), 'missing Part 1/Part 2 labels must not disable an already identified native home grid');
+const findMenuSource = qartonHome.slice(qartonHome.indexOf('function findMenu(root){'), qartonHome.indexOf('\nfunction decorate(root){'));
 const findMenu = vm.runInNewContext('(' + findMenuSource + ')');
 const nativeMenu = { querySelectorAll: () => [{}, {}], closest: () => null, parentElement: null };
 const stagedHomeRoot = { querySelector: selector => selector === '.home-actions.grid' ? nativeMenu : null, querySelectorAll: () => [] };
