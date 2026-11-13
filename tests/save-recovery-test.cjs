@@ -71,4 +71,52 @@ const malformed = boot({
 });
 assert.equal(malformed.get("shiganshina-slots-v1")[0].chapter, 5, "save records missing required restoration arrays must fall back to the recovery seed");
 
-console.log('PASS: recovery seed restores chapter 5, preserves complete saves, and rejects incomplete save records.');
+
+// Automatic saves must refresh only the autosave record, never overwrite a numbered manual slot.
+const saveDeclaration = source.indexOf('const saveHandler = ' + String.fromCharCode(96));
+assert.notEqual(saveDeclaration, -1, 'save handler declaration must exist');
+const saveCodeStart = saveDeclaration + ('const saveHandler = ' + String.fromCharCode(96)).length;
+const saveCodeEnd = source.indexOf(String.fromCharCode(96) + ';', saveCodeStart);
+assert.notEqual(saveCodeEnd, -1, 'save handler template must terminate');
+const saveCode = source.slice(saveCodeStart, saveCodeEnd);
+const storedChapterFive = {
+  slot: 1, chapter: 5, sceneIdx: 4, savedAtMs: 1700000000000,
+  state: { time: 52, health: 100, courage: 112, clues: ['crack'], inventory: ['sword'] },
+  flags: [], visited: [], usedHotspots: [], choicesHistory: []
+};
+const persisted = new Map([
+  ['shiganshina-slots-v1', JSON.stringify([storedChapterFive, null, null])],
+  ['shiganshina-autosave-v1', JSON.stringify(storedChapterFive)]
+]);
+const saveContext = {
+  T: 9, an: Array.from({ length: 10 }, () => ({ place: 'مشهد الاختبار' })),
+  L: { time: 40, health: 90, courage: 120, clues: ['alley'], inventory: ['key'] },
+  K: ['new-game'], v9: [0, 1], af: ['door'], jf: 'normal', A9: 0, yu: ['new choice'],
+  B: 2, e9: true, Qt: 'new choice', cu: 'part1', mu: false,
+  tv: { current: [] }, Zn: [],
+  localStorage: {
+    getItem(key) { return persisted.has(key) ? persisted.get(key) : null; },
+    setItem(key, value) { persisted.set(key, String(value)); }
+  },
+  $8(update) { this.slotState = update(this.slotState || [storedChapterFive, null, null]); },
+  te(slot) { this.selectedSlot = slot; },
+  fu() { return 'وقت الاختبار'; }, nn(value) { return String(value); },
+  G(message) { this.lastToast = message; }, Date
+};
+vm.runInNewContext(saveCode, saveContext);
+const autoResult = saveContext.ur(1, true);
+assert.ok(autoResult, 'automatic save must complete');
+assert.equal(JSON.parse(persisted.get('shiganshina-slots-v1'))[0].chapter, 5,
+  'automatic save must preserve the existing chapter 5 manual slot');
+assert.equal(JSON.parse(persisted.get('shiganshina-autosave-v1')).sceneIdx, 9,
+  'automatic save must still refresh the autosave record');
+assert.equal(saveContext.slotState, undefined,
+  'automatic save must not replace the in-memory manual slot list');
+const manualResult = saveContext.ur(2, false);
+assert.ok(manualResult, 'manual save must complete');
+const afterManual = JSON.parse(persisted.get('shiganshina-slots-v1'));
+assert.equal(afterManual[0].chapter, 5, 'manual save to slot 2 must preserve slot 1');
+assert.equal(afterManual[1].sceneIdx, 9, 'manual save must write the selected numbered slot');
+assert.equal(saveContext.selectedSlot, 2, 'manual save must update the selected slot');
+
+console.log('PASS: recovery seed, save validation, and autosave/manual-slot isolation checks.');
