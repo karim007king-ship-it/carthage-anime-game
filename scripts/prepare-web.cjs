@@ -51,7 +51,7 @@ replaceOnce(
 // confirmation UI so React's hidden legacy modal is never used.
 replaceOnce(
   '},L9=(P)=>{',
-  '};window.__carthageStartNewGame=()=>Vv();window.__carthageHasSave=()=>Xn.some(Boolean);let L9=(P)=>{',
+  '};window.__carthageStartNewGame=()=>{if(!Xn.some(slot=>!slot)){G("كل خانات الحفظ ممتلئة — حرّر خانة قبل بدء لعبة جديدة حتى لا تفقد تقدمك");return false}Vv();return true};window.__carthageHasSave=()=>Xn.some(Boolean);window.__carthageHasFreeSlot=()=>Xn.some(slot=>!slot);let L9=(P)=>{',
   'expose new-game action and saved-slot status to the isolated QARTON home'
 );
 
