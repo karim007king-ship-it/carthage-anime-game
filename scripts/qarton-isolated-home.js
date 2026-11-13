@@ -43,14 +43,15 @@ function showNewGameConfirm(nativeButton){
  var dialog=document.createElement("section");dialog.className="qh-confirm";dialog.setAttribute("role","dialog");dialog.setAttribute("aria-modal","true");dialog.setAttribute("aria-labelledby","qh-confirm-title");
  dialog.style.cssText="width:min(100%,420px);padding:22px 18px;border:1px solid #e8c477;border-radius:20px;background:linear-gradient(145deg,#20293a,#090d15);box-shadow:0 18px 60px #000b;text-align:center";
  var title=document.createElement("h2");title.id="qh-confirm-title";title.textContent="تبدأ لعبة جديدة؟";title.style.cssText="margin:0;color:#fff0d2;font-size:20px;font-weight:900";
- var note=document.createElement("p");note.textContent="سيبدأ الجزء الأول في خانة جديدة. حفظك السابق سيبقى محفوظًا ولن يتم حذفه.";note.style.cssText="margin:12px 0 18px;color:#d9c9ac;font-size:13px;line-height:1.9";
+ var canStart=typeof window.__carthageHasFreeSlot!=="function"||window.__carthageHasFreeSlot();
+ var note=document.createElement("p");note.textContent=canStart?"سيبدأ الجزء الأول في خانة جديدة. حفظك السابق سيبقى محفوظًا ولن يتم حذفه.":"خانات الحفظ الثلاث ممتلئة. حرّر خانة حفظ أولاً حتى لا نفقد أي تقدم سابق.";note.style.cssText="margin:12px 0 18px;color:#d9c9ac;font-size:13px;line-height:1.9";
  var actions=document.createElement("div");actions.style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:9px";
  var cancel=document.createElement("button");cancel.type="button";cancel.className="qh-action";cancel.textContent="إلغاء";cancel.addEventListener("click",function(){shade.remove()});
- var confirm=document.createElement("button");confirm.type="button";confirm.className="qh-action";confirm.dataset.kind="primary";confirm.textContent="ابدأ من جديد";
+ var confirm=document.createElement("button");confirm.type="button";confirm.className="qh-action";confirm.dataset.kind="primary";confirm.textContent=canStart?"ابدأ من جديد":"لا توجد خانة فارغة";confirm.disabled=!canStart;
  confirm.addEventListener("click",function(){
   if(typeof window.__carthageStartNewGame!=="function"){shade.remove();setState("HOME","new-game-handler-missing");return}
   setState("TRANSITION","confirm-new-game");
-  try{window.__carthageStartNewGame()}catch(e){setState("HOME","new-game-error");throw e}
+  try{if(window.__carthageStartNewGame()===false){setState("HOME","new-game-blocked");return}}catch(e){setState("HOME","new-game-error");throw e}
  });
  actions.append(cancel,confirm);dialog.append(title,note,actions);shade.appendChild(dialog);overlay.appendChild(shade);confirm.focus();
 }
@@ -75,7 +76,7 @@ function render(){
  Array.from(menu.querySelectorAll("button")).filter(function(n){return !difficulty||!difficulty.contains(n)}).forEach(function(n,index){var t=clean(n.textContent);if(!t)return;var b=document.createElement("button");b.type="button";b.className="qh-action";b.dataset.kind=kind(t,n);b.dataset.actionIndex=String(index);b.textContent=t;b.disabled=!!n.disabled;b.addEventListener("click",function(){
  if(b.dataset.kind==="primary"&&typeof window.__carthageHasSave==="function"&&window.__carthageHasSave()){showNewGameConfirm(n);return}
  setState("TRANSITION","home-action");
- try{if(b.dataset.kind==="primary"&&typeof window.__carthageStartNewGame==="function")window.__carthageStartNewGame();else n.click()}
+ try{if(b.dataset.kind==="primary"&&typeof window.__carthageStartNewGame==="function"){if(window.__carthageStartNewGame()===false)setState("HOME","new-game-blocked")}else n.click()}
  catch(e){setState("HOME","action-error");throw e}
 });actions.appendChild(b)});
  if(!actions.children.length){var empty=document.createElement("div");empty.className="qh-status";empty.textContent="لم تظهر خيارات القائمة بعد. الواجهة القديمة تبقى مخفية.";actions.appendChild(empty)}
