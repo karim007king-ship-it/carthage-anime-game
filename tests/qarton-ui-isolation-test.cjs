@@ -31,7 +31,10 @@ assert.ok(runtime.includes('function showNewGameConfirm(nativeButton)'),'new-gam
 assert.ok(runtime.includes('window.__carthageHasSave()'),'QARTON must detect saved progress before starting a fresh game');
 assert.ok(runtime.includes('window.__carthageStartNewGame()'),'QARTON confirmation must call the real React new-game handler directly');
 assert.ok(runtime.includes('حفظك السابق سيبقى محفوظًا ولن يتم حذفه'),'new-game confirmation must explicitly preserve existing saves');
-assert.ok(prep.includes('window.__carthageStartNewGame=()=>Vv()'),'Android preparation must expose the real new-game handler');
+assert.ok(prep.includes('window.__carthageStartNewGame=()=>{if(!Xn.some(slot=>!slot))'),'Android preparation must block new games when all save slots are occupied');
+assert.ok(prep.includes('window.__carthageHasFreeSlot=()=>Xn.some(slot=>!slot)'),'Android preparation must expose whether an empty save slot is available');
+assert.ok(runtime.includes('typeof window.__carthageHasFreeSlot!=="function"||window.__carthageHasFreeSlot()'),'QARTON confirmation must verify that a free save slot exists');
+assert.ok(runtime.includes('confirm.disabled=!canStart'),'the new-game confirmation must be disabled when starting would overwrite a saved slot');
 assert.ok(prep.includes('window.__carthageHasSave=()=>Xn.some(Boolean)'),'Android preparation must expose the actual saved-slot state');
 assert.ok(runtime.includes('forEach(function(n,index){var t=clean(n.textContent);if(!t)return'),'every native action button must produce its own QARTON card, including duplicate labels');
 assert.ok(runtime.includes('b.dataset.actionIndex=String(index)'),'each QARTON action card must retain a stable source-button index');
