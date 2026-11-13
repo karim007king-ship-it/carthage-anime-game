@@ -46,5 +46,6 @@ assert.ok(runtime.includes('bodyObserver.observe(document.body,{childList:true})
 assert.ok(!runtime.includes('document.addEventListener("DOMContentLoaded",start'),'QARTON HOME must not wait until DOMContentLoaded to isolate the legacy screen');
 assert.ok(prep.includes('qarton-isolated-home-runtime'),'Android preparation must inject isolated home runtime');
 assert.ok(legacy.includes('index-legacy.html'),'legacy app source must remain archived');
+assert.ok(!prep.includes('legacy/'),'Android preparation must never load archived legacy UI files into the running app');
 assert.ok(gameSource.includes('n("intro")'), "new game must enter the actual intro screen before gameplay");
 console.log('PASS: explicit QARTON HOME/INTRO/GAME/TRANSITION lifecycle, legacy isolation, and action delegation checks.');
