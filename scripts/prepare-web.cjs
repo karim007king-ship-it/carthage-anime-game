@@ -47,6 +47,14 @@ replaceOnce(
   'choose an unused manual save slot for a new game'
 );
 
+// Expose the real new-game handler to QARTON. The isolated home owns its
+// confirmation UI so React's hidden legacy modal is never used.
+replaceOnce(
+  '},L9=(P)=>{',
+  '};window.__carthageStartNewGame=()=>Vv();window.__carthageHasSave=()=>Xn.some(Boolean);let L9=(P)=>{',
+  'expose new-game action and saved-slot status to the isolated QARTON home'
+);
+
 // Make in-game slot writes verifiable, and autosave each meaningful story-state change.
 const saveStart = 'ur=(P,z=!1)=>{';
 const saveEnd = ',P3=(P)=>{';
