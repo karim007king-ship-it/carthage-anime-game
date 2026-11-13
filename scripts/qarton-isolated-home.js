@@ -58,7 +58,7 @@ function render(){
  var foot=document.createElement("div");foot.className="qh-footer";foot.textContent="رحلتك • اختياراتك • مصيرك";overlay.appendChild(foot);
  window.__QARTON_HOME_READY__=true;
 }
-function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;root=document.getElementById("root");var gameReady=!!(root&&root.querySelector(".game-timer"));var homeReady=!!findNativeMenu();if(state==="TRANSITION"&&gameReady)setState("GAME","dom-game-ready");else if(state==="GAME"&&homeReady)setState("HOME","dom-home-ready");if(state==="HOME"){menu=findNativeMenu()||menu;if(menu&&root&&!root.contains(menu))menu=null}render()})}
+function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;root=document.getElementById("root");if(state==="HOME"){menu=findNativeMenu()||menu;if(menu&&root&&!root.contains(menu))menu=null}render()})}
 function start(){
  root=document.getElementById("root");window.__QARTON_APP_STATE__=state;window.dispatchEvent(new CustomEvent("qarton:statechange",{detail:{state:state,reason:"init"}}));
  if(root){observer=new MutationObserver(schedule);observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class","aria-label","disabled"]});root.addEventListener("click",function(e){var b=e.target&&e.target.closest?e.target.closest("button"):null;if(!b||state!=="TRANSITION")return;var label=clean(b.textContent);if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))window.setTimeout(function(){if(state==="TRANSITION")setState("HOME","transition-cancel")},0)},true)}
