@@ -30,7 +30,7 @@ assert.ok(runtime.includes('if(!menu||!root||!root.contains(menu))'),'missing me
 assert.ok(!premium.includes('findMenu')&&!premium.includes('.game-timer')&&!premium.includes('home-actions'),'gameplay adapter must not infer home/game state from DOM selectors');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'gameplay adapter must obey the central lifecycle state');
 assert.ok(premium.includes('window.addEventListener("qarton:statechange",schedule)'),'gameplay adapter must react to central lifecycle events');
-assert.ok(prep.includes('window.__qartonSetAppState(f==="game"?"GAME"'),'Android preparation must wire central state to the actual React screen state');
+assert.ok(prep.includes('window.__qartonSetAppState((f==="intro"||f==="game")?"GAME"'),'Android preparation must wire central state to the actual React screen state');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'premium adapter must use the central lifecycle instead of timer detection');
 assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||\\"HOME\\"'),'navigation controls must use the central app state');
 assert.ok(prep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'),'fixed viewport behavior must use the central app state');
