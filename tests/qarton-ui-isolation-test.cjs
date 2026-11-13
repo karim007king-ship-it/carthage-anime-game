@@ -21,7 +21,7 @@ assert.ok(transitionSource.includes('hideLegacy()'),'TRANSITION must keep the le
 assert.ok(!transitionSource.includes('root.style.visibility=""'),'TRANSITION must never reveal the legacy React root');
 assert.ok(transitionSource.includes('ensureOverlay()')&&transitionSource.includes('تُحضّر قرطاج رحلتك'),'TRANSITION must remain inside the QARTON shell');
 assert.ok(transitionSource.includes('إلغاء والعودة إلى QARTON'),'TRANSITION must provide a QARTON-native return action');
-assert.ok(runtime.includes('menu.style.visibility="hidden";menu.setAttribute("data-qarton-transition-hidden","true")'),'native home actions must stay hidden while native confirmation dialogs remain accessible');
+assert.ok(runtime.includes('hideLegacy();restoreNativeMenu();removeTransitionControl();ensureOverlay()'),'TRANSITION must isolate the complete legacy root instead of selectively hiding only menu buttons');
 assert.ok(runtime.includes('if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))'),'native cancellation must restore the QARTON HOME state');
 assert.ok(runtime.includes('qarton-transition-return'),'TRANSITION must provide a safe return control when a native action does not start gameplay');
 assert.ok(runtime.includes('hideLegacy();ensureOverlay()'),'HOME and TRANSITION must keep the legacy root hidden');
