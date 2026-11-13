@@ -59,10 +59,18 @@ assert.ok(!prep.includes('legacy/'),'Android preparation must never load archive
 assert.ok(!prep.includes('else document.body.appendChild(continueButton)'),'continue control must never escape the hidden legacy React root');
 assert.ok(!prep.includes('else document.body.appendChild(partButton)'),'Part 3 control must never escape the hidden legacy React root');
 assert.ok(gameSource.includes('n("intro")'), "new game must enter the actual intro screen before gameplay");
-console.log('PASS: explicit QARTON HOME/INTRO/GAME/TRANSITION lifecycle, legacy isolation, and action delegation checks.');
 
 // Regression: the isolated home must win over any legacy adapter that mutates root visibility.
 assert.ok(runtime.includes('root.style.setProperty("visibility","hidden","important")'), 'legacy React root must stay hidden even if another adapter changes normal visibility');
 assert.ok(runtime.includes('document.body.classList.add("qarton-home-active")'), 'HOME and TRANSITION must own a body-level visibility guard');
 assert.ok(runtime.includes('document.body.classList.remove("qarton-home-active")'), 'only GAME may release the body-level visibility guard');
 assert.ok(runtime.includes('attributeFilter:["class","aria-label","disabled","style"]'), 'legacy visibility changes must be observed and corrected');
+
+assert.ok(runtime.includes('function observeRoot(){'), 'root observation must be centralized for initial mount and root replacement');
+assert.ok(runtime.includes('observeRoot();\n bodyObserver='), 'initial startup must use the shared root observer');
+assert.ok(runtime.includes('if(next!==root){observeRoot();schedule()}'), 'replacing the React root must reattach the same observer contract');
+assert.equal((runtime.match(/observer\.observe\(root,/g)||[]).length,1, 'the root observer must have a single configuration point');
+assert.ok(!runtime.includes('showNewGameConfirm(nativeButton)'), 'new-game confirmation must not retain an unused native button parameter');
+assert.ok(!runtime.includes('if(state==="TRANSITION"){var wait='), 'HOME rendering must not contain an unreachable transition branch');
+
+console.log('PASS: explicit QARTON HOME/INTRO/GAME/TRANSITION lifecycle, legacy isolation, and action delegation checks.');
