@@ -9,7 +9,7 @@ for(const state of ['HOME','GAME','TRANSITION'])assert.ok(runtime.includes(state
 assert.ok(runtime.includes('window.__qartonSetAppState'),'central state setter must be public to the React screen lifecycle');
 assert.ok(runtime.includes('window.__qartonGetAppState'),'central state getter must be available for diagnostics');
 assert.ok(runtime.includes('window.dispatchEvent(new CustomEvent("qarton:statechange"'),'state changes must emit a single lifecycle event');
-assert.ok(prep.includes('f==="game"?"GAME"'),'actual React screen state must explicitly enter GAME');
+assert.ok(prep.includes('(f==="intro"||f==="game")?"GAME"'),'the actual React intro and gameplay screens must explicitly enter GAME');
 assert.ok(prep.includes('window.__QARTON_APP_STATE__==="TRANSITION"?"TRANSITION":"HOME"'),'React non-game screen must resolve to HOME unless a transition is active');
 assert.ok(!runtime.includes('.game-timer'),'home/game lifecycle must not be inferred from the presence of a timer element');
 assert.ok(!runtime.includes('isPlaying'),'legacy DOM-based isPlaying heuristic must be removed');
@@ -38,4 +38,5 @@ assert.ok(prep.includes('window.addEventListener("qarton:statechange",schedule)'
 assert.ok(runtime.includes('reason:"init"'),'initial HOME state must be broadcast to all adapters');
 assert.ok(prep.includes('qarton-isolated-home-runtime'),'Android preparation must inject isolated home runtime');
 assert.ok(legacy.includes('index-legacy.html'),'legacy app source must remain archived');
-console.log('PASS: explicit QARTON HOME/GAME/TRANSITION lifecycle, legacy isolation, and action delegation checks.');
+assert.ok(prep.includes('n("intro")'), "new game must enter the actual intro screen before gameplay");
+console.log('PASS: explicit QARTON HOME/INTRO/GAME/TRANSITION lifecycle, legacy isolation, and action delegation checks.');
