@@ -60,3 +60,9 @@ assert.ok(!prep.includes('else document.body.appendChild(continueButton)'),'cont
 assert.ok(!prep.includes('else document.body.appendChild(partButton)'),'Part 3 control must never escape the hidden legacy React root');
 assert.ok(gameSource.includes('n("intro")'), "new game must enter the actual intro screen before gameplay");
 console.log('PASS: explicit QARTON HOME/INTRO/GAME/TRANSITION lifecycle, legacy isolation, and action delegation checks.');
+
+// Regression: the isolated home must win over any legacy adapter that mutates root visibility.
+assert.ok(runtime.includes('root.style.setProperty("visibility","hidden","important")'), 'legacy React root must stay hidden even if another adapter changes normal visibility');
+assert.ok(runtime.includes('document.body.classList.add("qarton-home-active")'), 'HOME and TRANSITION must own a body-level visibility guard');
+assert.ok(runtime.includes('document.body.classList.remove("qarton-home-active")'), 'only GAME may release the body-level visibility guard');
+assert.ok(runtime.includes('attributeFilter:["class","aria-label","disabled","style"]'), 'legacy visibility changes must be observed and corrected');
