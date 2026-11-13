@@ -65,5 +65,5 @@ function start(){
  bodyObserver=new MutationObserver(function(){var next=document.getElementById("root");if(next!==root){if(observer)observer.disconnect();root=next;if(root){observer=new MutationObserver(schedule);observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true})}schedule()}});
  bodyObserver.observe(document.body,{childList:true});render();
 }
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
+start();
 })();
