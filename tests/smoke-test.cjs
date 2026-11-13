@@ -134,7 +134,7 @@ assert.ok(qartonIsolatedHome.includes('window.__QARTON_HOME_READY__=true'), 'QAR
 assert.ok(!qartonIsolatedHome.includes('.game-timer')&&!qartonIsolatedHome.includes('isPlaying'), 'isolated home visibility must never be inferred from timer DOM');
 assert.ok(qartonIsolatedHome.includes('if(state==="GAME"){showGame();return}'), 'only explicit GAME state may reveal the story root');
 assert.ok(qartonIsolatedHome.includes('if(state==="TRANSITION"){showTransition();return}'), 'TRANSITION must have a dedicated handoff path');
-assert.ok(qartonIsolatedHome.includes('menu.style.visibility="hidden";menu.setAttribute("data-qarton-transition-hidden","true")'), 'native home actions must stay hidden while confirmation dialogs remain usable');
+assert.ok(qartonIsolatedHome.includes('if(state==="TRANSITION"){showTransition();return}')&&qartonIsolatedHome.includes('function showTransition(){hideLegacy();'), 'TRANSITION must hide the entire legacy root and show the QARTON-native transition screen');
 assert.ok(qartonIsolatedHome.includes('n.click()'), 'every QARTON card must delegate to its original React handler');
 assert.ok(qartonIsolatedHome.includes('forEach(function(n,index){var t=clean(n.textContent);if(!t)return'), 'every native action button must receive its own QARTON card');
 assert.ok(!qartonIsolatedHome.includes('seen.has(t)'), 'duplicate native labels must not silently drop action cards');
