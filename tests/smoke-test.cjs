@@ -151,7 +151,7 @@ assert.ok(androidPrep.includes('var appState=window.__QARTON_APP_STATE__'), 'nav
 assert.ok(androidPrep.includes('var homeScreen=appState==='), 'home navigation controls must be visible only in HOME');
 assert.ok(androidPrep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'), 'fixed viewport behavior must use central state, not DOM selectors');
 assert.ok(androidPrep.includes('window.addEventListener("qarton:statechange",schedule)'), 'all navigation and viewport adapters must react to central state changes');
-assert.ok(androidPrep.includes('window.__qartonSetAppState((f==="intro"||f==="game")?"GAME"'), 'Android preparation must wire the actual React screen state to QARTON');
+assert.ok(androidPrep.includes('window.__qartonSetAppState(f!=="start"?"GAME"'), 'Android preparation must wire the actual React screen state to QARTON');
 assert.ok(androidPrep.includes('qarton-isolated-home-runtime'), 'isolated QARTON home must be injected into Android builds');
 assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed viewport runtime must remain in Android builds');
 assert.ok(androidPrep.includes('carthage-home-locked'), 'HOME state must retain the fixed viewport lock');
