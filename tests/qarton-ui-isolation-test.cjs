@@ -27,7 +27,7 @@ assert.ok(runtime.includes('qarton-transition-return'),'TRANSITION must provide 
 assert.ok(runtime.includes('hideLegacy();ensureOverlay()'),'HOME and TRANSITION must keep the legacy root hidden');
 assert.ok(runtime.includes('setState("TRANSITION","home-action")'),'home actions must enter TRANSITION before invoking the native handler');
 assert.ok(runtime.includes('n.click()'),'QARTON cards must delegate to original React button handlers');
-assert.ok(runtime.includes('function showNewGameConfirm(nativeButton)'),'new-game confirmation must render inside the isolated QARTON layer');
+assert.ok(runtime.includes('function showNewGameConfirm()'),'new-game confirmation must render inside the isolated QARTON layer without unused parameters');
 assert.ok(runtime.includes('window.__carthageHasSave()'),'QARTON must detect saved progress before starting a fresh game');
 assert.ok(runtime.includes('window.__carthageStartNewGame()'),'QARTON confirmation must call the real React new-game handler directly');
 assert.ok(runtime.includes('حفظك السابق سيبقى محفوظًا ولن يتم حذفه'),'new-game confirmation must explicitly preserve existing saves');
