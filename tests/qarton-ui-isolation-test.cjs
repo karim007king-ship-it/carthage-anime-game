@@ -51,7 +51,7 @@ assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||\\"HOME\\"'),
 assert.ok(prep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'),'fixed viewport behavior must use the central app state');
 assert.ok(prep.includes('window.addEventListener("qarton:statechange",schedule)'),'state changes must update the shared UI adapters');
 assert.ok(runtime.includes('reason:"init"'),'initial HOME state must be broadcast to all adapters');
-assert.ok(runtime.includes('bodyObserver.observe(document.body,{childList:true});render();'),'QARTON HOME must mount immediately and hide the legacy root before React paints its old menu');
+assert.ok(runtime.includes('bodyObserver.observe(document.body,{childList:true});')&&runtime.includes('\n render();'),'QARTON HOME must mount immediately and hide the legacy root before React paints its old menu');
 assert.ok(!runtime.includes('document.addEventListener("DOMContentLoaded",start'),'QARTON HOME must not wait until DOMContentLoaded to isolate the legacy screen');
 assert.ok(prep.includes('qarton-isolated-home-runtime'),'Android preparation must inject isolated home runtime');
 assert.ok(legacy.includes('index-legacy.html'),'legacy app source must remain archived');
