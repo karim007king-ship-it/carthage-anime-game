@@ -22,7 +22,6 @@ on:
       - "tests/**"
       - "scripts/**"
       - "styles/**"
-      - "tests/**"
       - ".github/workflows/android-apk.yml"
 
 permissions:
