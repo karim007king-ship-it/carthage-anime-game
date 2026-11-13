@@ -4,6 +4,7 @@ const vm = require('node:vm');
 const assert = require('node:assert/strict');
 
 const source = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
+assert.ok(source.includes('emptySlot=Xn.findIndex((slot)=>!slot)'), 'new game must select an unused manual save slot when one is available');
 const declarationStart = source.indexOf('const recoverySeed = ');
 assert.notEqual(declarationStart, -1, 'recovery seed declaration must exist');
 const valueStart = source.indexOf('"', declarationStart);
