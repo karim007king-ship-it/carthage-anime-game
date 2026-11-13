@@ -35,7 +35,7 @@ function hideLegacy(){if(!root)return;root.style.setProperty("visibility","hidde
 function restoreNativeMenu(){if(menu&&menu.getAttribute("data-qarton-transition-hidden")==="true"){menu.style.visibility="";menu.removeAttribute("data-qarton-transition-hidden")}}
 function removeTransitionControl(){var back=document.getElementById("qarton-transition-return");if(back)back.remove()}function showTransition(){hideLegacy();restoreNativeMenu();removeTransitionControl();ensureOverlay();addStyle();overlay.replaceChildren();var sc=document.createElement("div");sc.className="qh-scroll";overlay.appendChild(sc);var brand=document.createElement("div");brand.className="qh-brand";brand.innerHTML='<span class="qh-mark">Q</span><span><strong>QARTON</strong><small>CULTURE • POWER • CINEMA</small></span>';sc.appendChild(brand);var title=document.createElement("h1");title.className="qh-title";title.textContent="آخر يوم في قرطاج";sc.appendChild(title);var status=document.createElement("div");status.className="qh-status";status.textContent="تُحضّر قرطاج رحلتك...";sc.appendChild(status);var back=document.createElement("button");back.id="qarton-transition-return";back.type="button";back.className="qh-action";back.textContent="إلغاء والعودة إلى QARTON";back.style.margin="18px auto 0";back.addEventListener("click",function(){setState("HOME","transition-return")});sc.appendChild(back);window.__QARTON_HOME_READY__=false}
 function showGame(){removeTransitionControl();restoreNativeMenu();document.body.classList.remove("qarton-home-active");if(root&&root.getAttribute("data-qarton-legacy-home-hidden")==="true"){root.style.removeProperty("visibility");root.style.removeProperty("pointer-events");root.removeAttribute("data-qarton-legacy-home-hidden")}if(overlay){overlay.remove();overlay=null}window.__QARTON_HOME_READY__=false}
-function showNewGameConfirm(nativeButton){
+function showNewGameConfirm(){
  ensureOverlay();addStyle();
  var previous=overlay.querySelector(".qh-confirm-backdrop");if(previous)return;
  var shade=document.createElement("div");shade.className="qh-confirm-backdrop";shade.setAttribute("role","presentation");
@@ -65,7 +65,6 @@ function render(){
  var title=document.createElement("h1");title.className="qh-title";title.textContent="آخر يوم في قرطاج";sc.appendChild(title);
  var desc=document.createElement("p");desc.className="qh-kicker";desc.textContent="60 دقيقة... ومدينة كاملة باش تطيح. خريطة، ثقة، 5 أدلة، و9 نهايات.";sc.appendChild(desc);
  var badge=document.createElement("div");badge.className="qh-badge";badge.textContent="✦ تجربة أنمي سينمائية";sc.appendChild(badge);
- if(state==="TRANSITION"){var wait=document.createElement("div");wait.className="qh-status";wait.textContent="تُحضّر قرطاج رحلتك...";sc.appendChild(wait);window.__QARTON_HOME_READY__=false;return}
  var currentMenu=findNativeMenu();
  if(currentMenu)menu=currentMenu;
  if(!menu||!root||!root.contains(menu)){var pending=document.createElement("div");pending.className="qh-status";pending.textContent="جاري تجهيز خيارات اللعبة...";sc.appendChild(pending);window.__QARTON_HOME_READY__=false;return}
@@ -74,7 +73,7 @@ function render(){
  var heading=document.createElement("div");heading.className="qh-section";heading.textContent="رحلتك تبدأ من هنا";sc.appendChild(heading);
  var actions=document.createElement("div");actions.className="qh-actions";sc.appendChild(actions);
  Array.from(menu.querySelectorAll("button")).filter(function(n){return !difficulty||!difficulty.contains(n)}).forEach(function(n,index){var t=clean(n.textContent);if(!t)return;var b=document.createElement("button");b.type="button";b.className="qh-action";b.dataset.kind=kind(t,n);b.dataset.actionIndex=String(index);b.textContent=t;b.disabled=!!n.disabled;b.addEventListener("click",function(){
- if(b.dataset.kind==="primary"&&typeof window.__carthageHasSave==="function"&&window.__carthageHasSave()){showNewGameConfirm(n);return}
+ if(b.dataset.kind==="primary"&&typeof window.__carthageHasSave==="function"&&window.__carthageHasSave()){showNewGameConfirm();return}
  setState("TRANSITION","home-action");
  try{if(b.dataset.kind==="primary"&&typeof window.__carthageStartNewGame==="function"){if(window.__carthageStartNewGame()===false)setState("HOME","new-game-blocked")}else n.click()}
  catch(e){setState("HOME","action-error");throw e}
@@ -84,11 +83,29 @@ function render(){
  window.__QARTON_HOME_READY__=true;
 }
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;root=document.getElementById("root");if(state==="HOME"){menu=findNativeMenu()||menu;if(menu&&root&&!root.contains(menu))menu=null}render()})}
+function observeRoot(){
+ if(observer)observer.disconnect();
+ root=document.getElementById("root");
+ if(!root)return;
+ observer=new MutationObserver(schedule);
+ observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class","aria-label","disabled","style"]});
+ root.addEventListener("click",function(e){
+  var b=e.target&&e.target.closest?e.target.closest("button"):null;
+  if(!b||state!=="TRANSITION")return;
+  var label=clean(b.textContent);
+  if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))window.setTimeout(function(){if(state==="TRANSITION")setState("HOME","transition-cancel")},0);
+ },true);
+}
 function start(){
- root=document.getElementById("root");window.__QARTON_APP_STATE__=state;window.dispatchEvent(new CustomEvent("qarton:statechange",{detail:{state:state,reason:"init"}}));
- if(root){observer=new MutationObserver(schedule);observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:["class","aria-label","disabled","style"]});root.addEventListener("click",function(e){var b=e.target&&e.target.closest?e.target.closest("button"):null;if(!b||state!=="TRANSITION")return;var label=clean(b.textContent);if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))window.setTimeout(function(){if(state==="TRANSITION")setState("HOME","transition-cancel")},0)},true)}
- bodyObserver=new MutationObserver(function(){var next=document.getElementById("root");if(next!==root){if(observer)observer.disconnect();root=next;if(root){observer=new MutationObserver(schedule);observer.observe(root,{subtree:true,childList:true,characterData:true,attributes:true})}schedule()}});
- bodyObserver.observe(document.body,{childList:true});render();
+ window.__QARTON_APP_STATE__=state;
+ window.dispatchEvent(new CustomEvent("qarton:statechange",{detail:{state:state,reason:"init"}}));
+ observeRoot();
+ bodyObserver=new MutationObserver(function(){
+  var next=document.getElementById("root");
+  if(next!==root){observeRoot();schedule()}
+ });
+ bodyObserver.observe(document.body,{childList:true});
+ render();
 }
 start();
 })();
