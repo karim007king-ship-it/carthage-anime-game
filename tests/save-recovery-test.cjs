@@ -88,6 +88,7 @@ const persisted = new Map([
   ['shiganshina-slots-v1', JSON.stringify([storedChapterFive, null, null])],
   ['shiganshina-autosave-v1', JSON.stringify(storedChapterFive)]
 ]);
+let selectedSlot = null;
 const saveContext = {
   T: 9, an: Array.from({ length: 10 }, () => ({ place: 'مشهد الاختبار' })),
   L: { time: 40, health: 90, courage: 120, clues: ['alley'], inventory: ['key'] },
@@ -99,7 +100,7 @@ const saveContext = {
     setItem(key, value) { persisted.set(key, String(value)); }
   },
   $8(update) { this.slotState = update(this.slotState || [storedChapterFive, null, null]); },
-  te(slot) { this.selectedSlot = slot; },
+  te(slot) { selectedSlot = slot; },
   fu() { return 'وقت الاختبار'; }, nn(value) { return String(value); },
   G(message) { this.lastToast = message; }, Date
 };
@@ -117,6 +118,6 @@ assert.ok(manualResult, 'manual save must complete');
 const afterManual = JSON.parse(persisted.get('shiganshina-slots-v1'));
 assert.equal(afterManual[0].chapter, 5, 'manual save to slot 2 must preserve slot 1');
 assert.equal(afterManual[1].sceneIdx, 9, 'manual save must write the selected numbered slot');
-assert.equal(saveContext.selectedSlot, 2, 'manual save must update the selected slot');
+assert.equal(selectedSlot, 2, 'manual save must update the selected slot');
 
 console.log('PASS: recovery seed, save validation, and autosave/manual-slot isolation checks.');
