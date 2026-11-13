@@ -12,6 +12,7 @@ on:
       - "tests/**"
       - "scripts/**"
       - "styles/**"
+      - "tests/**"
       - ".github/workflows/android-apk.yml"
   pull_request:
     branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation]
@@ -22,6 +23,7 @@ on:
       - "tests/**"
       - "scripts/**"
       - "styles/**"
+      - "tests/**"
       - ".github/workflows/android-apk.yml"
 
 permissions:
