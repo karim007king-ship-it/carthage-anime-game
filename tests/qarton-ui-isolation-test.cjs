@@ -27,6 +27,12 @@ assert.ok(runtime.includes('qarton-transition-return'),'TRANSITION must provide 
 assert.ok(runtime.includes('hideLegacy();ensureOverlay()'),'HOME and TRANSITION must keep the legacy root hidden');
 assert.ok(runtime.includes('setState("TRANSITION","home-action")'),'home actions must enter TRANSITION before invoking the native handler');
 assert.ok(runtime.includes('n.click()'),'QARTON cards must delegate to original React button handlers');
+assert.ok(runtime.includes('function showNewGameConfirm(nativeButton)'),'new-game confirmation must render inside the isolated QARTON layer');
+assert.ok(runtime.includes('window.__carthageHasSave()'),'QARTON must detect saved progress before starting a fresh game');
+assert.ok(runtime.includes('window.__carthageStartNewGame()'),'QARTON confirmation must call the real React new-game handler directly');
+assert.ok(runtime.includes('حفظك السابق سيبقى محفوظًا ولن يتم حذفه'),'new-game confirmation must explicitly preserve existing saves');
+assert.ok(prep.includes('window.__carthageStartNewGame=()=>Vv()'),'Android preparation must expose the real new-game handler');
+assert.ok(prep.includes('window.__carthageHasSave=()=>Xn.some(Boolean)'),'Android preparation must expose the actual saved-slot state');
 assert.ok(runtime.includes('forEach(function(n,index){var t=clean(n.textContent);if(!t)return'),'every native action button must produce its own QARTON card, including duplicate labels');
 assert.ok(runtime.includes('b.dataset.actionIndex=String(index)'),'each QARTON action card must retain a stable source-button index');
 assert.ok(!runtime.includes('seen.has(t)'),'no native action may be silently dropped by duplicate-label filtering');
