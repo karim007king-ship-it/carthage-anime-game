@@ -1,6 +1,7 @@
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
 const root=path.join(__dirname,'..');
 const runtime=fs.readFileSync(path.join(root,'scripts','qarton-isolated-home.js'),'utf8');
+const gameSource=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const premium=fs.readFileSync(path.join(root,'scripts','qarton-premium-home.js'),'utf8');
 const prep=fs.readFileSync(path.join(root,'scripts','prepare-web.cjs'),'utf8');
 const legacy=fs.readFileSync(path.join(root,'legacy','README.md'),'utf8');
@@ -38,5 +39,5 @@ assert.ok(prep.includes('window.addEventListener("qarton:statechange",schedule)'
 assert.ok(runtime.includes('reason:"init"'),'initial HOME state must be broadcast to all adapters');
 assert.ok(prep.includes('qarton-isolated-home-runtime'),'Android preparation must inject isolated home runtime');
 assert.ok(legacy.includes('index-legacy.html'),'legacy app source must remain archived');
-assert.ok(prep.includes('n("intro")'), "new game must enter the actual intro screen before gameplay");
+assert.ok(gameSource.includes('n("intro")'), "new game must enter the actual intro screen before gameplay");
 console.log('PASS: explicit QARTON HOME/INTRO/GAME/TRANSITION lifecycle, legacy isolation, and action delegation checks.');
