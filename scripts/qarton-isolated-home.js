@@ -57,7 +57,7 @@ function showNewGameConfirm(){
 }
 function render(){
  root=document.getElementById("root");
- if(state==="INTRO"||state==="GAME"){showGame();return}
+ if(state==="INTRO"){showTransition();var introStatus=overlay&&overlay.querySelector(".qh-status");if(introStatus)introStatus.textContent="تبدأ الحكاية...";return}if(state==="GAME"){showGame();return}
  if(state==="TRANSITION"){showTransition();return}
  restoreNativeMenu();hideLegacy();ensureOverlay();addStyle();overlay.replaceChildren();
  var sc=document.createElement("div");sc.className="qh-scroll";overlay.appendChild(sc);
