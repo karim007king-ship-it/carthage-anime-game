@@ -14,6 +14,53 @@ assert.match(html, /prefers-reduced-motion/);
 assert.match(html, /السور يتكسر/);
 
 const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
+const qartonBoot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-boot.js'), 'utf8');
+const qartonHomeRuntime = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-premium-home.js'), 'utf8');
+assert.doesNotThrow(() => new vm.Script(qartonBoot, { filename: 'qarton-boot.js' }), 'QARTON boot gate must parse');
+assert.ok(cinematicPilot.includes('qarton-boot-runtime'), 'Android build must inject the boot gate in the document head');
+assert.ok(cinematicPilot.includes('html.qarton-booting #root'), 'legacy React content must remain hidden until QARTON is ready');
+assert.ok(cinematicPilot.includes('qartonBootStyle'), 'boot cover styles must be included in the Android build');
+assert.ok(qartonHomeRuntime.includes('announce("HOME")'), 'QARTON must publish HOME only after decorating the home screen');
+assert.ok(qartonHomeRuntime.includes('announce("GAME")'), 'QARTON must publish GAME when the story screen is mounted');
+
+// Exercise the boot state gate without a browser: legacy content stays covered
+// until the QARTON runtime explicitly announces a verified destination.
+{
+  const classes = new Set();
+  const listeners = {};
+  const classList = {
+    add: (...items) => items.forEach(item => classes.add(item)),
+    remove: (...items) => items.forEach(item => classes.delete(item)),
+    contains: item => classes.has(item)
+  };
+  const htmlElement = { classList, dataset: {} };
+  const documentListeners = {};
+  const fakeDocument = {
+    documentElement: htmlElement,
+    body: { dataset: {} },
+    addEventListener: (name, fn) => { documentListeners[name] = fn; }
+  };
+  const windowListeners = {};
+  const fakeWindow = {
+    addEventListener: (name, fn) => { windowListeners[name] = fn; },
+    dispatchEvent: () => {},
+    setTimeout: () => 1,
+    clearTimeout: () => {}
+  };
+  class FakeCustomEvent { constructor(type, options) { this.type = type; this.detail = options && options.detail; } }
+  vm.runInNewContext(qartonBoot, { window: fakeWindow, document: fakeDocument, CustomEvent: FakeCustomEvent });
+  assert.ok(classes.has('qarton-booting'), 'boot gate must cover the legacy UI immediately');
+  windowListeners['qarton:ready']({ detail: { state: 'HOME' } });
+  assert.ok(!classes.has('qarton-booting'), 'verified QARTON home must release the startup cover');
+  assert.equal(fakeWindow.__qartonGetState(), 'HOME');
+  const startButton = { disabled: false, textContent: 'ابدأ الجزء الأول', closest: () => ({}) };
+  documentListeners.click({ target: { closest: selector => selector === 'button' ? startButton : null } });
+  assert.ok(classes.has('qarton-transitioning'), 'starting a story must cover the old menu during transition');
+  windowListeners['qarton:ready']({ detail: { state: 'GAME' } });
+  assert.ok(!classes.has('qarton-transitioning'), 'verified gameplay must release the transition cover');
+  assert.equal(fakeWindow.__qartonGetState(), 'GAME');
+}
+
 assert.ok(cinematicPilot.includes('carthage-cinematic-pilot-runtime'), 'cinematic pilot runtime must be injected into the Android build');
 assert.ok(cinematicPilot.includes('carthage-save-transfer'), 'save export/import transfer controls must be injected');
 assert.ok(cinematicPilot.includes('carthage-drive-recovery-seed'), 'the confirmed Drive save must be included as a clean-install recovery seed');
