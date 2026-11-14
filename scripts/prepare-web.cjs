@@ -21,6 +21,9 @@ html = html.replace('</head>', '<style id="qarton-design-system">' + qartonDesig
 const qartonHomeCssPath = path.join(__dirname, '..', 'styles', 'qarton-carthage-home.css');
 const qartonHomeCss = fs.readFileSync(qartonHomeCssPath, 'utf8');
 html = html.replace('</head>', '<style id="qarton-premium-home-style" media="not all">' + qartonHomeCss + '</style></head>');
+const qartonGameplayCssPath = path.join(__dirname, '..', 'styles', 'qarton-carthage-gameplay.css');
+const qartonGameplayCss = fs.readFileSync(qartonGameplayCssPath, 'utf8');
+html = html.replace('</head>', '<style id="qarton-carthage-gameplay-style">' + qartonGameplayCss + '</style></head>');
 function replaceOnce(needle, replacement, label) {
   const index = html.indexOf(needle);
   if (index < 0) throw new Error('Missing expected game hook: ' + label);
