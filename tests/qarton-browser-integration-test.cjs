@@ -58,6 +58,7 @@ const server = http.createServer((req, res) => {
       state: window.__qartonGetAppState && window.__qartonGetAppState(),
       rootDisplay: getComputedStyle(document.getElementById('root')).display,
       rootVisibility: getComputedStyle(document.getElementById('root')).visibility,
+      rootHasHomeLock: document.getElementById('root').classList.contains('carthage-home-locked'),
       homeVisible: !!document.querySelector('#qarton-home-screen') &&
         getComputedStyle(document.querySelector('#qarton-home-screen')).display !== 'none',
       hasPrimaryAction: !!document.querySelector('#qarton-home-screen .qh-action[data-kind="primary"]'),
@@ -69,7 +70,10 @@ const server = http.createServer((req, res) => {
     assert.equal(homeState.state, 'HOME', 'the actual app must start in QARTON HOME');
     assert.equal(homeState.rootDisplay, 'none', 'the legacy React root must be hidden while QARTON HOME is active');
     assert.equal(homeState.rootVisibility, 'hidden', 'the legacy React root must not be visible behind QARTON HOME');
+    assert.equal(homeState.rootHasHomeLock, false, 'the legacy React root must never receive the old home-layout class');
     assert.equal(homeState.homeVisible, true, 'the QARTON home overlay must be visible');
+    await page.waitForTimeout(250);
+    assert.equal(await page.locator('#root').evaluate(el => getComputedStyle(el).display), 'none', 'viewport-lock initialization must not reveal the legacy React root after first paint');
     assert.equal(homeState.hasPrimaryAction, true, 'the QARTON home must expose its real primary action');
 
     // The QARTON home is intentionally a fixed, non-scrolling screen on short phones.
