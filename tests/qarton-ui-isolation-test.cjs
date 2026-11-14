@@ -18,7 +18,7 @@ assert.ok(runtime.includes('if(state==="INTRO"){showIntro();return}if(state==="G
 assert.ok(runtime.includes('document.body.classList.add("qarton-intro-active")'),"the intro scene must have an explicit visibility state");
 const introRenderer=runtime.slice(runtime.indexOf("function showIntro()"),runtime.indexOf("function showGame()"));
 assert.ok(introRenderer.includes('document.body.classList.remove("qarton-home-active","qarton-game-active")'),"INTRO must release HOME and GAME body guards");
-assert.ok(introRenderer.includes('root.style.removeProperty("visibility");root.style.removeProperty("pointer-events")'),"INTRO must clear the inline important hide applied by HOME");
+assert.ok(introRenderer.includes('root.style.removeProperty("display");root.style.removeProperty("visibility");root.style.removeProperty("pointer-events")'),"INTRO must clear the inline important hide applied by HOME");
 assert.ok(introRenderer.includes('if(overlay){overlay.remove();overlay=null}'),"INTRO must remove the QARTON home/transition overlay before showing the cinematic scene");
 assert.ok(!runtime.includes('if(state==="INTRO"){showTransition()'),"INTRO must never reuse the transition-only screen");
 assert.ok(runtime.includes('if(state==="TRANSITION"){showTransition();return}'),'TRANSITION must use its own explicit rendering path');
@@ -31,7 +31,7 @@ assert.ok(runtime.includes('hideLegacy();restoreNativeMenu();removeTransitionCon
 assert.ok(runtime.includes('if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))'),'native cancellation must restore the QARTON HOME state');
 assert.ok(runtime.includes('qarton-transition-return'),'TRANSITION must provide a safe return control when a native action does not start gameplay');
 assert.ok(runtime.includes('hideLegacy();ensureOverlay()'),'HOME and TRANSITION must keep the legacy root hidden');
-assert.ok(prep.includes('qarton-startup-first-paint-guard')&&prep.includes('#root{visibility:hidden!important;pointer-events:none!important}')&&prep.includes("body.qarton-intro-active #root"),"root must be hidden before paint and released only for explicit intro/game scenes");
+assert.ok(prep.includes('qarton-startup-first-paint-guard')&&prep.includes('#root{display:none!important;visibility:hidden!important;pointer-events:none!important}')&&prep.includes("body.qarton-intro-active #root{display:block!important")&&prep.includes("body.qarton-game-active #root{display:block!important"),"root must be removed from layout before paint and restored only for explicit intro/game scenes");
 assert.ok(runtime.includes('document.body.classList.add("qarton-intro-active")')&&runtime.includes('document.body.classList.add("qarton-game-active")'),"only explicit INTRO or GAME lifecycle states may release the root");
 assert.ok(runtime.includes('document.body.classList.remove("qarton-game-active","qarton-intro-active")'),"HOME and TRANSITION must re-lock the legacy root");
 assert.ok(runtime.includes('setState("TRANSITION","home-action")'),'home actions must enter TRANSITION before invoking the native handler');
@@ -72,13 +72,15 @@ assert.ok(!prep.includes('else document.body.appendChild(partButton)'),'Part 3 c
 assert.ok(gameSource.includes('n("intro")'), "new game must enter the actual intro screen before gameplay");
 
 // Regression: the isolated home must win over any legacy adapter that mutates root visibility.
-assert.ok(runtime.includes('root.style.setProperty("visibility","hidden","important")'), 'legacy React root must stay hidden even if another adapter changes normal visibility');
+assert.ok(runtime.includes('root.style.setProperty("display","none","important")')&&runtime.includes('root.style.setProperty("visibility","hidden","important")'), 'legacy React root must be removed from layout so visible descendants cannot escape the HOME guard');
 assert.ok(runtime.includes('document.body.classList.add("qarton-home-active")'), 'HOME and TRANSITION must own a body-level visibility guard');
+assert.ok(runtime.includes('root.style.getPropertyValue("display")!=="none"||root.style.getPropertyPriority("display")!=="important"'), 'legacy-root display writes must be idempotent to avoid mutation-observer feedback');
 assert.ok(runtime.includes('root.style.getPropertyValue("visibility")!=="hidden"||root.style.getPropertyPriority("visibility")!=="important"'), 'legacy-root visibility writes must be idempotent to avoid mutation-observer feedback');
 assert.ok(runtime.includes('root.style.getPropertyValue("pointer-events")!=="none"||root.style.getPropertyPriority("pointer-events")!=="important"'), 'legacy-root pointer-event writes must be idempotent');
 assert.ok(runtime.includes('if(!document.body.classList.contains("qarton-home-active"))document.body.classList.add("qarton-home-active")'), 'body-level isolation class must not be redundantly re-added');
 assert.ok(runtime.includes('function showIntro(){')&&runtime.includes('document.body.classList.add("qarton-intro-active")')&&runtime.includes('document.body.classList.remove("qarton-home-active","qarton-game-active")'), 'INTRO must release the HOME guard only while enabling the dedicated intro visibility scope');
 assert.ok(runtime.includes('function showGame(){')&&runtime.includes('document.body.classList.add("qarton-game-active")')&&runtime.includes('document.body.classList.remove("qarton-home-active","qarton-intro-active")'), 'GAME must release the HOME guard only while enabling the dedicated gameplay visibility scope');
+assert.ok(runtime.includes('root.style.removeProperty("display");root.style.removeProperty("visibility");root.style.removeProperty("pointer-events")'), 'INTRO and GAME must restore the React root after the display:none isolation guard');
 assert.ok(runtime.includes('attributeFilter:["class","aria-label","disabled","style"]'), 'legacy visibility changes must be observed and corrected');
 
 assert.ok(runtime.includes('function observeRoot(){'), 'root observation must be centralized for initial mount and root replacement');
