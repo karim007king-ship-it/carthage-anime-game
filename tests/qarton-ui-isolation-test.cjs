@@ -59,6 +59,9 @@ assert.ok(premium.includes('window.addEventListener("qarton:statechange",schedul
 assert.ok(prep.includes('window.__qartonSetAppState(f==="game"?"GAME":f==="intro"?"INTRO"'),'Android preparation must wire exact React screen values to the central lifecycle');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'premium adapter must use the central lifecycle instead of timer detection');
 assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||\\"HOME\\"'),'navigation controls must use the central app state');
+const navigationRuntime=prep.slice(prep.indexOf('const navigation = '),prep.indexOf('const startupDiagnostics = '));
+assert.ok(navigationRuntime.includes('var observer=new MutationObserver(schedule)'),'native navigation must declare its mutation observer');
+assert.ok(navigationRuntime.indexOf('var observer=new MutationObserver(schedule)')<navigationRuntime.indexOf('observer.observe(document.documentElement'),'navigation observer must be initialized before startup');
 assert.ok(prep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'),'fixed viewport behavior must use the central app state');
 assert.ok(!prep.includes("#root.carthage-home-locked{"), "fixed viewport CSS must never reveal the hidden legacy React root");
 assert.ok(!prep.includes("qarton-carthage-home.css") && !prep.includes("qarton-premium-home-style"), "the obsolete React-home stylesheet must not enter the Android web bundle");
