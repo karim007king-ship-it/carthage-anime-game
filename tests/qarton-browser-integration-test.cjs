@@ -59,6 +59,7 @@ const server = http.createServer((req, res) => {
       rootDisplay: getComputedStyle(document.getElementById('root')).display,
       rootVisibility: getComputedStyle(document.getElementById('root')).visibility,
       rootHasHomeLock: document.getElementById('root').classList.contains('carthage-home-locked'),
+      obsoleteHomeStylePresent: !!document.getElementById('qarton-premium-home-style'),
       homeVisible: !!document.querySelector('#qarton-home-screen') &&
         getComputedStyle(document.querySelector('#qarton-home-screen')).display !== 'none',
       hasPrimaryAction: !!document.querySelector('#qarton-home-screen .qh-action[data-kind="primary"]'),
@@ -71,6 +72,7 @@ const server = http.createServer((req, res) => {
     assert.equal(homeState.rootDisplay, 'none', 'the legacy React root must be hidden while QARTON HOME is active');
     assert.equal(homeState.rootVisibility, 'hidden', 'the legacy React root must not be visible behind QARTON HOME');
     assert.equal(homeState.rootHasHomeLock, false, 'the legacy React root must never receive the old home-layout class');
+    assert.equal(homeState.obsoleteHomeStylePresent, false, 'the old React-home stylesheet must not be loaded in the QARTON app');
     assert.equal(homeState.homeVisible, true, 'the QARTON home overlay must be visible');
     await page.waitForTimeout(250);
     assert.equal(await page.locator('#root').evaluate(el => getComputedStyle(el).display), 'none', 'viewport-lock initialization must not reveal the legacy React root after first paint');
