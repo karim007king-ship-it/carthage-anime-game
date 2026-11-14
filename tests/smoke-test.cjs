@@ -20,8 +20,6 @@ assert.ok(cinematicPilot.includes('carthage-drive-recovery-seed'), 'the confirme
 assert.ok(cinematicPilot.includes('chapter\\":5'), 'recovery seed must preserve chapter 5');
 assert.ok(cinematicPilot.includes('sceneIdx\\":4'), 'recovery seed must preserve the saved scene index');
 assert.ok(cinematicPilot.includes('slots.some(valid)||valid(auto))return'), 'recovery seed must never overwrite a valid existing save');
-assert.ok(cinematicPilot.includes('carthage-export-backup'), 'one-tap save backup export button must exist');
-assert.ok(cinematicPilot.includes('carthage-import-backup'), 'save backup import button must exist');
 assert.ok(cinematicPilot.includes('shiganshina-autosave-v1'), 'save import must restore autosave for one-tap continue');
 assert.ok(cinematicPilot.includes('carthageSlowPushIn'), 'cinematic pilot must include a slow camera push-in');
 assert.ok(cinematicPilot.includes('carthage-cinematic-scene-runtime'), 'cinematic scene expansion must be injected into Android builds');
@@ -54,6 +52,8 @@ assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){.stage-slide .
 assert.ok(cinematicPilot.includes('.wall-stone{position:absolute;display:block;'), 'flying rubble fragments must be positioned visible blocks');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#carthage-wall-impact-fx'), 'destruction effects must respect reduced-motion accessibility');
 const androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
+assert.ok(androidPrep.includes('window.__carthageExportSave=exportSave'), 'QARTON must expose backup export without mounting legacy menu buttons');
+assert.ok(androidPrep.includes('window.__carthageImportSave=function'), 'QARTON must expose backup import without mounting legacy menu buttons');
 const qartonDesignSystem = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-design-system.css'), 'utf8');
 assert.ok(androidPrep.includes('qarton-design-system.css'), 'Android build must load the shared QARTON design system');
 assert.ok(androidPrep.includes('id="qarton-design-system"'), 'shared QARTON styles must be embedded in the packaged game');
