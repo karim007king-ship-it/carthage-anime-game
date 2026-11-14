@@ -43,8 +43,8 @@ const document={
   body,head,documentElement:element('html'),
   readyState:'complete',
   getElementById(id){
-    const all=[...body.children,...head.children];
-    return all.find(n=>n.id===id)|| (id==='root'?root:null);
+    function find(node){if(node.id===id)return node;for(const child of node.children||[]){const match=find(child);if(match)return match}return null}
+    return find(body)||find(head)||(id==='root'?root:null);
   },
   createElement:element,
   addEventListener(){},
