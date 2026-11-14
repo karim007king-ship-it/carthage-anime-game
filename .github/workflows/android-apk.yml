@@ -72,6 +72,9 @@ jobs:
       - name: Install JavaScript dependencies
         run: npm install
 
+      - name: Install Chromium for real-browser UI verification
+        run: npx playwright install --with-deps chromium
+
       - name: Syntax-check Android and QARTON runtime scripts
         run: |
           node --check scripts/prepare-web.cjs
@@ -83,6 +86,9 @@ jobs:
 
       - name: Prepare web assets
         run: npm run prepare:web
+
+      - name: Run real-browser QARTON startup and new-game test
+        run: node tests/qarton-browser-integration-test.cjs
 
       - name: Generate Android project
         run: npx cap add android
