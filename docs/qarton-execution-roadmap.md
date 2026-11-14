@@ -27,7 +27,7 @@ Acceptance evidence: repository source review. This stage is not a phone runtime
 
 ## Stage 2 — Deterministic startup and transition cover
 
-Status: **Implemented; automated test added, execution pending**
+Status: **Implemented; isolated lifecycle simulation passed; full repository test pending**
 
 - Added `scripts/qarton-boot.js` as an early boot gate.
 - Inject the boot gate in the document head during Android web preparation.
@@ -37,6 +37,7 @@ Status: **Implemented; automated test added, execution pending**
 - Keep a safe diagnostic cover if startup or transition readiness is not reported within 15 seconds.
 - Add a Node VM test for boot, home-ready, transition, and game-ready lifecycle.
 - Verify the boot runtime is present in the packaged Android HTML.
+- Executed an isolated runtime simulation: initial cover, HOME release, TRANSITION cover, and GAME release all passed.
 
 Acceptance:
 - [ ] `npm test` passes.
@@ -47,8 +48,10 @@ Acceptance:
 
 ## Stage 3 — One authoritative navigation state
 
-Status: **Pending**
+Status: **In progress — visibility ownership centralized; React action routing still pending**
 
+- Added mutually exclusive `qarton-state-home` and `qarton-state-game` classes, with both cleared during `TRANSITION`.
+- The boot controller now owns release of the startup/transition cover and publishes one state value.
 - Establish one explicit navigation controller for `HOME`, `TRANSITION`, and `GAME`.
 - Make the controller the sole owner of screen visibility.
 - Replace duplicate DOM heuristics where possible.
@@ -126,4 +129,4 @@ Acceptance:
 
 ## Current implementation notes
 
-The boot gate is a protective visibility layer, not yet the final navigation architecture. The current QARTON adapter still discovers the legacy React home menu and styles its native controls. Stage 3 must replace that dependency; Stage 2 alone does not complete legacy UI isolation.
+The boot gate is a protective visibility layer and the first owner of screen visibility, not yet the final navigation architecture. The current QARTON adapter still discovers the legacy React home menu and styles its native controls. Stage 3 must move route changes into the application action layer and reduce DOM discovery to a temporary compatibility bridge; Stage 2 alone does not complete legacy UI isolation. Isolated boot-state simulation passed, but full Node tests, Android packaging, and phone verification have not yet run.
