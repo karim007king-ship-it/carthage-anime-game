@@ -9,7 +9,7 @@ function element(tag){
  remove(){if(this.parentElement){let a=this.parentElement.children,i=a.indexOf(this);if(i>=0)a.splice(i,1);this.parentElement=null}},
  setAttribute(k,v){attrs.set(k,String(v));if(k==='id')this.id=String(v);if(k==='class')this.className=String(v)},getAttribute(k){return attrs.has(k)?attrs.get(k):null},removeAttribute(k){attrs.delete(k)},
  addEventListener(t,f){if(!listeners.has(t))listeners.set(t,[]);listeners.get(t).push(f)},click(){if(!this.disabled)(listeners.get('click')||[]).forEach(f=>f({target:this}))},
- matches(s){if(s==='button')return this.tagName==='BUTTON';if(s[0]==='.')return (this.className||'').split(/\\s+/).includes(s.slice(1))||classes.has(s.slice(1));if(s[0]==='#')return this.id===s.slice(1);return false},
+ matches(s){if(s==='button')return this.tagName==='BUTTON';if(s[0]==='.')return (this.className||'').split(/\s+/).includes(s.slice(1))||classes.has(s.slice(1));if(s[0]==='#')return this.id===s.slice(1);return false},
  querySelectorAll(s){let a=[];function walk(p){for(const c of p.children){if(c.matches&&c.matches(s))a.push(c);walk(c)}}walk(this);return a},querySelector(s){return this.querySelectorAll(s)[0]||null},
  contains(x){return x===this||children.some(c=>c===x||c.contains?.(x))},focus(){}
  };return n;
