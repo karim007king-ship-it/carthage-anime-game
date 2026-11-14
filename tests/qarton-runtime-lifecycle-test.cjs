@@ -6,7 +6,7 @@ const assert=require('node:assert/strict');
 const source=fs.readFileSync(path.join(__dirname,'..','scripts','qarton-isolated-home.js'),'utf8');
 
 function element(tag){
-  const attrs=new Map(),props=new Map(),children=[];
+  const attrs=new Map(),props=new Map(),children=[],listeners=new Map();
   const classes=new Set();
   const classList={
     add(...names){names.forEach(n=>classes.add(n))},
@@ -19,25 +19,34 @@ function element(tag){
     getPropertyPriority(name){return props.get(name)?.priority||''},
     removeProperty(name){props.delete(name)}
   };
-  return {
+  const node={
     tagName:tag.toUpperCase(),children,style,classList,dataset:{},textContent:'',
-    id:'',className:'',innerHTML:'',
+    id:'',className:'',innerHTML:'',disabled:false,parentElement:null,
     appendChild(child){children.push(child);child.parentElement=this;return child},
     append(...nodes){nodes.forEach(n=>this.appendChild(n))},
     replaceChildren(...nodes){children.splice(0,children.length);nodes.forEach(n=>this.appendChild(n))},
-    remove(){if(this.parentElement){const a=this.parentElement.children;const i=a.indexOf(this);if(i>=0)a.splice(i,1)}},
-    setAttribute(k,v){attrs.set(k,String(v))},
+    remove(){if(this.parentElement){const a=this.parentElement.children;const i=a.indexOf(this);if(i>=0)a.splice(i,1);this.parentElement=null}},
+    setAttribute(k,v){attrs.set(k,String(v));if(k==='id')this.id=String(v);if(k==='class')this.className=String(v)},
     getAttribute(k){return attrs.has(k)?attrs.get(k):null},
     removeAttribute(k){attrs.delete(k)},
-    addEventListener(){},
-    querySelector(){return null},
-    querySelectorAll(){return []},
-    contains(node){return node===this||children.some(c=>c===node||c.contains?.(node))},
+    addEventListener(type,fn){if(!listeners.has(type))listeners.set(type,[]);listeners.get(type).push(fn)},
+    click(){if(this.disabled)return;(listeners.get('click')||[]).forEach(fn=>fn({target:this}))},
+    matches(selector){
+      if(selector==='button')return this.tagName==='BUTTON';
+      if(selector[0]==='.')return (this.className||'').split(/\\s+/).includes(selector.slice(1))||classes.has(selector.slice(1));
+      if(selector[0]==='#')return this.id===selector.slice(1);
+      const attr=selector.match(/^\\[([^=]+)="([^"]*)"\\]$/);
+      return !!attr&&this.getAttribute(attr[1])===attr[2];
+    },
+    querySelectorAll(selector){const found=[];function walk(parent){for(const child of parent.children){if(child.matches&&child.matches(selector))found.push(child);walk(child)}}walk(this);return found},
+    querySelector(selector){return this.querySelectorAll(selector)[0]||null},
+    contains(target){return target===this||children.some(child=>child===target||child.contains?.(target))},
     focus(){}
   };
+  return node;
 }
 const root=element('div');root.id='root';
-const body=element('body');
+const body=element('body');body.appendChild(root);
 const head=element('head');
 const document={
   body,head,documentElement:element('html'),
@@ -49,12 +58,17 @@ const document={
   createElement:element,
   addEventListener(){},
 };
+const nativeMenu=element('div');nativeMenu.className='home-actions';
+const nativeStart=element('button');nativeStart.textContent='لعبة جديدة';
+const nativePart2=element('button');nativePart2.textContent='الجزء الثاني';
+nativeMenu.append(nativeStart,nativePart2);root.appendChild(nativeMenu);
 const timers=new Map();let nextTimer=1;
 const window={
   dispatchEvent(){},
   setTimeout(fn,delay){const id=nextTimer++;timers.set(id,{fn,delay});return id},
   clearTimeout(id){timers.delete(id)}
 };
+nativeStart.addEventListener('click',()=>window.__qartonSetAppState('INTRO','native-new-game'));
 class Observer{constructor(fn){this.fn=fn}observe(){}disconnect(){}}
 class CustomEvent{constructor(type,options){this.type=type;this.detail=options?.detail}}
 const context={window,document,MutationObserver:Observer,CustomEvent,requestAnimationFrame(fn){fn()},console};
@@ -102,5 +116,13 @@ assert.equal(window.__qartonGetAppState(),'HOME','a stalled transition must retu
 assert.match(window.__QARTON_TRANSITION_ERROR__,/تعذّر تشغيل المشهد/,'the recovery reason must be retained for the player');
 function findText(node,pattern){if(pattern.test(node.textContent||''))return true;return(node.children||[]).some(child=>findText(child,pattern))}
 assert.ok(findText(document.getElementById('qarton-home-screen'),/تعذّر تشغيل المشهد/),'the timeout recovery message must be visible on QARTON HOME');
+
+// Exercise the rendered QARTON primary card and its delegation to the native React action.
+const primaryCard=document.getElementById('qarton-home-screen').querySelectorAll('.qh-action').find(button=>button.textContent==='لعبة جديدة');
+assert.ok(primaryCard,'QARTON must render a primary new-game card from the native menu');
+primaryCard.click();
+assert.equal(window.__qartonGetAppState(),'INTRO','pressing the QARTON new-game card must reach the native intro lifecycle');
+assert.equal(document.getElementById('qarton-home-screen'),null,'the QARTON home overlay must disappear after the native intro starts');
+assert.equal(root.style.getPropertyValue('display'),'','the native intro root must be visible after starting a new game');
 
 console.log('PASS: QARTON runtime lifecycle integration — HOME, TRANSITION, INTRO, GAME, and return HOME.');
