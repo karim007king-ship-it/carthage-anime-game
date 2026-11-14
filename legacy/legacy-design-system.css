@@ -1,0 +1,43 @@
+/* QARTON Design System v1 — shared visual foundation for every QARTON game. */
+:root{
+  --qarton-ink:#080b12;
+  --q-gold:var(--qarton-gold);
+  --q-cream:var(--qarton-cream);
+  --q-ink:var(--qarton-ink);
+  --qarton-night:#101827;
+  --qarton-panel:#161e2c;
+  --qarton-panel-raised:#202b3c;
+  --qarton-gold:#e8c477;
+  --qarton-gold-bright:#ffe29d;
+  --qarton-cream:#fff0d2;
+  --qarton-red:#8b3039;
+  --qarton-red-deep:#57232e;
+  --qarton-muted:#bcae96;
+  --qarton-line:rgba(232,196,119,.42);
+  --qarton-focus:#fff0a8;
+  --qarton-radius-sm:10px;
+  --qarton-radius-md:14px;
+  --qarton-radius-lg:22px;
+  --qarton-shadow-card:0 10px 28px rgba(0,0,0,.38);
+  --qarton-motion-fast:160ms;
+  --qarton-motion-standard:240ms;
+  --qarton-ease:cubic-bezier(.2,.65,.25,1);
+}
+.qarton-ui{color:var(--qarton-cream);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.qarton-card{box-sizing:border-box;border:1px solid var(--qarton-line);border-radius:var(--qarton-radius-lg);background:linear-gradient(150deg,rgba(32,43,60,.96),rgba(8,11,18,.98));box-shadow:var(--qarton-shadow-card);color:var(--qarton-cream)}
+.qarton-button{box-sizing:border-box;min-height:44px;border:1px solid var(--qarton-line);border-radius:var(--qarton-radius-md);background:linear-gradient(145deg,var(--qarton-panel-raised),var(--qarton-ink));color:var(--qarton-cream);font:800 14px/1.3 system-ui,-apple-system,"Segoe UI",sans-serif;cursor:pointer;transition:transform var(--qarton-motion-fast) var(--qarton-ease),filter var(--qarton-motion-fast) ease,border-color var(--qarton-motion-fast) ease}
+.qarton-button:hover{border-color:var(--qarton-gold);filter:brightness(1.08)}
+.qarton-button:active{transform:scale(.98)}
+.qarton-button:focus-visible,.qarton-card:focus-visible{outline:2px solid var(--qarton-focus);outline-offset:3px}
+.qarton-button--primary{border-color:var(--qarton-gold-bright);background:linear-gradient(110deg,var(--qarton-red),var(--qarton-red-deep) 58%,#18263a)}
+.qarton-button--secondary{background:linear-gradient(145deg,var(--qarton-panel-raised),#0d121d)}
+.qarton-button--locked{border-color:rgba(157,131,199,.7);background:linear-gradient(110deg,#29243b,#111827)}
+.qarton-button:disabled,.qarton-button[aria-disabled="true"]{cursor:not-allowed;opacity:.68;filter:saturate(.65)}
+@media(prefers-reduced-motion:reduce){.qarton-button{transition:none}.qarton-button:active{transform:none}}
+
+/* Generic gameplay surfaces and controls: adapters map their native elements to these classes. */
+.qarton-game-card{box-sizing:border-box;border:1px solid var(--qarton-line);border-radius:var(--qarton-radius-lg);box-shadow:var(--qarton-shadow-card)}
+.qarton-game-control{box-sizing:border-box;min-height:44px;border:1px solid var(--qarton-line);border-radius:var(--qarton-radius-md);color:var(--qarton-cream);font-weight:800;transition:transform var(--qarton-motion-fast) var(--qarton-ease),filter var(--qarton-motion-fast) ease,border-color var(--qarton-motion-fast) ease}
+.qarton-game-control:focus-visible{outline:2px solid var(--qarton-focus);outline-offset:3px}
+.qarton-game-control:active{transform:scale(.985)}
+@media(prefers-reduced-motion:reduce){.qarton-game-control{transition:none}.qarton-game-control:active{transform:none}}
