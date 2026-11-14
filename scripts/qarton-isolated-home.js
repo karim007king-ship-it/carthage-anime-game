@@ -3,7 +3,7 @@
 if(window.__qartonHomeIsolationInstalled)return;
 window.__qartonHomeIsolationInstalled=true;
 var STATE={HOME:"HOME",INTRO:"INTRO",GAME:"GAME",TRANSITION:"TRANSITION"};
-var state=STATE.HOME,root=null,overlay=null,observer=null,bodyObserver=null,queued=false,menu=null;
+var state=STATE.HOME,root=null,overlay=null,observer=null,bodyObserver=null,queued=false,menu=null,transitionTimer=0;
 var css=[
 "#qarton-home-screen{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;overflow:hidden;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px calc(env(safe-area-inset-bottom,0px) + 10px);color:var(--qarton-cream,#f7ecd7);background:radial-gradient(ellipse at 50% 0%,#8b30394d,transparent 48%),radial-gradient(ellipse at 12% 85%,#e8c47722,transparent 40%),linear-gradient(155deg,#07090f,#101827 58%,#080a11);font-family:system-ui,sans-serif;direction:rtl}",
 "#qarton-home-screen *{box-sizing:border-box}#qarton-home-screen .qh-scroll{width:100%;max-width:560px;min-height:0;display:flex;flex:1;flex-direction:column;justify-content:center;overflow:hidden;overscroll-behavior:none}",
@@ -14,7 +14,7 @@ var css=[
 "#qarton-home-screen .qh-footer{flex:0 0 auto;margin-top:8px;color:#bca77f;text-align:center;font-size:9px;letter-spacing:1px}#qarton-home-screen button{font-family:inherit;cursor:pointer}#qarton-home-screen .qh-status{margin:18px auto 0;text-align:center;color:#d9c9ac;font-size:12px;line-height:1.8}@media(max-height:680px){#qarton-home-screen{padding-top:6px;padding-bottom:6px}#qarton-home-screen .qh-brand{margin-bottom:5px}#qarton-home-screen .qh-mark{width:27px;height:27px;font-size:16px}#qarton-home-screen .qh-brand strong{font-size:15px}#qarton-home-screen .qh-title{font-size:25px}#qarton-home-screen .qh-kicker{font-size:10px;margin-top:3px}#qarton-home-screen .qh-section{margin-top:8px}#qarton-home-screen .qh-action{min-height:38px;padding:6px}}@media(prefers-reduced-motion:reduce){#qarton-home-screen *{transition:none!important;animation:none!important}}"
 ].join("");
 function addStyle(){if(document.getElementById("qarton-isolated-home-style"))return;var s=document.createElement("style");s.id="qarton-isolated-home-style";s.textContent=css;document.head.appendChild(s)}
-function setState(next,reason){if(!STATE[next]||state===next)return;state=next;window.__QARTON_APP_STATE__=state;window.dispatchEvent(new CustomEvent("qarton:statechange",{detail:{state:state,reason:reason||"app"}}));render()}
+function setState(next,reason){if(!STATE[next]||state===next)return;if(transitionTimer){window.clearTimeout(transitionTimer);transitionTimer=0}state=next;if(next==="TRANSITION"){window.__QARTON_TRANSITION_ERROR__="";transitionTimer=window.setTimeout(function(){transitionTimer=0;if(state!=="TRANSITION")return;window.__QARTON_TRANSITION_ERROR__="تعذّر تشغيل المشهد في الوقت المحدد. رجعناك للقائمة حتى لا تبقى اللعبة معلّقة.";setState("HOME","transition-timeout")},15000)}window.__QARTON_APP_STATE__=state;window.dispatchEvent(new CustomEvent("qarton:statechange",{detail:{state:state,reason:reason||"app"}}));render()}
 window.__qartonSetAppState=function(next,reason){setState(String(next||"").toUpperCase(),reason)};
 window.__qartonGetAppState=function(){return state};
 function findNativeMenu(){
@@ -64,7 +64,7 @@ function render(){
  var sc=document.createElement("div");sc.className="qh-scroll";overlay.appendChild(sc);
  var brand=document.createElement("div");brand.className="qh-brand";brand.innerHTML='<span class="qh-mark">Q</span><span><strong>QARTON</strong><small>CULTURE • POWER • CINEMA</small></span>';sc.appendChild(brand);
  var title=document.createElement("h1");title.className="qh-title";title.textContent="آخر يوم في قرطاج";sc.appendChild(title);
- var desc=document.createElement("p");desc.className="qh-kicker";desc.textContent="60 دقيقة... ومدينة كاملة باش تطيح. خريطة، ثقة، 5 أدلة، و9 نهايات.";sc.appendChild(desc);
+ var desc=document.createElement("p");desc.className="qh-kicker";desc.textContent="60 دقيقة... ومدينة كاملة باش تطيح. خريطة، ثقة، 5 أدلة، و9 نهايات.";sc.appendChild(desc);if(window.__QARTON_TRANSITION_ERROR__){var recovery=document.createElement("div");recovery.className="qh-status";recovery.setAttribute("role","status");recovery.textContent=window.__QARTON_TRANSITION_ERROR__;sc.appendChild(recovery)}
  var badge=document.createElement("div");badge.className="qh-badge";badge.textContent="✦ تجربة أنمي سينمائية";sc.appendChild(badge);
  var currentMenu=findNativeMenu();
  if(currentMenu)menu=currentMenu;
