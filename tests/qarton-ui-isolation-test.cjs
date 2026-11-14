@@ -14,7 +14,7 @@ assert.ok(prep.includes('f==="game"?"GAME":f==="intro"?"INTRO"'),'React intro an
 assert.ok(prep.includes('window.__QARTON_APP_STATE__==="TRANSITION"?"TRANSITION":"HOME"'),'React non-game screen must resolve to HOME unless a transition is active');
 assert.ok(!runtime.includes('.game-timer'),'home/game lifecycle must not be inferred from the presence of a timer element');
 assert.ok(!runtime.includes('isPlaying'),'legacy DOM-based isPlaying heuristic must be removed');
-assert.ok(runtime.includes('if(state==="INTRO"||state==="GAME"){showGame();return}'),'only explicit story INTRO or GAME states may reveal the React root');
+assert.ok(runtime.includes('if(state==="INTRO"){showTransition();var introStatus=overlay&&overlay.querySelector(".qh-status");if(introStatus)introStatus.textContent="تبدأ الحكاية...";return}if(state==="GAME"){showGame();return}'),'INTRO must remain inside the QARTON shell; only explicit GAME may reveal the React root');
 assert.ok(runtime.includes('if(state==="TRANSITION"){showTransition();return}'),'TRANSITION must use its own explicit rendering path');
 const transitionSource=runtime.slice(runtime.indexOf('function showTransition()'),runtime.indexOf('function showGame()'));
 assert.ok(transitionSource.includes('hideLegacy()'),'TRANSITION must keep the legacy React root hidden');
