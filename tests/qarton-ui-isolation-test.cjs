@@ -16,6 +16,11 @@ assert.ok(!runtime.includes('.game-timer'),'home/game lifecycle must not be infe
 assert.ok(!runtime.includes('isPlaying'),'legacy DOM-based isPlaying heuristic must be removed');
 assert.ok(runtime.includes('if(state==="INTRO"){showIntro();return}if(state==="GAME"){showGame();return}'),"INTRO must reveal only the dedicated React intro scene; GAME reveals gameplay");
 assert.ok(runtime.includes('document.body.classList.add("qarton-intro-active")'),"the intro scene must have an explicit visibility state");
+const introRenderer=runtime.slice(runtime.indexOf("function showIntro()"),runtime.indexOf("function showGame()"));
+assert.ok(introRenderer.includes('document.body.classList.remove("qarton-home-active","qarton-game-active")'),"INTRO must release HOME and GAME body guards");
+assert.ok(introRenderer.includes('root.style.removeProperty("visibility");root.style.removeProperty("pointer-events")'),"INTRO must clear the inline important hide applied by HOME");
+assert.ok(introRenderer.includes('if(overlay){overlay.remove();overlay=null}'),"INTRO must remove the QARTON home/transition overlay before showing the cinematic scene");
+assert.ok(!runtime.includes('if(state==="INTRO"){showTransition()'),"INTRO must never reuse the transition-only screen");
 assert.ok(runtime.includes('if(state==="TRANSITION"){showTransition();return}'),'TRANSITION must use its own explicit rendering path');
 const transitionSource=runtime.slice(runtime.indexOf('function showTransition()'),runtime.indexOf('function showGame()'));
 assert.ok(transitionSource.includes('hideLegacy()'),'TRANSITION must keep the legacy React root hidden');
