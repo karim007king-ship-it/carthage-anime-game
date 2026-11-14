@@ -69,8 +69,11 @@ window.__qartonSetAppState('TRANSITION','test-transition');
 assert.equal(window.__qartonGetAppState(),'TRANSITION');
 assert.equal(root.style.getPropertyValue('display'),'none','legacy root must stay hidden during transitions');
 assert.ok(document.getElementById('qarton-transition-return'),'transition must provide a QARTON-native cancel control');
+const successfulTransitionTimer=[...timers.entries()].find(([,timer])=>timer.delay===15000);
+assert.ok(successfulTransitionTimer,'TRANSITION must arm a bounded recovery timer');
 
 window.__qartonSetAppState('INTRO','test-intro');
+assert.equal(timers.has(successfulTransitionTimer[0]),false,'a successful transition must cancel its recovery timer');
 assert.equal(window.__qartonGetAppState(),'INTRO');
 assert.equal(root.style.getPropertyValue('display'),'','legacy root must be restored for the actual intro scene');
 assert.ok(body.classList.contains('qarton-intro-active'));
@@ -97,5 +100,7 @@ timers.delete(pending[0]);
 pending[1].fn();
 assert.equal(window.__qartonGetAppState(),'HOME','a stalled transition must return to QARTON HOME');
 assert.match(window.__QARTON_TRANSITION_ERROR__,/تعذّر تشغيل المشهد/,'the recovery reason must be retained for the player');
+function findText(node,pattern){if(pattern.test(node.textContent||''))return true;return(node.children||[]).some(child=>findText(child,pattern))}
+assert.ok(findText(document.getElementById('qarton-home-screen'),/تعذّر تشغيل المشهد/),'the timeout recovery message must be visible on QARTON HOME');
 
 console.log('PASS: QARTON runtime lifecycle integration — HOME, TRANSITION, INTRO, GAME, and return HOME.');
