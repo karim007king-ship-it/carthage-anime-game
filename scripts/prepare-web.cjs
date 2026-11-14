@@ -13,7 +13,8 @@ let html = fs.readFileSync(target, 'utf8');
 // QARTON releases this guard only for explicit INTRO or GAME lifecycle states.
 const startupGuard = '<style id="qarton-startup-first-paint-guard">#root{display:none!important;visibility:hidden!important;pointer-events:none!important}body.qarton-intro-active #root{display:block!important;visibility:visible!important;pointer-events:auto!important}body.qarton-game-active #root{display:block!important;visibility:visible!important;pointer-events:auto!important}</style>';
 if (!html.includes('</head>')) throw new Error('Missing head tag for the QARTON startup guard.');
-html = html.replace('</head>', startupGuard + '</head>');
+const qartonStartupShell = '<style id="qarton-static-home-shell">#qarton-home-screen{position:fixed!important;inset:0!important;z-index:2147483000!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;box-sizing:border-box!important;padding:20px!important;direction:rtl!important;color:#f7ecd7!important;background:linear-gradient(155deg,#07090f,#101827 58%,#080a11)!important;font-family:system-ui,sans-serif!important;text-align:center!important}#qarton-home-screen .qarton-static-title{color:#e8c477!important;font-size:20px!important;font-weight:900!important;letter-spacing:3px!important}#qarton-home-screen h1{margin:12px 0 6px!important;color:#fff0d2!important;font-size:clamp(25px,7vw,38px)!important}#qarton-home-screen p{margin:0!important;color:#d9c9ac!important;font-size:12px!important}</style>';
+html = html.replace('</head>', startupGuard + qartonStartupShell + '</head>');
 const qartonDesignSystemPath = path.join(__dirname, '..', 'styles', 'qarton-design-system.css');
 const qartonDesignSystem = fs.readFileSync(qartonDesignSystemPath, 'utf8');
 if (!html.includes('</head>')) throw new Error('Missing head tag for the shared QARTON design system.');
@@ -73,7 +74,7 @@ if (html.indexOf(saveEnd, ue + saveEnd.length) >= 0) {
   throw new Error('Ambiguous in-game save-slot handler end; refusing to patch an uncertain source range.');
 }
 const saveHandler = `ur=(P,z=!1)=>{let c={slot:P,savedAt:fu(new Date),savedAtMs:Date.now(),sceneIdx:T,sceneName:an[T]?.place||"قرطاج",state:L,flags:K,visited:v9,usedHotspots:af,difficulty:jf,hintsUsed:A9,choicesHistory:yu,lineIdx:B,mapUnlocked:e9,lastChoice:Qt,part:cu,secretUnlocked:mu,achievements:[...tv.current],endingsSeen:[...Zn]};try{let slots=JSON.parse(localStorage.getItem("shiganshina-slots-v1")||"[null,null,null]");if(!Array.isArray(slots))slots=[null,null,null];while(slots.length<3)slots.push(null);if(!z){$8((b)=>b.map((i,R)=>R===P-1?c:i)),te(P),slots[P-1]=c;localStorage.setItem("shiganshina-slots-v1",JSON.stringify(slots))}localStorage.setItem("shiganshina-autosave-v1",JSON.stringify(c));localStorage.setItem("shiganshina-autosave-time-v1",String(Date.now()));let verifyAuto=JSON.parse(localStorage.getItem("shiganshina-autosave-v1")||"null");if(!verifyAuto||verifyAuto.sceneIdx!==c.sceneIdx)throw new Error("autosave verification failed");if(!z){let verify=JSON.parse(localStorage.getItem("shiganshina-slots-v1")||"[]");if(!verify[P-1]||verify[P-1].sceneIdx!==c.sceneIdx)throw new Error("slot verification failed");G("تم الحفظ في الخانة "+P+" — "+c.sceneName+" • "+nn(L.time)+" (محفوظ في جهازك)")}return c}catch(e){G("تعذر حفظ التقدم في الجهاز. تأكد من مساحة التخزين ثم أعد المحاولة.");return false}}`;
-const autosaveHook = `;window.__carthageSaveNow=()=>ur(cz,!1);y.useEffect(()=>{if(window.__qartonSetAppState)window.__qartonSetAppState(f==="game"?"GAME":f==="intro"?"INTRO":(window.__QARTON_APP_STATE__==="TRANSITION"?"TRANSITION":"HOME"),"react-screen-state");if(f!=="game")return;let timer=window.setTimeout(()=>{try{ur(cz,!0)}catch(e){}},300);return()=>window.clearTimeout(timer)},[f,T,B,L,K,cu]);let P3=(P)=>{`;
+const autosaveHook = `;window.__carthageSaveNow=()=>ur(cz,!1);y.useEffect(()=>{if(window.__qartonSetAppState)window.__qartonSetAppState(f==="start"?(window.__QARTON_APP_STATE__==="TRANSITION"?"TRANSITION":"HOME"):f==="intro"?"INTRO":"GAME","react-screen-state");if(f!=="game")return;let timer=window.setTimeout(()=>{try{ur(cz,!0)}catch(e){}},300);return()=>window.clearTimeout(timer)},[f,T,B,L,K,cu]);let P3=(P)=>{`;
 html = html.slice(0, us) + saveHandler + autosaveHook + html.slice(ue + saveEnd.length);
 
 // Expose a genuine Part 3 start action, beginning at story chapter 15.
@@ -402,6 +403,9 @@ const qartonHomeRuntime = fs.readFileSync(path.join(__dirname, 'qarton-premium-h
 html = html.replace('</body>', '<script id="qarton-premium-home-runtime">' + qartonHomeRuntime + '</script></body>');
 
 // Isolated QARTON home is rendered outside React; native controls remain the action bridge.
+// Static first-paint shell: the old React home stays hidden even before the QARTON runtime executes.
+const qartonStartupMarkup = '<main id="qarton-home-screen" aria-label="QARTON Carthage home"><div><div class="qarton-static-title">QARTON</div><h1>آخر يوم في قرطاج</h1><p>جارٍ تجهيز واجهة قرطون...</p></div></main>';
+html = html.replace('</body>', qartonStartupMarkup + '</body>');
 const qartonIsolatedHomeRuntime = fs.readFileSync(path.join(__dirname, 'qarton-isolated-home.js'), 'utf8');
 html = html.replace('</body>', '<script id="qarton-isolated-home-runtime">' + qartonIsolatedHomeRuntime + '</script></body>');
 
