@@ -14,7 +14,8 @@ assert.ok(prep.includes('f==="game"?"GAME":f==="intro"?"INTRO"'),'React intro an
 assert.ok(prep.includes('window.__QARTON_APP_STATE__==="TRANSITION"?"TRANSITION":"HOME"'),'React non-game screen must resolve to HOME unless a transition is active');
 assert.ok(!runtime.includes('.game-timer'),'home/game lifecycle must not be inferred from the presence of a timer element');
 assert.ok(!runtime.includes('isPlaying'),'legacy DOM-based isPlaying heuristic must be removed');
-assert.ok(runtime.includes('if(state==="INTRO"){showTransition();var introStatus=overlay&&overlay.querySelector(".qh-status");if(introStatus)introStatus.textContent="تبدأ الحكاية...";return}if(state==="GAME"){showGame();return}'),'INTRO must remain inside the QARTON shell; only explicit GAME may reveal the React root');
+assert.ok(runtime.includes('if(state==="INTRO"){showIntro();return}if(state==="GAME"){showGame();return}'),"INTRO must reveal only the dedicated React intro scene; GAME reveals gameplay");
+assert.ok(runtime.includes('document.body.classList.add("qarton-intro-active")'),"the intro scene must have an explicit visibility state");
 assert.ok(runtime.includes('if(state==="TRANSITION"){showTransition();return}'),'TRANSITION must use its own explicit rendering path');
 const transitionSource=runtime.slice(runtime.indexOf('function showTransition()'),runtime.indexOf('function showGame()'));
 assert.ok(transitionSource.includes('hideLegacy()'),'TRANSITION must keep the legacy React root hidden');
@@ -25,9 +26,9 @@ assert.ok(runtime.includes('hideLegacy();restoreNativeMenu();removeTransitionCon
 assert.ok(runtime.includes('if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))'),'native cancellation must restore the QARTON HOME state');
 assert.ok(runtime.includes('qarton-transition-return'),'TRANSITION must provide a safe return control when a native action does not start gameplay');
 assert.ok(runtime.includes('hideLegacy();ensureOverlay()'),'HOME and TRANSITION must keep the legacy root hidden');
-assert.ok(prep.includes('qarton-startup-first-paint-guard')&&prep.includes('#root{visibility:hidden!important;pointer-events:none!important}'),'legacy root must be hidden by head CSS before the first React paint');
-assert.ok(runtime.includes('document.body.classList.add("qarton-game-active")'),'only the explicit GAME lifecycle may release the first-paint guard');
-assert.ok(runtime.includes('document.body.classList.remove("qarton-game-active")'),'HOME and TRANSITION must re-lock the legacy root');
+assert.ok(prep.includes('qarton-startup-first-paint-guard')&&prep.includes('#root{visibility:hidden!important;pointer-events:none!important}')&&prep.includes("body.qarton-intro-active #root"),"root must be hidden before paint and released only for explicit intro/game scenes");
+assert.ok(runtime.includes('document.body.classList.add("qarton-intro-active")')&&runtime.includes('document.body.classList.add("qarton-game-active")'),"only explicit INTRO or GAME lifecycle states may release the root");
+assert.ok(runtime.includes('document.body.classList.remove("qarton-game-active","qarton-intro-active")'),"HOME and TRANSITION must re-lock the legacy root");
 assert.ok(runtime.includes('setState("TRANSITION","home-action")'),'home actions must enter TRANSITION before invoking the native handler');
 assert.ok(runtime.includes('n.click()'),'QARTON cards must delegate to original React button handlers');
 assert.ok(runtime.includes('function showNewGameConfirm()'),'new-game confirmation must render inside the isolated QARTON layer without unused parameters');
