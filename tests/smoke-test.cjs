@@ -31,7 +31,8 @@ assert.ok(qartonHomeRuntime.includes('announce("GAME")'), 'QARTON must publish G
   const classList = {
     add: (...items) => items.forEach(item => classes.add(item)),
     remove: (...items) => items.forEach(item => classes.delete(item)),
-    contains: item => classes.has(item)
+    contains: item => classes.has(item),
+    toggle: (item, force) => { const enabled = force === undefined ? !classes.has(item) : !!force; if (enabled) classes.add(item); else classes.delete(item); return enabled; }
   };
   const htmlElement = { classList, dataset: {}, removeAttribute: name => { delete htmlElement.dataset[name.replace(/^data-/, '').replace(/-([a-z])/g, (_, c) => c.toUpperCase())]; } };
   const documentListeners = {};
@@ -53,12 +54,15 @@ assert.ok(qartonHomeRuntime.includes('announce("GAME")'), 'QARTON must publish G
   windowListeners['qarton:ready']({ detail: { state: 'HOME' } });
   assert.ok(!classes.has('qarton-booting'), 'verified QARTON home must release the startup cover');
   assert.equal(fakeWindow.__qartonGetState(), 'HOME');
+  assert.ok(classes.has('qarton-state-home') && !classes.has('qarton-state-game'), 'HOME must be the only active screen state');
   const startButton = { disabled: false, textContent: 'ابدأ الجزء الأول', closest: () => ({}) };
   documentListeners.click({ target: { closest: selector => selector === 'button' ? startButton : null } });
   assert.ok(classes.has('qarton-transitioning'), 'starting a story must cover the old menu during transition');
+  assert.ok(!classes.has('qarton-state-home') && !classes.has('qarton-state-game'), 'transition must clear both visible screen states');
   windowListeners['qarton:ready']({ detail: { state: 'GAME' } });
   assert.ok(!classes.has('qarton-transitioning'), 'verified gameplay must release the transition cover');
   assert.equal(fakeWindow.__qartonGetState(), 'GAME');
+  assert.ok(classes.has('qarton-state-game') && !classes.has('qarton-state-home'), 'GAME must be the only active screen state');
 }
 
 assert.ok(cinematicPilot.includes('carthage-cinematic-pilot-runtime'), 'cinematic pilot runtime must be injected into the Android build');
