@@ -111,6 +111,23 @@ const server = http.createServer((req, res) => {
     assert.equal(intro.introTextPresent, true, 'the real Carthage intro scene must render, not only change a state flag');
     assert.equal(intro.continueButtonPresent, true, 'the real intro continue control must render');
 
+    const continueButton = page.getByRole('button', { name: /كمّل/ }).first();
+    await continueButton.waitFor({ state: 'visible', timeout: 10000 });
+    await continueButton.click();
+    await page.waitForFunction(() =>
+      window.__qartonGetAppState && window.__qartonGetAppState() === 'GAME' &&
+      document.getElementById('root')?.getAttribute('data-qarton-gameplay-skin') === 'active',
+    { timeout: 15000 });
+    const gameplay = await page.evaluate(() => ({
+      state: window.__qartonGetAppState && window.__qartonGetAppState(),
+      skinActive: document.getElementById('root')?.getAttribute('data-qarton-gameplay-skin') === 'active',
+      rootClass: document.getElementById('root')?.className || '',
+      controlsStyled: Array.from(document.querySelectorAll('#root.qarton-game-ui button')).length
+    }));
+    assert.equal(gameplay.state, 'GAME', 'continuing the intro must enter the real gameplay state');
+    assert.equal(gameplay.skinActive, true, 'QARTON gameplay adapter must activate in GAME state');
+    assert.ok(gameplay.controlsStyled > 0, 'gameplay controls must receive the QARTON skin');
+
     assert.deepEqual(pageErrors, [], 'the real browser run must not throw JavaScript page errors');
     console.log('PASS: real Chromium integration — QARTON HOME hides legacy React UI, the real new-game handler runs, and the actual Carthage INTRO scene renders.');
     console.log(JSON.stringify({ home: homeState, intro }, null, 2));
