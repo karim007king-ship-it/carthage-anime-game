@@ -111,26 +111,55 @@ const server = http.createServer((req, res) => {
     assert.equal(intro.introTextPresent, true, 'the real Carthage intro scene must render, not only change a state flag');
     assert.equal(intro.continueButtonPresent, true, 'the real intro continue control must render');
 
-    const continueButton = page.getByRole('button', { name: /كمّل/ }).first();
-    await continueButton.waitFor({ state: 'visible', timeout: 10000 });
-    await continueButton.click();
+    // The Carthage opening is a five-beat interactive sequence. Advance each
+    // visible "continue" control until React reports GAME; one click is not enough.
+    const introProgress = [];
+    for (let beat = 0; beat < 8; beat++) {
+      const currentState = await page.evaluate(() => window.__qartonGetAppState && window.__qartonGetAppState());
+      if (currentState === 'GAME') break;
+      const candidates = page.locator('#root button:visible');
+      let clicked = false;
+      for (let i = 0; i < await candidates.count(); i++) {
+        const button = candidates.nth(i);
+        const label = (await button.innerText().catch(() => '')).replace(/\\s+/g, ' ').trim();
+        if (/كمّل/.test(label) && await button.isEnabled()) {
+          introProgress.push(label);
+          await button.click();
+          clicked = true;
+          await page.waitForTimeout(350);
+          break;
+        }
+      }
+      if (!clicked) break;
+    }
     await page.waitForFunction(() =>
       window.__qartonGetAppState && window.__qartonGetAppState() === 'GAME' &&
       document.getElementById('root')?.getAttribute('data-qarton-gameplay-skin') === 'active',
-    { timeout: 15000 });
-    const gameplay = await page.evaluate(() => ({
-      state: window.__qartonGetAppState && window.__qartonGetAppState(),
-      skinActive: document.getElementById('root')?.getAttribute('data-qarton-gameplay-skin') === 'active',
-      rootClass: document.getElementById('root')?.className || '',
-      controlsStyled: Array.from(document.querySelectorAll('#root.qarton-game-ui button')).length
-    }));
-    assert.equal(gameplay.state, 'GAME', 'continuing the intro must enter the real gameplay state');
+    { timeout: 10000 });
+    const gameplay = await page.evaluate(() => {
+      const root = document.getElementById('root');
+      const button = root && root.querySelector('button');
+      const style = button ? getComputedStyle(button) : null;
+      return {
+        state: window.__qartonGetAppState && window.__qartonGetAppState(),
+        skinActive: root?.getAttribute('data-qarton-gameplay-skin') === 'active',
+        rootClass: root?.className || '',
+        bodyGameActive: document.body.classList.contains('qarton-game-active'),
+        controlsStyled: Array.from(document.querySelectorAll('#root.qarton-game-ui button')).length,
+        buttonBackground: style ? style.backgroundImage + ' ' + style.backgroundColor : '',
+        buttonBorderRadius: style ? style.borderRadius : ''
+      };
+    });
+    assert.equal(gameplay.state, 'GAME', 'the complete opening sequence must enter the real gameplay state');
     assert.equal(gameplay.skinActive, true, 'QARTON gameplay adapter must activate in GAME state');
+    assert.equal(gameplay.bodyGameActive, true, 'the native gameplay root must be released only in GAME state');
     assert.ok(gameplay.controlsStyled > 0, 'gameplay controls must receive the QARTON skin');
+    assert.match(gameplay.buttonBorderRadius, /13px/, 'gameplay button must use the QARTON visual treatment');
+    await page.screenshot({ path: path.resolve(__dirname, '..', 'test-results', 'qarton-gameplay.png'), fullPage: true });
 
     assert.deepEqual(pageErrors, [], 'the real browser run must not throw JavaScript page errors');
-    console.log('PASS: real Chromium integration — QARTON HOME hides legacy React UI, the real new-game handler runs, and the actual Carthage INTRO scene renders.');
-    console.log(JSON.stringify({ home: homeState, intro }, null, 2));
+    console.log('PASS: real Chromium integration — QARTON HOME, new game, full five-beat intro, GAME state, and computed QARTON gameplay styling.');
+    console.log(JSON.stringify({ home: homeState, intro, introProgress, gameplay }, null, 2));
   } catch (error) {
     if (page) {
       fs.mkdirSync(path.resolve(__dirname, '..', 'test-results'), { recursive: true });
