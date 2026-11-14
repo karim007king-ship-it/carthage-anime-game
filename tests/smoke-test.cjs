@@ -128,7 +128,7 @@ assert.ok(qartonDesignSystem.includes('.qarton-game-control{'), 'shared QARTON g
 assert.ok(qartonIsolatedHome.includes('QARTON'), 'isolated home must show the QARTON studio identity');
 assert.ok(qartonIsolatedHome.includes('CULTURE • POWER • CINEMA'), 'isolated home must show the studio tagline');
 assert.ok(qartonIsolatedHome.includes('آخر يوم في قرطاج'), 'isolated home must show the Carthage game title');
-assert.ok(qartonIsolatedHome.includes('HOME:"HOME",GAME:"GAME",TRANSITION:"TRANSITION"'), 'isolated home must own the three explicit lifecycle states');
+assert.ok(qartonIsolatedHome.includes('HOME:"HOME",INTRO:"INTRO",GAME:"GAME",TRANSITION:"TRANSITION"'), 'isolated home must own the three explicit lifecycle states');
 assert.ok(qartonIsolatedHome.includes('window.__qartonSetAppState'), 'React screen lifecycle must have a central state setter');
 assert.ok(qartonIsolatedHome.includes('window.__QARTON_HOME_READY__=true'), 'QARTON home must expose an explicit ready marker');
 assert.ok(!qartonIsolatedHome.includes('.game-timer')&&!qartonIsolatedHome.includes('isPlaying'), 'isolated home visibility must never be inferred from timer DOM');
