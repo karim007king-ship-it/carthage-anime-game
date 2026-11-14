@@ -15,6 +15,7 @@
     html.classList.remove("qarton-booting", "qarton-transitioning");
     html.dataset.qartonState = state;
     if (document.body) document.body.dataset.qartonState = state;
+    html.removeAttribute("data-qarton-boot-error");
     window.clearTimeout(timeout);
     window.dispatchEvent(new CustomEvent("qarton:statechange", { detail: { state: state } }));
     return true;
@@ -39,12 +40,20 @@
     var label = (button.textContent || "").trim();
     if (!/ابدأ|الجزء/.test(label)) return;
     state = "TRANSITION";
+    ready = false;
     html.classList.add("qarton-transitioning");
     html.dataset.qartonState = state;
+    html.removeAttribute("data-qarton-boot-error");
+    window.clearTimeout(timeout);
+    timeout = window.setTimeout(function() {
+      if (state !== "TRANSITION") return;
+      html.dataset.qartonBootError = "true";
+      window.dispatchEvent(new CustomEvent("qarton:transition-timeout"));
+    }, 15000);
   }, true);
 
   timeout = window.setTimeout(function() {
-    if (ready) return;
+    if (state !== "TRANSITION") return;
     html.dataset.qartonBootError = "true";
     window.dispatchEvent(new CustomEvent("qarton:boot-timeout"));
   }, 15000);
