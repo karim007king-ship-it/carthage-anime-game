@@ -23,6 +23,7 @@ html.qarton-booting #root,html.qarton-transitioning #root{visibility:hidden!impo
 html.qarton-booting body,html.qarton-transitioning body{background:#090b12!important}
 html.qarton-booting body:before,html.qarton-transitioning body:after{content:"QARTON\\A CULTURE • POWER • CINEMA\\A جارٍ تجهيز قرطاج";white-space:pre;position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;box-sizing:border-box;background:radial-gradient(ellipse at 50% 28%,#55242d 0%,#151b29 42%,#07090f 100%);color:#f4d58f;font:800 19px/2 system-ui;letter-spacing:1px}
 html[data-qarton-boot-error="true"].qarton-booting body:before{content:"QARTON\\A تعذّر تشغيل الواجهة\\A أعد المحاولة دون حذف بيانات الحفظ";font-size:17px}
+html[data-qarton-boot-error="true"].qarton-transitioning body:after{content:"QARTON\\A تعذّر الانتقال إلى الشاشة التالية\\A لم يتم حذف بيانات الحفظ";font-size:17px}
 </style>`;
 html = html.replace('</head>', qartonBootStyle + '<script id="qarton-boot-runtime">' + qartonBoot + '</script></head>');
 function replaceOnce(needle, replacement, label) {
