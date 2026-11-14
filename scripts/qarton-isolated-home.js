@@ -2,7 +2,7 @@
 "use strict";
 if(window.__qartonHomeIsolationInstalled)return;
 window.__qartonHomeIsolationInstalled=true;
-var STATE={HOME:"HOME",GAME:"GAME",TRANSITION:"TRANSITION"};
+var STATE={HOME:"HOME",INTRO:"INTRO",GAME:"GAME",TRANSITION:"TRANSITION"};
 var state=STATE.HOME,root=null,overlay=null,observer=null,bodyObserver=null,queued=false,menu=null;
 var css=[
 "#qarton-home-screen{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;overflow:hidden;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px calc(env(safe-area-inset-bottom,0px) + 10px);color:var(--qarton-cream,#f7ecd7);background:radial-gradient(ellipse at 50% 0%,#8b30394d,transparent 48%),radial-gradient(ellipse at 12% 85%,#e8c47722,transparent 40%),linear-gradient(155deg,#07090f,#101827 58%,#080a11);font-family:system-ui,sans-serif;direction:rtl}",
@@ -57,7 +57,7 @@ function showNewGameConfirm(){
 }
 function render(){
  root=document.getElementById("root");
- if(state==="GAME"){showGame();return}
+ if(state==="INTRO"||state==="GAME"){showGame();return}
  if(state==="TRANSITION"){showTransition();return}
  restoreNativeMenu();hideLegacy();ensureOverlay();addStyle();overlay.replaceChildren();
  var sc=document.createElement("div");sc.className="qh-scroll";overlay.appendChild(sc);
