@@ -118,9 +118,8 @@ assert.ok(androidPrep.includes('function isHome(){return window.__QARTON_APP_STA
 const qartonHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-premium-home.js'), 'utf8');
 const qartonIsolatedHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-isolated-home.js'), 'utf8');
 const carthageHomeCss = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-carthage-home.css'), 'utf8');
-assert.ok(androidPrep.includes('qarton-carthage-home.css'), 'Android preparation must retain the legacy Carthage stylesheet as an inactive rollback asset');
-assert.ok(androidPrep.includes('id="qarton-premium-home-style" media="not all"'), 'legacy Carthage home CSS must remain disabled');
-assert.ok(carthageHomeCss.includes('body.carthage-home-locked'), 'legacy home CSS must remain available for rollback');
+assert.ok(!androidPrep.includes('qarton-carthage-home.css') && !androidPrep.includes('qarton-premium-home-style'), 'the obsolete React-home stylesheet must remain outside the Android runtime bundle');
+assert.ok(carthageHomeCss.includes('body.carthage-home-locked'), 'the retired home stylesheet remains archived for reference, not runtime use');
 assert.ok(qartonDesignSystem.includes('--q-gold:var(--qarton-gold)'), 'legacy-compatible QARTON aliases must be owned by the shared design system');
 assert.ok(qartonDesignSystem.includes('--q-cream:var(--qarton-cream)'), 'shared cream alias must be defined centrally');
 assert.ok(qartonDesignSystem.includes('.qarton-game-card{'), 'shared QARTON gameplay surface primitive must exist');
