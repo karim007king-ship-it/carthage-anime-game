@@ -6,15 +6,15 @@ const premium=fs.readFileSync(path.join(root,'scripts','qarton-premium-home.js')
 const prep=fs.readFileSync(path.join(root,'scripts','prepare-web.cjs'),'utf8');
 const legacy=fs.readFileSync(path.join(root,'legacy','README.md'),'utf8');
 assert.doesNotThrow(()=>new vm.Script(runtime));
-for(const state of ['HOME','GAME','TRANSITION'])assert.ok(runtime.includes(state),'central QARTON state must define '+state);
+for(const state of ['HOME','INTRO','GAME','TRANSITION'])assert.ok(runtime.includes(state),'central QARTON state must define '+state);
 assert.ok(runtime.includes('window.__qartonSetAppState'),'central state setter must be public to the React screen lifecycle');
 assert.ok(runtime.includes('window.__qartonGetAppState'),'central state getter must be available for diagnostics');
 assert.ok(runtime.includes('window.dispatchEvent(new CustomEvent("qarton:statechange"'),'state changes must emit a single lifecycle event');
-assert.ok(prep.includes('f!=="start"?"GAME"'),'the actual React intro and gameplay screens must explicitly enter GAME');
+assert.ok(prep.includes('f==="game"?"GAME":f==="intro"?"INTRO"'),'React intro and gameplay must have separate explicit lifecycle states');
 assert.ok(prep.includes('window.__QARTON_APP_STATE__==="TRANSITION"?"TRANSITION":"HOME"'),'React non-game screen must resolve to HOME unless a transition is active');
 assert.ok(!runtime.includes('.game-timer'),'home/game lifecycle must not be inferred from the presence of a timer element');
 assert.ok(!runtime.includes('isPlaying'),'legacy DOM-based isPlaying heuristic must be removed');
-assert.ok(runtime.includes('if(state==="GAME"){showGame();return}'),'only explicit GAME state may reveal the React root');
+assert.ok(runtime.includes('if(state==="INTRO"||state==="GAME"){showGame();return}'),'only explicit story INTRO or GAME states may reveal the React root');
 assert.ok(runtime.includes('if(state==="TRANSITION"){showTransition();return}'),'TRANSITION must use its own explicit rendering path');
 const transitionSource=runtime.slice(runtime.indexOf('function showTransition()'),runtime.indexOf('function showGame()'));
 assert.ok(transitionSource.includes('hideLegacy()'),'TRANSITION must keep the legacy React root hidden');
@@ -50,7 +50,7 @@ assert.ok(runtime.includes('if(!menu||!root||!root.contains(menu))'),'missing me
 assert.ok(!premium.includes('findMenu')&&!premium.includes('.game-timer')&&!premium.includes('home-actions'),'gameplay adapter must not infer home/game state from DOM selectors');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'gameplay adapter must obey the central lifecycle state');
 assert.ok(premium.includes('window.addEventListener("qarton:statechange",schedule)'),'gameplay adapter must react to central lifecycle events');
-assert.ok(prep.includes('window.__qartonSetAppState(f!=="start"?"GAME"'),'Android preparation must wire central state to the actual React screen state');
+assert.ok(prep.includes('window.__qartonSetAppState(f==="game"?"GAME":f==="intro"?"INTRO"'),'Android preparation must wire exact React screen values to the central lifecycle');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'premium adapter must use the central lifecycle instead of timer detection');
 assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||\\"HOME\\"'),'navigation controls must use the central app state');
 assert.ok(prep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'),'fixed viewport behavior must use the central app state');
