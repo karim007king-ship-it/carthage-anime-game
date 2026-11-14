@@ -18,9 +18,7 @@ const qartonDesignSystemPath = path.join(__dirname, '..', 'styles', 'qarton-desi
 const qartonDesignSystem = fs.readFileSync(qartonDesignSystemPath, 'utf8');
 if (!html.includes('</head>')) throw new Error('Missing head tag for the shared QARTON design system.');
 html = html.replace('</head>', '<style id="qarton-design-system">' + qartonDesignSystem + '</style></head>');
-const qartonHomeCssPath = path.join(__dirname, '..', 'styles', 'qarton-carthage-home.css');
-const qartonHomeCss = fs.readFileSync(qartonHomeCssPath, 'utf8');
-html = html.replace('</head>', '<style id="qarton-premium-home-style" media="not all">' + qartonHomeCss + '</style></head>');
+// The old React-home stylesheet is deliberately not bundled; QARTON HOME owns a separate overlay.
 const qartonGameplayCssPath = path.join(__dirname, '..', 'styles', 'qarton-carthage-gameplay.css');
 const qartonGameplayCss = fs.readFileSync(qartonGameplayCssPath, 'utf8');
 html = html.replace('</head>', '<style id="qarton-carthage-gameplay-style">' + qartonGameplayCss + '</style></head>');
