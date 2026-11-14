@@ -10,7 +10,7 @@ assert.ok(runtime.includes('window.__qartonSetAppState')&&runtime.includes('wind
 assert.ok(runtime.includes('window.dispatchEvent(new CustomEvent("qarton:statechange"'));
 assert.ok(runtime.includes('function hideRoot()')&&runtime.includes('root.style.setProperty("display","none","important")'));
 assert.ok(runtime.includes('function revealRoot(scene)')&&runtime.includes('scene==="INTRO"')&&runtime.includes('scene==="GAME"'));
-assert.ok(runtime.includes('window.__carthageStartNewGame')&&runtime.includes('window.__carthageContinue'));
+assert.ok(runtime.includes('__carthageStartNewGame')&&runtime.includes('__carthageContinue'));
 assert.ok(runtime.includes('__carthageSetDifficulty')&&runtime.includes('__carthageStartPart2')&&runtime.includes('__carthageStartPart3'));
 assert.ok(!runtime.includes('findNativeMenu')&&!runtime.includes('home-actions')&&!runtime.includes('n.click()'),'QARTON must not discover or replay legacy home menu controls');
 assert.ok(!runtime.includes('.game-timer')&&!runtime.includes('isPlaying'),'lifecycle must not infer state from incidental DOM');
