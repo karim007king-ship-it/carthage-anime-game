@@ -190,6 +190,32 @@ const server = http.createServer((req, res) => {
     assert.match(gameplay.buttonBorderRadius, /13px/, 'gameplay button must use the QARTON visual treatment');
     await page.screenshot({ path: path.resolve(__dirname, '..', 'test-results', 'qarton-gameplay.png'), fullPage: true });
 
+    // Verify the gameplay exit path saves progress and restores the isolated QARTON HOME.
+    const returnHome = page.locator('#carthage-home-return');
+    await returnHome.waitFor({ state: 'visible', timeout: 10000 });
+    await returnHome.click();
+    await page.waitForFunction(() =>
+      window.__qartonGetAppState && window.__qartonGetAppState() === 'HOME' &&
+      window.__QARTON_HOME_READY__ === true,
+    { timeout: 20000 });
+    const returnedHome = await page.evaluate(() => {
+      let autosave = null;
+      try { autosave = JSON.parse(localStorage.getItem('shiganshina-autosave-v1') || 'null'); } catch {}
+      return {
+        state: window.__qartonGetAppState && window.__qartonGetAppState(),
+        homeVisible: !!document.getElementById('qarton-home-screen'),
+        legacyHidden: getComputedStyle(document.getElementById('root')).display === 'none' &&
+          getComputedStyle(document.getElementById('root')).visibility === 'hidden',
+        autosavePresent: !!autosave && Number.isInteger(autosave.sceneIdx),
+        returnControlRemoved: !document.getElementById('carthage-home-return')
+      };
+    });
+    assert.equal(returnedHome.state, 'HOME', 'returning from gameplay must restore the QARTON home state');
+    assert.equal(returnedHome.homeVisible, true, 'the isolated QARTON home must be visible after leaving gameplay');
+    assert.equal(returnedHome.legacyHidden, true, 'the legacy React menu must be hidden again after returning home');
+    assert.equal(returnedHome.autosavePresent, true, 'leaving gameplay must persist the current story progress');
+    assert.equal(returnedHome.returnControlRemoved, true, 'gameplay-only navigation controls must be removed at HOME');
+
     assert.deepEqual(pageErrors, [], 'the real browser run must not throw JavaScript page errors');
     console.log('PASS: real Chromium integration — QARTON HOME, new game, full five-beat intro, GAME state, and computed QARTON gameplay styling.');
     console.log(JSON.stringify({ home: homeState, intro, introProgress, gameplay }, null, 2));
