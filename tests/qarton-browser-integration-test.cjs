@@ -192,3 +192,5 @@ const server = http.createServer((req, res) => {
   console.error(error.stack || error);
   process.exitCode = 1;
 });
+
+// Regression guard: the house-entry overlay must be activated before advancing its hidden beat.
