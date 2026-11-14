@@ -142,7 +142,7 @@ jobs:
             'body.qarton-intro-active #root',
             'if(state==="INTRO"){showIntro();return}',
             'qarton-home-screen',
-            'qarton-premium-home-style',
+            'qh-action',
             'qarton-carthage-gameplay-style',
             'qarton-design-system',
             'qarton-brand-row',
