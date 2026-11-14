@@ -63,6 +63,9 @@ assert.ok(gameSource.includes('n("intro")'), "new game must enter the actual int
 // Regression: the isolated home must win over any legacy adapter that mutates root visibility.
 assert.ok(runtime.includes('root.style.setProperty("visibility","hidden","important")'), 'legacy React root must stay hidden even if another adapter changes normal visibility');
 assert.ok(runtime.includes('document.body.classList.add("qarton-home-active")'), 'HOME and TRANSITION must own a body-level visibility guard');
+assert.ok(runtime.includes('root.style.getPropertyValue("visibility")!=="hidden"||root.style.getPropertyPriority("visibility")!=="important"'), 'legacy-root visibility writes must be idempotent to avoid mutation-observer feedback');
+assert.ok(runtime.includes('root.style.getPropertyValue("pointer-events")!=="none"||root.style.getPropertyPriority("pointer-events")!=="important"'), 'legacy-root pointer-event writes must be idempotent');
+assert.ok(runtime.includes('if(!document.body.classList.contains("qarton-home-active"))document.body.classList.add("qarton-home-active")'), 'body-level isolation class must not be redundantly re-added');
 assert.ok(runtime.includes('document.body.classList.remove("qarton-home-active")'), 'only GAME may release the body-level visibility guard');
 assert.ok(runtime.includes('attributeFilter:["class","aria-label","disabled","style"]'), 'legacy visibility changes must be observed and corrected');
 
