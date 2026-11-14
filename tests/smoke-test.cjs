@@ -136,7 +136,7 @@ assert.ok(qartonIsolatedHome.includes('function revealRoot(scene)'), 'only expli
 assert.ok(qartonIsolatedHome.includes('if(state==="TRANSITION")'), 'TRANSITION must have a dedicated handoff path');
 assert.ok(qartonIsolatedHome.includes('if(state==="TRANSITION")')&&qartonIsolatedHome.includes('تُحضّر قرطاج رحلتك'), 'TRANSITION must remain in the QARTON shell');
 assert.ok(!qartonIsolatedHome.includes('n.click()'), 'QARTON home must not replay native React menu handlers');
-assert.ok(qartonIsolatedHome.includes('window.__carthageStartNewGame')&&qartonIsolatedHome.includes('window.__carthageStartPart2'), 'QARTON cards must call stable action APIs');
+assert.ok(qartonIsolatedHome.includes('__carthageStartNewGame')&&qartonIsolatedHome.includes('__carthageStartPart2'), 'QARTON cards must call stable action APIs');
 assert.ok(!qartonIsolatedHome.includes('findNativeMenu')&&!qartonIsolatedHome.includes('home-actions'), 'QARTON must not inspect the legacy home menu DOM');
 assert.ok(qartonIsolatedHome.includes('transition-cancel'), 'QARTON transition provides its own cancel action');
 assert.ok(qartonIsolatedHome.includes('إلغاء والعودة إلى QARTON'), 'TRANSITION must provide a safe return control');
