@@ -32,6 +32,8 @@ assert.ok(runtime.includes('window.__carthageHasSave()'),'QARTON must detect sav
 assert.ok(runtime.includes('window.__carthageStartNewGame()'),'QARTON confirmation must call the real React new-game handler directly');
 assert.ok(runtime.includes('حفظك السابق سيبقى محفوظًا ولن يتم حذفه'),'new-game confirmation must explicitly preserve existing saves');
 assert.ok(prep.includes('window.__carthageStartNewGame=()=>{if(!Xn.some(slot=>!slot))'),'Android preparation must block new games when all save slots are occupied');
+assert.ok(prep.includes('html.indexOf(saveStart, us + saveStart.length) >= 0'), 'save-handler patch must reject duplicate start anchors');
+assert.ok(prep.includes('html.indexOf(saveEnd, ue + saveEnd.length) >= 0'), 'save-handler patch must reject duplicate end anchors');
 assert.ok(prep.includes('window.__carthageHasFreeSlot=()=>Xn.some(slot=>!slot)'),'Android preparation must expose whether an empty save slot is available');
 assert.ok(runtime.includes('typeof window.__carthageHasFreeSlot!=="function"||window.__carthageHasFreeSlot()'),'QARTON confirmation must verify that a free save slot exists');
 assert.ok(runtime.includes('confirm.disabled=!canStart'),'the new-game confirmation must be disabled when starting would overwrite a saved slot');
