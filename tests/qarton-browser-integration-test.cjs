@@ -196,7 +196,8 @@ const server = http.createServer((req, res) => {
     await returnHome.click();
     await page.waitForFunction(() =>
       window.__qartonGetAppState && window.__qartonGetAppState() === 'HOME' &&
-      window.__QARTON_HOME_READY__ === true,
+      window.__QARTON_HOME_READY__ === true &&
+      !document.getElementById('carthage-home-return'),
     { timeout: 20000 });
     const returnedHome = await page.evaluate(() => {
       let autosave = null;
