@@ -13,6 +13,8 @@
     state = next;
     ready = true;
     html.classList.remove("qarton-booting", "qarton-transitioning");
+    html.classList.toggle("qarton-state-home", state === "HOME");
+    html.classList.toggle("qarton-state-game", state === "GAME");
     html.dataset.qartonState = state;
     if (document.body) document.body.dataset.qartonState = state;
     html.removeAttribute("data-qarton-boot-error");
@@ -41,6 +43,7 @@
     if (!/ابدأ|الجزء/.test(label)) return;
     state = "TRANSITION";
     ready = false;
+    html.classList.remove("qarton-state-home", "qarton-state-game");
     html.classList.add("qarton-transitioning");
     html.dataset.qartonState = state;
     html.removeAttribute("data-qarton-boot-error");
