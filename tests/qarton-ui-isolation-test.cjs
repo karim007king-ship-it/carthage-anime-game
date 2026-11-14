@@ -27,7 +27,7 @@ assert.ok(runtime.includes('__carthageExportSave')&&runtime.includes('__carthage
 assert.ok(prep.includes('qarton-isolated-home-runtime'));
 assert.ok(prep.includes('window.__qartonSetAppState(f==="start"?(window.__QARTON_APP_STATE__==="TRANSITION"?"TRANSITION":"HOME"):f==="intro"?"INTRO":"GAME"'));
 assert.ok(prep.includes('f==="start"?(window.__QARTON_APP_STATE__==="TRANSITION"?"TRANSITION":"HOME"):f==="intro"?"INTRO":"GAME"'), "only the true start screen may map to HOME; endings and other story screens must remain visible as GAME");
-assert.ok(prep.includes('id="qarton-static-home-shell"')&&prep.includes('id="qarton-home-screen" aria-label="QARTON Carthage home"'), "QARTON shell must exist in prepared HTML before React first paint");
+assert.ok(prep.includes("const qartonStartupMarkup = '<main id=\\"qarton-home-screen\\" aria-label=\\"QARTON Carthage home\\""), "QARTON shell must exist in prepared HTML before React first paint");
 assert.ok(runtime.includes('overlay=document.getElementById("qarton-home-screen")'), "QARTON runtime must adopt the static first-paint shell");
 assert.ok(!premium.includes('findMenu')&&!premium.includes('.game-timer')&&!premium.includes('home-actions'));
 assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'));
