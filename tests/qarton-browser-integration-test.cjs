@@ -117,6 +117,14 @@ const server = http.createServer((req, res) => {
     for (let beat = 0; beat < 8; beat++) {
       const currentState = await page.evaluate(() => window.__qartonGetAppState && window.__qartonGetAppState());
       if (currentState === 'GAME') break;
+      // Some intro beats pause on a full-screen "enter the house" scene.
+      // That overlay intentionally intercepts the underlying continue button.
+      const houseEntry = page.getByRole('button', { name: /ادخل للدار/ }).first();
+      if (await houseEntry.isVisible().catch(() => false)) {
+        await houseEntry.click();
+        await page.waitForTimeout(350);
+        continue;
+      }
       const candidates = page.locator('#root button:visible');
       let clicked = false;
       for (let i = 0; i < await candidates.count(); i++) {
