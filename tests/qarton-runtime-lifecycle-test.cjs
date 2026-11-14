@@ -49,7 +49,12 @@ const document={
   createElement:element,
   addEventListener(){},
 };
-const window={dispatchEvent(){},setTimeout,clearTimeout};
+const timers=new Map();let nextTimer=1;
+const window={
+  dispatchEvent(){},
+  setTimeout(fn,delay){const id=nextTimer++;timers.set(id,{fn,delay});return id},
+  clearTimeout(id){timers.delete(id)}
+};
 class Observer{constructor(fn){this.fn=fn}observe(){}disconnect(){}}
 class CustomEvent{constructor(type,options){this.type=type;this.detail=options?.detail}}
 const context={window,document,MutationObserver:Observer,CustomEvent,requestAnimationFrame(fn){fn()},console};
@@ -83,5 +88,14 @@ assert.ok(body.classList.contains('qarton-home-active'));
 
 window.__qartonSetAppState('NOT_A_STATE','invalid-state');
 assert.equal(window.__qartonGetAppState(),'HOME','invalid lifecycle states must be ignored');
+
+// A failed React transition must recover instead of leaving a permanent loading screen.
+window.__qartonSetAppState('TRANSITION','test-timeout');
+const pending=[...timers.entries()].find(([,timer])=>timer.delay===15000);
+assert.ok(pending,'TRANSITION must arm a bounded recovery timer');
+timers.delete(pending[0]);
+pending[1].fn();
+assert.equal(window.__qartonGetAppState(),'HOME','a stalled transition must return to QARTON HOME');
+assert.match(window.__QARTON_TRANSITION_ERROR__,/تعذّر تشغيل المشهد/,'the recovery reason must be retained for the player');
 
 console.log('PASS: QARTON runtime lifecycle integration — HOME, TRANSITION, INTRO, GAME, and return HOME.');
