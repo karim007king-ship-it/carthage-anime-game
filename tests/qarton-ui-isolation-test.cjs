@@ -77,7 +77,8 @@ assert.ok(runtime.includes('document.body.classList.add("qarton-home-active")'),
 assert.ok(runtime.includes('root.style.getPropertyValue("visibility")!=="hidden"||root.style.getPropertyPriority("visibility")!=="important"'), 'legacy-root visibility writes must be idempotent to avoid mutation-observer feedback');
 assert.ok(runtime.includes('root.style.getPropertyValue("pointer-events")!=="none"||root.style.getPropertyPriority("pointer-events")!=="important"'), 'legacy-root pointer-event writes must be idempotent');
 assert.ok(runtime.includes('if(!document.body.classList.contains("qarton-home-active"))document.body.classList.add("qarton-home-active")'), 'body-level isolation class must not be redundantly re-added');
-assert.ok(runtime.includes('document.body.classList.remove("qarton-home-active")'), 'only GAME may release the body-level visibility guard');
+assert.ok(runtime.includes('function showIntro(){')&&runtime.includes('document.body.classList.add("qarton-intro-active")')&&runtime.includes('document.body.classList.remove("qarton-home-active","qarton-game-active")'), 'INTRO must release the HOME guard only while enabling the dedicated intro visibility scope');
+assert.ok(runtime.includes('function showGame(){')&&runtime.includes('document.body.classList.add("qarton-game-active")')&&runtime.includes('document.body.classList.remove("qarton-home-active","qarton-intro-active")'), 'GAME must release the HOME guard only while enabling the dedicated gameplay visibility scope');
 assert.ok(runtime.includes('attributeFilter:["class","aria-label","disabled","style"]'), 'legacy visibility changes must be observed and corrected');
 
 assert.ok(runtime.includes('function observeRoot(){'), 'root observation must be centralized for initial mount and root replacement');
