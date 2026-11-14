@@ -51,6 +51,27 @@ const server = http.createServer((req, res) => {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
     page = await context.newPage();
     page.on('pageerror', error => pageErrors.push(error.stack || error.message));
+    await page.addInitScript(() => {
+      window.__qartonStartupVisibilityViolations = [];
+      const inspect = () => {
+        const root = document.getElementById('root');
+        if (!root) return;
+        const state = window.__QARTON_APP_STATE__ || 'BOOT';
+        if (state !== 'HOME' && state !== 'TRANSITION' && state !== 'BOOT') return;
+        const style = getComputedStyle(root);
+        if (style.display !== 'none' || style.visibility !== 'hidden') {
+          window.__qartonStartupVisibilityViolations.push({
+            state, display: style.display, visibility: style.visibility,
+            time: Math.round(performance.now())
+          });
+        }
+      };
+      const observer = new MutationObserver(inspect);
+      observer.observe(document, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style'] });
+      document.addEventListener('DOMContentLoaded', inspect);
+      window.addEventListener('qarton:statechange', inspect);
+      inspect();
+    });
     await page.goto('http://127.0.0.1:' + address.port + '/', { waitUntil: 'domcontentloaded', timeout: 30000 });
 
     await page.waitForFunction(() => window.__QARTON_HOME_READY__ === true, { timeout: 25000 });
@@ -72,6 +93,7 @@ const server = http.createServer((req, res) => {
     assert.equal(homeState.rootDisplay, 'none', 'the legacy React root must be hidden while QARTON HOME is active');
     assert.equal(homeState.rootVisibility, 'hidden', 'the legacy React root must not be visible behind QARTON HOME');
     assert.equal(homeState.rootHasHomeLock, false, 'the legacy React root must never receive the old home-layout class');
+    assert.deepEqual(await page.evaluate(() => window.__qartonStartupVisibilityViolations), [], 'the legacy React root must never flash during BOOT, HOME, or TRANSITION');
     assert.equal(homeState.obsoleteHomeStylePresent, false, 'the old React-home stylesheet must not be loaded in the QARTON app');
     assert.equal(homeState.homeVisible, true, 'the QARTON home overlay must be visible');
     await page.waitForTimeout(250);
