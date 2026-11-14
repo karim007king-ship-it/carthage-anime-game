@@ -33,7 +33,7 @@ assert.ok(qartonHomeRuntime.includes('announce("GAME")'), 'QARTON must publish G
     remove: (...items) => items.forEach(item => classes.delete(item)),
     contains: item => classes.has(item)
   };
-  const htmlElement = { classList, dataset: {} };
+  const htmlElement = { classList, dataset: {}, removeAttribute: name => { delete htmlElement.dataset[name.replace(/^data-/, '').replace(/-([a-z])/g, (_, c) => c.toUpperCase())]; } };
   const documentListeners = {};
   const fakeDocument = {
     documentElement: htmlElement,
