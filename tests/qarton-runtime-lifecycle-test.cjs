@@ -17,7 +17,7 @@ function element(tag){
 const root=element('div');root.id='root';const body=element('body');body.appendChild(root);const head=element('head');
 const document={body,head,documentElement:element('html'),readyState:'complete',getElementById(id){function f(n){if(n.id===id)return n;for(const c of n.children||[]){const x=f(c);if(x)return x}return null}return f(body)||f(head)},createElement:element};
 const timers=new Map();let id=0;const window={dispatchEvent(){},addEventListener(){},setTimeout(fn,delay){timers.set(++id,{fn,delay});return id}};
-const nativeActions={__carthageHasSave:()=>false,__carthageHasFreeSlot:()=>true,__carthageStartNewGame:()=>{window.__qartonSetAppState('INTRO','new-game');return true},__carthageContinue:()=>true,__carthageSetDifficulty:()=>true,__carthageStartPart2:()=>true,__carthageStartPart3:()=>true,__carthageCanStartPart3:()=>false};
+const nativeActions={__carthageHasSave:()=>false,__carthageHasFreeSlot:()=>true,__carthageStartNewGame:()=>true,__carthageContinue:()=>true,__carthageSetDifficulty:()=>true,__carthageStartPart2:()=>true,__carthageStartPart3:()=>true,__carthageCanStartPart3:()=>false};
 Object.assign(window,nativeActions);
 class Observer{constructor(fn){this.fn=fn}observe(){}disconnect(){}}
 class CustomEvent{constructor(type,options){this.type=type;this.detail=options?.detail}}
@@ -38,5 +38,5 @@ window.__qartonSetAppState('GAME','game');assert.ok(body.classList.contains('qar
 window.__qartonSetAppState('HOME','home');assert.equal(root.style.getPropertyValue('display'),'none');assert.ok(body.classList.contains('qarton-home-active'));
 window.__qartonSetAppState('BAD','invalid');assert.equal(window.__qartonGetAppState(),'HOME');
 window.__qartonSetAppState('TRANSITION','timeout');const pending=[...timers.entries()].find(([,v])=>v.delay===15000);pending[1].fn();assert.equal(window.__qartonGetAppState(),'HOME');assert.match(window.__QARTON_TRANSITION_ERROR__,/تعذّر تشغيل المشهد/);
-const newGame=document.getElementById('qarton-home-screen').querySelectorAll('.qh-action').find(b=>/لعبة جديدة/.test(b.textContent));newGame.click();assert.equal(window.__qartonGetAppState(),'INTRO');assert.equal(document.getElementById('qarton-home-screen'),null);
+const newGame=document.getElementById('qarton-home-screen').querySelectorAll('.qh-action').find(b=>/لعبة جديدة/.test(b.textContent));newGame.click();assert.equal(window.__qartonGetAppState(),'TRANSITION','the standalone action must enter transition before the React lifecycle reports INTRO');window.__qartonSetAppState('INTRO','react-intro');assert.equal(window.__qartonGetAppState(),'INTRO');assert.equal(document.getElementById('qarton-home-screen'),null);
 console.log('PASS: QARTON lifecycle and standalone home action flow.');
