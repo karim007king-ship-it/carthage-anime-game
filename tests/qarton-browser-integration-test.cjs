@@ -71,6 +71,31 @@ const server = http.createServer((req, res) => {
     assert.equal(homeState.rootVisibility, 'hidden', 'the legacy React root must not be visible behind QARTON HOME');
     assert.equal(homeState.homeVisible, true, 'the QARTON home overlay must be visible');
     assert.equal(homeState.hasPrimaryAction, true, 'the QARTON home must expose its real primary action');
+
+    // The QARTON home is intentionally a fixed, non-scrolling screen on short phones.
+    await page.setViewportSize({ width: 360, height: 640 });
+    const compactHome = await page.evaluate(() => {
+      const overlay = document.getElementById('qarton-home-screen');
+      const rect = overlay && overlay.getBoundingClientRect();
+      return {
+        viewportHeight: window.innerHeight,
+        overlayHeight: rect ? rect.height : 0,
+        documentHeight: document.documentElement.scrollHeight,
+        bodyHeight: document.body.scrollHeight,
+        primaryVisible: !!overlay && Array.from(overlay.querySelectorAll('button')).some(button =>
+          button.dataset.kind === 'primary' && button.getBoundingClientRect().height > 0),
+        legacyHidden: getComputedStyle(document.getElementById('root')).display === 'none' &&
+          getComputedStyle(document.getElementById('root')).visibility === 'hidden'
+      };
+    });
+    assert.ok(compactHome.overlayHeight <= compactHome.viewportHeight + 1,
+      'QARTON home must fit within a compact 360x640 viewport');
+    assert.ok(compactHome.documentHeight <= compactHome.viewportHeight + 1 &&
+      compactHome.bodyHeight <= compactHome.viewportHeight + 1,
+      'QARTON home must not introduce vertical page scrolling on a compact phone');
+    assert.equal(compactHome.primaryVisible, true, 'the primary action must remain visible on a compact phone');
+    assert.equal(compactHome.legacyHidden, true, 'the legacy root must remain isolated on a compact phone');
+    await page.setViewportSize({ width: 390, height: 844 });
     assert.equal(homeState.moduleStarted, true, 'the actual story module must have started');
     assert.equal(homeState.renderRequested, true, 'the actual React application must have rendered');
 
