@@ -20,6 +20,7 @@ const qartonBootPath = path.join(__dirname, 'qarton-boot.js');
 const qartonBoot = fs.readFileSync(qartonBootPath, 'utf8');
 const qartonBootStyle = `<style id="qarton-boot-gate">
 html.qarton-booting #root,html.qarton-transitioning #root{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+html.qarton-state-home #root,html.qarton-state-game #root{visibility:visible!important;opacity:1!important;pointer-events:auto!important}
 html.qarton-booting body,html.qarton-transitioning body{background:#090b12!important}
 html.qarton-booting body:before,html.qarton-transitioning body:after{content:"QARTON\\A CULTURE • POWER • CINEMA\\A جارٍ تجهيز قرطاج";white-space:pre;position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;box-sizing:border-box;background:radial-gradient(ellipse at 50% 28%,#55242d 0%,#151b29 42%,#07090f 100%);color:#f4d58f;font:800 19px/2 system-ui;letter-spacing:1px}
 html[data-qarton-boot-error="true"].qarton-booting body:before{content:"QARTON\\A تعذّر تشغيل الواجهة\\A أعد المحاولة دون حذف بيانات الحفظ";font-size:17px}
