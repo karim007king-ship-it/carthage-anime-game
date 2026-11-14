@@ -3,6 +3,10 @@ if(window.__qartonPremiumHomeInstalled)return;
 window.__qartonPremiumHomeInstalled=true;
 function style(){var sheet=document.getElementById("qarton-premium-home-style");if(sheet)sheet.media="all"}
 function playing(root){return !!(root&&root.querySelector(".game-timer"))}
+function announce(state){
+if(window.__qartonGetState&&window.__qartonGetState()===state)return;
+window.dispatchEvent(new CustomEvent("qarton:ready",{detail:{state:state}}));
+}
 function decorateGameplay(root){
 if(!root)return;
 root.classList.add("qarton-game-ui");
@@ -80,7 +84,7 @@ if(candidates[0])candidates[0].classList.add("qarton-achievements");
 }
 function mount(){
 var root=document.getElementById("root");if(!root)return;
-if(playing(root)){decorateGameplay(root);var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");if(observer){observer.disconnect();observer=null}watchGameplayEnd(root);return}root.classList.remove("qarton-game-ui");
+if(playing(root)){decorateGameplay(root);var a=document.getElementById("qarton-home-brand"),f=document.getElementById("qarton-home-info");if(a)a.remove();if(f)f.remove();root.classList.remove("carthage-home-locked");document.documentElement.classList.remove("carthage-home-locked");document.body.classList.remove("carthage-home-locked");if(observer){observer.disconnect();observer=null}announce("GAME");watchGameplayEnd(root);return}root.classList.remove("qarton-game-ui");
 var menu=findMenu(root);
 if(!menu)return;
 root.classList.add("carthage-home-locked");document.documentElement.classList.add("carthage-home-locked");document.body.classList.add("carthage-home-locked");
@@ -95,6 +99,7 @@ var foot=document.createElement("div");foot.id="qarton-home-info";foot.dir="rtl"
 foot.innerHTML='<span class="qarton-line"></span><span>رحلتك • اختياراتك • مصيرك</span><span class="qarton-line"></span>';root.appendChild(foot);
 }
 decorate(root);
+announce("HOME");
 }
 var queued=false,observer=null,gameplayObserver=null,returnTimer=0;
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount()})}
