@@ -25,6 +25,9 @@ assert.ok(runtime.includes('hideLegacy();restoreNativeMenu();removeTransitionCon
 assert.ok(runtime.includes('if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))'),'native cancellation must restore the QARTON HOME state');
 assert.ok(runtime.includes('qarton-transition-return'),'TRANSITION must provide a safe return control when a native action does not start gameplay');
 assert.ok(runtime.includes('hideLegacy();ensureOverlay()'),'HOME and TRANSITION must keep the legacy root hidden');
+assert.ok(prep.includes('qarton-startup-first-paint-guard')&&prep.includes('#root{visibility:hidden!important;pointer-events:none!important}'),'legacy root must be hidden by head CSS before the first React paint');
+assert.ok(runtime.includes('document.body.classList.add("qarton-game-active")'),'only the explicit GAME lifecycle may release the first-paint guard');
+assert.ok(runtime.includes('document.body.classList.remove("qarton-game-active")'),'HOME and TRANSITION must re-lock the legacy root');
 assert.ok(runtime.includes('setState("TRANSITION","home-action")'),'home actions must enter TRANSITION before invoking the native handler');
 assert.ok(runtime.includes('n.click()'),'QARTON cards must delegate to original React button handlers');
 assert.ok(runtime.includes('function showNewGameConfirm()'),'new-game confirmation must render inside the isolated QARTON layer without unused parameters');
