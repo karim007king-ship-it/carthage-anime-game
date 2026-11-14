@@ -144,7 +144,9 @@ assert.ok(!qartonHome.includes('findMenu')&&!qartonHome.includes('.game-timer')&
 assert.ok(qartonHome.includes('window.__QARTON_APP_STATE__!=="GAME"'), 'gameplay adapter must use the central lifecycle state');
 assert.ok(qartonHome.includes('function decorateGameplay(node)'), 'QARTON adapter must style active gameplay');
 assert.ok(qartonHome.includes('.dialogue-panel,.theatre-text,.search-layer'), 'QARTON adapter must style dialogue and search surfaces');
-assert.ok(qartonHome.includes('.dialogue-panel button,.choice-stack button,.game-choices button,.game-pill-btn,.map-pill'), 'QARTON adapter must style story choices and HUD controls');
+assert.ok(qartonHome.includes('Array.from(node.querySelectorAll("button"))'), 'QARTON adapter must decorate story and HUD buttons without changing their handlers');
+const qartonGameplayCss = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-carthage-gameplay.css'), 'utf8');
+assert.ok(qartonGameplayCss.includes('.choice-stack button') && qartonGameplayCss.includes('.game-choices button') && qartonGameplayCss.includes('.game-pill-btn') && qartonGameplayCss.includes('.map-pill'), 'QARTON gameplay stylesheet must style story choices and HUD controls');
 assert.ok(qartonHome.includes('window.addEventListener("qarton:statechange",schedule)'), 'gameplay adapter must respond to central state changes');
 assert.ok(qartonHome.includes('observer.observe(root,{subtree:true,childList:true,characterData:true})'), 'newly rendered gameplay controls must be styled after React updates');
 assert.ok(androidPrep.includes('var appState=window.__QARTON_APP_STATE__'), 'navigation visibility must use central QARTON state');
