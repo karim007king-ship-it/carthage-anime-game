@@ -33,9 +33,9 @@ function element(tag){
     click(){if(this.disabled)return;(listeners.get('click')||[]).forEach(fn=>fn({target:this}))},
     matches(selector){
       if(selector==='button')return this.tagName==='BUTTON';
-      if(selector[0]==='.')return (this.className||'').split(/\\s+/).includes(selector.slice(1))||classes.has(selector.slice(1));
+      if(selector[0]==='.')return (this.className||'').split(/\s+/).includes(selector.slice(1))||classes.has(selector.slice(1));
       if(selector[0]==='#')return this.id===selector.slice(1);
-      const attr=selector.match(/^\\[([^=]+)="([^"]*)"\\]$/);
+      const attr=selector.match(/^\[([^=]+)="([^"]*)"\]$/);
       return !!attr&&this.getAttribute(attr[1])===attr[2];
     },
     querySelectorAll(selector){const found=[];function walk(parent){for(const child of parent.children){if(child.matches&&child.matches(selector))found.push(child);walk(child)}}walk(this);return found},
