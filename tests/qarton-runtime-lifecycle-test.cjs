@@ -14,7 +14,7 @@ function element(tag){
  contains(x){return x===this||children.some(c=>c===x||c.contains?.(x))},focus(){}
  };return n;
 }
-const root=element('div');root.id='root';const body=element('body');body.appendChild(root);const head=element('head');
+const root=element('div');root.id='root';const body=element('body');body.appendChild(root);const staticHome=element('main');staticHome.id='qarton-home-screen';body.appendChild(staticHome);const head=element('head');
 const document={body,head,documentElement:element('html'),readyState:'complete',getElementById(id){function f(n){if(n.id===id)return n;for(const c of n.children||[]){const x=f(c);if(x)return x}return null}return f(body)||f(head)},createElement:element};
 const timers=new Map();let id=0;const window={dispatchEvent(){},addEventListener(){},setTimeout(fn,delay){timers.set(++id,{fn,delay});return id}};
 const nativeActions={__carthageHasSave:()=>false,__carthageHasFreeSlot:()=>true,__carthageStartNewGame:()=>{window.__qartonSetAppState("INTRO","native-new-game-sync");return true},__carthageContinue:()=>true,__carthageSetDifficulty:()=>true,__carthageStartPart2:()=>true,__carthageStartPart3:()=>true,__carthageCanStartPart3:()=>false};
@@ -27,7 +27,7 @@ vm.runInNewContext(source,context,{filename:'qarton-isolated-home.js'});
 assert.equal(window.__qartonGetAppState(),'HOME');
 assert.equal(root.style.getPropertyValue('display'),'none','legacy root hidden before showing home');
 assert.equal(root.style.getPropertyPriority('display'),'important');
-const home=document.getElementById('qarton-home-screen');assert.ok(home,'QARTON HOME mounts without any native menu');
+const home=document.getElementById('qarton-home-screen');assert.ok(home,'QARTON HOME mounts without any native menu');assert.equal(home,staticHome,'runtime must adopt the pre-rendered static shell rather than create a second home screen');
 assert.ok(home.querySelectorAll('.qh-action').some(b=>/لعبة جديدة/.test(b.textContent)),'new game card rendered directly');
 assert.ok(home.querySelectorAll('.qh-difficulty').length===3,'three difficulty cards rendered directly');
 assert.ok(!home.querySelectorAll('.qh-action').some(b=>/متابعة/.test(b.textContent)),'continue hidden when there is no save');
