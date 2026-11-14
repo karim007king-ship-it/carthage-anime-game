@@ -69,7 +69,7 @@ const server = http.createServer((req, res) => {
       const observer = new MutationObserver(inspect);
       observer.observe(document, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style'] });
       document.addEventListener('DOMContentLoaded', inspect);
-      window.addEventListener('qarton:statechange', inspect);
+      window.addEventListener('qarton:statechange', () => queueMicrotask(inspect));
       inspect();
     });
     await page.goto('http://127.0.0.1:' + address.port + '/', { waitUntil: 'domcontentloaded', timeout: 30000 });
