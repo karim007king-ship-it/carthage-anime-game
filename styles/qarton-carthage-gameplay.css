@@ -1,0 +1,20 @@
+/* QARTON Carthage gameplay skin. Visual-only adapter: story DOM and event handlers remain untouched. */
+body.qarton-game-active{background:#080b12!important;color:#fff0d2!important;overscroll-behavior:none}
+#root.qarton-game-ui{box-sizing:border-box;min-height:100dvh;color:#fff0d2!important;background:radial-gradient(ellipse at 50% 0%,rgba(139,48,57,.22),transparent 46%),linear-gradient(155deg,#080b12,#101827 58%,#080a11)!important;font-family:system-ui,-apple-system,"Segoe UI",sans-serif!important}
+#root.qarton-game-ui button{box-sizing:border-box;min-height:42px;border:1px solid rgba(232,196,119,.58)!important;border-radius:13px!important;background:linear-gradient(145deg,#273246,#101722)!important;color:#fff0d2!important;font-family:system-ui,-apple-system,"Segoe UI",sans-serif!important;font-weight:800!important;box-shadow:0 5px 16px rgba(0,0,0,.28)!important}
+#root.qarton-game-ui button:active{transform:scale(.985);filter:brightness(1.12)}
+#root.qarton-game-ui button:disabled{opacity:.48!important;filter:saturate(.55)}
+#root.qarton-game-ui button:focus-visible{outline:2px solid #ffe29d!important;outline-offset:3px}
+#root.qarton-game-ui .dialogue-panel,
+#root.qarton-game-ui .theatre-text,
+#root.qarton-game-ui .search-layer,
+#root.qarton-game-ui .qarton-game-card{border:1px solid rgba(232,196,119,.56)!important;border-radius:20px!important;background:linear-gradient(150deg,rgba(32,43,60,.97),rgba(8,11,18,.98))!important;color:#fff0d2!important;box-shadow:0 12px 30px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.05)!important}
+#root.qarton-game-ui .choice-stack button,
+#root.qarton-game-ui .game-choices button,
+#root.qarton-game-ui .qarton-game-control{border-color:rgba(232,196,119,.72)!important;background:linear-gradient(110deg,#652b35,#202b3c)!important;color:#fff0d2!important}
+#root.qarton-game-ui .game-pill-btn,
+#root.qarton-game-ui .map-pill{border:1px solid #e8c477!important;border-radius:999px!important;background:rgba(17,24,39,.96)!important;color:#ffe29d!important}
+#root.qarton-game-ui h1,#root.qarton-game-ui h2,#root.qarton-game-ui h3{color:#ffe29d!important;text-shadow:0 2px 14px rgba(139,48,57,.28)}
+#root.qarton-game-ui p,#root.qarton-game-ui label,#root.qarton-game-ui span{ text-wrap:pretty }
+#root.qarton-game-ui img{max-width:100%;height:auto}
+@media(prefers-reduced-motion:reduce){#root.qarton-game-ui button{transition:none!important;animation:none!important}}
