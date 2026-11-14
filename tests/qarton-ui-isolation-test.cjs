@@ -61,7 +61,7 @@ assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'premium adap
 assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||\\"HOME\\"'),'navigation controls must use the central app state');
 assert.ok(prep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'),'fixed viewport behavior must use the central app state');
 assert.ok(!prep.includes("#root.carthage-home-locked{"), "fixed viewport CSS must never reveal the hidden legacy React root");
-assert.ok(!prep.includes('root.classList.toggle(\\"carthage-home-locked\\",locked)'), "fixed viewport runtime must not mark the legacy React root as HOME");
+assert.ok(!prep.includes(String.raw`root.classList.toggle(\"carthage-home-locked\",locked)`), "fixed viewport runtime must not mark the legacy React root as HOME");
 assert.ok(prep.includes('window.addEventListener("qarton:statechange",schedule)'),'state changes must update the shared UI adapters');
 assert.ok(runtime.includes('reason:"init"'),'initial HOME state must be broadcast to all adapters');
 assert.ok(runtime.includes('bodyObserver.observe(document.body,{childList:true});')&&runtime.includes('\n render();'),'QARTON HOME must mount immediately and hide the legacy root before React paints its old menu');
