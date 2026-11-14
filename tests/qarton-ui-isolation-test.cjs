@@ -22,6 +22,8 @@ assert.ok(prep.includes('window.__carthageStartPart2=()=>'));
 assert.ok(prep.includes('window.__carthageStartNewGame=()=>'));
 assert.ok(prep.includes('window.__carthageContinue=()=>'));
 assert.ok(prep.includes('window.__carthageStartPart3=()=>'));
+assert.ok(prep.includes('window.__carthageExportSave=exportSave')&&prep.includes('window.__carthageImportSave=function'));
+assert.ok(runtime.includes('__carthageExportSave')&&runtime.includes('__carthageImportSave'),'backup import/export must remain accessible from the standalone home');
 assert.ok(prep.includes('qarton-isolated-home-runtime'));
 assert.ok(prep.includes('window.__qartonSetAppState(f==="game"?"GAME":f==="intro"?"INTRO"'));
 assert.ok(!premium.includes('findMenu')&&!premium.includes('.game-timer')&&!premium.includes('home-actions'));
