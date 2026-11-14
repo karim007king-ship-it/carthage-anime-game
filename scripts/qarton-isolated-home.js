@@ -3,7 +3,7 @@
 if(window.__qartonHomeIsolationInstalled)return;
 window.__qartonHomeIsolationInstalled=true;
 var STATE={HOME:"HOME",INTRO:"INTRO",GAME:"GAME",TRANSITION:"TRANSITION"};
-var state=STATE.HOME,root=null,overlay=null,observer=null,bodyObserver=null,queued=false,menu=null,transitionTimer=0;
+var state=STATE.HOME,root=null,overlay=null,observer=null,bodyObserver=null,queued=false,menu=null,transitionTimer=0,lastRenderedState=null,lastRenderedMenu=null,lastRenderedSignature=null,lastRenderedError=null;
 var css=[
 "#qarton-home-screen{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;overflow:hidden;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px calc(env(safe-area-inset-bottom,0px) + 10px);color:var(--qarton-cream,#f7ecd7);background:radial-gradient(ellipse at 50% 0%,#8b30394d,transparent 48%),radial-gradient(ellipse at 12% 85%,#e8c47722,transparent 40%),linear-gradient(155deg,#07090f,#101827 58%,#080a11);font-family:system-ui,sans-serif;direction:rtl}",
 "#qarton-home-screen *{box-sizing:border-box}#qarton-home-screen .qh-scroll{width:100%;max-width:560px;min-height:0;display:flex;flex:1;flex-direction:column;justify-content:center;overflow:hidden;overscroll-behavior:none}",
@@ -58,6 +58,18 @@ function showNewGameConfirm(){
 }
 function render(){
  root=document.getElementById("root");
+ if(menu&&root&&!root.contains(menu))menu=null;
+ if(state==="HOME"){var activeMenu=findNativeMenu();if(activeMenu)menu=activeMenu}
+ var signature="";
+ if(state==="HOME"&&menu){signature=Array.from(menu.querySelectorAll("button")).map(function(b){return [b.id||"",clean(b.textContent),b.disabled?"1":"0",b.getAttribute("aria-pressed")||"",b.className||""].join("#")}).join("|")}
+ var errorMessage=state==="HOME"?(window.__QARTON_TRANSITION_ERROR__||""):"";
+ var overlayExpected=state==="HOME"||state==="TRANSITION";
+ if(state===lastRenderedState&&menu===lastRenderedMenu&&signature===lastRenderedSignature&&errorMessage===lastRenderedError&&((overlayExpected&&!!overlay)||(!overlayExpected&&!overlay))){
+  if(state==="HOME"||state==="TRANSITION")hideLegacy();
+  if(state==="HOME")window.__QARTON_HOME_READY__=!!(menu&&root&&root.contains(menu));
+  return;
+ }
+ lastRenderedState=state;lastRenderedMenu=menu;lastRenderedSignature=signature;lastRenderedError=errorMessage;
  if(state==="INTRO"){showIntro();return}if(state==="GAME"){showGame();return}
  if(state==="TRANSITION"){showTransition();return}
  restoreNativeMenu();hideLegacy();ensureOverlay();addStyle();overlay.replaceChildren();
