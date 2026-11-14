@@ -11,7 +11,7 @@ fs.copyFileSync(source, target);
 let html = fs.readFileSync(target, 'utf8');
 // Critical first-paint guard: hide the legacy React root in CSS before React can paint it.
 // QARTON explicitly releases this guard only after the real React screen enters GAME.
-const startupGuard = '<style id="qarton-startup-first-paint-guard">#root{visibility:hidden!important;pointer-events:none!important}body.qarton-game-active #root{visibility:visible!important;pointer-events:auto!important}</style>';
+const startupGuard = '<style id="qarton-startup-first-paint-guard">#root{visibility:hidden!important;pointer-events:none!important}body.qarton-intro-active #root,body.qarton-game-active #root{visibility:visible!important;pointer-events:auto!important}</style>';
 if (!html.includes('</head>')) throw new Error('Missing head tag for the QARTON startup guard.');
 html = html.replace('</head>', startupGuard + '</head>');
 const qartonDesignSystemPath = path.join(__dirname, '..', 'styles', 'qarton-design-system.css');
