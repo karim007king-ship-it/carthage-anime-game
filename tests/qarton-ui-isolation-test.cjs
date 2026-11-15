@@ -65,7 +65,7 @@ assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'gameplay ada
 assert.ok(premium.includes('window.addEventListener("qarton:statechange",schedule)'),'gameplay adapter must react to central lifecycle events');
 assert.ok(prep.includes('window.__qartonSetAppState(f==="game"?"GAME":f==="intro"?"INTRO"'),'Android preparation must wire exact React screen values to the central lifecycle');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'premium adapter must use the central lifecycle instead of timer detection');
-assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||\\"HOME\\"'),'navigation controls must use the central app state');
+assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||"HOME"'),'navigation controls must use the central app state');
 const navigationRuntime=prep.slice(prep.indexOf('const navigation = '),prep.indexOf('const startupDiagnostics = '));
 assert.ok(navigationRuntime.includes('var observer=new MutationObserver(schedule)'),'native navigation must declare its mutation observer');
 assert.ok(navigationRuntime.indexOf('var observer=new MutationObserver(schedule)')<navigationRuntime.indexOf('observer.observe(document.documentElement'),'navigation observer must be initialized before startup');
