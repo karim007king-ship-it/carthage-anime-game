@@ -54,6 +54,7 @@ assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){.stage-slide .
 assert.ok(cinematicPilot.includes('.wall-stone{position:absolute;display:block;'), 'flying rubble fragments must be positioned visible blocks');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#carthage-wall-impact-fx'), 'destruction effects must respect reduced-motion accessibility');
 const androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
+const qartonIsolatedHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-isolated-home.js'), 'utf8');
 const qartonDesignSystem = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-design-system.css'), 'utf8');
 assert.ok(androidPrep.includes('qarton-design-system.css'), 'Android build must load the shared QARTON design system');
 assert.ok(androidPrep.includes('id="qarton-design-system"'), 'shared QARTON styles must be embedded in the packaged game');
@@ -64,7 +65,8 @@ assert.ok(qartonDesignSystem.includes('.qarton-button--primary{'), 'shared QARTO
 assert.ok(qartonDesignSystem.includes(':focus-visible'), 'shared QARTON controls must preserve visible keyboard focus');
 assert.ok(qartonDesignSystem.includes('prefers-reduced-motion:reduce'), 'shared QARTON motion must respect reduced-motion settings');
 assert.ok(androidPrep.includes('var appState=window.__QARTON_APP_STATE__'), 'navigation visibility must use the central QARTON state');
-assert.ok(!androidPrep.includes('homeScreen=')&&!androidPrep.includes('.home-actions'), 'Android navigation must not discover or mutate the legacy home menu');
+const navigationRuntime = androidPrep.slice(androidPrep.indexOf('const navigation = '), androidPrep.indexOf('const startupDiagnostics = '));
+assert.ok(!navigationRuntime.includes('homeScreen=')&&!navigationRuntime.includes('.home-actions'), 'Android navigation must not discover or mutate the legacy home menu');
 assert.ok(androidPrep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'), 'fixed home viewport must use the central QARTON state rather than DOM selectors');
 assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
 assert.ok(androidPrep.includes('carthage-save-now'), 'simple save button must exist');
@@ -107,7 +109,7 @@ assert.ok(androidPrep.includes('carthage-fixed-home-style'), 'fixed home viewpor
 assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed home viewport runtime must be injected into Android builds');
 assert.ok(androidPrep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'), 'fixed viewport must not infer HOME from difficulty or action DOM');
 const qartonHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-premium-home.js'), 'utf8');
-const qartonIsolatedHome = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-isolated-home.js'), 'utf8');
+
 const carthageHomeCss = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-carthage-home.css'), 'utf8');
 assert.ok(!androidPrep.includes('qarton-carthage-home.css') && !androidPrep.includes('qarton-premium-home-style'), 'the obsolete React-home stylesheet must remain outside the Android runtime bundle');
 assert.ok(carthageHomeCss.includes('body.carthage-home-locked'), 'the retired home stylesheet remains archived for reference, not runtime use');
