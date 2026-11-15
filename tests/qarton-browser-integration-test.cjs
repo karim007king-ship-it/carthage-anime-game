@@ -486,7 +486,7 @@ const server = http.createServer((req, res) => {
     if (page) {
       fs.mkdirSync(path.resolve(__dirname, '..', 'test-results'), { recursive: true });
       await page.screenshot({ path: path.resolve(__dirname, '..', 'test-results', 'qarton-browser-failure.png'), fullPage: true }).catch(() => {});
-      const diagnostics = await page.evaluate(() => {
+      const diagnostics = await page.evaluate(async () => {
         const root = document.getElementById('root');
         const describe = node => {
           const style = getComputedStyle(node), rect = node.getBoundingClientRect();
@@ -515,6 +515,50 @@ const server = http.createServer((req, res) => {
           naturalWidth: img.naturalWidth, naturalHeight: img.naturalHeight,
           objectFit: getComputedStyle(img).objectFit
         })) : [];
+        const backgroundOwners = root ? [root, ...Array.from(root.querySelectorAll('*'))].filter(node => {
+          const r = node.getBoundingClientRect(), s = getComputedStyle(node);
+          return r.width > 2 && r.height > 2 && s.display !== 'none' &&
+            s.visibility !== 'hidden' && Number(s.opacity || 1) > 0;
+        }) : [];
+        const backgroundMap = new Map();
+        for (const node of backgroundOwners) {
+          const r = node.getBoundingClientRect();
+          const owner = (node.tagName || '').toLowerCase() +
+            (node.id ? '#' + node.id : '') +
+            (typeof node.className === 'string' && node.className.trim()
+              ? '.' + node.className.trim().split(/\\s+/).join('.') : '');
+          for (const pseudo of ['element', '::before', '::after']) {
+            const s = pseudo === 'element' ? getComputedStyle(node) : getComputedStyle(node, pseudo);
+            const value = s.backgroundImage;
+            if (!value || value === 'none' || s.display === 'none' ||
+                s.visibility === 'hidden' || Number(s.opacity || 1) <= 0) continue;
+            for (const match of value.matchAll(/url\\(["']?(.*?)["']?\\)/g)) {
+              try {
+                const url = new URL(match[1], document.baseURI).href;
+                if (!backgroundMap.has(url)) backgroundMap.set(url, []);
+                backgroundMap.get(url).push({owner, pseudo, width:Math.round(r.width),
+                  height:Math.round(r.height), backgroundImage:value});
+              } catch {}
+            }
+          }
+        }
+        const cssBackgrounds = await Promise.all(Array.from(backgroundMap, ([url, sources]) =>
+          new Promise(resolve => {
+            const image = new Image();
+            let settled = false;
+            const finish = loaded => {
+              if (settled) return;
+              settled = true;
+              resolve({url, loaded, naturalWidth:image.naturalWidth,
+                naturalHeight:image.naturalHeight, sources});
+            };
+            image.onload = () => finish(true);
+            image.onerror = () => finish(false);
+            image.src = url;
+            if (image.complete) finish(image.naturalWidth > 0);
+            setTimeout(() => finish(image.complete && image.naturalWidth > 0), 5000);
+          })
+        ));
         const stageSlides = root ? Array.from(root.querySelectorAll('.stage-slide')).map(describe) : [];
         const rootInfo = root ? describe(root) : null;
         return {
@@ -526,8 +570,8 @@ const server = http.createServer((req, res) => {
           rootText: (root?.innerText || '').slice(0, 1600),
           overlayText: (document.getElementById('qarton-home-screen')?.innerText || '').slice(0, 800),
           viewport: { width: innerWidth, height: innerHeight },
-          root: rootInfo, stageSlides, layers: layers.slice(0, 160), images,
-          body: describe(document.body)
+          root: rootInfo, stageSlides, layers: layers.slice(0, 200), images,
+          cssBackgrounds, body: describe(document.body)
         };
       }).catch(error => ({ diagnosticError: error.stack || error.message }));
       fs.writeFileSync(path.resolve(__dirname, '..', 'test-results', 'qarton-visual-diagnostics-failure.json'),
