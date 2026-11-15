@@ -14,7 +14,8 @@ The game is split into five ownership layers:
    - `scripts/qarton-isolated-home.js`: HOME / INTRO / GAME / TRANSITION lifecycle and isolated home shell.
    - `scripts/qarton-main-tree.js`: four home branches and placement of original engine controls.
    - `scripts/qarton-premium-home.js`: gameplay styling adapter only.
-   - `scripts/qarton-cinematic-scenes.cjs`: story artwork discovery, cinematic scene motion, and scene transitions. Supports both loaded `img` elements and elements with CSS `background-image: url(...)`.
+   - `scripts/qarton-scene-backgrounds.cjs`: the single owner of scene-art discovery, image load states, CSS background/pseudo-element checks, and a non-black fallback.
+   - `scripts/qarton-cinematic-scenes.cjs`: presentation effects only; consumes the active artwork published by the background manager and never performs its own DOM-wide image discovery.
 
 3. **Android preparation — `scripts/prepare-web.cjs`**
    - Copies the canonical game HTML into `www/`.
@@ -50,7 +51,8 @@ The game is split into five ownership layers:
 | `scripts/qarton-isolated-home.js` | Home shell and app lifecycle | Story progression or save schema |
 | `scripts/qarton-main-tree.js` | Four-branch navigation and original control placement | Recreated game/save handlers |
 | `scripts/qarton-premium-home.js` | Gameplay presentation adapter | Competing home implementation |
-| `scripts/qarton-cinematic-scenes.cjs` | Scene-art detection, motion, and transitions | Story progression or save mutation |
+| `scripts/qarton-scene-backgrounds.cjs` | Active scene-art discovery, load state, fallback, background-change events | Story progression, cinematic motion, or save mutation |
+| `scripts/qarton-cinematic-scenes.cjs` | Motion and scene transitions driven by the background manager | Image discovery, story progression, or save mutation |
 | `scripts/prepare-web.cjs` | Build-time patches and ordered runtime injection | Manual generated assets |
 | `scripts/apply-android-branding.cjs` | Launcher artwork and manifest branding | Game UI or save behavior |
 | `tests/` | Regression and integration checks | Production runtime behavior |
@@ -61,7 +63,7 @@ The game is split into five ownership layers:
 1. Identify the owning file before editing.
 2. Keep changes narrow; do not extract or rewrite the bundled game engine as part of visual cleanup.
 3. Guard every source-string patch with unique-match checks. Missing or duplicate anchors must fail the build.
-4. Add a regression test for every repaired behavior.
+4. Add a regression test for every repaired behavior, including background-ready, pending, missing, and scene-change states.
 5. Run `npm test`.
 6. Run `npm run prepare:web`; inspect the prepared HTML and confirm all runtime markers are present.
 7. Run `node tests/qarton-browser-integration-test.cjs`.
