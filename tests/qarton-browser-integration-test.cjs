@@ -313,18 +313,49 @@ const server = http.createServer((req, res) => {
         root:{className:root.className,backgroundColor:rootStyle.backgroundColor,backgroundImage:rootStyle.backgroundImage},
         largeLayers:layers,images};
     });
+    // CSS backgrounds are common scene-art layers in this game. Inspect and decode
+    // visible background URLs as well as <img> elements; an <img>-only test can
+    // falsely reject a valid CSS scene or pass because of an unrelated UI icon.
+    const cssBackgroundArtwork = await page.evaluate(async () => {
+      const root = document.getElementById('root');
+      const candidates = Array.from(root.querySelectorAll('*')).filter(node => {
+        const rect = node.getBoundingClientRect(), style = getComputedStyle(node);
+        return rect.width > innerWidth * .45 && rect.height > innerHeight * .25 &&
+          style.display !== 'none' && style.visibility !== 'hidden' &&
+          Number(style.opacity || 1) > 0 && style.backgroundImage &&
+          style.backgroundImage !== 'none';
+      });
+      const urls = new Set();
+      for (const node of candidates) {
+        const value = getComputedStyle(node).backgroundImage;
+        for (const match of value.matchAll(/url\\(["']?(.*?)["']?\\)/g)) {
+          try { urls.add(new URL(match[1], document.baseURI).href); } catch {}
+        }
+      }
+      return await Promise.all(Array.from(urls).map(url => new Promise(resolve => {
+        const image = new Image();
+        const finish = (loaded) => resolve({url,loaded,naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight});
+        image.onload = () => finish(true);
+        image.onerror = () => finish(false);
+        image.src = url;
+        if (image.complete) finish(image.naturalWidth > 0);
+      })));
+    });
     fs.mkdirSync(path.resolve(__dirname, '..', 'test-results'), { recursive: true });
     fs.writeFileSync(path.resolve(__dirname, '..', 'test-results', 'qarton-visual-diagnostics.json'),
-      JSON.stringify({ gameplay, visualDiagnostics }, null, 2));
+      JSON.stringify({ gameplay, visualDiagnostics, cssBackgroundArtwork }, null, 2));
     assert.equal(gameplay.state, 'GAME', 'the complete opening sequence must enter the real gameplay state');
     assert.equal(gameplay.skinActive, true, 'QARTON gameplay adapter must activate in GAME state');
     assert.equal(gameplay.bodyGameActive, true, 'the native gameplay root must be released only in GAME state');
     assert.ok(gameplay.controlsStyled > 0, 'gameplay controls must receive the QARTON skin');
-    const loadedSceneArtwork = visualDiagnostics.images.filter(image =>
+    const loadedImageArtwork = visualDiagnostics.images.filter(image =>
       image.visible && image.complete && image.naturalWidth > 100 && image.naturalHeight > 80
     );
-    assert.ok(loadedSceneArtwork.length > 0,
-      'GAME must render at least one real, loaded scene/character image; a text-only screen cannot pass as a completed visual scene. See qarton-visual-diagnostics.json for failed image URLs and dimensions.');
+    const loadedBackgroundArtwork = cssBackgroundArtwork.filter(image =>
+      image.loaded && image.naturalWidth > 100 && image.naturalHeight > 80
+    );
+    assert.ok(loadedImageArtwork.length + loadedBackgroundArtwork.length > 0,
+      'GAME must render at least one real, loaded scene image or CSS background; see qarton-visual-diagnostics.json for failed image URLs and dimensions.');
     assert.match(gameplay.buttonBorderRadius, /13px/, 'gameplay button must use the QARTON visual treatment');
     assert.ok(gameplay.readableTextTargets.length > 0, 'GAME must expose visible text targets for contrast verification; an empty result cannot pass');
     assert.ok(gameplay.readableTextTargets.some(target => !target.insideButton), 'GAME must expose visible story or interface text outside buttons; button labels alone are not proof that dialogue rendered');
