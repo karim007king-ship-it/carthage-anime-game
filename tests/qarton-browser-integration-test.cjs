@@ -270,7 +270,24 @@ const server = http.createServer((req, res) => {
         buttonBackground: style ? style.backgroundImage + ' ' + style.backgroundColor : '',
         buttonBorderRadius: style ? style.borderRadius : '',
         characterMotionTargets: Array.from(root.querySelectorAll('.stage-slide .stage-breath,img.carthage-cinematic-subject,img.carthage-cinematic-scene-subject')).map(node => ({animationName:getComputedStyle(node).animationName,transform:getComputedStyle(node).transform})),
-        dialogueSurfaces: Array.from(root.querySelectorAll('.dialogue-panel,.theatre-text,.search-layer,.qarton-game-card')).map(node => ({backgroundImage:getComputedStyle(node).backgroundImage,backgroundColor:getComputedStyle(node).backgroundColor})),
+        dialogueSurfaces: Array.from(root.querySelectorAll('.dialogue-panel,.theatre-text,.search-layer')).map(node => {
+          const style = getComputedStyle(node), rect = node.getBoundingClientRect();
+          const visible = style.display !== 'none' && style.visibility !== 'hidden' &&
+            Number(style.opacity || 1) > 0 && rect.width >= 120 && rect.height >= 28;
+          const textNodes = Array.from(node.querySelectorAll('*')).filter(child => {
+            const childStyle = getComputedStyle(child), childRect = child.getBoundingClientRect();
+            return !(child.children.length) && !!(child.textContent || '').trim() &&
+              childStyle.display !== 'none' && childStyle.visibility !== 'hidden' &&
+              Number(childStyle.opacity || 1) > 0 && childRect.width > 0 && childRect.height > 0;
+          });
+          return {
+            selector: node.matches('.dialogue-panel') ? '.dialogue-panel' : node.matches('.theatre-text') ? '.theatre-text' : '.search-layer',
+            visible, rect: {x:Math.round(rect.x),y:Math.round(rect.y),width:Math.round(rect.width),height:Math.round(rect.height)},
+            backgroundImage:style.backgroundImage,backgroundColor:style.backgroundColor,
+            text:textNodes.map(child => (child.textContent || '').trim()).join(' ').slice(0,240),
+            textColors:textNodes.map(child => ({color:getComputedStyle(child).color,textFill:getComputedStyle(child).webkitTextFillColor}))
+          };
+        }),
         readableTextTargets: Array.from(root.querySelectorAll('div,p,span,label,strong,em,b,i,small,li,blockquote,a,section,article,h4,h5,h6,button'))
           .filter(node => {
             const style = getComputedStyle(node);
@@ -362,11 +379,22 @@ const server = http.createServer((req, res) => {
     assert.ok(gameplay.readableTextTargets.every(target =>
       target.color === 'rgb(255, 240, 210)' && target.textFill === 'rgb(255, 240, 210)'
     ), 'all visible gameplay text targets must use the readable QARTON cream color, never inherited black text');
-    // Some opening chapters render a text-only scene before the character portrait
-    // or dialogue card is mounted. Verify every matching surface that actually exists;
-    // do not fail the entire build because an optional visual is absent in this scene.
+    // A vacuous Array.every() passed when the dialogue surface was completely absent.
+    // Require a real, visible story surface with readable content before checking its skin.
+    const visibleDialogueSurfaces = gameplay.dialogueSurfaces.filter(surface => surface.visible);
+    assert.ok(visibleDialogueSurfaces.length > 0,
+      'GAME must mount at least one visible dialogue surface (.dialogue-panel, .theatre-text, or .search-layer); see qarton-visual-diagnostics.json');
+    assert.ok(visibleDialogueSurfaces.some(surface => surface.text.trim().length > 0),
+      'the visible dialogue surface must contain actual story text, not an empty decorative panel');
+    assert.ok(visibleDialogueSurfaces.every(surface =>
+      /38, 50, 69|23, 33, 48/.test(surface.backgroundImage) &&
+      surface.backgroundColor !== 'rgba(0, 0, 0, 0)' &&
+      surface.backgroundColor !== 'rgb(0, 0, 0)'
+    ), 'visible dialogue surfaces must use the QARTON blue-charcoal gradient, not a black or transparent strip');
+    assert.ok(visibleDialogueSurfaces.every(surface => surface.textColors.every(text =>
+      text.color === 'rgb(255, 240, 210)' && text.textFill === 'rgb(255, 240, 210)'
+    )), 'dialogue text inside the visible surface must use readable QARTON cream');
     assert.ok(gameplay.characterMotionTargets.every(target => target.animationName === 'none'), 'QARTON gameplay must suppress portrait and cinematic image drift whenever those elements are mounted');
-    assert.ok(gameplay.dialogueSurfaces.every(surface => /38, 50, 69|23, 33, 48/.test(surface.backgroundImage)), 'mounted dialogue surfaces must use the QARTON blue-charcoal gradient, not the near-black strip');
     assert.equal(gameplay.cinematicOverlayBefore, 'none', 'the cinematic vignette must not cover the lower dialogue area');
     assert.equal(gameplay.cinematicOverlayAfter, 'none', 'the cinematic light sweep must not create a dark or obstructive strip');
     await page.screenshot({ path: path.resolve(__dirname, '..', 'test-results', 'qarton-gameplay.png'), fullPage: true });
