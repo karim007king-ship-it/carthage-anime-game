@@ -20,8 +20,10 @@ if(active==="settings"){panel(body,"تجربة QARTON","تُحفظ التفضي�
 }
 scroll.replaceChildren(root);if(!actions)actions=el("div","qh-actions");if(active!=="story")storyNodes.forEach(n=>actions.appendChild(n));if(active!=="progress")backupNodes.forEach(n=>actions.appendChild(n));actions.style.display="none";scroll.appendChild(actions);if(footer)overlay.appendChild(footer);save();window.__QARTON_TREE_PAGE__=active;window.__QARTON_TREE_READY__=true}
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;var h=document.getElementById("qarton-home-screen");if(!h||!isHome())return;var oldCount=storyNodes.length+backupNodes.length;collect();var newCount=storyNodes.length+backupNodes.length;if(!h.querySelector(".qt-tree")||newCount>oldCount)render()})}
-var observer=new MutationObserver(schedule);
-function start(){if(!isHome())return;style();var h=document.getElementById("qarton-home-screen");if(h){render();observer.observe(h,{childList:true,subtree:true})}else{var w=new MutationObserver(()=>{var x=document.getElementById("qarton-home-screen");if(x){w.disconnect();render();observer.observe(x,{childList:true,subtree:true})}});w.observe(document.body,{childList:true,subtree:true})}}
-window.__QARTON_OPEN_SECTION__=function(id){if(isHome()&&sections.some(s=>s[0]===id)){active=id;render()}};\nwindow.addEventListener("qarton:statechange",function(e){if(e&&e.detail&&e.detail.state==="HOME")schedule()});
+var observer=new MutationObserver(schedule),bodyObserver=null;
+function attachHome(h){if(!h||!isHome())return;overlay=h;observer.disconnect();render();observer.observe(h,{childList:true,subtree:true})}
+function start(){style();bodyObserver=new MutationObserver(function(){var h=document.getElementById("qarton-home-screen");if(!h){if(overlay){overlay=null;observer.disconnect()}return}if(h!==overlay&&isHome())attachHome(h)});bodyObserver.observe(document.body,{childList:true});var h=document.getElementById("qarton-home-screen");if(h&&isHome())attachHome(h)}
+window.__QARTON_OPEN_SECTION__=function(id){if(isHome()&&sections.some(s=>s[0]===id)){active=id;render()}};
+window.addEventListener("qarton:statechange",function(e){if(e&&e.detail&&e.detail.state==="HOME"){var h=document.getElementById("qarton-home-screen");if(h&&h!==overlay)attachHome(h);else schedule()}});
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();
 })();
