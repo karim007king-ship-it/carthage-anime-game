@@ -66,6 +66,9 @@ assert.ok(qartonDesignSystem.includes(':focus-visible'), 'shared QARTON controls
 assert.ok(qartonDesignSystem.includes('prefers-reduced-motion:reduce'), 'shared QARTON motion must respect reduced-motion settings');
 assert.ok(androidPrep.includes('var appState=window.__QARTON_APP_STATE__'), 'navigation visibility must use the central QARTON state');
 const navigationRuntime = androidPrep.slice(androidPrep.indexOf('const navigation = '), androidPrep.indexOf('const startupDiagnostics = '));
+const saveTransferRuntime = androidPrep.slice(androidPrep.indexOf('const saveTransfer = '), androidPrep.indexOf('const cinematicPilot = '));
+assert.ok(saveTransferRuntime.includes('document.getElementById("qarton-home-screen")')&&saveTransferRuntime.includes('home.querySelector(".qh-actions")'), 'save backup controls must mount inside the independent QARTON home');
+assert.ok(!saveTransferRuntime.includes('.home-actions')&&!saveTransferRuntime.includes('.game-timer'), 'save backup controls must not depend on the legacy home DOM');
 assert.ok(!navigationRuntime.includes('homeScreen=')&&!navigationRuntime.includes('.home-actions'), 'Android navigation must not discover or mutate the legacy home menu');
 assert.ok(androidPrep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'), 'fixed home viewport must use the central QARTON state rather than DOM selectors');
 assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
