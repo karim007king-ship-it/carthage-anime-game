@@ -66,6 +66,8 @@ assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'gameplay ada
 assert.ok(premium.includes('window.addEventListener("qarton:statechange",schedule)'),'gameplay adapter must react to central lifecycle events');
 assert.ok(prep.includes('window.__qartonSetAppState(f==="game"?"GAME":f==="intro"?"INTRO"'),'Android preparation must wire exact React screen values to the central lifecycle');
 assert.ok(gameplayCss.includes('body.qarton-game-active #root{')&&gameplayCss.includes('body.qarton-game-active #root .dialogue-panel'),'gameplay skin must target the actual GAME lifecycle class, not an unassigned root class');
+assert.ok(gameplayCss.includes('img:not(.carthage-cinematic-subject):not(.carthage-cinematic-scene-subject)'), 'generic responsive image sizing must not override the dimensions of selected cinematic scene artwork');
+assert.ok(gameplayCss.includes('.dialogue-panel *:not(button):not(svg):not(path)')&&gameplayCss.includes('.theatre-text *:not(button):not(svg):not(path)'), 'legacy dark-text utilities inside story panels must inherit the readable QARTON foreground');
 assert.ok(!gameplayCss.includes('#root.qarton-game-ui'),'gameplay stylesheet must not depend on an orphan qarton-game-ui class');
 assert.ok(prep.includes('qarton-carthage-gameplay-style'),'Android preparation must package the corrected gameplay skin');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'premium adapter must use the central lifecycle instead of timer detection');
