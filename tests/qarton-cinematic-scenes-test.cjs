@@ -2,18 +2,12 @@
 const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const inject = require('../scripts/qarton-cinematic-scenes.cjs');
-
 const html = inject('<html><head></head><body><main id="root"></main></body></html>');
-assert.ok(html.includes('carthage-cinematic-scene-runtime'), 'scene motion runtime must be injected');
-assert.ok(html.includes('carthage-scene-transition-runtime'), 'scene transition runtime must be injected');
-assert.ok(html.includes('root.querySelectorAll("*")'), 'scene discovery must inspect non-img artwork containers');
-assert.ok(html.includes('/url\\(/i'), 'CSS background-image URLs must be detected');
-assert.ok(html.includes('carthage-cinematic-scene .carthage-cinematic-scene-subject'), 'cinematic motion must apply to image and CSS-background elements');
-assert.ok(html.includes('.match(/url\\('), 'scene transitions must extract CSS background-image URLs');
-assert.ok(!html.includes('localStorage.setItem'), 'cinematic presentation must not mutate game saves');
-
-const scripts = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
-assert.equal(scripts.length, 2, 'both isolated cinematic runtimes must be emitted');
-for (const [, source] of scripts) assert.doesNotThrow(() => new vm.Script(source), 'injected cinematic script must parse');
-
-console.log('PASS: isolated cinematic runtime supports IMG and CSS background-image scenes without touching story or saves.');
+for(const marker of ['carthage-cinematic-scene-runtime','carthage-scene-transition-runtime','window.__CARTHAGE_ACTIVE_BACKGROUND__','carthage:backgroundchange','data-carthage-scene-background','carthageSceneDrift','pointer-events:none;background:#050509','prefers-reduced-motion:reduce'])assert.ok(html.includes(marker),'missing cinematic contract: '+marker);
+assert.ok(!html.includes('querySelectorAll("*")'),'cinematic adapters must not rescan the entire DOM');
+assert.ok(!html.includes('getComputedStyle'),'background discovery belongs to the dedicated manager');
+assert.ok(!html.includes('localStorage.setItem'),'cinematic presentation must not modify saves');
+const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
+assert.equal(scripts.length,2);
+for(const [,source] of scripts)assert.doesNotThrow(()=>new vm.Script(source));
+console.log('PASS: cinematic adapters consume the dedicated scene-background manager.');
