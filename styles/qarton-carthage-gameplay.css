@@ -53,3 +53,31 @@ body.qarton-game-active{background:#080b12!important;color:#fff0d2!important;ove
   #root.qarton-game-ui img.carthage-cinematic-subject,
   #root.qarton-game-ui img.carthage-cinematic-scene-subject{animation:none!important;transform:none!important}
 }
+/* Final cascade guard: cinematic styles are appended after this stylesheet in prepare-web.cjs.
+   Match the complete cinematic root scope so those later, equally-specific rules cannot restart drift. */
+#root.qarton-game-ui.carthage-cinematic-pilot img.carthage-cinematic-subject,
+#root.qarton-game-ui.carthage-cinematic-scene img.carthage-cinematic-scene-subject{
+  animation:none!important;
+  transform:none!important;
+  filter:none!important;
+  will-change:auto!important;
+}
+#root.qarton-game-ui.carthage-cinematic-pilot:before,
+#root.qarton-game-ui.carthage-cinematic-scene:before,
+#root.qarton-game-ui.carthage-cinematic-pilot:after{
+  content:none!important;
+  display:none!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  animation:none!important;
+}
+/* Keep dialogue readable without the near-black lower gradient that looked like a black strip. */
+#root.qarton-game-ui .dialogue-panel,
+#root.qarton-game-ui .theatre-text,
+#root.qarton-game-ui .search-layer,
+#root.qarton-game-ui .qarton-game-card{
+  background:linear-gradient(145deg,rgba(38,50,69,.96),rgba(23,33,48,.96))!important;
+  border-color:rgba(232,196,119,.68)!important;
+  color:#fff0d2!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.06)!important;
+}
