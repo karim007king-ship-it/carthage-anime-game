@@ -71,6 +71,15 @@ body.qarton-game-active{background:#080b12!important;color:#fff0d2!important;ove
   box-shadow:none!important;
   animation:none!important;
 }
+/* The emotional selectors in the later cinematic runtime are more specific than the base idle rule.
+   Scope the override to the QARTON gameplay root so grief/tension/memory states cannot restart portrait drift. */
+#root.qarton-game-ui .stage-slide .stage-breath{
+  animation:none!important;
+  transform:none!important;
+  filter:none!important;
+  will-change:auto!important;
+}
+
 /* Keep dialogue readable without the near-black lower gradient that looked like a black strip. */
 #root.qarton-game-ui .dialogue-panel,
 #root.qarton-game-ui .theatre-text,
