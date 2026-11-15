@@ -4,6 +4,7 @@ const runtime=fs.readFileSync(path.join(root,'scripts','qarton-isolated-home.js'
 const gameSource=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const premium=fs.readFileSync(path.join(root,'scripts','qarton-premium-home.js'),'utf8');
 const prep=fs.readFileSync(path.join(root,'scripts','prepare-web.cjs'),'utf8');
+const gameplayCss=fs.readFileSync(path.join(root,'styles','qarton-carthage-gameplay.css'),'utf8');
 const legacy=fs.readFileSync(path.join(root,'legacy','README.md'),'utf8');
 assert.doesNotThrow(()=>new vm.Script(runtime));
 for(const state of ['HOME','INTRO','GAME','TRANSITION'])assert.ok(runtime.includes(state),'central QARTON state must define '+state);
@@ -27,39 +28,57 @@ assert.ok(transitionSource.includes('hideLegacy()'),'TRANSITION must keep the le
 assert.ok(!transitionSource.includes('root.style.visibility=""'),'TRANSITION must never reveal the legacy React root');
 assert.ok(transitionSource.includes('ensureOverlay()')&&transitionSource.includes('تُحضّر قرطاج رحلتك'),'TRANSITION must remain inside the QARTON shell');
 assert.ok(transitionSource.includes('إلغاء والعودة إلى QARTON'),'TRANSITION must provide a QARTON-native return action');
-assert.ok(runtime.includes('hideLegacy();restoreNativeMenu();removeTransitionControl();ensureOverlay()'),'TRANSITION must isolate the complete legacy root instead of selectively hiding only menu buttons');
+assert.ok(runtime.includes('hideLegacy();removeTransitionControl();ensureOverlay()'),'TRANSITION must isolate the complete legacy root instead of selectively hiding only menu buttons');
 assert.ok(runtime.includes('if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))'),'native cancellation must restore the QARTON HOME state');
 assert.ok(runtime.includes('qarton-transition-return'),'TRANSITION must provide a safe return control when a native action does not start gameplay');
 assert.ok(runtime.includes('hideLegacy();ensureOverlay()'),'HOME and TRANSITION must keep the legacy root hidden');
 assert.ok(prep.includes('qarton-startup-first-paint-guard')&&prep.includes('#root{display:none!important;visibility:hidden!important;pointer-events:none!important}')&&prep.includes("body.qarton-intro-active #root{display:block!important")&&prep.includes("body.qarton-game-active #root{display:block!important"),"root must be removed from layout before paint and restored only for explicit intro/game scenes");
 assert.ok(runtime.includes('document.body.classList.add("qarton-intro-active")')&&runtime.includes('document.body.classList.add("qarton-game-active")'),"only explicit INTRO or GAME lifecycle states may release the root");
 assert.ok(runtime.includes('document.body.classList.remove("qarton-game-active","qarton-intro-active")'),"HOME and TRANSITION must re-lock the legacy root");
-assert.ok(runtime.includes('setState("TRANSITION","home-action")'),'home actions must enter TRANSITION before invoking the native handler');
-assert.ok(runtime.includes('n.click()'),'QARTON cards must delegate to original React button handlers');
+assert.ok(runtime.includes('setState("TRANSITION",reason)'),'home actions must enter TRANSITION before invoking the engine bridge');
+
 assert.ok(runtime.includes('function showNewGameConfirm()'),'new-game confirmation must render inside the isolated QARTON layer without unused parameters');
 assert.ok(runtime.includes('window.__carthageHasSave()'),'QARTON must detect saved progress before starting a fresh game');
 assert.ok(runtime.includes('window.__carthageStartNewGame()'),'QARTON confirmation must call the real React new-game handler directly');
+assert.ok(runtime.includes('function invokeAction(name,reason)'),'QARTON home actions must call explicit engine bridges');
+assert.ok(runtime.includes('invokeAction("__carthageContinue","continue")'),'continue must use the explicit save bridge');
+assert.ok(runtime.includes('invokeAction("__carthageStartPart2","part-two")'),'Part 2 must use an explicit engine bridge');
+assert.ok(runtime.includes('findDifficultyControl()'),'difficulty selection may bridge to the engine control without importing the legacy home menu');
+assert.ok(!runtime.includes('findNativeMenu')&&!runtime.includes('.home-actions'),'isolated QARTON home must not discover or copy the legacy home menu');
+assert.ok(!runtime.includes('menu.querySelectorAll')&&!runtime.includes('findNativeMenu'),'QARTON action cards must not be cloned from legacy menu buttons');
 assert.ok(runtime.includes('حفظك السابق سيبقى محفوظًا ولن يتم حذفه'),'new-game confirmation must explicitly preserve existing saves');
 assert.ok(prep.includes('window.__carthageStartNewGame=()=>{if(!Xn.some(slot=>!slot))'),'Android preparation must block new games when all save slots are occupied');
+assert.ok(prep.includes('window.__carthageStartPart2=()=>Bu(9)'),'Android preparation must expose the Part 2 engine action to QARTON');
 assert.ok(prep.includes('html.indexOf(saveStart, us + saveStart.length) >= 0'), 'save-handler patch must reject duplicate start anchors');
 assert.ok(prep.includes('html.indexOf(saveEnd, ue + saveEnd.length) >= 0'), 'save-handler patch must reject duplicate end anchors');
 assert.ok(prep.includes('window.__carthageHasFreeSlot=()=>Xn.some(slot=>!slot)'),'Android preparation must expose whether an empty save slot is available');
 assert.ok(runtime.includes('typeof window.__carthageHasFreeSlot!=="function"||window.__carthageHasFreeSlot()'),'QARTON confirmation must verify that a free save slot exists');
 assert.ok(runtime.includes('confirm.disabled=!canStart'),'the new-game confirmation must be disabled when starting would overwrite a saved slot');
 assert.ok(prep.includes('window.__carthageHasSave=()=>Xn.some(Boolean)'),'Android preparation must expose the actual saved-slot state');
-assert.ok(runtime.includes('forEach(function(n,index){var t=clean(n.textContent);if(!t)return'),'every native action button must produce its own QARTON card, including duplicate labels');
-assert.ok(runtime.includes('b.dataset.actionIndex=String(index)'),'each QARTON action card must retain a stable source-button index');
-assert.ok(!runtime.includes('seen.has(t)'),'no native action may be silently dropped by duplicate-label filtering');
+
+
+
 assert.ok(runtime.includes('window.__QARTON_HOME_READY__=true'),'QARTON home must expose a readiness marker');
-assert.ok(runtime.includes('b.disabled=!!n.disabled'),'disabled native actions must remain disabled in the matching QARTON card');
-assert.ok(runtime.includes('if(!menu||!root||!root.contains(menu))'),'missing menu must keep the QARTON shell active instead of revealing legacy UI');
+
+
 assert.ok(!premium.includes('findMenu')&&!premium.includes('.game-timer')&&!premium.includes('home-actions'),'gameplay adapter must not infer home/game state from DOM selectors');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'gameplay adapter must obey the central lifecycle state');
 assert.ok(premium.includes('window.addEventListener("qarton:statechange",schedule)'),'gameplay adapter must react to central lifecycle events');
 assert.ok(prep.includes('window.__qartonSetAppState(f==="game"?"GAME":f==="intro"?"INTRO"'),'Android preparation must wire exact React screen values to the central lifecycle');
+assert.ok(gameplayCss.includes('body.qarton-game-active #root{')&&gameplayCss.includes('body.qarton-game-active #root .dialogue-panel'),'gameplay skin must target the actual GAME lifecycle class, not an unassigned root class');
+assert.ok(gameplayCss.includes('img:not(.carthage-cinematic-subject):not(.carthage-cinematic-scene-subject)'), 'generic responsive image sizing must not override the dimensions of selected cinematic scene artwork');
+assert.ok(gameplayCss.includes('.dialogue-panel *:not(button):not(svg):not(path)')&&gameplayCss.includes('.theatre-text *:not(button):not(svg):not(path)'), 'legacy dark-text utilities inside story panels must inherit the readable QARTON foreground');
+assert.ok(!gameplayCss.includes('#root.qarton-game-ui'),'gameplay stylesheet must not depend on an orphan qarton-game-ui class');
+assert.ok(prep.includes('qarton-carthage-gameplay-style'),'Android preparation must package the corrected gameplay skin');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'premium adapter must use the central lifecycle instead of timer detection');
-assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||\\"HOME\\"'),'navigation controls must use the central app state');
+assert.ok(prep.includes('var appState=window.__QARTON_APP_STATE__||"HOME"'),'navigation controls must use the central app state');
+const navigationRuntime=prep.slice(prep.indexOf('const navigation = '),prep.indexOf('const startupDiagnostics = '));
+assert.ok(navigationRuntime.includes('var observer=new MutationObserver(schedule)'),'native navigation must declare its mutation observer');
+assert.ok(navigationRuntime.indexOf('var observer=new MutationObserver(schedule)')<navigationRuntime.indexOf('observer.observe(document.documentElement'),'navigation observer must be initialized before startup');
 assert.ok(prep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'),'fixed viewport behavior must use the central app state');
+assert.ok(!prep.includes("#root.carthage-home-locked{"), "fixed viewport CSS must never reveal the hidden legacy React root");
+assert.ok(!prep.includes("qarton-carthage-home.css") && !prep.includes("qarton-premium-home-style"), "the obsolete React-home stylesheet must not enter the Android web bundle");
+assert.ok(!prep.includes(String.raw`root.classList.toggle(\"carthage-home-locked\",locked)`), "fixed viewport runtime must not mark the legacy React root as HOME");
 assert.ok(prep.includes('window.addEventListener("qarton:statechange",schedule)'),'state changes must update the shared UI adapters');
 assert.ok(runtime.includes('reason:"init"'),'initial HOME state must be broadcast to all adapters');
 assert.ok(runtime.includes('bodyObserver.observe(document.body,{childList:true});')&&runtime.includes('\n render();'),'QARTON HOME must mount immediately and hide the legacy root before React paints its old menu');
@@ -90,4 +109,4 @@ assert.equal((runtime.match(/observer\.observe\(root,/g)||[]).length,1, 'the roo
 assert.ok(!runtime.includes('showNewGameConfirm(nativeButton)'), 'new-game confirmation must not retain an unused native button parameter');
 assert.ok(!runtime.includes('if(state==="TRANSITION"){var wait='), 'HOME rendering must not contain an unreachable transition branch');
 
-console.log('PASS: explicit QARTON HOME/INTRO/GAME/TRANSITION lifecycle, legacy isolation, and action delegation checks.');
+console.log('PASS: standalone QARTON HOME, explicit story-action bridges, and HOME/INTRO/GAME/TRANSITION isolation checks.');

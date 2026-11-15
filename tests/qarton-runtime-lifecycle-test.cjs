@@ -58,17 +58,20 @@ const document={
   createElement:element,
   addEventListener(){},
 };
-const nativeMenu=element('div');nativeMenu.className='home-actions';
-const nativeStart=element('button');nativeStart.textContent='لعبة جديدة';
-const nativePart2=element('button');nativePart2.textContent='الجزء الثاني';
-nativeMenu.append(nativeStart,nativePart2);root.appendChild(nativeMenu);
+
 const timers=new Map();let nextTimer=1;
 const window={
   dispatchEvent(){},
   setTimeout(fn,delay){const id=nextTimer++;timers.set(id,{fn,delay});return id},
   clearTimeout(id){timers.delete(id)}
 };
-nativeStart.addEventListener('click',()=>window.__qartonSetAppState('INTRO','native-new-game'));
+window.__carthageHasSave=()=>true;
+window.__carthageHasFreeSlot=()=>true;
+window.__carthageContinue=()=>{window.__qartonSetAppState("GAME","bridge-continue");return true};
+window.__carthageStartNewGame=()=>{window.__qartonSetAppState("INTRO","bridge-new-game");return true};
+window.__carthageStartPart2=()=>{window.__qartonSetAppState("GAME","bridge-part-two");return true};
+window.__carthageStartPart3=()=>false;
+window.__carthageCanStartPart3=()=>false;
 class Observer{constructor(fn){this.fn=fn}observe(){}disconnect(){}}
 class CustomEvent{constructor(type,options){this.type=type;this.detail=options?.detail}}
 const context={window,document,MutationObserver:Observer,CustomEvent,requestAnimationFrame(fn){fn()},console};
@@ -118,10 +121,29 @@ function findText(node,pattern){if(pattern.test(node.textContent||''))return tru
 assert.ok(findText(document.getElementById('qarton-home-screen'),/تعذّر تشغيل المشهد/),'the timeout recovery message must be visible on QARTON HOME');
 
 // Exercise the rendered QARTON primary card and its delegation to the native React action.
-const primaryCard=document.getElementById('qarton-home-screen').querySelectorAll('.qh-action').find(button=>button.textContent==='لعبة جديدة');
-assert.ok(primaryCard,'QARTON must render a primary new-game card from the native menu');
-primaryCard.click();
-assert.equal(window.__qartonGetAppState(),'INTRO','pressing the QARTON new-game card must reach the native intro lifecycle');
+const homeActions=document.getElementById('qarton-home-screen').querySelectorAll('.qh-action');
+const primaryCard=homeActions.find(button=>button.dataset.kind==='primary');
+assert.ok(primaryCard,'QARTON must render its primary action without a native menu');
+const continueCard=homeActions.find(button=>button.id==='carthage-continue-last');
+assert.ok(continueCard,'QARTON must render Continue from the explicit save bridge');
+continueCard.click();
+assert.equal(window.__qartonGetAppState(),'GAME','pressing Continue must restore the saved game through its bridge');
+window.__qartonSetAppState('HOME','test-after-continue');
+const partTwoCard=document.getElementById('qarton-home-screen').querySelectorAll('.qh-action').find(button=>button.textContent==='الجزء الثاني');
+assert.ok(partTwoCard,'QARTON must render Part 2 from the explicit engine bridge');
+assert.ok(document.getElementById('qarton-home-screen').querySelectorAll('.qh-action').some(button=>button.disabled&&button.textContent.includes('الجزء الثالث')),'Part 3 must remain visibly locked until its ending condition is met');
+partTwoCard.click();
+assert.equal(window.__qartonGetAppState(),'GAME','pressing the QARTON Part 2 card must invoke the engine bridge');
+window.__qartonSetAppState('HOME','test-after-part-two');
+const refreshedActions=document.getElementById('qarton-home-screen').querySelectorAll('.qh-action');
+const refreshedPrimary=refreshedActions.find(button=>button.dataset.kind==='primary');
+assert.ok(refreshedPrimary,'QARTON must restore its independent primary action after returning HOME');
+refreshedPrimary.click();
+const confirmDialog=document.getElementById('qarton-home-screen').querySelector('.qh-confirm-backdrop');
+assert.ok(confirmDialog,'starting a fresh game must confirm before changing an existing save');
+assert.ok(confirmDialog.querySelectorAll('.qh-action').some(button=>button.textContent==='ابدأ من جديد'&&!button.disabled),'the new-game confirmation must preserve the existing save and allow a free slot');
+confirmDialog.querySelectorAll('.qh-action').find(button=>button.textContent==='ابدأ من جديد').click();
+assert.equal(window.__qartonGetAppState(),'INTRO','pressing the QARTON new-game confirmation must reach the actual intro lifecycle');
 assert.equal(document.getElementById('qarton-home-screen'),null,'the QARTON home overlay must disappear after the native intro starts');
 assert.equal(root.style.getPropertyValue('display'),'','the native intro root must be visible after starting a new game');
 

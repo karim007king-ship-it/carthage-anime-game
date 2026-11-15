@@ -4,7 +4,7 @@ name: Build Carthage Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation, fix/qarton-real-browser-verification]
+    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation, fix/qarton-real-browser-verification, fix/qarton-gameplay-interface]
     paths:
       - "index.html"
       - "package.json"
@@ -14,7 +14,7 @@ on:
       - "styles/**"
       - ".github/workflows/android-apk.yml"
   pull_request:
-    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation]
+    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation, fix/qarton-real-browser-verification, fix/qarton-gameplay-interface]
     paths:
       - "index.html"
       - "package.json"
@@ -80,6 +80,8 @@ jobs:
           node --check scripts/prepare-web.cjs
           node --check scripts/qarton-isolated-home.js
           node --check scripts/qarton-premium-home.js
+          node --check scripts/qarton-main-tree.js
+          node --check tests/qarton-main-tree-test.cjs
           node --check tests/qarton-browser-integration-test.cjs
 
       - name: Run game integrity tests
@@ -139,13 +141,22 @@ jobs:
             'carthage-fixed-home-runtime',
             'qarton-premium-home-runtime',
             'qarton-isolated-home-runtime',
+            'qarton-main-tree-runtime',
+            'qarton-main-tree-style',
+            'qt-carthage-art',
+            'التقدم والحفظ',
             'body.qarton-intro-active #root',
             'if(state==="INTRO"){showIntro();return}',
             'qarton-home-screen',
-            'qarton-premium-home-style',
+            'qh-action',
+            'qarton-carthage-gameplay-style',
+            'body.qarton-game-active #root .dialogue-panel',
+            'body.qarton-game-active #root button',
             'qarton-design-system',
-            'qarton-brand-row',
-            'qarton-home-info'
+            'qh-brand',
+            'qh-actions',
+            'qh-difficulty',
+            'qh-footer'
           ];
           const html = dst.toString('utf8');
           const missing = markers.filter(marker => !html.includes(marker));

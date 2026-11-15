@@ -38,7 +38,7 @@ npm run android:sync
 | `styles/qarton-design-system.css` | ألوان QARTON ومكوّناته المشتركة |
 | `styles/qarton-carthage-home.css` | قواعد واجهة Carthage السابقة محفوظة ومعطّلة افتراضياً للرجوع الآمن |
 | `scripts/qarton-premium-home.js` | تنسيق عناصر اللعب فقط اعتماداً على حالة QARTON المركزية |
-| `scripts/qarton-isolated-home.js` | إدارة HOME/GAME/TRANSITION، وعرض الشاشة المستقلة وربط كل بطاقة بمعالج React الأصلي |
+| `scripts/qarton-isolated-home.js` | إدارة HOME/INTRO/GAME/TRANSITION وعرض غلاف QARTON المستقل |\n| `scripts/qarton-main-tree.js` | شجرة التنقل ذات الأقسام الأربعة: القصة، عالم قرطاج، التقدم والحفظ، الإعدادات |
 | `scripts/prepare-web.cjs` | تجهيز نسخة الويب وحقن تكامل Android |
 | `scripts/apply-android-branding.cjs` | توليد أيقونات Android وربطها بالـ Manifest |
 | `tests/` | اختبارات سلامة اللعبة والحفظ وتكامل Android |
@@ -71,7 +71,7 @@ npm run android:sync
 - سلامة استرجاع الحفظ وعدم الكتابة فوق حفظ صالح.
 - توليد أيقونات Android وتحديث مراجع `AndroidManifest.xml`.
 
-نجاح الاختبارات والبناء لا يعوّض اختبار اللمس والصوت والتنقل والحفظ على هاتف Android فعلي.
+إعدادات QARTON تحفظ التفضيلات وتصدر حدث `qarton:settingschange`؛ ربط مستوى الصوت والموسيقى بمحرك الصوت الفعلي ما زال خطوة مستقلة. نجاح الاختبارات والبناء لا يعوّض اختبار اللمس والصوت والتنقل والحفظ على هاتف Android فعلي.
 
 ## هوية QARTON المشتركة
 
