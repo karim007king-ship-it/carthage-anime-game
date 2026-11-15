@@ -375,7 +375,7 @@ const server = http.createServer((req, res) => {
         const owner = (node.tagName || '').toLowerCase() +
           (node.id ? '#' + node.id : '') +
           (typeof node.className === 'string' && node.className.trim()
-            ? '.' + node.className.trim().split(/\\s+/).join('.') : '');
+            ? '.' + node.className.trim().split(/\s+/).join('.') : '');
         const layers = [
           { pseudo: 'element', style: getComputedStyle(node) },
           { pseudo: '::before', style: getComputedStyle(node, '::before') },
