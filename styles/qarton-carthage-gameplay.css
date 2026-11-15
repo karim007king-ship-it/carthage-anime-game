@@ -16,7 +16,7 @@ body.qarton-game-active #root .game-pill-btn,
 body.qarton-game-active #root .map-pill{border:1px solid #e8c477!important;border-radius:999px!important;background:rgba(17,24,39,.96)!important;color:#ffe29d!important}
 body.qarton-game-active #root h1,body.qarton-game-active #root h2,body.qarton-game-active #root h3{color:#ffe29d!important;text-shadow:0 2px 14px rgba(139,48,57,.28)}
 body.qarton-game-active #root p,body.qarton-game-active #root label,body.qarton-game-active #root span{ text-wrap:pretty }
-body.qarton-game-active #root img{max-width:100%;height:auto}
+body.qarton-game-active #root img:not(.carthage-cinematic-subject):not(.carthage-cinematic-scene-subject){max-width:100%;height:auto}
 @media(prefers-reduced-motion:reduce){body.qarton-game-active #root button{transition:none!important;animation:none!important}}
 
 /* Visual correction: keep the character artwork still and remove the unwanted black letterbox behind dialogue. */
@@ -90,3 +90,11 @@ body.qarton-game-active #root .qarton-game-card{
   color:#fff0d2!important;
   box-shadow:0 8px 22px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.06)!important;
 }
+
+
+/* Dialogue copy may carry legacy Tailwind dark-text utilities. In the QARTON story panels,
+   inherit the panel's cream foreground so text remains readable on the dark surface. */
+body.qarton-game-active #root .dialogue-panel *:not(button):not(svg):not(path),
+body.qarton-game-active #root .theatre-text *:not(button):not(svg):not(path),
+body.qarton-game-active #root .search-layer *:not(button):not(svg):not(path),
+body.qarton-game-active #root .qarton-game-card *:not(button):not(svg):not(path){color:inherit!important}
