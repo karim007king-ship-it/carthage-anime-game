@@ -279,7 +279,7 @@ const server = http.createServer((req, res) => {
               style.display !== 'none' && style.visibility !== 'hidden' &&
               Number(style.opacity || 1) > 0 && rect.width > 0 && rect.height > 0;
           })
-          .map(node => ({tag:node.tagName.toLowerCase(),text:(node.textContent || '').trim().slice(0,60),
+          .map(node => ({tag:node.tagName.toLowerCase(),insideButton:!!node.closest('button'),text:(node.textContent || '').trim().slice(0,60),
             color:getComputedStyle(node).color,textFill:getComputedStyle(node).webkitTextFillColor})),
         cinematicOverlayBefore: getComputedStyle(root,':before').content,
         cinematicOverlayAfter: getComputedStyle(root,':after').content
@@ -291,6 +291,7 @@ const server = http.createServer((req, res) => {
     assert.ok(gameplay.controlsStyled > 0, 'gameplay controls must receive the QARTON skin');
     assert.match(gameplay.buttonBorderRadius, /13px/, 'gameplay button must use the QARTON visual treatment');
     assert.ok(gameplay.readableTextTargets.length > 0, 'GAME must expose visible text targets for contrast verification; an empty result cannot pass');
+    assert.ok(gameplay.readableTextTargets.some(target => !target.insideButton), 'GAME must expose visible story or interface text outside buttons; button labels alone are not proof that dialogue rendered');
     assert.ok(gameplay.readableTextTargets.every(target =>
       target.color === 'rgb(255, 240, 210)' && target.textFill === 'rgb(255, 240, 210)'
     ), 'all visible gameplay text targets must use the readable QARTON cream color, never inherited black text');
