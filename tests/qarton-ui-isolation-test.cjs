@@ -35,24 +35,31 @@ assert.ok(prep.includes('qarton-startup-first-paint-guard')&&prep.includes('#roo
 assert.ok(runtime.includes('document.body.classList.add("qarton-intro-active")')&&runtime.includes('document.body.classList.add("qarton-game-active")'),"only explicit INTRO or GAME lifecycle states may release the root");
 assert.ok(runtime.includes('document.body.classList.remove("qarton-game-active","qarton-intro-active")'),"HOME and TRANSITION must re-lock the legacy root");
 assert.ok(runtime.includes('setState("TRANSITION","home-action")'),'home actions must enter TRANSITION before invoking the native handler');
-assert.ok(runtime.includes('n.click()'),'QARTON cards must delegate to original React button handlers');
+
 assert.ok(runtime.includes('function showNewGameConfirm()'),'new-game confirmation must render inside the isolated QARTON layer without unused parameters');
 assert.ok(runtime.includes('window.__carthageHasSave()'),'QARTON must detect saved progress before starting a fresh game');
 assert.ok(runtime.includes('window.__carthageStartNewGame()'),'QARTON confirmation must call the real React new-game handler directly');
+assert.ok(runtime.includes('function invokeAction(name,reason)'),'QARTON home actions must call explicit engine bridges');
+assert.ok(runtime.includes('invokeAction("__carthageContinue","continue")'),'continue must use the explicit save bridge');
+assert.ok(runtime.includes('invokeAction("__carthageStartPart2","part-two")'),'Part 2 must use an explicit engine bridge');
+assert.ok(runtime.includes('findDifficultyControl()'),'difficulty selection may bridge to the engine control without importing the legacy home menu');
+assert.ok(!runtime.includes('findNativeMenu')&&!runtime.includes('.home-actions'),'isolated QARTON home must not discover or copy the legacy home menu');
+assert.ok(!runtime.includes('menu.querySelectorAll')&&!runtime.includes('n.click()'),'QARTON action cards must not be cloned from legacy menu buttons');
 assert.ok(runtime.includes('حفظك السابق سيبقى محفوظًا ولن يتم حذفه'),'new-game confirmation must explicitly preserve existing saves');
 assert.ok(prep.includes('window.__carthageStartNewGame=()=>{if(!Xn.some(slot=>!slot))'),'Android preparation must block new games when all save slots are occupied');
+assert.ok(prep.includes('window.__carthageStartPart2=()=>Bu(9)'),'Android preparation must expose the Part 2 engine action to QARTON');
 assert.ok(prep.includes('html.indexOf(saveStart, us + saveStart.length) >= 0'), 'save-handler patch must reject duplicate start anchors');
 assert.ok(prep.includes('html.indexOf(saveEnd, ue + saveEnd.length) >= 0'), 'save-handler patch must reject duplicate end anchors');
 assert.ok(prep.includes('window.__carthageHasFreeSlot=()=>Xn.some(slot=>!slot)'),'Android preparation must expose whether an empty save slot is available');
 assert.ok(runtime.includes('typeof window.__carthageHasFreeSlot!=="function"||window.__carthageHasFreeSlot()'),'QARTON confirmation must verify that a free save slot exists');
 assert.ok(runtime.includes('confirm.disabled=!canStart'),'the new-game confirmation must be disabled when starting would overwrite a saved slot');
 assert.ok(prep.includes('window.__carthageHasSave=()=>Xn.some(Boolean)'),'Android preparation must expose the actual saved-slot state');
-assert.ok(runtime.includes('forEach(function(n,index){var t=clean(n.textContent);if(!t)return'),'every native action button must produce its own QARTON card, including duplicate labels');
-assert.ok(runtime.includes('b.dataset.actionIndex=String(index)'),'each QARTON action card must retain a stable source-button index');
-assert.ok(!runtime.includes('seen.has(t)'),'no native action may be silently dropped by duplicate-label filtering');
+
+
+
 assert.ok(runtime.includes('window.__QARTON_HOME_READY__=true'),'QARTON home must expose a readiness marker');
-assert.ok(runtime.includes('b.disabled=!!n.disabled'),'disabled native actions must remain disabled in the matching QARTON card');
-assert.ok(runtime.includes('if(!menu||!root||!root.contains(menu))'),'missing menu must keep the QARTON shell active instead of revealing legacy UI');
+
+
 assert.ok(!premium.includes('findMenu')&&!premium.includes('.game-timer')&&!premium.includes('home-actions'),'gameplay adapter must not infer home/game state from DOM selectors');
 assert.ok(premium.includes('window.__QARTON_APP_STATE__!=="GAME"'),'gameplay adapter must obey the central lifecycle state');
 assert.ok(premium.includes('window.addEventListener("qarton:statechange",schedule)'),'gameplay adapter must react to central lifecycle events');
@@ -96,4 +103,4 @@ assert.equal((runtime.match(/observer\.observe\(root,/g)||[]).length,1, 'the roo
 assert.ok(!runtime.includes('showNewGameConfirm(nativeButton)'), 'new-game confirmation must not retain an unused native button parameter');
 assert.ok(!runtime.includes('if(state==="TRANSITION"){var wait='), 'HOME rendering must not contain an unreachable transition branch');
 
-console.log('PASS: explicit QARTON HOME/INTRO/GAME/TRANSITION lifecycle, legacy isolation, and action delegation checks.');
+console.log('PASS: standalone QARTON HOME, explicit story-action bridges, and HOME/INTRO/GAME/TRANSITION isolation checks.');
