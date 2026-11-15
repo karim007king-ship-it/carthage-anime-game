@@ -44,6 +44,7 @@ const server = http.createServer((req, res) => {
   let browser;
   let page;
   const pageErrors = [];
+  const assetFailures = [];
   try {
     await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
     const address = server.address();
@@ -51,6 +52,18 @@ const server = http.createServer((req, res) => {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1 });
     page = await context.newPage();
     page.on('pageerror', error => pageErrors.push(error.stack || error.message));
+    page.on('requestfailed', request => {
+      const type = request.resourceType();
+      if (type === 'image' || /\\.(?:png|jpe?g|webp|svg)(?:[?#]|$)/i.test(request.url())) {
+        assetFailures.push({ url: request.url(), type, error: request.failure()?.errorText || 'request failed' });
+      }
+    });
+    page.on('response', response => {
+      const request = response.request();
+      if (request.resourceType() === 'image' && response.status() >= 400) {
+        assetFailures.push({ url: response.url(), type: 'image', status: response.status(), error: 'HTTP ' + response.status() });
+      }
+    });
     await page.addInitScript(() => {
       window.__qartonStartupVisibilityViolations = [];
       const inspect = () => {
@@ -454,16 +467,53 @@ const server = http.createServer((req, res) => {
     if (page) {
       fs.mkdirSync(path.resolve(__dirname, '..', 'test-results'), { recursive: true });
       await page.screenshot({ path: path.resolve(__dirname, '..', 'test-results', 'qarton-browser-failure.png'), fullPage: true }).catch(() => {});
-      const diagnostics = await page.evaluate(() => ({
-        state: window.__QARTON_APP_STATE__ || null,
-        ready: window.__QARTON_HOME_READY__ || false,
-        moduleStarted: window.__CARTHAGE_MODULE_STARTED__ || false,
-        renderRequested: window.__CARTHAGE_RENDER_REQUESTED__ || false,
-        renderError: window.__CARTHAGE_RENDER_ERROR__ || null,
-        rootText: (document.getElementById('root')?.innerText || '').slice(0, 1200),
-        overlayText: (document.getElementById('qarton-home-screen')?.innerText || '').slice(0, 600)
-      })).catch(() => ({}));
-      console.error('Browser diagnostics:', JSON.stringify({ diagnostics, pageErrors }, null, 2));
+      const diagnostics = await page.evaluate(() => {
+        const root = document.getElementById('root');
+        const describe = node => {
+          const style = getComputedStyle(node), rect = node.getBoundingClientRect();
+          const pseudo = name => {
+            const ps = getComputedStyle(node, name);
+            return { content: ps.content, display: ps.display, visibility: ps.visibility,
+              opacity: ps.opacity, position: ps.position, zIndex: ps.zIndex,
+              backgroundColor: ps.backgroundColor, backgroundImage: ps.backgroundImage };
+          };
+          return { tag: node.tagName.toLowerCase(), id: node.id,
+            className: typeof node.className === 'string' ? node.className : '',
+            rect: { x: Math.round(rect.x), y: Math.round(rect.y), width: Math.round(rect.width), height: Math.round(rect.height) },
+            display: style.display, visibility: style.visibility, opacity: style.opacity,
+            position: style.position, zIndex: style.zIndex,
+            backgroundColor: style.backgroundColor, backgroundImage: style.backgroundImage,
+            before: pseudo('::before'), after: pseudo('::after') };
+        };
+        const visible = node => {
+          const s = getComputedStyle(node), r = node.getBoundingClientRect();
+          return s.display !== 'none' && s.visibility !== 'hidden' &&
+            Number(s.opacity || 1) > 0 && r.width > 2 && r.height > 2;
+        };
+        const layers = root ? Array.from(root.querySelectorAll('*')).filter(visible).map(describe) : [];
+        const images = root ? Array.from(root.querySelectorAll('img')).map(img => ({
+          ...describe(img), src: img.currentSrc || img.src, complete: img.complete,
+          naturalWidth: img.naturalWidth, naturalHeight: img.naturalHeight,
+          objectFit: getComputedStyle(img).objectFit
+        })) : [];
+        const stageSlides = root ? Array.from(root.querySelectorAll('.stage-slide')).map(describe) : [];
+        const rootInfo = root ? describe(root) : null;
+        return {
+          state: window.__QARTON_APP_STATE__ || null,
+          ready: window.__QARTON_HOME_READY__ || false,
+          moduleStarted: window.__CARTHAGE_MODULE_STARTED__ || false,
+          renderRequested: window.__CARTHAGE_RENDER_REQUESTED__ || false,
+          renderError: window.__CARTHAGE_RENDER_ERROR__ || null,
+          rootText: (root?.innerText || '').slice(0, 1600),
+          overlayText: (document.getElementById('qarton-home-screen')?.innerText || '').slice(0, 800),
+          viewport: { width: innerWidth, height: innerHeight },
+          root: rootInfo, stageSlides, layers: layers.slice(0, 160), images,
+          body: describe(document.body)
+        };
+      }).catch(error => ({ diagnosticError: error.stack || error.message }));
+      fs.writeFileSync(path.resolve(__dirname, '..', 'test-results', 'qarton-visual-diagnostics-failure.json'),
+        JSON.stringify({ diagnostics, pageErrors, assetFailures }, null, 2));
+      console.error('Browser diagnostics:', JSON.stringify({ diagnostics, pageErrors, assetFailures }, null, 2));
     }
     throw error;
   } finally {
