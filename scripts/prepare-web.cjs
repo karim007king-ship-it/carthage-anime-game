@@ -253,6 +253,9 @@ const cinematicPilot = `<style id="carthage-cinematic-pilot">
 html = html.replace('</body>', cinematicPilot + '</body>');
 
 
+const injectSceneBackgroundRuntime = require('./qarton-scene-backgrounds.cjs');
+html = injectSceneBackgroundRuntime(html);
+
 const injectCinematicSceneRuntimes = require('./qarton-cinematic-scenes.cjs');
 html = injectCinematicSceneRuntimes(html);
 
@@ -363,7 +366,7 @@ for (const [, attrs, body] of inlineScripts) {
   new vm.Script(body, { filename: `carthage-inline-${executable}.js` });
   executable++;
 }
-for (const required of ['window.__carthageSaveNow', 'window.__carthageStartPart3', 'window.__carthageCanStartPart3', 'window.__carthageContinue', 'carthage-home-return', 'carthage-save-now', 'carthage-continue-last', 'plugins.Filesystem', 'plugins.Share']) {
+for (const required of ['carthage-scene-background-runtime', 'carthage-cinematic-scene-runtime', 'window.__carthageSaveNow', 'window.__carthageStartPart3', 'window.__carthageCanStartPart3', 'window.__carthageContinue', 'carthage-home-return', 'carthage-save-now', 'carthage-continue-last', 'plugins.Filesystem', 'plugins.Share']) {
   if (!html.includes(required)) throw new Error('Missing patched runtime feature: ' + required);
 }
 fs.writeFileSync(target, html);
