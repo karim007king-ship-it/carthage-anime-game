@@ -45,7 +45,7 @@ const server = http.createServer((req, res) => {
     page.on('pageerror', error => pageErrors.push(error.stack || error.message));
     await page.goto('http://127.0.0.1:' + address.port + '/', { waitUntil: 'domcontentloaded', timeout: 30000 });
 
-    await page.waitForFunction(() => window.__QARTON_HOME_READY__ === true, { timeout: 25000 });
+    await page.waitForFunction(() => window.__QARTON_HOME_READY__ === true && window.__CARTHAGE_RENDER_REQUESTED__ === true, { timeout: 25000 });
     const home = await page.evaluate(() => {
       const root = document.getElementById('root');
       const overlay = document.getElementById('qarton-home-screen');
