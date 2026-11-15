@@ -439,6 +439,10 @@ html = html.replace('</body>', '<script id="qarton-premium-home-runtime">' + qar
 const qartonIsolatedHomeRuntime = fs.readFileSync(path.join(__dirname, 'qarton-isolated-home.js'), 'utf8');
 html = html.replace('</body>', '<script id="qarton-isolated-home-runtime">' + qartonIsolatedHomeRuntime + '</script></body>');
 
+// QARTON four-branch navigation: story operations remain in the Story branch.
+const qartonMainTreeRuntime = fs.readFileSync(path.join(__dirname, 'qarton-main-tree.js'), 'utf8');
+html = html.replace('</body>', '<script id="qarton-main-tree-runtime">' + qartonMainTreeRuntime + '</script></body>');
+
 const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
 let executable = 0;
 for (const [, attrs, body] of inlineScripts) {
