@@ -178,11 +178,15 @@ const server = http.createServer((req, res) => {
     await page.locator('#qarton-home-screen .qt-card[aria-label="التقدم والحفظ"]').click();
     await page.waitForSelector('#qarton-home-screen #carthage-export-backup', { state: 'visible', timeout: 5000 });
     await page.waitForSelector('#qarton-home-screen #carthage-import-backup', { state: 'visible', timeout: 5000 });
+    assert.equal(await page.locator('#carthage-export-backup').count(), 1, 'Progress branch must not duplicate export controls after HOME rerenders');
+    assert.equal(await page.locator('#carthage-import-backup').count(), 1, 'Progress branch must not duplicate import controls after HOME rerenders');
     assert.equal(await page.getByRole('button', { name: '▶ متابعة آخر حفظ' }).isEnabled(), true, 'Progress branch must offer restore through the existing Continue engine action');
     assert.ok(await page.locator('#qarton-home-screen').innerText().then(text => text.includes('سجل القرارات')), 'Progress branch must render saved decision history');
     assert.ok(await page.locator('#qarton-home-screen').innerText().then(text => text.includes('نبقى مع لينا ونحميها')), 'Progress branch must read real saved choices without rewriting them');
     await page.locator('#qarton-home-screen .qt-back').click();
     await page.locator('#qarton-home-screen .qt-card[aria-label="القصة"]').click();
+    assert.equal(await page.locator('#carthage-start-new-game').count(), 1, 'Story branch must keep one live New Game control');
+    assert.equal(await page.locator('#carthage-continue-last').count(), 1, 'Story branch must keep one live Continue control');
     const primary = page.locator('#qarton-home-screen .qh-action[data-kind="primary"]').first();
     await primary.click();
 
