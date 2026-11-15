@@ -4,7 +4,7 @@ name: Build Carthage Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation]
     paths:
       - "index.html"
       - "package.json"
@@ -14,7 +14,7 @@ on:
       - "styles/**"
       - ".github/workflows/android-apk.yml"
   pull_request:
-    branches: [main]
+    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation]
     paths:
       - "index.html"
       - "package.json"
@@ -30,6 +30,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    timeout-minutes: 32
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -71,11 +72,24 @@ jobs:
       - name: Install JavaScript dependencies
         run: npm install
 
+      - name: Install Chromium for real-browser QARTON verification
+        run: npx playwright install --with-deps chromium
+
+      - name: Syntax-check Android and QARTON runtime scripts
+        run: |
+          node --check scripts/prepare-web.cjs
+          node --check scripts/qarton-isolated-home.js
+          node --check scripts/qarton-premium-home.js
+          node --check tests/qarton-browser-integration-test.cjs
+
       - name: Run game integrity tests
         run: npm test
 
       - name: Prepare web assets
         run: npm run prepare:web
+
+      - name: Run real-browser QARTON startup and new-game test
+        run: node tests/qarton-browser-integration-test.cjs
 
       - name: Generate Android project
         run: npx cap add android
@@ -118,12 +132,18 @@ jobs:
             'carthage-save-now',
             'carthage-cinematic-pilot-runtime',
             'carthage-save-transfer',
-            'carthage-export-backup',
-            'carthage-import-backup',
+            'window.__carthageExportSave=exportSave',
+            'window.__carthageImportSave=function',
             'carthageCinematicLight',
             'carthageCinematicImpact',
             'carthage-fixed-home-runtime',
             'qarton-premium-home-runtime',
+            'qarton-isolated-home-runtime',
+            'body.qarton-intro-active #root',
+            'function revealRoot(scene)',
+            'scene==="INTRO"',
+            'scene==="GAME"',
+            'qarton-home-screen',
             'qarton-premium-home-style',
             'qarton-design-system',
             'qarton-brand-row',
