@@ -172,8 +172,8 @@ assert.ok(androidPrep.includes('pointer-events:none;background:#050509'), 'cinem
 assert.ok(qartonHome.includes('document.body.classList.add("qarton-game-active")'), 'the existing gameplay adapter must scope the body while playing');
 assert.ok(qartonHome.includes('document.body.classList.remove("qarton-game-active")'), 'the existing gameplay adapter must clear gameplay body styling on exit');
 assert.ok(qartonGameplayCss.includes('.stage-slide .stage-breath') && qartonGameplayCss.includes('animation:none!important'), 'character portrait motion must be disabled to prevent unwanted drifting');
-assert.ok(qartonGameplayCss.includes('#root.qarton-game-ui.carthage-cinematic-pilot img.carthage-cinematic-subject') && qartonGameplayCss.includes('#root.qarton-game-ui.carthage-cinematic-scene img.carthage-cinematic-scene-subject'), 'final QARTON cascade guard must override later cinematic image-drift rules');
-assert.ok(qartonGameplayCss.includes('#root.qarton-game-ui.carthage-cinematic-pilot:before') && qartonGameplayCss.includes('content:none!important'), 'cinematic vignette and letterbox overlays must not obscure the dialogue area');
+assert.ok(qartonGameplayCss.includes('body.qarton-game-active #root.carthage-cinematic-pilot img.carthage-cinematic-subject') && qartonGameplayCss.includes('body.qarton-game-active #root.carthage-cinematic-scene img.carthage-cinematic-scene-subject'), 'final QARTON cascade guard must override later cinematic image-drift rules');
+assert.ok(qartonGameplayCss.includes('body.qarton-game-active #root.carthage-cinematic-pilot:before') && qartonGameplayCss.includes('content:none!important'), 'cinematic vignette and letterbox overlays must not obscure the dialogue area');
 assert.ok(qartonGameplayCss.includes('.theatre-text') && qartonGameplayCss.includes('rgba(23,33,48,.96)'), 'dialogue panels must use a readable blue-charcoal surface rather than near-black fill');
 
 const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(m => m[1]);
