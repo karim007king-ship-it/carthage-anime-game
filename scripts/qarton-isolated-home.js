@@ -3,7 +3,7 @@
 if(window.__qartonHomeIsolationInstalled)return;
 window.__qartonHomeIsolationInstalled=true;
 var STATE={HOME:"HOME",INTRO:"INTRO",GAME:"GAME",TRANSITION:"TRANSITION"};
-var state=STATE.HOME,root=null,overlay=null,observer=null,bodyObserver=null,queued=false,menu=null,transitionTimer=0,lastRenderedState=null,lastRenderedMenu=null,lastRenderedSignature=null,lastRenderedError=null;
+var state=STATE.HOME,root=null,overlay=null,observer=null,bodyObserver=null,queued=false,transitionTimer=0;
 var css=[
 "#qarton-home-screen{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box;overflow:hidden;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px calc(env(safe-area-inset-bottom,0px) + 10px);color:var(--qarton-cream,#f7ecd7);background:radial-gradient(ellipse at 50% 0%,#8b30394d,transparent 48%),radial-gradient(ellipse at 12% 85%,#e8c47722,transparent 40%),linear-gradient(155deg,#07090f,#101827 58%,#080a11);font-family:system-ui,sans-serif;direction:rtl}",
 "#qarton-home-screen *{box-sizing:border-box}#qarton-home-screen .qh-scroll{width:100%;max-width:560px;min-height:0;display:flex;flex:1;flex-direction:column;justify-content:center;overflow:hidden;overscroll-behavior:none}",
@@ -17,22 +17,12 @@ function addStyle(){if(document.getElementById("qarton-isolated-home-style"))ret
 function setState(next,reason){if(!STATE[next]||state===next)return;if(transitionTimer){window.clearTimeout(transitionTimer);transitionTimer=0}state=next;if(next==="TRANSITION"){window.__QARTON_TRANSITION_ERROR__="";transitionTimer=window.setTimeout(function(){transitionTimer=0;if(state!=="TRANSITION")return;window.__QARTON_TRANSITION_ERROR__="تعذّر تشغيل المشهد في الوقت المحدد. رجعناك للقائمة حتى لا تبقى اللعبة معلّقة.";setState("HOME","transition-timeout")},15000)}window.__QARTON_APP_STATE__=state;window.dispatchEvent(new CustomEvent("qarton:statechange",{detail:{state:state,reason:reason||"app"}}));render()}
 window.__qartonSetAppState=function(next,reason){setState(String(next||"").toUpperCase(),reason)};
 window.__qartonGetAppState=function(){return state};
-function findNativeMenu(){
- if(!root)return null;
- var difficulty=root.querySelector('[aria-label="اختار الصعوبة"]');
- var menu=root.querySelector(".home-actions");
- if(menu&&Array.from(menu.querySelectorAll("button")).filter(function(b){return !difficulty||!difficulty.contains(b)}).length>=2)return menu;
- var buttons=Array.from(root.querySelectorAll("button"));
- var start=buttons.find(function(b){return /ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test((b.textContent||"").trim())});
- var part2=buttons.find(function(b){return /الجزء الثاني/.test((b.textContent||"").trim())||b.id==="btn-part2"});
- if(start&&part2){var node=start.parentElement;while(node&&node!==root){if(node.contains(part2)&&node.querySelectorAll("button").length>=2)return node;node=node.parentElement}}
- return null;
-}
+function findDifficultyControl(){return root&&root.querySelector('[aria-label="اختار الصعوبة"]')||null}
 function clean(s){return(s||"").replace(/\s+/g," ").trim()}
 function kind(t,b){if(b.id==="carthage-continue-last"||/متابعة|استكمال|آخر حفظ/.test(t))return"continue";if(/ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test(t))return"primary";if(/الجزء الثالث|الجزء 3/.test(t))return"locked";return"secondary"}
 function ensureOverlay(){if(overlay)return;overlay=document.createElement("main");overlay.id="qarton-home-screen";overlay.setAttribute("aria-label","QARTON Carthage home");document.body.appendChild(overlay)}
 function hideLegacy(){document.body.classList.remove("qarton-game-active","qarton-intro-active");if(!root)return;if(root.style.getPropertyValue("display")!=="none"||root.style.getPropertyPriority("display")!=="important")root.style.setProperty("display","none","important");if(root.style.getPropertyValue("visibility")!=="hidden"||root.style.getPropertyPriority("visibility")!=="important")root.style.setProperty("visibility","hidden","important");if(root.style.getPropertyValue("pointer-events")!=="none"||root.style.getPropertyPriority("pointer-events")!=="important")root.style.setProperty("pointer-events","none","important");if(root.getAttribute("data-qarton-legacy-home-hidden")!=="true")root.setAttribute("data-qarton-legacy-home-hidden","true");if(!document.body.classList.contains("qarton-home-active"))document.body.classList.add("qarton-home-active")}
-function restoreNativeMenu(){if(menu&&menu.getAttribute("data-qarton-transition-hidden")==="true"){menu.style.visibility="";menu.removeAttribute("data-qarton-transition-hidden")}}
+function restoreNativeMenu(){}
 function removeTransitionControl(){var back=document.getElementById("qarton-transition-return");if(back)back.remove()}function showTransition(){hideLegacy();restoreNativeMenu();removeTransitionControl();ensureOverlay();addStyle();overlay.replaceChildren();var sc=document.createElement("div");sc.className="qh-scroll";overlay.appendChild(sc);var brand=document.createElement("div");brand.className="qh-brand";brand.innerHTML='<span class="qh-mark">Q</span><span><strong>QARTON</strong><small>CULTURE • POWER • CINEMA</small></span>';sc.appendChild(brand);var title=document.createElement("h1");title.className="qh-title";title.textContent="آخر يوم في قرطاج";sc.appendChild(title);var status=document.createElement("div");status.className="qh-status";status.textContent="تُحضّر قرطاج رحلتك...";sc.appendChild(status);var back=document.createElement("button");back.id="qarton-transition-return";back.type="button";back.className="qh-action";back.textContent="إلغاء والعودة إلى QARTON";back.style.margin="18px auto 0";back.addEventListener("click",function(){setState("HOME","transition-return")});sc.appendChild(back);window.__QARTON_HOME_READY__=false}
 function showIntro(){removeTransitionControl();restoreNativeMenu();document.body.classList.add("qarton-intro-active");document.body.classList.remove("qarton-home-active","qarton-game-active");if(root&&root.getAttribute("data-qarton-legacy-home-hidden")==="true"){root.style.removeProperty("display");root.style.removeProperty("visibility");root.style.removeProperty("pointer-events");root.removeAttribute("data-qarton-legacy-home-hidden")}if(overlay){overlay.remove();overlay=null}window.__QARTON_HOME_READY__=false}
 function showGame(){removeTransitionControl();restoreNativeMenu();document.body.classList.add("qarton-game-active");document.body.classList.remove("qarton-home-active","qarton-intro-active");if(root&&root.getAttribute("data-qarton-legacy-home-hidden")==="true"){root.style.removeProperty("display");root.style.removeProperty("visibility");root.style.removeProperty("pointer-events");root.removeAttribute("data-qarton-legacy-home-hidden")}if(overlay){overlay.remove();overlay=null}window.__QARTON_HOME_READY__=false}
@@ -56,46 +46,59 @@ function showNewGameConfirm(){
  });
  actions.append(cancel,confirm);dialog.append(title,note,actions);shade.appendChild(dialog);overlay.appendChild(shade);confirm.focus();
 }
+function actionButton(label,kindName,handler,disabled){
+ var b=document.createElement("button");b.type="button";b.className="qh-action";b.dataset.kind=kindName;b.textContent=label;b.disabled=!!disabled;
+ b.addEventListener("click",handler);return b;
+}
+function invokeAction(name,reason){
+ var fn=window[name];if(typeof fn!=="function"){window.__QARTON_TRANSITION_ERROR__="وظيفة التشغيل غير جاهزة بعد. أعد المحاولة بعد لحظات.";setState("HOME","missing-"+name);return false}
+ setState("TRANSITION",reason);
+ try{var result=fn();if(result===false){setState("HOME",reason+"-blocked");return false}return true}
+ catch(error){setState("HOME",reason+"-error");window.__QARTON_LAST_ACTION_ERROR__=String(error&&error.message||error);return false}
+}
 function render(){
  root=document.getElementById("root");
- if(menu&&root&&!root.contains(menu))menu=null;
- if(state==="HOME"){var activeMenu=findNativeMenu();if(activeMenu)menu=activeMenu}
- var signature="";
- if(state==="HOME"&&menu){signature=Array.from(menu.querySelectorAll("button")).map(function(b){return [b.id||"",clean(b.textContent),b.disabled?"1":"0",b.getAttribute("aria-pressed")||"",b.className||""].join("#")}).join("|")}
- var errorMessage=state==="HOME"?(window.__QARTON_TRANSITION_ERROR__||""):"";
- var overlayExpected=state==="HOME"||state==="TRANSITION";
- if(state===lastRenderedState&&menu===lastRenderedMenu&&signature===lastRenderedSignature&&errorMessage===lastRenderedError&&((overlayExpected&&!!overlay)||(!overlayExpected&&!overlay))){
-  if(state==="HOME"||state==="TRANSITION")hideLegacy();
-  if(state==="HOME")window.__QARTON_HOME_READY__=!!(menu&&root&&root.contains(menu));
-  return;
- }
- lastRenderedState=state;lastRenderedMenu=menu;lastRenderedSignature=signature;lastRenderedError=errorMessage;
  if(state==="INTRO"){showIntro();return}if(state==="GAME"){showGame();return}
  if(state==="TRANSITION"){showTransition();return}
- restoreNativeMenu();hideLegacy();ensureOverlay();addStyle();overlay.replaceChildren();
+ hideLegacy();ensureOverlay();addStyle();overlay.replaceChildren();
  var sc=document.createElement("div");sc.className="qh-scroll";overlay.appendChild(sc);
  var brand=document.createElement("div");brand.className="qh-brand";brand.innerHTML='<span class="qh-mark">Q</span><span><strong>QARTON</strong><small>CULTURE • POWER • CINEMA</small></span>';sc.appendChild(brand);
  var title=document.createElement("h1");title.className="qh-title";title.textContent="آخر يوم في قرطاج";sc.appendChild(title);
- var desc=document.createElement("p");desc.className="qh-kicker";desc.textContent="60 دقيقة... ومدينة كاملة باش تطيح. خريطة، ثقة، 5 أدلة، و9 نهايات.";sc.appendChild(desc);if(window.__QARTON_TRANSITION_ERROR__){var recovery=document.createElement("div");recovery.className="qh-status";recovery.setAttribute("role","status");recovery.textContent=window.__QARTON_TRANSITION_ERROR__;sc.appendChild(recovery)}
+ var desc=document.createElement("p");desc.className="qh-kicker";desc.textContent="60 دقيقة... ومدينة كاملة باش تطيح. خريطة، ثقة، 5 أدلة، و9 نهايات.";sc.appendChild(desc);
+ if(window.__QARTON_TRANSITION_ERROR__){var recovery=document.createElement("div");recovery.className="qh-status";recovery.setAttribute("role","status");recovery.textContent=window.__QARTON_TRANSITION_ERROR__;sc.appendChild(recovery)}
  var badge=document.createElement("div");badge.className="qh-badge";badge.textContent="✦ تجربة أنمي سينمائية";sc.appendChild(badge);
- var currentMenu=findNativeMenu();
- if(currentMenu)menu=currentMenu;
- if(!menu||!root||!root.contains(menu)){var pending=document.createElement("div");pending.className="qh-status";pending.textContent="جاري تجهيز خيارات اللعبة...";sc.appendChild(pending);window.__QARTON_HOME_READY__=false;return}
- var difficulty=root.querySelector('[aria-label="اختار الصعوبة"]');
- if(difficulty){var dh=document.createElement("div");dh.className="qh-section";dh.textContent="اختار مستوى التحدّي";sc.appendChild(dh);var ds=document.createElement("div");ds.className="qh-difficulties";Array.from(difficulty.querySelectorAll("button")).forEach(function(n){var b=document.createElement("button");b.type="button";b.className="qh-difficulty";b.textContent=clean(n.textContent);b.setAttribute("aria-pressed",String(n.getAttribute("aria-pressed")==="true"||n.classList.contains("selected")||n.classList.contains("active")));b.disabled=!!n.disabled;b.addEventListener("click",function(){n.click();Array.from(ds.children).forEach(function(x){x.setAttribute("aria-pressed",String(x===b))})});ds.appendChild(b)});if(ds.children.length)sc.appendChild(ds)}
+ var difficulty=findDifficultyControl();
+ if(difficulty){
+  var dh=document.createElement("div");dh.className="qh-section";dh.textContent="اختار مستوى التحدّي";sc.appendChild(dh);
+  var ds=document.createElement("div");ds.className="qh-difficulties";
+  Array.from(difficulty.querySelectorAll("button")).forEach(function(nativeButton){
+   var b=document.createElement("button");b.type="button";b.className="qh-difficulty";b.textContent=clean(nativeButton.textContent);
+   b.setAttribute("aria-pressed",String(nativeButton.getAttribute("aria-pressed")==="true"||nativeButton.classList.contains("selected")||nativeButton.classList.contains("active")));
+   b.disabled=!!nativeButton.disabled;
+   b.addEventListener("click",function(){nativeButton.click();Array.from(ds.children).forEach(function(item){item.setAttribute("aria-pressed",String(item===b))})});
+   ds.appendChild(b);
+  });
+  if(ds.children.length)sc.appendChild(ds);
+ }
  var heading=document.createElement("div");heading.className="qh-section";heading.textContent="رحلتك تبدأ من هنا";sc.appendChild(heading);
  var actions=document.createElement("div");actions.className="qh-actions";sc.appendChild(actions);
- Array.from(menu.querySelectorAll("button")).filter(function(n){return !difficulty||!difficulty.contains(n)}).forEach(function(n,index){var t=clean(n.textContent);if(!t)return;var b=document.createElement("button");b.type="button";b.className="qh-action";b.dataset.kind=kind(t,n);b.dataset.actionIndex=String(index);b.textContent=t;b.disabled=!!n.disabled;b.addEventListener("click",function(){
- if(b.dataset.kind==="primary"&&typeof window.__carthageHasSave==="function"&&window.__carthageHasSave()){showNewGameConfirm();return}
- setState("TRANSITION","home-action");
- try{if(b.dataset.kind==="primary"&&typeof window.__carthageStartNewGame==="function"){if(window.__carthageStartNewGame()===false)setState("HOME","new-game-blocked")}else n.click()}
- catch(e){setState("HOME","action-error");throw e}
-});actions.appendChild(b)});
- if(!actions.children.length){var empty=document.createElement("div");empty.className="qh-status";empty.textContent="لم تظهر خيارات القائمة بعد. الواجهة القديمة تبقى مخفية.";actions.appendChild(empty)}
+ var startReady=typeof window.__carthageStartNewGame==="function";
+ var hasSave=false;try{hasSave=typeof window.__carthageHasSave==="function"?!!window.__carthageHasSave():!!(localStorage.getItem("shiganshina-autosave-v1")||localStorage.getItem("shiganshina-slots-v1"))}catch(e){}
+ if(!startReady){
+  var pending=document.createElement("div");pending.className="qh-status";pending.textContent="جاري تجهيز محرك اللعبة...";actions.appendChild(pending);window.__QARTON_HOME_READY__=false;
+ }else{
+  actions.appendChild(actionButton("▶ ابدأ الجزء الأول","primary",function(){if(hasSave){showNewGameConfirm();return}invokeAction("__carthageStartNewGame","new-game")}));
+  if(hasSave&&typeof window.__carthageContinue==="function")actions.appendChild(actionButton("▶ متابعة آخر حفظ","continue",function(){invokeAction("__carthageContinue","continue")}));
+  if(typeof window.__carthageStartPart2==="function")actions.appendChild(actionButton("الجزء الثاني","secondary",function(){invokeAction("__carthageStartPart2","part-two")}));
+  if(typeof window.__carthageStartPart3==="function"){
+   var canPart3=typeof window.__carthageCanStartPart3==="function"&&window.__carthageCanStartPart3();
+   actions.appendChild(actionButton(canPart3?"▶ ابدأ الجزء الثالث — ما بعد الحقيقة":"🔒 الجزء الثالث — يفتح بعد إتمام الجزء الثاني","locked",function(){if(canPart3)invokeAction("__carthageStartPart3","part-three")},!canPart3));
+  }
+  window.__QARTON_HOME_READY__=true;
+ }
  var foot=document.createElement("div");foot.className="qh-footer";foot.textContent="رحلتك • اختياراتك • مصيرك";overlay.appendChild(foot);
- window.__QARTON_HOME_READY__=true;
 }
-function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;root=document.getElementById("root");if(state==="HOME"){menu=findNativeMenu()||menu;if(menu&&root&&!root.contains(menu))menu=null}render()})}
+function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;root=document.getElementById("root");render()})}
 function observeRoot(){
  if(observer)observer.disconnect();
  root=document.getElementById("root");
