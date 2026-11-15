@@ -268,7 +268,11 @@ const server = http.createServer((req, res) => {
         bodyGameActive: document.body.classList.contains('qarton-game-active'),
         controlsStyled: Array.from(document.querySelectorAll('#root.qarton-game-ui button')).length,
         buttonBackground: style ? style.backgroundImage + ' ' + style.backgroundColor : '',
-        buttonBorderRadius: style ? style.borderRadius : ''
+        buttonBorderRadius: style ? style.borderRadius : '',
+        characterMotionTargets: Array.from(root.querySelectorAll('.stage-slide .stage-breath,img.carthage-cinematic-subject,img.carthage-cinematic-scene-subject')).map(node => ({animationName:getComputedStyle(node).animationName,transform:getComputedStyle(node).transform})),
+        dialogueSurfaces: Array.from(root.querySelectorAll('.dialogue-panel,.theatre-text,.search-layer,.qarton-game-card')).map(node => ({backgroundImage:getComputedStyle(node).backgroundImage,backgroundColor:getComputedStyle(node).backgroundColor})),
+        cinematicOverlayBefore: getComputedStyle(root,':before').content,
+        cinematicOverlayAfter: getComputedStyle(root,':after').content
       };
     });
     assert.equal(gameplay.state, 'GAME', 'the complete opening sequence must enter the real gameplay state');
@@ -276,6 +280,12 @@ const server = http.createServer((req, res) => {
     assert.equal(gameplay.bodyGameActive, true, 'the native gameplay root must be released only in GAME state');
     assert.ok(gameplay.controlsStyled > 0, 'gameplay controls must receive the QARTON skin');
     assert.match(gameplay.buttonBorderRadius, /13px/, 'gameplay button must use the QARTON visual treatment');
+    assert.ok(gameplay.characterMotionTargets.length > 0, 'the first gameplay scene must expose its character artwork to the visual regression check');
+    assert.ok(gameplay.characterMotionTargets.every(target => target.animationName === 'none'), 'QARTON gameplay must suppress portrait and cinematic image drift after the complete CSS cascade');
+    assert.ok(gameplay.dialogueSurfaces.length > 0, 'the gameplay scene must expose a dialogue surface for contrast verification');
+    assert.ok(gameplay.dialogueSurfaces.every(surface => /38, 50, 69|23, 33, 48/.test(surface.backgroundImage)), 'dialogue surfaces must use the QARTON blue-charcoal gradient, not the near-black strip');
+    assert.equal(gameplay.cinematicOverlayBefore, 'none', 'the cinematic vignette must not cover the lower dialogue area');
+    assert.equal(gameplay.cinematicOverlayAfter, 'none', 'the cinematic light sweep must not create a dark or obstructive strip');
     await page.screenshot({ path: path.resolve(__dirname, '..', 'test-results', 'qarton-gameplay.png'), fullPage: true });
 
     // Verify the gameplay exit path saves progress and restores the isolated QARTON HOME.
