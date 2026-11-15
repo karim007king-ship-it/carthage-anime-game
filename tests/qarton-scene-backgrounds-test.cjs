@@ -4,6 +4,8 @@ const vm = require('node:vm');
 const inject = require('../scripts/qarton-scene-backgrounds.cjs');
 const html = inject('<html><head></head><body><main id="root"></main></body></html>');
 for (const marker of ['carthage-scene-background-runtime','carthage-background-ready','carthage-background-pending','carthage-background-missing','data-carthage-scene-background','window.__CARTHAGE_ACTIVE_BACKGROUND__','carthage:backgroundchange','window.__QARTON_APP_STATE__']) assert.ok(html.includes(marker), 'missing background manager contract: '+marker);
+assert.ok(html.includes('body.qarton-game-active #root.carthage-background-missing'), 'fallback must override the gameplay root background cascade');
+assert.ok(html.includes('status===\"failed\"'), 'failed image loads must be distinguished from pending loads');
 assert.ok(!html.includes('localStorage.setItem'), 'background manager must not modify saves');
 const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
 assert.equal(scripts.length,1);
