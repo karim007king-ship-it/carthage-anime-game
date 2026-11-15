@@ -56,6 +56,11 @@ const server = http.createServer((req, res) => {
       const inspect = () => {
         const root = document.getElementById('root');
         if (!root) return;
+        const legacyMenu = root.querySelector('.home-actions');
+        if (legacyMenu) {
+          legacyMenu.remove();
+          window.__qartonLegacyMenuRemoved = true;
+        }
         const state = window.__QARTON_APP_STATE__ || 'BOOT';
         if (state !== 'HOME' && state !== 'TRANSITION' && state !== 'BOOT') return;
         const style = getComputedStyle(root);
@@ -84,6 +89,8 @@ const server = http.createServer((req, res) => {
       homeVisible: !!document.querySelector('#qarton-home-screen') &&
         getComputedStyle(document.querySelector('#qarton-home-screen')).display !== 'none',
       hasPrimaryAction: !!document.querySelector('#qarton-home-screen .qh-action[data-kind="primary"]'),
+      legacyMenuPresent: !!document.getElementById('root').querySelector('.home-actions'),
+      legacyMenuRemoved: !!window.__qartonLegacyMenuRemoved,
       moduleStarted: !!window.__CARTHAGE_MODULE_STARTED__,
       renderRequested: !!window.__CARTHAGE_RENDER_REQUESTED__,
       renderError: window.__CARTHAGE_RENDER_ERROR__ || null
@@ -99,6 +106,8 @@ const server = http.createServer((req, res) => {
     await page.waitForTimeout(250);
     assert.equal(await page.locator('#root').evaluate(el => getComputedStyle(el).display), 'none', 'viewport-lock initialization must not reveal the legacy React root after first paint');
     assert.equal(homeState.hasPrimaryAction, true, 'the QARTON home must expose its real primary action');
+    assert.equal(homeState.legacyMenuPresent, false, 'QARTON HOME must remain functional without the legacy React home menu');
+    assert.equal(homeState.legacyMenuRemoved, true, 'the browser test must actively remove the legacy home menu before QARTON readiness');
 
     // The QARTON home is intentionally a fixed, non-scrolling screen on short phones.
     await page.setViewportSize({ width: 360, height: 640 });
