@@ -17,6 +17,8 @@ assert.ok(tree.includes('shiganshina-slots-v1')&&tree.includes('shiganshina-auto
 assert.ok(!tree.includes('localStorage.removeItem'),'navigation must never delete user saves');
 assert.ok(tree.includes('qarton-settings-v1')&&tree.includes('qarton:settingschange'),'settings must persist and emit a stable settings event');
 assert.ok(tree.includes('window.__QARTON_OPEN_SECTION__'),'branch navigation must expose a testable public entry point');
+assert.ok(tree.includes('function isHome()')&&tree.includes('if(!isHome()||!collect())return'),'tree rendering must be restricted to HOME so it cannot cover INTRO, GAME, or TRANSITION');
+assert.ok(tree.includes('e.detail.state==="HOME"'),'returning to HOME must reactivate the tree after a transition');
 assert.ok(prep.includes('qarton-main-tree.js')&&prep.includes('qarton-main-tree-runtime'),'Android web preparation must include the QARTON tree runtime');
 assert.ok(runtime.includes('window.__carthageStartNewGame')&&runtime.includes('window.__carthageContinue'),'existing game engine actions must remain the source of Story actions');
 assert.ok(runtime.includes('window.__carthageCanStartPart3'),'Part 3 gating remains owned by the story engine');
