@@ -99,7 +99,7 @@ const server = http.createServer((req, res) => {
         getComputedStyle(document.querySelector('#qarton-home-screen')).display !== 'none',
       treeReady: window.__QARTON_TREE_READY__ === true,
       treeCards: Array.from(document.querySelectorAll('#qarton-home-screen .qt-card')).map(button => button.getAttribute('aria-label')),
-      hasPrimaryAction: !!document.querySelector('#qarton-home-screen .qh-action[data-kind="primary"]'),
+      hasPrimaryAction: (() => { const node = document.querySelector('#qarton-home-screen .qh-action[data-kind="primary"]'); return !!node && node.getBoundingClientRect().height > 0; })(),
       legacyMenuPresent: !!document.getElementById('root').querySelector('.home-actions'),
       legacyMenuHidden: !!document.getElementById('root').querySelector('.home-actions[data-qarton-test-hidden="true"]') &&
         getComputedStyle(document.getElementById('root').querySelector('.home-actions')).display === 'none',
