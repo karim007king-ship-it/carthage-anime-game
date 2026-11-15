@@ -14,6 +14,7 @@ assert.ok(tree.includes('qt-carthage-art')&&tree.includes('قرطاج'),'home he
 assert.ok(tree.includes('overflow:hidden'),'main screen must remain fixed without vertical page scrolling');
 assert.ok(tree.includes('storyNodes.forEach'),'native game operations must remain preserved in the Story branch');
 assert.ok(tree.includes('backupNodes.forEach'),'save import/export controls must be preserved in Progress & Saves');
+assert.ok(tree.includes('storyNodes=storyNodes.filter(n=>n.isConnected)')&&tree.includes('backupNodes=backupNodes.filter(n=>n.isConnected)'),'detached native controls must be discarded after React HOME rerenders to prevent duplicate or stale actions');
 assert.ok(tree.includes('shiganshina-slots-v1')&&tree.includes('shiganshina-autosave-v1'),'progress summary must read existing save keys');
 assert.ok(!tree.includes('localStorage.removeItem'),'navigation must never delete user saves');
 assert.ok(tree.includes('qarton-settings-v1')&&tree.includes('qarton:settingschange'),'settings must persist and emit a stable settings event');
