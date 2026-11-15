@@ -277,6 +277,8 @@ const server = http.createServer((req, res) => {
     await page.waitForFunction(() =>
       window.__qartonGetAppState && window.__qartonGetAppState() === 'HOME' &&
       window.__QARTON_HOME_READY__ === true &&
+      window.__QARTON_TREE_READY__ === true &&
+      document.querySelectorAll('#qarton-home-screen .qt-card').length === 4 &&
       !document.getElementById('carthage-home-return'),
     { timeout: 20000 });
     const returnedHome = await page.evaluate(() => {
@@ -285,6 +287,8 @@ const server = http.createServer((req, res) => {
       return {
         state: window.__qartonGetAppState && window.__qartonGetAppState(),
         homeVisible: !!document.getElementById('qarton-home-screen'),
+        treeReady: window.__QARTON_TREE_READY__ === true,
+        treeCards: document.querySelectorAll('#qarton-home-screen .qt-card').length,
         legacyHidden: getComputedStyle(document.getElementById('root')).display === 'none' &&
           getComputedStyle(document.getElementById('root')).visibility === 'hidden',
         autosavePresent: !!autosave && Number.isInteger(autosave.sceneIdx),
@@ -293,6 +297,8 @@ const server = http.createServer((req, res) => {
     });
     assert.equal(returnedHome.state, 'HOME', 'returning from gameplay must restore the QARTON home state');
     assert.equal(returnedHome.homeVisible, true, 'the isolated QARTON home must be visible after leaving gameplay');
+    assert.equal(returnedHome.treeReady, true, 'the four-branch tree must remount after leaving gameplay');
+    assert.equal(returnedHome.treeCards, 4, 'all four navigation branches must return after gameplay');
     assert.equal(returnedHome.legacyHidden, true, 'the legacy React menu must be hidden again after returning home');
     assert.equal(returnedHome.autosavePresent, true, 'leaving gameplay must persist the current story progress');
     assert.equal(returnedHome.returnControlRemoved, true, 'gameplay-only navigation controls must be removed at HOME');
