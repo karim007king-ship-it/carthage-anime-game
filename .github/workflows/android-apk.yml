@@ -143,6 +143,7 @@ jobs:
             'qarton-isolated-home-runtime',
             'qarton-main-tree-runtime',
             'qarton-main-tree-style',
+            'qt-carthage-art',
             'التقدم والحفظ',
             'body.qarton-intro-active #root',
             'if(state==="INTRO"){showIntro();return}',
