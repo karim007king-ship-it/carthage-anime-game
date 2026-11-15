@@ -320,6 +320,11 @@ const server = http.createServer((req, res) => {
     assert.equal(gameplay.skinActive, true, 'QARTON gameplay adapter must activate in GAME state');
     assert.equal(gameplay.bodyGameActive, true, 'the native gameplay root must be released only in GAME state');
     assert.ok(gameplay.controlsStyled > 0, 'gameplay controls must receive the QARTON skin');
+    const loadedSceneArtwork = visualDiagnostics.images.filter(image =>
+      image.visible && image.complete && image.naturalWidth > 100 && image.naturalHeight > 80
+    );
+    assert.ok(loadedSceneArtwork.length > 0,
+      'GAME must render at least one real, loaded scene/character image; a text-only screen cannot pass as a completed visual scene. See qarton-visual-diagnostics.json for failed image URLs and dimensions.');
     assert.match(gameplay.buttonBorderRadius, /13px/, 'gameplay button must use the QARTON visual treatment');
     assert.ok(gameplay.readableTextTargets.length > 0, 'GAME must expose visible text targets for contrast verification; an empty result cannot pass');
     assert.ok(gameplay.readableTextTargets.some(target => !target.insideButton), 'GAME must expose visible story or interface text outside buttons; button labels alone are not proof that dialogue rendered');
