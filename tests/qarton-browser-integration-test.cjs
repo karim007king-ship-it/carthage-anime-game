@@ -54,7 +54,7 @@ const server = http.createServer((req, res) => {
     page.on('pageerror', error => pageErrors.push(error.stack || error.message));
     page.on('requestfailed', request => {
       const type = request.resourceType();
-      if (type === 'image' || /\\.(?:png|jpe?g|webp|svg)(?:[?#]|$)/i.test(request.url())) {
+      if (type === 'image' || /\.(?:png|jpe?g|webp|svg)(?:[?#]|$)/i.test(request.url())) {
         assetFailures.push({ url: request.url(), type, error: request.failure()?.errorText || 'request failed' });
       }
     });
