@@ -176,6 +176,7 @@ const server = http.createServer((req, res) => {
     await page.locator('#qarton-home-screen .qt-card[aria-label="التقدم والحفظ"]').click();
     await page.waitForSelector('#qarton-home-screen #carthage-export-backup', { state: 'visible', timeout: 5000 });
     await page.waitForSelector('#qarton-home-screen #carthage-import-backup', { state: 'visible', timeout: 5000 });
+    assert.equal(await page.getByRole('button', { name: '▶ متابعة آخر حفظ' }).isEnabled(), true, 'Progress branch must offer restore through the existing Continue engine action');
     assert.ok(await page.locator('#qarton-home-screen').innerText().then(text => text.includes('سجل القرارات')), 'Progress branch must render saved decision history');
     assert.ok(await page.locator('#qarton-home-screen').innerText().then(text => text.includes('نبقى مع لينا ونحميها')), 'Progress branch must read real saved choices without rewriting them');
     await page.locator('#qarton-home-screen .qt-back').click();
