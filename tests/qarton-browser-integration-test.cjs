@@ -328,7 +328,7 @@ const server = http.createServer((req, res) => {
       const urls = new Set();
       for (const node of candidates) {
         const value = getComputedStyle(node).backgroundImage;
-        for (const match of value.matchAll(/url\\(["']?(.*?)["']?\\)/g)) {
+        for (const match of value.matchAll(/url\(["']?(.*?)["']?\)/g)) {
           try { urls.add(new URL(match[1], document.baseURI).href); } catch {}
         }
       }
