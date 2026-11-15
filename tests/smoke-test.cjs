@@ -64,12 +64,14 @@ assert.ok(qartonDesignSystem.includes('.qarton-button--primary{'), 'shared QARTO
 assert.ok(qartonDesignSystem.includes(':focus-visible'), 'shared QARTON controls must preserve visible keyboard focus');
 assert.ok(qartonDesignSystem.includes('prefers-reduced-motion:reduce'), 'shared QARTON motion must respect reduced-motion settings');
 assert.ok(androidPrep.includes('var appState=window.__QARTON_APP_STATE__'), 'navigation visibility must use the central QARTON state');
+assert.ok(!androidPrep.includes('homeScreen=')&&!androidPrep.includes('.home-actions'), 'Android navigation must not discover or mutate the legacy home menu');
 assert.ok(androidPrep.includes('function isHome(){return window.__QARTON_APP_STATE__==="HOME"}'), 'fixed home viewport must use the central QARTON state rather than DOM selectors');
 assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
 assert.ok(androidPrep.includes('carthage-save-now'), 'simple save button must exist');
 assert.ok(qartonIsolatedHome.includes('carthage-continue-last'), 'one-tap continue button must be rendered by the independent QARTON home');
 assert.ok(androidPrep.includes('window.__carthageCanStartPart3'), 'Part 3 lock state must be exposed');
-assert.ok(androidPrep.includes('رجوع للقائمة'), 'new-game cancel action must be clearly labeled as returning to menu');
+assert.ok(androidPrep.includes('window.__carthageStartPart2=()=>Bu(9)'), 'Part 2 must be exposed as a direct QARTON engine action');
+assert.ok(qartonIsolatedHome.includes('إلغاء والعودة إلى QARTON'), 'QARTON transition must provide its own return action');
 assert.ok(androidPrep.includes('shiganshina-autosave-v1'), 'continue flow must recognize autosave fallback');
 assert.ok(androidPrep.includes('window.__carthageContinue=()=>{'), 'continue action must restore the newest valid local save');
 assert.ok(androidPrep.includes('Array.isArray(v.flags)&&Array.isArray(v.visited)&&Array.isArray(v.usedHotspots)&&Array.isArray(v.choicesHistory)&&Array.isArray(v.state.clues)&&Array.isArray(v.state.inventory)'), 'continue action must reject incomplete saves before restoring them');
@@ -99,7 +101,7 @@ assert.ok(androidPrep.includes('var observer=new MutationObserver(schedule)'), '
 assert.ok(androidPrep.includes('رجوع للقائمة'), 'new-game cancel action must be clearly labeled as returning to menu');
 assert.ok(androidPrep.includes('shiganshina-autosave-v1'), 'continue flow must recognize autosave fallback');
 assert.ok(androidPrep.includes('window.__carthageContinue=()=>{'), 'continue action must restore the newest valid local save');
-assert.ok(androidPrep.includes('يُفتح بعد إتمام الجزء الثاني') || androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
+assert.ok(qartonIsolatedHome.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
 
 assert.ok(androidPrep.includes('carthage-fixed-home-style'), 'fixed home viewport CSS must be injected into Android builds');
 assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed home viewport runtime must be injected into Android builds');
@@ -123,6 +125,8 @@ assert.ok(!qartonIsolatedHome.includes('.game-timer')&&!qartonIsolatedHome.inclu
 assert.ok(qartonIsolatedHome.includes('if(state==="GAME"){showGame();return}'), 'only explicit GAME state may reveal the story root');
 assert.ok(qartonIsolatedHome.includes('if(state==="TRANSITION"){showTransition();return}'), 'TRANSITION must have a dedicated handoff path');
 assert.ok(qartonIsolatedHome.includes('if(state==="TRANSITION"){showTransition();return}')&&qartonIsolatedHome.includes('function showTransition(){hideLegacy();'), 'TRANSITION must hide the entire legacy root and show the QARTON-native transition screen');
+assert.ok(qartonIsolatedHome.includes('function invokeAction(name,reason)'), 'QARTON cards must invoke explicit engine action bridges');
+assert.ok(!qartonIsolatedHome.includes('findNativeMenu')&&!qartonIsolatedHome.includes('.home-actions'), 'QARTON must not discover or clone the legacy home menu');
 assert.ok(qartonIsolatedHome.includes('if(/^(رجوع للقائمة|إلغاء|لا)$/.test(label))'), 'canceling a native confirmation must restore QARTON HOME');
 assert.ok(qartonIsolatedHome.includes("qarton-transition-return"), "TRANSITION must provide a safe return control if a native action does not enter gameplay");
 assert.ok(!qartonHome.includes('findMenu')&&!qartonHome.includes('.game-timer')&&!qartonHome.includes('home-actions'), 'gameplay adapter must not detect or render the home menu');
