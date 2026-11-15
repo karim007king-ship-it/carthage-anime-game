@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090a10">
+  <title>QARTON — آخر يوم في قرطاج</title>
+  <style>
+    :root{color-scheme:dark;--bg:#090a10;--panel:#14151d;--panel2:#1b1b25;--gold:#e8bd62;--gold2:#9e7330;--red:#9d2634;--ink:#f7f2e8;--muted:#aaa6a0;--line:rgba(232,189,98,.22);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif}
+    *{box-sizing:border-box}
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink)}
+    body{min-height:100vh;min-height:100dvh;background:radial-gradient(ellipse at 50% 20%,rgba(119,35,43,.23),transparent 42%),linear-gradient(145deg,#0a0b12 0%,#111019 58%,#08090e 100%)}
+    button{font:inherit;color:inherit}
+    #qarton-home{height:100vh;height:100dvh;max-width:720px;margin:auto;padding:calc(10px + env(safe-area-inset-top)) 16px calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-rows:auto auto auto minmax(0,1fr) auto;gap:clamp(7px,1.5vh,14px);overflow:hidden;isolation:isolate;position:relative}
+    #qarton-home:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.16;background-image:linear-gradient(30deg,transparent 48%,rgba(232,189,98,.08) 49%,transparent 50%),linear-gradient(150deg,transparent 48%,rgba(232,189,98,.06) 49%,transparent 50%);background-size:42px 42px}
+    #qarton-brand{display:flex;align-items:center;gap:11px;min-height:42px}
+    .brand-mark{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:11px;color:var(--gold);font-family:Georgia,serif;font-size:25px;font-weight:800;box-shadow:0 0 20px rgba(232,189,98,.13),inset 0 0 12px rgba(232,189,98,.08)}
+    .brand-name{font-size:15px;font-weight:900;letter-spacing:.2em;color:var(--gold);direction:ltr;text-align:right}
+    .brand-tagline{font-size:9px;letter-spacing:.16em;color:#aaa39a;direction:ltr}
+    #game-identity{text-align:center;padding:clamp(2px,1vh,10px) 4px 0}
+    .eyebrow{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.18em;margin-bottom:4px}
+    h1{font-size:clamp(27px,6.2vw,42px);line-height:1.15;margin:0;font-weight:950;text-shadow:0 3px 22px rgba(157,38,52,.32)}
+    h1 span{color:#e9c16e}
+    .story-hook{font-size:clamp(10px,2.7vw,13px);line-height:1.65;color:#c3bdb5;margin:7px auto 0;max-width:440px}
+    #player-entry{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 11px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(100deg,rgba(232,189,98,.08),rgba(20,21,29,.88) 42%,rgba(157,38,52,.1))}
+    .entry-label{font-size:10px;color:var(--muted);margin-bottom:5px}
+    .difficulty-list{display:flex;gap:6px}
+    .difficulty{border:1px solid rgba(255,255,255,.12);background:#171821;border-radius:9px;padding:6px 9px;font-size:11px;cursor:pointer}
+    .difficulty[aria-pressed="true"]{border-color:var(--gold);background:rgba(232,189,98,.14);color:#f5d58f;box-shadow:inset 0 0 0 1px rgba(232,189,98,.12)}
+    .stats{font-size:9px;line-height:1.7;text-align:left;color:#bdb6ac;white-space:nowrap}
+    .stats strong{color:var(--gold);font-weight:700}
+    .save-status{font-size:10px;color:#d7b86f;display:none;margin-top:3px}
+    #home-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:clamp(7px,1.3vh,12px);min-height:0}
+    .home-card{position:relative;overflow:hidden;text-align:right;border:1px solid rgba(232,189,98,.18);border-radius:15px;padding:clamp(9px,1.7vh,15px);background:linear-gradient(145deg,rgba(29,29,39,.96),rgba(16,17,25,.96));display:flex;flex-direction:column;justify-content:space-between;min-width:0;cursor:pointer;transition:transform .18s,border-color .18s,background .18s}
+    .home-card:before{content:"";position:absolute;width:100px;height:100px;left:-40px;top:-48px;border-radius:50%;background:rgba(232,189,98,.08);filter:blur(2px)}
+    .home-card:active{transform:scale(.985)}
+    .home-card:focus-visible,.difficulty:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+    .home-card.primary{grid-column:1/-1;flex-direction:row;align-items:center;border-color:rgba(232,189,98,.62);background:linear-gradient(105deg,rgba(116,29,41,.88),rgba(36,22,28,.98) 55%,rgba(35,29,25,.98));box-shadow:0 8px 25px rgba(0,0,0,.2),inset 0 0 22px rgba(232,189,98,.06)}
+    .home-card.continue{display:none}
+    #qarton-home[data-has-save="true"] .home-card.continue{display:flex}
+    #qarton-home[data-has-save="true"] #home-actions{grid-template-rows:repeat(3,minmax(0,1fr))}
+    .card-icon{font-size:clamp(18px,4vw,25px);color:var(--gold);margin-bottom:4px}
+    .primary .card-icon{font-size:30px;margin:0 0 0 10px}
+    .card-title{font-size:clamp(12px,3vw,15px);font-weight:850;line-height:1.35}
+    .card-desc{font-size:clamp(9px,2.2vw,11px);color:#aaa5a0;line-height:1.5;margin-top:3px}
+    .card-arrow{font-size:18px;color:var(--gold);align-self:flex-end;line-height:1}
+    .primary .card-arrow{align-self:center;margin-right:auto}
+    .home-card.locked{opacity:.62;cursor:not-allowed;border-style:dashed}
+    .lock-label{font-size:9px;color:#e2a0a0;margin-top:4px}
+    #qarton-home-footer{text-align:center;color:#8f8982;font-size:9px;letter-spacing:.12em;direction:ltr;padding-top:1px}
+    #qarton-home-footer span{color:var(--gold2)}
+    @media(max-height:650px){#qarton-home{gap:6px;padding-top:calc(6px + env(safe-area-inset-top));padding-bottom:calc(6px + env(safe-area-inset-bottom))}#qarton-brand{min-height:32px}.brand-mark{width:31px;height:31px;font-size:21px}#game-identity{padding-top:0}h1{font-size:clamp(24px,5.5vw,32px)}.story-hook{margin-top:4px;font-size:10px}#player-entry{padding:6px 9px}.home-card{padding:8px;border-radius:12px}.card-desc{font-size:9px}}
+    @media(max-width:360px){#qarton-home{padding-left:10px;padding-right:10px}.stats{font-size:8px}.difficulty{padding:6px 7px}.card-title{font-size:11px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <!--
+    QARTON isolated home-screen shell.
+    This file deliberately does not replace or modify the game's story/save engine.
+    Integration contract: listen for qarton:new-game, qarton:continue, qarton:open-section.
+    Set #qarton-home[data-has-save="true"] only after the existing save validator confirms a valid save.
+  -->
+  <main id="qarton-home" data-has-save="false">
+    <header id="qarton-brand" aria-label="QARTON">
+      <div class="brand-mark" aria-hidden="true">Q</div>
+      <div><div class="brand-name">QARTON</div><div class="brand-tagline">CULTURE • POWER • CINEMA</div></div>
+    </header>
+
+    <section id="game-identity" aria-labelledby="game-title">
+      <div class="eyebrow">قَــرْطَــاج</div>
+      <h1 id="game-title">آخر يوم في <span>قرطاج</span></h1>
+      <p class="story-hook">60 دقيقة... ومدينة كاملة باش طيح.<br>خريطة، ثقة، 5 أدلة، و9 نهايات.</p>
+    </section>
+
+    <section id="player-entry" aria-label="إعدادات البداية">
+      <div>
+        <div class="entry-label">اختار مستوى الصعوبة</div>
+        <div class="difficulty-list" role="group" aria-label="مستوى الصعوبة">
+          <button class="difficulty" type="button" data-difficulty="easy" aria-pressed="false">🍃 سهلة</button>
+          <button class="difficulty" type="button" data-difficulty="normal" aria-pressed="true">⚖️ عادية</button>
+          <button class="difficulty" type="button" data-difficulty="hard" aria-pressed="false">🔥 صعبة</button>
+        </div>
+        <div class="save-status" id="save-status" aria-live="polite">تم العثور على حفظ صالح</div>
+      </div>
+      <div class="stats"><strong>60 دقيقة</strong> • صحة 100<br><strong>10 ثواني</strong> لكل قرار<br>تلميحات مجانية</div>
+    </section>
+
+    <nav id="home-actions" aria-label="القائمة الرئيسية">
+      <button class="home-card primary" type="button" data-action="new-game">
+        <span class="card-icon" aria-hidden="true">⚔</span>
+        <span style="flex:1"><span class="card-title">ابدأ قصة جديدة</span><span class="card-desc" style="display:block">ابدأ رحلتك لإنقاذ قرطاج</span></span>
+        <span class="card-arrow" aria-hidden="true">←</span>
+      </button>
+      <button class="home-card continue" type="button" data-action="continue">
+        <span><span class="card-icon" aria-hidden="true">◷</span><span class="card-title" style="display:block">متابعة آخر حفظ</span><span class="card-desc">ارجع من آخر نقطة وصلت لها</span></span><span class="card-arrow">←</span>
+      </button>
+      <button class="home-card" type="button" data-action="part-two">
+        <span><span class="card-icon" aria-hidden="true">Ⅱ</span><span class="card-title" style="display:block">الجزء الثاني</span><span class="card-desc">واصل أحداث الحكاية</span></span><span class="card-arrow">←</span>
+      </button>
+      <button class="home-card locked" type="button" data-action="part-three" aria-disabled="true" title="يتطلب إكمال الجزء الثاني">
+        <span><span class="card-icon" aria-hidden="true">Ⅲ</span><span class="card-title" style="display:block">الجزء الثالث</span><span class="card-desc">الفصل الأخير من الملحمة</span><span class="lock-label">🔒 يتفتح بعد إكمال الجزء الثاني</span></span><span class="card-arrow">←</span>
+      </button>
+      <button class="home-card" type="button" data-action="settings">
+        <span><span class="card-icon" aria-hidden="true">⚙</span><span class="card-title" style="display:block">الإعدادات</span><span class="card-desc">الصوت والعرض واللغة</span></span><span class="card-arrow">←</span>
+      </button>
+      <button class="home-card" type="button" data-action="save-tools">
+        <span><span class="card-icon" aria-hidden="true">▤</span><span class="card-title" style="display:block">إدارة الحفظ</span><span class="card-desc">تصدير أو استيراد التقدم</span></span><span class="card-arrow">←</span>
+      </button>
+    </nav>
+
+    <footer id="qarton-home-footer">A STORY OF <span>COURAGE</span> • MEMORY • DESTINY</footer>
+  </main>
+  <script>
+    (() => {
+      const root = document.getElementById('qarton-home');
+      if (!root) return;
+      let difficulty = 'normal';
+
+      document.querySelectorAll('[data-difficulty]').forEach(button => {
+        button.addEventListener('click', () => {
+          difficulty = button.dataset.difficulty;
+          document.querySelectorAll('[data-difficulty]').forEach(item =>
+            item.setAttribute('aria-pressed', String(item === button))
+          );
+          root.dispatchEvent(new CustomEvent('qarton:difficulty-change', {
+            bubbles: true, detail: { difficulty }
+          }));
+        });
+      });
+
+      document.querySelectorAll('[data-action]').forEach(button => {
+        button.addEventListener('click', () => {
+          const action = button.dataset.action;
+          if (action === 'part-three' || button.getAttribute('aria-disabled') === 'true') return;
+          if (action === 'continue' && root.dataset.hasSave !== 'true') return;
+          root.dispatchEvent(new CustomEvent('qarton:' + action, {
+            bubbles: true, detail: { difficulty }
+          }));
+        });
+      });
+
+      // Called by the host app only after its own save validator completes.
+      window.setQartonSaveAvailability = valid => {
+        root.dataset.hasSave = valid ? 'true' : 'false';
+        const status = document.getElementById('save-status');
+        if (status) status.style.display = valid ? 'block' : 'none';
+      };
+    })();
+  </script>
+</body>
+</html>
