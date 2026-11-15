@@ -150,6 +150,8 @@ jobs:
             'qarton-home-screen',
             'qh-action',
             'qarton-carthage-gameplay-style',
+            'body.qarton-game-active #root .dialogue-panel',
+            'body.qarton-game-active #root button',
             'qarton-design-system',
             'qh-brand',
             'qh-actions',
