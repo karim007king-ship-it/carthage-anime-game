@@ -145,8 +145,10 @@ jobs:
             'qh-action',
             'qarton-carthage-gameplay-style',
             'qarton-design-system',
-            'qarton-brand-row',
-            'qarton-home-info'
+            'qh-brand',
+            'qh-actions',
+            'qh-difficulty',
+            'qh-footer'
           ];
           const html = dst.toString('utf8');
           const missing = markers.filter(marker => !html.includes(marker));
