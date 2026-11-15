@@ -1,6 +1,6 @@
 // Dedicated QARTON story-background discovery and load-state manager.
 module.exports = function injectSceneBackgroundRuntime(html) {
-  const runtime = '<style id="carthage-scene-background-style">#root.carthage-background-missing,#root.carthage-background-pending{background-color:#111827!important;background-image:radial-gradient(ellipse at 50% 18%,rgba(139,48,57,.2),transparent 52%),linear-gradient(155deg,#111827,#080b12)!important}</style>\n' +
+  const runtime = '<style id="carthage-scene-background-style">body.qarton-game-active #root.carthage-background-missing,body.qarton-game-active #root.carthage-background-pending,#root.carthage-background-missing,#root.carthage-background-pending{background-color:#111827!important;background-image:radial-gradient(ellipse at 50% 18%,rgba(139,48,57,.2),transparent 52%),linear-gradient(155deg,#111827,#080b12)!important}</style>\n' +
   '<script id="carthage-scene-background-runtime">(function(){' +
   '"use strict";if(window.__carthageSceneBackgroundManager)return;window.__carthageSceneBackgroundManager=true;' +
   'var root=null,observer=null,queued=false,active=null,activeKey="",probes=new Map(),watched=new WeakSet();' +
