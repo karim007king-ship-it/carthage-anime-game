@@ -10,6 +10,7 @@ for(const [id,label] of [['story','القصة'],['world','عالم قرطاج'],
  assert.ok(tree.includes(label),'tree must label '+id+' branch');
 }
 assert.ok(tree.includes('grid-template-columns:repeat(2,minmax(0,1fr))'),'main navigation must use a two-column grid');
+assert.ok(tree.includes('qt-carthage-art')&&tree.includes('قرطاج'),'home hero must include its own Carthage-inspired cinematic illustration');
 assert.ok(tree.includes('overflow:hidden'),'main screen must remain fixed without vertical page scrolling');
 assert.ok(tree.includes('storyNodes.forEach'),'native game operations must remain preserved in the Story branch');
 assert.ok(tree.includes('backupNodes.forEach'),'save import/export controls must be preserved in Progress & Saves');
