@@ -13,7 +13,7 @@ assert.match(html, /c17-audio-volume/);
 assert.match(html, /prefers-reduced-motion/);
 assert.match(html, /السور يتكسر/);
 
-const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8') + '\n' + fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-cinematic-scenes.cjs'), 'utf8');
+const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8') + '\n' + fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-scene-backgrounds.cjs'), 'utf8') + '\n' + fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-cinematic-scenes.cjs'), 'utf8');
 assert.ok(cinematicPilot.includes('carthage-cinematic-pilot-runtime'), 'cinematic pilot runtime must be injected into the Android build');
 assert.ok(cinematicPilot.includes('carthage-save-transfer'), 'save export/import transfer controls must be injected');
 assert.ok(cinematicPilot.includes('carthage-drive-recovery-seed'), 'the confirmed Drive save must be included as a clean-install recovery seed');
@@ -24,14 +24,17 @@ assert.ok(cinematicPilot.includes('carthage-export-backup'), 'one-tap save backu
 assert.ok(cinematicPilot.includes('carthage-import-backup'), 'save backup import button must exist');
 assert.ok(cinematicPilot.includes('shiganshina-autosave-v1'), 'save import must restore autosave for one-tap continue');
 assert.ok(cinematicPilot.includes('carthageSlowPushIn'), 'cinematic pilot must include a slow camera push-in');
+assert.ok(cinematicPilot.includes('carthage-scene-background-runtime'), 'dedicated scene background manager must be injected into Android builds');
 assert.ok(cinematicPilot.includes('carthage-cinematic-scene-runtime'), 'cinematic scene expansion must be injected into Android builds');
 assert.ok(cinematicPilot.includes('carthage-scene-transition-runtime'), 'cinematic scene transition runtime must be injected into Android builds');
 assert.ok(cinematicPilot.includes('carthageSceneFadeThrough'), 'scene transitions must fade smoothly through black');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#carthage-scene-transition'), 'scene transitions must respect reduced-motion accessibility');
 assert.ok(cinematicPilot.includes('pointer-events:none;background:#050509'), 'scene transition overlay must never block gameplay input');
-assert.ok(cinematicPilot.includes('function mainArtwork()'), 'scene transitions must track the dominant story artwork');
+assert.ok(cinematicPilot.includes('window.__CARTHAGE_ACTIVE_BACKGROUND__'), 'cinematic effects must consume the dedicated background manager');
 
 assert.ok(cinematicPilot.includes('carthageSceneDrift'), 'story images must receive restrained camera drift');
+assert.ok(cinematicPilot.includes('carthage-background-missing'), 'missing scene art must receive a visible non-black fallback');
+assert.ok(cinematicPilot.includes('data-carthage-scene-background'), 'the background manager must identify the active scene artwork');
 assert.ok(cinematicPilot.includes('carthage-cinematic-scene-subject'), 'the cinematic runtime must target the main scene image');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#root.carthage-cinematic-scene'), 'expanded scene motion must respect reduced-motion settings');
 assert.ok(cinematicPilot.includes('carthageCinematicLight'), 'cinematic pilot must include a restrained moving light pass');
