@@ -161,6 +161,7 @@ const server = http.createServer((req, res) => {
     await page.locator('#qarton-home-screen .qt-card[aria-label="عالم قرطاج"]').click();
     assert.equal(await page.locator('#qarton-home-screen .qt-page-title').innerText(), 'عالم قرطاج', 'World branch must open its own page');
     assert.ok(await page.locator('#qarton-home-screen .qt-chip').count() >= 5, 'World branch must show its character and location guide');
+    assert.equal(await page.locator('#qarton-home-screen .qt-map').count(), 1, 'World branch must render the static Carthage location reference');
     await page.locator('#qarton-home-screen .qt-back').click();
     await page.locator('#qarton-home-screen .qt-card[aria-label="الإعدادات"]').click();
     assert.equal(await page.locator('#qarton-home-screen .qt-page-title').innerText(), 'الإعدادات', 'Settings branch must open its own page');
