@@ -4,7 +4,7 @@ name: Build Carthage Android APK
 on:
   workflow_dispatch:
   push:
-    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation, fix/qarton-real-browser-verification, fix/qarton-gameplay-interface, refactor/qarton-cleanup-cinematic]
+    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation, fix/qarton-real-browser-verification, fix/qarton-gameplay-interface, refactor/qarton-cleanup-cinematic, fix/qarton-background-manager]
     paths:
       - "index.html"
       - "package.json"
@@ -14,7 +14,7 @@ on:
       - "styles/**"
       - ".github/workflows/android-apk.yml"
   pull_request:
-    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation, fix/qarton-real-browser-verification, fix/qarton-gameplay-interface]
+    branches: [main, fix/new-game-qarton-home-regression, refactor/qarton-legacy-ui-isolation, fix/qarton-real-browser-verification, fix/qarton-gameplay-interface, refactor/qarton-cleanup-cinematic, fix/qarton-background-manager]
     paths:
       - "index.html"
       - "package.json"
@@ -81,6 +81,8 @@ jobs:
           node --check scripts/qarton-isolated-home.js
           node --check scripts/qarton-premium-home.js
           node --check scripts/qarton-main-tree.js
+          node --check scripts/qarton-scene-backgrounds.cjs
+          node --check tests/qarton-scene-backgrounds-test.cjs
           node --check scripts/qarton-cinematic-scenes.cjs
           node --check tests/qarton-cinematic-scenes-test.cjs
           node --check tests/qarton-main-tree-test.cjs
