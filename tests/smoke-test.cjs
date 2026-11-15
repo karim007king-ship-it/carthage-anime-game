@@ -169,7 +169,6 @@ assert.ok(html.includes('window.setTimeout(()=>L9(T+1),z?300:850)'), 'completed 
 assert.ok(html.includes('src:j.image,alt:j.place'), 'the active chapter artwork must be bound to the current chapter data');
 assert.ok(androidPrep.includes('pointer-events:none;background:#050509'), 'cinematic scene transitions must never block taps');
 
-const qartonGameplayCss = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-carthage-gameplay.css'), 'utf8');
 assert.ok(qartonHome.includes('document.body.classList.add("qarton-game-active")'), 'the existing gameplay adapter must scope the body while playing');
 assert.ok(qartonHome.includes('document.body.classList.remove("qarton-game-active")'), 'the existing gameplay adapter must clear gameplay body styling on exit');
 assert.ok(qartonGameplayCss.includes('.stage-slide .stage-breath') && qartonGameplayCss.includes('animation:none!important'), 'character portrait motion must be disabled to prevent unwanted drifting');
