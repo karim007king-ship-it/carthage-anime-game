@@ -22,6 +22,28 @@ html = html.replace('</head>', '<style id="qarton-design-system">' + qartonDesig
 const qartonGameplayCssPath = path.join(__dirname, '..', 'styles', 'qarton-carthage-gameplay.css');
 const qartonGameplayCss = fs.readFileSync(qartonGameplayCssPath, 'utf8');
 html = html.replace('</head>', '<style id="qarton-carthage-gameplay-style">' + qartonGameplayCss + '</style></head>');
+const qartonGameplayRuntime = `<script id="qarton-gameplay-surface-runtime">
+(function(){
+  if(window.__qartonGameplaySurfaceInstalled)return;
+  window.__qartonGameplaySurfaceInstalled=true;
+  function apply(){
+    var root=document.getElementById("root");
+    var active=window.__QARTON_APP_STATE__==="GAME";
+    if(root)root.classList.toggle("qarton-game-ui",active);
+    if(document.body)document.body.classList.toggle("qarton-game-active",active);
+  }
+  var observer=new MutationObserver(apply);
+  function start(){
+    apply();
+    if(document.body)observer.observe(document.body,{childList:true,subtree:true});
+  }
+  window.addEventListener("qarton:statechange",apply);
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});
+  else start();
+})();
+</script>`;
+html = html.replace('</body>', qartonGameplayRuntime + '</body>');
+
 function replaceOnce(needle, replacement, label) {
   const index = html.indexOf(needle);
   if (index < 0) throw new Error('Missing expected game hook: ' + label);
