@@ -58,9 +58,11 @@ const server = http.createServer((req, res) => {
         if (!root) return;
         const legacyMenu = root.querySelector('.home-actions');
         if (legacyMenu) {
-          window.__qartonDetachedLegacyMenu = { node: legacyMenu, parent: legacyMenu.parentNode, next: legacyMenu.nextSibling };
-          legacyMenu.remove();
-          window.__qartonLegacyMenuRemoved = true;
+          // Keep React's managed DOM intact: hide the old menu rather than detaching
+          // a node that React may later reconcile during the intro transition.
+          legacyMenu.style.setProperty('display', 'none', 'important');
+          legacyMenu.setAttribute('data-qarton-test-hidden', 'true');
+          window.__qartonLegacyMenuHidden = true;
         }
         const state = window.__QARTON_APP_STATE__ || 'BOOT';
         if (state !== 'HOME' && state !== 'TRANSITION' && state !== 'BOOT') return;
@@ -98,7 +100,8 @@ const server = http.createServer((req, res) => {
         getComputedStyle(document.querySelector('#qarton-home-screen')).display !== 'none',
       hasPrimaryAction: !!document.querySelector('#qarton-home-screen .qh-action[data-kind="primary"]'),
       legacyMenuPresent: !!document.getElementById('root').querySelector('.home-actions'),
-      legacyMenuRemoved: !!window.__qartonLegacyMenuRemoved,
+      legacyMenuHidden: !!document.getElementById('root').querySelector('.home-actions[data-qarton-test-hidden="true"]') &&
+        getComputedStyle(document.getElementById('root').querySelector('.home-actions')).display === 'none',
       backupControlsInsideQartonHome: !!document.querySelector('#qarton-home-screen #carthage-export-backup') &&
         !!document.querySelector('#qarton-home-screen #carthage-import-backup'),
       moduleStarted: !!window.__CARTHAGE_MODULE_STARTED__,
@@ -118,8 +121,8 @@ const server = http.createServer((req, res) => {
     await page.waitForTimeout(250);
     assert.equal(await page.locator('#root').evaluate(el => getComputedStyle(el).display), 'none', 'viewport-lock initialization must not reveal the legacy React root after first paint');
     assert.equal(homeState.hasPrimaryAction, true, 'the QARTON home must expose its real primary action');
-    assert.equal(homeState.legacyMenuPresent, false, 'QARTON HOME must remain functional without the legacy React home menu');
-    assert.equal(homeState.legacyMenuRemoved, true, 'the browser test must actively remove the legacy home menu before QARTON readiness');
+    assert.equal(homeState.legacyMenuPresent, true, 'the legacy React node remains mounted to protect React reconciliation');
+    assert.equal(homeState.legacyMenuHidden, true, 'the browser test must make the old menu unavailable before QARTON readiness');
     assert.equal(homeState.backupControlsInsideQartonHome, true, 'save backup controls must remain accessible inside QARTON after the legacy menu is removed');
 
     // The QARTON home is intentionally a fixed, non-scrolling screen on short phones.
@@ -155,13 +158,6 @@ const server = http.createServer((req, res) => {
     assert.equal(homeState.moduleStarted, true, 'the actual story module must have started');
     assert.equal(homeState.renderRequested, true, 'the actual React application must have rendered');
 
-    await page.evaluate(() => {
-      const saved = window.__qartonDetachedLegacyMenu;
-      if (saved && saved.parent && saved.parent.isConnected && !saved.node.isConnected) {
-        const next = saved.next && saved.next.parentNode === saved.parent ? saved.next : null;
-        saved.parent.insertBefore(saved.node, next);
-      }
-    });
     const primary = page.locator('#qarton-home-screen .qh-action[data-kind="primary"]').first();
     await primary.click();
 
