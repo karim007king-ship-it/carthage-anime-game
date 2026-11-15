@@ -6,6 +6,7 @@ var root=null,observer=null,queued=false;
 function decorateGameplay(node){
  if(!node)return;
  node.classList.add("qarton-game-ui");
+ document.body.classList.add("qarton-game-active");
  node.setAttribute("data-qarton-gameplay-skin","active");
  Array.from(node.querySelectorAll(".dialogue-panel,.theatre-text,.search-layer")).forEach(function(el){el.classList.add("qarton-game-card")});
  Array.from(node.querySelectorAll("button")).forEach(function(button){button.classList.add("qarton-game-control")});
@@ -17,6 +18,7 @@ function apply(){
   if(observer){observer.disconnect();observer=null}
   root.classList.remove("qarton-game-ui");
   root.removeAttribute("data-qarton-gameplay-skin");
+  document.body.classList.remove("qarton-game-active");
   return;
  }
  decorateGameplay(root);
