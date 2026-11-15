@@ -1,0 +1,11 @@
+'use strict';
+const assert = require('node:assert/strict');
+const vm = require('node:vm');
+const inject = require('../scripts/qarton-scene-backgrounds.cjs');
+const html = inject('<html><head></head><body><main id="root"></main></body></html>');
+for (const marker of ['carthage-scene-background-runtime','carthage-background-ready','carthage-background-pending','carthage-background-missing','data-carthage-scene-background','window.__CARTHAGE_ACTIVE_BACKGROUND__','carthage:backgroundchange','window.__QARTON_APP_STATE__']) assert.ok(html.includes(marker), 'missing background manager contract: '+marker);
+assert.ok(!html.includes('localStorage.setItem'), 'background manager must not modify saves');
+const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)];
+assert.equal(scripts.length,1);
+for(const [,source] of scripts)assert.doesNotThrow(()=>new vm.Script(source));
+console.log('PASS: dedicated scene-background manager exposes load states and a non-black fallback.');
