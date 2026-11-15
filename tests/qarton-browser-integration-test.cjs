@@ -157,6 +157,17 @@ const server = http.createServer((req, res) => {
     assert.equal(compactHome.treeCardsVisible, true, 'all four navigation cards must remain visible on a compact phone');
     assert.equal(compactHome.legacyHidden, true, 'the legacy root must remain isolated on a compact phone');
     await page.setViewportSize({ width: 390, height: 844 });
+    await page.locator('#qarton-home-screen .qt-card[aria-label="عالم قرطاج"]').click();
+    assert.equal(await page.locator('#qarton-home-screen .qt-page-title').innerText(), 'عالم قرطاج', 'World branch must open its own page');
+    assert.ok(await page.locator('#qarton-home-screen .qt-chip').count() >= 5, 'World branch must show its character and location guide');
+    await page.locator('#qarton-home-screen .qt-back').click();
+    await page.locator('#qarton-home-screen .qt-card[aria-label="الإعدادات"]').click();
+    assert.equal(await page.locator('#qarton-home-screen .qt-page-title').innerText(), 'الإعدادات', 'Settings branch must open its own page');
+    const soundToggle = page.locator('#qarton-home-screen .qt-setting input[type="checkbox"]').first();
+    await soundToggle.uncheck();
+    assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('qarton-settings-v1')).sound), false,
+      'settings must persist without changing story-save keys');
+    await page.locator('#qarton-home-screen .qt-back').click();
     assert.equal(homeState.moduleStarted, true, 'the actual story module must have started');
     assert.equal(homeState.renderRequested, true, 'the actual React application must have rendered');
 
