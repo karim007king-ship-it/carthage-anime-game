@@ -58,17 +58,19 @@ const document={
   createElement:element,
   addEventListener(){},
 };
-const nativeMenu=element('div');nativeMenu.className='home-actions';
-const nativeStart=element('button');nativeStart.textContent='لعبة جديدة';
-const nativePart2=element('button');nativePart2.textContent='الجزء الثاني';
-nativeMenu.append(nativeStart,nativePart2);root.appendChild(nativeMenu);
+
 const timers=new Map();let nextTimer=1;
 const window={
   dispatchEvent(){},
   setTimeout(fn,delay){const id=nextTimer++;timers.set(id,{fn,delay});return id},
   clearTimeout(id){timers.delete(id)}
 };
-nativeStart.addEventListener('click',()=>window.__qartonSetAppState('INTRO','native-new-game'));
+window.__carthageHasSave=()=>false;
+window.__carthageHasFreeSlot=()=>true;
+window.__carthageStartNewGame=()=>{window.__qartonSetAppState("INTRO","bridge-new-game");return true};
+window.__carthageStartPart2=()=>{window.__qartonSetAppState("GAME","bridge-part-two");return true};
+window.__carthageStartPart3=()=>false;
+window.__carthageCanStartPart3=()=>false;
 class Observer{constructor(fn){this.fn=fn}observe(){}disconnect(){}}
 class CustomEvent{constructor(type,options){this.type=type;this.detail=options?.detail}}
 const context={window,document,MutationObserver:Observer,CustomEvent,requestAnimationFrame(fn){fn()},console};
@@ -118,8 +120,11 @@ function findText(node,pattern){if(pattern.test(node.textContent||''))return tru
 assert.ok(findText(document.getElementById('qarton-home-screen'),/تعذّر تشغيل المشهد/),'the timeout recovery message must be visible on QARTON HOME');
 
 // Exercise the rendered QARTON primary card and its delegation to the native React action.
-const primaryCard=document.getElementById('qarton-home-screen').querySelectorAll('.qh-action').find(button=>button.textContent==='لعبة جديدة');
-assert.ok(primaryCard,'QARTON must render a primary new-game card from the native menu');
+const homeActions=document.getElementById('qarton-home-screen').querySelectorAll('.qh-action');
+const primaryCard=homeActions.find(button=>button.dataset.kind==='primary');
+assert.ok(primaryCard,'QARTON must render its primary action without a native menu');
+assert.ok(homeActions.some(button=>button.textContent==='الجزء الثاني'),'QARTON must render Part 2 from the explicit engine bridge');
+assert.ok(homeActions.some(button=>button.disabled&&button.textContent.includes('الجزء الثالث')),'Part 3 must remain visibly locked until its ending condition is met');
 primaryCard.click();
 assert.equal(window.__qartonGetAppState(),'INTRO','pressing the QARTON new-game card must reach the native intro lifecycle');
 assert.equal(document.getElementById('qarton-home-screen'),null,'the QARTON home overlay must disappear after the native intro starts');
