@@ -38,7 +38,7 @@ npm run android:sync
 | `styles/qarton-design-system.css` | ألوان QARTON ومكوّناته المشتركة |
 | `styles/qarton-carthage-home.css` | قواعد واجهة Carthage السابقة محفوظة ومعطّلة افتراضياً للرجوع الآمن |
 | `scripts/qarton-premium-home.js` | تنسيق عناصر اللعب فقط اعتماداً على حالة QARTON المركزية |
-| `scripts/qarton-isolated-home.js` | إدارة HOME/GAME/TRANSITION، وعرض الشاشة المستقلة وربط كل بطاقة بمعالج React الأصلي |
+| `scripts/qarton-isolated-home.js` | إدارة HOME/GAME/TRANSITION، وعرض شاشة QARTON مستقلة وربط أزرارها بجسور محرك اللعبة |
 | `scripts/prepare-web.cjs` | تجهيز نسخة الويب وحقن تكامل Android |
 | `scripts/apply-android-branding.cjs` | توليد أيقونات Android وربطها بالـ Manifest |
 | `tests/` | اختبارات سلامة اللعبة والحفظ وتكامل Android |
