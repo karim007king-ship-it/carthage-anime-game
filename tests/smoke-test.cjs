@@ -169,6 +169,14 @@ assert.ok(html.includes('window.setTimeout(()=>L9(T+1),z?300:850)'), 'completed 
 assert.ok(html.includes('src:j.image,alt:j.place'), 'the active chapter artwork must be bound to the current chapter data');
 assert.ok(androidPrep.includes('pointer-events:none;background:#050509'), 'cinematic scene transitions must never block taps');
 
+const qartonGameplayCss = fs.readFileSync(path.join(__dirname, '..', 'styles', 'qarton-carthage-gameplay.css'), 'utf8');
+assert.ok(androidPrep.includes('qarton-gameplay-surface-runtime'), 'gameplay presentation adapter must be packaged');
+assert.ok(androidPrep.includes('root.classList.toggle("qarton-game-ui",active)'), 'the real gameplay root must receive the QARTON visual scope only while playing');
+assert.ok(androidPrep.includes('window.addEventListener("qarton:statechange",apply)'), 'gameplay styling must follow the central screen lifecycle');
+assert.ok(qartonGameplayCss.includes('.stage-slide .stage-breath') && qartonGameplayCss.includes('animation:none!important'), 'character portrait motion must be disabled to prevent unwanted drifting');
+assert.ok(qartonGameplayCss.includes('carthage-cinematic-pilot:before') && qartonGameplayCss.includes('box-shadow:none!important'), 'cinematic letterbox bars must not obscure the lower dialogue area');
+assert.ok(qartonGameplayCss.includes('.theatre-text') && qartonGameplayCss.includes('rgba(32,43,60,.96)'), 'dialogue panels must use the QARTON dark-blue surface rather than a flat black fill');
+
 const ids = [...html.matchAll(/\sid=["']([^"']+)["']/g)].map(m => m[1]);
 const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
 assert.deepEqual([...new Set(duplicates)], [], 'HTML ids must be unique');
