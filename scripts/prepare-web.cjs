@@ -129,12 +129,17 @@ const startupDiagnostics = `<script id="carthage-startup-diagnostics">
   window.addEventListener("unhandledrejection",function(e){var r=e.reason;record("Promise",r&&r.stack||r&&r.message||r)});
   var originalError=console.error;
   console.error=function(){try{record("console.error",Array.prototype.map.call(arguments,function(v){return v&&v.stack||v&&v.message||String(v)}).join(" "))}catch(e){}return originalError.apply(console,arguments)};
+  function qartonHomeReady(){
+    var home=document.getElementById("qarton-home-screen");
+    return !!(window.__QARTON_HOME_READY__===true&&home&&home.querySelector(".qh-actions"));
+  }
   function removeWatchdogWhenReady(){
     var root=document.getElementById("root");
     var bodyText=(root&&root.innerText||"").trim();
-    var ready=!!(root&&root.querySelector("button,[role=button],canvas,.game-timer"))&&!/جاري.{0,18}(تحميل|التحم)|loading|starting/i.test(bodyText);
-    if(!ready)return;
-    window.__CARTHAGE_REACT_MOUNTED__=true;
+    var qartonReady=qartonHomeReady();
+    var legacyReady=!!(root&&root.querySelector("button,[role=button],canvas,.game-timer"))&&!/جاري.{0,18}(تحميل|التحم)|loading|starting/i.test(bodyText);
+    if(!qartonReady&&!legacyReady)return;
+    if(legacyReady)window.__CARTHAGE_REACT_MOUNTED__=true;
     var watchdog=document.getElementById("carthage-startup-watchdog");
     if(watchdog)watchdog.remove();
   }
@@ -146,8 +151,8 @@ const startupDiagnostics = `<script id="carthage-startup-diagnostics">
     var root=document.getElementById("root");
     var bodyText=(root&&root.innerText||document.body&&document.body.innerText||"").trim();
     var loading=/جاري.{0,18}(تحميل|التحم)|loading|starting/i.test(bodyText);
-    var appReady=!!(root&&root.querySelector("button,[role=button],canvas,.game-timer"));
-    if(!loading&&appReady){removeWatchdogWhenReady();return;}
+    var appReady=qartonHomeReady()||!!(root&&root.querySelector("button,[role=button],canvas,.game-timer"));
+    if(qartonHomeReady()||(!loading&&appReady)){removeWatchdogWhenReady();return;}
     // Show diagnostics whenever the game UI is not actually mounted, even if static text is present.
     var panel=document.createElement("section");
     panel.id="carthage-startup-error";panel.dir="rtl";
