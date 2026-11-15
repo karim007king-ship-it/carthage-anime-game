@@ -126,6 +126,11 @@ const server = http.createServer((req, res) => {
         bodyHeight: document.body.scrollHeight,
         primaryVisible: !!overlay && Array.from(overlay.querySelectorAll('button')).some(button =>
           button.dataset.kind === 'primary' && button.getBoundingClientRect().height > 0),
+        backupControlsVisible: ['carthage-export-backup','carthage-import-backup'].every(id => {
+          const button = document.getElementById(id);
+          const rect = button && button.getBoundingClientRect();
+          return !!rect && rect.height > 0 && rect.top >= 0 && rect.bottom <= window.innerHeight + 1;
+        }),
         legacyHidden: getComputedStyle(document.getElementById('root')).display === 'none' &&
           getComputedStyle(document.getElementById('root')).visibility === 'hidden'
       };
@@ -136,6 +141,7 @@ const server = http.createServer((req, res) => {
       compactHome.bodyHeight <= compactHome.viewportHeight + 1,
       'QARTON home must not introduce vertical page scrolling on a compact phone');
     assert.equal(compactHome.primaryVisible, true, 'the primary action must remain visible on a compact phone');
+    assert.equal(compactHome.backupControlsVisible, true, 'save backup controls must remain visible on a compact phone');
     assert.equal(compactHome.legacyHidden, true, 'the legacy root must remain isolated on a compact phone');
     await page.setViewportSize({ width: 390, height: 844 });
     assert.equal(homeState.moduleStarted, true, 'the actual story module must have started');
