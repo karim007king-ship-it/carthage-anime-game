@@ -90,3 +90,11 @@ body.qarton-game-active{background:#080b12!important;color:#fff0d2!important;ove
   color:#fff0d2!important;
   box-shadow:0 8px 22px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.06)!important;
 }
+
+/* Dialogue contrast regression guard.
+   The story engine may set dark text on nested spans/paragraphs. Root color inheritance
+   does not override those explicit child colors, so normalize gameplay text descendants. */
+#root.qarton-game-ui :is(div,p,span,label,strong,em,b,i,small,li,blockquote,a,section,article,h4,h5,h6){
+  color:#fff0d2!important;
+  -webkit-text-fill-color:#fff0d2!important;
+}
