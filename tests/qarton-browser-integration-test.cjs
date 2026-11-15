@@ -80,6 +80,7 @@ const server = http.createServer((req, res) => {
     await page.goto('http://127.0.0.1:' + address.port + '/', { waitUntil: 'domcontentloaded', timeout: 30000 });
 
     await page.waitForFunction(() => window.__QARTON_HOME_READY__ === true, { timeout: 25000 });
+    await page.waitForSelector('#carthage-export-backup', { state: 'visible', timeout: 5000 });
     const homeState = await page.evaluate(() => ({
       state: window.__qartonGetAppState && window.__qartonGetAppState(),
       rootDisplay: getComputedStyle(document.getElementById('root')).display,
@@ -91,6 +92,8 @@ const server = http.createServer((req, res) => {
       hasPrimaryAction: !!document.querySelector('#qarton-home-screen .qh-action[data-kind="primary"]'),
       legacyMenuPresent: !!document.getElementById('root').querySelector('.home-actions'),
       legacyMenuRemoved: !!window.__qartonLegacyMenuRemoved,
+      backupControlsInsideQartonHome: !!document.querySelector('#qarton-home-screen #carthage-export-backup') &&
+        !!document.querySelector('#qarton-home-screen #carthage-import-backup'),
       moduleStarted: !!window.__CARTHAGE_MODULE_STARTED__,
       renderRequested: !!window.__CARTHAGE_RENDER_REQUESTED__,
       renderError: window.__CARTHAGE_RENDER_ERROR__ || null
@@ -108,6 +111,7 @@ const server = http.createServer((req, res) => {
     assert.equal(homeState.hasPrimaryAction, true, 'the QARTON home must expose its real primary action');
     assert.equal(homeState.legacyMenuPresent, false, 'QARTON HOME must remain functional without the legacy React home menu');
     assert.equal(homeState.legacyMenuRemoved, true, 'the browser test must actively remove the legacy home menu before QARTON readiness');
+    assert.equal(homeState.backupControlsInsideQartonHome, true, 'save backup controls must remain accessible inside QARTON after the legacy menu is removed');
 
     // The QARTON home is intentionally a fixed, non-scrolling screen on short phones.
     await page.setViewportSize({ width: 360, height: 640 });
