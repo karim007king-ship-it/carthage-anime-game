@@ -526,13 +526,13 @@ const server = http.createServer((req, res) => {
           const owner = (node.tagName || '').toLowerCase() +
             (node.id ? '#' + node.id : '') +
             (typeof node.className === 'string' && node.className.trim()
-              ? '.' + node.className.trim().split(/\\s+/).join('.') : '');
+              ? '.' + node.className.trim().split(/\s+/).join('.') : '');
           for (const pseudo of ['element', '::before', '::after']) {
             const s = pseudo === 'element' ? getComputedStyle(node) : getComputedStyle(node, pseudo);
             const value = s.backgroundImage;
             if (!value || value === 'none' || s.display === 'none' ||
                 s.visibility === 'hidden' || Number(s.opacity || 1) <= 0) continue;
-            for (const match of value.matchAll(/url\\(["']?(.*?)["']?\\)/g)) {
+            for (const match of value.matchAll(/url\(["']?(.*?)["']?\)/g)) {
               try {
                 const url = new URL(match[1], document.baseURI).href;
                 if (!backgroundMap.has(url)) backgroundMap.set(url, []);
