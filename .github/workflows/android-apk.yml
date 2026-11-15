@@ -81,6 +81,8 @@ jobs:
           node --check scripts/qarton-isolated-home.js
           node --check scripts/qarton-premium-home.js
           node --check scripts/qarton-main-tree.js
+          node --check scripts/qarton-cinematic-scenes.cjs
+          node --check tests/qarton-cinematic-scenes-test.cjs
           node --check tests/qarton-main-tree-test.cjs
           node --check tests/qarton-browser-integration-test.cjs
 
