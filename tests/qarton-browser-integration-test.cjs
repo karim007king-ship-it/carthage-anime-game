@@ -98,6 +98,7 @@ const server = http.createServer((req, res) => {
       homeVisible: !!document.querySelector('#qarton-home-screen') &&
         getComputedStyle(document.querySelector('#qarton-home-screen')).display !== 'none',
       treeReady: window.__QARTON_TREE_READY__ === true,
+      carthageArtPresent: !!document.querySelector('#qarton-home-screen .qt-carthage-art'),
       treeCards: Array.from(document.querySelectorAll('#qarton-home-screen .qt-card')).map(button => button.getAttribute('aria-label')),
       hasPrimaryAction: (() => { const node = document.querySelector('#qarton-home-screen .qh-action[data-kind="primary"]'); return !!node && node.getBoundingClientRect().height > 0; })(),
       legacyMenuPresent: !!document.getElementById('root').querySelector('.home-actions'),
@@ -123,6 +124,7 @@ const server = http.createServer((req, res) => {
     await page.waitForTimeout(250);
     assert.equal(await page.locator('#root').evaluate(el => getComputedStyle(el).display), 'none', 'viewport-lock initialization must not reveal the legacy React root after first paint');
     assert.equal(homeState.treeReady, true, 'the four-branch QARTON tree must be mounted');
+    assert.equal(homeState.carthageArtPresent, true, 'the QARTON hero must include its Carthage-inspired artwork');
     assert.deepEqual(homeState.treeCards, ['القصة','عالم قرطاج','التقدم والحفظ','الإعدادات'], 'the home must expose exactly the four agreed navigation branches');
     assert.equal(homeState.hasPrimaryAction, false, 'game operations must not be exposed directly on the main tree');
     assert.equal(homeState.legacyMenuPresent, true, 'the legacy React node remains mounted to protect React reconciliation');
