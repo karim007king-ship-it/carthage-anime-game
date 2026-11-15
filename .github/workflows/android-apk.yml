@@ -80,6 +80,8 @@ jobs:
           node --check scripts/prepare-web.cjs
           node --check scripts/qarton-isolated-home.js
           node --check scripts/qarton-premium-home.js
+          node --check scripts/qarton-main-tree.js
+          node --check tests/qarton-main-tree-test.cjs
           node --check tests/qarton-browser-integration-test.cjs
 
       - name: Run game integrity tests
@@ -139,6 +141,9 @@ jobs:
             'carthage-fixed-home-runtime',
             'qarton-premium-home-runtime',
             'qarton-isolated-home-runtime',
+            'qarton-main-tree-runtime',
+            'qarton-main-tree-style',
+            'التقدم والحفظ',
             'body.qarton-intro-active #root',
             'if(state==="INTRO"){showIntro();return}',
             'qarton-home-screen',
