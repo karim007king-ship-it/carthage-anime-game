@@ -94,13 +94,13 @@ assert.ok(!/opacity\s*:\s*0|visibility\s*:\s*hidden|animation\s*:/.test(watchdog
 assert.ok(androidPrep.includes('Resource load'), 'Android startup diagnostic must capture failed resource loads');
 assert.ok(androidPrep.includes('carthage-startup-errors'), 'Android startup diagnostic must retain captured errors for display');
 assert.ok(qartonIsolatedHome.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
-assert.ok(androidPrep.includes('var appState=window.__QARTON_APP_STATE__||\\"HOME\\"'), 'navigation must read the central QARTON state');
+assert.ok(androidPrep.includes('var appState=window.__QARTON_APP_STATE__||"HOME"'), 'navigation must read the central QARTON state');
 assert.ok(androidPrep.includes('var playing=appState==="GAME"'), 'native save navigation must use the explicit GAME state');
 assert.ok(androidPrep.includes('window.addEventListener("qarton:statechange",schedule)'), 'navigation must update when the central lifecycle changes');
 assert.ok(qartonIsolatedHome.includes('className="qh-action"'), 'QARTON home actions must use the isolated QARTON component');
 assert.ok(androidPrep.includes('function schedule(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;mount()})}'), 'navigation DOM updates must be coalesced to one animation frame');
 assert.ok(androidPrep.includes('var observer=new MutationObserver(schedule)'), 'navigation observer must use the coalesced scheduler instead of rescanning synchronously for every DOM mutation');
-assert.ok(androidPrep.includes('رجوع للقائمة'), 'new-game cancel action must be clearly labeled as returning to menu');
+assert.ok(qartonIsolatedHome.includes('إلغاء والعودة إلى QARTON'), 'QARTON transition must provide its own return action');
 assert.ok(androidPrep.includes('shiganshina-autosave-v1'), 'continue flow must recognize autosave fallback');
 assert.ok(androidPrep.includes('window.__carthageContinue=()=>{'), 'continue action must restore the newest valid local save');
 assert.ok(qartonIsolatedHome.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
