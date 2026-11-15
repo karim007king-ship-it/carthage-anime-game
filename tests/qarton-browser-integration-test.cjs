@@ -363,23 +363,42 @@ const server = http.createServer((req, res) => {
     // falsely reject a valid CSS scene or pass because of an unrelated UI icon.
     const cssBackgroundArtwork = await page.evaluate(async () => {
       const root = document.getElementById('root');
-      const candidates = Array.from(root.querySelectorAll('*')).filter(node => {
+      const candidates = [root, ...Array.from(root.querySelectorAll('*'))].filter(node => {
         const rect = node.getBoundingClientRect(), style = getComputedStyle(node);
         return rect.width > innerWidth * .45 && rect.height > innerHeight * .25 &&
           style.display !== 'none' && style.visibility !== 'hidden' &&
-          Number(style.opacity || 1) > 0 && style.backgroundImage &&
-          style.backgroundImage !== 'none';
+          Number(style.opacity || 1) > 0;
       });
-      const urls = new Set();
+      const urlSources = new Map();
       for (const node of candidates) {
-        const value = getComputedStyle(node).backgroundImage;
-        for (const match of value.matchAll(/url\(["']?(.*?)["']?\)/g)) {
-          try { urls.add(new URL(match[1], document.baseURI).href); } catch {}
+        const rect = node.getBoundingClientRect();
+        const owner = (node.tagName || '').toLowerCase() +
+          (node.id ? '#' + node.id : '') +
+          (typeof node.className === 'string' && node.className.trim()
+            ? '.' + node.className.trim().split(/\\s+/).join('.') : '');
+        const layers = [
+          { pseudo: 'element', style: getComputedStyle(node) },
+          { pseudo: '::before', style: getComputedStyle(node, '::before') },
+          { pseudo: '::after', style: getComputedStyle(node, '::after') }
+        ];
+        for (const layer of layers) {
+          const value = layer.style.backgroundImage;
+          if (!value || value === 'none' || layer.style.display === 'none' ||
+              layer.style.visibility === 'hidden' || Number(layer.style.opacity || 1) <= 0) continue;
+          for (const match of value.matchAll(/url\(["']?(.*?)["']?\)/g)) {
+            try {
+              const url = new URL(match[1], document.baseURI).href;
+              if (!urlSources.has(url)) urlSources.set(url, []);
+              urlSources.get(url).push({ owner, pseudo: layer.pseudo,
+                rect: { width: Math.round(rect.width), height: Math.round(rect.height) }, backgroundImage: value });
+            } catch {}
+          }
         }
       }
-      return await Promise.all(Array.from(urls).map(url => new Promise(resolve => {
+      return await Promise.all(Array.from(urlSources, ([url, sources]) => new Promise(resolve => {
         const image = new Image();
-        const finish = (loaded) => resolve({url,loaded,naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight});
+        const finish = loaded => resolve({url, loaded, naturalWidth:image.naturalWidth,
+          naturalHeight:image.naturalHeight, sources});
         image.onload = () => finish(true);
         image.onerror = () => finish(false);
         image.src = url;
