@@ -58,6 +58,7 @@ const server = http.createServer((req, res) => {
         if (!root) return;
         const legacyMenu = root.querySelector('.home-actions');
         if (legacyMenu) {
+          window.__qartonDetachedLegacyMenu = { node: legacyMenu, parent: legacyMenu.parentNode, next: legacyMenu.nextSibling };
           legacyMenu.remove();
           window.__qartonLegacyMenuRemoved = true;
         }
@@ -140,6 +141,13 @@ const server = http.createServer((req, res) => {
     assert.equal(homeState.moduleStarted, true, 'the actual story module must have started');
     assert.equal(homeState.renderRequested, true, 'the actual React application must have rendered');
 
+    await page.evaluate(() => {
+      const saved = window.__qartonDetachedLegacyMenu;
+      if (saved && saved.parent && saved.parent.isConnected && !saved.node.isConnected) {
+        const next = saved.next && saved.next.parentNode === saved.parent ? saved.next : null;
+        saved.parent.insertBefore(saved.node, next);
+      }
+    });
     const primary = page.locator('#qarton-home-screen .qh-action[data-kind="primary"]').first();
     await primary.click();
 
