@@ -325,10 +325,25 @@ const server = http.createServer((req, res) => {
         return {src:img.currentSrc||img.src,complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,
           visible:visible(img),rect:{x:Math.round(r.x),y:Math.round(r.y),width:Math.round(r.width),height:Math.round(r.height)},opacity:s.opacity};
       });
+      const stageSlides = Array.from(root.querySelectorAll('.stage-slide')).map(node => {
+        const s=getComputedStyle(node),r=node.getBoundingClientRect();
+        const children=Array.from(node.querySelectorAll('img,[style*="background"],.stage-breath')).map(child => {
+          const cs=getComputedStyle(child),cr=child.getBoundingClientRect();
+          return {tag:child.tagName.toLowerCase(),id:child.id,className:typeof child.className==='string'?child.className:'',
+            src:child.currentSrc||child.src||'',complete:child.tagName==='IMG'?child.complete:null,
+            naturalWidth:child.tagName==='IMG'?child.naturalWidth:null,naturalHeight:child.tagName==='IMG'?child.naturalHeight:null,
+            rect:{x:Math.round(cr.x),y:Math.round(cr.y),width:Math.round(cr.width),height:Math.round(cr.height)},
+            backgroundColor:cs.backgroundColor,backgroundImage:cs.backgroundImage,objectFit:cs.objectFit,position:cs.position,
+            display:cs.display,visibility:cs.visibility,opacity:cs.opacity};
+        });
+        return {id:node.id,className:typeof node.className==='string'?node.className:'',
+          rect:{x:Math.round(r.x),y:Math.round(r.y),width:Math.round(r.width),height:Math.round(r.height)},
+          backgroundColor:s.backgroundColor,backgroundImage:s.backgroundImage,position:s.position,overflow:s.overflow,children};
+      });
       const bodyStyle=getComputedStyle(document.body),rootStyle=getComputedStyle(root);
       return {viewport:{width:innerWidth,height:innerHeight},body:{backgroundColor:bodyStyle.backgroundColor,backgroundImage:bodyStyle.backgroundImage},
         root:{className:root.className,backgroundColor:rootStyle.backgroundColor,backgroundImage:rootStyle.backgroundImage},
-        largeLayers:layers,images};
+        stageSlides,largeLayers:layers,images};
     });
     // CSS backgrounds are common scene-art layers in this game. Inspect and decode
     // visible background URLs as well as <img> elements; an <img>-only test can
