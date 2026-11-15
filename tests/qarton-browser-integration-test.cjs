@@ -175,6 +175,8 @@ const server = http.createServer((req, res) => {
     await page.locator('#qarton-home-screen .qt-card[aria-label="التقدم والحفظ"]').click();
     await page.waitForSelector('#qarton-home-screen #carthage-export-backup', { state: 'visible', timeout: 5000 });
     await page.waitForSelector('#qarton-home-screen #carthage-import-backup', { state: 'visible', timeout: 5000 });
+    assert.ok(await page.locator('#qarton-home-screen').innerText().then(text => text.includes('سجل القرارات')), 'Progress branch must render saved decision history');
+    assert.ok(await page.locator('#qarton-home-screen').innerText().then(text => text.includes('نبقى مع لينا ونحميها')), 'Progress branch must read real saved choices without rewriting them');
     await page.locator('#qarton-home-screen .qt-back').click();
     await page.locator('#qarton-home-screen .qt-card[aria-label="القصة"]').click();
     const primary = page.locator('#qarton-home-screen .qh-action[data-kind="primary"]').first();
