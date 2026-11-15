@@ -103,8 +103,9 @@ const server = http.createServer((req, res) => {
       legacyMenuPresent: !!document.getElementById('root').querySelector('.home-actions'),
       legacyMenuHidden: !!document.getElementById('root').querySelector('.home-actions[data-qarton-test-hidden="true"]') &&
         getComputedStyle(document.getElementById('root').querySelector('.home-actions')).display === 'none',
-      backupControlsInHome: !!document.querySelector('#qarton-home-screen #carthage-export-backup') ||
-        !!document.querySelector('#qarton-home-screen #carthage-import-backup'),
+      backupControlsInHome: ['carthage-export-backup','carthage-import-backup'].some(id => {
+        const node = document.getElementById(id); return !!node && node.getBoundingClientRect().height > 0;
+      }),
       moduleStarted: !!window.__CARTHAGE_MODULE_STARTED__,
       renderRequested: !!window.__CARTHAGE_RENDER_REQUESTED__,
       renderError: window.__CARTHAGE_RENDER_ERROR__ || null
