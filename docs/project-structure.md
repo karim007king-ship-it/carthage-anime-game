@@ -1,61 +1,87 @@
-# Project Structure and Maintenance Guide
+# QARTON — Project Structure and Maintenance Guide
 
-## Architecture at a glance
+## 1. Runtime architecture
 
-The project currently has four layers:
+The game is split into five ownership layers:
 
-1. **Game source** — `index.html` contains the original self-contained React game, story data, scene rendering, and core save behavior.
-2. **QARTON presentation** — `styles/qarton-design-system.css` defines reusable studio tokens/components. `scripts/qarton-isolated-home.js` owns the HOME/INTRO/GAME/TRANSITION lifecycle and isolated shell. `scripts/qarton-main-tree.js` renders the four navigation branches (Story, World, Progress & Saves, Settings). `scripts/qarton-premium-home.js` styles gameplay only.
-3. **Android preparation** — `scripts/prepare-web.cjs` copies the source into `www/`, applies the Android-specific compatibility and save/navigation patches, embeds the QARTON stylesheet/runtime, and parses the resulting inline scripts.
-4. **Android packaging** — Capacitor syncs the prepared web assets; `scripts/apply-android-branding.cjs` creates launcher resources and updates the generated manifest; GitHub Actions builds and uploads the APK.
+1. **Game source — `index.html`**
+   - Original React game, story data, scene markup, progression, choices, and save engine.
+   - This remains the only source of truth for story and game state.
 
-## Source-of-truth rules
+2. **QARTON presentation — `styles/` and `scripts/qarton-*.js`**
+   - `styles/qarton-design-system.css`: shared QARTON tokens and reusable primitives.
+   - `styles/qarton-carthage-gameplay.css`: Carthage gameplay-only visual rules.
+   - `scripts/qarton-isolated-home.js`: HOME / INTRO / GAME / TRANSITION lifecycle and isolated home shell.
+   - `scripts/qarton-main-tree.js`: four home branches and placement of original engine controls.
+   - `scripts/qarton-premium-home.js`: gameplay styling adapter only.
+   - `scripts/qarton-cinematic-scenes.cjs`: story artwork discovery, cinematic scene motion, and scene transitions. Supports both loaded `img` elements and elements with CSS `background-image: url(...)`.
 
-- `index.html` is the source of truth for the original game. `www/` and `android/` are generated build outputs, ignored by Git, and must not become competing hand-edited sources.
-- The QARTON stylesheet is the canonical home for shared design tokens and reusable component primitives.
-- The isolated QARTON shell hides the React root immediately at startup, before the deferred React module mounts. The main-tree adapter presents exactly four root branches. It relocates original story action nodes into Story and save-transfer nodes into Progress & Saves; it does not clone or recreate their handlers. The game engine, story data, and save keys remain the source of truth. Difficulty selection may use the hidden engine control as a compatibility bridge. The premium adapter is gameplay-only while `window.__qartonHomeIsolationInstalled` is set.
-- Android-only behavior belongs in the preparation/build layer until it can be implemented safely in the shared game source.
-- Save keys such as `shiganshina-slots-v1` and `shiganshina-autosave-v1` are compatibility contracts. Never rename or clear them as part of visual cleanup.
+3. **Android preparation — `scripts/prepare-web.cjs`**
+   - Copies the canonical game HTML into `www/`.
+   - Applies guarded compatibility/save/navigation patches.
+   - Loads and injects the QARTON styles and runtime adapters in a deterministic order.
+   - Parses every executable inline script before writing the prepared page.
 
-## File ownership
+4. **Android packaging**
+   - Capacitor syncs the prepared `www/` assets.
+   - `scripts/apply-android-branding.cjs` owns launcher resources and manifest icon references.
+   - GitHub Actions builds and uploads the APK.
 
-| File or folder | Owns | Must not own |
+5. **Verification — `tests/`**
+   - Source contracts, save recovery, QARTON lifecycle/navigation, cinematic injection, and Chromium integration.
+   - CI and browser tests do not replace the final Android WebView/device check.
+
+## 2. Source-of-truth and compatibility rules
+
+- Edit `index.html` for story and game-engine changes. Never hand-edit generated `www/` or `android/` output.
+- Keep shared QARTON tokens in the design system; keep Carthage-only presentation rules in Carthage adapters.
+- Keep the original engine responsible for story progression, choices, and save operations. QARTON may move existing controls but must not clone their handlers.
+- Android-only compatibility behavior belongs in the preparation layer until it can be moved safely into the shared source.
+- Save keys such as `shiganshina-slots-v1` and `shiganshina-autosave-v1` are compatibility contracts. Never rename, clear, or silently replace them during visual cleanup.
+- Cinematic adapters are presentation-only. They must not mutate story state, timers, choices, or saves.
+
+## 3. File ownership
+
+| File | Owns | Must not own |
 | --- | --- | --- |
-| `index.html` | Original story and game engine | QARTON-wide design tokens |
-| `styles/qarton-design-system.css` | Shared QARTON visual primitives and semantic tokens | Story progression or Carthage-only layout rules |
-| `styles/qarton-carthage-home.css` | Carthage-specific home layout and fixed viewport rules | Shared studio tokens or story logic |
-| `scripts/qarton-premium-home.js` | Gameplay presentation adapter and legacy home lifecycle fallback | Reimplementation of story actions or a competing isolated home screen |
-| `scripts/qarton-isolated-home.js` | HOME/INTRO/GAME/TRANSITION lifecycle and isolated QARTON shell | Story progression, save schema, or duplicate game actions |\n| `scripts/qarton-main-tree.js` | Four-branch navigation, branch pages, settings preferences, and placement of original controls | Story progression, save-handler reimplementation, or changed save keys |
-| `scripts/prepare-web.cjs` | Deterministic Android preparation and compatibility patches | Manual edits to generated Android assets |
-| `scripts/apply-android-branding.cjs` | Launcher artwork and manifest icon references | Game UI or save behavior |
-| `tests/` | Regression checks for source, saves, and build helpers | Runtime production behavior |
-| `docs/` | Architecture, design decisions, and maintenance rules | Duplicate executable configuration |
+| `index.html` | Story, React game engine, scene markup, save logic | QARTON-wide design tokens |
+| `styles/qarton-design-system.css` | Shared studio tokens and primitives | Story progression or Carthage-only layout |
+| `styles/qarton-carthage-gameplay.css` | Carthage gameplay skin | Story state or save logic |
+| `scripts/qarton-isolated-home.js` | Home shell and app lifecycle | Story progression or save schema |
+| `scripts/qarton-main-tree.js` | Four-branch navigation and original control placement | Recreated game/save handlers |
+| `scripts/qarton-premium-home.js` | Gameplay presentation adapter | Competing home implementation |
+| `scripts/qarton-cinematic-scenes.cjs` | Scene-art detection, motion, and transitions | Story progression or save mutation |
+| `scripts/prepare-web.cjs` | Build-time patches and ordered runtime injection | Manual generated assets |
+| `scripts/apply-android-branding.cjs` | Launcher artwork and manifest branding | Game UI or save behavior |
+| `tests/` | Regression and integration checks | Production runtime behavior |
+| `docs/` | Architecture and maintenance guidance | Duplicate executable configuration |
 
-## Safe change sequence
+## 4. Safe change sequence
 
-1. Identify the owning layer before editing.
-2. Keep each cleanup change narrow and preserve existing public hooks.
-3. Add a regression test for behavior that previously failed.
-4. Run `npm test`.
-5. Run `npm run prepare:web` and inspect the generated output.
-6. Build the Android APK in CI and verify the packaged `index.html` matches `www/index.html`.
-7. Test new game, continue, save/export, Part 2, locked/unlocked Part 3, return-to-home, scene audio, and short-screen layout on a real phone.
-8. Only after these checks, consider removing duplicated legacy markup or old runtime patches.
+1. Identify the owning file before editing.
+2. Keep changes narrow; do not extract or rewrite the bundled game engine as part of visual cleanup.
+3. Guard every source-string patch with unique-match checks. Missing or duplicate anchors must fail the build.
+4. Add a regression test for every repaired behavior.
+5. Run `npm test`.
+6. Run `npm run prepare:web`; inspect the prepared HTML and confirm all runtime markers are present.
+7. Run `node tests/qarton-browser-integration-test.cjs`.
+8. Build the APK and verify the packaged HTML matches `www/index.html`.
+9. On Android, verify new game, continue, saves, Part 2/Part 3 gating, scene backgrounds, scene transitions, audio, and return-to-home.
 
-## Known technical debt
+## 5. Known technical debt
 
-- There is currently no committed npm lockfile; the direct Capacitor dependency versions are pinned in `package.json`, but transitive versions can still drift between clean builds. Add a reviewed `package-lock.json` and switch CI to `npm ci` before treating builds as fully reproducible.
-- The original game source is a large bundled HTML file. Splitting it into modules may improve maintainability, but it is a high-risk structural change because story state, React hooks, and save handlers are tightly coupled. Do not perform a blind minifier/de-minifier or module extraction.
-- `scripts/prepare-web.cjs` contains several string-based patches against exact source fragments. Keep each patch guarded by a unique-match check; a missing or duplicated anchor must fail the build rather than silently create a partial APK.
-- The QARTON home runtime contains game-specific layout rules alongside shared component classes. Move only genuinely reusable rules into the design system; keep Carthage-specific selectors in the adapter.
-- DOM/VM tests cover important contracts but cannot prove Android WebView lifecycle, touch behavior, or actual audio playback. The settings adapter currently persists preferences and emits `qarton:settingschange`; actual in-game audio playback still requires an engine listener. Device testing remains mandatory.
+- There is no committed npm lockfile. Transitive dependency versions can drift; add and review a lockfile before switching CI to `npm ci`.
+- The original game is a large bundled HTML file. Module extraction is high-risk because story state, React hooks, and save handlers are tightly coupled. Do not blindly reformat or split it.
+- `prepare-web.cjs` still contains guarded string-based patches. Long-term, migrate stable engine hooks into explicit source-level APIs rather than adding more textual replacements.
+- The cinematic scene adapter detects image elements and CSS background URLs on DOM elements. It does not currently inspect CSS pseudo-element artwork; add that only with a representative scene test.
+- Chromium verifies browser rendering and DOM behavior, not Android WebView device-specific loading, touch, or audio.
 
-## Definition of done for cleanup
+## 6. Cleanup definition of done
 
-- No accidental change to story text, story order, save schema, or save keys.
+- Story text, order, choices, and save schema remain unchanged.
 - No duplicate HTML IDs.
 - All executable inline scripts parse.
-- Save recovery preserves a valid existing save.
-- Android branding manifest references are updated exactly once.
-- The prepared APK contains the current game and QARTON assets.
-- CI passes and the real-device smoke test is recorded.
+- Existing saves survive startup and recovery.
+- Cinematic image and CSS-background discovery tests pass.
+- Prepared and packaged HTML are identical.
+- CI passes and a real-device smoke test is recorded.
