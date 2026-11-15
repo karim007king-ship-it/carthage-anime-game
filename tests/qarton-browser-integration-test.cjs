@@ -81,9 +81,15 @@ const server = http.createServer((req, res) => {
     await page.goto('http://127.0.0.1:' + address.port + '/', { waitUntil: 'domcontentloaded', timeout: 30000 });
 
     await page.waitForFunction(() => window.__QARTON_HOME_READY__ === true, { timeout: 25000 });
+    await page.waitForFunction(() =>
+      !document.getElementById('carthage-startup-watchdog') &&
+      !document.getElementById('carthage-startup-error'),
+    { timeout: 5000 });
     await page.waitForSelector('#carthage-export-backup', { state: 'visible', timeout: 5000 });
     const homeState = await page.evaluate(() => ({
       state: window.__qartonGetAppState && window.__qartonGetAppState(),
+      startupWatchdogPresent: !!document.getElementById('carthage-startup-watchdog'),
+      startupErrorPresent: !!document.getElementById('carthage-startup-error'),
       rootDisplay: getComputedStyle(document.getElementById('root')).display,
       rootVisibility: getComputedStyle(document.getElementById('root')).visibility,
       rootHasHomeLock: document.getElementById('root').classList.contains('carthage-home-locked'),
@@ -101,6 +107,8 @@ const server = http.createServer((req, res) => {
     }));
 
     assert.equal(homeState.state, 'HOME', 'the actual app must start in QARTON HOME');
+    assert.equal(homeState.startupWatchdogPresent, false, 'the startup fallback must be removed after QARTON HOME is ready');
+    assert.equal(homeState.startupErrorPresent, false, 'the startup error panel must not cover a ready QARTON HOME');
     assert.equal(homeState.rootDisplay, 'none', 'the legacy React root must be hidden while QARTON HOME is active');
     assert.equal(homeState.rootVisibility, 'hidden', 'the legacy React root must not be visible behind QARTON HOME');
     assert.equal(homeState.rootHasHomeLock, false, 'the legacy React root must never receive the old home-layout class');
