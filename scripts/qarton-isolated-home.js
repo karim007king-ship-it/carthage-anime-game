@@ -46,7 +46,7 @@ function showNewGameConfirm(){
  actions.append(cancel,confirm);dialog.append(title,note,actions);shade.appendChild(dialog);overlay.appendChild(shade);confirm.focus();
 }
 function actionButton(label,kindName,handler,disabled){
- var b=document.createElement("button");b.type="button";b.className="qh-action";b.dataset.kind=kindName;b.textContent=label;b.disabled=!!disabled;
+ var b=document.createElement("button");b.type="button";b.className="qh-action";b.dataset.kind=kindName;b.textContent=label;b.disabled=!!disabled;if(kindName==="continue")b.id="carthage-continue-last";if(kindName==="primary")b.id="carthage-start-new-game";
  b.addEventListener("click",handler);return b;
 }
 function invokeAction(name,reason){
