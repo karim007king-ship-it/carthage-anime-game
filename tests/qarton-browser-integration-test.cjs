@@ -87,7 +87,6 @@ const server = http.createServer((req, res) => {
       !document.getElementById('carthage-startup-watchdog') &&
       !document.getElementById('carthage-startup-error'),
     { timeout: 5000 });
-    await page.waitForSelector('#carthage-export-backup', { state: 'visible', timeout: 5000 });
     const homeState = await page.evaluate(() => ({
       state: window.__qartonGetAppState && window.__qartonGetAppState(),
       startupWatchdogPresent: !!document.getElementById('carthage-startup-watchdog'),
@@ -98,11 +97,13 @@ const server = http.createServer((req, res) => {
       obsoleteHomeStylePresent: !!document.getElementById('qarton-premium-home-style'),
       homeVisible: !!document.querySelector('#qarton-home-screen') &&
         getComputedStyle(document.querySelector('#qarton-home-screen')).display !== 'none',
+      treeReady: window.__QARTON_TREE_READY__ === true,
+      treeCards: Array.from(document.querySelectorAll('#qarton-home-screen .qt-card')).map(button => button.getAttribute('aria-label')),
       hasPrimaryAction: !!document.querySelector('#qarton-home-screen .qh-action[data-kind="primary"]'),
       legacyMenuPresent: !!document.getElementById('root').querySelector('.home-actions'),
       legacyMenuHidden: !!document.getElementById('root').querySelector('.home-actions[data-qarton-test-hidden="true"]') &&
         getComputedStyle(document.getElementById('root').querySelector('.home-actions')).display === 'none',
-      backupControlsInsideQartonHome: !!document.querySelector('#qarton-home-screen #carthage-export-backup') &&
+      backupControlsInHome: !!document.querySelector('#qarton-home-screen #carthage-export-backup') ||
         !!document.querySelector('#qarton-home-screen #carthage-import-backup'),
       moduleStarted: !!window.__CARTHAGE_MODULE_STARTED__,
       renderRequested: !!window.__CARTHAGE_RENDER_REQUESTED__,
@@ -120,10 +121,12 @@ const server = http.createServer((req, res) => {
     assert.equal(homeState.homeVisible, true, 'the QARTON home overlay must be visible');
     await page.waitForTimeout(250);
     assert.equal(await page.locator('#root').evaluate(el => getComputedStyle(el).display), 'none', 'viewport-lock initialization must not reveal the legacy React root after first paint');
-    assert.equal(homeState.hasPrimaryAction, true, 'the QARTON home must expose its real primary action');
+    assert.equal(homeState.treeReady, true, 'the four-branch QARTON tree must be mounted');
+    assert.deepEqual(homeState.treeCards, ['القصة','عالم قرطاج','التقدم والحفظ','الإعدادات'], 'the home must expose exactly the four agreed navigation branches');
+    assert.equal(homeState.hasPrimaryAction, false, 'game operations must not be exposed directly on the main tree');
     assert.equal(homeState.legacyMenuPresent, true, 'the legacy React node remains mounted to protect React reconciliation');
     assert.equal(homeState.legacyMenuHidden, true, 'the browser test must make the old menu unavailable before QARTON readiness');
-    assert.equal(homeState.backupControlsInsideQartonHome, true, 'save backup controls must remain accessible inside QARTON after the legacy menu is removed');
+    assert.equal(homeState.backupControlsInHome, false, 'save backup controls must live inside Progress & Saves, not the main tree');
 
     // The QARTON home is intentionally a fixed, non-scrolling screen on short phones.
     await page.setViewportSize({ width: 360, height: 640 });
@@ -135,8 +138,8 @@ const server = http.createServer((req, res) => {
         overlayHeight: rect ? rect.height : 0,
         documentHeight: document.documentElement.scrollHeight,
         bodyHeight: document.body.scrollHeight,
-        primaryVisible: !!overlay && Array.from(overlay.querySelectorAll('button')).some(button =>
-          button.dataset.kind === 'primary' && button.getBoundingClientRect().height > 0),
+        treeCardsVisible: !!overlay && Array.from(overlay.querySelectorAll('.qt-card')).length === 4 &&
+          Array.from(overlay.querySelectorAll('.qt-card')).every(button => button.getBoundingClientRect().height > 0 && button.getBoundingClientRect().top >= 0 && button.getBoundingClientRect().bottom <= window.innerHeight + 1),
         backupControlsVisible: ['carthage-export-backup','carthage-import-backup'].every(id => {
           const button = document.getElementById(id);
           const rect = button && button.getBoundingClientRect();
@@ -151,13 +154,17 @@ const server = http.createServer((req, res) => {
     assert.ok(compactHome.documentHeight <= compactHome.viewportHeight + 1 &&
       compactHome.bodyHeight <= compactHome.viewportHeight + 1,
       'QARTON home must not introduce vertical page scrolling on a compact phone');
-    assert.equal(compactHome.primaryVisible, true, 'the primary action must remain visible on a compact phone');
-    assert.equal(compactHome.backupControlsVisible, true, 'save backup controls must remain visible on a compact phone');
+    assert.equal(compactHome.treeCardsVisible, true, 'all four navigation cards must remain visible on a compact phone');
     assert.equal(compactHome.legacyHidden, true, 'the legacy root must remain isolated on a compact phone');
     await page.setViewportSize({ width: 390, height: 844 });
     assert.equal(homeState.moduleStarted, true, 'the actual story module must have started');
     assert.equal(homeState.renderRequested, true, 'the actual React application must have rendered');
 
+    await page.locator('#qarton-home-screen .qt-card[aria-label="التقدم والحفظ"]').click();
+    await page.waitForSelector('#qarton-home-screen #carthage-export-backup', { state: 'visible', timeout: 5000 });
+    await page.waitForSelector('#qarton-home-screen #carthage-import-backup', { state: 'visible', timeout: 5000 });
+    await page.locator('#qarton-home-screen .qt-back').click();
+    await page.locator('#qarton-home-screen .qt-card[aria-label="القصة"]').click();
     const primary = page.locator('#qarton-home-screen .qh-action[data-kind="primary"]').first();
     await primary.click();
 
