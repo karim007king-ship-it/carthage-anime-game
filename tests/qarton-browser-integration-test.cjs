@@ -271,6 +271,16 @@ const server = http.createServer((req, res) => {
         buttonBorderRadius: style ? style.borderRadius : '',
         characterMotionTargets: Array.from(root.querySelectorAll('.stage-slide .stage-breath,img.carthage-cinematic-subject,img.carthage-cinematic-scene-subject')).map(node => ({animationName:getComputedStyle(node).animationName,transform:getComputedStyle(node).transform})),
         dialogueSurfaces: Array.from(root.querySelectorAll('.dialogue-panel,.theatre-text,.search-layer,.qarton-game-card')).map(node => ({backgroundImage:getComputedStyle(node).backgroundImage,backgroundColor:getComputedStyle(node).backgroundColor})),
+        readableTextTargets: Array.from(root.querySelectorAll('div,p,span,label,strong,em,b,i,small,li,blockquote,a,section,article,h4,h5,h6,button'))
+          .filter(node => {
+            const style = getComputedStyle(node);
+            const rect = node.getBoundingClientRect();
+            return !(node.children.length) && !!(node.textContent || '').trim() &&
+              style.display !== 'none' && style.visibility !== 'hidden' &&
+              Number(style.opacity || 1) > 0 && rect.width > 0 && rect.height > 0;
+          })
+          .map(node => ({tag:node.tagName.toLowerCase(),text:(node.textContent || '').trim().slice(0,60),
+            color:getComputedStyle(node).color,textFill:getComputedStyle(node).webkitTextFillColor})),
         cinematicOverlayBefore: getComputedStyle(root,':before').content,
         cinematicOverlayAfter: getComputedStyle(root,':after').content
       };
@@ -280,6 +290,10 @@ const server = http.createServer((req, res) => {
     assert.equal(gameplay.bodyGameActive, true, 'the native gameplay root must be released only in GAME state');
     assert.ok(gameplay.controlsStyled > 0, 'gameplay controls must receive the QARTON skin');
     assert.match(gameplay.buttonBorderRadius, /13px/, 'gameplay button must use the QARTON visual treatment');
+    assert.ok(gameplay.readableTextTargets.length > 0, 'GAME must expose visible text targets for contrast verification; an empty result cannot pass');
+    assert.ok(gameplay.readableTextTargets.every(target =>
+      target.color === 'rgb(255, 240, 210)' && target.textFill === 'rgb(255, 240, 210)'
+    ), 'all visible gameplay text targets must use the readable QARTON cream color, never inherited black text');
     // Some opening chapters render a text-only scene before the character portrait
     // or dialogue card is mounted. Verify every matching surface that actually exists;
     // do not fail the entire build because an optional visual is absent in this scene.
