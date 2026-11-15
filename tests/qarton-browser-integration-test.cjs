@@ -271,6 +271,7 @@ const server = http.createServer((req, res) => {
         buttonBorderRadius: style ? style.borderRadius : '',
         characterMotionTargets: Array.from(root.querySelectorAll('.stage-slide .stage-breath,img.carthage-cinematic-subject,img.carthage-cinematic-scene-subject')).map(node => ({animationName:getComputedStyle(node).animationName,transform:getComputedStyle(node).transform})),
         dialogueSurfaces: Array.from(root.querySelectorAll('.dialogue-panel,.theatre-text,.search-layer,.qarton-game-card')).map(node => ({backgroundImage:getComputedStyle(node).backgroundImage,backgroundColor:getComputedStyle(node).backgroundColor})),
+        dialogueTextColors: Array.from(root.querySelectorAll('.dialogue-panel *, .theatre-text *, .search-layer *, .qarton-game-card *')).filter(node => node.children.length === 0 && (node.textContent || '').trim()).map(node => getComputedStyle(node).color),
         cinematicOverlayBefore: getComputedStyle(root,':before').content,
         cinematicOverlayAfter: getComputedStyle(root,':after').content
       };
@@ -285,6 +286,17 @@ const server = http.createServer((req, res) => {
     // do not fail the entire build because an optional visual is absent in this scene.
     assert.ok(gameplay.characterMotionTargets.every(target => target.animationName === 'none'), 'QARTON gameplay must suppress portrait and cinematic image drift whenever those elements are mounted');
     assert.ok(gameplay.dialogueSurfaces.every(surface => /38, 50, 69|23, 33, 48/.test(surface.backgroundImage)), 'mounted dialogue surfaces must use the QARTON blue-charcoal gradient, not the near-black strip');
+    assert.ok(gameplay.dialogueTextColors.every(color => color === 'rgb(255, 240, 210)'), 'mounted story copy must inherit the readable QARTON cream foreground instead of legacy black text');
+    const contrastProbe = await page.evaluate(() => {
+      const root = document.getElementById('root');
+      const panel = document.createElement('section'); panel.className = 'dialogue-panel';
+      const copy = document.createElement('p'); copy.className = 'text-black'; copy.textContent = 'QARTON dialogue contrast probe';
+      panel.appendChild(copy); root.appendChild(panel);
+      const result = { color: getComputedStyle(copy).color, background: getComputedStyle(panel).backgroundImage };
+      panel.remove(); return result;
+    });
+    assert.equal(contrastProbe.color, 'rgb(255, 240, 210)', 'legacy text-black utility classes must not turn dialogue copy black');
+    assert.match(contrastProbe.background, /38, 50, 69|23, 33, 48/, 'dialogue contrast probe must use the intended charcoal panel background');
     assert.equal(gameplay.cinematicOverlayBefore, 'none', 'the cinematic vignette must not cover the lower dialogue area');
     assert.equal(gameplay.cinematicOverlayAfter, 'none', 'the cinematic light sweep must not create a dark or obstructive strip');
     await page.screenshot({ path: path.resolve(__dirname, '..', 'test-results', 'qarton-gameplay.png'), fullPage: true });
