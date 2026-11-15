@@ -285,6 +285,37 @@ const server = http.createServer((req, res) => {
         cinematicOverlayAfter: getComputedStyle(root,':after').content
       };
     });
+    const visualDiagnostics = await page.evaluate(() => {
+      const root = document.getElementById('root');
+      const visible = node => {
+        const style = getComputedStyle(node), rect = node.getBoundingClientRect();
+        return style.display !== 'none' && style.visibility !== 'hidden' &&
+          Number(style.opacity || 1) > 0 && rect.width > 2 && rect.height > 2;
+      };
+      const layers = Array.from(root.querySelectorAll('*')).filter(node => {
+        if (!visible(node)) return false;
+        const r = node.getBoundingClientRect();
+        return r.width >= innerWidth * .72 && r.height >= innerHeight * .55;
+      }).slice(0, 80).map(node => {
+        const s = getComputedStyle(node), r = node.getBoundingClientRect();
+        return {tag:node.tagName.toLowerCase(),id:node.id,className:typeof node.className==='string'?node.className:'',
+          rect:{x:Math.round(r.x),y:Math.round(r.y),width:Math.round(r.width),height:Math.round(r.height)},
+          position:s.position,zIndex:s.zIndex,backgroundColor:s.backgroundColor,backgroundImage:s.backgroundImage,
+          opacity:s.opacity,overflow:s.overflow};
+      });
+      const images = Array.from(root.querySelectorAll('img')).map(img => {
+        const r=img.getBoundingClientRect(),s=getComputedStyle(img);
+        return {src:img.currentSrc||img.src,complete:img.complete,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,
+          visible:visible(img),rect:{x:Math.round(r.x),y:Math.round(r.y),width:Math.round(r.width),height:Math.round(r.height)},opacity:s.opacity};
+      });
+      const bodyStyle=getComputedStyle(document.body),rootStyle=getComputedStyle(root);
+      return {viewport:{width:innerWidth,height:innerHeight},body:{backgroundColor:bodyStyle.backgroundColor,backgroundImage:bodyStyle.backgroundImage},
+        root:{className:root.className,backgroundColor:rootStyle.backgroundColor,backgroundImage:rootStyle.backgroundImage},
+        largeLayers:layers,images};
+    });
+    fs.mkdirSync(path.resolve(__dirname, '..', 'test-results'), { recursive: true });
+    fs.writeFileSync(path.resolve(__dirname, '..', 'test-results', 'qarton-visual-diagnostics.json'),
+      JSON.stringify({ gameplay, visualDiagnostics }, null, 2));
     assert.equal(gameplay.state, 'GAME', 'the complete opening sequence must enter the real gameplay state');
     assert.equal(gameplay.skinActive, true, 'QARTON gameplay adapter must activate in GAME state');
     assert.equal(gameplay.bodyGameActive, true, 'the native gameplay root must be released only in GAME state');
