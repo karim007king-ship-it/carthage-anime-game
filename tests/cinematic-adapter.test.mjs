@@ -56,6 +56,9 @@ test("adapter mounts a declared scene without touching game state", async () => 
     durationMs: 0,
     layers: [{ id: "sky", role: "background", asset: "pilot-bg", depth: 0 }]
   };
+  assert.equal(root.style.position, "relative");
+  assert.equal(root.style.overflow, "hidden");
+  assert.equal(root.style.isolation, "isolate");
   assert.equal(await adapter.mountScene(scene), true);
   assert.equal(root.children.length, 1);
   assert.equal(root.children[0].children[0].children[0].src, "https://assets.example/pilot.webp");
