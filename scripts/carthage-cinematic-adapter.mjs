@@ -27,6 +27,15 @@ export function createCarthageCinematicAdapter({
   }
   if (typeof onError !== "function") throw new TypeError("onError must be a function");
 
+  // The adapter owns this dedicated presentation root. Establish a containing
+  // block and stacking context so absolute scene layers cannot escape into the
+  // story UI or attach themselves to an unrelated ancestor.
+  if (root.style) {
+    if (!root.style.position) root.style.position = "relative";
+    if (!root.style.overflow) root.style.overflow = "hidden";
+    if (!root.style.isolation) root.style.isolation = "isolate";
+  }
+
   const assets = Object.freeze({ ...assetManifest });
   const runtime = createCinematicRuntime({
     root,
