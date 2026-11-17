@@ -1,3 +1,4 @@
+import { buildLayerPlan } from "@qarton/cinematic-engine";
 import { createCinematicRuntime } from "@qarton/cinematic-engine/engine";
 import { createSceneDefinition } from "@qarton/cinematic-engine/scene";
 
@@ -53,22 +54,9 @@ export function createCarthageCinematicAdapter({
         pointerEvents: "none"
       });
 
-      const layers = scene.layers
-        .map((layer, index) => ({ ...layer, index }))
-        .sort((a, b) => {
-          const order = { background: 0, midground: 1, character: 2, foreground: 3, overlay: 4 };
-          return order[a.role] - order[b.role] || a.depth - b.depth || a.index - b.index;
-        });
-      const backgroundBudget = Number.isInteger(profile.maxBackgroundLayers)
-        ? profile.maxBackgroundLayers
-        : 2;
-      let backgroundCount = 0;
+      const layers = buildLayerPlan(scene, profile);
 
-      for (const layer of layers) {
-        const isBackground = layer.role === "background" || layer.role === "midground";
-        if (isBackground && backgroundCount >= backgroundBudget) continue;
-        if (isBackground) backgroundCount += 1;
-
+      for (const [index, layer] of layers.entries()) {
         const url = await assetManager.load(layer.asset);
         const image = document.createElement("img");
         image.className = `carthage-engine-layer carthage-engine-layer--${layer.role}`;
@@ -76,6 +64,7 @@ export function createCarthageCinematicAdapter({
         image.draggable = false;
         image.decoding = "async";
         image.src = url;
+        if (typeof image.decode === "function") await image.decode();
         image.dataset.layerId = layer.id;
         Object.assign(image.style, {
           position: "absolute",
@@ -85,7 +74,7 @@ export function createCarthageCinematicAdapter({
           height: "100%",
           objectFit: "cover",
           opacity: String(layer.opacity),
-          zIndex: String(layers.indexOf(layer)),
+          zIndex: String(index),
           pointerEvents: "none"
         });
         stage.appendChild(image);
@@ -101,9 +90,9 @@ export function createCarthageCinematicAdapter({
   async function mountScene(config, options = {}) {
     if (destroyed) throw new Error("Carthage cinematic adapter has been destroyed");
     const scene = createSceneDefinition(config);
-    return runtime.transitionTo(scene, {
-      duration: options.duration ?? scene.durationMs ?? duration
-    });
+    const transitionDuration = options.duration
+      ?? (Number.isFinite(config.durationMs) ? config.durationMs : duration);
+    return runtime.transitionTo(scene, { duration: transitionDuration });
   }
 
   async function destroy() {
