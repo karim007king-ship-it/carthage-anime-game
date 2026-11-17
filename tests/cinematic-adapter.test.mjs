@@ -78,7 +78,7 @@ test("adapter rejects missing assets and invalid scene layers without corrupting
     layers: [{ id: "unknown", role: "background", asset: "missing" }]
   }), /Unknown Carthage cinematic asset/);
   assert.equal(root.children.includes(current), true);
-  assert.throws(() => adapter.mountScene({
+  await assert.rejects(adapter.mountScene({
     id: "invalid",
     layers: [{ id: "duplicate", role: "background", asset: "pilot-bg" }, { id: "duplicate", role: "foreground", asset: "pilot-bg" }]
   }), /unique id/);
