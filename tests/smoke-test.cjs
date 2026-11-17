@@ -54,6 +54,7 @@ assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){.stage-slide .
 assert.ok(cinematicPilot.includes('.wall-stone{position:absolute;display:block;'), 'flying rubble fragments must be positioned visible blocks');
 assert.ok(cinematicPilot.includes('prefers-reduced-motion:reduce){#carthage-wall-impact-fx'), 'destruction effects must respect reduced-motion accessibility');
 const androidPrep = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
+const cinematicAdapterSource = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'carthage-cinematic-adapter.mjs'), 'utf8');
 assert.ok(androidPrep.includes('!Zn.includes("light")&&!Zn.includes("shadow")'), 'Part 3 must require a completed Part 2 ending');
 assert.ok(androidPrep.includes('carthage-save-now'), 'simple save button must exist');
 assert.ok(androidPrep.includes('carthage-continue-last'), 'one-tap continue button must exist');
@@ -97,7 +98,7 @@ assert.ok(androidPrep.includes('يُفتح بعد إتمام الجزء الثا
 
 assert.ok(androidPrep.includes('carthage-cinematic-engine-bridge'), 'the pinned cinematic engine bridge must be included in Android builds');
 assert.ok(androidPrep.includes('carthage-cinematic-adapter.js'), 'the bundled cinematic adapter must be loaded as a separate browser asset');
-assert.ok(androidPrep.includes('does not access story state'), 'the engine adapter must document its strict presentation-only boundary');
+assert.ok(cinematicAdapterSource.includes('does not access story state'), 'the engine adapter must document its strict presentation-only boundary');
 
 assert.ok(androidPrep.includes('carthage-fixed-home-style'), 'fixed home viewport CSS must be injected into Android builds');
 assert.ok(androidPrep.includes('carthage-fixed-home-runtime'), 'fixed home viewport runtime must be injected into Android builds');
