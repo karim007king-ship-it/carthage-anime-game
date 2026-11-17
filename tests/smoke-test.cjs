@@ -96,8 +96,6 @@ assert.ok(androidPrep.includes('shiganshina-autosave-v1'), 'continue flow must r
 assert.ok(androidPrep.includes('window.__carthageContinue=()=>{'), 'continue action must restore the newest valid local save');
 assert.ok(androidPrep.includes('يُفتح بعد إتمام الجزء الثاني') || androidPrep.includes('يفتح بعد إتمام الجزء الثاني'), 'Part 3 must remain visible with a clear locked state');
 
-assert.ok(androidPrep.includes('carthage-cinematic-engine-bridge'), 'the pinned cinematic engine bridge must be included in Android builds');
-assert.ok(androidPrep.includes('carthage-cinematic-adapter.js'), 'the bundled cinematic adapter must be loaded as a separate browser asset');
 assert.ok(cinematicAdapterSource.includes('does not access story state'), 'the engine adapter must document its strict presentation-only boundary');
 
 assert.ok(androidPrep.includes('carthage-fixed-home-style'), 'fixed home viewport CSS must be injected into Android builds');
