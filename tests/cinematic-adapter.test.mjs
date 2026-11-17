@@ -95,3 +95,47 @@ test("adapter lifecycle can pause and resume without auto-starting a scene", asy
   assert.equal(adapter.isActive, true);
   await adapter.destroy();
 });
+
+class FakeEventTarget {
+  constructor(visibilityState = "visible") {
+    this.visibilityState = visibilityState;
+    this.listeners = new Map();
+  }
+  addEventListener(type, listener) {
+    const listeners = this.listeners.get(type) ?? new Set();
+    listeners.add(listener);
+    this.listeners.set(type, listeners);
+  }
+  removeEventListener(type, listener) {
+    this.listeners.get(type)?.delete(listener);
+  }
+  dispatch(type) {
+    for (const listener of this.listeners.get(type) ?? []) listener({ type });
+  }
+  count() {
+    return [...this.listeners.values()].reduce((sum, listeners) => sum + listeners.size, 0);
+  }
+}
+
+test("adapter bridges page visibility and pagehide/pageshow, then removes listeners on destroy", async () => {
+  const documentTarget = new FakeEventTarget("visible");
+  const pageTarget = new FakeEventTarget();
+  const { adapter } = setup({
+    lifecycleTarget: documentTarget,
+    lifecyclePageTarget: pageTarget
+  });
+  assert.equal(adapter.isActive, true);
+  pageTarget.dispatch("pagehide");
+  assert.equal(adapter.isActive, false);
+  pageTarget.dispatch("pageshow");
+  assert.equal(adapter.isActive, true);
+  documentTarget.visibilityState = "hidden";
+  documentTarget.dispatch("visibilitychange");
+  assert.equal(adapter.isActive, false);
+  documentTarget.visibilityState = "visible";
+  documentTarget.dispatch("visibilitychange");
+  assert.equal(adapter.isActive, true);
+  await adapter.destroy();
+  assert.equal(documentTarget.count(), 0);
+  assert.equal(pageTarget.count(), 0);
+});
