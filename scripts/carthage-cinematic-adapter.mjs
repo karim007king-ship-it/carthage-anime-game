@@ -13,8 +13,8 @@ export function createCarthageCinematicAdapter({
   root,
   assetManifest,
   device = {},
-  lifecycleTarget = null,
-  lifecyclePageTarget = lifecycleTarget,
+  lifecycleTarget = typeof document !== "undefined" ? document : null,
+  lifecyclePageTarget = typeof window !== "undefined" ? window : lifecycleTarget,
   duration = 350,
   onError = () => {}
 } = {}) {
