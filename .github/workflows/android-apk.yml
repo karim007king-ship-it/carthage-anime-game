@@ -102,15 +102,14 @@ jobs:
             }
             return null;
           }
+          const adapterSource = path.resolve('www/carthage-cinematic-adapter.js');
+          if (!fs.existsSync(adapterSource)) throw new Error('Missing bundled QARTON cinematic adapter: ' + adapterSource);
           const packaged = findPackaged(assetsRoot);
           if (!packaged) throw new Error('Capacitor did not place index.html under Android assets/**/public/.');
           const packagedAdapter = path.join(path.dirname(packaged), 'carthage-cinematic-adapter.js');
           if (!fs.existsSync(packagedAdapter)) throw new Error('Capacitor did not package the QARTON cinematic adapter: ' + packagedAdapter);
           const adapterHtml = fs.readFileSync(adapterSource, 'utf8');
           if (!adapterHtml.includes('QARTON_CINEMATIC_ENGINE')) throw new Error('Bundled adapter is missing its public registration marker.');
-
-          const adapterSource = path.resolve('www/carthage-cinematic-adapter.js');
-          if (!fs.existsSync(adapterSource)) throw new Error('Missing bundled QARTON cinematic adapter: ' + adapterSource);
           const src = fs.readFileSync(source);
           const dst = fs.readFileSync(packaged);
           const markers = [
