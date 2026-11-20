@@ -191,3 +191,30 @@ test("adapter keeps the current scene when a new image fails to decode", async (
   await adapter.destroy();
   assert.equal(root.children.length, 0);
 });
+
+test("adapter supersedes an in-flight transition and retains only the latest scene", async () => {
+  const { adapter, root } = setup({
+    device: { quality: "low", reducedMotion: false },
+    duration: 40
+  });
+  const scene = id => ({
+    id,
+    layers: [{ id: "sky", role: "background", asset: "pilot-bg" }]
+  });
+
+  assert.equal(await adapter.mountScene(scene("initial"), { duration: 0 }), true);
+  const firstTransition = adapter.mountScene(scene("superseded"), { duration: 40 });
+
+  // Allow the first transition to mount and enter its crossfade before
+  // requesting another scene. The newer request must cancel the old fade.
+  await new Promise(resolve => setTimeout(resolve, 0));
+  const latestTransition = adapter.mountScene(scene("latest"), { duration: 0 });
+
+  assert.equal(await firstTransition, false);
+  assert.equal(await latestTransition, true);
+  assert.equal(root.children.length, 1);
+  assert.equal(root.children[0].dataset.qartonSceneId, "latest");
+
+  await adapter.destroy();
+  assert.equal(root.children.length, 0);
+});
