@@ -27,13 +27,18 @@ export function createCarthageCinematicAdapter({
   }
   if (typeof onError !== "function") throw new TypeError("onError must be a function");
 
-  // The adapter owns this dedicated presentation root. Establish a containing
-  // block and stacking context so absolute scene layers cannot escape into the
-  // story UI or attach themselves to an unrelated ancestor.
+  // The adapter temporarily owns these host styles. Restore their original
+  // values after successful teardown, without overwriting later host changes.
+  const originalStyles = root.style ? {
+    position: root.style.position,
+    overflow: root.style.overflow,
+    isolation: root.style.isolation
+  } : null;
+  const appliedStyles = { position: "relative", overflow: "hidden", isolation: "isolate" };
   if (root.style) {
-    if (!root.style.position) root.style.position = "relative";
-    if (!root.style.overflow) root.style.overflow = "hidden";
-    if (!root.style.isolation) root.style.isolation = "isolate";
+    for (const [key, value] of Object.entries(appliedStyles)) {
+      if (!root.style[key]) root.style[key] = value;
+    }
   }
 
   const assets = Object.freeze({ ...assetManifest });
@@ -94,20 +99,40 @@ export function createCarthageCinematicAdapter({
     onAudioError: error => onError(error, { phase: "audio" })
   });
 
+  let destroyStarted = false;
   let destroyed = false;
+  let destroyPromise = null;
 
   async function mountScene(config, options = {}) {
-    if (destroyed) throw new Error("Carthage cinematic adapter has been destroyed");
+    if (destroyStarted) throw new Error("Carthage cinematic adapter has been destroyed");
     const scene = createSceneDefinition(config);
     const transitionDuration = options.duration
       ?? (Number.isFinite(config.durationMs) ? config.durationMs : duration);
     return runtime.transitionTo(scene, { duration: transitionDuration });
   }
 
-  async function destroy() {
-    if (destroyed) return;
-    destroyed = true;
-    await runtime.destroy();
+  function restoreHostStyles() {
+    if (!root.style || !originalStyles) return;
+    for (const key of Object.keys(appliedStyles)) {
+      if (root.style[key] === appliedStyles[key]) {
+        root.style[key] = originalStyles[key] ?? "";
+      }
+    }
+  }
+
+  function destroy() {
+    if (destroyed) return Promise.resolve();
+    if (destroyPromise) return destroyPromise;
+    // Keep the adapter closed to new scenes while teardown is pending. If a
+    // native/DOM cleanup fails, a later destroy() call can retry the runtime.
+    destroyStarted = true;
+    destroyPromise = runtime.destroy().then(() => {
+      restoreHostStyles();
+      destroyed = true;
+    }).finally(() => {
+      destroyPromise = null;
+    });
+    return destroyPromise;
   }
 
   return Object.freeze({
