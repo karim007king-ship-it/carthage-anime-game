@@ -75,6 +75,13 @@ assert.ok(progressSubview.includes('carthage-continue-last'), 'Progress & Saves 
 assert.ok(progressSubview.includes('carthage-export-backup') && progressSubview.includes('carthage-import-backup'), 'Progress & Saves must retain backup actions');
 assert.ok(home.includes('function proxyStoryAction('), 'Story actions must proxy original controls');
 assert.ok(home.includes('function handoffStoryAction(live)'), 'story actions must hand off to the original screen so confirmation dialogs remain visible');
+assert.ok(home.includes('function showHandoffMessage(title,message)'), 'handoff states must be rendered inside QARTON rather than exposing the legacy home');
+assert.ok(home.includes('يوجد تقدم محفوظ على هذا الجهاز'), 'new-game confirmation must warn before replacing the current session');
+assert.ok(home.includes('/إيه\\s*،?\\s*ابدأ/'), 'QARTON must detect the original React-owned new-game confirmation');
+assert.ok(home.includes('var original=Array.from(root.querySelectorAll("button")).find'), 'confirming a new game must invoke the original game-owned confirmation control');
+assert.ok(home.includes('var originalNo=Array.from(root.querySelectorAll("button")).find'), 'canceling a new game must dismiss the original confirmation without changing saves');
+assert.ok(home.includes('لم نحذف الحفظ'), 'a failed handoff must explicitly preserve the existing save');
+assert.ok(home.includes('if(attempts++<180){requestAnimationFrame(inspectStart);return;}'), 'the transition must have a bounded wait and must not remain stuck forever');
 assert.ok(home.includes('view="handoff";hideLegacy();ensureOverlay();'), 'story handoff must keep the legacy home hidden while invoking the original action');
 assert.ok(home.includes('جاري فتح القصة…'), 'story handoff must show a QARTON transition state instead of revealing the legacy home');
 assert.ok(home.includes('if(live&&!live.disabled)handoffStoryAction(live);'), 'new game and chapter actions must use the safe story handoff');
