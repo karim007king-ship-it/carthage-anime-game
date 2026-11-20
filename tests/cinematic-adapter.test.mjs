@@ -162,3 +162,32 @@ test("adapter restores temporary host styles and preserves later host changes", 
   assert.equal(root.style.overflow, "clip");
   assert.equal(root.style.isolation, "");
 });
+
+
+test("adapter keeps the current scene when a new image fails to decode", async () => {
+  const { adapter, root } = setup();
+  const first = {
+    id: "first",
+    layers: [{ id: "sky", role: "background", asset: "pilot-bg" }]
+  };
+  await adapter.mountScene(first);
+  const current = root.children[0];
+
+  const createElement = root.ownerDocument.createElement.bind(root.ownerDocument);
+  root.ownerDocument.createElement = tagName => {
+    const element = createElement(tagName);
+    if (tagName === "img") {
+      element.decode = async () => { throw new Error("simulated image decode failure"); };
+    }
+    return element;
+  };
+
+  await assert.rejects(adapter.mountScene({
+    id: "broken-image",
+    layers: [{ id: "broken", role: "background", asset: "pilot-bg" }]
+  }), /simulated image decode failure/);
+  assert.equal(root.children.length, 1);
+  assert.equal(root.children[0], current);
+  await adapter.destroy();
+  assert.equal(root.children.length, 0);
+});
