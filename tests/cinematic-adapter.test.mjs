@@ -343,3 +343,26 @@ test("adapter retries lifecycle listener cleanup after a transient detach failur
   assert.equal(root.style.overflow, "");
   assert.equal(root.style.isolation, "");
 });
+
+test("adapter preserves packaged relative asset paths for offline WebView use", async () => {
+  const document = new FakeDocument();
+  document.baseURI = "https://localhost/";
+  const root = new FakeElement("main", document);
+  const adapter = createCarthageCinematicAdapter({
+    root,
+    assetManifest: { "local-bg": "./assets/cinematic/carthage-wall.webp" },
+    device: { reducedMotion: true },
+    duration: 0,
+    lifecycleTarget: null,
+    lifecyclePageTarget: null
+  });
+
+  await adapter.mountScene({
+    id: "offline-local-assets",
+    layers: [{ id: "wall", role: "background", asset: "local-bg" }]
+  });
+  const image = root.children[0].children[0].children[0];
+  assert.equal(image.src, "./assets/cinematic/carthage-wall.webp");
+  await adapter.destroy();
+  assert.equal(root.children.length, 0);
+});
