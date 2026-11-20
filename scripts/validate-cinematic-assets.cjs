@@ -51,7 +51,7 @@ function validateManifest(rootDirectory, options = {}) {
     if (keys.has(key)) fail('Duplicate cinematic asset key: "' + key + '".');
     keys.add(key);
     if (typeof relativePath !== "string" || !relativePath.trim()) fail('Asset "' + key + '" has an empty or invalid path.');
-    if (/[\u0000-\u001f\u007f\\]/.test(relativePath)) fail('Unsafe characters in path for asset "' + key + '".');
+    if (/[\u0000-\u001f\u007f\\%?#:]/.test(relativePath)) fail('Unsafe characters in path for asset "' + key + '".');
     if (/^(?:[a-z][a-z0-9+.-]*:|\/\/|\/)/i.test(relativePath)) fail('Asset "' + key + '" must use a local relative path.');
     const segments = relativePath.split("/");
     if (segments.some(segment => !segment || segment === "." || segment === "..")) fail('Unsafe path segments for asset "' + key + '".');
