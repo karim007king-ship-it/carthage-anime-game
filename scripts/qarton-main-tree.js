@@ -54,7 +54,43 @@
   function ensureOverlay(){if(!overlay){overlay=el("main");overlay.id="qarton-main-tree";overlay.setAttribute("aria-label","القائمة الرئيسية للعبة آخر يوم في قرطاج");document.body.appendChild(overlay);}}
   function goTree(){view="tree";viewSignature="";hideLegacy();ensureOverlay();renderTree();clearReturn();overlay.style.display="flex";}
   function findNewGameButton(container){if(!container)return null;var buttons=Array.from(container.querySelectorAll("button"));var excluded=/متابعة|استكمال|آخر حفظ|حفظ|استيراد|تصدير|الجزء الثاني|الجزء الثالث|إعدادات|الخيارات/;var primary=buttons.find(function(b){var t=(b.textContent||"").trim();return !b.disabled&&((b.dataset&&b.dataset.qartonKind==="primary")||/ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test(t)||/ابدأ|بداية/.test(t))&&!excluded.test(t);});if(primary)return primary;return null;}
-  function handoffStoryAction(live){if(!live||live.disabled)return;view="handoff";hideLegacy();ensureOverlay();overlay.replaceChildren();var panel=el("section","qt-panel");panel.style.margin="auto";panel.style.width="100%";panel.style.maxWidth="420px";panel.append(el("strong","","جاري فتح القصة…"),el("p","","نحضّر بداية الرحلة. لن نعرض القائمة القديمة أثناء الانتقال."));var cancel=el("button","qt-back","العودة إلى قائمة QARTON");cancel.type="button";cancel.addEventListener("click",goTree);panel.appendChild(cancel);overlay.appendChild(panel);overlay.style.display="flex";clearReturn();live.click();}
+  function showHandoffMessage(title,message){if(!overlay)return;overlay.replaceChildren();var panel=el("section","qt-panel");panel.style.margin="auto";panel.style.width="100%";panel.style.maxWidth="420px";panel.append(el("strong","",title),el("p","",message));var cancel=el("button","qt-back","العودة إلى قائمة QARTON");cancel.type="button";cancel.addEventListener("click",goTree);panel.appendChild(cancel);overlay.appendChild(panel);overlay.style.display="flex";}
+  function handoffStoryAction(live){
+    if(!live||live.disabled)return;
+    view="handoff";hideLegacy();ensureOverlay();clearReturn();
+    showHandoffMessage("جاري فتح القصة…","نحضّر بداية الرحلة. لن نعرض القائمة القديمة أثناء الانتقال.");
+    live.click();
+    var attempts=0,confirmationShown=false;
+    function inspectStart(){
+      if(view!=="handoff"||confirmationShown)return;
+      if(isPlaying()){cleanupForGame();return;}
+      var buttons=Array.from(root.querySelectorAll("button"));
+      var yes=buttons.find(function(b){return /إيه\s*،?\s*ابدأ/.test((b.textContent||"").trim())&&!b.disabled;});
+      if(yes){
+        confirmationShown=true;
+        overlay.replaceChildren();
+        var panel=el("section","qt-panel");panel.style.margin="auto";panel.style.width="100%";panel.style.maxWidth="420px";
+        panel.append(el("strong","","تأكيد بداية جديدة"),el("p","","يوجد تقدم محفوظ على هذا الجهاز. بدء قصة جديدة قد يستبدل جلسة اللعب الحالية. هل تريد المتابعة؟"));
+        var actions=el("div","");actions.style.display="grid";actions.style.gridTemplateColumns="1fr 1fr";actions.style.gap="8px";
+        var confirm=el("button","qt-action","إيه، ابدأ");confirm.type="button";confirm.addEventListener("click",function(){
+          var original=Array.from(root.querySelectorAll("button")).find(function(b){return /إيه\s*،?\s*ابدأ/.test((b.textContent||"").trim())&&!b.disabled;});
+          if(!original){showHandoffMessage("تعذّر تأكيد البداية","لم نعثر على زر التأكيد الأصلي. ارجع للقائمة وحاول مرة أخرى.");return;}
+          confirmationShown=false;showHandoffMessage("جاري فتح القصة…","تم تأكيد البداية. نحمّل الفصل الأول…");original.click();
+          var checks=0;function verify(){if(view!=="handoff")return;if(isPlaying()){cleanupForGame();return;}if(checks++<180){requestAnimationFrame(verify);}else{showHandoffMessage("تعذّر فتح الفصل الأول","لم تظهر واجهة اللعب بعد التأكيد. يمكنك العودة إلى QARTON والمحاولة مجدداً.");}}
+          requestAnimationFrame(verify);
+        });
+        var cancel=el("button","qt-back","لا، رجوع");cancel.type="button";cancel.addEventListener("click",function(){
+          var originalNo=Array.from(root.querySelectorAll("button")).find(function(b){return /^(لا|رجوع للقائمة)$/.test((b.textContent||"").trim());});
+          if(originalNo)originalNo.click();
+          showStory();
+        });
+        actions.append(confirm,cancel);panel.appendChild(actions);overlay.appendChild(panel);overlay.style.display="flex";return;
+      }
+      if(attempts++<180){requestAnimationFrame(inspectStart);return;}
+      showHandoffMessage("تعذّر فتح القصة","لم يظهر تأكيد البداية أو واجهة الفصل الأول. لم نحذف الحفظ. ارجع إلى QARTON وحاول مرة أخرى.");
+    }
+    requestAnimationFrame(inspectStart);
+  }
   function proxyStoryAction(parent,selector,label,detail,disabled){var b=el("button","qt-action");b.type="button";b.append(el("span","",label),el("span","","‹"));if(detail)b.setAttribute("aria-label",detail);b.disabled=!!disabled;b.addEventListener("click",function(){var menu=root&&(root.querySelector(".home-actions.grid")||root.querySelector(".home-actions")||root);var live=selector==="@new-game"?findNewGameButton(menu):root&&root.querySelector(selector);if(live&&!live.disabled)handoffStoryAction(live);});parent.appendChild(b);return b;}
   function showStory(){view="story";hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren();var head=el("div","qt-subhead");head.append(el("h2","","القصة — اختر بداية رحلتك"));var back=el("button","qt-back","⌂ الرئيسية");back.type="button";back.addEventListener("click",goTree);head.appendChild(back);var panel=el("section","qt-panel");panel.appendChild(el("p","","اختر بداية رحلتك أو افتح فصلاً متاحاً. لاستكمال تقدمك السابق، انتقل إلى قسم التقدم والحفظ."));var menu=root&&(root.querySelector(".home-actions.grid")||root.querySelector(".home-actions")||root);var start=findNewGameButton(menu);if(start)proxyStoryAction(panel,"@new-game","▶ بداية جديدة — الجزء الأول","بدء قصة جديدة من الفصل الأول",!!start.disabled);var part2=root&&root.querySelector("#btn-part2");if(part2)proxyStoryAction(panel,"#btn-part2",part2.textContent.trim()||"الجزء الثاني","فتح الجزء الثاني حسب شروط اللعبة",!!part2.disabled);var part3=root&&root.querySelector("#carthage-part3-start");if(part3)proxyStoryAction(panel,"#carthage-part3-start",part3.textContent.trim()||"الجزء الثالث","الجزء الثالث يفتح بعد إتمام الجزء الثاني",!!part3.disabled);if(!start&&!part2&&!part3)panel.appendChild(el("div","qt-empty","لم تُعثر على خيارات القصة الأصلية. أعد المحاولة بعد اكتمال تحميل اللعبة."));overlay.append(head,panel);overlay.style.display="flex";viewSignature=getSubviewSignature();}
   function showWorld(){
