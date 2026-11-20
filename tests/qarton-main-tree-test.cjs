@@ -57,6 +57,25 @@ assert.equal(lifecycle.isPlaying(), true, 'the normal gameplay timer must remain
 lifecycle.setRoot(lifecycleRoot({main:true,buttons:['إعدادات']}));
 assert.equal(lifecycle.isPlaying(), false, 'unrelated main content must not be mistaken for the story intro');
 
+// Existing-save detection is driven by the validated build signal or the real Continue control.
+const hasSaveStart = home.indexOf('function hasExistingSave(){');
+const hasSaveEnd = home.indexOf('function waitForStory()', hasSaveStart);
+assert.ok(hasSaveStart >= 0 && hasSaveEnd > hasSaveStart, 'existing-save detector boundaries must remain testable');
+const hasSaveProbe = vm.runInNewContext(
+  'var root=null;var window={__carthageHasValidSave:false};' + home.slice(hasSaveStart, hasSaveEnd) +
+  ';({hasExistingSave:hasExistingSave,setRoot:function(value){root=value;},setFlag:function(value){window.__carthageHasValidSave=value;}})'
+);
+hasSaveProbe.setRoot(lifecycleRoot({home:true,buttons:['ابدأ الجزء الأول']}));
+assert.equal(hasSaveProbe.hasExistingSave(), false, 'a clean start must not ask for an unnecessary overwrite confirmation');
+hasSaveProbe.setFlag(true);
+assert.equal(hasSaveProbe.hasExistingSave(), true, 'a validated save must trigger the preflight confirmation');
+hasSaveProbe.setFlag(false);
+hasSaveProbe.setRoot({
+  querySelector(selector) { return selector === '#carthage-continue-last' ? {} : null; },
+  querySelectorAll() { return []; }
+});
+assert.equal(hasSaveProbe.hasExistingSave(), true, 'the actual Continue button must remain a safe fallback signal');
+
 // The premium-home runtime must release its fixed-home styling at the same INTRO boundary.
 const premiumStart = premiumHome.indexOf('function playing(root){');
 const premiumEnd = premiumHome.indexOf('function findMenu(', premiumStart);
