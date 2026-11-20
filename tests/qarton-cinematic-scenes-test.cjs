@@ -17,3 +17,12 @@ assert.equal(scripts.length, 2, 'both isolated cinematic runtimes must be emitte
 for (const [, source] of scripts) assert.doesNotThrow(() => new vm.Script(source), 'injected cinematic script must parse');
 
 console.log('PASS: isolated cinematic runtime supports IMG and CSS background-image scenes without touching story or saves.');
+
+// Guard performance and accessibility contracts in the injected runtimes.
+assert.ok(html.includes('if(queued)return;queued=true;'), 'mutation bursts must be coalesced before rendering');
+assert.ok(html.includes('requestAnimationFrame'), 'scene updates must be scheduled on animation frames');
+assert.ok(html.includes('prefers-reduced-motion:reduce'), 'scene motion must respect reduced-motion preference');
+assert.ok(html.includes('prefers-reduced-motion: reduce'), 'scene cuts must respect reduced-motion preference');
+assert.ok(html.includes('attributeFilter:["src","class","style"]'), 'observer must restrict watched attributes');
+assert.ok(html.includes('if(window.__carthageCinematicScene)return;'), 'scene motion runtime must be idempotent');
+assert.ok(html.includes('if(window.__carthageSceneTransitions)return;'), 'scene transition runtime must be idempotent');
