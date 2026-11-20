@@ -16,6 +16,7 @@ assert.match(html, /السور يتكسر/);
 const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
 assert.ok(cinematicPilot.includes('carthage-cinematic-pilot-runtime'), 'cinematic pilot runtime must be injected into the Android build');
 assert.ok(cinematicPilot.includes('carthage-save-transfer'), 'save export/import transfer controls must be injected');
+assert.ok(cinematicPilot.includes('var menu=root.querySelector(".home-actions.grid");if(!menu)return;'), 'save-transfer controls must mount only on the actual home menu, never inside the intro/story screen');
 assert.ok(cinematicPilot.includes('carthage-drive-recovery-seed'), 'the confirmed Drive save must be included as a clean-install recovery seed');
 assert.ok(cinematicPilot.includes('chapter\\":5'), 'recovery seed must preserve chapter 5');
 assert.ok(cinematicPilot.includes('sceneIdx\\":4'), 'recovery seed must preserve the saved scene index');
