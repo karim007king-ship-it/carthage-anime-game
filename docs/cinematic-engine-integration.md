@@ -64,6 +64,22 @@ A Node adapter test now verifies that a packaged relative path is preserved. Thi
 
 **Current limitation:** this repository revision has no cinematic asset manifest or committed `assets/cinematic/` files, and the game does not yet instantiate the adapter for a story scene. Therefore offline cinematic playback is not yet enabled or verified. Before enabling it, add the real local assets and manifest, make the Android packaging workflow fail if any manifest file is missing, then test airplane mode on the HONOR device. If an image fails to load or decode, the existing scene must remain visible and the game renderer must remain the fallback.
 
+## Cinematic asset manifest contract
+
+When the pilot receives approved artwork, add `assets/cinematic/manifest.json` with this shape:
+
+```json
+{
+  "assets": [
+    { "key": "carthage-wall", "path": "carthage-wall.webp" }
+  ]
+}
+```
+
+Paths are relative to `assets/cinematic/`. The validator accepts only local PNG, JPEG, WebP, or AVIF files; rejects remote URLs, absolute paths, traversal, duplicate keys, missing files, and symlinks; and emits the exact relative URL expected by the adapter (`./assets/cinematic/...`). The manifest and every referenced image must be included in the Android web bundle.
+
+The validator runs against both the source web root and the Capacitor-packaged `public/` root. The current pilot intentionally treats a missing manifest as an informational skip, because no approved cinematic assets have been committed yet. Once real assets are approved, change the workflow invocation to include `--required`; do not enable that gate before the manifest and files are present.
+
 ## Validation still required
 
 CI validates Node-level adapter behavior and verifies that the bundled adapter is copied into the Capacitor Android assets. It does not prove visual quality or audio behavior on a physical Android device. The HONOR 400 Pro / Android WebView check remains a separate release gate.
