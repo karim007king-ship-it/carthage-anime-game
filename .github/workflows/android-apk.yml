@@ -71,6 +71,9 @@ jobs:
       - name: Run game integrity tests
         run: npm test
 
+      - name: Validate source cinematic assets (optional pilot gate)
+        run: npm run validate:cinematic-assets
+
       - name: Prepare web assets
         run: npm run prepare:web
 
@@ -142,6 +145,13 @@ jobs:
           console.log('Bytes: ' + dst.length + ' | SHA-256: ' + hash(dst));
           console.log('Startup diagnostics, watchdog, real story module, save and continue controls are present.');
           NODE
+
+      - name: Validate packaged cinematic assets
+        run: |
+          set -euo pipefail
+          PACKAGED_INDEX="$(find android/app/src/main/assets -path '*/public/index.html' -print -quit)"
+          if [ -z "$PACKAGED_INDEX" ]; then echo "::error::Packaged Capacitor index.html was not found."; exit 1; fi
+          node scripts/validate-cinematic-assets.cjs --root "$(dirname "$PACKAGED_INDEX")"
 
       - name: Apply Carthage launcher icon
         run: node scripts/apply-android-branding.cjs
