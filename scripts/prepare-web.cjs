@@ -361,6 +361,10 @@ const qartonHomeRuntime = fs.readFileSync(path.join(__dirname, 'qarton-premium-h
 html = html.replace('</body>', '<script id="qarton-premium-home-runtime">' + qartonHomeRuntime + '</script></body>');
 
 // Load the bundled engine bridge without auto-starting a scene or touching game state.
+// QARTON fixed main-tree home; invokes existing React-owned controls without cloning them.
+const qartonMainTree = fs.readFileSync(path.join(__dirname, 'qarton-main-tree.js'), 'utf8');
+html = html.replace('</body>', '<script id="qarton-main-tree-runtime">\n' + qartonMainTree + '\n</script></body>');
+
 const engineBridgeTag = '<script id="qarton-cinematic-engine-bridge" src="./carthage-cinematic-adapter.js" defer></script>';
 if (html.includes('id="qarton-cinematic-engine-bridge"')) throw new Error('Cinematic engine bridge was already injected.');
 html = html.replace('</body>', engineBridgeTag + '</body>');
