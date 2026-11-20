@@ -306,7 +306,7 @@ test("adapter does not attach a partially rendered scene when a later layer fail
 
   assert.equal(root.children.length, 1);
   assert.equal(root.children[0], currentWrapper);
-  assert.equal(root.children[0].dataset.qartonSceneId, undefined);
+  assert.equal(root.children[0].dataset.qartonSceneId, "stable-current");
   await adapter.destroy();
   assert.equal(root.children.length, 0);
 });
