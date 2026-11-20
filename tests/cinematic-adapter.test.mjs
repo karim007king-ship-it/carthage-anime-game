@@ -238,3 +238,36 @@ test("adapter destroy cancels an in-flight transition and removes every scene", 
   assert.equal(root.children.length, 0);
   await assert.rejects(adapter.mountScene(scene("after-destroy")), /destroyed/);
 });
+
+test("adapter retries teardown after a transient scene-removal failure", async () => {
+  const { adapter, root } = setup();
+  const scene = {
+    id: "cleanup-retry",
+    layers: [{ id: "sky", role: "background", asset: "pilot-bg" }]
+  };
+  assert.equal(await adapter.mountScene(scene), true);
+  assert.equal(root.children.length, 1);
+
+  const removeChild = root.removeChild.bind(root);
+  let failOnce = true;
+  root.removeChild = child => {
+    if (failOnce) {
+      failOnce = false;
+      throw new Error("simulated transient DOM removal failure");
+    }
+    return removeChild(child);
+  };
+
+  await assert.rejects(adapter.destroy(), /simulated transient DOM removal failure/);
+  // The runtime's later cleanup phase can still release the owned scene.
+  assert.equal(root.children.length, 0);
+
+  // A second destroy call must complete the adapter teardown and restore
+  // the host styles even after the first attempt reported a cleanup error.
+  await adapter.destroy();
+  assert.equal(root.children.length, 0);
+  assert.equal(root.style.position, "");
+  assert.equal(root.style.overflow, "");
+  assert.equal(root.style.isolation, "");
+  await assert.rejects(adapter.mountScene(scene), /destroyed/);
+});
