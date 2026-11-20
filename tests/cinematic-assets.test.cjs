@@ -50,7 +50,7 @@ test("rejects duplicate keys", t => {
 
 test("rejects traversal, absolute paths, and remote URLs", t => {
   const f = fixture(); t.after(f.cleanup);
-  for (const unsafe of ["../secret.webp", "folder/../../secret.webp", "https://example.test/a.webp", "//cdn.test/a.webp", "/absolute.webp", "folder\\wall.webp"]) {
+  for (const unsafe of ["../secret.webp", "folder/../../secret.webp", "folder/%2e%2e/secret.webp", "wall.webp?cache=1", "https://example.test/a.webp", "//cdn.test/a.webp", "/absolute.webp", "folder\\wall.webp"]) {
     f.writeManifest({ assets: [{ key: "unsafe", path: unsafe }] });
     assert.throws(() => validateManifest(f.root), /local relative path|Unsafe/);
   }
