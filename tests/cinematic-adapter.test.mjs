@@ -218,3 +218,23 @@ test("adapter supersedes an in-flight transition and retains only the latest sce
   await adapter.destroy();
   assert.equal(root.children.length, 0);
 });
+
+test("adapter destroy cancels an in-flight transition and removes every scene", async () => {
+  const { adapter, root } = setup({
+    device: { quality: "low", reducedMotion: false },
+    duration: 40
+  });
+  const scene = id => ({
+    id,
+    layers: [{ id: "sky", role: "background", asset: "pilot-bg" }]
+  });
+
+  assert.equal(await adapter.mountScene(scene("initial"), { duration: 0 }), true);
+  const pendingTransition = adapter.mountScene(scene("in-flight"), { duration: 40 });
+  await new Promise(resolve => setTimeout(resolve, 0));
+
+  await adapter.destroy();
+  assert.equal(await pendingTransition, false);
+  assert.equal(root.children.length, 0);
+  await assert.rejects(adapter.mountScene(scene("after-destroy")), /destroyed/);
+});
