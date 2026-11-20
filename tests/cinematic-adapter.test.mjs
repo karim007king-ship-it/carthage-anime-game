@@ -143,24 +143,22 @@ test("adapter bridges page visibility and pagehide/pageshow, then removes listen
   assert.equal(pageTarget.count(), 0);
 });
 
-test("adapter restores only the host styles it temporarily owns on destroy", async () => {
+test("adapter restores temporary host styles and preserves later host changes", async () => {
   const document = new FakeDocument();
   const root = new FakeElement("main", document);
-  root.style.position = "absolute";
-  root.style.overflow = "auto";
-  root.style.isolation = "auto";
   const adapter = createCarthageCinematicAdapter({
     root,
     assetManifest: { "pilot-bg": "https://assets.example/pilot.webp" },
     device: { reducedMotion: true },
     duration: 0
   });
-  assert.equal(root.style.position, "absolute");
-  assert.equal(root.style.overflow, "auto");
-  assert.equal(root.style.isolation, "auto");
-  // The adapter only fills absent values; existing host-owned values remain.
+  assert.equal(root.style.position, "relative");
+  assert.equal(root.style.overflow, "hidden");
+  assert.equal(root.style.isolation, "isolate");
+  // A host change made after adapter creation remains host-owned.
+  root.style.overflow = "clip";
   await adapter.destroy();
-  assert.equal(root.style.position, "absolute");
-  assert.equal(root.style.overflow, "auto");
-  assert.equal(root.style.isolation, "auto");
+  assert.equal(root.style.position, "");
+  assert.equal(root.style.overflow, "clip");
+  assert.equal(root.style.isolation, "");
 });
