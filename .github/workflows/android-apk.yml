@@ -132,6 +132,8 @@ jobs:
             'qarton-premium-home-runtime',
             'qarton-brand-row',
             'qarton-home-info',
+            'qarton-main-tree-runtime',
+            'التقدم والحفظ',
             'qarton-cinematic-engine-bridge',
             'carthage-cinematic-adapter.js'
           ];
