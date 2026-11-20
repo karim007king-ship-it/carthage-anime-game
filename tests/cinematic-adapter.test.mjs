@@ -271,3 +271,42 @@ test("adapter retries teardown after a transient scene-removal failure", async (
   assert.equal(root.style.isolation, "");
   await assert.rejects(adapter.mountScene(scene), /destroyed/);
 });
+
+test("adapter does not attach a partially rendered scene when a later layer fails", async () => {
+  const { adapter, root } = setup();
+  const currentScene = {
+    id: "stable-current",
+    layers: [{ id: "base", role: "background", asset: "pilot-bg" }]
+  };
+  await adapter.mountScene(currentScene);
+  const currentWrapper = root.children[0];
+
+  const createElement = root.ownerDocument.createElement.bind(root.ownerDocument);
+  let imageCount = 0;
+  root.ownerDocument.createElement = tagName => {
+    const element = createElement(tagName);
+    if (tagName === "img") {
+      imageCount += 1;
+      if (imageCount === 3) {
+        element.decode = async () => { throw new Error("second layer decode failed"); };
+      } else {
+        element.decode = async () => {};
+      }
+    }
+    return element;
+  };
+
+  await assert.rejects(adapter.mountScene({
+    id: "partially-rendered",
+    layers: [
+      { id: "first-layer", role: "background", asset: "pilot-bg" },
+      { id: "second-layer", role: "foreground", asset: "pilot-bg" }
+    ]
+  }), /second layer decode failed/);
+
+  assert.equal(root.children.length, 1);
+  assert.equal(root.children[0], currentWrapper);
+  assert.equal(root.children[0].dataset.qartonSceneId, undefined);
+  await adapter.destroy();
+  assert.equal(root.children.length, 0);
+});
