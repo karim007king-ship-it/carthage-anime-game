@@ -13,7 +13,7 @@ assert.match(html, /c17-audio-volume/);
 assert.match(html, /prefers-reduced-motion/);
 assert.match(html, /السور يتكسر/);
 
-const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8');
+const cinematicPilot = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'prepare-web.cjs'), 'utf8') + '\n' + fs.readFileSync(path.join(__dirname, '..', 'scripts', 'qarton-cinematic-scenes.cjs'), 'utf8');
 assert.ok(cinematicPilot.includes('carthage-cinematic-pilot-runtime'), 'cinematic pilot runtime must be injected into the Android build');
 assert.ok(cinematicPilot.includes('carthage-save-transfer'), 'save export/import transfer controls must be injected');
 assert.ok(cinematicPilot.includes('carthage-drive-recovery-seed'), 'the confirmed Drive save must be included as a clean-install recovery seed');
@@ -167,7 +167,7 @@ assert.ok(html.includes('m(P),x(0),p("dialogue"),Q8'), 'chapter navigation must 
 assert.ok(html.includes('if(B<j.lines.length-1)x(B+1)'), 'dialogue must advance line by line');
 assert.ok(html.includes('window.setTimeout(()=>L9(T+1),z?300:850)'), 'completed choices must advance to the next chapter');
 assert.ok(html.includes('src:j.image,alt:j.place'), 'the active chapter artwork must be bound to the current chapter data');
-assert.ok(androidPrep.includes('pointer-events:none;background:#050509'), 'cinematic scene transitions must never block taps');
+assert.ok(cinematicPilot.includes('pointer-events:none;background:#050509'), 'cinematic scene transitions must never block taps');
 
 assert.ok(qartonHome.includes('document.body.classList.add("qarton-game-active")'), 'the existing gameplay adapter must scope the body while playing');
 assert.ok(qartonHome.includes('document.body.classList.remove("qarton-game-active")'), 'the existing gameplay adapter must clear gameplay body styling on exit');
