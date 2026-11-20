@@ -25,6 +25,36 @@ assert.ok(!/if\\s*\\(\\s*!shell\\s*\\)\\s*return/.test(mountSource), 'QARTON hom
 assert.ok(mountSource.includes('addStyle();goTree();'), 'mount must render the QARTON tree once the app root exists');
 assert.ok(mountSource.includes('if(view!=="game"||overlay)cleanupForGame()'), 'game mutations must not repeatedly run cleanup after gameplay has already started');
 assert.ok(home.includes('observer.observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:["disabled","id"],characterData:true})'), 'main-tree observer must track only control availability, identity, and label changes while home UI is active');
+
+// The real Carthage new-game handler enters the five-screen INTRO before .game-timer exists.
+const playingStart = home.indexOf('function isPlaying(){');
+const playingEnd = home.indexOf('function el(', playingStart);
+assert.ok(playingStart >= 0 && playingEnd > playingStart, 'story lifecycle detector boundaries must remain testable');
+const lifecycle = vm.runInNewContext(
+  'var root=null;' + home.slice(playingStart, playingEnd) +
+  ';({isPlaying:isPlaying,setRoot:function(value){root=value;}})'
+);
+function lifecycleRoot({timer=false, home=false, main=false, buttons=[]}={}) {
+  return {
+    querySelector(selector) {
+      if (selector === '.game-timer') return timer ? {} : null;
+      if (selector === '.home-actions.grid') return home ? {} : null;
+      if (selector === 'main') return main ? {} : null;
+      return null;
+    },
+    querySelectorAll() { return buttons.map(textContent => ({textContent})); }
+  };
+}
+lifecycle.setRoot(lifecycleRoot({home:true,main:true,buttons:['ابدأ الجزء الأول']}));
+assert.equal(lifecycle.isPlaying(), false, 'the legacy home must not be mistaken for gameplay');
+lifecycle.setRoot(lifecycleRoot({main:true,buttons:['كمّل...']}));
+assert.equal(lifecycle.isPlaying(), true, 'the intro must count as an active story screen before the timer appears');
+lifecycle.setRoot(lifecycleRoot({main:true,buttons:['ادخل للدار ←']}));
+assert.equal(lifecycle.isPlaying(), true, 'the final intro action must release the QARTON overlay');
+lifecycle.setRoot(lifecycleRoot({timer:true}));
+assert.equal(lifecycle.isPlaying(), true, 'the normal gameplay timer must remain a positive gameplay signal');
+lifecycle.setRoot(lifecycleRoot({main:true,buttons:['إعدادات']}));
+assert.equal(lifecycle.isPlaying(), false, 'unrelated main content must not be mistaken for the story intro');
 assert.ok(home.includes('observer.disconnect();observer=null;'), 'main-tree observer must stop completely after gameplay starts');
 assert.ok(!/attributeFilter:\[[^\]]*(?:class|style)/.test(home), 'main-tree observer must not watch every animated style/class mutation');
 
