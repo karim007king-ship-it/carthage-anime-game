@@ -79,7 +79,7 @@ assert.ok(home.includes('view="handoff";hideLegacy();ensureOverlay();'), 'story 
 assert.ok(home.includes('جاري فتح القصة…'), 'story handoff must show a QARTON transition state instead of revealing the legacy home');
 assert.ok(home.includes('if(live&&!live.disabled)handoffStoryAction(live);'), 'new game and chapter actions must use the safe story handoff');
 assert.ok(home.includes('if(view==="handoff"){hideLegacy();if(overlay)overlay.style.display="flex";return;}'), "mutation-driven remounts must keep the QARTON transition visible and the legacy home hidden during handoff");
-assert.ok(mountSource.includes('if(view==="handoff"){restoreLegacy();if(overlay)overlay.style.display="none";return;}'), "mutation-driven remounts must not hide the native confirmation dialog during story handoff");
+assert.ok(mountSource.includes('if(view==="handoff"){hideLegacy();if(overlay)overlay.style.display="flex";return;}'), "mutation-driven remounts must keep QARTON visible during story handoff");
 assert.ok(home.includes('function findNewGameButton(container)'), 'Story subview must resolve the original new-game action');
 assert.ok(home.includes('hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren()'), 'Story subview must keep the legacy home hidden');
 assert.ok(!storySubview.includes('restoreLegacy()') && !storySubview.includes('overlay.style.display="none"'), 'Story subview must keep the legacy home hidden until a native story action is invoked');
