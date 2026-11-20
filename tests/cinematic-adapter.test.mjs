@@ -310,3 +310,36 @@ test("adapter does not attach a partially rendered scene when a later layer fail
   await adapter.destroy();
   assert.equal(root.children.length, 0);
 });
+
+test("adapter retries lifecycle listener cleanup after a transient detach failure", async () => {
+  const documentTarget = new FakeEventTarget("visible");
+  const pageTarget = new FakeEventTarget();
+  const remove = pageTarget.removeEventListener.bind(pageTarget);
+  let failOnce = true;
+  pageTarget.removeEventListener = (type, listener) => {
+    if (type === "pagehide" && failOnce) {
+      failOnce = false;
+      throw new Error("simulated pagehide listener detach failure");
+    }
+    return remove(type, listener);
+  };
+
+  const { adapter, root } = setup({
+    lifecycleTarget: documentTarget,
+    lifecyclePageTarget: pageTarget
+  });
+  assert.equal(documentTarget.count(), 1);
+  assert.equal(pageTarget.count(), 2);
+
+  await assert.rejects(adapter.destroy(), /simulated pagehide listener detach failure/);
+  // The failed listener remains tracked; other listeners were still detached.
+  assert.equal(documentTarget.count(), 0);
+  assert.equal(pageTarget.count(), 1);
+
+  await adapter.destroy();
+  assert.equal(documentTarget.count(), 0);
+  assert.equal(pageTarget.count(), 0);
+  assert.equal(root.style.position, "");
+  assert.equal(root.style.overflow, "");
+  assert.equal(root.style.isolation, "");
+});
