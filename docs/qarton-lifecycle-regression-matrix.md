@@ -40,3 +40,9 @@ This document defines the browser/device scenarios required before changing eith
 4. Batch rendering with a single animation frame; prevent duplicate scheduling.
 5. Never alter save data or story-owned controls as a side effect of observer cleanup.
 6. Do not claim browser/device coverage based on source-string assertions.
+
+## Audit finding — home re-entry observer (open)
+
+The current main-tree runtime sets `started=true` when it attaches, then `cleanupForGame()` disconnects the main observer and removes the overlay but does not reset `started` or install a lightweight home-return watcher. A later call to `attachToApp()` therefore exits immediately. The premium-home observer still manages fixed-home CSS, but it does not re-render the QARTON main tree. Consequently, L-08 (return to home) is not proven and may expose the legacy menu after an in-app return without a full page reload.
+
+**Do not patch this by simply keeping the full subtree observer active during gameplay.** First add a browser-level regression harness that models the React root returning from story to home; then introduce a narrowly scoped re-entry watcher and verify L-01, L-03, L-06, L-07, and L-08. Keep the currently validated intro handoff and save behavior unchanged.
