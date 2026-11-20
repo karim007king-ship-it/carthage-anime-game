@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const root = path.join(__dirname, '..');
 const home = fs.readFileSync(path.join(root, 'scripts/qarton-main-tree.js'), 'utf8');
+const premiumHome = fs.readFileSync(path.join(root, 'scripts/qarton-premium-home.js'), 'utf8');
 const prep = fs.readFileSync(path.join(root, 'scripts/prepare-web.cjs'), 'utf8');
 const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 const workflow = fs.readFileSync(path.join(root, '.github/workflows/android-apk.yml'), 'utf8');
@@ -55,6 +56,15 @@ lifecycle.setRoot(lifecycleRoot({timer:true}));
 assert.equal(lifecycle.isPlaying(), true, 'the normal gameplay timer must remain a positive gameplay signal');
 lifecycle.setRoot(lifecycleRoot({main:true,buttons:['إعدادات']}));
 assert.equal(lifecycle.isPlaying(), false, 'unrelated main content must not be mistaken for the story intro');
+
+// The premium-home runtime must release its fixed-home styling at the same INTRO boundary.
+const premiumStart = premiumHome.indexOf('function playing(root){');
+const premiumEnd = premiumHome.indexOf('function findMenu(', premiumStart);
+assert.ok(premiumStart >= 0 && premiumEnd > premiumStart, 'premium-home lifecycle detector boundaries must remain testable');
+const premiumIsPlaying = vm.runInNewContext(premiumHome.slice(premiumStart, premiumEnd) + ';playing');
+assert.equal(premiumIsPlaying(lifecycleRoot({main:true,buttons:['كمّل...']})), true, 'premium-home must release its fixed-home state during the cinematic intro');
+assert.equal(premiumIsPlaying(lifecycleRoot({main:true,buttons:['ادخل للدار ←']})), true, 'premium-home must recognize the final intro action');
+assert.equal(premiumIsPlaying(lifecycleRoot({home:true,main:true,buttons:['ابدأ الجزء الأول']})), false, 'premium-home must preserve the home styling while the legacy menu is active');
 assert.ok(home.includes('observer.disconnect();observer=null;'), 'main-tree observer must stop completely after gameplay starts');
 assert.ok(!/attributeFilter:\[[^\]]*(?:class|style)/.test(home), 'main-tree observer must not watch every animated style/class mutation');
 
