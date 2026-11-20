@@ -287,7 +287,7 @@ test("adapter does not attach a partially rendered scene when a later layer fail
     const element = createElement(tagName);
     if (tagName === "img") {
       imageCount += 1;
-      if (imageCount === 3) {
+      if (imageCount === 2) {
         element.decode = async () => { throw new Error("second layer decode failed"); };
       } else {
         element.decode = async () => {};
