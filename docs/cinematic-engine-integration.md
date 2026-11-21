@@ -89,3 +89,5 @@ CI validates Node-level adapter behavior and verifies that the bundled adapter i
 The Carthage test suite imports the pinned engine package and mounts a single isolated test character through `createCharacterStage()`. It exercises the deterministic idle sampler, movement pose sampler, and sprite-frame sampler against a fake DOM host, verifies the configured sprite asset keys change as the shared clock advances, then verifies stage teardown removes the character element.
 
 This is an integration contract test only. It does not mount a character in the live story, supply production anime artwork, or prove Android WebView rendering. The game still needs an approved local character sprite set and a dedicated story-scene host before a visual pilot can be enabled.
+
+The Carthage adapter owns its small page-lifecycle bridge instead of depending on a runtime-specific `isActive()` or lifecycle-target API. It forwards activity changes through the stable `runtime.setActive()` method and retains listener ownership until every detach succeeds, allowing teardown retries across engine revisions.
