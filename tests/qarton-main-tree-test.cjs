@@ -1,0 +1,215 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const assert = require('node:assert/strict');
+const vm = require('node:vm');
+const root = path.join(__dirname, '..');
+const home = fs.readFileSync(path.join(root, 'scripts/qarton-main-tree.js'), 'utf8');
+const premiumHome = fs.readFileSync(path.join(root, 'scripts/qarton-premium-home.js'), 'utf8');
+const prep = fs.readFileSync(path.join(root, 'scripts/prepare-web.cjs'), 'utf8');
+const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+const workflow = fs.readFileSync(path.join(root, '.github/workflows/android-apk.yml'), 'utf8');
+
+// Parse the runtime before checking its behavior contracts.
+new vm.Script(home, {filename:'qarton-main-tree.js'});
+assert.ok(home.includes('function attachToApp()') && home.includes('rootWaiter=new MutationObserver'), 'main tree must wait for the app root if the game mounts after DOMContentLoaded');
+assert.ok(home.includes('if(started)return;') && home.includes('rootWaiter.disconnect()'), 'late app-root attachment must happen once and release its waiter');
+assert.ok(!home.includes('}\\n  #qarton-main-tree'), 'CSS rules must be separated by real newlines, not literal backslash-n text');
+assert.ok(!home.includes('/\\\\s+/g'), 'settings action matching must use a whitespace regex, not a literal backslash-s pattern');
+
+// The main tree must mount even when the legacy menu's class names differ or it is absent.
+const mountStart = home.indexOf('function mount(){');
+const mountEnd = home.indexOf('function schedule(){', mountStart);
+assert.ok(mountStart >= 0 && mountEnd > mountStart, 'mount function boundaries must remain testable');
+const mountSource = home.slice(mountStart, mountEnd);
+assert.ok(mountSource.includes('root=document.getElementById("root")') && mountSource.includes('if(!root)return'), 'mount must still wait for the application root');
+assert.ok(!/if\\s*\\(\\s*!shell\\s*\\)\\s*return/.test(mountSource), 'QARTON home must not disappear when the legacy menu selector is missing');
+assert.ok(mountSource.includes('addStyle();goTree();'), 'mount must render the QARTON tree once the app root exists');
+assert.ok(mountSource.includes('if(view!=="game"||overlay)cleanupForGame()'), 'game mutations must not repeatedly run cleanup after gameplay has already started');
+assert.ok(home.includes('observer.observe(root,{subtree:true,childList:true,attributes:true,attributeFilter:["disabled","id"],characterData:true})'), 'main-tree observer must track only control availability, identity, and label changes while home UI is active');
+
+// The real Carthage new-game handler enters the five-screen INTRO before .game-timer exists.
+const playingStart = home.indexOf('function isPlaying(){');
+const playingEnd = home.indexOf('function el(', playingStart);
+assert.ok(playingStart >= 0 && playingEnd > playingStart, 'story lifecycle detector boundaries must remain testable');
+const lifecycle = vm.runInNewContext(
+  'var root=null;' + home.slice(playingStart, playingEnd) +
+  ';({isPlaying:isPlaying,setRoot:function(value){root=value;}})'
+);
+function lifecycleRoot({timer=false, home=false, main=false, buttons=[]}={}) {
+  return {
+    querySelector(selector) {
+      if (selector === '.game-timer') return timer ? {} : null;
+      if (selector === '.home-actions.grid') return home ? {} : null;
+      if (selector === 'main') return main ? {} : null;
+      return null;
+    },
+    querySelectorAll() { return buttons.map(textContent => ({textContent})); }
+  };
+}
+lifecycle.setRoot(lifecycleRoot({home:true,main:true,buttons:['ابدأ الجزء الأول']}));
+assert.equal(lifecycle.isPlaying(), false, 'the legacy home must not be mistaken for gameplay');
+lifecycle.setRoot(lifecycleRoot({main:true,buttons:['كمّل...']}));
+assert.equal(lifecycle.isPlaying(), true, 'the intro must count as an active story screen before the timer appears');
+lifecycle.setRoot(lifecycleRoot({main:true,buttons:['ادخل للدار ←']}));
+assert.equal(lifecycle.isPlaying(), true, 'the final intro action must release the QARTON overlay');
+lifecycle.setRoot(lifecycleRoot({timer:true}));
+assert.equal(lifecycle.isPlaying(), true, 'the normal gameplay timer must remain a positive gameplay signal');
+lifecycle.setRoot(lifecycleRoot({main:true,buttons:['إعدادات']}));
+assert.equal(lifecycle.isPlaying(), false, 'unrelated main content must not be mistaken for the story intro');
+
+// Existing-save detection is driven by the validated build signal or the real Continue control.
+const hasSaveStart = home.indexOf('function hasExistingSave(){');
+const hasSaveEnd = home.indexOf('function waitForStory()', hasSaveStart);
+assert.ok(hasSaveStart >= 0 && hasSaveEnd > hasSaveStart, 'existing-save detector boundaries must remain testable');
+const hasSaveProbe = vm.runInNewContext(
+  'var root=null;var window={__carthageHasValidSave:false};' + home.slice(hasSaveStart, hasSaveEnd) +
+  ';({hasExistingSave:hasExistingSave,setRoot:function(value){root=value;},setFlag:function(value){window.__carthageHasValidSave=value;}})'
+);
+hasSaveProbe.setRoot(lifecycleRoot({home:true,buttons:['ابدأ الجزء الأول']}));
+assert.equal(hasSaveProbe.hasExistingSave(), false, 'a clean start must not ask for an unnecessary overwrite confirmation');
+hasSaveProbe.setFlag(true);
+assert.equal(hasSaveProbe.hasExistingSave(), true, 'a validated save must trigger the preflight confirmation');
+hasSaveProbe.setFlag(false);
+hasSaveProbe.setRoot({
+  querySelector(selector) { return selector === '#carthage-continue-last' ? {} : null; },
+  querySelectorAll() { return []; }
+});
+assert.equal(hasSaveProbe.hasExistingSave(), true, 'the actual Continue button must remain a safe fallback signal');
+
+// The premium-home runtime must release its fixed-home styling at the same INTRO boundary.
+const premiumStart = premiumHome.indexOf('function playing(root){');
+const premiumEnd = premiumHome.indexOf('function findMenu(', premiumStart);
+assert.ok(premiumStart >= 0 && premiumEnd > premiumStart, 'premium-home lifecycle detector boundaries must remain testable');
+const premiumIsPlaying = vm.runInNewContext(premiumHome.slice(premiumStart, premiumEnd) + ';playing');
+assert.equal(premiumIsPlaying(lifecycleRoot({main:true,buttons:['كمّل...']})), true, 'premium-home must release its fixed-home state during the cinematic intro');
+assert.equal(premiumIsPlaying(lifecycleRoot({main:true,buttons:['ادخل للدار ←']})), true, 'premium-home must recognize the final intro action');
+assert.equal(premiumIsPlaying(lifecycleRoot({home:true,main:true,buttons:['ابدأ الجزء الأول']})), false, 'premium-home must preserve the home styling while the legacy menu is active');
+assert.ok(home.includes('observer.disconnect();observer=null;'), 'main-tree observer must stop completely after gameplay starts');
+assert.ok(!/attributeFilter:\[[^\]]*(?:class|style)/.test(home), 'main-tree observer must not watch every animated style/class mutation');
+
+
+// The approved fixed home is a real four-branch 2x2 tree, not a restyled old menu.
+for (const marker of [
+  'grid-template-columns:repeat(2,minmax(0,1fr))',
+  'grid-template-rows:repeat(2,minmax(0,1fr))',
+  'القصة', 'عالم قرطاج', 'التقدم والحفظ', 'الإعدادات',
+  'آخر يوم في قرطاج', 'QARTON', 'CULTURE • POWER • CINEMA',
+  'safe-area-inset-top', 'safe-area-inset-bottom',
+  '@media(max-height:650px)', 'prefers-reduced-motion:reduce'
+]) assert.ok(home.includes(marker), 'missing main-tree design contract: ' + marker);
+
+// Exercise the semantic new-game resolver against button-like controls, not only source markers.
+const findStart = home.indexOf('function findNewGameButton(container){');
+const findEnd = home.indexOf('function handoffStoryAction(', findStart);
+assert.ok(findStart >= 0 && findEnd > findStart, 'new-game resolver boundaries must remain testable');
+const findNewGameButton = vm.runInNewContext(home.slice(findStart, findEnd) + ';findNewGameButton');
+const makeButton = (text, disabled=false, kind='') => ({textContent:text,disabled,dataset:{qartonKind:kind}});
+const unrelated = makeButton('الإعدادات');
+const primaryStart = makeButton('ابدأ الجزء الأول');
+assert.equal(findNewGameButton({querySelectorAll:()=>[unrelated,primaryStart]}), primaryStart, 'new-game resolver must select the real story-start control');
+assert.equal(findNewGameButton({querySelectorAll:()=>[makeButton('الإعدادات'),makeButton('تصدير الحفظ')]}), null, 'new-game resolver must fail closed when no start control exists');
+assert.equal(findNewGameButton({querySelectorAll:()=>[makeButton('لعبة جديدة',true)]}), null, 'new-game resolver must not activate a disabled start control');
+
+// Story and backup actions must invoke the existing app controls by ID at click time.
+for (const id of [
+  'carthage-continue-last', 'carthage-export-backup', 'carthage-import-backup'
+]) assert.ok(home.includes(id), 'missing existing action bridge: ' + id);
+assert.ok(home.includes('live.click()'), 'the tree must invoke original handlers, not recreate them');
+assert.ok(home.includes('function showStory()'), 'Story branch must open a dedicated story subview');
+assert.ok(home.includes('root.querySelector(".home-actions.grid")||root.querySelector(".home-actions")||root'), 'Story start lookup must fall back to semantic search across the app root when legacy menu classes differ');
+assert.ok(home.includes('var menu=root&&(root.querySelector(".home-actions.grid")||root.querySelector(".home-actions")||root);var live=selector==="@new-game"?findNewGameButton(menu)'), 'New Game proxy click must use the same resilient menu lookup as the visible story action');
+assert.ok(home.includes('if(view==="story"){var menu=root&&(root.querySelector(".home-actions.grid")||root.querySelector(".home-actions")||root);var start=findNewGameButton(menu);'), 'Story subview signature must observe the same fallback menu so button state updates remain visible');
+// Continue-last-save belongs only to Progress & Saves, never the Story subview.
+const storyStart = home.indexOf('function showStory(){');
+const storyEnd = home.indexOf('function actionButton(', storyStart);
+assert.ok(storyStart >= 0 && storyEnd > storyStart, 'Story subview boundaries must remain testable');
+const storySubview = home.slice(storyStart, storyEnd);
+assert.ok(!storySubview.includes('carthage-continue-last'), 'Story must not render a duplicate Continue Last Save action');
+assert.ok(!storySubview.includes('متابعة آخر حفظ'), 'Story must not label a duplicate continue action');
+const progressStart = home.indexOf('function showProgress(){');
+const progressEnd = home.indexOf('function card(', progressStart);
+assert.ok(progressStart >= 0 && progressEnd > progressStart, 'Progress subview boundaries must remain testable');
+const progressSubview = home.slice(progressStart, progressEnd);
+assert.ok(progressSubview.includes('carthage-continue-last'), 'Progress & Saves must own the continue action');
+assert.ok(progressSubview.includes('carthage-export-backup') && progressSubview.includes('carthage-import-backup'), 'Progress & Saves must retain backup actions');
+assert.ok(home.includes('function proxyStoryAction('), 'Story actions must proxy original controls');
+assert.ok(home.includes('function handoffStoryAction(live,isNewGame)'), 'story actions must hand off to the original screen so confirmation dialogs remain visible');
+assert.ok(home.includes('function hasExistingSave()'), 'new-game flow must detect an existing valid save without reading storage from the UI runtime');
+assert.ok(home.includes('function showNewGameConfirmation(live)'), 'new-game flow must ask before triggering the original reset handler');
+assert.ok(home.includes('if(isNewGame&&hasExistingSave()){showNewGameConfirmation(live);return;}'), 'existing saves must be confirmed before the original new-game button is clicked');
+assert.ok(home.includes('window.__carthageHasValidSave===true'), 'QARTON must consume the validated save-availability signal from the build runtime');
+assert.ok(prep.includes('window.__carthageHasValidSave=hasSave'), 'the Android navigation bridge must publish validated save availability');
+assert.ok(home.includes('handoffStoryAction(live,selector==="@new-game")'), 'only the new-game action must require the preflight save confirmation');
+assert.ok(home.includes('function showHandoffMessage(title,message)'), 'handoff states must be rendered inside QARTON rather than exposing the legacy home');
+assert.ok(home.includes('يوجد تقدم محفوظ على هذا الجهاز'), 'new-game confirmation must warn before replacing the current session');
+assert.ok(home.includes('/إيه\\s*،?\\s*ابدأ/'), 'QARTON must detect the original React-owned new-game confirmation');
+assert.ok(home.includes('var original=Array.from(root.querySelectorAll("button")).find'), 'confirming a new game must invoke the original game-owned confirmation control');
+assert.ok(home.includes('var originalNo=Array.from(root.querySelectorAll("button")).find'), 'canceling a new game must dismiss the original confirmation without changing saves');
+assert.ok(home.includes('لم نحذف الحفظ'), 'a failed handoff must explicitly preserve the existing save');
+assert.ok(home.includes('if(attempts++<180){requestAnimationFrame(inspectStart);return;}'), 'the transition must have a bounded wait and must not remain stuck forever');
+assert.ok(home.includes('view="handoff";hideLegacy();ensureOverlay();'), 'story handoff must keep the legacy home hidden while invoking the original action');
+assert.ok(home.includes('جاري فتح القصة…'), 'story handoff must show a QARTON transition state instead of revealing the legacy home');
+assert.ok(home.includes('if(live&&!live.disabled)handoffStoryAction(live,selector==="@new-game");'), 'new game and chapter actions must use the safe story handoff');
+assert.ok(home.includes('if(view==="handoff"){hideLegacy();if(overlay)overlay.style.display="flex";return;}'), "mutation-driven remounts must keep the QARTON transition visible and the legacy home hidden during handoff");
+assert.ok(mountSource.includes('if(view==="handoff"){hideLegacy();if(overlay)overlay.style.display="flex";return;}'), "mutation-driven remounts must keep QARTON visible during story handoff");
+assert.ok(home.includes('function findNewGameButton(container)'), 'Story subview must resolve the original new-game action');
+assert.ok(home.includes('hideLegacy();clearReturn();ensureOverlay();overlay.replaceChildren()'), 'Story subview must keep the legacy home hidden');
+assert.ok(!storySubview.includes('restoreLegacy()') && !storySubview.includes('overlay.style.display="none"'), 'Story subview must keep the legacy home hidden until a native story action is invoked');
+assert.ok(home.includes('function showProgress()'), 'Progress branch must expose original backup actions');
+assert.ok(home.includes('function cleanupForGame()'), 'tree must disappear during gameplay');
+
+// Every main card must route to its own dedicated subview.
+for (const marker of [
+  'card("01","⚔","القصة"',
+  'card("02","⌖","عالم قرطاج"',
+  'card("03","▣","التقدم والحفظ"',
+  'card("04","⚙","الإعدادات"'
+]) assert.ok(home.includes(marker), 'missing main card route: ' + marker);
+assert.ok(home.includes('true,showStory') && home.includes('true,showProgress'), 'Story and Progress cards must open their dedicated views');
+assert.ok(home.includes('بداية جديدة • الأجزاء المتاحة') && !home.includes('بداية جديدة • متابعة • فصول القصة'), 'Story card must not promise Continue Save in the wrong section');
+assert.ok(home.includes('الصوت السينمائي • مستوى الصوت') && !home.includes('الصوت • العرض • إمكانية الوصول'), 'Settings card must list only implemented settings');
+assert.ok(home.includes('function proxyStoryAction(') && home.includes('live.click()'), 'Story actions must invoke the live original game buttons');
+assert.ok(home.includes("function findNewGameButton(container)") && home.includes('proxyStoryAction(panel,"@new-game"'), "New Game must resolve the real primary story action instead of assuming a fixed button position");
+assert.ok(home.includes('b.dataset.qartonKind==="primary"') && home.includes("/ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/"), "New Game lookup must recognize the primary action by semantic label");
+assert.ok(home.includes("if(primary)return primary;return null;"), "New Game lookup must fail closed instead of clicking an unrelated menu button when no semantic start action is found");
+assert.ok(home.includes('root.querySelector("#btn-part2")') || home.includes('root.querySelector("#carthage-part3-start")'), 'Story must retain the original chapter entry controls');
+assert.ok(home.includes('actionButton(panel,"carthage-continue-last"') && home.includes('actionButton(panel,"carthage-export-backup"') && home.includes('actionButton(panel,"carthage-import-backup"'), 'Progress must expose all original save actions when available');
+
+// World and Settings are functional subviews backed only by existing game content and controls.
+assert.ok(home.includes('card("02","⌖","عالم قرطاج"') && home.includes('card("04","⚙","الإعدادات"'), 'World and Settings must remain explicit main-tree branches');
+assert.ok(home.includes('true,showWorld') && home.includes('true,showSettings'), 'World and Settings cards must open real subviews');
+assert.ok(home.includes('الشخصيات • الأماكن • دليل المدينة') && !home.includes('الشخصيات • الأماكن • خريطة المدينة'), 'World card must not promise an interactive map that is not implemented');
+assert.ok(home.includes('function showWorld()') && home.includes('function showSettings()'), 'both branches must render dedicated views');
+for (const marker of ['ريان','لينا','عم منصور','القائدة نور','أمين','مريم','عم الهادي','ياسمين','القائد كريم','السوق','المستشفى','الجسر','البوابة']) {
+  assert.ok(home.includes(marker), 'World guide is missing existing game content: ' + marker);
+}
+assert.ok(home.includes('function showSettings()'), 'Settings must open a dedicated view');
+assert.ok(home.includes('document.getElementById("c17-audio-control")'), 'Settings must bridge to the real cinematic audio toggle');
+assert.ok(home.includes('document.getElementById("c17-audio-volume")'), 'Settings must bridge to the real audio volume control');
+assert.ok(home.includes('live.dispatchEvent(new Event("input",{bubbles:true}))'), 'volume changes must reach the original input handler');
+for (const invented of ['أصوات الشخصيات — تشغيل / إيقاف','حجم الخط — عادي / كبير','تقليل الاهتزاز — تشغيل / إيقاف','جودة الحركة — سينمائية ثقيلة']) {
+  assert.ok(!home.includes(invented), 'Settings must not advertise a control that the game does not provide: ' + invented);
+}
+assert.ok(home.includes('if(view==="world")') && home.includes('if(view==="settings")'), 'mutation observer must preserve both subviews');
+assert.ok(home.includes("function getSubviewSignature()"), "Story and Progress must expose a stable signature for their live original controls");
+assert.ok(home.includes('if(view==="story"){hideLegacy();if(!overlay||getSubviewSignature()!==viewSignature)showStory();return;}'), "Story view must refresh when original new-game or chapter controls arrive after the view opens");
+assert.ok(home.includes('if(view==="progress"){hideLegacy();if(!overlay||getSubviewSignature()!==viewSignature)showProgress();return;}'), "Progress view must refresh when continue or backup controls arrive after the view opens");
+assert.ok(home.includes("viewSignature=getSubviewSignature();"), "subviews must remember the rendered control signature to avoid unnecessary redraws");
+assert.ok(home.includes('if(view==="settings"){var audio=document.getElementById("c17-audio-control");var volume=document.getElementById("c17-audio-volume");'), "Settings must detect late-loaded original audio controls");
+assert.ok(home.includes('if(view==="settings"){hideLegacy();if(!overlay||getSubviewSignature()!==viewSignature)showSettings();return;}'), "Settings view must refresh when original audio controls arrive after opening");
+assert.ok(home.includes('لا يغيّر وقت اللعب أو تقدمك'), 'World guide must be read-only');
+assert.ok(home.includes('إعدادات الصوت المتاحة فعلياً في اللعبة'), 'Settings must describe the real available audio controls');
+
+// Do not read, write, clear, migrate, clone, or move game-save data/controls.
+assert.ok(!/localStorage|sessionStorage|shiganshina-(slots|autosave)/.test(home), 'home navigation must not access save storage');
+assert.ok(!/cloneNode|replaceWith\(|insertBefore\(|appendChild\(original/.test(home), 'original React-owned controls must not be cloned or moved');
+assert.ok(home.includes('shell.style.visibility="hidden"'), 'original story menu must be hidden behind the tree, not deleted');
+
+// Android packaging must inject and verify the new runtime.
+assert.ok(prep.includes('qarton-main-tree-runtime'), 'Android preparation must inject the main tree');
+assert.ok(pkg.scripts.test.includes('qarton-main-tree-test.cjs'), 'npm test must run the main-tree contract test');
+for (const marker of ['qarton-main-tree-runtime', 'التقدم والحفظ']) {
+  assert.ok(workflow.includes(marker), 'Android APK verification must include ' + marker);
+}
+
+console.log('PASS: QARTON main-tree structure, safe original-control bridges, save isolation, and Android packaging.');
