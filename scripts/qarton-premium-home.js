@@ -1,5 +1,5 @@
 (function(){
-// V2 owns the home presentation. Retain this legacy module for rollback only.
+// QARTON V2 owns the home presentation; this runtime remains a guarded compatibility fallback.
 if(document.getElementById('qarton-home-v2-runtime'))return;
 if(window.__qartonPremiumHomeInstalled)return;
 window.__qartonPremiumHomeInstalled=true;

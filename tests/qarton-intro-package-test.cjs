@@ -17,16 +17,27 @@ console.log('QARTON optional intro packaging contract verified.');
 
 const vm = require('node:vm');
 const home = fs.readFileSync(path.join(root, 'scripts/qarton-home-v2.js'), 'utf8');
+const prepareWeb = fs.readFileSync(path.join(root, 'scripts/prepare-web.cjs'),'utf8');
 new vm.Script(home, {filename:'qarton-home-v2.js'});
 assert.match(home, /source\.click\(\)/, 'QARTON buttons must forward to original game actions');
 assert.match(home, /isStory\(root\)/, 'QARTON overlay must disappear during story gameplay');
 assert.doesNotMatch(home, /localStorage\.(setItem|removeItem|clear)/, 'home must not modify saved game data');
-assert.match(fs.readFileSync(path.join(root, 'scripts/prepare-web.cjs'),'utf8'), /qarton-home-v2-runtime/);
+assert.match(home, /querySelectorAll\('button,label'\)/, 'home must preserve the file-based save import action');
+assert.match(home, /input\[type="file"\]/, 'file restore action must be discovered by its actual input');
+assert.match(home, /function actionKey\(source\)/, 'equivalent native actions must be deduplicated by action type');
+assert.match(home, /button\.disabled=!!source\.disabled/, 'disabled story-part gates must carry through to QARTON controls');
+assert.match(home, /data-qarton-kind/, 'continue and restore actions must be laid out as primary full-width actions');
+assert.match(home, /safe-area-inset-top/, 'home must respect the Android status bar inset');
+assert.match(home, /height:100dvh/, 'home must size itself to the visible Android viewport');
+assert.match(prepareWeb, /qarton-home-v2-runtime/);
 console.log('QARTON home V2 parse and game-action forwarding contract verified.');
 
 // Regression guard: V2 is the only presentation layer when both runtime scripts are packaged.
 const legacyHome = fs.readFileSync(path.join(root, 'scripts/qarton-premium-home.js'), 'utf8');
 assert.match(legacyHome, /getElementById\('qarton-home-v2-runtime'\)/);
+assert.ok(prepareWeb.indexOf('qarton-home-v2-runtime') < prepareWeb.indexOf('qarton-premium-home-runtime'), 'V2 must be present before the fallback executes');
 assert.match(home, /const uniqueOriginal=\[\]/);
 assert.match(home, /const settingsCss=/);
+assert.match(prepareWeb, /qv\.scrollHeight>qv\.clientHeight\+1/, 'the fixed viewport must permit scrolling only inside an overflowing QARTON home');
+assert.doesNotMatch(prepareWeb, /touch-action:pan-x/, 'the fixed home viewport must not block QARTON vertical overflow scrolling');
 console.log('QARTON V2 home ownership and compact settings regression guards verified.');

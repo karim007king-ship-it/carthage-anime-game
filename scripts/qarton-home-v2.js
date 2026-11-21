@@ -3,8 +3,8 @@
 if(window.__qartonHomeV2Installed)return;
 window.__qartonHomeV2Installed=true;
 const css=`
-#qarton-home-v2{position:fixed;inset:0;z-index:2147482500;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;overflow:auto;overscroll-behavior:contain;background:radial-gradient(ellipse at 50% 10%,#65202e 0%,transparent 55%),linear-gradient(155deg,#07090e,#111b2a 60%,#07090e);color:#f9ebd4;font-family:system-ui,sans-serif;direction:rtl;padding:calc(env(safe-area-inset-top,0px) + 32px) 12px calc(env(safe-area-inset-bottom,0px) + 8px)}
-#qarton-home-v2 .qv-wrap{width:100%;max-width:540px;min-height:100%;display:flex;flex-direction:column;justify-content:center;gap:10px}
+#qarton-home-v2{position:fixed;inset:0;z-index:2147482500;box-sizing:border-box;width:100%;height:100dvh;display:flex;flex-direction:column;align-items:center;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;background:radial-gradient(ellipse at 50% 10%,#65202e 0%,transparent 55%),linear-gradient(155deg,#07090e,#111b2a 60%,#07090e);color:#f9ebd4;font-family:system-ui,sans-serif;direction:rtl;padding:calc(env(safe-area-inset-top,0px) + 16px) 12px calc(env(safe-area-inset-bottom,0px) + 12px)}
+#qarton-home-v2 .qv-wrap{box-sizing:border-box;width:100%;max-width:540px;min-height:100%;display:flex;flex-direction:column;justify-content:center;gap:8px}
 #qarton-home-v2 .qv-brand{text-align:center;color:#e9c67e;font-size:15px;font-weight:900;letter-spacing:4px}
 #qarton-home-v2 .qv-tag{text-align:center;color:#a99a88;font-size:9px;letter-spacing:2px;direction:ltr}
 #qarton-home-v2 h1{text-align:center;font-size:clamp(29px,8vw,44px);line-height:1.1;margin:4px 0 0;color:#fff6e9}
@@ -14,6 +14,7 @@ const css=`
 #qarton-home-v2 .qv-section-title{grid-column:1/-1;color:#e9c67e;font-size:11px;font-weight:800}
 #qarton-home-v2 button{min-width:0;min-height:44px;border:1px solid #9e7b4e;border-radius:11px;background:linear-gradient(135deg,#273346,#121927);color:#fff0d4;font:800 12px/1.3 system-ui;padding:9px 7px;cursor:pointer}
 #qarton-home-v2 button.qv-primary{grid-column:1/-1;background:linear-gradient(110deg,#8c303d,#4c1b2c);border-color:#e9c67e;font-size:15px;min-height:52px}
+#qarton-home-v2 .qv-section button[data-qarton-kind="continue"],#qarton-home-v2 .qv-section button[data-qarton-kind="restore"]{grid-column:1/-1}
 #qarton-home-v2 button:disabled{opacity:.48;cursor:not-allowed}
 #qarton-home-v2 button:focus-visible{outline:2px solid #fff0b5;outline-offset:2px}
 #qarton-home-v2 .qv-difficulty{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
@@ -31,9 +32,19 @@ let overlay=null,queued=false,signature='';
 function isStory(root){return !!root.querySelector('.game-timer')}
 function getMenu(root){return root.querySelector('.home-actions.grid')}
 function make(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text)el.textContent=text;return el}
-function cloneAction(source,cls){
+function actionKey(source){
+ const label=(source.textContent||'').trim().replace(/\s+/g,' ');
+ if((/متابعة|استكمال/.test(label)&&/حفظ/.test(label))||source.id==='carthage-continue-last')return 'continue';
+ if(/ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test(label))return 'start';
+ if(/الجزء الثاني|part\s*2/i.test(label))return 'part2';
+ if(/الجزء الثالث|الجزء 3|part\s*3/i.test(label))return 'part3';
+ if(source.tagName==='LABEL'&&source.querySelector('input[type="file"]'))return 'restore';
+ return label.toLocaleLowerCase();
+}
+function cloneAction(source,cls,kind){
  const button=make('button',cls,(source.textContent||'').trim());
- button.type='button';button.disabled=source.disabled;
+ button.type='button';button.disabled=!!source.disabled;
+ if(kind)button.setAttribute('data-qarton-kind',kind);
  button.addEventListener('click',()=>{if(!source.isConnected||source.disabled)return;source.click();schedule()});
  return button;
 }
@@ -44,13 +55,14 @@ function render(){
  if(!root||isStory(root)){remove();return}
  const menu=getMenu(root);
  if(!menu){remove();return}
- const original=Array.from(menu.querySelectorAll('button')).filter(b=>!b.closest('#qarton-home-v2'));
+ const original=Array.from(menu.querySelectorAll('button,label')).filter(el=>!el.closest('#qarton-home-v2')&&(el.tagName==='BUTTON'||el.querySelector('input[type="file"]')));
  if(!original.length){remove();return}
  const difficulty=Array.from(root.querySelectorAll('[aria-label="اختار الصعوبة"] button')).filter(b=>!b.closest('#qarton-home-v2'));
  const extras=Array.from(root.querySelectorAll('.home-set button')).filter(b=>!b.closest('#qarton-home-v2'));
  const uniqueOriginal=[];const seenActions=new Set();
- original.forEach(b=>{const label=(b.textContent||'').trim().replace(/\\s+/g,' ');const kind=/متابعة|استكمال/.test(label)&&/حفظ/.test(label)?'continue':label;if(seenActions.has(kind))return;seenActions.add(kind);uniqueOriginal.push(b)});
- const current=[...uniqueOriginal,...difficulty,...extras].map(b=>[b.textContent,b.disabled,b.getAttribute('aria-pressed')].join(':')).join('|');
+ original.forEach(b=>{const kind=actionKey(b);if(seenActions.has(kind))return;seenActions.add(kind);uniqueOriginal.push({source:b,kind:kind})});
+ const tracked=[...uniqueOriginal.map(action=>action.source),...difficulty,...extras];
+ const current=tracked.map(b=>[b.textContent,b.disabled,b.getAttribute('aria-pressed')].join(':')).join('|');
  if(overlay&&current===signature)return;
  signature=current;
  if(overlay)overlay.remove();
@@ -59,7 +71,7 @@ function render(){
  wrap.append(make('div','qv-brand','QARTON'),make('div','qv-tag','CULTURE • POWER • CINEMA'),make('h1','', 'آخر يوم في قرطاج'),make('div','qv-sub','بالأنمي'),make('p','qv-description','60 دقيقة… ومدينة كاملة باش طيح. خريطة، ثقة، 5 أدلة، و9 نهايات.'));
  if(difficulty.length){const group=make('div','qv-difficulty');difficulty.forEach(b=>{const c=cloneAction(b);if(b.getAttribute('aria-pressed'))c.setAttribute('aria-pressed',b.getAttribute('aria-pressed'));group.append(c)});wrap.append(group)}
  const section=make('div','qv-section');section.append(make('div','qv-section-title','اختار رحلتك'));
- uniqueOriginal.forEach((b,i)=>{const label=(b.textContent||'').trim();section.append(cloneAction(b,/ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test(label)||i===0?'qv-primary':''))});
+ uniqueOriginal.forEach(({source,kind})=>{section.append(cloneAction(source,kind==='start'?'qv-primary':'',kind))});
  wrap.append(section);
  if(extras.length){const details=make('details','qv-settings');const summary=make('summary','','الإعدادات والخيارات');details.append(summary);const bottom=make('div','qv-bottom');extras.forEach(b=>bottom.append(cloneAction(b)));details.append(bottom);wrap.append(details)}
  overlay.append(wrap);document.body.append(overlay);

@@ -140,7 +140,9 @@ jobs:
             'carthageCinematicLight',
             'carthageCinematicImpact',
             'carthage-fixed-home-runtime',
+            'qarton-home-v2-runtime',
             'qarton-premium-home-runtime',
+            'carthage-part3-start',
             'qarton-brand-row',
             'qarton-home-info'
           ];
