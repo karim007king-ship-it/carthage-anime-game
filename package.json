@@ -4,7 +4,7 @@
   "private": true,
   "description": "Carthage interactive story game - cinematic anime pilot",
   "scripts": {
-    "test": "node tests/smoke-test.cjs && node tests/save-recovery-test.cjs && node --test tests/cinematic-adapter.test.mjs && node --test tests/cinematic-assets.test.cjs && node tests/qarton-main-tree-test.cjs && node tests/qarton-lifecycle-audit.cjs && node --test tests/cinematic-character-engine.test.mjs",
+    "test": "node tests/smoke-test.cjs && node tests/save-recovery-test.cjs && node --test tests/cinematic-adapter.test.mjs && node --test tests/cinematic-assets.test.cjs && node tests/qarton-main-tree-test.cjs && node tests/qarton-lifecycle-audit.cjs && node --test tests/cinematic-character-engine.test.mjs && node tests/qarton-lifecycle-browser.test.cjs",
     "prepare:web": "node scripts/prepare-web.cjs && npm run build:cinematic-adapter",
     "build:cinematic-adapter": "esbuild scripts/carthage-cinematic-bootstrap.mjs --bundle --format=iife --platform=browser --target=es2020 --outfile=www/carthage-cinematic-adapter.js",
     "android:sync": "npm run prepare:web && cap sync android",
@@ -19,7 +19,8 @@
   },
   "devDependencies": {
     "@capacitor/cli": "8.6.0",
-    "esbuild": "0.25.12"
+    "esbuild": "0.25.12",
+    "playwright": "^1.56.1"
   },
   "engines": {
     "node": ">=22"
