@@ -23,8 +23,9 @@ const css=`
 #qarton-home-v2 .qv-bottom button{min-height:34px;font-size:10px}
 @media(max-height:650px){#qarton-home-v2 .qv-wrap{justify-content:flex-start;gap:6px}#qarton-home-v2 h1{font-size:28px}#qarton-home-v2 .qv-section{padding:7px;gap:5px}#qarton-home-v2 button{min-height:36px}}
 `;
+const settingsCss="#qarton-home-v2 .qv-settings{border:1px solid #c59a5666;border-radius:10px;padding:7px;background:#0d1421d9}#qarton-home-v2 .qv-settings summary{font-size:11px;font-weight:800;color:#e9c67e;cursor:pointer;text-align:center}#qarton-home-v2 .qv-settings .qv-bottom{padding-top:8px}";
 const compactCss="\n/* Mobile compact layout: status-bar clearance, less wrapping, and bounded screen height. */\n#qarton-home-v2{overflow:auto!important;padding-top:calc(env(safe-area-inset-top,0px) + 44px)!important}\n#qarton-home-v2 .qv-wrap{justify-content:flex-start!important;min-height:0!important;gap:5px!important}\n#qarton-home-v2 .qv-brand{font-size:12px!important;letter-spacing:2px!important}\n#qarton-home-v2 .qv-tag{font-size:8px!important}\n#qarton-home-v2 h1{font-size:clamp(25px,6vw,34px)!important;margin:0!important}\n#qarton-home-v2 .qv-sub{font-size:11px!important}\n#qarton-home-v2 .qv-description{font-size:10px!important;line-height:1.35!important}\n#qarton-home-v2 .qv-section{padding:7px!important;gap:5px!important;border-radius:12px!important}\n#qarton-home-v2 .qv-section-title{font-size:10px!important}\n#qarton-home-v2 button{min-height:36px!important;padding:6px!important;font-size:10px!important;line-height:1.2!important}\n#qarton-home-v2 button.qv-primary{min-height:43px!important;font-size:12px!important}\n#qarton-home-v2 .qv-difficulty button{min-height:30px!important}\n#qarton-home-v2 .qv-bottom{gap:5px!important}\n#qarton-home-v2 .qv-bottom button{min-height:30px!important;font-size:9px!important}\n@media(max-height:740px){#qarton-home-v2{padding-top:calc(env(safe-area-inset-top,0px) + 34px)!important}#qarton-home-v2 .qv-wrap{gap:3px!important}#qarton-home-v2 .qv-description{font-size:9px!important}#qarton-home-v2 button{min-height:32px!important}#qarton-home-v2 button.qv-primary{min-height:38px!important}}\n";
-const style=document.createElement('style');style.id='qarton-home-v2-style';style.textContent=css+compactCss;document.head.appendChild(style);
+const style=document.createElement('style');style.id='qarton-home-v2-style';style.textContent=css+compactCss+settingsCss;document.head.appendChild(style);
 let overlay=null,queued=false,signature='';
 function isStory(root){return !!root.querySelector('.game-timer')}
 function getMenu(root){return root.querySelector('.home-actions.grid')}
@@ -47,7 +48,7 @@ function render(){
  const difficulty=Array.from(root.querySelectorAll('[aria-label="اختار الصعوبة"] button')).filter(b=>!b.closest('#qarton-home-v2'));
  const extras=Array.from(root.querySelectorAll('.home-set button')).filter(b=>!b.closest('#qarton-home-v2'));
  const uniqueOriginal=[];const seenActions=new Set();
- original.forEach(b=>{const label=(b.textContent||'').trim().replace(/\\s+/g,' ');const kind=/متابعة.*آخر.*حفظ|آخر.*حفظ.*متابعة/.test(label)?'continue':label;if(seenActions.has(kind))return;seenActions.add(kind);uniqueOriginal.push(b)});
+ original.forEach(b=>{const label=(b.textContent||'').trim().replace(/\\s+/g,' ');const kind=/متابعة|استكمال/.test(label)&&/حفظ/.test(label)?'continue':label;if(seenActions.has(kind))return;seenActions.add(kind);uniqueOriginal.push(b)});
  const current=[...uniqueOriginal,...difficulty,...extras].map(b=>[b.textContent,b.disabled,b.getAttribute('aria-pressed')].join(':')).join('|');
  if(overlay&&current===signature)return;
  signature=current;
@@ -59,7 +60,7 @@ function render(){
  const section=make('div','qv-section');section.append(make('div','qv-section-title','اختار رحلتك'));
  uniqueOriginal.forEach((b,i)=>{const label=(b.textContent||'').trim();section.append(cloneAction(b,/ابدأ الجزء الأول|ابدأ من البداية|لعبة جديدة/.test(label)||i===0?'qv-primary':''))});
  wrap.append(section);
- if(extras.length){const bottom=make('div','qv-bottom');extras.forEach(b=>bottom.append(cloneAction(b)));wrap.append(bottom)}
+ if(extras.length){const details=make('details','qv-settings');const summary=make('summary','','الإعدادات والخيارات');details.append(summary);const bottom=make('div','qv-bottom');extras.forEach(b=>bottom.append(cloneAction(b)));details.append(bottom);wrap.append(details)}
  overlay.append(wrap);document.body.append(overlay);
 }
 function schedule(){if(queued)return;queued=true;requestAnimationFrame(render)}
