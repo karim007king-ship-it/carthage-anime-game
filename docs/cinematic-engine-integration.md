@@ -2,7 +2,7 @@
 
 ## Current integration state
 
-The engine dependency is pinned to commit `550cfa3f3439ce30dbc4454d2b6d8c9e8284e6d4` rather than a moving branch or tag. The Android preparation step bundles the adapter into `www/carthage-cinematic-adapter.js` and includes it as a separate script asset.
+The engine dependency is pinned to commit `c0583058c570c8b5c7fee7da8cbe5818b67612af` rather than a moving branch or tag. The Android preparation step bundles the adapter into `www/carthage-cinematic-adapter.js` and includes it as a separate script asset.
 
 The browser bootstrap only registers `window.QARTON_CINEMATIC_ENGINE`. It does not instantiate a runtime, create an overlay, start audio, or mount a scene. This is intentional: the current game presentation remains the active renderer until a specific scene is approved for the pilot.
 
@@ -83,3 +83,9 @@ The validator runs against both the source web root and the Capacitor-packaged `
 ## Validation still required
 
 CI validates Node-level adapter behavior and verifies that the bundled adapter is copied into the Capacitor Android assets. It does not prove visual quality or audio behavior on a physical Android device. The HONOR 400 Pro / Android WebView check remains a separate release gate.
+
+## Character animation contract test
+
+The Carthage test suite imports the pinned engine package and mounts a single isolated test character through `createCharacterStage()`. It exercises the deterministic idle sampler, movement pose sampler, and sprite-frame sampler against a fake DOM host, verifies the configured sprite asset keys change as the shared clock advances, then verifies stage teardown removes the character element.
+
+This is an integration contract test only. It does not mount a character in the live story, supply production anime artwork, or prove Android WebView rendering. The game still needs an approved local character sprite set and a dedicated story-scene host before a visual pilot can be enabled.
