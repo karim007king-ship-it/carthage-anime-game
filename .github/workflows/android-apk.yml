@@ -2,6 +2,12 @@ name: Build Carthage Android APK
 
 on:
   workflow_dispatch:
+    inputs:
+      qarton_intro:
+        description: "Include official QARTON intro in this APK"
+        required: false
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths:
@@ -72,7 +78,21 @@ jobs:
         run: npm test
 
       - name: Prepare web assets
+        env:
+          QARTON_INTRO_ENABLE: ${{ github.event_name == 'pull_request' || inputs.qarton_intro == true && '1' || '0' }}
         run: npm run prepare:web
+
+      - name: Verify optional intro bundle
+        run: |
+          if [ -f www/qarton-intro/official-intro.mp4 ]; then
+            echo "Official intro included in this APK build"
+            sha256sum www/qarton-intro/official-intro.mp4
+            test -s www/qarton-intro/official-intro-player.js
+            test -s www/qarton-intro/official-intro.css
+            grep -q qarton-official-intro-bootstrap www/index.html
+          else
+            echo "Official intro disabled in this build"
+          fi
 
       - name: Generate Android project
         run: npx cap add android
@@ -134,6 +154,13 @@ jobs:
           console.log('Bytes: ' + dst.length + ' | SHA-256: ' + hash(dst));
           console.log('Startup diagnostics, watchdog, real story module, save and continue controls are present.');
           NODE
+
+      - name: Verify intro copied into Android assets
+        run: |
+          if [ -f www/qarton-intro/official-intro.mp4 ]; then
+            test -f android/app/src/main/assets/public/qarton-intro/official-intro.mp4
+            cmp www/qarton-intro/official-intro.mp4 android/app/src/main/assets/public/qarton-intro/official-intro.mp4
+          fi
 
       - name: Apply Carthage launcher icon
         run: node scripts/apply-android-branding.cjs
