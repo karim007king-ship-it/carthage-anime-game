@@ -47,22 +47,32 @@ async function main() {
   ]);
   const bootstrap = `<link rel="stylesheet" href="./qarton-intro/official-intro.css">
 <script id="qarton-official-intro-bootstrap" type="module">
-import { createOfficialIntroPlayer } from './qarton-intro/official-intro-player.js';
+const game=document.getElementById('root');
+const complete=()=>{ game.inert=false; };
+let playing=false;
 try {
   const key='qarton-official-intro-seen-v1';
-  // A reload used to return from gameplay must not replay the video.
-  const seen=sessionStorage.getItem(key)==='1';
+  // In-app reloads return to the home without replaying the video.
+  let seen=false;
+  try { seen=sessionStorage.getItem(key)==='1'; } catch {}
   if (!seen && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    sessionStorage.setItem(key,'1');
+    game.inert=true;
+    const { createOfficialIntroPlayer }=await import('./qarton-intro/official-intro-player.js');
+    try { sessionStorage.setItem(key,'1'); } catch {}
     const player=createOfficialIntroPlayer({
       mount:document.body,
       src:'./qarton-intro/official-intro.mp4',
       timeoutMs:10000,
-      onComplete:()=>{}
+      onComplete:complete
     });
+    playing=true;
     player.start().catch(()=>player.skip());
   }
-} catch(error) { console.warn('Optional QARTON intro unavailable',error); }
+} catch(error) {
+  console.warn('Optional QARTON intro unavailable',error);
+} finally {
+  if (!playing) complete();
+}
 </script>`;
   html = html.replace('</body>', bootstrap + '\n</body>');
   await fs.writeFile(htmlPath, html);

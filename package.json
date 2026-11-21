@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node tests/smoke-test.cjs && node tests/save-recovery-test.cjs && node tests/qarton-intro-package-test.cjs",
     "prepare:web": "node scripts/prepare-web.cjs && node scripts/package-qarton-intro.cjs",
-    "android:sync": "npm run prepare:web && cap sync android"
+    "android:sync": "npm run prepare:web && cap sync android",
+    "test:home": "node --test tests/qarton-home-browser-test.cjs"
   },
   "dependencies": {
     "@capacitor/android": "8.6.0",
@@ -15,7 +16,8 @@
     "@capacitor/share": "8.0.0"
   },
   "devDependencies": {
-    "@capacitor/cli": "8.6.0"
+    "@capacitor/cli": "8.6.0",
+    "playwright": "1.58.2"
   },
   "engines": {
     "node": ">=22"

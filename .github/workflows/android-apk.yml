@@ -82,6 +82,12 @@ jobs:
           QARTON_INTRO_ENABLE: ${{ (github.event_name == 'pull_request' || inputs.qarton_intro == true) && '1' || '0' }}
         run: npm run prepare:web
 
+      - name: Run portrait home browser regressions
+        if: github.event_name == 'pull_request' || inputs.qarton_intro == true
+        env:
+          QARTON_BROWSER_EXECUTABLE: /usr/bin/google-chrome
+        run: npm run test:home
+
       - name: Verify optional intro bundle
         run: |
           if [ -f www/qarton-intro/official-intro.mp4 ]; then
@@ -139,15 +145,14 @@ jobs:
             'carthage-import-backup',
             'carthageCinematicLight',
             'carthageCinematicImpact',
-            'carthage-fixed-home-runtime',
-            'qarton-home-v2-runtime',
-            'qarton-premium-home-runtime',
-            'carthage-part3-start',
-            'qarton-brand-row',
-            'qarton-home-info'
+            'qarton-home-v2-style',
+            'createElement(QartonHome',
+            'data-qarton-card',
+            'carthage-part3-start'
           ];
           const html = dst.toString('utf8');
           const missing = markers.filter(marker => !html.includes(marker));
+          if (html.includes('qarton-premium-home-runtime') || html.includes('qarton-home-v2-runtime')) throw new Error('Competing legacy home runtime in Android assets');
           if (missing.length) throw new Error('Packaged HTML is missing runtime markers: ' + missing.join(', '));
           const hash = b => crypto.createHash('sha256').update(b).digest('hex');
           if (hash(src) !== hash(dst)) throw new Error('Packaged HTML differs from www/index.html; refusing to build a stale APK.');
