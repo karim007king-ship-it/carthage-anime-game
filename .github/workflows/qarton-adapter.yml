@@ -4,14 +4,14 @@ on:
   pull_request:
     paths:
       - "src/qarton/**"
-      - "tests/qarton-adapter.test.mjs"
+      - "tests/qarton-*.test.mjs"
       - ".github/workflows/qarton-adapter.yml"
   push:
     branches:
       - feature/qarton-adapter-pilot
     paths:
       - "src/qarton/**"
-      - "tests/qarton-adapter.test.mjs"
+      - "tests/qarton-*.test.mjs"
       - ".github/workflows/qarton-adapter.yml"
   workflow_dispatch:
 
@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: "22"
       - name: Run isolated QARTON adapter tests
-        run: node --test tests/qarton-adapter.test.mjs
+        run: node --test tests/qarton-*.test.mjs
       - name: Verify existing Carthage regression suite
         run: npm test
       - name: Verify Android web preparation
