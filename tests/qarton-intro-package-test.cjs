@@ -23,3 +23,10 @@ assert.match(home, /isStory\(root\)/, 'QARTON overlay must disappear during stor
 assert.doesNotMatch(home, /localStorage\.(setItem|removeItem|clear)/, 'home must not modify saved game data');
 assert.match(fs.readFileSync(path.join(root, 'scripts/prepare-web.cjs'),'utf8'), /qarton-home-v2-runtime/);
 console.log('QARTON home V2 parse and game-action forwarding contract verified.');
+
+// Regression guard: V2 is the only presentation layer when both runtime scripts are packaged.
+const legacyHome = fs.readFileSync(path.join(root, 'scripts/qarton-premium-home.js'), 'utf8');
+assert.match(legacyHome, /getElementById\('qarton-home-v2-runtime'\)/);
+assert.match(home, /const uniqueOriginal=\[\]/);
+assert.match(home, /const settingsCss=/);
+console.log('QARTON V2 home ownership and compact settings regression guards verified.');
