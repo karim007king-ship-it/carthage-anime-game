@@ -2,6 +2,73 @@ import { buildLayerPlan } from "@qarton/cinematic-engine";
 import { createCinematicRuntime } from "@qarton/cinematic-engine/engine";
 import { createSceneDefinition } from "@qarton/cinematic-engine/scene";
 
+function createHostPageLifecycle({ target, pageTarget = target, setActive, onError }) {
+  const validTarget = value => value
+    && typeof value.addEventListener === "function"
+    && typeof value.removeEventListener === "function";
+  if (!validTarget(target) || !validTarget(pageTarget)) {
+    throw new TypeError("Page lifecycle requires document and page EventTargets");
+  }
+
+  let started = false;
+  let active = true;
+  const report = error => {
+    try { onError(error, { phase: "lifecycle" }); } catch { /* diagnostics must not break lifecycle */ }
+  };
+  const apply = next => {
+    if (active === next) return;
+    try {
+      setActive(next);
+      active = next;
+    } catch (error) {
+      report(error);
+    }
+  };
+  const sync = () => apply(target.visibilityState !== "hidden");
+  const listeners = [
+    [target, "visibilitychange", sync],
+    [pageTarget, "pagehide", () => apply(false)],
+    [pageTarget, "pageshow", sync]
+  ];
+
+  function start() {
+    if (started) return false;
+    const attached = [];
+    try {
+      for (const [eventTarget, type, listener] of listeners) {
+        eventTarget.addEventListener(type, listener);
+        attached.push([eventTarget, type, listener]);
+      }
+      started = true;
+      sync();
+      return true;
+    } catch (error) {
+      for (const [eventTarget, type, listener] of attached.reverse()) {
+        try { eventTarget.removeEventListener(type, listener); } catch { /* best effort rollback */ }
+      }
+      throw error;
+    }
+  }
+
+  function stop() {
+    if (!started) return false;
+    const errors = [];
+    for (const [eventTarget, type, listener] of listeners) {
+      try { eventTarget.removeEventListener(type, listener); } catch (error) { errors.push(error); }
+    }
+    if (errors.length === 1) throw errors[0];
+    if (errors.length > 1) throw new AggregateError(errors, "Page lifecycle listeners could not all be removed");
+    started = false;
+    return true;
+  }
+
+  return Object.freeze({
+    start,
+    stop,
+    getState: () => Object.freeze({ started, active })
+  });
+}
+
 /**
  * Carthage-owned presentation bridge.
  *
@@ -27,8 +94,6 @@ export function createCarthageCinematicAdapter({
   }
   if (typeof onError !== "function") throw new TypeError("onError must be a function");
 
-  // The adapter temporarily owns these host styles. Restore their original
-  // values after successful teardown, without overwriting later host changes.
   const originalStyles = root.style ? {
     position: root.style.position,
     overflow: root.style.overflow,
@@ -46,8 +111,6 @@ export function createCarthageCinematicAdapter({
     root,
     duration,
     device,
-    lifecycleTarget,
-    lifecyclePageTarget,
     loadAsset: async key => {
       const url = assets[key];
       if (typeof url !== "string" || !url.trim()) {
@@ -69,7 +132,6 @@ export function createCarthageCinematicAdapter({
       });
 
       const layers = buildLayerPlan(scene, profile);
-
       for (const [index, layer] of layers.entries()) {
         const url = await assetManager.load(layer.asset);
         const image = document.createElement("img");
@@ -94,14 +156,29 @@ export function createCarthageCinematicAdapter({
         stage.appendChild(image);
       }
       return stage;
-    },
-    onLifecycleError: error => onError(error, { phase: "lifecycle" }),
-    onAudioError: error => onError(error, { phase: "audio" })
+    }
   });
 
+  let active = true;
   let destroyStarted = false;
   let destroyed = false;
   let destroyPromise = null;
+  const setActive = next => {
+    if (destroyStarted) throw new Error("Carthage cinematic adapter has been destroyed");
+    if (typeof next !== "boolean") throw new TypeError("Activity state must be boolean");
+    runtime.setActive(next);
+    active = next;
+    return active;
+  };
+  const pageLifecycle = lifecycleTarget
+    ? createHostPageLifecycle({
+      target: lifecycleTarget,
+      pageTarget: lifecyclePageTarget ?? lifecycleTarget,
+      setActive,
+      onError
+    })
+    : null;
+  pageLifecycle?.start();
 
   async function mountScene(config, options = {}) {
     if (destroyStarted) throw new Error("Carthage cinematic adapter has been destroyed");
@@ -123,13 +200,22 @@ export function createCarthageCinematicAdapter({
   function destroy() {
     if (destroyed) return Promise.resolve();
     if (destroyPromise) return destroyPromise;
-    // Keep the adapter closed to new scenes while teardown is pending. If a
-    // native/DOM cleanup fails, a later destroy() call can retry the runtime.
     destroyStarted = true;
-    destroyPromise = runtime.destroy().then(() => {
+    destroyPromise = (async () => {
+      const errors = [];
+      for (const cleanup of [
+        () => pageLifecycle?.stop(),
+        () => runtime.destroy()
+      ]) {
+        try { await cleanup(); } catch (error) { errors.push(error); }
+      }
+      if (errors.length === 1) throw errors[0];
+      if (errors.length > 1) {
+        throw new AggregateError(errors, "Carthage cinematic adapter teardown failed");
+      }
       restoreHostStyles();
       destroyed = true;
-    }).finally(() => {
+    })().finally(() => {
       destroyPromise = null;
     });
     return destroyPromise;
@@ -139,7 +225,7 @@ export function createCarthageCinematicAdapter({
     mountScene,
     destroy,
     getProfile: runtime.getProfile,
-    get isActive() { return runtime.isActive(); },
-    setActive: runtime.setActive
+    get isActive() { return active && !destroyed; },
+    setActive
   });
 }
