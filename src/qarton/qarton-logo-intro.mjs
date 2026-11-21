@@ -22,6 +22,7 @@ export function createQartonLogoIntro({
       video.removeAttribute("src");
       video.load();
     }
+    doc.removeEventListener("visibilitychange", onVisibility);
     overlay?.remove();
     overlay = undefined;
     video = undefined;
