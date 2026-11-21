@@ -79,7 +79,7 @@ jobs:
 
       - name: Prepare web assets
         env:
-          QARTON_INTRO_ENABLE: ${{ github.event_name == 'pull_request' || inputs.qarton_intro == true && '1' || '0' }}
+          QARTON_INTRO_ENABLE: ${{ (github.event_name == 'pull_request' || inputs.qarton_intro == true) && '1' || '0' }}
         run: npm run prepare:web
 
       - name: Verify optional intro bundle
