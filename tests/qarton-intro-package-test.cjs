@@ -29,6 +29,12 @@ assert.match(home, /button\.disabled=!!source\.disabled/, 'disabled story-part g
 assert.match(home, /data-qarton-kind/, 'continue and restore actions must be laid out as primary full-width actions');
 assert.match(home, /safe-area-inset-top/, 'home must respect the Android status bar inset');
 assert.match(home, /height:100dvh/, 'home must size itself to the visible Android viewport');
+assert.match(home, /const cards=\[/, 'the post-intro home must render the four QARTON sections');
+assert.match(home, /card\.addEventListener\('click'/, 'every QARTON card must open its working section');
+assert.match(home, /function showPanel\(/, 'story, world, progress and settings sections must have live content');
+assert.match(home, /activePanel==='story'/, 'the story section must expose start, continue, and chapter controls');
+assert.match(home, /activePanel==='progress'/, 'the save section must expose real save and continue actions');
+assert.match(home, /activePanel==='settings'/, 'the settings section must forward to native settings controls');
 assert.match(prepareWeb, /qarton-home-v2-runtime/);
 console.log('QARTON home V2 parse and game-action forwarding contract verified.');
 
