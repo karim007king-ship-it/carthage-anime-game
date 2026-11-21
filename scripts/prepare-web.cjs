@@ -360,6 +360,11 @@ html = html.replace('</body>', fixedHomeViewport + '</body>');
 const qartonHomeRuntime = fs.readFileSync(path.join(__dirname, 'qarton-premium-home.js'), 'utf8');
 html = html.replace('</body>', '<script id="qarton-premium-home-runtime">' + qartonHomeRuntime + '</script></body>');
 
+// QARTON V2 home is a separate visual layer; every action forwards to the existing React control.
+// Never replace the story root or change saved game state.
+const qartonHomeV2 = fs.readFileSync(path.join(__dirname, 'qarton-home-v2.js'), 'utf8');
+html = html.replace('</body>', '<script id="qarton-home-v2-runtime">' + qartonHomeV2 + '</script></body>');
+
 const inlineScripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
 let executable = 0;
 for (const [, attrs, body] of inlineScripts) {
