@@ -32,6 +32,8 @@ assert.match(home, /height:100dvh/, 'home must size itself to the visible Androi
 assert.match(home, /const cards=\[/, 'the post-intro home must render the four QARTON sections');
 assert.match(home, /card\.addEventListener\('click'/, 'every QARTON card must open its working section');
 assert.match(home, /function showPanel\(/, 'story, world, progress and settings sections must have live content');
+assert.match(home, /function hasNativeTransient\(/, 'native confirmation and save dialogs must be released above the home overlay');
+assert.match(home, /لعبة جديدة؟\|خانات الجلسة/, 'new-game confirmation and save-slot flows must remain visible and usable');
 assert.match(home, /activePanel==='story'/, 'the story section must expose start, continue, and chapter controls');
 assert.match(home, /activePanel==='progress'/, 'the save section must expose real save and continue actions');
 assert.match(home, /activePanel==='settings'/, 'the settings section must forward to native settings controls');

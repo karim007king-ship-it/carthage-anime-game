@@ -52,6 +52,7 @@ const compactCss="\n/* Mobile compact layout: status-bar clearance, less wrappin
 const style=document.createElement('style');style.id='qarton-home-v2-style';style.textContent=css+compactCss+settingsCss+portraitCss;document.head.appendChild(style);
 let overlay=null,queued=false,signature='',activePanel='home';
 function isStory(root){return !!root.querySelector('.game-timer')}
+function hasNativeTransient(root){const text=root.textContent||'';return /لعبة جديدة؟|خانات الجلسة/.test(text)||!!root.querySelector('[role="dialog"],[aria-modal="true"],.fixed.inset-0')}
 function getMenu(root){return root.querySelector('.home-actions.grid')}
 function make(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text)el.textContent=text;return el}
 function actionKey(source){
@@ -110,7 +111,7 @@ function showPanel(root,wrap,actions,difficulty,extras){
 function render(){
  queued=false;
  const root=document.getElementById('root');
- if(!root||isStory(root)){remove();return}
+ if(!root||isStory(root)||hasNativeTransient(root)){remove();return}
  const menu=getMenu(root);
  if(!menu){remove();return}
  const original=Array.from(menu.querySelectorAll('button,label')).filter(el=>!el.closest('#qarton-home-v2')&&(el.tagName==='BUTTON'||el.querySelector('input[type="file"]')));
