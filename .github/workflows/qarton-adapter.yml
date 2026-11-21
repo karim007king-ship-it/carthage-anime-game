@@ -1,0 +1,35 @@
+name: QARTON adapter pilot checks
+
+on:
+  pull_request:
+    paths:
+      - "src/qarton/**"
+      - "tests/qarton-*.test.mjs"
+      - ".github/workflows/qarton-adapter.yml"
+  push:
+    branches:
+      - feature/qarton-adapter-pilot
+    paths:
+      - "src/qarton/**"
+      - "tests/qarton-*.test.mjs"
+      - ".github/workflows/qarton-adapter.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  adapter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run isolated QARTON adapter tests
+        run: node --test tests/qarton-*.test.mjs
+      - name: Verify existing Carthage regression suite
+        run: npm test
+      - name: Verify Android web preparation
+        run: npm run prepare:web
