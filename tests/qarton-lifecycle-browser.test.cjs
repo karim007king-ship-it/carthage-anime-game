@@ -26,12 +26,18 @@ const { chromium } = require('playwright');
     assert.equal(await page.locator('#root main').innerText(),'مقدمة القصة\nكمّل...','story intro must remain visible after the QARTON handoff');
 
     await page.evaluate(() => {
+      document.getElementById('root').innerHTML='<main><div class="game-timer">60:00</div><section>مشهد اللعب الفعلي</section></main>';
+    });
+    await page.waitForSelector('#root .game-timer');
+    assert.equal(await page.locator('#qarton-main-tree').count(),0,'QARTON home overlay must stay removed during active gameplay');
+
+    await page.evaluate(() => {
       document.getElementById('root').innerHTML='<main><div class="home-actions flex"><div class="home-actions grid"><button id="start-again">ابدأ الجزء الأول</button></div></div></main>';
     });
     await page.waitForSelector('#qarton-main-tree',{timeout:3000});
     assert.equal(await page.locator('#qarton-main-tree').isVisible(),true,'QARTON home must be restored after React returns from gameplay');
     assert.match(await page.locator('#qarton-main-tree').innerText(),/القصة|آخر يوم في قرطاج/,'restored overlay must render the QARTON home tree');
-    console.log('PASS: browser lifecycle home -> story intro -> home return');
+    console.log('PASS: browser lifecycle home -> story intro -> gameplay -> home return');
   } finally {
     await browser.close();
   }
