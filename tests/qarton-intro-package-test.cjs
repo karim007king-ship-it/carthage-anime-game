@@ -14,3 +14,12 @@ assert.match(source, /timeoutMs:10000/);
 assert.match(source, /src:'\.\/qarton-intro\/official-intro\.mp4'/);
 assert.doesNotMatch(source, /localStorage\.(setItem|removeItem|clear)/);
 console.log('QARTON optional intro packaging contract verified.');
+
+const vm = require('node:vm');
+const home = fs.readFileSync(path.join(root, 'scripts/qarton-home-v2.js'), 'utf8');
+new vm.Script(home, {filename:'qarton-home-v2.js'});
+assert.match(home, /source\.click\(\)/, 'QARTON buttons must forward to original game actions');
+assert.match(home, /isStory\(root\)/, 'QARTON overlay must disappear during story gameplay');
+assert.doesNotMatch(home, /localStorage\.(setItem|removeItem|clear)/, 'home must not modify saved game data');
+assert.match(fs.readFileSync(path.join(root, 'scripts/prepare-web.cjs'),'utf8'), /qarton-home-v2-runtime/);
+console.log('QARTON home V2 parse and game-action forwarding contract verified.');
