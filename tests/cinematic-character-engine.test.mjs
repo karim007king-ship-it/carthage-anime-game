@@ -75,9 +75,9 @@ test("Carthage can use deterministic idle, walk and sprite-frame APIs from its p
     characters: [{
       controller,
       sprites: {
-        idle: "asset://idle",
-        "walk-a": "asset://walk-a",
-        "walk-b": "asset://walk-b"
+        idle: "idle",
+        "walk-a": "walk-a",
+        "walk-b": "walk-b"
       }
     }],
     idleAnimations: { "pilot-hero": idle },
