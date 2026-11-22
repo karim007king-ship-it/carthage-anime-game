@@ -16,4 +16,32 @@ The mobile playback, audio and skip button were confirmed manually in QARTON Tes
 
 ## Current status
 
-Planning branch only. The MP4 and runtime have **not** yet been copied into Carthage, and the game does **not** play the intro yet. No changes to the game or saves.
+Implemented on PR #19. The approved video is packaged by `scripts/package-qarton-intro.cjs`, and the four-card home is mounted within React via `scripts/prepare-web.cjs` and `scripts/qarton-home-v2.js`. Browser and Android WebView checks passed in GitHub Actions run #44966971460; the user also confirmed the game works on their Android phone. Keep PR #19 unmerged until final release review.
+
+## Stabilization and cleanup roadmap
+
+### P0 — Protect saved games before any migration
+- Preserve `shiganshina-*` storage keys, import/export, chapters, difficulty, language settings and Part 3 unlock logic.
+- **Audit the embedded `carthage-drive-recovery-seed` in `scripts/prepare-web.cjs`:** it currently inserts a hard-coded chapter-5 save if no valid save exists. Do not delete or change this behavior until a verified backup and a migration regression test exist.
+- After backup validation, move legacy recovery to an explicit, opt-in import path; a clean install should start with empty save slots.
+- Test clean install, existing valid save, malformed save, export/import, new game, and upgrade without clearing app data.
+
+### P1 — Reduce maintenance risk
+- Split the large `prepare-web.cjs` patch pipeline into named, independently tested transforms, preserving byte-for-byte generated behavior initially.
+- Centralize save-record validation to avoid divergent acceptance rules between recovery, import, and continue flows.
+- Keep one React home source of truth; avoid restoring overlay-based legacy menus.
+- Update docs and remove dead scripts only after references and build consumers are checked.
+
+### P2 — Game experience improvements (proposals, not implemented)
+- Add a story progress map with completed chapters, current chapter, and locked content.
+- Improve world encyclopedia entries for characters and Carthage locations.
+- Add accessibility checks for 4 languages, small screens, reduced motion and screen readers.
+- Add a user-visible save/restore confirmation and a manual backup verification flow.
+
+### P3 — Cinematic engine integration (proposals, not implemented)
+- Integrate the reusable QARTON scene clock and cinematic director behind a feature flag, first in one pilot scene.
+- Profile 2D animation, layered backgrounds, audio synchronization and Android memory usage before expanding.
+- Keep the engine isolated from save format and navigation until compatibility tests pass.
+
+## Release gate
+Do not merge solely because tests are green. Require a signed APK build, browser regression, Android WebView regression, and a manual upgrade test on a device with an existing save.
