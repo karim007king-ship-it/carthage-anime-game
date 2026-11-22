@@ -6,19 +6,7 @@ const path=require('node:path');
 const read=id=>JSON.parse(fs.readFileSync(path.join(__dirname,'..','game-content/story/chapters',id+'.json'),'utf8'));
 const groups=['p1-gate-manifest','p2-protection-cost'];
 
-function inspectCheckpoint(chapter,checkpoint){
- if(!checkpoint||typeof checkpoint!=='object'||Array.isArray(checkpoint))return {valid:false};
- if(checkpoint.chapterId!==chapter.id||checkpoint.schemaVersion!==1)return {valid:false};
- if(!checkpoint.groups||typeof checkpoint.groups!=='object'||Array.isArray(checkpoint.groups))return {valid:false};
- const names=Object.keys(checkpoint.groups);
- if(names.some(k=>!chapter.choiceGroups.some(g=>g.id===k)))return {valid:false};
- for(const group of chapter.choiceGroups){
-  if(!Object.hasOwn(checkpoint.groups,group.id))continue;
-  const selected=checkpoint.groups[group.id];
-  if(typeof selected!=='string'||!group.choiceIds.includes(selected))return {valid:false};
- }
- return {valid:true,completeGroups:names};
-}
+const {inspectDraftCheckpoint:inspectCheckpoint}=require('../scripts/qarton-g1-draft-checkpoint-inspector.cjs');
 
 test('draft checkpoint IDs cannot confuse chapter 11 with chapter 22 or legacy sceneIdx',()=>{
  const ch11=read(groups[0]),ch22=read(groups[1]);
@@ -58,4 +46,24 @@ test('conditional Elias group remains optional without affecting mandatory boat 
  assert.equal(c.choiceGroups[0].required,true);
  assert.equal(c.choiceGroups[1].requiredIf,'elias-present');
  assert.equal(c.continuity.missingElias,'skip-eliasPage-group-no-fabricated-testimony');
+});
+
+
+test('prototype inheritance, accessors, and arrays fail closed without executing a getter',()=>{
+ const c=read('p2-protection-cost');
+ let touched=0;
+ const inherited=Object.create({schemaVersion:1,chapterId:c.id,groups:{boat:'evacuateFamily'}});
+ assert.equal(inspectCheckpoint(c,inherited).valid,false);
+ const groups={};
+ Object.defineProperty(groups,'boat',{enumerable:true,get(){touched++;throw Error('untrusted getter executed');}});
+ assert.equal(inspectCheckpoint(c,{schemaVersion:1,chapterId:c.id,groups}).valid,false);
+ assert.equal(touched,0);
+ assert.equal(inspectCheckpoint(c,{schemaVersion:1,chapterId:c.id,groups:[]}).valid,false);
+});
+
+test('missing Elias cannot be represented as a fabricated completed testimony group',()=>{
+ const c=read('p2-protection-cost');
+ const boatOnly={schemaVersion:1,chapterId:c.id,groups:{boat:'keepForWatch'}};
+ assert.deepEqual(inspectCheckpoint(c,boatOnly),{valid:true,completeGroups:['boat']});
+ assert.equal(c.choiceGroups.find(x=>x.id==='eliasPage').requiredIf,'elias-present');
 });
