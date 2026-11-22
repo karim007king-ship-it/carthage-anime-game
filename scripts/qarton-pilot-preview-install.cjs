@@ -11,6 +11,8 @@ function installPilotPreview(workspace){
  const www=path.join(root,'www');
  const index=path.join(www,'index.html');
  if(!fs.existsSync(index)) throw new Error('Prepared isolated www/index.html required');
+ const sourceRoot=path.resolve(__dirname,'..');
+ if(root===sourceRoot || root.startsWith(sourceRoot+path.sep)) throw new Error('Refusing checked-in source workspace');
  const html=fs.readFileSync(index,'utf8');
  if(!/<\/body\s*>/i.test(html)) throw new Error('Missing closing body');
  if(html.includes('id="qarton-pilot-preview-entry"')) throw new Error('Preview already installed');
