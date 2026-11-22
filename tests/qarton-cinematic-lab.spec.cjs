@@ -18,6 +18,12 @@ test('chapter 27 lab renders JSON timeline and controls without errors', async (
     await page.locator('#pause').click();
     await page.locator('#replay').click();
     assert.equal(await page.locator('[data-choice="prioritizeBridge"]').isDisabled(),true);
+    await page.locator('#seek').fill('20500');
+    assert.equal(await page.locator('[data-choice="prioritizeBridge"]').isEnabled(),true);
+    await page.locator('[data-choice="prioritizeBridge"]').click();
+    assert.match(await page.locator('#result').innerText(),/الجسر/);
+    await page.locator('#reduce').click();
+    assert.equal(await page.locator('.stage').getAttribute('data-reduced-motion'),'true');
     assert.deepEqual(errors,[]);
   } finally { await browser.close(); }
 });
