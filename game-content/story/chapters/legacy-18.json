@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-18",
+  "sceneIdx": 17,
+  "legacyChapter": 18,
+  "part": "part3",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-18.title",
+    "place": "story.legacy-18.place",
+    "hint": "story.legacy-18.hint",
+    "cardTitle": "story.legacy-18.card.cardTitle",
+    "cardSub": "story.legacy-18.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-18.line-001.speaker",
+      "text": "story.legacy-18.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-18.line-002.speaker",
+      "text": "story.legacy-18.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "char.lina",
+      "who": "story.legacy-18.line-003.speaker",
+      "text": "story.legacy-18.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "char.mariam",
+      "who": "story.legacy-18.line-004.speaker",
+      "text": "story.legacy-18.line-004"
+    },
+    {
+      "id": "line-005",
+      "speakerId": "char.hadi",
+      "who": "story.legacy-18.line-005.speaker",
+      "text": "story.legacy-18.line-005"
+    },
+    {
+      "id": "line-006",
+      "speakerId": "char.yasmin",
+      "who": "story.legacy-18.line-006.speaker",
+      "text": "story.legacy-18.line-006"
+    },
+    {
+      "id": "line-007",
+      "speakerId": "char.karim",
+      "who": "story.legacy-18.line-007.speaker",
+      "text": "story.legacy-18.line-007"
+    },
+    {
+      "id": "line-008",
+      "speakerId": "char.amin",
+      "who": "story.legacy-18.line-008.speaker",
+      "text": "story.legacy-18.line-008"
+    },
+    {
+      "id": "line-009",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-18.line-009.speaker",
+      "text": "story.legacy-18.line-009"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "sunset-family",
+      "legacyId": "sunsetFamily",
+      "texts": {
+        "label": "story.legacy-18.hotspot.sunset-family.label",
+        "note": "story.legacy-18.hotspot.sunset-family.note"
+      },
+      "effect": {
+        "x": 24,
+        "y": 30,
+        "courage": 6
+      }
+    },
+    {
+      "id": "promise-stone-final",
+      "legacyId": "promiseStoneFinal",
+      "texts": {
+        "label": "story.legacy-18.hotspot.promise-stone-final.label",
+        "note": "story.legacy-18.hotspot.promise-stone-final.note"
+      },
+      "effect": {
+        "x": 52,
+        "y": 52,
+        "courage": 8,
+        "trust": {
+          "lina": 10
+        }
+      }
+    },
+    {
+      "id": "new-carthage-final",
+      "legacyId": "newCarthageFinal",
+      "texts": {
+        "label": "story.legacy-18.hotspot.new-carthage-final.label",
+        "note": "story.legacy-18.hotspot.new-carthage-final.note"
+      },
+      "effect": {
+        "x": 78,
+        "y": 68,
+        "courage": 8,
+        "trust": {
+          "mariam": 8
+        }
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "final-rebuild2",
+      "legacyId": "finalRebuild2",
+      "texts": {
+        "label": "story.legacy-18.choice.final-rebuild2.label",
+        "sub": "story.legacy-18.choice.final-rebuild2.sub",
+        "lockedHint": "story.legacy-18.choice.final-rebuild2.lockedHint"
+      },
+      "effect": {
+        "time": 0,
+        "courage": 0,
+        "flag": "rebuiltCarthage",
+        "final": "rebuild"
+      }
+    },
+    {
+      "id": "final-guardian2",
+      "legacyId": "finalGuardian2",
+      "texts": {
+        "label": "story.legacy-18.choice.final-guardian2.label",
+        "sub": "story.legacy-18.choice.final-guardian2.sub"
+      },
+      "effect": {
+        "time": 0,
+        "flag": "guardedCarthage",
+        "final": "guardian"
+      }
+    }
+  ],
+  "displayChapter": 36,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.byrsa-plateau",
+  "backgroundVariable": "lz"
+}

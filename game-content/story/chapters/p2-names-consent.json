@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "p2-names-consent",
+  "displayChapter": 16,
+  "part": "part2",
+  "source": {
+    "pr": 20,
+    "path": "docs/story/p2-ch16-names-consent.md",
+    "editorialState": "draft"
+  },
+  "entryAfter": "legacy-10",
+  "exitBefore": "legacy-11",
+  "textKeys": [
+    "story.p2-names-consent.line-001",
+    "story.p2-names-consent.line-002",
+    "story.p2-names-consent.line-003",
+    "story.p2-names-consent.line-004",
+    "story.p2-names-consent.line-005",
+    "story.p2-names-consent.line-006",
+    "story.p2-names-consent.line-007",
+    "story.p2-names-consent.choice.redactNames",
+    "story.p2-names-consent.line-008",
+    "story.p2-names-consent.line-009",
+    "story.p2-names-consent.line-010",
+    "story.p2-names-consent.line-011",
+    "story.p2-names-consent.choice.aminOwnTestimony",
+    "story.p2-names-consent.line-012",
+    "story.p2-names-consent.line-013",
+    "story.p2-names-consent.line-014",
+    "story.p2-names-consent.line-015",
+    "story.p2-names-consent.choice.holdInEscrow",
+    "story.p2-names-consent.line-016",
+    "story.p2-names-consent.line-017",
+    "story.p2-names-consent.line-018",
+    "story.p2-names-consent.line-019",
+    "story.p2-names-consent.line-020",
+    "story.p2-names-consent.line-021",
+    "story.p2-names-consent.line-022",
+    "story.p2-names-consent.line-023"
+  ],
+  "choiceTextKeys": [
+    "story.p2-names-consent.choice.redactNames",
+    "story.p2-names-consent.choice.aminOwnTestimony",
+    "story.p2-names-consent.choice.holdInEscrow"
+  ],
+  "legacySaveIndex": null,
+  "missingLegacyStatePolicy": "unknown",
+  "runtimeIntegrated": false,
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "amin"
+  ],
+  "location": {
+    "status": "proposed-unmapped",
+    "description": "forest path at fallen trunk"
+  },
+  "inputs": [
+    "presentCharacters",
+    "legacyInventory"
+  ],
+  "outputs": [
+    "namesConsent",
+    "aminTestimony"
+  ],
+  "choices": [
+    {
+      "id": "redactNames",
+      "textKey": "story.p2-names-consent.choice.redactNames",
+      "proposedState": {
+        "namesConsent": "redacted",
+        "aminTestimony": "eventsOnly"
+      }
+    },
+    {
+      "id": "aminOwnTestimony",
+      "textKey": "story.p2-names-consent.choice.aminOwnTestimony",
+      "proposedState": {
+        "namesConsent": "aminOnly",
+        "aminTestimony": "approvedPersonal"
+      }
+    },
+    {
+      "id": "holdInEscrow",
+      "textKey": "story.p2-names-consent.choice.holdInEscrow",
+      "proposedState": {
+        "namesConsent": "escrow",
+        "aminTestimony": "withheld"
+      }
+    }
+  ],
+  "continuity": {
+    "unknownLegacyState": "no-consent-assumed",
+    "aminAbsent": "no-consent-attributed",
+    "inventoryPolicy": "do-not-duplicate-legacy-notebook",
+    "endingPolicy": "no-light-shadow-unlock",
+    "decisionOnce": true
+  }
+}

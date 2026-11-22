@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-10",
+  "sceneIdx": 9,
+  "legacyChapter": 10,
+  "part": "part2",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-10.title",
+    "place": "story.legacy-10.place",
+    "hint": "story.legacy-10.hint",
+    "cardTitle": "story.legacy-10.card.cardTitle",
+    "cardSub": "story.legacy-10.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-10.line-001.speaker",
+      "text": "story.legacy-10.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.amin",
+      "who": "story.legacy-10.line-002.speaker",
+      "text": "story.legacy-10.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "char.amin",
+      "who": "story.legacy-10.line-003.speaker",
+      "text": "story.legacy-10.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "char.lina",
+      "who": "story.legacy-10.line-004.speaker",
+      "text": "story.legacy-10.line-004"
+    },
+    {
+      "id": "line-005",
+      "speakerId": "char.amin",
+      "who": "story.legacy-10.line-005.speaker",
+      "text": "story.legacy-10.line-005"
+    },
+    {
+      "id": "line-006",
+      "speakerId": "char.elias",
+      "who": "story.legacy-10.line-006.speaker",
+      "text": "story.legacy-10.line-006"
+    },
+    {
+      "id": "line-007",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-10.line-007.speaker",
+      "text": "story.legacy-10.line-007"
+    },
+    {
+      "id": "line-008",
+      "speakerId": "char.amin",
+      "who": "story.legacy-10.line-008.speaker",
+      "text": "story.legacy-10.line-008"
+    },
+    {
+      "id": "line-009",
+      "speakerId": "char.lina",
+      "who": "story.legacy-10.line-009.speaker",
+      "text": "story.legacy-10.line-009"
+    },
+    {
+      "id": "line-010",
+      "speakerId": "char.amin",
+      "who": "story.legacy-10.line-010.speaker",
+      "text": "story.legacy-10.line-010"
+    },
+    {
+      "id": "line-011",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-10.line-011.speaker",
+      "text": "story.legacy-10.line-011"
+    },
+    {
+      "id": "line-012",
+      "speakerId": "char.amin",
+      "who": "story.legacy-10.line-012.speaker",
+      "text": "story.legacy-10.line-012"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "diary-page1-spot",
+      "legacyId": "diaryPage1Spot",
+      "texts": {
+        "label": "story.legacy-10.hotspot.diary-page1-spot.label",
+        "note": "story.legacy-10.hotspot.diary-page1-spot.note"
+      },
+      "effect": {
+        "x": 24,
+        "y": 30,
+        "courage": 7,
+        "trust": {
+          "amin": 8
+        },
+        "clue": "diaryPage1"
+      }
+    },
+    {
+      "id": "diary-page2-spot",
+      "legacyId": "diaryPage2Spot",
+      "texts": {
+        "label": "story.legacy-10.hotspot.diary-page2-spot.label",
+        "note": "story.legacy-10.hotspot.diary-page2-spot.note"
+      },
+      "effect": {
+        "x": 52,
+        "y": 52,
+        "courage": 7,
+        "trust": {
+          "amin": 8
+        },
+        "clue": "diaryPage2"
+      }
+    },
+    {
+      "id": "diary-page3-spot",
+      "legacyId": "diaryPage3Spot",
+      "texts": {
+        "label": "story.legacy-10.hotspot.diary-page3-spot.label",
+        "note": "story.legacy-10.hotspot.diary-page3-spot.note"
+      },
+      "effect": {
+        "x": 78,
+        "y": 68,
+        "courage": 8,
+        "trust": {
+          "amin": 10
+        },
+        "clue": "diaryPage3"
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "fight-sword",
+      "legacyId": "fightSword",
+      "texts": {
+        "label": "story.legacy-10.choice.fight-sword.label",
+        "sub": "story.legacy-10.choice.fight-sword.sub"
+      },
+      "effect": {
+        "time": 3,
+        "courage": 18,
+        "health": -10,
+        "flag": "foughtTitan",
+        "trust": {
+          "lina": 8
+        }
+      }
+    },
+    {
+      "id": "trust-amin-forest",
+      "legacyId": "trustAminForest",
+      "texts": {
+        "label": "story.legacy-10.choice.trust-amin-forest.label",
+        "sub": "story.legacy-10.choice.trust-amin-forest.sub"
+      },
+      "effect": {
+        "time": 3,
+        "courage": 10,
+        "flag": "trustedAmin",
+        "trust": {
+          "amin": 20,
+          "lina": 5
+        }
+      }
+    }
+  ],
+  "displayChapter": 15,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.forest",
+  "backgroundVariable": "uz"
+}

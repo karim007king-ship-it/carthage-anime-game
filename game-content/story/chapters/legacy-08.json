@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-08",
+  "sceneIdx": 7,
+  "legacyChapter": 8,
+  "part": "part1",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-08.title",
+    "place": "story.legacy-08.place",
+    "hint": "story.legacy-08.hint",
+    "cardTitle": "story.legacy-08.card.cardTitle",
+    "cardSub": "story.legacy-08.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-08.line-001.speaker",
+      "text": "story.legacy-08.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.noor",
+      "who": "story.legacy-08.line-002.speaker",
+      "text": "story.legacy-08.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-08.line-003.speaker",
+      "text": "story.legacy-08.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "char.mansour",
+      "who": "story.legacy-08.line-004.speaker",
+      "text": "story.legacy-08.line-004"
+    },
+    {
+      "id": "line-005",
+      "speakerId": "char.elias",
+      "who": "story.legacy-08.line-005.speaker",
+      "text": "story.legacy-08.line-005"
+    },
+    {
+      "id": "line-006",
+      "speakerId": "char.noor",
+      "who": "story.legacy-08.line-006.speaker",
+      "text": "story.legacy-08.line-006"
+    },
+    {
+      "id": "line-007",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-08.line-007.speaker",
+      "text": "story.legacy-08.line-007"
+    },
+    {
+      "id": "line-008",
+      "speakerId": "char.mansour",
+      "who": "story.legacy-08.line-008.speaker",
+      "text": "story.legacy-08.line-008"
+    },
+    {
+      "id": "line-009",
+      "speakerId": "char.elias",
+      "who": "story.legacy-08.line-009.speaker",
+      "text": "story.legacy-08.line-009"
+    },
+    {
+      "id": "line-010",
+      "speakerId": "char.noor",
+      "who": "story.legacy-08.line-010.speaker",
+      "text": "story.legacy-08.line-010"
+    },
+    {
+      "id": "line-011",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-08.line-011.speaker",
+      "text": "story.legacy-08.line-011"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "gate-broken-key",
+      "legacyId": "gateBrokenKey",
+      "texts": {
+        "label": "story.legacy-08.hotspot.gate-broken-key.label",
+        "note": "story.legacy-08.hotspot.gate-broken-key.note"
+      },
+      "effect": {
+        "x": 24,
+        "y": 30,
+        "courage": 6,
+        "clue": "gateBrokenKey"
+      }
+    },
+    {
+      "id": "noor-badge",
+      "legacyId": "noorBadge",
+      "texts": {
+        "label": "story.legacy-08.hotspot.noor-badge.label",
+        "note": "story.legacy-08.hotspot.noor-badge.note"
+      },
+      "effect": {
+        "x": 52,
+        "y": 52,
+        "courage": 6,
+        "trust": {
+          "nour": 8
+        },
+        "clue": "noorBadge"
+      }
+    },
+    {
+      "id": "elias-note",
+      "legacyId": "eliasNote",
+      "texts": {
+        "label": "story.legacy-08.hotspot.elias-note.label",
+        "note": "story.legacy-08.hotspot.elias-note.note"
+      },
+      "effect": {
+        "x": 78,
+        "y": 68,
+        "courage": 8,
+        "trust": {
+          "elias": 8
+        },
+        "clue": "eliasNote",
+        "flag": "secretHint"
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "gate-open-alone",
+      "legacyId": "gateOpenAlone",
+      "texts": {
+        "label": "story.legacy-08.choice.gate-open-alone.label",
+        "sub": "story.legacy-08.choice.gate-open-alone.sub"
+      },
+      "effect": {
+        "time": 2,
+        "courage": 18,
+        "health": -10,
+        "flag": "heroPath",
+        "trust": {
+          "nour": 8
+        },
+        "final": "hero"
+      }
+    },
+    {
+      "id": "gate-with-mansour",
+      "legacyId": "gateWithMansour",
+      "texts": {
+        "label": "story.legacy-08.choice.gate-with-mansour.label",
+        "sub": "story.legacy-08.choice.gate-with-mansour.sub"
+      },
+      "effect": {
+        "time": 2,
+        "courage": 8,
+        "health": -4,
+        "flag": "survivorPath",
+        "trust": {
+          "mansour": 15,
+          "nour": 5
+        },
+        "final": "survivor"
+      }
+    },
+    {
+      "id": "gate-listen-elias",
+      "legacyId": "gateListenElias",
+      "texts": {
+        "label": "story.legacy-08.choice.gate-listen-elias.label",
+        "sub": "story.legacy-08.choice.gate-listen-elias.sub"
+      },
+      "effect": {
+        "time": 2,
+        "courage": 10,
+        "flag": "secretPath",
+        "trust": {
+          "elias": 15
+        },
+        "final": "secret"
+      }
+    }
+  ],
+  "displayChapter": 12,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.gate",
+  "backgroundVariable": "n9"
+}

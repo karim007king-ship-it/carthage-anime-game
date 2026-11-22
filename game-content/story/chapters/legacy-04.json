@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-04",
+  "sceneIdx": 3,
+  "legacyChapter": 4,
+  "part": "part1",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-04.title",
+    "place": "story.legacy-04.place",
+    "hint": "story.legacy-04.hint",
+    "cardTitle": "story.legacy-04.card.cardTitle",
+    "cardSub": "story.legacy-04.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-04.line-001.speaker",
+      "text": "story.legacy-04.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-04.line-002.speaker",
+      "text": "story.legacy-04.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-04.line-003.speaker",
+      "text": "story.legacy-04.line-003"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "bag",
+      "legacyId": "bag",
+      "texts": {
+        "label": "story.legacy-04.hotspot.bag.label",
+        "note": "story.legacy-04.hotspot.bag.note"
+      },
+      "effect": {
+        "x": 68,
+        "y": 70,
+        "health": 6
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "hero",
+      "legacyId": "hero",
+      "texts": {
+        "label": "story.legacy-04.choice.hero.label",
+        "sub": "story.legacy-04.choice.hero.sub"
+      },
+      "effect": {
+        "time": 3,
+        "courage": 12,
+        "flag": "heroPath",
+        "trust": {
+          "lina": 8
+        }
+      }
+    },
+    {
+      "id": "survivor",
+      "legacyId": "survivor",
+      "texts": {
+        "label": "story.legacy-04.choice.survivor.label",
+        "sub": "story.legacy-04.choice.survivor.sub"
+      },
+      "effect": {
+        "time": 2,
+        "health": -5,
+        "flag": "survivorPath"
+      }
+    },
+    {
+      "id": "secret",
+      "legacyId": "secret",
+      "texts": {
+        "label": "story.legacy-04.choice.secret.label",
+        "sub": "story.legacy-04.choice.secret.sub"
+      },
+      "effect": {
+        "time": 3,
+        "courage": 15,
+        "flag": "secretPath"
+      }
+    }
+  ],
+  "displayChapter": 6,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.fire-street",
+  "backgroundVariable": "Wt"
+}

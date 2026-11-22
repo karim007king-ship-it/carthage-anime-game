@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-01",
+  "sceneIdx": 0,
+  "legacyChapter": 1,
+  "part": "part1",
+  "after": "linear",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-01.title",
+    "place": "story.legacy-01.place",
+    "hint": "story.legacy-01.hint",
+    "cardTitle": "story.legacy-01.card.cardTitle",
+    "cardSub": "story.legacy-01.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-01.line-001.speaker",
+      "text": "story.legacy-01.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-01.line-002.speaker",
+      "text": "story.legacy-01.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "char.sara",
+      "who": "story.legacy-01.line-003.speaker",
+      "text": "story.legacy-01.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "char.lina",
+      "who": "story.legacy-01.line-004.speaker",
+      "text": "story.legacy-01.line-004"
+    },
+    {
+      "id": "line-005",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-01.line-005.speaker",
+      "text": "story.legacy-01.line-005"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "window",
+      "legacyId": "window",
+      "texts": {
+        "label": "story.legacy-01.hotspot.window.label",
+        "note": "story.legacy-01.hotspot.window.note"
+      },
+      "effect": {
+        "x": 72,
+        "y": 34,
+        "courage": 8,
+        "clue": "crack"
+      }
+    },
+    {
+      "id": "photo",
+      "legacyId": "photo",
+      "texts": {
+        "label": "story.legacy-01.hotspot.photo.label",
+        "note": "story.legacy-01.hotspot.photo.note",
+        "item": "story.legacy-01.hotspot.photo.item"
+      },
+      "effect": {
+        "x": 28,
+        "y": 30,
+        "courage": 6
+      },
+      "itemId": "family-photo",
+      "legacyItemValue": "صورة العائلة"
+    },
+    {
+      "id": "table",
+      "legacyId": "table",
+      "texts": {
+        "label": "story.legacy-01.hotspot.table.label",
+        "note": "story.legacy-01.hotspot.table.note",
+        "item": "story.legacy-01.hotspot.table.item"
+      },
+      "effect": {
+        "x": 52,
+        "y": 68
+      },
+      "itemId": "store-key",
+      "legacyItemValue": "مفتاح المخزن"
+    }
+  ],
+  "choices": [
+    {
+      "id": "stay",
+      "legacyId": "stay",
+      "texts": {
+        "label": "story.legacy-01.choice.stay.label",
+        "sub": "story.legacy-01.choice.stay.sub"
+      },
+      "effect": {
+        "time": 2,
+        "courage": 6,
+        "flag": "protectedLina",
+        "trust": {
+          "lina": 15
+        }
+      }
+    },
+    {
+      "id": "market",
+      "legacyId": "market",
+      "texts": {
+        "label": "story.legacy-01.choice.market.label",
+        "sub": "story.legacy-01.choice.market.sub"
+      },
+      "effect": {
+        "time": 3,
+        "courage": 10,
+        "flag": "wentMarket",
+        "trust": {
+          "father": 8
+        }
+      }
+    },
+    {
+      "id": "ask",
+      "legacyId": "ask",
+      "texts": {
+        "label": "story.legacy-01.choice.ask.label",
+        "sub": "story.legacy-01.choice.ask.sub"
+      },
+      "effect": {
+        "time": 1,
+        "courage": 4,
+        "flag": "askedMother",
+        "trust": {
+          "lina": 5
+        }
+      }
+    }
+  ],
+  "displayChapter": 1,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.home",
+  "backgroundVariable": "N8"
+}

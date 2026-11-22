@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-03",
+  "sceneIdx": 2,
+  "legacyChapter": 3,
+  "part": "part1",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-03.title",
+    "place": "story.legacy-03.place",
+    "hint": "story.legacy-03.hint",
+    "cardTitle": "story.legacy-03.card.cardTitle",
+    "cardSub": "story.legacy-03.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-03.line-001.speaker",
+      "text": "story.legacy-03.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.elias",
+      "who": "story.legacy-03.line-002.speaker",
+      "text": "story.legacy-03.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-03.line-003.speaker",
+      "text": "story.legacy-03.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-03.line-004.speaker",
+      "text": "story.legacy-03.line-004"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "stone",
+      "legacyId": "stone",
+      "texts": {
+        "label": "story.legacy-03.hotspot.stone.label",
+        "note": "story.legacy-03.hotspot.stone.note"
+      },
+      "effect": {
+        "x": 58,
+        "y": 62,
+        "courage": 8,
+        "clue": "stone"
+      }
+    },
+    {
+      "id": "crowd",
+      "legacyId": "crowd",
+      "texts": {
+        "label": "story.legacy-03.hotspot.crowd.label",
+        "note": "story.legacy-03.hotspot.crowd.note"
+      },
+      "effect": {
+        "x": 22,
+        "y": 68,
+        "courage": 6,
+        "trust": {
+          "lina": 5
+        }
+      }
+    },
+    {
+      "id": "crack-spot",
+      "legacyId": "crackSpot",
+      "texts": {
+        "label": "story.legacy-03.hotspot.crack-spot.label",
+        "note": "story.legacy-03.hotspot.crack-spot.note"
+      },
+      "effect": {
+        "x": 38,
+        "y": 38,
+        "courage": 5
+      }
+    },
+    {
+      "id": "tower",
+      "legacyId": "tower",
+      "texts": {
+        "label": "story.legacy-03.hotspot.tower.label",
+        "note": "story.legacy-03.hotspot.tower.note"
+      },
+      "effect": {
+        "x": 82,
+        "y": 30,
+        "courage": 5,
+        "trust": {
+          "nour": 4
+        }
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "to-lina",
+      "legacyId": "toLina",
+      "texts": {
+        "label": "story.legacy-03.choice.to-lina.label",
+        "sub": "story.legacy-03.choice.to-lina.sub"
+      },
+      "effect": {
+        "time": 5,
+        "courage": 12,
+        "health": -8,
+        "flag": "protectedLina",
+        "trust": {
+          "lina": 15
+        }
+      }
+    },
+    {
+      "id": "to-father",
+      "legacyId": "toFather",
+      "texts": {
+        "label": "story.legacy-03.choice.to-father.label",
+        "sub": "story.legacy-03.choice.to-father.sub"
+      },
+      "effect": {
+        "time": 5,
+        "courage": 10,
+        "health": -10,
+        "flag": "savedFather",
+        "trust": {
+          "father": 10
+        }
+      }
+    },
+    {
+      "id": "to-gate",
+      "legacyId": "toGate",
+      "texts": {
+        "label": "story.legacy-03.choice.to-gate.label",
+        "sub": "story.legacy-03.choice.to-gate.sub"
+      },
+      "effect": {
+        "time": 4,
+        "courage": 14,
+        "flag": "followedElias",
+        "trust": {
+          "nour": -5
+        }
+      }
+    }
+  ],
+  "displayChapter": 5,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.wall",
+  "backgroundVariable": "s8"
+}

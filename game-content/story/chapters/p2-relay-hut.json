@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "p2-relay-hut",
+  "displayChapter": 14,
+  "part": "part2",
+  "source": {
+    "pr": 20,
+    "path": "docs/story/p2-ch14-relay-hut.md",
+    "editorialState": "draft"
+  },
+  "entryAfter": "legacy-09",
+  "exitBefore": "legacy-10",
+  "textKeys": [
+    "story.p2-relay-hut.line-001",
+    "story.p2-relay-hut.line-002",
+    "story.p2-relay-hut.line-003",
+    "story.p2-relay-hut.line-004",
+    "story.p2-relay-hut.line-005",
+    "story.p2-relay-hut.line-006",
+    "story.p2-relay-hut.line-007",
+    "story.p2-relay-hut.line-008",
+    "story.p2-relay-hut.line-009",
+    "story.p2-relay-hut.choice.returned",
+    "story.p2-relay-hut.line-010",
+    "story.p2-relay-hut.line-011",
+    "story.p2-relay-hut.line-012",
+    "story.p2-relay-hut.line-013",
+    "story.p2-relay-hut.choice.message",
+    "story.p2-relay-hut.line-014",
+    "story.p2-relay-hut.line-015",
+    "story.p2-relay-hut.line-016",
+    "story.p2-relay-hut.choice.untouched",
+    "story.p2-relay-hut.line-017",
+    "story.p2-relay-hut.line-018",
+    "story.p2-relay-hut.line-019",
+    "story.p2-relay-hut.line-020",
+    "story.p2-relay-hut.line-021",
+    "story.p2-relay-hut.line-022",
+    "story.p2-relay-hut.line-023"
+  ],
+  "choiceTextKeys": [
+    "story.p2-relay-hut.choice.returned",
+    "story.p2-relay-hut.choice.message",
+    "story.p2-relay-hut.choice.untouched"
+  ],
+  "legacySaveIndex": null,
+  "missingLegacyStatePolicy": "unknown",
+  "runtimeIntegrated": false,
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "amin"
+  ],
+  "location": {
+    "status": "proposed-unmapped",
+    "description": "forest relay hut"
+  },
+  "inputs": [
+    "presentCharacters"
+  ],
+  "outputs": [
+    "relayHutAction",
+    "relayMessagePrivacy"
+  ],
+  "choices": [
+    {
+      "id": "returned",
+      "textKey": "story.p2-relay-hut.choice.returned",
+      "proposedState": {
+        "relayHutAction": "returned",
+        "relayMessagePrivacy": "anonymous"
+      },
+      "costMinutes": 1
+    },
+    {
+      "id": "message",
+      "textKey": "story.p2-relay-hut.choice.message",
+      "proposedState": {
+        "relayHutAction": "message",
+        "relayMessagePrivacy": "sealed"
+      },
+      "costMinutes": 1
+    },
+    {
+      "id": "untouched",
+      "textKey": "story.p2-relay-hut.choice.untouched",
+      "proposedState": {
+        "relayHutAction": "untouched"
+      },
+      "costMinutes": 0
+    }
+  ],
+  "continuity": {
+    "nextReception": "legacy-12",
+    "unknownLegacyState": "neutral-no-prior-visit",
+    "inventoryPolicy": "do-not-add-pot-to-legacy-inventory",
+    "decisionOnce": true
+  }
+}

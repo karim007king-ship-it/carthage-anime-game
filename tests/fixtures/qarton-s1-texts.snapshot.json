@@ -1,0 +1,6349 @@
+{
+  "source": {
+    "path": "index.html",
+    "commit": "094a1246a17923d4bb788d30c8e9c09b5db77cd2",
+    "blob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23",
+    "position": "1-based UTF-16 line and column"
+  },
+  "locale": "tn",
+  "texts": {
+    "story.legacy-01.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3452825
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-01.line-001": {
+      "tn": "قرطاج... 10:00 صباحا. آخر صباح هادئ. والهواء ثقيل برشا، كأنو المدينة قاعدة تحبس أنفاسها.",
+      "source": {
+        "line": 4505,
+        "column": 3452839
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-01.line-002.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3452936
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-01.line-002": {
+      "tn": "شنو الصوت هذا؟ موش عادي... كأنو حاجة كبيرة قاعدة تتحرك ورا السور.",
+      "source": {
+        "line": 4505,
+        "column": 3452948
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-01.line-003.speaker": {
+      "tn": "سارة — الأم",
+      "source": {
+        "line": 4505,
+        "column": 3453022
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-01.line-003": {
+      "tn": "ريان... بربي ما تخوفش أختك. لينا، كمّلي فطورك يا بنتي.",
+      "source": {
+        "line": 4505,
+        "column": 3453041
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-01.line-004.speaker": {
+      "tn": "لينا — 8 سنوات",
+      "source": {
+        "line": 4505,
+        "column": 3453104
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-01.line-004": {
+      "tn": "خويا... أنا خايفة. قلبي يدق برشا. ما تخلينيش وحدي، باهي؟",
+      "source": {
+        "line": 4505,
+        "column": 3453126
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-01.line-005.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3453191
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-01.line-005": {
+      "tn": "قبل ما تاخذ أي قرار، شوف مليح في الدار. كل تفصيلة تنجم تكون هي الفرق بين الحياة والموت.",
+      "source": {
+        "line": 4505,
+        "column": 3453205
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-01.hotspot.window.label": {
+      "tn": "الشباك",
+      "source": {
+        "line": 4505,
+        "column": 3453326
+      }
+    },
+    "story.legacy-01.hotspot.window.note": {
+      "tn": "من الشباك، السور يبان بعيد... وسمعت طقطقة غريبة، كأنو الحجر قاعد يتكسر من الداخل. دليل جديد!",
+      "source": {
+        "line": 4505,
+        "column": 3453350
+      }
+    },
+    "story.legacy-01.hotspot.photo.label": {
+      "tn": "صورة العائلة",
+      "source": {
+        "line": 4505,
+        "column": 3453487
+      }
+    },
+    "story.legacy-01.hotspot.photo.note": {
+      "tn": "صورة قديمة... بابا يضحك، وأنت صغير. الذاكرة هاذي باش تعطيك قوة ما تتصورهاش. خذيت صورة العائلة.",
+      "source": {
+        "line": 4505,
+        "column": 3453517
+      }
+    },
+    "story.legacy-01.hotspot.photo.item": {
+      "tn": "صورة العائلة",
+      "source": {
+        "line": 4505,
+        "column": 3453629
+      },
+      "legacyUse": "Exact legacy inventory value serialized in saves"
+    },
+    "story.legacy-01.hotspot.table.label": {
+      "tn": "الطاولة",
+      "source": {
+        "line": 4505,
+        "column": 3453663
+      }
+    },
+    "story.legacy-01.hotspot.table.note": {
+      "tn": "تحت الصحن... مفتاح المخزن! بابا ديما يخبيه هنا. تنجم تحتاجو برشا بعد شوية.",
+      "source": {
+        "line": 4505,
+        "column": 3453688
+      }
+    },
+    "story.legacy-01.hotspot.table.item": {
+      "tn": "مفتاح المخزن",
+      "source": {
+        "line": 4505,
+        "column": 3453770
+      },
+      "legacyUse": "Exact legacy inventory value serialized in saves"
+    },
+    "story.legacy-01.choice.stay.label": {
+      "tn": "نبقى مع لينا ونحميها",
+      "source": {
+        "line": 4505,
+        "column": 3453813
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-01.choice.stay.sub": {
+      "tn": "أمانها قبل كل شيء",
+      "source": {
+        "line": 4505,
+        "column": 3453840
+      }
+    },
+    "story.legacy-01.choice.market.label": {
+      "tn": "نخرج للسوق نجيب الدواء لأبي",
+      "source": {
+        "line": 4505,
+        "column": 3453934
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-01.choice.market.sub": {
+      "tn": "بابا مريض... والدواء ما يستناش",
+      "source": {
+        "line": 4505,
+        "column": 3453968
+      }
+    },
+    "story.legacy-01.choice.ask.label": {
+      "tn": "نسأل أمي على الصوت الغريب",
+      "source": {
+        "line": 4505,
+        "column": 3454071
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-01.choice.ask.sub": {
+      "tn": "هي تعرف حاجة ومخبيتها",
+      "source": {
+        "line": 4505,
+        "column": 3454103
+      }
+    },
+    "story.legacy-01.title": {
+      "tn": "الفصل 1",
+      "source": {
+        "line": 4505,
+        "column": 3452714
+      }
+    },
+    "story.legacy-01.place": {
+      "tn": "الدار — قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3452730
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-01.hint": {
+      "tn": "استكشف النقاط المضيئة قبل ما تختار.",
+      "source": {
+        "line": 4505,
+        "column": 3452775
+      }
+    },
+    "story.legacy-01.card.cardTitle": {
+      "tn": "الفصل 1",
+      "source": {
+        "line": 4505,
+        "column": 3484789
+      }
+    },
+    "story.legacy-01.card.cardSub": {
+      "tn": "صباح عادي · 10:00",
+      "source": {
+        "line": 4505,
+        "column": 3484807
+      }
+    },
+    "story.legacy-02.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3454320
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-02.line-001": {
+      "tn": "السوق عامر بالناس... أما الضحك متاعهم ناقص. الكل يحس بحاجة، أما حتى حد ما يحب يقولها بصوت عالي.",
+      "source": {
+        "line": 4505,
+        "column": 3454334
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-02.line-002.speaker": {
+      "tn": "سليم — صاحبك",
+      "source": {
+        "line": 4505,
+        "column": 3454438
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-02.line-002": {
+      "tn": "ريان! أخيرا جيت! سمعت الصوت؟ الناس الكل تحكي على السور... يقولو فما شقوق جديدة.",
+      "source": {
+        "line": 4505,
+        "column": 3454458
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-02.line-003.speaker": {
+      "tn": "إيلاس — الغامض",
+      "source": {
+        "line": 4505,
+        "column": 3454546
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-02.line-003": {
+      "tn": "الشقوق موش جديدة... هي قاعدة تكبر. والسور باش يطيح اليوم. موش غدوة. اليوم.",
+      "source": {
+        "line": 4505,
+        "column": 3454568
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-02.line-004.speaker": {
+      "tn": "سليم",
+      "source": {
+        "line": 4505,
+        "column": 3454651
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-02.line-004": {
+      "tn": "ما تسمعلوش! هذا ديما يحكي هكا باش يخوف الناس. ارجع للدار، عايلتك تستنى فيك.",
+      "source": {
+        "line": 4505,
+        "column": 3454663
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-02.line-005.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3454747
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-02.line-005": {
+      "tn": "الثواني قليلة باش تقرر شكون تصدق. في قرطاج، التردد أخطر من الغلط.",
+      "source": {
+        "line": 4505,
+        "column": 3454761
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-02.hotspot.cart.label": {
+      "tn": "عربة الخضرة",
+      "source": {
+        "line": 4505,
+        "column": 3454858
+      }
+    },
+    "story.legacy-02.hotspot.cart.note": {
+      "tn": "تحت صندوق الخضرة... خريطة الأزقة القديمة! فيها طريق ما يعرفوهش برشا ناس. دليل جديد!",
+      "source": {
+        "line": 4505,
+        "column": 3454887
+      }
+    },
+    "story.legacy-02.hotspot.cart.item": {
+      "tn": "خريطة الأزقة",
+      "source": {
+        "line": 4505,
+        "column": 3454978
+      },
+      "legacyUse": "Exact legacy inventory value serialized in saves"
+    },
+    "story.legacy-02.hotspot.well.label": {
+      "tn": "البئر",
+      "source": {
+        "line": 4505,
+        "column": 3455024
+      }
+    },
+    "story.legacy-02.hotspot.well.note": {
+      "tn": "إيلاس يقرب ويهمس: «اسمعني مليح... السور باش يطيح اليوم. كان تحب تعيش، تبعني وقت اللي يبدا كل شيء يطيح.»",
+      "source": {
+        "line": 4505,
+        "column": 3455047
+      }
+    },
+    "story.legacy-02.hotspot.father-shop.label": {
+      "tn": "محل الأب",
+      "source": {
+        "line": 4505,
+        "column": 3455205
+      }
+    },
+    "story.legacy-02.hotspot.father-shop.note": {
+      "tn": "محل بابا مسكّر... أما الشباك مكسور شوية. من الداخل، ريحة الدواء ما زالت موجودة، وورقة صغيرة مكتوب عليها: «رجّع الدواء للناس».",
+      "source": {
+        "line": 4505,
+        "column": 3455231
+      }
+    },
+    "story.legacy-02.choice.believe-elias.label": {
+      "tn": "تصدق إيلاس وتتبعه",
+      "source": {
+        "line": 4505,
+        "column": 3455422
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-02.choice.believe-elias.sub": {
+      "tn": "عينيه ما يكذبوش... المرة هاذي",
+      "source": {
+        "line": 4505,
+        "column": 3455446
+      }
+    },
+    "story.legacy-02.choice.believe-salim.label": {
+      "tn": "تصدق سليم وترجع للدار",
+      "source": {
+        "line": 4505,
+        "column": 3455561
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-02.choice.believe-salim.sub": {
+      "tn": "الدار أولى... ولينا تستنى",
+      "source": {
+        "line": 4505,
+        "column": 3455589
+      }
+    },
+    "story.legacy-02.choice.stay-market.label": {
+      "tn": "تبقى في السوق",
+      "source": {
+        "line": 4505,
+        "column": 3455703
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-02.choice.stay-market.sub": {
+      "tn": "تستنى وتشوف شنو باش يصير",
+      "source": {
+        "line": 4505,
+        "column": 3455723
+      }
+    },
+    "story.legacy-02.title": {
+      "tn": "الفصل 2",
+      "source": {
+        "line": 4505,
+        "column": 3454193
+      }
+    },
+    "story.legacy-02.place": {
+      "tn": "سوق قرطاج — الصباح",
+      "source": {
+        "line": 4505,
+        "column": 3454209
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-02.hint": {
+      "tn": "بعد السوق، خريطة المدينة باش تتحل. كل تنقل −3 دق.",
+      "source": {
+        "line": 4505,
+        "column": 3454256
+      }
+    },
+    "story.legacy-02.card.cardTitle": {
+      "tn": "الفصل 2",
+      "source": {
+        "line": 4505,
+        "column": 3484989
+      }
+    },
+    "story.legacy-02.card.cardSub": {
+      "tn": "السوق · 10:15",
+      "source": {
+        "line": 4505,
+        "column": 3485007
+      }
+    },
+    "story.legacy-03.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3455949
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-03.line-001": {
+      "tn": "الأرض تهتز... لا، موش الأرض. العالم كامل قاعد يتهز.",
+      "source": {
+        "line": 4505,
+        "column": 3455963
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-03.line-002.speaker": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 3456023
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-03.line-002": {
+      "tn": "ريان! شوف! السور... يتكسر!",
+      "source": {
+        "line": 4505,
+        "column": 3456036
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-03.line-003.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3456071
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-03.line-003": {
+      "tn": "مستحيل... السور واقف من 3000 سنة! كيفاش... كيفاش يطيح توا؟!",
+      "source": {
+        "line": 4505,
+        "column": 3456083
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-03.line-004.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3456151
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-03.line-004": {
+      "tn": "الغبار، الصراخ، والحجر يطيح كأنو السماء نفسها تكسرت. ما عادش عندك وقت تفكر. عندك وقت تختار برك.",
+      "source": {
+        "line": 4505,
+        "column": 3456165
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-03.hotspot.stone.label": {
+      "tn": "الحجر المتشقق",
+      "source": {
+        "line": 4505,
+        "column": 3456293
+      }
+    },
+    "story.legacy-03.hotspot.stone.note": {
+      "tn": "الحجر فيه فراغات كأنو حد نقّبو من الداخل. دليل جديد — الحقيقة قريبة!",
+      "source": {
+        "line": 4505,
+        "column": 3456324
+      }
+    },
+    "story.legacy-03.hotspot.crowd.label": {
+      "tn": "الناس الهاربة",
+      "source": {
+        "line": 4505,
+        "column": 3456437
+      }
+    },
+    "story.legacy-03.hotspot.crowd.note": {
+      "tn": "امرأة تصرخ وتدور على ولدها. صوتها باش يقعد في ودنك برشا. حسيت بمسؤولية أكبر.",
+      "source": {
+        "line": 4505,
+        "column": 3456468
+      }
+    },
+    "story.legacy-03.hotspot.crack-spot.label": {
+      "tn": "الشق",
+      "source": {
+        "line": 4505,
+        "column": 3456595
+      }
+    },
+    "story.legacy-03.hotspot.crack-spot.note": {
+      "tn": "الشق في الحجر موش عادي: الحواف نظيفة من الداخل، كأنو حد حفر فيه بشوية بشوية على مدى سنين.",
+      "source": {
+        "line": 4505,
+        "column": 3456617
+      }
+    },
+    "story.legacy-03.hotspot.tower.label": {
+      "tn": "برج المراقبة",
+      "source": {
+        "line": 4505,
+        "column": 3456738
+      }
+    },
+    "story.legacy-03.hotspot.tower.note": {
+      "tn": "من فوق البرج، المدينة كلها تبان صغيرة. الحارس هرب وخلى منظارو... ومن هنا، تشوف البوابة بوضوح.",
+      "source": {
+        "line": 4505,
+        "column": 3456768
+      }
+    },
+    "story.legacy-03.choice.to-lina.label": {
+      "tn": "نجري للدار ننقذ لينا",
+      "source": {
+        "line": 4505,
+        "column": 3456919
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-03.choice.to-lina.sub": {
+      "tn": "وعدتها ما نخليهاش وحدها",
+      "source": {
+        "line": 4505,
+        "column": 3456946
+      }
+    },
+    "story.legacy-03.choice.to-father.label": {
+      "tn": "نجري للمستشفى ننقذ أبي",
+      "source": {
+        "line": 4505,
+        "column": 3457059
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-03.choice.to-father.sub": {
+      "tn": "بابا ما ينجمش يتحرك وحدو",
+      "source": {
+        "line": 4505,
+        "column": 3457088
+      }
+    },
+    "story.legacy-03.choice.to-gate.label": {
+      "tn": "نتبع إيلاس للبوابة السرية",
+      "source": {
+        "line": 4505,
+        "column": 3457201
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-03.choice.to-gate.sub": {
+      "tn": "ثمة طريق آخر... طريق ما يعرفو حد",
+      "source": {
+        "line": 4505,
+        "column": 3457233
+      }
+    },
+    "story.legacy-03.title": {
+      "tn": "الفصل 3",
+      "source": {
+        "line": 4505,
+        "column": 3455828
+      }
+    },
+    "story.legacy-03.place": {
+      "tn": "السور العظيم — لحظة الكسر",
+      "source": {
+        "line": 4505,
+        "column": 3455844
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-03.hint": {
+      "tn": "فتّش في الحجر... الحقيقة متخبية هنا.",
+      "source": {
+        "line": 4505,
+        "column": 3455898
+      }
+    },
+    "story.legacy-03.card.cardTitle": {
+      "tn": "الفصل 3",
+      "source": {
+        "line": 4505,
+        "column": 3485184
+      }
+    },
+    "story.legacy-03.card.cardSub": {
+      "tn": "السور يتشقق",
+      "source": {
+        "line": 4505,
+        "column": 3485202
+      }
+    },
+    "story.legacy-04.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3457460
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-04.line-001": {
+      "tn": "النار في كل بلاصة. الدخان يخنق. والناس تجري... تجري بلا ما تعرف لوين.",
+      "source": {
+        "line": 4505,
+        "column": 3457474
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-04.line-002.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3457552
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-04.line-002": {
+      "tn": "الوقت قصير... دقايق معدودة برك. وتوا؟ توا لازم نختار النهاية متاعي بيدي.",
+      "source": {
+        "line": 4505,
+        "column": 3457564
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-04.line-003.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3457645
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-04.line-003": {
+      "tn": "موش وقت التفكير الطويل. الخريطة قدامك، والمدينة كلها تستنى في قرارك.",
+      "source": {
+        "line": 4505,
+        "column": 3457659
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-04.hotspot.bag.label": {
+      "tn": "حقيبة طايحة",
+      "source": {
+        "line": 4505,
+        "column": 3457758
+      }
+    },
+    "story.legacy-04.hotspot.bag.note": {
+      "tn": "حقيبة متاع عائلة هاربة. فيها شوية خبز وماء. خذيتهم... يمكن تحتاجهم.",
+      "source": {
+        "line": 4505,
+        "column": 3457787
+      }
+    },
+    "story.legacy-04.choice.hero.label": {
+      "tn": "نحمي اللي نجم ننقذهم",
+      "source": {
+        "line": 4505,
+        "column": 3457894
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-04.choice.hero.sub": {
+      "tn": "البطل ما يهربش ويخلي عايلتو",
+      "source": {
+        "line": 4505,
+        "column": 3457921
+      }
+    },
+    "story.legacy-04.choice.survivor.label": {
+      "tn": "نحافظ على قوتي للبوابة",
+      "source": {
+        "line": 4505,
+        "column": 3458022
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-04.choice.survivor.sub": {
+      "tn": "نعيش... باش نحكي شنو صار",
+      "source": {
+        "line": 4505,
+        "column": 3458051
+      }
+    },
+    "story.legacy-04.choice.secret.label": {
+      "tn": "نتبع أثر إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 3458135
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-04.choice.secret.sub": {
+      "tn": "شنو يعرف إيلاس؟ وعلاش كان يعرف؟",
+      "source": {
+        "line": 4505,
+        "column": 3458156
+      }
+    },
+    "story.legacy-04.title": {
+      "tn": "الفصل 4",
+      "source": {
+        "line": 4505,
+        "column": 3457338
+      }
+    },
+    "story.legacy-04.place": {
+      "tn": "شارع النار — الهروب",
+      "source": {
+        "line": 4505,
+        "column": 3457354
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-04.hint": {
+      "tn": "الشارع يحرق... لازم تختار طريقك من الخريطة.",
+      "source": {
+        "line": 4505,
+        "column": 3457402
+      }
+    },
+    "story.legacy-04.card.cardTitle": {
+      "tn": "الفصل 4",
+      "source": {
+        "line": 4505,
+        "column": 3485379
+      }
+    },
+    "story.legacy-04.card.cardSub": {
+      "tn": "الهروب · شارع النار",
+      "source": {
+        "line": 4505,
+        "column": 3485397
+      }
+    },
+    "story.legacy-05.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3458374
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-05.line-001": {
+      "tn": "دار عم منصور... 30 سنة من الحرب والسكوت. ريحة الخشب القديم، وسيف معلق في الحيط كأنو قاعد يستنى.",
+      "source": {
+        "line": 4505,
+        "column": 3458388
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-05.line-002.speaker": {
+      "tn": "عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 3458492
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-05.line-002": {
+      "tn": "ريان؟ ولد يوسف؟ ادخل... سمعت السور. سمعتو قبل ما يطيح. كيف ما سمعتو قبل 30 سنة.",
+      "source": {
+        "line": 4505,
+        "column": 3458508
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-05.line-003.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3458596
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-05.line-003": {
+      "tn": "عمي منصور... نحتاجك. المدينة قاعدة تطيح، والناس ما عندهاش شكون يقودها.",
+      "source": {
+        "line": 4505,
+        "column": 3458608
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-05.line-004.speaker": {
+      "tn": "عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 3458687
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-05.line-004": {
+      "tn": "أنا كبرت، يا ولدي. أما... كانك باش تحمي الناس بحق، مش باش تهرب وحدك، نحكيو.",
+      "source": {
+        "line": 4505,
+        "column": 3458703
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-05.hotspot.sword.label": {
+      "tn": "السيف القديم",
+      "source": {
+        "line": 4505,
+        "column": 3458811
+      }
+    },
+    "story.legacy-05.hotspot.sword.note": {
+      "tn": "السيف ثقيل ونظيف، كأنو صاحبو كان يستنى هالنهار. يلزم ثقة عم منصور 30+ باش تاخذو. +20 شجاعة.",
+      "source": {
+        "line": 4505,
+        "column": 3458841
+      }
+    },
+    "story.legacy-05.hotspot.sword.item": {
+      "tn": "سيف عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 3458951
+      },
+      "legacyUse": "Exact legacy inventory value serialized in saves"
+    },
+    "story.legacy-05.hotspot.sword.trust-name": {
+      "tn": "عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 3459008
+      }
+    },
+    "story.legacy-05.hotspot.oldmap.label": {
+      "tn": "الخريطة القديمة",
+      "source": {
+        "line": 4505,
+        "column": 3459040
+      }
+    },
+    "story.legacy-05.hotspot.oldmap.note": {
+      "tn": "خريطة فيها علامة حمراء فوق السور: «هنا تضعف الحجارة». دليل جديد!",
+      "source": {
+        "line": 4505,
+        "column": 3459073
+      }
+    },
+    "story.legacy-05.hotspot.uniform.label": {
+      "tn": "الزي العسكري",
+      "source": {
+        "line": 4505,
+        "column": 3459193
+      }
+    },
+    "story.legacy-05.hotspot.uniform.note": {
+      "tn": "الزي معلق ومخيوط بعناية. عم منصور يحكي: «لبستو وقت اللي حميت البوابة... وحدي.» عينيه تلمع.",
+      "source": {
+        "line": 4505,
+        "column": 3459223
+      }
+    },
+    "story.legacy-05.choice.help-mansour.label": {
+      "tn": "نعاون عم منصور ونطلب منو يعاونا",
+      "source": {
+        "line": 4505,
+        "column": 3459380
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-05.choice.help-mansour.sub": {
+      "tn": "نحمل معاه أغراضو ونمشيو مع بعضنا",
+      "source": {
+        "line": 4505,
+        "column": 3459418
+      }
+    },
+    "story.legacy-05.choice.take-sword.label": {
+      "tn": "ناخذ السيف ونمشي",
+      "source": {
+        "line": 4505,
+        "column": 3459540
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-05.choice.take-sword.sub": {
+      "tn": "الوقت ما يستناش... والسيف يلزمني",
+      "source": {
+        "line": 4505,
+        "column": 3459563
+      }
+    },
+    "story.legacy-05.title": {
+      "tn": "الفصل 5",
+      "source": {
+        "line": 4505,
+        "column": 3458241
+      }
+    },
+    "story.legacy-05.place": {
+      "tn": "دار عم منصور — الجندي القديم",
+      "source": {
+        "line": 4505,
+        "column": 3458257
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-05.hint": {
+      "tn": "عم منصور ما يعطيش سيفو لأي حد. اكسب ثقتو قبل.",
+      "source": {
+        "line": 4505,
+        "column": 3458314
+      }
+    },
+    "story.legacy-05.card.cardTitle": {
+      "tn": "الفصل 5",
+      "source": {
+        "line": 4505,
+        "column": 3485583
+      }
+    },
+    "story.legacy-05.card.cardSub": {
+      "tn": "دار عم منصور · على ضو الشمعة",
+      "source": {
+        "line": 4505,
+        "column": 3485601
+      }
+    },
+    "story.legacy-06.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3459790
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-06.line-001": {
+      "tn": "الممر عامر بالدخان. صراخ، جرحى، وطبيب يجري من سرير لسرير وما يوقفش.",
+      "source": {
+        "line": 4505,
+        "column": 3459804
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-06.line-002.speaker": {
+      "tn": "الأب يوسف",
+      "source": {
+        "line": 4505,
+        "column": 3459880
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-06.line-002": {
+      "tn": "ريان! الحمد لله... ما تخافش عليا. الجرحى هاذم ما عندهم حد غيرنا.",
+      "source": {
+        "line": 4505,
+        "column": 3459897
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-06.line-003.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3459970
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-06.line-003": {
+      "tn": "بابا، لازم نخرجوك من هنا. السقف ينجم يطيح في أي لحظة.",
+      "source": {
+        "line": 4505,
+        "column": 3459982
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-06.line-004.speaker": {
+      "tn": "الأب يوسف",
+      "source": {
+        "line": 4505,
+        "column": 3460044
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-06.line-004": {
+      "tn": "وهم؟ نخليهم؟ يا ولدي، الطبيب اللي يهرب ويخلي جرحاه... ما عادش طبيب.",
+      "source": {
+        "line": 4505,
+        "column": 3460061
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-06.hotspot.medicine.label": {
+      "tn": "الدواء",
+      "source": {
+        "line": 4505,
+        "column": 3460164
+      }
+    },
+    "story.legacy-06.hotspot.medicine.note": {
+      "tn": "دواء بابا، ودواء ينجم ينقذ جريح. خذيتو. ومعاه تقرير قديم يوثّق شقوق السور.",
+      "source": {
+        "line": 4505,
+        "column": 3460188
+      }
+    },
+    "story.legacy-06.hotspot.medicine.item": {
+      "tn": "دواء",
+      "source": {
+        "line": 4505,
+        "column": 3460270
+      },
+      "legacyUse": "Exact legacy inventory value serialized in saves"
+    },
+    "story.legacy-06.hotspot.file.label": {
+      "tn": "ملف المريض",
+      "source": {
+        "line": 4505,
+        "column": 3460326
+      }
+    },
+    "story.legacy-06.hotspot.file.note": {
+      "tn": "ملف قديم: شقوق ظهرت قبل سنوات، وطبيب كتب «لا أحد يريد أن يسمع». دليل من أدلة الفصل!",
+      "source": {
+        "line": 4505,
+        "column": 3460354
+      }
+    },
+    "story.legacy-06.hotspot.wounded.label": {
+      "tn": "الجريح",
+      "source": {
+        "line": 4505,
+        "column": 3460490
+      }
+    },
+    "story.legacy-06.hotspot.wounded.note": {
+      "tn": "شاب صغير يمسك في يدك: «قول لأمي... راني حي.» ساعدتو يقوم، وحكالك على تحذير الطبيب من السور.",
+      "source": {
+        "line": 4505,
+        "column": 3460514
+      }
+    },
+    "story.legacy-06.choice.stay-help.label": {
+      "tn": "نبقى نعاون بابا نهز الجرحى",
+      "source": {
+        "line": 4505,
+        "column": 3460689
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-06.choice.stay-help.sub": {
+      "tn": "نحمل معاه، حتى كان الوقت يطير",
+      "source": {
+        "line": 4505,
+        "column": 3460722
+      }
+    },
+    "story.legacy-06.choice.take-run.label": {
+      "tn": "ناخذ بابا ونهرب",
+      "source": {
+        "line": 4505,
+        "column": 3460830
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-06.choice.take-run.sub": {
+      "tn": "بابا أولاً... والباقي ربي معاهم",
+      "source": {
+        "line": 4505,
+        "column": 3460852
+      }
+    },
+    "story.legacy-06.title": {
+      "tn": "الفصل 6",
+      "source": {
+        "line": 4505,
+        "column": 3459667
+      }
+    },
+    "story.legacy-06.place": {
+      "tn": "المستشفى — الدخان والجرحى",
+      "source": {
+        "line": 4505,
+        "column": 3459683
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-06.hint": {
+      "tn": "هنا، كل دقيقة تنقذ روح... أو تخسر ثقة.",
+      "source": {
+        "line": 4505,
+        "column": 3459737
+      }
+    },
+    "story.legacy-06.card.cardTitle": {
+      "tn": "الفصل 6",
+      "source": {
+        "line": 4505,
+        "column": 3485785
+      }
+    },
+    "story.legacy-06.card.cardSub": {
+      "tn": "المستشفى · دخان وجرحى",
+      "source": {
+        "line": 4505,
+        "column": 3485803
+      }
+    },
+    "story.legacy-07.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3461077
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-07.line-001": {
+      "tn": "الجسر فوق النهر... والمدينة وراك تحرق. كل خطوة تهز الخشب تحت ساقيك.",
+      "source": {
+        "line": 4505,
+        "column": 3461091
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-07.line-002.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3461167
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-07.line-002": {
+      "tn": "لازم نعبر. كان الجسر طاح، ما عادش فما طريق للبوابة.",
+      "source": {
+        "line": 4505,
+        "column": 3461179
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-07.line-003.speaker": {
+      "tn": "امرأة عجوز",
+      "source": {
+        "line": 4505,
+        "column": 3461239
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-07.line-003": {
+      "tn": "يا ولدي... ركبتي ما عادش تهزني. كانك خليتني، نفهمك... أما كانك عاونتني، ندعيلك.",
+      "source": {
+        "line": 4505,
+        "column": 3461257
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-07.line-004.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3461345
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-07.line-004": {
+      "tn": "الجسر يتشقق. الثواني قليلة. واللي صحتو ضعيفة، يحس بالاهتزاز مضاعف.",
+      "source": {
+        "line": 4505,
+        "column": 3461359
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-07.hotspot.plank.label": {
+      "tn": "لوح مكسور",
+      "source": {
+        "line": 4505,
+        "column": 3461458
+      }
+    },
+    "story.legacy-07.hotspot.plank.note": {
+      "tn": "لوح يتحرك تحت رجلك. ثبتّو بحجر قبل ما يعبر حد وراك.",
+      "source": {
+        "line": 4505,
+        "column": 3461485
+      }
+    },
+    "story.legacy-07.hotspot.river.label": {
+      "tn": "النهر",
+      "source": {
+        "line": 4505,
+        "column": 3461568
+      }
+    },
+    "story.legacy-07.hotspot.river.note": {
+      "tn": "النهر يجري بسرعة. لوكان طحت... ما ينجم حد يلحقك. ركز.",
+      "source": {
+        "line": 4505,
+        "column": 3461591
+      }
+    },
+    "story.legacy-07.hotspot.rope.label": {
+      "tn": "الحبل",
+      "source": {
+        "line": 4505,
+        "column": 3461674
+      }
+    },
+    "story.legacy-07.hotspot.rope.note": {
+      "tn": "حبل قديم مربوط في عمود الجسر. شديتو بيدك... على الأقل، فما حاجة تتمسك بيها وقت اللي يتهز الجسر.",
+      "source": {
+        "line": 4505,
+        "column": 3461697
+      }
+    },
+    "story.legacy-07.hotspot.boat.label": {
+      "tn": "القارب",
+      "source": {
+        "line": 4505,
+        "column": 3461823
+      }
+    },
+    "story.legacy-07.hotspot.boat.note": {
+      "tn": "قارب صغير مربوط تحت الجسر، يتخبط مع الموج. كان الجسر طاح، هالقارب ينجم يكون طريق ثاني للبوابة.",
+      "source": {
+        "line": 4505,
+        "column": 3461847
+      }
+    },
+    "story.legacy-07.choice.cross-fast.label": {
+      "tn": "نعبر بسرعة",
+      "source": {
+        "line": 4505,
+        "column": 3461996
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-07.choice.cross-fast.sub": {
+      "tn": "نجري قبل ما يطيح الجسر",
+      "source": {
+        "line": 4505,
+        "column": 3462013
+      }
+    },
+    "story.legacy-07.choice.help-woman.label": {
+      "tn": "نعاون المرأة العجوز",
+      "source": {
+        "line": 4505,
+        "column": 3462111
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-07.choice.help-woman.sub": {
+      "tn": "نحملها ونعبر معاها بشوية",
+      "source": {
+        "line": 4505,
+        "column": 3462137
+      }
+    },
+    "story.legacy-07.choice.go-back.label": {
+      "tn": "نرجع",
+      "source": {
+        "line": 4505,
+        "column": 3462254
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-07.choice.go-back.sub": {
+      "tn": "الجسر أخطر من اللازم",
+      "source": {
+        "line": 4505,
+        "column": 3462265
+      }
+    },
+    "story.legacy-07.title": {
+      "tn": "الفصل 7",
+      "source": {
+        "line": 4505,
+        "column": 3460966
+      }
+    },
+    "story.legacy-07.place": {
+      "tn": "الجسر — فوق النهر",
+      "source": {
+        "line": 4505,
+        "column": 3460982
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-07.hint": {
+      "tn": "الجسر يهتز. قرر بسرعة قبل ما يطيح.",
+      "source": {
+        "line": 4505,
+        "column": 3461028
+      }
+    },
+    "story.legacy-07.card.cardTitle": {
+      "tn": "الفصل 7",
+      "source": {
+        "line": 4505,
+        "column": 3485990
+      }
+    },
+    "story.legacy-07.card.cardSub": {
+      "tn": "الجسر · فوق النهر",
+      "source": {
+        "line": 4505,
+        "column": 3486008
+      }
+    },
+    "story.legacy-08.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3462513
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-08.line-001": {
+      "tn": "البوابة... مكسورة. النار في كل بلاصة، والدخان يخنق، وعمالقة في البعيد يقربو بشوية.",
+      "source": {
+        "line": 4505,
+        "column": 3462527
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-08.line-002.speaker": {
+      "tn": "القائدة نور — 29 سنة",
+      "source": {
+        "line": 4505,
+        "column": 3462618
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-08.line-002": {
+      "tn": "البوابة هي آخر أمل... إذا تسكرت، الكل يموت.",
+      "source": {
+        "line": 4505,
+        "column": 3462646
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-08.line-003.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3462698
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-08.line-003": {
+      "tn": "أنا نجم نفتحها... أما لازم حد يغطي عليا.",
+      "source": {
+        "line": 4505,
+        "column": 3462710
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-08.line-004.speaker": {
+      "tn": "عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 3462759
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-08.line-004": {
+      "tn": "أنا نقعد... أنت صغير، عندك مستقبل.",
+      "source": {
+        "line": 4505,
+        "column": 3462775
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-08.line-005.speaker": {
+      "tn": "إيلاس — همس",
+      "source": {
+        "line": 4505,
+        "column": 3462818
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-08.line-005": {
+      "tn": "(يهمس) البوابة موش هي الحل... الحل وراء السور.",
+      "source": {
+        "line": 4505,
+        "column": 3462837
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-08.line-006.speaker": {
+      "tn": "القائدة نور",
+      "source": {
+        "line": 4505,
+        "column": 3462892
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-08.line-006": {
+      "tn": "قف! القوارب ما تهزش الكل. كل بلاصة... هي حياة حد. وريني شنو عندك قبل ما نقرر.",
+      "source": {
+        "line": 4505,
+        "column": 3462911
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-08.line-007.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3462997
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-08.line-007": {
+      "tn": "شفت اللي شفتو، وعرفت اللي عرفتو. ومهما كان، ما نهربش ونخليهم.",
+      "source": {
+        "line": 4505,
+        "column": 3463009
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-08.line-008.speaker": {
+      "tn": "عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 3463079
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-08.line-008": {
+      "tn": "سمعت هالصوت قبل 30 سنة. المرة هاذي، ما نهربش. نغطي عليك يا ولدي.",
+      "source": {
+        "line": 4505,
+        "column": 3463095
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-08.line-009.speaker": {
+      "tn": "إيلاس — همس",
+      "source": {
+        "line": 4505,
+        "column": 3463168
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-08.line-009": {
+      "tn": "(يهمس) اسمعني مليح... السر موش في البوابة. السر في اللي سكّرها من الداخل.",
+      "source": {
+        "line": 4505,
+        "column": 3463187
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-08.line-010.speaker": {
+      "tn": "القائدة نور",
+      "source": {
+        "line": 4505,
+        "column": 3463269
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-08.line-010": {
+      "tn": "القرار ليك، ريان. افتح، أو غطّي، أو دوّر طريق آخر... أما قرر توا.",
+      "source": {
+        "line": 4505,
+        "column": 3463288
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-08.line-011.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3463362
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-08.line-011": {
+      "tn": "باهي... نختار. ومهما صار، ما نخلي حد وحدو ورا البوابة.",
+      "source": {
+        "line": 4505,
+        "column": 3463374
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-08.hotspot.gate-broken-key.label": {
+      "tn": "المفتاح المكسور",
+      "source": {
+        "line": 4505,
+        "column": 3463469
+      }
+    },
+    "story.legacy-08.hotspot.gate-broken-key.note": {
+      "tn": "مفتاح البوابة مكسور في القفل. حد حاول يفتحها بسرعة... أو كسّر المفتاح قصداً باش ما تتفتحش. دليل 1/3 في البوابة!",
+      "source": {
+        "line": 4505,
+        "column": 3463502
+      }
+    },
+    "story.legacy-08.hotspot.noor-badge.label": {
+      "tn": "شارة نور",
+      "source": {
+        "line": 4505,
+        "column": 3463670
+      }
+    },
+    "story.legacy-08.hotspot.noor-badge.note": {
+      "tn": "شارة القائدة نور طايحة جنب البوابة. نور ما تخلّي شارتها... إلا كان اضطرت تختار بين الشارة وبين الناس. دليل 2/3 في البوابة!",
+      "source": {
+        "line": 4505,
+        "column": 3463696
+      }
+    },
+    "story.legacy-08.hotspot.elias-note.label": {
+      "tn": "ملاحظة إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 3463886
+      }
+    },
+    "story.legacy-08.hotspot.elias-note.note": {
+      "tn": "ورقة صغيرة بخط إيلاس: «البوابة موش هي الحل... الحل وراء السور.» إيلاس كان هنا، وخلّى هالرسالة للي يفهم. دليل 3/3 — تلميح الحقيقة السرية!",
+      "source": {
+        "line": 4505,
+        "column": 3463916
+      }
+    },
+    "story.legacy-08.choice.gate-open-alone.label": {
+      "tn": "حاول تفتح البوابة بنفسك",
+      "source": {
+        "line": 4505,
+        "column": 3464153
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-08.choice.gate-open-alone.sub": {
+      "tn": "البوابة ثقيلة... أما لازم نجرب — طريق البطل",
+      "source": {
+        "line": 4505,
+        "column": 3464183
+      }
+    },
+    "story.legacy-08.choice.gate-with-mansour.label": {
+      "tn": "خلي منصور يغطي عليك وانت تفتح",
+      "source": {
+        "line": 4505,
+        "column": 3464331
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-08.choice.gate-with-mansour.sub": {
+      "tn": "عم منصور يغطي عليك — طريق الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3464367
+      }
+    },
+    "story.legacy-08.choice.gate-listen-elias.label": {
+      "tn": "اسمع كلام إيلاس ودور طريق آخر",
+      "source": {
+        "line": 4505,
+        "column": 3464521
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-08.choice.gate-listen-elias.sub": {
+      "tn": "الحل وراء السور — تلميح الحقيقة السرية",
+      "source": {
+        "line": 4505,
+        "column": 3464557
+      }
+    },
+    "story.legacy-08.title": {
+      "tn": "الفصل 8 — البوابة",
+      "source": {
+        "line": 4505,
+        "column": 3462337
+      }
+    },
+    "story.legacy-08.place": {
+      "tn": "البوابة — مكسورة، نار، عمالقة في البعيد",
+      "source": {
+        "line": 4505,
+        "column": 3462363
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-08.hint": {
+      "tn": "الفصل 8 — البوابة: اختار طريقك، وبعدها فتّش في البوابة قبل النهاية.",
+      "source": {
+        "line": 4505,
+        "column": 3462431
+      }
+    },
+    "story.legacy-08.card.cardTitle": {
+      "tn": "الفصل 8 — البوابة",
+      "source": {
+        "line": 4505,
+        "column": 3486179
+      }
+    },
+    "story.legacy-08.card.cardSub": {
+      "tn": "البوابة · مكسورة ونار · عمالقة في البعيد",
+      "source": {
+        "line": 4505,
+        "column": 3486207
+      }
+    },
+    "story.legacy-09.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3464845
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-09.line-001": {
+      "tn": "الجزء الثاني — ما وراء السور. عبرتوا الفتحة، والحجر تحت ساقيكم يتهز... والضباب يخبي الغابة كلها.",
+      "source": {
+        "line": 4505,
+        "column": 3464859
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-09.line-002.speaker": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 3464964
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-09.line-002": {
+      "tn": "شوف مليح، ريان. السور ما طاحش وحدو... والفتحة هاذي، حد فتحها قصداً. اسمعني مليح: الحقيقة أكبر من السور.",
+      "source": {
+        "line": 4505,
+        "column": 3464977
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-09.line-003.speaker": {
+      "tn": "لينا — 8 سنوات",
+      "source": {
+        "line": 4505,
+        "column": 3465089
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-09.line-003": {
+      "tn": "خويا... أنا خايفة. الغابة كبيرة برشا، وما نسمع حتى صوت عصفور. ما تخلينيش وحدي، باهي؟",
+      "source": {
+        "line": 4505,
+        "column": 3465111
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-09.line-004.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3465204
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-09.line-004": {
+      "tn": "ما نخليكش، لينا. نواجه مع بعضنا. شكون هذاكا واقف في الضباب؟",
+      "source": {
+        "line": 4505,
+        "column": 3465216
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-09.line-005.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3465284
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-09.line-005": {
+      "tn": "قف. ما تقربش. شكون أنت؟ أنا أمين، عشت 7 سنين وراء السور... ومن سبع سنين ما شفت حد حي هنا.",
+      "source": {
+        "line": 4505,
+        "column": 3465305
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-09.line-006.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3465403
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-09.line-006": {
+      "tn": "أنا ريان... وهذا أختي لينا. جينا من قرطاج. السور طاح، ونشك في كل شي قالوهولنا.",
+      "source": {
+        "line": 4505,
+        "column": 3465415
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-09.line-007.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3465502
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-09.line-007": {
+      "tn": "نعرف. سمعتو. كنت حذر... وما نثق في حد. سبع سنين وأنا وحدي، وكل مرة نثق في حد، نخسرو.",
+      "source": {
+        "line": 4505,
+        "column": 3465523
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-09.line-008.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3465616
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-09.line-008": {
+      "tn": "هاذا دفترو. كتبت فيه كل شي شفتو... أسماء، بلايص، وتواريخ. كان تثق فيا، نقرا معاك.",
+      "source": {
+        "line": 4505,
+        "column": 3465637
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-09.line-009.speaker": {
+      "tn": "لينا — 8 سنوات",
+      "source": {
+        "line": 4505,
+        "column": 3465727
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-09.line-009": {
+      "tn": "أمين... أنت خايف كيفنا؟ يعني... ما عادش باش نبقاو وحدنا؟",
+      "source": {
+        "line": 4505,
+        "column": 3465749
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-09.line-010.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3465814
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-09.line-010": {
+      "tn": "باهي. القرار ليك، ريان. تثق فيا ونمشيو مع بعضنا... ولا تشك فيا ونبعد عليك شوية؟",
+      "source": {
+        "line": 4505,
+        "column": 3465835
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-09.hotspot.amin-notebook-page.label": {
+      "tn": "صفحة من دفتر أمين",
+      "source": {
+        "line": 4505,
+        "column": 3465958
+      }
+    },
+    "story.legacy-09.hotspot.amin-notebook-page.note": {
+      "tn": "صفحة بخط أمين: «اليوم 2600 ورا السور. ما زلت نكتب أسماءهم باش ما ينساوهمش.» دليل 1/3 في العبور.",
+      "source": {
+        "line": 4505,
+        "column": 3465993
+      }
+    },
+    "story.legacy-09.hotspot.broken-compass.label": {
+      "tn": "البوصلة المكسورة",
+      "source": {
+        "line": 4505,
+        "column": 3466168
+      }
+    },
+    "story.legacy-09.hotspot.broken-compass.note": {
+      "tn": "بوصلة قديمة، إبرتها واقفة وتشير ديما نحو السور. صاحبها كان راجع... وما وصلش. دليل 2/3 في العبور.",
+      "source": {
+        "line": 4505,
+        "column": 3466202
+      }
+    },
+    "story.legacy-09.hotspot.giant-footprints.label": {
+      "tn": "آثار أقدام عملاق",
+      "source": {
+        "line": 4505,
+        "column": 3466361
+      }
+    },
+    "story.legacy-09.hotspot.giant-footprints.note": {
+      "tn": "آثار أقدام عملاقة تتجه من هنا نحو الغابة، ثم للسهول. حد عملاق مشى من هنا... قريب. دليل 3/3 في العبور.",
+      "source": {
+        "line": 4505,
+        "column": 3466395
+      }
+    },
+    "story.legacy-09.choice.trust-amin.label": {
+      "tn": "تثق في أمين",
+      "source": {
+        "line": 4505,
+        "column": 3466560
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-09.choice.trust-amin.sub": {
+      "tn": "عاش هنا 7 سنين... ويوريك دفترو — ينفتح دفتر أمين",
+      "source": {
+        "line": 4505,
+        "column": 3466578
+      }
+    },
+    "story.legacy-09.choice.doubt-amin.label": {
+      "tn": "تشك فيه",
+      "source": {
+        "line": 4505,
+        "column": 3466712
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-09.choice.doubt-amin.sub": {
+      "tn": "ما نعرفوش... أمين يبعد عليك شوية ويرجع بعدين",
+      "source": {
+        "line": 4505,
+        "column": 3466726
+      }
+    },
+    "story.legacy-09.title": {
+      "tn": "الجزء الثاني — الفصل 9",
+      "source": {
+        "line": 4505,
+        "column": 3464681
+      }
+    },
+    "story.legacy-09.place": {
+      "tn": "العبور — ما وراء السور",
+      "source": {
+        "line": 4505,
+        "column": 3464712
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-09.hint": {
+      "tn": "ورا السور، كل حجر يحكي حكاية. فتّش في آخر الفصل قبل ما تدخل الغابة.",
+      "source": {
+        "line": 4505,
+        "column": 3464763
+      }
+    },
+    "story.legacy-09.card.cardTitle": {
+      "tn": "الجزء الثاني — الفصل 9",
+      "source": {
+        "line": 4505,
+        "column": 3486417
+      }
+    },
+    "story.legacy-09.card.cardSub": {
+      "tn": "العبور · ما وراء السور",
+      "source": {
+        "line": 4505,
+        "column": 3486450
+      }
+    },
+    "story.legacy-10.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3467011
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-001": {
+      "tn": "الغابة... ضباب كثيف، وشجر عالي يخبي السماء. وكل شوية، تسمع خطوة ثقيلة تهز الأرض تحتك.",
+      "source": {
+        "line": 4505,
+        "column": 3467025
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.line-002.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3467119
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-002": {
+      "tn": "اسمع. جاد. ما تتحركش. الضباب يخبيك... كان سكت. هنا، في الغابة هاذي، بدات حكايتي.",
+      "source": {
+        "line": 4505,
+        "column": 3467140
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.line-003.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3467229
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-003": {
+      "tn": "العمالقة كانو بشر... عملو عليهم تجربة. خذاو ناس عاديين، وقالولهم باش يوليو أقوى... وما رجعوش كيف ما كانو.",
+      "source": {
+        "line": 4505,
+        "column": 3467250
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.line-004.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 3467364
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-004": {
+      "tn": "كانو بشر؟ تبكي... يعني العملاق اللي خايفة منو... كان عندو ماما وبابا كيفنا؟",
+      "source": {
+        "line": 4505,
+        "column": 3467376
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.line-005.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3467460
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-005": {
+      "tn": "إيه. أنا حزين... صحابي ماتوا هنا. كلهم ماتو. كنت نشوفهم كل يوم، وشوية بشوية، نساو أسماءهم.",
+      "source": {
+        "line": 4505,
+        "column": 3467481
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.line-006.speaker": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 3467580
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-006": {
+      "tn": "اسمعني مليح... الظلال هاذي موش أشجار. كان تحركت غلط، يسمعوك. السر: ما تخليهمش يشوفوك أولاً.",
+      "source": {
+        "line": 4505,
+        "column": 3467593
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.line-007.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3467693
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-007": {
+      "tn": "خايف... أما ما نهربش ونخلي لينا. لازم نعبر، ولازم نواجه. غاضب... وشجاع.",
+      "source": {
+        "line": 4505,
+        "column": 3467705
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.line-008.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3467785
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-008": {
+      "tn": "التجربة ما كانتش باش تحمي الناس. كانت باش يسيطرو عليهم. اللي رفض... اختفى. واللي قبل... صار عملاق.",
+      "source": {
+        "line": 4505,
+        "column": 3467806
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.line-009.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 3467913
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-009": {
+      "tn": "أمين، ما تخافش علينا. ريان يحميني... وأنت تحمينا زادا؟",
+      "source": {
+        "line": 4505,
+        "column": 3467925
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.line-010.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3467988
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-010": {
+      "tn": "نحاول. سبع سنين وأنا وحدي. النجاة... موش ساهلة. أما دفترو فيه 3 صفحات تحكي كل شي.",
+      "source": {
+        "line": 4505,
+        "column": 3468009
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.line-011.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3468099
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-011": {
+      "tn": "واضح، أمين. نمشيو وراك. لينا، شدي في يدي. نقراو الصفحات، وبعدها نقرر.",
+      "source": {
+        "line": 4505,
+        "column": 3468111
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.line-012.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3468189
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-10.line-012": {
+      "tn": "باهي. توا نثق فيكم... شوية. الطريق من هنا. قصير. أما لازم تمشيو ورايا، خطوة بخطوة.",
+      "source": {
+        "line": 4505,
+        "column": 3468210
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-10.hotspot.diary-page1-spot.label": {
+      "tn": "يوميات أمين — صفحة 1",
+      "source": {
+        "line": 4505,
+        "column": 3468334
+      }
+    },
+    "story.legacy-10.hotspot.diary-page1-spot.note": {
+      "tn": "الصفحة 1 — التجربة: «خذاو ناس عاديين... وقالولهم باش يوليو أقوى. التجربة ما كانتش دواء، كانت عقاب.»",
+      "source": {
+        "line": 4505,
+        "column": 3468372
+      }
+    },
+    "story.legacy-10.hotspot.diary-page2-spot.label": {
+      "tn": "يوميات أمين — صفحة 2",
+      "source": {
+        "line": 4505,
+        "column": 3468545
+      }
+    },
+    "story.legacy-10.hotspot.diary-page2-spot.note": {
+      "tn": "الصفحة 2 — الأسماء: «كتبت أسماءهم كلهم. كانو جيران، كانو صحابي، كان عندهم عائلات.»",
+      "source": {
+        "line": 4505,
+        "column": 3468583
+      }
+    },
+    "story.legacy-10.hotspot.diary-page3-spot.label": {
+      "tn": "يوميات أمين — صفحة 3",
+      "source": {
+        "line": 4505,
+        "column": 3468739
+      }
+    },
+    "story.legacy-10.hotspot.diary-page3-spot.note": {
+      "tn": "الصفحة 3 — من أمر؟: «اللي أمر بالتجربة خاف يخسر سلطتو. سكّر السور، وسكّت كل من عرف.» السر الكامل صار في يدك.",
+      "source": {
+        "line": 4505,
+        "column": 3468777
+      }
+    },
+    "story.legacy-10.choice.fight-sword.label": {
+      "tn": "تحارب العملاق",
+      "source": {
+        "line": 4505,
+        "column": 3468975
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-10.choice.fight-sword.sub": {
+      "tn": "سيف عم منصور في يدي... ما نهربش",
+      "source": {
+        "line": 4505,
+        "column": 3468995
+      }
+    },
+    "story.legacy-10.choice.trust-amin-forest.label": {
+      "tn": "تتخبى وتتبع أمين",
+      "source": {
+        "line": 4505,
+        "column": 3469121
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-10.choice.trust-amin-forest.sub": {
+      "tn": "الضباب يخبينا... وأمين يعرف الممر الآمن",
+      "source": {
+        "line": 4505,
+        "column": 3469144
+      }
+    },
+    "story.legacy-10.title": {
+      "tn": "الجزء الثاني — الفصل 10",
+      "source": {
+        "line": 4505,
+        "column": 3466849
+      }
+    },
+    "story.legacy-10.place": {
+      "tn": "الغابة — ضباب وظلال",
+      "source": {
+        "line": 4505,
+        "column": 3466881
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-10.hint": {
+      "tn": "الضباب يخبي أكثر مما يوري. فتّش في آخر الفصل: 3 صفحات من دفتر أمين.",
+      "source": {
+        "line": 4505,
+        "column": 3466929
+      }
+    },
+    "story.legacy-10.card.cardTitle": {
+      "tn": "الجزء الثاني — الفصل 10",
+      "source": {
+        "line": 4505,
+        "column": 3486626
+      }
+    },
+    "story.legacy-10.card.cardSub": {
+      "tn": "الغابة · ضباب وظلال",
+      "source": {
+        "line": 4505,
+        "column": 3486660
+      }
+    },
+    "story.legacy-11.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3469468
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-001": {
+      "tn": "السهول المحطمة... مدينة محطمة، وضباب، وظل عملاق فوق الأنقاض. هنا، كل شيء بدا.",
+      "source": {
+        "line": 4505,
+        "column": 3469482
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-002.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3469568
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-002": {
+      "tn": "اسمع. جاد. هاذي بلاصتي. هنا خسرت كل شي. وهنا عرفت شكون صنع العمالقة.",
+      "source": {
+        "line": 4505,
+        "column": 3469589
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-003.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3469666
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-003": {
+      "tn": "اللي صنعوهم كانو ناس من الداخل. خافو يخسرو سلطتهم، فعملو تجربة على ناس عاديين... وصنعو العمالقة باش يخوفو الكل ويسكّتوهم.",
+      "source": {
+        "line": 4505,
+        "column": 3469687
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-004.speaker": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 3469817
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-004": {
+      "tn": "هنا بدات الحكاية، ريان. الحقيقة: السور، العمالقة، والسكوت... الكل مربوط. اسمعني: اختار، والقرار ليك.",
+      "source": {
+        "line": 4505,
+        "column": 3469830
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-005.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 3469939
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-005": {
+      "tn": "خويا، قول الحقيقة للناس... باش ما يعيش حد خايف كيفنا. أما... خايفة عليك.",
+      "source": {
+        "line": 4505,
+        "column": 3469951
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-006.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3470032
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-006": {
+      "tn": "الحقيقة في يدي. كان قلتها، المدينة باش تتغير للأبد. كان خبيتها، نحميها... أما بثمن.",
+      "source": {
+        "line": 4505,
+        "column": 3470044
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-007.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3470136
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-007": {
+      "tn": "(يسكت، ويمسح غلاف الدفتر بكمّو) كل مرة نرجع، نتفكرهم. كانو بشر. كانو صحابي. وكانو أول ضحايا التجربة.",
+      "source": {
+        "line": 4505,
+        "column": 3470157
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-008.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3470266
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-008": {
+      "tn": "الحقيقة في دفترو. ما خبيتهاش باش نوجعكم. خبيتها باش تحميو رواحكم... أما توا، الحماية هي أنكم تعرفو.",
+      "source": {
+        "line": 4505,
+        "column": 3470287
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-009.speaker": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 3470395
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-009": {
+      "tn": "(يهمس) مهما اخترت، الحقيقة ما تموتش. أما اللي يقولها... يتحمّل ثمنها. اختار بقلبك، موش بخوفك.",
+      "source": {
+        "line": 4505,
+        "column": 3470408
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-010.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3470510
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-010": {
+      "tn": "أمين، لو كان نخبيوها، باش يعاودو نفس الغلطة. الحقيقة لازم تخرج... أما لازم نقولها مع بعضنا.",
+      "source": {
+        "line": 4505,
+        "column": 3470522
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-011.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3470622
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-011": {
+      "tn": "(يشد الدفتر على صدرو) أنا معاك. كان تقولها، نقولها معاك. هاذي أسماؤهم، وهاذي حكايتهم.",
+      "source": {
+        "line": 4505,
+        "column": 3470643
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-012.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 3470737
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-012": {
+      "tn": "أمين، شكراً. توا ما عادش وحدك. قولها معانا، باهي؟",
+      "source": {
+        "line": 4505,
+        "column": 3470749
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.line-013.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3470807
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-11.line-013": {
+      "tn": "باهي. القرار ليك، ريان. أنا معاك... للآخر. النور ولا الظل؟",
+      "source": {
+        "line": 4505,
+        "column": 3470828
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-11.hotspot.ruins.label": {
+      "tn": "الأنقاض",
+      "source": {
+        "line": 4505,
+        "column": 3470919
+      }
+    },
+    "story.legacy-11.hotspot.ruins.note": {
+      "tn": "أنقاض مدينة قديمة، فيها نفس الحجارة متاع سور قرطاج. الحكاية أقدم مما كنت تتصور.",
+      "source": {
+        "line": 4505,
+        "column": 3470944
+      }
+    },
+    "story.legacy-11.hotspot.amin-final.label": {
+      "tn": "أمين",
+      "source": {
+        "line": 4505,
+        "column": 3471059
+      }
+    },
+    "story.legacy-11.hotspot.amin-final.note": {
+      "tn": "أمين يفتح دفترو للمرة الأولى قدامكم. يقول بجدية: «هاذي أسماؤهم. كان تقول الحقيقة، قول أسماؤهم.»",
+      "source": {
+        "line": 4505,
+        "column": 3471081
+      }
+    },
+    "story.legacy-11.hotspot.titan-shadow.label": {
+      "tn": "ظل العملاق",
+      "source": {
+        "line": 4505,
+        "column": 3471230
+      }
+    },
+    "story.legacy-11.hotspot.titan-shadow.note": {
+      "tn": "ظل عملاق فوق السهول، واقف بلا حركة. كأنو يحرس الحقيقة... أو يستناها تخرج.",
+      "source": {
+        "line": 4505,
+        "column": 3471258
+      }
+    },
+    "story.legacy-11.choice.choose-light.label": {
+      "tn": "النور — نكمل ونكشف الحقيقة للكل",
+      "source": {
+        "line": 4505,
+        "column": 3471379
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-11.choice.choose-light.sub": {
+      "tn": "الحقيقة للجميع — نمشيو للقرية ونكملو",
+      "source": {
+        "line": 4505,
+        "column": 3471417
+      }
+    },
+    "story.legacy-11.choice.choose-shadow.label": {
+      "tn": "الظل — نخبي الحقيقة باش نحميهم",
+      "source": {
+        "line": 4505,
+        "column": 3471543
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-11.choice.choose-shadow.sub": {
+      "tn": "نحمي الناس — نمشيو للقرية في صمت",
+      "source": {
+        "line": 4505,
+        "column": 3471580
+      }
+    },
+    "story.legacy-11.title": {
+      "tn": "الجزء الثاني — الفصل 11 — النهائي",
+      "source": {
+        "line": 4505,
+        "column": 3469262
+      }
+    },
+    "story.legacy-11.place": {
+      "tn": "السهول المحطمة — الحقيقة الكبرى",
+      "source": {
+        "line": 4505,
+        "column": 3469304
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-11.hint": {
+      "tn": "الحقيقة الكبرى قدامك. فتّش في آخر الفصل، وبعدها القرار هاذي باش يرسم مستقبل المدينة كلها.",
+      "source": {
+        "line": 4505,
+        "column": 3469364
+      }
+    },
+    "story.legacy-11.card.cardTitle": {
+      "tn": "الجزء الثاني — الفصل 11",
+      "source": {
+        "line": 4505,
+        "column": 3486821
+      }
+    },
+    "story.legacy-11.card.cardSub": {
+      "tn": "السهول المحطمة · الحقيقة الكبرى",
+      "source": {
+        "line": 4505,
+        "column": 3486855
+      }
+    },
+    "story.legacy-12.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3471849
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-12.line-001": {
+      "tn": "القرية المخفية... بيوت صغار من الخشب، نار في الوسط، وأطفال يلعبو. بعد كل اللي شفتوه، أول بلاصة تحسها آمنة.",
+      "source": {
+        "line": 4505,
+        "column": 3471863
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-12.line-002.speaker": {
+      "tn": "مريم — المهندسة",
+      "source": {
+        "line": 4505,
+        "column": 3471978
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-12.line-002": {
+      "tn": "أهلا! أنا مريم. أنا اللي نصلح البوابات هنا. أنت ريان؟ أمين حكالي عليك. قالي أنك وعدت أختك ما تخليهاش وحدها.",
+      "source": {
+        "line": 4505,
+        "column": 3472001
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-12.line-003.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 3472117
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-12.line-003": {
+      "tn": "مريم... داركم حلوة. عندكم كسكسي؟ أنا جعت برشا... وخويا ديما يقلي ما نخليكش.",
+      "source": {
+        "line": 4505,
+        "column": 3472129
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-12.line-004.speaker": {
+      "tn": "ياسمين — 10 سنوات",
+      "source": {
+        "line": 4505,
+        "column": 3472213
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-12.line-004": {
+      "tn": "أنت لينا؟ أنا ياسمين. أنا وحدي كيفك... أما مريم تحميني. تحب نوريك رسمتي؟ رسمت قرطاج قبل السور.",
+      "source": {
+        "line": 4505,
+        "column": 3472238
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-12.line-005.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3472341
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-12.line-005": {
+      "tn": "ياسمين... رسمتك حلوة. أنا وعدت لينا، ونوعدك أنت زادا: ما نخلي حد وحدو هنا.",
+      "source": {
+        "line": 4505,
+        "column": 3472353
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-12.line-006.speaker": {
+      "tn": "مريم — المهندسة",
+      "source": {
+        "line": 4505,
+        "column": 3472436
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-12.line-006": {
+      "tn": "اسمع، ريان. القرية هاذي بناوها اللي هربو من التجربة. عندنا مختبر تحت قرطاج، فيه أوراق تثبت شكون أمر بيها. أما المفتاح عندي... وما نعطيه كان للي نثق فيه.",
+      "source": {
+        "line": 4505,
+        "column": 3472459
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-12.line-007.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3472620
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-12.line-007": {
+      "tn": "مريم صح. أنا عشت 7 سنين وحدي، أما القرية هاذي عاشت مخبية. كان تثق فيها، توريك الطريق.",
+      "source": {
+        "line": 4505,
+        "column": 3472641
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-12.line-008.speaker": {
+      "tn": "مريم — المهندسة",
+      "source": {
+        "line": 4505,
+        "column": 3472735
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-12.line-008": {
+      "tn": "القرار ليك: تقعد معانا وترتاح، ولا نعطيك المفتاح وتمشي للمختبر توا؟ القرية تستنى... أما الحقيقة ما تستناش.",
+      "source": {
+        "line": 4505,
+        "column": 3472758
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-12.hotspot.village-well.label": {
+      "tn": "بئر القرية",
+      "source": {
+        "line": 4505,
+        "column": 3472903
+      }
+    },
+    "story.legacy-12.hotspot.village-well.note": {
+      "tn": "بئر القرية: ماء نظيف ودواء. أهل القرية يخبيو فيه الدواء باش ما يسرقوش. دليل القرية.",
+      "source": {
+        "line": 4505,
+        "column": 3472931
+      }
+    },
+    "story.legacy-12.hotspot.yasmin-drawing.label": {
+      "tn": "رسمة ياسمين",
+      "source": {
+        "line": 4505,
+        "column": 3473080
+      }
+    },
+    "story.legacy-12.hotspot.yasmin-drawing.note": {
+      "tn": "رسمة ياسمين: قرطاج قبل السور، باب البحر أزرق، والناس تضحك. ياسمين تقول: هاذي قرطاج اللي حكتلي عليها أمي.",
+      "source": {
+        "line": 4505,
+        "column": 3473109
+      }
+    },
+    "story.legacy-12.hotspot.mariam-workshop.label": {
+      "tn": "ورشة مريم",
+      "source": {
+        "line": 4505,
+        "column": 3473279
+      }
+    },
+    "story.legacy-12.hotspot.mariam-workshop.note": {
+      "tn": "ورشة مريم: مفاتيح، خرائط، وآلة إشارة مكسورة. مريم تقول: كان نصلحوها، ننجمو نكلمو قرطاج.",
+      "source": {
+        "line": 4505,
+        "column": 3473306
+      }
+    },
+    "story.legacy-12.choice.stay-village.label": {
+      "tn": "نقعد في القرية ونرتاح",
+      "source": {
+        "line": 4505,
+        "column": 3473477
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-12.choice.stay-village.sub": {
+      "tn": "القرية آمنة — نرتاح ونحمي ياسمين",
+      "source": {
+        "line": 4505,
+        "column": 3473505
+      }
+    },
+    "story.legacy-12.choice.go-lab.label": {
+      "tn": "ناخذ المفتاح ونمشي للمختبر",
+      "source": {
+        "line": 4505,
+        "column": 3473632
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-12.choice.go-lab.sub": {
+      "tn": "مريم تعطيك المفتاح — الحقيقة تحت قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3473665
+      }
+    },
+    "story.legacy-12.title": {
+      "tn": "الجزء الثاني — الفصل 12",
+      "source": {
+        "line": 4505,
+        "column": 3471686
+      }
+    },
+    "story.legacy-12.place": {
+      "tn": "القرية المخفية — غابة زغوان",
+      "source": {
+        "line": 4505,
+        "column": 3471718
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-12.hint": {
+      "tn": "القرية عايشة على الكسكسي والزيت. فتّش: مريم وياسمين يستناوك.",
+      "source": {
+        "line": 4505,
+        "column": 3471774
+      }
+    },
+    "story.legacy-12.card.cardTitle": {
+      "tn": "الجزء الثاني — الفصل 12",
+      "source": {
+        "line": 4505,
+        "column": 3487029
+      }
+    },
+    "story.legacy-12.card.cardSub": {
+      "tn": "القرية المخفية · غابة زغوان",
+      "source": {
+        "line": 4505,
+        "column": 3487063
+      }
+    },
+    "story.legacy-13.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3473938
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-13.line-001": {
+      "tn": "المختبر القديم... تحت حمامات أنطونيوس، بلاصة مظلمة، أوراق مبعثرة، وآلة إشارة مكسورة. هنا، بدات التجربة.",
+      "source": {
+        "line": 4505,
+        "column": 3473952
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-13.line-002.speaker": {
+      "tn": "عم الهادي — حارس الأرشيف",
+      "source": {
+        "line": 4505,
+        "column": 3474064
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-13.line-002": {
+      "tn": "أهلا، ريان. أنا الهادي. كنت نخدم مع باباك في البيمارستان. كنت نعرف... وسكت. سامحني.",
+      "source": {
+        "line": 4505,
+        "column": 3474096
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-13.line-003.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3474188
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-13.line-003": {
+      "tn": "عم الهادي... بابا كان يعرف؟ كان يعرف على التجربة؟",
+      "source": {
+        "line": 4505,
+        "column": 3474200
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-13.line-004.speaker": {
+      "tn": "عم الهادي — حارس الأرشيف",
+      "source": {
+        "line": 4505,
+        "column": 3474258
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-13.line-004": {
+      "tn": "إيه. باباك حاول يوقفها. كتب ورقة... وهاذي الورقة. اللي أمر بالتجربة خاف يخسر سلطتو، فسد السور وسكّت كل من عرف.",
+      "source": {
+        "line": 4505,
+        "column": 3474290
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-13.line-005.speaker": {
+      "tn": "مريم — المهندسة",
+      "source": {
+        "line": 4505,
+        "column": 3474409
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-13.line-005": {
+      "tn": "الورقة هاذي تثبت كل شي. كان نصلحو جهاز الإشارة، ننجمو نبعثوها لقرطاج الكل.",
+      "source": {
+        "line": 4505,
+        "column": 3474432
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-13.line-006.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 3474515
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-13.line-006": {
+      "tn": "خويا... بابا كان شجاع كيفك. ما تخبيش الورقة، باهي؟",
+      "source": {
+        "line": 4505,
+        "column": 3474527
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-13.line-007.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3474586
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-13.line-007": {
+      "tn": "(يتنفس بعمق) توا عندنا دليل. الورقة + دفترو + رسمة ياسمين = الحقيقة كاملة.",
+      "source": {
+        "line": 4505,
+        "column": 3474607
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-13.line-008.speaker": {
+      "tn": "عم الهادي — حارس الأرشيف",
+      "source": {
+        "line": 4505,
+        "column": 3474690
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-13.line-008": {
+      "tn": "القرار ليك، ريان: تصلح الإشارة وتكشف كل شي، ولا تخبي الورقة وتحمي القرية؟",
+      "source": {
+        "line": 4505,
+        "column": 3474722
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-13.hotspot.lab-papers.label": {
+      "tn": "أوراق المختبر",
+      "source": {
+        "line": 4505,
+        "column": 3474832
+      }
+    },
+    "story.legacy-13.hotspot.lab-papers.note": {
+      "tn": "أوراق المختبر: أسماء، تواريخ، وأمر مكتوب: سكّرو السور وسكّتو اللي يعرف. دليل المختبر 1/2.",
+      "source": {
+        "line": 4505,
+        "column": 3474863
+      }
+    },
+    "story.legacy-13.hotspot.signal-device.label": {
+      "tn": "جهاز الإشارة",
+      "source": {
+        "line": 4505,
+        "column": 3475023
+      }
+    },
+    "story.legacy-13.hotspot.signal-device.note": {
+      "tn": "جهاز إشارة قديم. مريم تقول: كان نصلحوه، ننجمو نكلمو قرطاج ونقولولهم الحقيقة.",
+      "source": {
+        "line": 4505,
+        "column": 3475053
+      }
+    },
+    "story.legacy-13.hotspot.hadi-letter.label": {
+      "tn": "رسالة عم الهادي",
+      "source": {
+        "line": 4505,
+        "column": 3475184
+      }
+    },
+    "story.legacy-13.hotspot.hadi-letter.note": {
+      "tn": "رسالة الهادي: سامحوني سكت. كنت خايف. أما توا، الحقيقة لازم تخرج. دليل المختبر 2/2.",
+      "source": {
+        "line": 4505,
+        "column": 3475217
+      }
+    },
+    "story.legacy-13.choice.fix-signal.label": {
+      "tn": "نصلح الإشارة ونكشف الحقيقة",
+      "source": {
+        "line": 4505,
+        "column": 3475379
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-13.choice.fix-signal.sub": {
+      "tn": "مريم تصلح الجهاز — قرطاج تسمع",
+      "source": {
+        "line": 4505,
+        "column": 3475412
+      }
+    },
+    "story.legacy-13.choice.hide-lab.label": {
+      "tn": "نخبي الورقة ونحمي القرية",
+      "source": {
+        "line": 4505,
+        "column": 3475535
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-13.choice.hide-lab.sub": {
+      "tn": "الحقيقة توجع — نحمي القرية في صمت",
+      "source": {
+        "line": 4505,
+        "column": 3475566
+      }
+    },
+    "story.legacy-13.title": {
+      "tn": "الجزء الثاني — الفصل 13",
+      "source": {
+        "line": 4505,
+        "column": 3473780
+      }
+    },
+    "story.legacy-13.place": {
+      "tn": "المختبر القديم — تحت قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3473812
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-13.hint": {
+      "tn": "تحت حمامات أنطونيوس، أوراق حنبعل تستنى. فتّش قبل القرار.",
+      "source": {
+        "line": 4505,
+        "column": 3473867
+      }
+    },
+    "story.legacy-13.card.cardTitle": {
+      "tn": "الجزء الثاني — الفصل 13",
+      "source": {
+        "line": 4505,
+        "column": 3487224
+      }
+    },
+    "story.legacy-13.card.cardSub": {
+      "tn": "المختبر · تحت قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3487258
+      }
+    },
+    "story.legacy-14.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3475835
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-14.line-001": {
+      "tn": "أطلال قرطاج... أعمدة طايحة، حجارة قديمة، والبحر من بعيد. هنا، قرطاج بدات، وهنا لازم تقرر وين باش تمشي.",
+      "source": {
+        "line": 4505,
+        "column": 3475849
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-14.line-002.speaker": {
+      "tn": "القائد كريم — 35 سنة",
+      "source": {
+        "line": 4505,
+        "column": 3475960
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-14.line-002": {
+      "tn": "قف، ريان. أنا كريم. نقود المجموعة الثانية. سمعت أنك تلوج على الحقيقة. الحقيقة توجع... والناس ما تحبش توجع.",
+      "source": {
+        "line": 4505,
+        "column": 3475988
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-14.line-003.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3476103
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-14.line-003": {
+      "tn": "كريم... أنت تعرف شكون أمر بالتجربة؟",
+      "source": {
+        "line": 4505,
+        "column": 3476115
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-14.line-004.speaker": {
+      "tn": "القائد كريم — 35 سنة",
+      "source": {
+        "line": 4505,
+        "column": 3476159
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-14.line-004": {
+      "tn": "نعرف. أما كان قلتها، الناس باش تخاف، والقرية باش تطيح. أنا نحميهم بالسكوت. أنت تحميهم بالكلام؟",
+      "source": {
+        "line": 4505,
+        "column": 3476187
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-14.line-005.speaker": {
+      "tn": "مريم — المهندسة",
+      "source": {
+        "line": 4505,
+        "column": 3476290
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-14.line-005": {
+      "tn": "ريان، ما تسمعوش. هو يخاف يخسر سلطتو كيف اللي قبلو.",
+      "source": {
+        "line": 4505,
+        "column": 3476313
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-14.line-006.speaker": {
+      "tn": "عم الهادي — حارس الأرشيف",
+      "source": {
+        "line": 4505,
+        "column": 3476372
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-14.line-006": {
+      "tn": "كريم... أنا سكت كيفك 30 سنة. والسكوت ما حمى حد. الحقيقة هي اللي تحمي.",
+      "source": {
+        "line": 4505,
+        "column": 3476404
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-14.line-007.speaker": {
+      "tn": "ياسمين — 10 سنوات",
+      "source": {
+        "line": 4505,
+        "column": 3476482
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-14.line-007": {
+      "tn": "ريان... قول الحقيقة. باش ما يعيش حد خايف كيفنا. باهي؟",
+      "source": {
+        "line": 4505,
+        "column": 3476507
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-14.line-008.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 3476569
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-14.line-008": {
+      "tn": "خويا، أنا معاك مهما اخترت... أما خايفة في الحالتين. النور ولا الظل؟",
+      "source": {
+        "line": 4505,
+        "column": 3476581
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-14.line-009.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3476657
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-14.line-009": {
+      "tn": "أنا معاك للآخر، ريان. قولها معانا... أو خبيها معانا. أما اختار بقلبك.",
+      "source": {
+        "line": 4505,
+        "column": 3476678
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-14.line-010.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3476756
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-14.line-010": {
+      "tn": "الحقيقة في يدي، والقرية في يدي، وقرطاج في يدي. كان قلتها، كل شي يتغير. كان خبيتها، نحميهم... أما بثمن.",
+      "source": {
+        "line": 4505,
+        "column": 3476768
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-14.hotspot.carthage-ruins.label": {
+      "tn": "أطلال قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3476911
+      }
+    },
+    "story.legacy-14.hotspot.carthage-ruins.note": {
+      "tn": "أطلال قرطاج: نفس الحجارة متاع سور قرطاج. الحكاية أقدم من 3000 سنة.",
+      "source": {
+        "line": 4505,
+        "column": 3476940
+      }
+    },
+    "story.legacy-14.hotspot.bab-bhar.label": {
+      "tn": "باب البحر",
+      "source": {
+        "line": 4505,
+        "column": 3477040
+      }
+    },
+    "story.legacy-14.hotspot.bab-bhar.note": {
+      "tn": "باب البحر: الباب الكبير الأزرق. من هنا تدخل قرطاج... ومن هنا تخرج الحقيقة.",
+      "source": {
+        "line": 4505,
+        "column": 3477067
+      }
+    },
+    "story.legacy-14.hotspot.karim-confront.label": {
+      "tn": "مواجهة كريم",
+      "source": {
+        "line": 4505,
+        "column": 3477198
+      }
+    },
+    "story.legacy-14.hotspot.karim-confront.note": {
+      "tn": "كريم واقف قدامك. يقول: كان تكشفها، تتحمل ثمنها. كان تخبيها، تتحمل ذنبها.",
+      "source": {
+        "line": 4505,
+        "column": 3477227
+      }
+    },
+    "story.legacy-14.choice.choose-light2.label": {
+      "tn": "النور — نكمل ونكشف الحقيقة",
+      "source": {
+        "line": 4505,
+        "column": 3477364
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-14.choice.choose-light2.sub": {
+      "tn": "الحقيقة للجميع — نمشيو لقرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3477397
+      }
+    },
+    "story.legacy-14.choice.choose-shadow2.label": {
+      "tn": "الظل — نخبي ونحمي القرية",
+      "source": {
+        "line": 4505,
+        "column": 3477517
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-14.choice.choose-shadow2.sub": {
+      "tn": "نحمي الناس — نمشيو في صمت",
+      "source": {
+        "line": 4505,
+        "column": 3477548
+      }
+    },
+    "story.legacy-14.title": {
+      "tn": "الجزء الثاني — الفصل 14",
+      "source": {
+        "line": 4505,
+        "column": 3475673
+      }
+    },
+    "story.legacy-14.place": {
+      "tn": "أطلال قرطاج — الرجوع للبوابة",
+      "source": {
+        "line": 4505,
+        "column": 3475705
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-14.hint": {
+      "tn": "أطلال قرطاج، باب البحر، والقرار الأخير. فتّش قبل ما تختار.",
+      "source": {
+        "line": 4505,
+        "column": 3475762
+      }
+    },
+    "story.legacy-14.card.cardTitle": {
+      "tn": "الجزء الثاني — الفصل 14",
+      "source": {
+        "line": 4505,
+        "column": 3487410
+      }
+    },
+    "story.legacy-14.card.cardSub": {
+      "tn": "أطلال قرطاج · الرجوع للبوابة",
+      "source": {
+        "line": 4505,
+        "column": 3487444
+      }
+    },
+    "story.legacy-15.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3477807
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-15.line-001": {
+      "tn": "الجزء الثالث — ما بعد الحقيقة. رجعتو لقرطاج، والناس واقفة في الساحة تستنى. سمعو الحقيقة... وما يعرفوش شنو يعملو بيها.",
+      "source": {
+        "line": 4505,
+        "column": 3477821
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-15.line-002.speaker": {
+      "tn": "مريم — المهندسة",
+      "source": {
+        "line": 4505,
+        "column": 3477947
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-15.line-002": {
+      "tn": "ريان، الناس خايفة. قلتلهم الحقيقة، أما توا يسألو: وبعد؟ السور طايح، والدار طايحة... شنو نعملو؟",
+      "source": {
+        "line": 4505,
+        "column": 3477970
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-15.line-003.speaker": {
+      "tn": "عم الهادي — حارس الأرشيف",
+      "source": {
+        "line": 4505,
+        "column": 3478073
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-15.line-003": {
+      "tn": "أنا سكت 30 سنة. توا تكلمت. أما الكلام وحدو ما يبنيش سور. لازم نبنيو... مع بعضنا.",
+      "source": {
+        "line": 4505,
+        "column": 3478105
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-15.line-004.speaker": {
+      "tn": "ياسمين — 10 سنوات",
+      "source": {
+        "line": 4505,
+        "column": 3478194
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-15.line-004": {
+      "tn": "ريان... لينا قالتلي أنك وعدتها. توا توعدنا الكل؟ توعدنا باش نبنيو قرطاج جديدة؟",
+      "source": {
+        "line": 4505,
+        "column": 3478219
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-15.line-005.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 3478306
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-15.line-005": {
+      "tn": "خويا، الناس الكل تشوف فيك... وأنا زادا، كيف ديما. شدّ يدي وكمل.",
+      "source": {
+        "line": 4505,
+        "column": 3478318
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-15.line-006.speaker": {
+      "tn": "القائد كريم — 35 سنة",
+      "source": {
+        "line": 4505,
+        "column": 3478390
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-15.line-006": {
+      "tn": "أنا كنت ضدك. أما توا نشوف: الناس ما خافتش. الناس تحب تبني. كان تحب، نساعدك... أما بشرط: نبنيو بلا سكوت، بلا خوف.",
+      "source": {
+        "line": 4505,
+        "column": 3478418
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-15.line-007.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3478539
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-15.line-007": {
+      "tn": "سبع سنين وأنا وحدي. توا أول مرة نشوف قرطاج كاملة مجتمعة. هاذي هي الحقيقة اللي كنت نحلم بيها.",
+      "source": {
+        "line": 4505,
+        "column": 3478560
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-15.line-008.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3478661
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-15.line-008": {
+      "tn": "ما نبنيش وحدي. نبنيو مع بعضنا. قرطاج موش سور... قرطاج هي الناس.",
+      "source": {
+        "line": 4505,
+        "column": 3478673
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-15.hotspot.square-crowd.label": {
+      "tn": "ساحة قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3478775
+      }
+    },
+    "story.legacy-15.hotspot.square-crowd.note": {
+      "tn": "ساحة قرطاج: ناس مجتمعة، أطفال، شيوخ. أول مرة من سنين يتلمو بلا خوف.",
+      "source": {
+        "line": 4505,
+        "column": 3478803
+      }
+    },
+    "story.legacy-15.hotspot.broken-wall-rebuild.label": {
+      "tn": "السور المكسور",
+      "source": {
+        "line": 4505,
+        "column": 3478931
+      }
+    },
+    "story.legacy-15.hotspot.broken-wall-rebuild.note": {
+      "tn": "السور المكسور: حجارة طايحة. مريم تقول: ننجمو نعاودو نبنيوه، أما أقوى، وبشفافية.",
+      "source": {
+        "line": 4505,
+        "column": 3478962
+      }
+    },
+    "story.legacy-15.hotspot.yasmin-hope.label": {
+      "tn": "أمل ياسمين",
+      "source": {
+        "line": 4505,
+        "column": 3479096
+      }
+    },
+    "story.legacy-15.hotspot.yasmin-hope.note": {
+      "tn": "ياسمين ترسم قرطاج الجديدة: بيوت بيضاء وزرقاء، وسوق، وبحر. تقول: هكا نحبها تولي.",
+      "source": {
+        "line": 4505,
+        "column": 3479124
+      }
+    },
+    "story.legacy-15.choice.build-together.label": {
+      "tn": "نبنيو مع بعضنا",
+      "source": {
+        "line": 4505,
+        "column": 3479278
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-15.choice.build-together.sub": {
+      "tn": "الكل يبني — مريم تقود البناء",
+      "source": {
+        "line": 4505,
+        "column": 3479299
+      }
+    },
+    "story.legacy-15.choice.protect-village.label": {
+      "tn": "نحمي القرية أولاً",
+      "source": {
+        "line": 4505,
+        "column": 3479429
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-15.choice.protect-village.sub": {
+      "tn": "القرية أولاً — كريم يحمي الطريق",
+      "source": {
+        "line": 4505,
+        "column": 3479453
+      }
+    },
+    "story.legacy-15.title": {
+      "tn": "الجزء الثالث — الفصل 15",
+      "source": {
+        "line": 4505,
+        "column": 3477647
+      }
+    },
+    "story.legacy-15.place": {
+      "tn": "ساحة قرطاج — ما بعد الحقيقة",
+      "source": {
+        "line": 4505,
+        "column": 3477679
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-15.hint": {
+      "tn": "قرطاج تستفيق. مريم والهادي وياسمين معاك. فتّش قبل القرار.",
+      "source": {
+        "line": 4505,
+        "column": 3477735
+      }
+    },
+    "story.legacy-15.card.cardTitle": {
+      "tn": "الجزء الثالث — الفصل 15",
+      "source": {
+        "line": 4505,
+        "column": 3487605
+      }
+    },
+    "story.legacy-15.card.cardSub": {
+      "tn": "ساحة قرطاج · ما بعد الحقيقة",
+      "source": {
+        "line": 4505,
+        "column": 3487639
+      }
+    },
+    "story.legacy-16.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3479720
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-16.line-001": {
+      "tn": "الميناء البونيقي... ناس تبني، أطفال يهزو حجارة، ومريم ترسم الخريطة الجديدة. قرطاج ترجع تتنفس.",
+      "source": {
+        "line": 4505,
+        "column": 3479734
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-16.line-002.speaker": {
+      "tn": "مريم — المهندسة",
+      "source": {
+        "line": 4505,
+        "column": 3479836
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-16.line-002": {
+      "tn": "شوف، ريان! السور يطلع من جديد. أما المرة هاذي، كل حجر فيه اسم اللي بناه. بلا سكوت، بلا سر.",
+      "source": {
+        "line": 4505,
+        "column": 3479859
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-16.line-003.speaker": {
+      "tn": "عم الهادي — حارس الأرشيف",
+      "source": {
+        "line": 4505,
+        "column": 3479958
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-16.line-003": {
+      "tn": "أنا نكتب كل شي. كل حجر، كل اسم، كل قرار. باش بعد 30 سنة، حد ما يقول: ما كناش نعرفو.",
+      "source": {
+        "line": 4505,
+        "column": 3479990
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-16.line-004.speaker": {
+      "tn": "القائد كريم — 35 سنة",
+      "source": {
+        "line": 4505,
+        "column": 3480082
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-16.line-004": {
+      "tn": "أنا كنت نحمي بالسكوت. توا نحمي بالبناء. الطريق للميناء آمن، والقوارب ترجع.",
+      "source": {
+        "line": 4505,
+        "column": 3480110
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-16.line-005.speaker": {
+      "tn": "ياسمين — 10 سنوات",
+      "source": {
+        "line": 4505,
+        "column": 3480193
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-16.line-005": {
+      "tn": "ريان، شوف رسمتي! رسمت قرطاج الجديدة. فيها دار ليا، ودار للينا، ودار لمريم.",
+      "source": {
+        "line": 4505,
+        "column": 3480218
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-16.line-006.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 3480301
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-16.line-006": {
+      "tn": "خويا، شوف! حملت حجرة كبيرة كيفك! توا قرطاج فيها حجرة متاعي.",
+      "source": {
+        "line": 4505,
+        "column": 3480313
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-16.line-007.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3480381
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-16.line-007": {
+      "tn": "(يحط حجرة على السور بحذر) سبع سنين وأنا نكتب أسماء ناس ماتو... توا نشوف ناس تبني.",
+      "source": {
+        "line": 4505,
+        "column": 3480402
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-16.line-008.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3480492
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-16.line-008": {
+      "tn": "ما كملناش. باقي أهم قرار: شنو نوع قرطاج اللي نحبوها؟ قرطاج تبني سور جديد، ولا قرطاج تحمي بلا سور؟",
+      "source": {
+        "line": 4505,
+        "column": 3480504
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-16.hotspot.port-rebuild.label": {
+      "tn": "الميناء يتصلح",
+      "source": {
+        "line": 4505,
+        "column": 3480640
+      }
+    },
+    "story.legacy-16.hotspot.port-rebuild.note": {
+      "tn": "الميناء البونيقي يتصلح: قوارب ترجع، ناس تخدم. قرطاج ترجع للبحر.",
+      "source": {
+        "line": 4505,
+        "column": 3480671
+      }
+    },
+    "story.legacy-16.hotspot.wall-names.label": {
+      "tn": "أسماء على السور",
+      "source": {
+        "line": 4505,
+        "column": 3480786
+      }
+    },
+    "story.legacy-16.hotspot.wall-names.note": {
+      "tn": "أسماء على السور: كل حجر فيه اسم. مريم تقول: هكا ما يتنساش حد.",
+      "source": {
+        "line": 4505,
+        "column": 3480819
+      }
+    },
+    "story.legacy-16.hotspot.new-map.label": {
+      "tn": "خريطة قرطاج الجديدة",
+      "source": {
+        "line": 4505,
+        "column": 3480931
+      }
+    },
+    "story.legacy-16.hotspot.new-map.note": {
+      "tn": "خريطة قرطاج الجديدة: سوق، ميناء، قرية، وهضبة بيرصا. كل شي مربوط.",
+      "source": {
+        "line": 4505,
+        "column": 3480968
+      }
+    },
+    "story.legacy-16.choice.build-wall.label": {
+      "tn": "نبني سور جديد، أما بشفافية",
+      "source": {
+        "line": 4505,
+        "column": 3481094
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-16.choice.build-wall.sub": {
+      "tn": "سور جديد بأسماء الكل",
+      "source": {
+        "line": 4505,
+        "column": 3481127
+      }
+    },
+    "story.legacy-16.choice.build-no-wall.label": {
+      "tn": "نبني قرطاج بلا سور",
+      "source": {
+        "line": 4505,
+        "column": 3481236
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-16.choice.build-no-wall.sub": {
+      "tn": "قرطاج مفتوحة — نحميو بعضنا",
+      "source": {
+        "line": 4505,
+        "column": 3481261
+      }
+    },
+    "story.legacy-16.title": {
+      "tn": "الجزء الثالث — الفصل 16",
+      "source": {
+        "line": 4505,
+        "column": 3479568
+      }
+    },
+    "story.legacy-16.place": {
+      "tn": "الميناء البونيقي — البناء",
+      "source": {
+        "line": 4505,
+        "column": 3479600
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-16.hint": {
+      "tn": "البناء بدا. الميناء والسور يتصلحو. فتّش قبل القرار.",
+      "source": {
+        "line": 4505,
+        "column": 3479654
+      }
+    },
+    "story.legacy-16.card.cardTitle": {
+      "tn": "الجزء الثالث — الفصل 16",
+      "source": {
+        "line": 4505,
+        "column": 3487800
+      }
+    },
+    "story.legacy-16.card.cardSub": {
+      "tn": "الميناء · البناء",
+      "source": {
+        "line": 4505,
+        "column": 3487834
+      }
+    },
+    "story.legacy-17.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3481521
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-17.line-001": {
+      "tn": "هضبة بيرصا... الفجر يطلع على قرطاج الجديدة. بيوت بيضاء وزرقاء، سوق، ميناء، وناس. هنا، قرطاج بدات من جديد.",
+      "source": {
+        "line": 4505,
+        "column": 3481535
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-17.line-002.speaker": {
+      "tn": "مريم — المهندسة",
+      "source": {
+        "line": 4505,
+        "column": 3481649
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-17.line-002": {
+      "tn": "ريان، السور كمل... أو ما كملش، حسب اختيارك. أما قرطاج كملت. قرطاج هي الناس.",
+      "source": {
+        "line": 4505,
+        "column": 3481672
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-17.line-003.speaker": {
+      "tn": "عم الهادي — حارس الأرشيف",
+      "source": {
+        "line": 4505,
+        "column": 3481756
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-17.line-003": {
+      "tn": "الكتب تنسى... أما السور فيه أسماءنا. هذا اللي باش يحكي على اللي صار.",
+      "source": {
+        "line": 4505,
+        "column": 3481788
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-17.line-004.speaker": {
+      "tn": "ياسمين — 10 سنوات",
+      "source": {
+        "line": 4505,
+        "column": 3481865
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-17.line-004": {
+      "tn": "ريان... توا قرطاج حلوة كيف رسمتي؟",
+      "source": {
+        "line": 4505,
+        "column": 3481890
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-17.line-005.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 3481932
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-17.line-005": {
+      "tn": "خويا، اللي تختارو، أنا معاك. النور ولا الحارس؟ فكّر مليح، ما فما جواب سهل.",
+      "source": {
+        "line": 4505,
+        "column": 3481944
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-17.line-006.speaker": {
+      "tn": "القائد كريم — 35 سنة",
+      "source": {
+        "line": 4505,
+        "column": 3482027
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-17.line-006": {
+      "tn": "أنا معاك، ريان. مهما اخترت، نحمي قرطاج معاك.",
+      "source": {
+        "line": 4505,
+        "column": 3482055
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-17.line-007.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3482108
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-17.line-007": {
+      "tn": "ريان... ما كنتش نتصور نقول كلمة «دار» مرة أخرى. اختار اللي يخلي الدار هاذي قايمة.",
+      "source": {
+        "line": 4505,
+        "column": 3482129
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-17.line-008.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3482219
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-17.line-008": {
+      "tn": "قرطاج الجديدة في يدي. نبنيها بالنور، ولا نحميها كحارس؟",
+      "source": {
+        "line": 4505,
+        "column": 3482231
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-17.hotspot.byrsa-dawn.label": {
+      "tn": "فجر بيرصا",
+      "source": {
+        "line": 4505,
+        "column": 3482322
+      }
+    },
+    "story.legacy-17.hotspot.byrsa-dawn.note": {
+      "tn": "فجر بيرصا: الشمس تطلع على قرطاج الجديدة. أول فجر بلا خوف.",
+      "source": {
+        "line": 4505,
+        "column": 3482349
+      }
+    },
+    "story.legacy-17.hotspot.new-carthage-view.label": {
+      "tn": "قرطاج الجديدة",
+      "source": {
+        "line": 4505,
+        "column": 3482448
+      }
+    },
+    "story.legacy-17.hotspot.new-carthage-view.note": {
+      "tn": "قرطاج الجديدة: بيوت، سوق، ميناء. الناس تضحك.",
+      "source": {
+        "line": 4505,
+        "column": 3482479
+      }
+    },
+    "story.legacy-17.hotspot.promise-stone.label": {
+      "tn": "حجر الوعد",
+      "source": {
+        "line": 4505,
+        "column": 3482579
+      }
+    },
+    "story.legacy-17.hotspot.promise-stone.note": {
+      "tn": "حجر الوعد: ريان كتب عليه: ما نخلي حد وحدو. وعدو للينا صار وعد لقرطاج كاملة.",
+      "source": {
+        "line": 4505,
+        "column": 3482606
+      }
+    },
+    "story.legacy-17.choice.choose-rebuild.label": {
+      "tn": "البناء — قرطاج جديدة بالنور",
+      "source": {
+        "line": 4505,
+        "column": 3482747
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-17.choice.choose-rebuild.sub": {
+      "tn": "نبني قرطاج جديدة، مفتوحة وشفافة",
+      "source": {
+        "line": 4505,
+        "column": 3482781
+      }
+    },
+    "story.legacy-17.choice.choose-guardian.label": {
+      "tn": "الحارس — نحمي قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3482908
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-17.choice.choose-guardian.sub": {
+      "tn": "نحمي قرطاج كحارس، بلا سور",
+      "source": {
+        "line": 4505,
+        "column": 3482934
+      }
+    },
+    "story.legacy-17.title": {
+      "tn": "الجزء الثالث — الفصل 17",
+      "source": {
+        "line": 4505,
+        "column": 3481366
+      }
+    },
+    "story.legacy-17.place": {
+      "tn": "هضبة بيرصا — قرطاج الجديدة",
+      "source": {
+        "line": 4505,
+        "column": 3481398
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-17.hint": {
+      "tn": "هضبة بيرصا، الفجر، والقرار الأخير. فتّش قبل ما تختار.",
+      "source": {
+        "line": 4505,
+        "column": 3481453
+      }
+    },
+    "story.legacy-17.card.cardTitle": {
+      "tn": "الجزء الثالث — الفصل 17",
+      "source": {
+        "line": 4505,
+        "column": 3487980
+      }
+    },
+    "story.legacy-17.card.cardSub": {
+      "tn": "هضبة بيرصا · قرطاج الجديدة",
+      "source": {
+        "line": 4505,
+        "column": 3488014
+      }
+    },
+    "story.legacy-18.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3483181
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-18.line-001": {
+      "tn": "الخاتمة — قرطاج تعيش. الغروب على هضبة بيرصا، والكل مجتمع: مريم، الهادي، ياسمين، كريم، أمين، لينا، وريان.",
+      "source": {
+        "line": 4505,
+        "column": 3483195
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-18.line-002.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3483308
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-18.line-002": {
+      "tn": "بديت بوعد صغير: ما نخليش لينا وحدها. توا الوعد صار أكبر: ما نخليش حد وحدو في قرطاج.",
+      "source": {
+        "line": 4505,
+        "column": 3483320
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-18.line-003.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 3483412
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-18.line-003": {
+      "tn": "خويا، أنت وفيت بوعدك. وأنا ديما معاك.",
+      "source": {
+        "line": 4505,
+        "column": 3483424
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-18.line-004.speaker": {
+      "tn": "مريم — المهندسة",
+      "source": {
+        "line": 4505,
+        "column": 3483470
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-18.line-004": {
+      "tn": "قرطاج تبنات. السور فيه أسماء الكل. بلا سكوت، بلا سر.",
+      "source": {
+        "line": 4505,
+        "column": 3483493
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-18.line-005.speaker": {
+      "tn": "عم الهادي — حارس الأرشيف",
+      "source": {
+        "line": 4505,
+        "column": 3483554
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-18.line-005": {
+      "tn": "ثلاثين سنة سكوت... وتوا الحبر يكمل الحكاية. هاذي آخر ورقة.",
+      "source": {
+        "line": 4505,
+        "column": 3483586
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-18.line-006.speaker": {
+      "tn": "ياسمين — 10 سنوات",
+      "source": {
+        "line": 4505,
+        "column": 3483653
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-18.line-006": {
+      "tn": "ريان، رسمت رسمة جديدة. فيها الكل مجتمع، وأنت واقف في النص.",
+      "source": {
+        "line": 4505,
+        "column": 3483678
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-18.line-007.speaker": {
+      "tn": "القائد كريم — 35 سنة",
+      "source": {
+        "line": 4505,
+        "column": 3483745
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-18.line-007": {
+      "tn": "كنت نحمي وحدي بالسكوت. توا نحمي معاكم، والباب مفتوح.",
+      "source": {
+        "line": 4505,
+        "column": 3483773
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-18.line-008.speaker": {
+      "tn": "أمين — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3483834
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-18.line-008": {
+      "tn": "(يبتسم لأول مرة) ما عادش نعد الأيام... نعد الوجوه.",
+      "source": {
+        "line": 4505,
+        "column": 3483855
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-18.line-009.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 3483914
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "story.legacy-18.line-009": {
+      "tn": "قرطاج تعيش... موش بالسور، موش بالحجر. قرطاج تعيش بالناس. والقرار الأخير ليك.",
+      "source": {
+        "line": 4505,
+        "column": 3483928
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "story.legacy-18.hotspot.sunset-family.label": {
+      "tn": "غروب العائلة",
+      "source": {
+        "line": 4505,
+        "column": 3484044
+      }
+    },
+    "story.legacy-18.hotspot.sunset-family.note": {
+      "tn": "غروب العائلة: الكل مجتمع على بيرصا. أول غروب بلا خوف.",
+      "source": {
+        "line": 4505,
+        "column": 3484074
+      }
+    },
+    "story.legacy-18.hotspot.promise-stone-final.label": {
+      "tn": "حجر الوعد",
+      "source": {
+        "line": 4505,
+        "column": 3484171
+      }
+    },
+    "story.legacy-18.hotspot.promise-stone-final.note": {
+      "tn": "حجر الوعد: ما نخلي حد وحدو. وعد ريان صار وعد قرطاج.",
+      "source": {
+        "line": 4505,
+        "column": 3484198
+      }
+    },
+    "story.legacy-18.hotspot.new-carthage-final.label": {
+      "tn": "قرطاج الجديدة",
+      "source": {
+        "line": 4505,
+        "column": 3484308
+      }
+    },
+    "story.legacy-18.hotspot.new-carthage-final.note": {
+      "tn": "قرطاج الجديدة: بيوت، سوق، ميناء، وناس تضحك.",
+      "source": {
+        "line": 4505,
+        "column": 3484339
+      }
+    },
+    "story.legacy-18.choice.final-rebuild2.label": {
+      "tn": "البناء — قرطاج جديدة بالنور",
+      "source": {
+        "line": 4505,
+        "column": 3484449
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-18.choice.final-rebuild2.sub": {
+      "tn": "نبني قرطاج جديدة، مفتوحة وشفافة",
+      "source": {
+        "line": 4505,
+        "column": 3484483
+      }
+    },
+    "story.legacy-18.choice.final-rebuild2.lockedHint": {
+      "tn": "أمين ما زال يشك فيك — ثق فيه أولاً في الفصل 9 أو 10.",
+      "source": {
+        "line": 4505,
+        "column": 3484584
+      }
+    },
+    "story.legacy-18.choice.final-guardian2.label": {
+      "tn": "الحارس — نحمي قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3484667
+      },
+      "legacyUse": "Rendered display and legacy lastChoice / choicesHistory save values"
+    },
+    "story.legacy-18.choice.final-guardian2.sub": {
+      "tn": "نحمي قرطاج كحارس، بلا سور",
+      "source": {
+        "line": 4505,
+        "column": 3484693
+      }
+    },
+    "story.legacy-18.title": {
+      "tn": "الخاتمة — قرطاج تعيش",
+      "source": {
+        "line": 4505,
+        "column": 3483042
+      }
+    },
+    "story.legacy-18.place": {
+      "tn": "هضبة بيرصا — الغروب",
+      "source": {
+        "line": 4505,
+        "column": 3483071
+      },
+      "legacyUse": "Rendered place and legacy sceneName save value"
+    },
+    "story.legacy-18.hint": {
+      "tn": "الخاتمة. الكل مجتمع. فتّش قبل ما تختار النهاية.",
+      "source": {
+        "line": 4505,
+        "column": 3483119
+      }
+    },
+    "story.legacy-18.card.cardTitle": {
+      "tn": "الخاتمة — قرطاج تعيش",
+      "source": {
+        "line": 4505,
+        "column": 3488174
+      }
+    },
+    "story.legacy-18.card.cardSub": {
+      "tn": "هضبة بيرصا · الغروب",
+      "source": {
+        "line": 4505,
+        "column": 3488205
+      }
+    },
+    "characters.ryan.name": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 2444969
+      }
+    },
+    "characters.ryan.role": {
+      "tn": "البطل • 16 سنة",
+      "source": {
+        "line": 4505,
+        "column": 2444981
+      }
+    },
+    "characters.ryan.desc": {
+      "tn": "ولد قرطاج اللي وعد أختو ما يخليهاش وحدها. قراراتو هي اللي باش ترسم نهاية المدينة.",
+      "source": {
+        "line": 4505,
+        "column": 2445003
+      }
+    },
+    "characters.ryan.secret": {
+      "tn": "وعدو للينا هو أقوى سلاح عندو وقت اللي يضيق الوقت.",
+      "source": {
+        "line": 4505,
+        "column": 2445094
+      }
+    },
+    "characters.sara.name": {
+      "tn": "سارة",
+      "source": {
+        "line": 4505,
+        "column": 2445172
+      }
+    },
+    "characters.sara.role": {
+      "tn": "الأم",
+      "source": {
+        "line": 4505,
+        "column": 2445184
+      }
+    },
+    "characters.sara.desc": {
+      "tn": "قلب الدار. تحاول تحمي ولادها بالهدوء، حتى وهي حاسة بالخطر قبل الكل.",
+      "source": {
+        "line": 4505,
+        "column": 2445196
+      }
+    },
+    "characters.sara.secret": {
+      "tn": "تعرف أكثر على الصوت الغريب مما تقول.",
+      "source": {
+        "line": 4505,
+        "column": 2445273
+      }
+    },
+    "characters.lina.name": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 2445338
+      }
+    },
+    "characters.lina.role": {
+      "tn": "الأخت • 8 سنوات",
+      "source": {
+        "line": 4505,
+        "column": 2445350
+      }
+    },
+    "characters.lina.desc": {
+      "tn": "أخت ريان الصغيرة. خايفة، أما ثقتها في خوها ما تهتزش.",
+      "source": {
+        "line": 4505,
+        "column": 2445373
+      }
+    },
+    "characters.lina.secret": {
+      "tn": "صورة العائلة تذكر ريان بوعدو كل مرة يضعف.",
+      "source": {
+        "line": 4505,
+        "column": 2445435
+      }
+    },
+    "characters.salim.name": {
+      "tn": "سليم",
+      "source": {
+        "line": 4505,
+        "column": 2445522
+      }
+    },
+    "characters.salim.role": {
+      "tn": "الصاحب الذكي",
+      "source": {
+        "line": 4505,
+        "column": 2445534
+      }
+    },
+    "characters.salim.desc": {
+      "tn": "صاحب ريان في السوق. ذكي ويلاحظ برشا، أما يحب يرجع للدار بسرعة.",
+      "source": {
+        "line": 4505,
+        "column": 2445554
+      }
+    },
+    "characters.salim.secret": {
+      "tn": "يعرف الأزقة القديمة خير مما يبين.",
+      "source": {
+        "line": 4505,
+        "column": 2445626
+      }
+    },
+    "characters.mansour.name": {
+      "tn": "عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 2445708
+      }
+    },
+    "characters.mansour.role": {
+      "tn": "الجندي القديم",
+      "source": {
+        "line": 4505,
+        "column": 2445724
+      }
+    },
+    "characters.mansour.desc": {
+      "tn": "جندي قديم ساكت برشا. سيفو وخريطتو يحملو ذاكرة 30 سنة من الحرب.",
+      "source": {
+        "line": 4505,
+        "column": 2445745
+      }
+    },
+    "characters.mansour.secret": {
+      "tn": "خريطتو فيها التحذير اللي الكل سكتو عليه: هنا تضعف الحجارة.",
+      "source": {
+        "line": 4505,
+        "column": 2445817
+      }
+    },
+    "characters.noor.name": {
+      "tn": "القائدة نور",
+      "source": {
+        "line": 4505,
+        "column": 2445923
+      }
+    },
+    "characters.noor.role": {
+      "tn": "قائدة البوابة • 29 سنة",
+      "source": {
+        "line": 4505,
+        "column": 2445942
+      }
+    },
+    "characters.noor.desc": {
+      "tn": "واقفة بثبات وسط الفوضى. هي اللي تقرر شكون يركب في القوارب الأخيرة.",
+      "source": {
+        "line": 4505,
+        "column": 2445972
+      }
+    },
+    "characters.noor.secret": {
+      "tn": "قائمة الركاب فيها اسم مشطوب: إيلاس.",
+      "source": {
+        "line": 4505,
+        "column": 2446048
+      }
+    },
+    "characters.youssef.name": {
+      "tn": "الأب يوسف",
+      "source": {
+        "line": 4505,
+        "column": 2446131
+      }
+    },
+    "characters.youssef.role": {
+      "tn": "الأب • طبيب المستشفى • 42 سنة",
+      "source": {
+        "line": 4505,
+        "column": 2446148
+      }
+    },
+    "characters.youssef.desc": {
+      "tn": "أب ريان ولينا وطبيب المستشفى. رجل هادئ وحازم، حتى وهو مجروح يرفض يخلي جرحاه وحدهم.",
+      "source": {
+        "line": 4505,
+        "column": 2446185
+      }
+    },
+    "characters.youssef.secret": {
+      "tn": "ملف قديم عندو يحكي على شقوق ظهرت قبل سنوات.",
+      "source": {
+        "line": 4505,
+        "column": 2446277
+      }
+    },
+    "characters.elias.name": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 2446368
+      }
+    },
+    "characters.elias.role": {
+      "tn": "الغامض المقنّع",
+      "source": {
+        "line": 4505,
+        "column": 2446381
+      }
+    },
+    "characters.elias.desc": {
+      "tn": "يظهر وقت الخطر ويهمس بالحقيقة قبل ما تصير. حد ما يعرف منين جا.",
+      "source": {
+        "line": 4505,
+        "column": 2446403
+      }
+    },
+    "characters.elias.secret": {
+      "tn": "كان يعرف أن السور باش يطيح اليوم... قبل ما يطيح.",
+      "source": {
+        "line": 4505,
+        "column": 2446475
+      }
+    },
+    "characters.amin.name": {
+      "tn": "أمين",
+      "source": {
+        "line": 4505,
+        "column": 2446569
+      }
+    },
+    "characters.amin.role": {
+      "tn": "الناجي من وراء السور • 23 سنة",
+      "source": {
+        "line": 4505,
+        "column": 2446581
+      }
+    },
+    "characters.amin.desc": {
+      "tn": "عاش 7 سنين ورا السور. هادئ، مجروح، ويعرف برشا على العمالقة. يحكي بجمل قصيرة، وما يثق في حد في الأول.",
+      "source": {
+        "line": 4505,
+        "column": 2446618
+      }
+    },
+    "characters.amin.secret": {
+      "tn": "دفترو القديم فيه أسماء ناس كانو بشر قبل ما يوليو عمالقة.",
+      "source": {
+        "line": 4505,
+        "column": 2446728
+      }
+    },
+    "characters.mariam.name": {
+      "tn": "مريم",
+      "source": {
+        "line": 4505,
+        "column": 2446831
+      }
+    },
+    "characters.mariam.role": {
+      "tn": "المهندسة • 17 سنة",
+      "source": {
+        "line": 4505,
+        "column": 2446843
+      }
+    },
+    "characters.mariam.desc": {
+      "tn": "بنت القرية المخفية في غابة زغوان. تصلح البوابات والآلات، وتشبه لريان في عناده.",
+      "source": {
+        "line": 4505,
+        "column": 2446868
+      }
+    },
+    "characters.mariam.secret": {
+      "tn": "تعرف طريق المختبر تحت قرطاج، وتخبيه على القائد كريم.",
+      "source": {
+        "line": 4505,
+        "column": 2446956
+      }
+    },
+    "characters.hadi.name": {
+      "tn": "عم الهادي",
+      "source": {
+        "line": 4505,
+        "column": 2447055
+      }
+    },
+    "characters.hadi.role": {
+      "tn": "حارس الأرشيف • 62 سنة",
+      "source": {
+        "line": 4505,
+        "column": 2447072
+      }
+    },
+    "characters.hadi.desc": {
+      "tn": "كان يخدم مع بابا في البيمارستان. يعرف الحقيقة كاملة على سور قرطاج، وساكت من سنين.",
+      "source": {
+        "line": 4505,
+        "column": 2447101
+      }
+    },
+    "characters.hadi.secret": {
+      "tn": "عندو ورقة المختبر اللي تثبت شكون أمر بالتجربة.",
+      "source": {
+        "line": 4505,
+        "column": 2447192
+      }
+    },
+    "characters.yasmin.name": {
+      "tn": "ياسمين",
+      "source": {
+        "line": 4505,
+        "column": 2447285
+      }
+    },
+    "characters.yasmin.role": {
+      "tn": "اليتيمة • 10 سنوات",
+      "source": {
+        "line": 4505,
+        "column": 2447299
+      }
+    },
+    "characters.yasmin.desc": {
+      "tn": "لقاتها مريم في الغابة. تشبه للينا، وتخلي ريان يتفكر وعدو.",
+      "source": {
+        "line": 4505,
+        "column": 2447325
+      }
+    },
+    "characters.yasmin.secret": {
+      "tn": "تخبي رسمة لقرطاج قبل السور، رسمتها أمها.",
+      "source": {
+        "line": 4505,
+        "column": 2447392
+      }
+    },
+    "characters.karim.name": {
+      "tn": "القائد كريم",
+      "source": {
+        "line": 4505,
+        "column": 2447480
+      }
+    },
+    "characters.karim.role": {
+      "tn": "قائد المجموعة الثانية • 35 سنة",
+      "source": {
+        "line": 4505,
+        "column": 2447499
+      }
+    },
+    "characters.karim.desc": {
+      "tn": "يقود مجموعة نجاو من ورا السور. يحب يحكم القرية بالقوة، ويظن الحقيقة لازم تتخبى.",
+      "source": {
+        "line": 4505,
+        "column": 2447537
+      }
+    },
+    "characters.karim.secret": {
+      "tn": "يعرف القائد اللي أمر بالتجربة، أما يخاف يقول.",
+      "source": {
+        "line": 4505,
+        "column": 2447626
+      }
+    },
+    "characters.trust.lina": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 2444778
+      }
+    },
+    "characters.trust.salim": {
+      "tn": "سليم",
+      "source": {
+        "line": 4505,
+        "column": 2444791
+      }
+    },
+    "characters.trust.mansour": {
+      "tn": "عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 2444806
+      }
+    },
+    "characters.trust.nour": {
+      "tn": "القائدة نور",
+      "source": {
+        "line": 4505,
+        "column": 2444822
+      }
+    },
+    "characters.trust.father": {
+      "tn": "الأب يوسف",
+      "source": {
+        "line": 4505,
+        "column": 2444843
+      }
+    },
+    "characters.trust.amin": {
+      "tn": "أمين",
+      "source": {
+        "line": 4505,
+        "column": 2444860
+      }
+    },
+    "characters.trust.elias": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 2444873
+      }
+    },
+    "characters.trust.mariam": {
+      "tn": "مريم",
+      "source": {
+        "line": 4505,
+        "column": 2444888
+      }
+    },
+    "characters.trust.hadi": {
+      "tn": "عم الهادي",
+      "source": {
+        "line": 4505,
+        "column": 2444900
+      }
+    },
+    "characters.trust.yasmin": {
+      "tn": "ياسمين",
+      "source": {
+        "line": 4505,
+        "column": 2444919
+      }
+    },
+    "characters.trust.karim": {
+      "tn": "القائد كريم",
+      "source": {
+        "line": 4505,
+        "column": 2444934
+      }
+    },
+    "ending.hero.gallery.title": {
+      "tn": "النهاية 1 — البطل",
+      "source": {
+        "line": 4505,
+        "column": 2437896
+      }
+    },
+    "ending.hero.gallery.desc": {
+      "tn": "أنقذت لينا + بابا + عم منصور، شجاعة أكثر من 70، ووقت أكثر من 5 دق.",
+      "source": {
+        "line": 4505,
+        "column": 2437921
+      }
+    },
+    "ending.hero.cinematic.place": {
+      "tn": "البوابة — فجر ذهبي",
+      "source": {
+        "line": 4505,
+        "column": 2438716
+      }
+    },
+    "ending.hero.cinematic.achievementLabel": {
+      "tn": "بطل قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 2438956
+      }
+    },
+    "ending.hero.cinematic.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 2438980
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.hero.cinematic.line-001": {
+      "tn": "البوابة تنفتح... والنور الذهبي يدخل قرطاج لأول مرة من ساعات طويلة.",
+      "source": {
+        "line": 4505,
+        "column": 2438994
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.hero.cinematic.line-002.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 2439069
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.hero.cinematic.line-002": {
+      "tn": "فتحتها وحدي... أما ما فتحتهاش وحدي. كل واحد فيكم كان معايا، خطوة بخطوة.",
+      "source": {
+        "line": 4505,
+        "column": 2439081
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.hero.cinematic.line-003.speaker": {
+      "tn": "القائدة نور",
+      "source": {
+        "line": 4505,
+        "column": 2439161
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.hero.cinematic.line-003": {
+      "tn": "ريان... وقف! (تؤدي التحية) اليوم، قرطاج كلها تعرف اسمك. البوابة مفتوحة بفضلك.",
+      "source": {
+        "line": 4505,
+        "column": 2439180
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.hero.cinematic.line-004.speaker": {
+      "tn": "عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 2439266
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.hero.cinematic.line-004": {
+      "tn": "كنت نعرف... من أول مرة شديت السيف. هالولد موش ولد عادي. هاذا بطل، يا ولدي، بطل بحق.",
+      "source": {
+        "line": 4505,
+        "column": 2439282
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.hero.cinematic.line-005.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 2439374
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.hero.cinematic.line-005": {
+      "tn": "خويا! خويا رجع! كنت نعرف باش ترجع... وعدتني، ووفيت بوعدك!",
+      "source": {
+        "line": 4505,
+        "column": 2439386
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.hero.cinematic.line-006.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 2439452
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.hero.cinematic.line-006": {
+      "tn": "الناس تجري نحو الأمان... وأنا واقف هنا، نشوفهم. هاذا هو النهار اللي عشنا على خاطرو.",
+      "source": {
+        "line": 4505,
+        "column": 2439464
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.survivor.gallery.title": {
+      "tn": "النهاية 2 — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 2438013
+      }
+    },
+    "ending.survivor.gallery.desc": {
+      "tn": "ركبت القارب وحدك ونجيت… أما الثمن ثقيل.",
+      "source": {
+        "line": 4505,
+        "column": 2438039
+      }
+    },
+    "ending.survivor.cinematic.place": {
+      "tn": "الجسر — غروب هادئ",
+      "source": {
+        "line": 4505,
+        "column": 2439584
+      }
+    },
+    "ending.survivor.cinematic.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 2439808
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.survivor.cinematic.line-001": {
+      "tn": "عم منصور يغطي عليكم... والرصاصة الأخيرة تسكت. الجسر وراكم، والغروب قدامكم.",
+      "source": {
+        "line": 4505,
+        "column": 2439822
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.survivor.cinematic.line-002.speaker": {
+      "tn": "عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 2439905
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.survivor.cinematic.line-002": {
+      "tn": "امشيو! ما توقفوش! أنا نغطي عليكم... والجسر هذا، أنا نحميه لآخر نفس.",
+      "source": {
+        "line": 4505,
+        "column": 2439921
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.survivor.cinematic.line-003.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 2439997
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.survivor.cinematic.line-003": {
+      "tn": "عمي منصور... ما نخليكش!",
+      "source": {
+        "line": 4505,
+        "column": 2440009
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.survivor.cinematic.line-004.speaker": {
+      "tn": "عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 2440041
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.survivor.cinematic.line-004": {
+      "tn": "أنت ما تخليتني... أنت كملت الطريق. روح، واحمي عايلتك. هاذي وصيتي.",
+      "source": {
+        "line": 4505,
+        "column": 2440057
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.survivor.cinematic.line-005.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 2440131
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.survivor.cinematic.line-005": {
+      "tn": "خويا... شدني مليح. أنا خايفة، أما يدك دافية. ما تسيبنيش، باهي؟",
+      "source": {
+        "line": 4505,
+        "column": 2440143
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.survivor.cinematic.line-006.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 2440214
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.survivor.cinematic.line-006": {
+      "tn": "ما نسيبكش. نجينا... مع بعضنا. الشمس تغرب، أما احنا ما زلنا مع بعضنا، وهاذا يكفي.",
+      "source": {
+        "line": 4505,
+        "column": 2440226
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.sacrifice.gallery.title": {
+      "tn": "النهاية 3 — التضحية",
+      "source": {
+        "line": 4505,
+        "column": 2438105
+      }
+    },
+    "ending.sacrifice.gallery.desc": {
+      "tn": "خليت بلاصتك في القارب لغيرك.",
+      "source": {
+        "line": 4505,
+        "column": 2438132
+      }
+    },
+    "ending.sacrifice.cinematic.place": {
+      "tn": "البوابة — مطر وذكرى",
+      "source": {
+        "line": 4505,
+        "column": 2440345
+      }
+    },
+    "ending.sacrifice.cinematic.achievementLabel": {
+      "tn": "التضحية",
+      "source": {
+        "line": 4505,
+        "column": 2440578
+      }
+    },
+    "ending.sacrifice.cinematic.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 2440600
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.sacrifice.cinematic.line-001": {
+      "tn": "المطر يطيح على البوابة... وريان يسكرها بيديه، باش القارب يمشي والناس تعيش.",
+      "source": {
+        "line": 4505,
+        "column": 2440614
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.sacrifice.cinematic.line-002.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 2440697
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.sacrifice.cinematic.line-002": {
+      "tn": "خليو بلاصتي للي محتاجها أكثر. أنا... أنا وفيت بوعدي. قولولهم راني كنت شجاع.",
+      "source": {
+        "line": 4505,
+        "column": 2440709
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.sacrifice.cinematic.line-003.speaker": {
+      "tn": "سارة — الأم",
+      "source": {
+        "line": 4505,
+        "column": 2440793
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.sacrifice.cinematic.line-003": {
+      "tn": "ولدي! لا! ريان! يا ربي... ولدي ما تخليهمش يسّكرو البوابة عليه!",
+      "source": {
+        "line": 4505,
+        "column": 2440812
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.sacrifice.cinematic.line-004.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 2440883
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.sacrifice.cinematic.line-004": {
+      "tn": "خويا! ما تمشيش! (تبكي) قلتلي ما تخلينيش وحدي... علاش خليتني؟",
+      "source": {
+        "line": 4505,
+        "column": 2440895
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.sacrifice.cinematic.line-005.speaker": {
+      "tn": "القائدة نور",
+      "source": {
+        "line": 4505,
+        "column": 2440964
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.sacrifice.cinematic.line-005": {
+      "tn": "(بصوت مكسور) سكّر البوابة... هو طلب هكا. اليوم، ريان ما ماتش... ريان صار اسم البوابة.",
+      "source": {
+        "line": 4505,
+        "column": 2440983
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.sacrifice.cinematic.line-006.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 2441077
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.sacrifice.cinematic.line-006": {
+      "tn": "بعد سنوات، حجر صغير قدام البوابة مكتوب عليه: «هنا وقف ولد، وخلّى بلاصتو لغيره.»",
+      "source": {
+        "line": 4505,
+        "column": 2441091
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.traitor.gallery.title": {
+      "tn": "النهاية 4 — الخائن",
+      "source": {
+        "line": 4505,
+        "column": 2438185
+      }
+    },
+    "ending.traitor.gallery.desc": {
+      "tn": "تبعت إيلاس وسكّرت البوابة.",
+      "source": {
+        "line": 4505,
+        "column": 2438211
+      }
+    },
+    "ending.traitor.cinematic.place": {
+      "tn": "السور — ظلام وخيانة",
+      "source": {
+        "line": 4505,
+        "column": 2441205
+      }
+    },
+    "ending.traitor.cinematic.line-001.speaker": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 2441469
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.traitor.cinematic.line-001": {
+      "tn": "(يضحك) هههه... صدقتني، يا ريان؟ صدقت الكذبة كاملة؟ البوابة تسكرت... بيدك أنت.",
+      "source": {
+        "line": 4505,
+        "column": 2441482
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.traitor.cinematic.line-002.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 2441568
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.traitor.cinematic.line-002": {
+      "tn": "إيلاس... شنو عملت؟ قلتلي هاذي هي الطريق... قلتلي الناس باش تعيش!",
+      "source": {
+        "line": 4505,
+        "column": 2441580
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.traitor.cinematic.line-003.speaker": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 2441653
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.traitor.cinematic.line-003": {
+      "tn": "الناس تعيش؟ لا... الناس تنسى. وأنت، يا ريان، باش تكون الاسم اللي يتقال كل مرة تتسكر فيها بوابة.",
+      "source": {
+        "line": 4505,
+        "column": 2441666
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.traitor.cinematic.line-004.speaker": {
+      "tn": "القائدة نور",
+      "source": {
+        "line": 4505,
+        "column": 2441770
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.traitor.cinematic.line-004": {
+      "tn": "خاين! سكّرت البوابة على عايلتك! عشت... أما خسرت اسمك، وخسرتنا الكل.",
+      "source": {
+        "line": 4505,
+        "column": 2441789
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.traitor.cinematic.line-005.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 2441865
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.traitor.cinematic.line-005": {
+      "tn": "خويا... أنت موش خويا. خويا كان يحميني. أنت... أنت خليتنا برا.",
+      "source": {
+        "line": 4505,
+        "column": 2441877
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.traitor.cinematic.line-006.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 2441947
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.traitor.cinematic.line-006": {
+      "tn": "واقف وحدي في الظلام... حي، أما الكل يشوف فيا كخاين. الحياة ساعات تكون عقاب.",
+      "source": {
+        "line": 4505,
+        "column": 2441959
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.secret.gallery.title": {
+      "tn": "النهاية 5 — الحقيقة",
+      "source": {
+        "line": 4505,
+        "column": 2438261
+      }
+    },
+    "ending.secret.gallery.desc": {
+      "tn": "جمعت 5/5 أدلة وكشفت سر السور.",
+      "source": {
+        "line": 4505,
+        "column": 2438288
+      }
+    },
+    "ending.secret.cinematic.place": {
+      "tn": "ما وراء السور — إشارة مشوّشة",
+      "source": {
+        "line": 4505,
+        "column": 2442067
+      }
+    },
+    "ending.secret.cinematic.achievementLabel": {
+      "tn": "الحقيقة",
+      "source": {
+        "line": 4505,
+        "column": 2442303
+      }
+    },
+    "ending.secret.cinematic.line-001.speaker": {
+      "tn": "الراوي",
+      "source": {
+        "line": 4505,
+        "column": 2442325
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.secret.cinematic.line-001": {
+      "tn": "الأدلة الخمسة قدامك: الشقوق، الأزقة، الخريطة، الملف، الحجر. الصورة كاملة أخيراً.",
+      "source": {
+        "line": 4505,
+        "column": 2442339
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.secret.cinematic.line-002.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 2442428
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.secret.cinematic.line-002": {
+      "tn": "الحجر كان منقوب من الداخل... الشقوق معروفة من سنوات... والخريطة فيها التحذير. موش حادث.",
+      "source": {
+        "line": 4505,
+        "column": 2442440
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.secret.cinematic.line-003.speaker": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 2442536
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.secret.cinematic.line-003": {
+      "tn": "صحيح. السور ما طاحش وحدو. حد نقّبو، حد سكت، وحد استفاد. وأنت توا تعرف شكون.",
+      "source": {
+        "line": 4505,
+        "column": 2442549
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.secret.cinematic.line-004.speaker": {
+      "tn": "عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 2442633
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.secret.cinematic.line-004": {
+      "tn": "يا ولدي... 30 سنة وأنا ساكت. توا، السكوت وفا. قولها، ريان. قول الحقيقة.",
+      "source": {
+        "line": 4505,
+        "column": 2442649
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.secret.cinematic.line-005.speaker": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 2442729
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.secret.cinematic.line-005": {
+      "tn": "اسمعني مليح: الحقيقة أكبر من السور. اللي سكّر السور من الداخل... ما زال موجود.",
+      "source": {
+        "line": 4505,
+        "column": 2442742
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.secret.cinematic.line-006.speaker": {
+      "tn": "لينا",
+      "source": {
+        "line": 4505,
+        "column": 2442829
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.secret.cinematic.line-006": {
+      "tn": "خويا... يعني الحكاية ما كملتش؟ يعني ما زال فما حاجة ورا السور؟",
+      "source": {
+        "line": 4505,
+        "column": 2442841
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.secret.cinematic.line-007.speaker": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 2442912
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.secret.cinematic.line-007": {
+      "tn": "إيه. ما وراء السور... قريبا. هناك، باش تعرف شكون صنع العمالقة، وعلاش.",
+      "source": {
+        "line": 4505,
+        "column": 2442925
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.secret.cinematic.line-008.speaker": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 2443003
+      },
+      "legacyUse": "Rendered label and legacy speaker, portrait, voice and expression lookup"
+    },
+    "ending.secret.cinematic.line-008": {
+      "tn": "باهي... نمشيو. الجزء الثاني يبدا من هنا: ما وراء السور.",
+      "source": {
+        "line": 4505,
+        "column": 2443015
+      },
+      "legacyUse": "Rendered dialogue and legacy keyword-based cues"
+    },
+    "ending.light.gallery.title": {
+      "tn": "الجزء الثاني — النهاية أ — النور",
+      "source": {
+        "line": 4505,
+        "column": 2438340
+      }
+    },
+    "ending.light.gallery.desc": {
+      "tn": "كشفت الحقيقة الكبرى للجميع.",
+      "source": {
+        "line": 4505,
+        "column": 2438380
+      }
+    },
+    "ending.shadow.gallery.title": {
+      "tn": "الجزء الثاني — النهاية ب — الظل",
+      "source": {
+        "line": 4505,
+        "column": 2438431
+      }
+    },
+    "ending.shadow.gallery.desc": {
+      "tn": "خبيت الحقيقة أو مشيت مع إيلاس ورا السور.",
+      "source": {
+        "line": 4505,
+        "column": 2438470
+      }
+    },
+    "ending.rebuild.gallery.title": {
+      "tn": "الجزء الثالث — النهاية أ — البناء",
+      "source": {
+        "line": 4505,
+        "column": 2438535
+      }
+    },
+    "ending.rebuild.gallery.desc": {
+      "tn": "بنيت قرطاج جديدة بالنور.",
+      "source": {
+        "line": 4505,
+        "column": 2438576
+      }
+    },
+    "ending.guardian.gallery.title": {
+      "tn": "الجزء الثالث — النهاية ب — الحارس",
+      "source": {
+        "line": 4505,
+        "column": 2438626
+      }
+    },
+    "ending.guardian.gallery.desc": {
+      "tn": "حميت قرطاج كحارس.",
+      "source": {
+        "line": 4505,
+        "column": 2438667
+      }
+    },
+    "ending.rebuild.summary.title": {
+      "tn": "الجزء الثالث — النهاية أ — البناء",
+      "source": {
+        "line": 4505,
+        "column": 3550797
+      }
+    },
+    "ending.rebuild.summary.text": {
+      "tn": "بنيت قرطاج الجديدة مع بعضكم. بيوت بيضاء وزرقاء، سوق، ميناء، وناس تضحك. مريم قالت: السور فيه أسماء الكل، بلا سكوت. لينا شدت يدك: وعدك صار وعد لقرطاج كاملة. قرطاج الجديدة بدات.",
+      "source": {
+        "line": 4505,
+        "column": 3550838
+      }
+    },
+    "ending.rebuild.summary.badge": {
+      "tn": "بنيت قرطاج جديدة بالنور",
+      "source": {
+        "line": 4505,
+        "column": 3551021
+      }
+    },
+    "ending.guardian.summary.title": {
+      "tn": "الجزء الثالث — النهاية ب — الحارس",
+      "source": {
+        "line": 4505,
+        "column": 3551070
+      }
+    },
+    "ending.guardian.summary.text": {
+      "tn": "قرطاج بلا سور، أما محمية. الناس تحمي بعضها، وأنت واقف حارس. كريم قال: نحميوها مع بعضنا. لينا قالت: أنت حارسنا. قرطاج ما تحتاجش سور باش تكون آمنة، تحتاج ناس تحمي بعضها.",
+      "source": {
+        "line": 4505,
+        "column": 3551111
+      }
+    },
+    "ending.guardian.summary.badge": {
+      "tn": "حميت قرطاج كحارس",
+      "source": {
+        "line": 4505,
+        "column": 3551287
+      }
+    },
+    "ending.light.summary.title": {
+      "tn": "الجزء الثاني — النهاية أ — النور",
+      "source": {
+        "line": 4505,
+        "column": 3551326
+      }
+    },
+    "ending.light.summary.text": {
+      "tn": "قلت الحقيقة للكل. الصمت انكسر، وقرطاج سمعت أخيراً شنو كان متخبي ورا السور. لينا شدت يدك، ومريم صلحت الإشارة، وعم الهادي عطاك الورقة، وياسمين ابتسمت: «الحقيقة ما تموتش.» الطريق قدامكم ما زال طويل، أما هالمرة تمشيو فيه بالنور، من القرية المخفية لباب البحر.",
+      "source": {
+        "line": 4505,
+        "column": 3551366
+      }
+    },
+    "ending.light.summary.badge": {
+      "tn": "كشفت الحقيقة الكبرى للجميع",
+      "source": {
+        "line": 4505,
+        "column": 3551629
+      }
+    },
+    "ending.shadow.summary.title": {
+      "tn": "الجزء الثاني — النهاية ب — الظل",
+      "source": {
+        "line": 4505,
+        "column": 3551679
+      }
+    },
+    "ending.shadow.summary.text": {
+      "tn": "خبيت الحقيقة... أو مشيت مع إيلاس ورا السور. المدينة بقات هادئة، أما قلبك يعرف: الظل ما يختفيش، يستنى. لينا تشوف فيك وتسأل بصمت: «شنو خبيت علينا؟» والجواب يبقى معاك.",
+      "source": {
+        "line": 4505,
+        "column": 3551718
+      }
+    },
+    "ending.shadow.summary.badge": {
+      "tn": "الحقيقة بقات في الظل",
+      "source": {
+        "line": 4505,
+        "column": 3551891
+      }
+    },
+    "ending.hero.summary.title": {
+      "tn": "النهاية 1 — البطل",
+      "source": {
+        "line": 4505,
+        "column": 3551933
+      }
+    },
+    "ending.hero.summary.text": {
+      "tn": "رجعت... رغم النار، رغم الخوف، رغم كل شيء. لينا شافتك جاي من وسط الدخان، وجرات لحضنك. المفتاح فتح المخزن، والخريطة وراتكم طريق النجاة. اليوم هذا خذا منك برشا... أما ما خذاش عايلتك. عم منصور واقف، بابا واقف، والكل حي.",
+      "source": {
+        "line": 4505,
+        "column": 3551958
+      }
+    },
+    "ending.hero.summary.badge": {
+      "tn": "أنقذت لينا + بابا + عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 3552182
+      }
+    },
+    "ending.sacrifice.summary.title": {
+      "tn": "النهاية 3 — التضحية",
+      "source": {
+        "line": 4505,
+        "column": 3552237
+      }
+    },
+    "ending.sacrifice.summary.text": {
+      "tn": "خليت بلاصتك في القارب لطفل ما تعرفوش. القارب بعد... وأنت بقيت واقف على البوابة. في جيبك رسالة كتبتها بسرعة: «لينا، سامحيني... عشت باش غيري يعيش. احكي عليا كي كنت شجاع، موش كي مت.» الشاشة تطفى... أما الرسالة توصل.",
+      "source": {
+        "line": 4505,
+        "column": 3552264
+      }
+    },
+    "ending.sacrifice.summary.badge": {
+      "tn": "ضحيت بروحك باش القارب يمشي",
+      "source": {
+        "line": 4505,
+        "column": 3552485
+      }
+    },
+    "ending.traitor.summary.title": {
+      "tn": "النهاية 4 — الخائن",
+      "source": {
+        "line": 4505,
+        "column": 3552536
+      }
+    },
+    "ending.traitor.summary.text": {
+      "tn": "تبعت إيلاس وسكّرت البوابة. الناس برا يصرخو، وأنت داخل... حي. نور تشوف فيك باحتقار: «عشت، أما خسرت اسمك.» القارب يمشي بيك، أما قرطاج كلها باش تحكي عليك كخاين. الحياة ساعات تكون عقاب.",
+      "source": {
+        "line": 4505,
+        "column": 3552562
+      }
+    },
+    "ending.traitor.summary.badge": {
+      "tn": "عشت... أما مكروه",
+      "source": {
+        "line": 4505,
+        "column": 3552752
+      }
+    },
+    "ending.secret.summary.title": {
+      "tn": "النهاية 5 — الحقيقة",
+      "source": {
+        "line": 4505,
+        "column": 3552792
+      }
+    },
+    "ending.secret.summary.text": {
+      "tn": "جمعت الأدلة الخمسة. السور ما طاحش وحدو: الحجر كان منقوب من الداخل، والشقوق معروفة من سنوات، وخريطة عم منصور فيها التحذير. شكون سكت؟ وشكون استفاد؟ إيلاس يهمس: «الحقيقة أكبر من السور.» — يتبع في الجزء الثاني.",
+      "source": {
+        "line": 4505,
+        "column": 3552819
+      }
+    },
+    "ending.secret.summary.badge": {
+      "tn": "كشفت الحقيقة — 5/5 أدلة",
+      "source": {
+        "line": 4505,
+        "column": 3553034
+      }
+    },
+    "ending.survivor.summary.title": {
+      "tn": "النهاية 2 — الناجي",
+      "source": {
+        "line": 4505,
+        "column": 3553068
+      }
+    },
+    "ending.survivor.summary.text": {
+      "tn": "هربت... وحدك. الهواء البارد ضرب وجهك، والمدينة وراك قاعدة تطيح. نجيت، إيه. أما صوت لينا... صوتها ما زال يدور في راسك. النجاة ساعات تكون أثقل من الموت.",
+      "source": {
+        "line": 4505,
+        "column": 3553094
+      }
+    },
+    "ending.survivor.summary.badge": {
+      "tn": "نجيت وحدك",
+      "source": {
+        "line": 4505,
+        "column": 3553253
+      }
+    },
+    "clues.crack.title": {
+      "tn": "الشقوق من الداخل",
+      "source": {
+        "line": 4505,
+        "column": 2452724
+      }
+    },
+    "clues.crack.text": {
+      "tn": "الحجر يتكسر من الداخل، موش من برا. السور ما طاحش بضربة... طاح بحاجة كانت تتخبى فيه.",
+      "source": {
+        "line": 4505,
+        "column": 2452748
+      }
+    },
+    "clues.alley.title": {
+      "tn": "خريطة الأزقة",
+      "source": {
+        "line": 4505,
+        "column": 2452853
+      }
+    },
+    "clues.alley.text": {
+      "tn": "الأزقة القديمة توصل للبوابة من غير ما تتعدى على الشارع الكبير. طريق النجاة كان ديما قدام عينيهم.",
+      "source": {
+        "line": 4505,
+        "column": 2452873
+      }
+    },
+    "clues.oldmap.title": {
+      "tn": "الخريطة القديمة",
+      "source": {
+        "line": 4505,
+        "column": 2452992
+      }
+    },
+    "clues.oldmap.text": {
+      "tn": "خريطة عم منصور فيها علامة حمراء فوق السور: «هنا تضعف الحجارة كل شتاء». كانو يعرفو... وسكتو.",
+      "source": {
+        "line": 4505,
+        "column": 2453015
+      }
+    },
+    "clues.file.title": {
+      "tn": "ملف المريض",
+      "source": {
+        "line": 4505,
+        "column": 2453127
+      }
+    },
+    "clues.file.text": {
+      "tn": "في المستشفى، ملف قديم يحكي على شقوق ظهرت قبل سنوات، وطبيب كتب: «لا أحد يريد أن يسمع».",
+      "source": {
+        "line": 4505,
+        "column": 2453145
+      }
+    },
+    "clues.hospital-cracks.title": {
+      "tn": "تقرير شقوق السور",
+      "source": {
+        "line": 4505,
+        "column": 2453261
+      }
+    },
+    "clues.hospital-cracks.text": {
+      "tn": "في المستشفى، تقرير قديم يوثّق شقوق السور: نفس الشقوق ظهرت قبل سنوات، في نفس البلاصة بالضبط.",
+      "source": {
+        "line": 4505,
+        "column": 2453285
+      }
+    },
+    "clues.doctor-warning.title": {
+      "tn": "تحذير الطبيب",
+      "source": {
+        "line": 4505,
+        "column": 2453406
+      }
+    },
+    "clues.doctor-warning.text": {
+      "tn": "الجريح يحكي أن طبيباً حذّر من السور قبل ما يطيح، أما حد ما سمعو. التحذير كان مكتوباً ومتخبياً.",
+      "source": {
+        "line": 4505,
+        "column": 2453426
+      }
+    },
+    "clues.stone.title": {
+      "tn": "الحجر المتشقق",
+      "source": {
+        "line": 4505,
+        "column": 2453542
+      }
+    },
+    "clues.stone.text": {
+      "tn": "الحجر اللي طاح من السور فيه فراغات كأنو حد نقّبو من الداخل. الحقيقة ما كانتش حادث... كانت خطة متخبية.",
+      "source": {
+        "line": 4505,
+        "column": 2453563
+      }
+    },
+    "clues.broken-wall.title": {
+      "tn": "السور المكسور",
+      "source": {
+        "line": 4505,
+        "column": 2453691
+      }
+    },
+    "clues.broken-wall.text": {
+      "tn": "الفتحة في السور موش عشوائية: حوافها مرسومة، كأنو حد خطط للعبور من هنا من زمان.",
+      "source": {
+        "line": 4505,
+        "column": 2453712
+      }
+    },
+    "clues.footprints.title": {
+      "tn": "آثار أقدام عملاق",
+      "source": {
+        "line": 4505,
+        "column": 2453817
+      }
+    },
+    "clues.footprints.text": {
+      "tn": "آثار أقدام عملاقة تتجه من الغابة نحو السهول المحطمة... وتوقف فجأة، كأنو صاحبها اختفى.",
+      "source": {
+        "line": 4505,
+        "column": 2453841
+      }
+    },
+    "clues.gate-broken-key.title": {
+      "tn": "المفتاح المكسور",
+      "source": {
+        "line": 4505,
+        "column": 2453956
+      }
+    },
+    "clues.gate-broken-key.text": {
+      "tn": "مفتاح البوابة مكسور في القفل. حد حاول يفتح البوابة بسرعة... أو حد كسّر المفتاح قصداً باش ما تتفتحش.",
+      "source": {
+        "line": 4505,
+        "column": 2453979
+      }
+    },
+    "clues.noor-badge.title": {
+      "tn": "شارة نور",
+      "source": {
+        "line": 4505,
+        "column": 2454104
+      }
+    },
+    "clues.noor-badge.text": {
+      "tn": "شارة القائدة نور طايحة جنب البوابة. نور ما تخلّي شارتها... إلا كان اضطرت تختار بين الشارة وبين الناس.",
+      "source": {
+        "line": 4505,
+        "column": 2454120
+      }
+    },
+    "clues.elias-note.title": {
+      "tn": "ملاحظة إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 2454247
+      }
+    },
+    "clues.elias-note.text": {
+      "tn": "ورقة صغيرة بخط إيلاس: «البوابة موش هي الحل... الحل وراء السور.» إيلاس كان هنا، وخلّى هالرسالة للي يفهم.",
+      "source": {
+        "line": 4505,
+        "column": 2454267
+      }
+    },
+    "clues.amin-notebook-page.title": {
+      "tn": "صفحة من دفتر أمين",
+      "source": {
+        "line": 4505,
+        "column": 2454403
+      }
+    },
+    "clues.amin-notebook-page.text": {
+      "tn": "صفحة بخط أمين: «اليوم 2600 ورا السور. ما زلت نكتب أسماءهم باش ما ينساوهمش.» الدفتر هو ذاكرة الناجين.",
+      "source": {
+        "line": 4505,
+        "column": 2454428
+      }
+    },
+    "clues.broken-compass.title": {
+      "tn": "البوصلة المكسورة",
+      "source": {
+        "line": 4505,
+        "column": 2454558
+      }
+    },
+    "clues.broken-compass.text": {
+      "tn": "بوصلة قديمة، إبرتها واقفة وتشير ديما نحو السور. كأنها ترفض تصدّق أن العالم ورا السور موجود.",
+      "source": {
+        "line": 4505,
+        "column": 2454582
+      }
+    },
+    "clues.diary-page1.title": {
+      "tn": "يوميات أمين — الصفحة 1: التجربة",
+      "source": {
+        "line": 4505,
+        "column": 2454700
+      }
+    },
+    "clues.diary-page1.text": {
+      "tn": "«خذاو ناس عاديين... وقالولهم باش يوليو أقوى. التجربة ما كانتش دواء، كانت عقاب.» أول جزء من السر.",
+      "source": {
+        "line": 4505,
+        "column": 2454739
+      }
+    },
+    "clues.diary-page2.title": {
+      "tn": "يوميات أمين — الصفحة 2: الأسماء",
+      "source": {
+        "line": 4505,
+        "column": 2454862
+      }
+    },
+    "clues.diary-page2.text": {
+      "tn": "«كتبت أسماءهم كلهم. كانو جيران، كانو صحابي، كان عندهم عائلات.» الأسماء هي الدليل أن العمالقة كانو بشر.",
+      "source": {
+        "line": 4505,
+        "column": 2454901
+      }
+    },
+    "clues.diary-page3.title": {
+      "tn": "يوميات أمين — الصفحة 3: من أمر؟",
+      "source": {
+        "line": 4505,
+        "column": 2455030
+      }
+    },
+    "clues.diary-page3.text": {
+      "tn": "«اللي أمر بالتجربة خاف يخسر سلطتو. سكّر السور، وسكّت كل من عرف.» آخر صفحة: السر الكامل صار في يد ريان.",
+      "source": {
+        "line": 4505,
+        "column": 2455069
+      }
+    },
+    "clues.village-map.title": {
+      "tn": "خريطة القرية المخفية",
+      "source": {
+        "line": 4505,
+        "column": 2455198
+      }
+    },
+    "clues.village-map.text": {
+      "tn": "خريطة مريم: القرية المخفية، المختبر تحت قرطاج، وأطلال قرطاج. الطريق كامل مرسوم بخط مريم.",
+      "source": {
+        "line": 4505,
+        "column": 2455226
+      }
+    },
+    "clues.lab-paper.title": {
+      "tn": "ورقة المختبر",
+      "source": {
+        "line": 4505,
+        "column": 2455339
+      }
+    },
+    "clues.lab-paper.text": {
+      "tn": "ورقة من المختبر: أمر مكتوب: سكّرو السور وسكّتو اللي يعرف. توقيع القائد اللي أمر بالتجربة.",
+      "source": {
+        "line": 4505,
+        "column": 2455359
+      }
+    },
+    "clues.hadi-letter.title": {
+      "tn": "رسالة عم الهادي",
+      "source": {
+        "line": 4505,
+        "column": 2455475
+      }
+    },
+    "clues.hadi-letter.text": {
+      "tn": "«سامحوني سكت. كنت خايف. أما توا، الحقيقة لازم تخرج.» رسالة الهادي بعد 30 سنة سكوت.",
+      "source": {
+        "line": 4505,
+        "column": 2455498
+      }
+    },
+    "achievements.hawk.title": {
+      "tn": "عين الصقر",
+      "source": {
+        "line": 4505,
+        "column": 2443173
+      }
+    },
+    "achievements.hawk.hint": {
+      "tn": "لقيت الأدلة الخمسة في الجزء الأول: الشقوق، الأزقة، الخريطة القديمة، ملف المريض، الحجر.",
+      "source": {
+        "line": 4505,
+        "column": 2443190
+      }
+    },
+    "achievements.savior.title": {
+      "tn": "منقذ الكل",
+      "source": {
+        "line": 4505,
+        "column": 2443321
+      }
+    },
+    "achievements.savior.hint": {
+      "tn": "أنقذ سارة ولينا وسليم وعم منصور ونور ويوسف في نفس النهاية.",
+      "source": {
+        "line": 4505,
+        "column": 2443338
+      }
+    },
+    "achievements.hero.title": {
+      "tn": "بطل قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 2443438
+      }
+    },
+    "achievements.hero.hint": {
+      "tn": "أوصل لنهاية البطل.",
+      "source": {
+        "line": 4505,
+        "column": 2443455
+      }
+    },
+    "achievements.sacrifice.title": {
+      "tn": "التضحية",
+      "source": {
+        "line": 4505,
+        "column": 2443520
+      }
+    },
+    "achievements.sacrifice.hint": {
+      "tn": "أوصل لنهاية التضحية.",
+      "source": {
+        "line": 4505,
+        "column": 2443535
+      }
+    },
+    "achievements.truth.title": {
+      "tn": "الحقيقة",
+      "source": {
+        "line": 4505,
+        "column": 2443599
+      }
+    },
+    "achievements.truth.hint": {
+      "tn": "أوصل لنهاية الحقيقة السرية وافتح الجزء الثاني.",
+      "source": {
+        "line": 4505,
+        "column": 2443614
+      }
+    },
+    "achievements.amin.title": {
+      "tn": "رفيق أمين",
+      "source": {
+        "line": 4505,
+        "column": 2443702
+      }
+    },
+    "achievements.amin.hint": {
+      "tn": "اكسب ثقة أمين 70%+ في الجزء الثاني — ثق فيه واتبعه.",
+      "source": {
+        "line": 4505,
+        "column": 2443719
+      }
+    },
+    "achievements.legend.title": {
+      "tn": "أسطورة السور",
+      "source": {
+        "line": 4505,
+        "column": 2443814
+      }
+    },
+    "achievements.legend.hint": {
+      "tn": "أكمل النهايات السبعة كلها عبر جولات مختلفة.",
+      "source": {
+        "line": 4505,
+        "column": 2443834
+      }
+    },
+    "difficulty.easy.label": {
+      "tn": "سهلة",
+      "source": {
+        "line": 4505,
+        "column": 2444213
+      }
+    },
+    "difficulty.easy.desc": {
+      "tn": "وقت 75 دقيقة • صحة 120 • قرارات 20 ثانية • تلميحات أكثر ومجانية",
+      "source": {
+        "line": 4505,
+        "column": 2444273
+      }
+    },
+    "difficulty.easy.hintCost": {
+      "tn": "مجاني",
+      "source": {
+        "line": 4505,
+        "column": 2444348
+      }
+    },
+    "difficulty.normal.label": {
+      "tn": "عادية",
+      "source": {
+        "line": 4505,
+        "column": 2444371
+      }
+    },
+    "difficulty.normal.desc": {
+      "tn": "وقت 60 دقيقة • صحة 100 • قرارات 10 ثواني • تلميحات مجانية",
+      "source": {
+        "line": 4505,
+        "column": 2444422
+      }
+    },
+    "difficulty.normal.hintCost": {
+      "tn": "مجاني",
+      "source": {
+        "line": 4505,
+        "column": 2444491
+      }
+    },
+    "difficulty.hard.label": {
+      "tn": "صعبة",
+      "source": {
+        "line": 4505,
+        "column": 2444512
+      }
+    },
+    "difficulty.hard.desc": {
+      "tn": "وقت 45 دقيقة • صحة 80 • قرارات 7 ثواني • الجسر يتهز أكثر • بلا تلميحات تلقائية",
+      "source": {
+        "line": 4505,
+        "column": 2444570
+      }
+    },
+    "difficulty.hard.hintCost": {
+      "tn": "−1 دقيقة",
+      "source": {
+        "line": 4505,
+        "column": 2444660
+      }
+    },
+    "expressions.fear.label": {
+      "tn": "😨 خايف",
+      "source": {
+        "line": 4505,
+        "column": 2447749
+      }
+    },
+    "expressions.fear.short": {
+      "tn": "خايف",
+      "source": {
+        "line": 4505,
+        "column": 2447775
+      }
+    },
+    "expressions.brave.label": {
+      "tn": "😤 غاضب / شجاع",
+      "source": {
+        "line": 4505,
+        "column": 2447933
+      }
+    },
+    "expressions.brave.short": {
+      "tn": "غاضب / شجاع",
+      "source": {
+        "line": 4505,
+        "column": 2447966
+      }
+    },
+    "expressions.crying.label": {
+      "tn": "😢 تبكي",
+      "source": {
+        "line": 4505,
+        "column": 2448136
+      }
+    },
+    "expressions.crying.short": {
+      "tn": "تبكي",
+      "source": {
+        "line": 4505,
+        "column": 2448162
+      }
+    },
+    "expressions.sly.label": {
+      "tn": "😏 ماكر",
+      "source": {
+        "line": 4505,
+        "column": 2448321
+      }
+    },
+    "expressions.sly.short": {
+      "tn": "ماكر",
+      "source": {
+        "line": 4505,
+        "column": 2448347
+      }
+    },
+    "expressions.worried.label": {
+      "tn": "😢 قلقانة / حزينة",
+      "source": {
+        "line": 4505,
+        "column": 2448512
+      }
+    },
+    "expressions.worried.short": {
+      "tn": "قلقانة / حزينة",
+      "source": {
+        "line": 4505,
+        "column": 2448548
+      }
+    },
+    "expressions.angry.label": {
+      "tn": "😠 غاضبة / حازمة",
+      "source": {
+        "line": 4505,
+        "column": 2448728
+      }
+    },
+    "expressions.angry.short": {
+      "tn": "غاضبة / حازمة",
+      "source": {
+        "line": 4505,
+        "column": 2448763
+      }
+    },
+    "expressions.wise.label": {
+      "tn": "😔 حزين / حكيم",
+      "source": {
+        "line": 4505,
+        "column": 2448935
+      }
+    },
+    "expressions.wise.short": {
+      "tn": "حزين / حكيم",
+      "source": {
+        "line": 4505,
+        "column": 2448968
+      }
+    },
+    "expressions.amin-cautious.label": {
+      "tn": "😒 حذر",
+      "source": {
+        "line": 4505,
+        "column": 2449156
+      }
+    },
+    "expressions.amin-cautious.short": {
+      "tn": "حذر",
+      "source": {
+        "line": 4505,
+        "column": 2449181
+      }
+    },
+    "expressions.amin-sad.label": {
+      "tn": "😔 حزين",
+      "source": {
+        "line": 4505,
+        "column": 2449339
+      }
+    },
+    "expressions.amin-sad.short": {
+      "tn": "حزين",
+      "source": {
+        "line": 4505,
+        "column": 2449365
+      }
+    },
+    "expressions.amin-serious.label": {
+      "tn": "😐 جاد",
+      "source": {
+        "line": 4505,
+        "column": 2449529
+      }
+    },
+    "expressions.amin-serious.short": {
+      "tn": "جاد",
+      "source": {
+        "line": 4505,
+        "column": 2449554
+      }
+    },
+    "expressions.amin-shocked.label": {
+      "tn": "😨 مصدوم",
+      "source": {
+        "line": 4505,
+        "column": 2449717
+      }
+    },
+    "expressions.amin-shocked.short": {
+      "tn": "مصدوم",
+      "source": {
+        "line": 4505,
+        "column": 2449744
+      }
+    },
+    "expressions.normal.label": {
+      "tn": "✨ عادي",
+      "source": {
+        "line": 4505,
+        "column": 2449908
+      }
+    },
+    "expressions.normal.short": {
+      "tn": "عادي",
+      "source": {
+        "line": 4505,
+        "column": 2449923
+      }
+    },
+    "story.intro.line-001": {
+      "tn": "قرطاج... 10:00 صباحا. آخر صباح هادئ.",
+      "source": {
+        "line": 4505,
+        "column": 3522811
+      }
+    },
+    "story.intro.line-002": {
+      "tn": "قرطاج بناتها الأسوار من 3000 سنة... أما الهدوء هذا موش طبيعي.",
+      "source": {
+        "line": 4505,
+        "column": 3522850
+      }
+    },
+    "story.intro.line-003": {
+      "tn": "ريان وعد أختو لينا: ما نخليكش وحدك، مهما صار.",
+      "source": {
+        "line": 4505,
+        "column": 3522914
+      }
+    },
+    "story.intro.line-004": {
+      "tn": "اسمع مليح...",
+      "source": {
+        "line": 4505,
+        "column": 3522962
+      }
+    },
+    "story.intro.line-005": {
+      "tn": "الصمت هذا، هو الصوت متاع العاصفة قبل ما تجي.",
+      "source": {
+        "line": 4505,
+        "column": 3522977
+      }
+    },
+    "map.legacy-01.name": {
+      "tn": "الدار",
+      "source": {
+        "line": 4505,
+        "column": 3571733
+      }
+    },
+    "map.legacy-01.desc": {
+      "tn": "لينا وأمك",
+      "source": {
+        "line": 4505,
+        "column": 3571746
+      }
+    },
+    "map.legacy-02.name": {
+      "tn": "السوق",
+      "source": {
+        "line": 4505,
+        "column": 3571799
+      }
+    },
+    "map.legacy-02.desc": {
+      "tn": "سليم وإيلاس",
+      "source": {
+        "line": 4505,
+        "column": 3571812
+      }
+    },
+    "map.legacy-05.name": {
+      "tn": "دار عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 3571867
+      }
+    },
+    "map.legacy-05.desc": {
+      "tn": "السيف والخريطة",
+      "source": {
+        "line": 4505,
+        "column": 3571887
+      }
+    },
+    "map.legacy-06.name": {
+      "tn": "المستشفى",
+      "source": {
+        "line": 4505,
+        "column": 3571945
+      }
+    },
+    "map.legacy-06.desc": {
+      "tn": "الأب يوسف",
+      "source": {
+        "line": 4505,
+        "column": 3571961
+      }
+    },
+    "map.legacy-07.name": {
+      "tn": "الجسر",
+      "source": {
+        "line": 4505,
+        "column": 3572014
+      }
+    },
+    "map.legacy-07.desc": {
+      "tn": "خطر • قرار سريع",
+      "source": {
+        "line": 4505,
+        "column": 3572027
+      }
+    },
+    "map.legacy-03.name": {
+      "tn": "السور",
+      "source": {
+        "line": 4505,
+        "column": 3572086
+      }
+    },
+    "map.legacy-03.desc": {
+      "tn": "دليل الحقيقة",
+      "source": {
+        "line": 4505,
+        "column": 3572099
+      }
+    },
+    "map.legacy-08.name": {
+      "tn": "البوابة",
+      "source": {
+        "line": 4505,
+        "column": 3572155
+      }
+    },
+    "map.legacy-08.desc": {
+      "tn": "القرار الأخير",
+      "source": {
+        "line": 4505,
+        "column": 3572170
+      }
+    },
+    "inventory.store-key.name": {
+      "tn": "مفتاح المخزن",
+      "source": {
+        "line": 4505,
+        "column": 2455589
+      },
+      "legacyUse": "Exact legacy inventory value used as icon-map key and in saves"
+    },
+    "inventory.alley-map.name": {
+      "tn": "خريطة الأزقة",
+      "source": {
+        "line": 4505,
+        "column": 2455620
+      },
+      "legacyUse": "Exact legacy inventory value used as icon-map key and in saves"
+    },
+    "inventory.mansour-sword.name": {
+      "tn": "سيف عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 2455651
+      },
+      "legacyUse": "Exact legacy inventory value used as icon-map key and in saves"
+    },
+    "inventory.medicine.name": {
+      "tn": "دواء",
+      "source": {
+        "line": 4505,
+        "column": 2455682
+      },
+      "legacyUse": "Exact legacy inventory value used as icon-map key and in saves"
+    },
+    "inventory.family-photo.name": {
+      "tn": "صورة العائلة",
+      "source": {
+        "line": 4505,
+        "column": 2455705
+      },
+      "legacyUse": "Exact legacy inventory value used as icon-map key and in saves"
+    }
+  }
+}

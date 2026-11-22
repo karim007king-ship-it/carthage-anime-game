@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "p2-yasmin-drawing",
+  "displayChapter": 19,
+  "part": "part2",
+  "source": {
+    "pr": 20,
+    "path": "docs/story/p2-ch19-yasmin-drawing.md",
+    "editorialState": "draft"
+  },
+  "entryAfter": "legacy-12",
+  "exitBefore": "legacy-13",
+  "textKeys": [
+    "story.p2-yasmin-drawing.line-001",
+    "story.p2-yasmin-drawing.line-002",
+    "story.p2-yasmin-drawing.line-003",
+    "story.p2-yasmin-drawing.line-004",
+    "story.p2-yasmin-drawing.line-005",
+    "story.p2-yasmin-drawing.line-006",
+    "story.p2-yasmin-drawing.line-007",
+    "story.p2-yasmin-drawing.line-008",
+    "story.p2-yasmin-drawing.choice.copyRouteWithConsent",
+    "story.p2-yasmin-drawing.line-009",
+    "story.p2-yasmin-drawing.line-010",
+    "story.p2-yasmin-drawing.line-011",
+    "story.p2-yasmin-drawing.line-012",
+    "story.p2-yasmin-drawing.line-013",
+    "story.p2-yasmin-drawing.choice.requestGuidedVisit",
+    "story.p2-yasmin-drawing.line-014",
+    "story.p2-yasmin-drawing.line-015",
+    "story.p2-yasmin-drawing.line-016",
+    "story.p2-yasmin-drawing.line-017",
+    "story.p2-yasmin-drawing.choice.keepDrawingPrivate",
+    "story.p2-yasmin-drawing.line-018",
+    "story.p2-yasmin-drawing.line-019",
+    "story.p2-yasmin-drawing.line-020",
+    "story.p2-yasmin-drawing.line-021",
+    "story.p2-yasmin-drawing.line-022",
+    "story.p2-yasmin-drawing.line-023",
+    "story.p2-yasmin-drawing.line-024",
+    "story.p2-yasmin-drawing.line-025",
+    "story.p2-yasmin-drawing.line-026",
+    "story.p2-yasmin-drawing.line-027"
+  ],
+  "choiceTextKeys": [
+    "story.p2-yasmin-drawing.choice.copyRouteWithConsent",
+    "story.p2-yasmin-drawing.choice.requestGuidedVisit",
+    "story.p2-yasmin-drawing.choice.keepDrawingPrivate"
+  ],
+  "legacySaveIndex": null,
+  "missingLegacyStatePolicy": "unknown",
+  "runtimeIntegrated": false,
+  "editorialReview": "pending",
+  "optional": true,
+  "characters": [
+    "ryan",
+    "lina",
+    "yasmin",
+    "mariam"
+  ],
+  "location": {
+    "status": "proposed-unmapped",
+    "description": "village home with two drawings"
+  },
+  "inputs": [
+    "presentCharacters",
+    "routeSafety"
+  ],
+  "outputs": [
+    "yasminMapConsent",
+    "yasminRouteCopy"
+  ],
+  "choices": [
+    {
+      "id": "copyRouteWithConsent",
+      "textKey": "story.p2-yasmin-drawing.choice.copyRouteWithConsent",
+      "proposedState": {
+        "yasminMapConsent": "routeOnly",
+        "yasminRouteCopy": true
+      }
+    },
+    {
+      "id": "requestGuidedVisit",
+      "textKey": "story.p2-yasmin-drawing.choice.requestGuidedVisit",
+      "proposedState": {
+        "yasminMapConsent": "guidedVisit",
+        "yasminRouteCopy": false
+      }
+    },
+    {
+      "id": "keepDrawingPrivate",
+      "textKey": "story.p2-yasmin-drawing.choice.keepDrawingPrivate",
+      "proposedState": {
+        "yasminMapConsent": "private",
+        "yasminRouteCopy": false
+      }
+    }
+  ],
+  "continuity": {
+    "unknownLegacyState": "no-consent-assumed",
+    "bypass": "no-route-copy-or-permission",
+    "guidedVisit": "requires-yasmin-present-and-safe-route",
+    "houseProof": "independent-witness-or-civic-record",
+    "inventoryPolicy": "do-not-duplicate-drawing",
+    "timeCost": "pending-editorial-balance",
+    "decisionOnce": true
+  }
+}

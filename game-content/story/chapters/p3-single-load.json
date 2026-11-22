@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "p3-single-load",
+  "displayChapter": 27,
+  "part": "part3",
+  "source": {
+    "pr": 20,
+    "path": "docs/story/p3-ch27-single-load.md",
+    "editorialState": "draft"
+  },
+  "entryAfter": "p3-survivor-register",
+  "exitBefore": "legacy-16",
+  "textKeys": [
+    "story.p3-single-load.line-001",
+    "story.p3-single-load.line-002",
+    "story.p3-single-load.line-003",
+    "story.p3-single-load.line-004",
+    "story.p3-single-load.line-005",
+    "story.p3-single-load.line-006",
+    "story.p3-single-load.line-007",
+    "story.p3-single-load.line-008",
+    "story.p3-single-load.line-009",
+    "story.p3-single-load.choice.prioritizeBridge",
+    "story.p3-single-load.line-010",
+    "story.p3-single-load.line-011",
+    "story.p3-single-load.line-012",
+    "story.p3-single-load.line-013",
+    "story.p3-single-load.line-014",
+    "story.p3-single-load.line-015",
+    "story.p3-single-load.choice.prioritizeClinic",
+    "story.p3-single-load.line-016",
+    "story.p3-single-load.line-017",
+    "story.p3-single-load.line-018",
+    "story.p3-single-load.line-019",
+    "story.p3-single-load.line-020",
+    "story.p3-single-load.line-021",
+    "story.p3-single-load.choice.splitWithLimits",
+    "story.p3-single-load.line-022",
+    "story.p3-single-load.line-023",
+    "story.p3-single-load.line-024",
+    "story.p3-single-load.line-025",
+    "story.p3-single-load.line-026",
+    "story.p3-single-load.line-027",
+    "story.p3-single-load.line-028",
+    "story.p3-single-load.line-033",
+    "story.p3-single-load.line-029",
+    "story.p3-single-load.line-030",
+    "story.p3-single-load.line-031",
+    "story.p3-single-load.line-032"
+  ],
+  "choiceTextKeys": [
+    "story.p3-single-load.choice.prioritizeBridge",
+    "story.p3-single-load.choice.prioritizeClinic",
+    "story.p3-single-load.choice.splitWithLimits"
+  ],
+  "legacySaveIndex": null,
+  "missingLegacyStatePolicy": "unknown",
+  "runtimeIntegrated": false,
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "noor",
+    "karim",
+    "youssef"
+  ],
+  "inputs": [
+    "registryMethod",
+    "boatDecision",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "supplyAllocation",
+    "bridgeRepair",
+    "clinicShelter"
+  ],
+  "choices": [
+    {
+      "id": "prioritizeBridge",
+      "textKey": "story.p3-single-load.choice.prioritizeBridge",
+      "proposedState": {
+        "supplyAllocation": "bridge",
+        "bridgeRepair": "started",
+        "clinicShelter": "improvised"
+      }
+    },
+    {
+      "id": "prioritizeClinic",
+      "textKey": "story.p3-single-load.choice.prioritizeClinic",
+      "proposedState": {
+        "supplyAllocation": "clinic",
+        "bridgeRepair": "delayed",
+        "clinicShelter": "reinforced"
+      }
+    },
+    {
+      "id": "splitWithLimits",
+      "textKey": "story.p3-single-load.choice.splitWithLimits",
+      "proposedState": {
+        "supplyAllocation": "split",
+        "bridgeRepair": "footpathOnly",
+        "clinicShelter": "partial"
+      }
+    }
+  ],
+  "continuity": {
+    "unknownAllocation": "no-retroactive-repair-or-shelter",
+    "missingBoat": "no-extra-transport-resource",
+    "split": "footpath-only-not-two-full-repairs",
+    "outcome": "rescue-and-treatment-require-later-confirmation",
+    "decisionOnce": true,
+    "timeCost": "pending-editorial-balance"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "p3-house-without-number",
+  "displayChapter": 30,
+  "part": "part3",
+  "source": {
+    "pr": 20,
+    "path": "docs/story/p3-ch30-house-without-number.md",
+    "editorialState": "draft"
+  },
+  "entryAfter": "p3-karim-key",
+  "exitBefore": "p3-medicine-cost",
+  "textKeys": [
+    "story.p3-house-without-number.line-001",
+    "story.p3-house-without-number.line-002",
+    "story.p3-house-without-number.line-003",
+    "story.p3-house-without-number.line-004",
+    "story.p3-house-without-number.line-005",
+    "story.p3-house-without-number.line-006",
+    "story.p3-house-without-number.line-007",
+    "story.p3-house-without-number.line-008",
+    "story.p3-house-without-number.line-009",
+    "story.p3-house-without-number.line-010",
+    "story.p3-house-without-number.line-011",
+    "story.p3-house-without-number.line-012",
+    "story.p3-house-without-number.line-013",
+    "story.p3-house-without-number.line-014",
+    "story.p3-house-without-number.line-015",
+    "story.p3-house-without-number.line-016",
+    "story.p3-house-without-number.line-017",
+    "story.p3-house-without-number.line-018",
+    "story.p3-house-without-number.line-019",
+    "story.p3-house-without-number.choice.formalReview",
+    "story.p3-house-without-number.line-020",
+    "story.p3-house-without-number.line-021",
+    "story.p3-house-without-number.line-022",
+    "story.p3-house-without-number.choice.temporaryShelter",
+    "story.p3-house-without-number.line-023",
+    "story.p3-house-without-number.line-024",
+    "story.p3-house-without-number.line-025",
+    "story.p3-house-without-number.line-026",
+    "story.p3-house-without-number.choice.communityHearing",
+    "story.p3-house-without-number.line-027",
+    "story.p3-house-without-number.line-028",
+    "story.p3-house-without-number.line-029",
+    "story.p3-house-without-number.line-030",
+    "story.p3-house-without-number.line-031",
+    "story.p3-house-without-number.line-032",
+    "story.p3-house-without-number.line-033",
+    "story.p3-house-without-number.line-034"
+  ],
+  "choiceTextKeys": [
+    "story.p3-house-without-number.choice.formalReview",
+    "story.p3-house-without-number.choice.temporaryShelter",
+    "story.p3-house-without-number.choice.communityHearing"
+  ],
+  "legacySaveIndex": null,
+  "missingLegacyStatePolicy": "unknown",
+  "runtimeIntegrated": false,
+  "editorialReview": "pending",
+  "optional": false,
+  "characters": [
+    "ryan",
+    "lina",
+    "noor",
+    "yasmin"
+  ],
+  "inputs": [
+    "yasminMapConsent",
+    "yasminRouteCopy",
+    "registryMethod",
+    "missingHousehold",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "houseClaim",
+    "houseEvidence",
+    "houseAccess"
+  ],
+  "choices": [
+    {
+      "id": "formalReview",
+      "textKey": "story.p3-house-without-number.choice.formalReview",
+      "proposedState": {
+        "houseClaim": "formalReview",
+        "houseEvidence": "partialCorroboration",
+        "houseAccess": "deferred"
+      }
+    },
+    {
+      "id": "temporaryShelter",
+      "textKey": "story.p3-house-without-number.choice.temporaryShelter",
+      "proposedState": {
+        "houseClaim": "temporaryShelter",
+        "houseEvidence": "unresolved",
+        "houseAccess": "temporaryOnly"
+      }
+    },
+    {
+      "id": "communityHearing",
+      "textKey": "story.p3-house-without-number.choice.communityHearing",
+      "proposedState": {
+        "houseClaim": "communityHearing",
+        "houseEvidence": "publicRouteCorroboration",
+        "houseAccess": "pendingHearing"
+      }
+    }
+  ],
+  "continuity": {
+    "missingYasmin": "no-forced-presence-neighbor-and-register-alternative",
+    "privateDrawing": "no-address-or-drawing-disclosure",
+    "unknownRegistry": "no-fabricated-appeal-or-record",
+    "property": "route-or-oral-testimony-is-not-title",
+    "temporaryShelter": "not-waiver-of-property-claim",
+    "decisionOnce": true,
+    "timeCost": "pending-editorial-balance",
+    "optionalPresence": "yasmin-and-noor-only-chapter-30-always-continues-to-chapter-31"
+  }
+}

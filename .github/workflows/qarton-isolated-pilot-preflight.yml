@@ -1,0 +1,53 @@
+name: QARTON isolated pilot preflight (no APK)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'scripts/qarton-pilot-capacitor-config.cjs'
+      - 'scripts/qarton-pilot-build-guard.cjs'
+      - 'scripts/qarton-pilot-content-gate.cjs'
+      - 'scripts/qarton-pilot-chapter-navigator.cjs'
+      - 'tests/qarton-pilot-chapter-navigator-test.cjs'
+      - 'scripts/qarton-pilot-checkpoint-codec.cjs'
+      - 'tests/qarton-pilot-checkpoint-codec-test.cjs'
+      - 'scripts/qarton-pilot-chapter-preview.cjs'
+      - 'tests/qarton-pilot-chapter-preview-test.cjs'
+      - 'scripts/qarton-pilot-preview-text.cjs'
+      - 'tests/qarton-pilot-preview-text-test.cjs'
+      - 'scripts/qarton-pilot-preview-html.cjs'
+      - 'tests/qarton-pilot-preview-html-test.cjs'
+      - 'scripts/qarton-pilot-preview-export.cjs'
+      - 'tests/qarton-pilot-preview-export-test.cjs'
+      - 'scripts/qarton-pilot-preview-install.cjs'
+      - 'tests/qarton-pilot-preview-install-test.cjs'
+      - 'tests/qarton-pilot-capacitor-config-test.cjs'
+      - 'tests/qarton-pilot-build-guard-test.cjs'
+      - '.github/workflows/qarton-isolated-pilot-preflight.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  pilot-preflight:
+    name: Verify distinct Android pilot identity without building APK
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test pilot configuration isolation
+        run: node --test tests/qarton-pilot-capacitor-config-test.cjs tests/qarton-pilot-build-guard-test.cjs
+      - name: Validate 36 chapter draft manifest without runtime integration
+        run: |
+          node scripts/qarton-pilot-content-gate.cjs
+          node --test tests/qarton-pilot-chapter-navigator-test.cjs tests/qarton-pilot-checkpoint-codec-test.cjs tests/qarton-pilot-chapter-preview-test.cjs tests/qarton-pilot-preview-text-test.cjs
+      - name: Generate isolated config outside source tree
+        run: |
+          mkdir -p "$RUNNER_TEMP/qarton-pilot"
+          node scripts/qarton-pilot-capacitor-config.cjs capacitor.config.json "$RUNNER_TEMP/qarton-pilot/capacitor.config.json"
+          node scripts/qarton-pilot-build-guard.cjs "$RUNNER_TEMP/qarton-pilot/capacitor.config.json" capacitor.config.json
+          node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('capacitor.config.json','utf8'));if(p.appId!=='com.qarton.carthage')process.exit(1);console.log('Production config remains unchanged')"
+      - name: Confirm pilot build is deliberately disabled
+        run: echo 'PASS — identity preflight only; no APK generated, signed or published'

@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "p1-gate-manifest",
+  "displayChapter": 11,
+  "part": "part1",
+  "source": {
+    "pr": 20,
+    "path": "docs/story/p1-ch11-gate-manifest.md",
+    "editorialState": "draft"
+  },
+  "entryAfter": "p1-smoke-door",
+  "exitBefore": "legacy-08",
+  "characters": [
+    "char.ryan",
+    "char.lina",
+    "char.noor",
+    "char.salim",
+    "char.elias",
+    "char.sara"
+  ],
+  "textKeys": [
+    "story.p1-gate-manifest.no-promise",
+    "story.p1-gate-manifest.line-001",
+    "story.p1-gate-manifest.line-002",
+    "story.p1-gate-manifest.line-003",
+    "story.p1-gate-manifest.line-004",
+    "story.p1-gate-manifest.line-005",
+    "story.p1-gate-manifest.line-006",
+    "story.p1-gate-manifest.line-007",
+    "story.p1-gate-manifest.line-008",
+    "story.p1-gate-manifest.line-009",
+    "story.p1-gate-manifest.line-010",
+    "story.p1-gate-manifest.line-011",
+    "story.p1-gate-manifest.line-012",
+    "story.p1-gate-manifest.line-013",
+    "story.p1-gate-manifest.line-014",
+    "story.p1-gate-manifest.line-015",
+    "story.p1-gate-manifest.line-016",
+    "story.p1-gate-manifest.line-017",
+    "story.p1-gate-manifest.choice.yieldSeat",
+    "story.p1-gate-manifest.line-018",
+    "story.p1-gate-manifest.line-019",
+    "story.p1-gate-manifest.line-020",
+    "story.p1-gate-manifest.line-021",
+    "story.p1-gate-manifest.choice.keepGroup",
+    "story.p1-gate-manifest.line-022",
+    "story.p1-gate-manifest.line-023",
+    "story.p1-gate-manifest.choice.appealManifest",
+    "story.p1-gate-manifest.line-024",
+    "story.p1-gate-manifest.line-025",
+    "story.p1-gate-manifest.line-026",
+    "story.p1-gate-manifest.line-027",
+    "story.p1-gate-manifest.choice.keepWithNoor",
+    "story.p1-gate-manifest.choice.entrustSalim",
+    "story.p1-gate-manifest.choice.entrustSara",
+    "story.p1-gate-manifest.line-028",
+    "story.p1-gate-manifest.line-029",
+    "story.p1-gate-manifest.line-030"
+  ],
+  "choices": [
+    {
+      "id": "yieldSeat",
+      "textKey": "story.p1-gate-manifest.choice.yieldSeat",
+      "proposedState": {
+        "lastSeat": "yielded"
+      },
+      "timeCostMinutes": 1,
+      "trust": {},
+      "group": "seat"
+    },
+    {
+      "id": "keepGroup",
+      "textKey": "story.p1-gate-manifest.choice.keepGroup",
+      "proposedState": {
+        "lastSeat": "group"
+      },
+      "timeCostMinutes": 1,
+      "trust": {},
+      "group": "seat"
+    },
+    {
+      "id": "appealManifest",
+      "textKey": "story.p1-gate-manifest.choice.appealManifest",
+      "proposedState": {
+        "lastSeat": "appeal",
+        "manifestDisputed": true
+      },
+      "timeCostMinutes": 2,
+      "trust": {},
+      "group": "seat"
+    },
+    {
+      "id": "keepWithNoor",
+      "textKey": "story.p1-gate-manifest.choice.keepWithNoor",
+      "proposedState": {
+        "manifestHolder": "noor"
+      },
+      "timeCostMinutes": 0,
+      "trust": {},
+      "group": "manifestCustody"
+    },
+    {
+      "id": "entrustSalim",
+      "textKey": "story.p1-gate-manifest.choice.entrustSalim",
+      "proposedState": {
+        "manifestHolder": "salim"
+      },
+      "timeCostMinutes": 0,
+      "trust": {},
+      "group": "manifestCustody"
+    },
+    {
+      "id": "entrustSara",
+      "textKey": "story.p1-gate-manifest.choice.entrustSara",
+      "proposedState": {
+        "manifestHolder": "sara"
+      },
+      "timeCostMinutes": 0,
+      "trust": {},
+      "group": "manifestCustody"
+    }
+  ],
+  "inputs": [
+    "alleyFamilies",
+    "smokeAftercare",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "lastSeat",
+    "manifestDisputed",
+    "manifestHolder"
+  ],
+  "missingLegacyStatePolicy": "unknown",
+  "legacySaveIndex": null,
+  "runtimeIntegrated": false,
+  "choiceGroups": [
+    {
+      "id": "seat",
+      "choiceIds": [
+        "yieldSeat",
+        "keepGroup",
+        "appealManifest"
+      ],
+      "required": true
+    },
+    {
+      "id": "manifestCustody",
+      "choiceIds": [
+        "keepWithNoor",
+        "entrustSalim",
+        "entrustSara"
+      ],
+      "required": true
+    }
+  ],
+  "continuity": {
+    "decisionOncePerGroup": true,
+    "checkpoint": "draft-sidecar-only-never-write-legacy-save",
+    "missingCustodian": "offer-present-valid-custodians-only",
+    "restore": "unknown-legacy-draft-state-never-assume-choice-made"
+  },
+  "choiceTextKeys": [
+    "story.p1-gate-manifest.choice.yieldSeat",
+    "story.p1-gate-manifest.choice.keepGroup",
+    "story.p1-gate-manifest.choice.appealManifest",
+    "story.p1-gate-manifest.choice.keepWithNoor",
+    "story.p1-gate-manifest.choice.entrustSalim",
+    "story.p1-gate-manifest.choice.entrustSara"
+  ]
+}

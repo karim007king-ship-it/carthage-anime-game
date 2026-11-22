@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "p1-family-promise",
+  "displayChapter": 2,
+  "part": "part1",
+  "source": {
+    "pr": 20,
+    "path": "docs/story/p1-ch02-family-promise.md",
+    "editorialState": "draft"
+  },
+  "entryAfter": "legacy-01",
+  "exitBefore": "legacy-02",
+  "location": {
+    "label": "سلم الدار، صباح يوم السقوط",
+    "locationRef": null,
+    "artStatus": "not-approved"
+  },
+  "characters": [
+    "char.ryan",
+    "char.lina",
+    "char.sara"
+  ],
+  "textKeys": [
+    "story.p1-family-promise.line-001",
+    "story.p1-family-promise.line-002",
+    "story.p1-family-promise.line-003",
+    "story.p1-family-promise.line-004",
+    "story.p1-family-promise.line-005",
+    "story.p1-family-promise.choice.knocks",
+    "story.p1-family-promise.line-006",
+    "story.p1-family-promise.line-007",
+    "story.p1-family-promise.line-008",
+    "story.p1-family-promise.line-009",
+    "story.p1-family-promise.line-010",
+    "story.p1-family-promise.choice.mother",
+    "story.p1-family-promise.line-011",
+    "story.p1-family-promise.line-012",
+    "story.p1-family-promise.line-013",
+    "story.p1-family-promise.line-014",
+    "story.p1-family-promise.line-015",
+    "story.p1-family-promise.line-016",
+    "story.p1-family-promise.line-017"
+  ],
+  "choices": [
+    {
+      "id": "knocks",
+      "textKey": "story.p1-family-promise.choice.knocks",
+      "proposedState": {
+        "familySignal": "knocks"
+      }
+    },
+    {
+      "id": "mother",
+      "textKey": "story.p1-family-promise.choice.mother",
+      "proposedState": {
+        "familySignal": "mother"
+      }
+    }
+  ],
+  "legacySaveIndex": null,
+  "missingLegacyStatePolicy": "unknown",
+  "runtimeIntegrated": false,
+  "choiceTextKeys": [
+    "story.p1-family-promise.choice.knocks",
+    "story.p1-family-promise.choice.mother"
+  ],
+  "outputs": [
+    "familySignal"
+  ]
+}

@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-14",
+  "sceneIdx": 13,
+  "legacyChapter": 14,
+  "part": "part2",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-14.title",
+    "place": "story.legacy-14.place",
+    "hint": "story.legacy-14.hint",
+    "cardTitle": "story.legacy-14.card.cardTitle",
+    "cardSub": "story.legacy-14.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-14.line-001.speaker",
+      "text": "story.legacy-14.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.karim",
+      "who": "story.legacy-14.line-002.speaker",
+      "text": "story.legacy-14.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-14.line-003.speaker",
+      "text": "story.legacy-14.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "char.karim",
+      "who": "story.legacy-14.line-004.speaker",
+      "text": "story.legacy-14.line-004"
+    },
+    {
+      "id": "line-005",
+      "speakerId": "char.mariam",
+      "who": "story.legacy-14.line-005.speaker",
+      "text": "story.legacy-14.line-005"
+    },
+    {
+      "id": "line-006",
+      "speakerId": "char.hadi",
+      "who": "story.legacy-14.line-006.speaker",
+      "text": "story.legacy-14.line-006"
+    },
+    {
+      "id": "line-007",
+      "speakerId": "char.yasmin",
+      "who": "story.legacy-14.line-007.speaker",
+      "text": "story.legacy-14.line-007"
+    },
+    {
+      "id": "line-008",
+      "speakerId": "char.lina",
+      "who": "story.legacy-14.line-008.speaker",
+      "text": "story.legacy-14.line-008"
+    },
+    {
+      "id": "line-009",
+      "speakerId": "char.amin",
+      "who": "story.legacy-14.line-009.speaker",
+      "text": "story.legacy-14.line-009"
+    },
+    {
+      "id": "line-010",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-14.line-010.speaker",
+      "text": "story.legacy-14.line-010"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "carthage-ruins",
+      "legacyId": "carthageRuins",
+      "texts": {
+        "label": "story.legacy-14.hotspot.carthage-ruins.label",
+        "note": "story.legacy-14.hotspot.carthage-ruins.note"
+      },
+      "effect": {
+        "x": 24,
+        "y": 30,
+        "courage": 6
+      }
+    },
+    {
+      "id": "bab-bhar",
+      "legacyId": "babBhar",
+      "texts": {
+        "label": "story.legacy-14.hotspot.bab-bhar.label",
+        "note": "story.legacy-14.hotspot.bab-bhar.note"
+      },
+      "effect": {
+        "x": 52,
+        "y": 52,
+        "courage": 8,
+        "trust": {
+          "mariam": 8
+        }
+      }
+    },
+    {
+      "id": "karim-confront",
+      "legacyId": "karimConfront",
+      "texts": {
+        "label": "story.legacy-14.hotspot.karim-confront.label",
+        "note": "story.legacy-14.hotspot.karim-confront.note"
+      },
+      "effect": {
+        "x": 78,
+        "y": 68,
+        "courage": 8,
+        "trust": {
+          "karim": 5
+        }
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "choose-light2",
+      "legacyId": "chooseLight2",
+      "texts": {
+        "label": "story.legacy-14.choice.choose-light2.label",
+        "sub": "story.legacy-14.choice.choose-light2.sub"
+      },
+      "effect": {
+        "time": 2,
+        "courage": 8,
+        "flag": "revealedTruth",
+        "trust": {
+          "amin": 10,
+          "lina": 5
+        }
+      }
+    },
+    {
+      "id": "choose-shadow2",
+      "legacyId": "chooseShadow2",
+      "texts": {
+        "label": "story.legacy-14.choice.choose-shadow2.label",
+        "sub": "story.legacy-14.choice.choose-shadow2.sub"
+      },
+      "effect": {
+        "time": 2,
+        "courage": 6,
+        "flag": "hidTruth",
+        "trust": {
+          "amin": 5,
+          "lina": 5
+        }
+      }
+    }
+  ],
+  "displayChapter": 23,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.ruins",
+  "backgroundVariable": "lz"
+}

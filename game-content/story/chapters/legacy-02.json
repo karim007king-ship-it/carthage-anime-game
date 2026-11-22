@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-02",
+  "sceneIdx": 1,
+  "legacyChapter": 2,
+  "part": "part1",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-02.title",
+    "place": "story.legacy-02.place",
+    "hint": "story.legacy-02.hint",
+    "cardTitle": "story.legacy-02.card.cardTitle",
+    "cardSub": "story.legacy-02.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-02.line-001.speaker",
+      "text": "story.legacy-02.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.salim",
+      "who": "story.legacy-02.line-002.speaker",
+      "text": "story.legacy-02.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "char.elias",
+      "who": "story.legacy-02.line-003.speaker",
+      "text": "story.legacy-02.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "char.salim",
+      "who": "story.legacy-02.line-004.speaker",
+      "text": "story.legacy-02.line-004"
+    },
+    {
+      "id": "line-005",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-02.line-005.speaker",
+      "text": "story.legacy-02.line-005"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "cart",
+      "legacyId": "cart",
+      "texts": {
+        "label": "story.legacy-02.hotspot.cart.label",
+        "note": "story.legacy-02.hotspot.cart.note",
+        "item": "story.legacy-02.hotspot.cart.item"
+      },
+      "effect": {
+        "x": 26,
+        "y": 62,
+        "clue": "alley"
+      },
+      "itemId": "alley-map",
+      "legacyItemValue": "خريطة الأزقة"
+    },
+    {
+      "id": "well",
+      "legacyId": "well",
+      "texts": {
+        "label": "story.legacy-02.hotspot.well.label",
+        "note": "story.legacy-02.hotspot.well.note"
+      },
+      "effect": {
+        "x": 76,
+        "y": 58,
+        "courage": 7,
+        "flag": "heardElias"
+      }
+    },
+    {
+      "id": "father-shop",
+      "legacyId": "fatherShop",
+      "texts": {
+        "label": "story.legacy-02.hotspot.father-shop.label",
+        "note": "story.legacy-02.hotspot.father-shop.note"
+      },
+      "effect": {
+        "x": 50,
+        "y": 36,
+        "courage": 5,
+        "trust": {
+          "father": 6
+        }
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "believe-elias",
+      "legacyId": "believeElias",
+      "texts": {
+        "label": "story.legacy-02.choice.believe-elias.label",
+        "sub": "story.legacy-02.choice.believe-elias.sub"
+      },
+      "effect": {
+        "time": 2,
+        "courage": 10,
+        "flag": "followedElias",
+        "trust": {
+          "salim": -10
+        }
+      }
+    },
+    {
+      "id": "believe-salim",
+      "legacyId": "believeSalim",
+      "texts": {
+        "label": "story.legacy-02.choice.believe-salim.label",
+        "sub": "story.legacy-02.choice.believe-salim.sub"
+      },
+      "effect": {
+        "time": 2,
+        "courage": 3,
+        "flag": "protectedLina",
+        "trust": {
+          "salim": 15,
+          "lina": 8
+        }
+      }
+    },
+    {
+      "id": "stay-market",
+      "legacyId": "stayMarket",
+      "texts": {
+        "label": "story.legacy-02.choice.stay-market.label",
+        "sub": "story.legacy-02.choice.stay-market.sub"
+      },
+      "effect": {
+        "time": 3,
+        "health": -6,
+        "flag": "stayedMarket",
+        "trust": {
+          "salim": -5
+        }
+      }
+    }
+  ],
+  "displayChapter": 3,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.market",
+  "backgroundVariable": "ht"
+}

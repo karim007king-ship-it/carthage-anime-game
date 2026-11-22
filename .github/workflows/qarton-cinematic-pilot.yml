@@ -17,19 +17,85 @@ on:
       - 'tests/qarton-audio-playback-test.cjs'
       - 'scripts/qarton-g4-legacy-presentation-adapter.cjs'
       - 'tests/qarton-g4-legacy-presentation-adapter-test.cjs'
+      - 'tests/qarton-prepare-web-hook-contract-test.cjs'
+      - 'tests/qarton-unified-id-registry-test.cjs'
+      - 'tests/qarton-content-manifests-test.cjs'
+      - 'tests/qarton-chapter-extraction-test.cjs'
+      - 'tests/qarton-s1-source-parity-test.cjs'
+      - 'tests/qarton-tn-locale-parity-test.cjs'
+      - 'tests/qarton-g1-chapter02-contract-test.cjs'
+      - 'tests/qarton-g1-chapter04-contract-test.cjs'
+      - 'tests/qarton-g1-chapter10-11-contract-test.cjs'
+      - 'tests/qarton-g1-36-chapter-coverage-test.cjs'
+      - 'tests/qarton-g1-ending-route-contract-test.cjs'
+      - 'tests/qarton-g1-cross-chapter-continuity-test.cjs'
+      - 'tests/qarton-g1-draft-readiness-test.cjs'
+      - 'tests/qarton-g1-chapter14-16-contract-test.cjs'
+      - 'tests/qarton-g1-chapter19-21-contract-test.cjs'
+      - 'tests/qarton-g1-chapter22-24-contract-test.cjs'
+      - 'tests/qarton-g1-chapter26-27-contract-test.cjs'
+      - 'tests/qarton-g1-chapter29-30-contract-test.cjs'
+      - 'tests/qarton-g1-chapter31-32-contract-test.cjs'
+      - 'tests/qarton-g1-chapter33-34-contract-test.cjs'
+      - 'tests/qarton-g1-registry-and-effect-integrity-test.cjs'
+      - 'tests/qarton-g1-cross-chapter-dataflow-test.cjs'
+      - 'tests/qarton-g1-multi-choice-group-boundary-test.cjs'
+      - 'tests/qarton-g1-draft-checkpoint-validation-test.cjs'
+      - 'tests/qarton-g1-smoke-rescue-contract-test.cjs'
+      - 'tests/qarton-g1-smoke-gate-continuity-test.cjs'
+      - 'tests/qarton-g1-elias-conditional-evidence-test.cjs'
+      - 'tests/qarton-g1-ch24-ending-authorization-test.cjs'
+      - 'tests/qarton-g1-part2-to-part3-boundary-test.cjs'
+      - 'tests/qarton-g1-final-handover-legacy-endings-test.cjs'
+      - 'scripts/qarton-pilot-build-guard.cjs'
+      - 'tests/qarton-pilot-build-guard-test.cjs'
+      - 'scripts/qarton-pilot-capacitor-config.cjs'
+      - 'tests/qarton-pilot-capacitor-config-test.cjs'
+      - 'scripts/qarton-g1-draft-checkpoint-inspector.cjs'
+      - 'scripts/qarton-g1-draft-resume-plan.cjs'
+      - 'tests/qarton-g1-draft-resume-plan-test.cjs'
+      - 'tests/qarton-g1-global-text-namespace-test.cjs'
+      - 'scripts/qarton-g1-draft-character-resolver.cjs'
+      - 'tests/qarton-g1-draft-character-resolver-test.cjs'
+      - 'scripts/qarton-g1-draft-location-resolver.cjs'
+      - 'tests/qarton-g1-draft-location-resolver-test.cjs'
+      - 'tests/qarton-g1-all-draft-presentation-boundary-test.cjs'
+      - 'tests/qarton-g1-draft-asset-locale-readiness-test.cjs'
+      - 'tests/qarton-g1-draft-save-ending-isolation-test.cjs'
+      - 'tests/qarton-g1-exhaustive-multigroup-resume-matrix-test.cjs'
+      - 'tests/qarton-g1-legacy-save-nonmutation-matrix-test.cjs'
+      - 'tests/fixtures/qarton-g1-*.md'
+      - 'tests/fixtures/qarton-g1-p1-smoke-door.md'
+      - 'tests/fixtures/qarton-g1-p1-gate-manifest.md'
+      - 'tests/fixtures/qarton-g1-ch04-family-alley.md'
+      - 'tests/fixtures/qarton-g1-ch02-family-promise.md'
+      - 'tests/fixtures/qarton-s1-texts.snapshot.json'
+      - 'tests/fixtures/qarton-s1-original-scenes.snapshot.json'
+      - 'game-content/**'
+      - 'docs/qarton-unified-id-registry.proposal.json'
       - 'tests/qarton-timeline-player-test.cjs'
       - 'tests/qarton-cinematic-browser-wiring-test.cjs'
       - '.github/workflows/qarton-cinematic-pilot.yml'
+      - 'scripts/prepare-web.cjs'
 jobs:
   contract:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Guard original production files on PR #23
+        if: github.event_name == 'pull_request' && github.event.pull_request.number == 23
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git diff --name-only "$BASE_SHA" HEAD > /tmp/qarton-pr23-changed-files.txt
+          node -e "const fs=require('fs'); const files=fs.readFileSync('/tmp/qarton-pr23-changed-files.txt','utf8').trim().split('\\n').filter(Boolean); const protectedFiles=files.filter(f=>f==='index.html'||f==='scripts/prepare-web.cjs'||f.startsWith('android/')||f.startsWith('app/')); if(protectedFiles.length){console.error('PR #23 production boundary violation:',protectedFiles);process.exit(1)} console.log('PASS: no protected production files changed in PR #23 ('+files.length+' files)')"
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - name: Verify standalone pilot contract
-        run: node --test tests/qarton-cinematic-pilot-contract-test.cjs tests/qarton-cinematic-scene-package-test.cjs tests/qarton-timeline-player-test.cjs tests/qarton-audio-cue-planner-test.cjs tests/qarton-audio-playback-test.cjs tests/qarton-g4-legacy-presentation-adapter-test.cjs tests/qarton-cinematic-browser-wiring-test.cjs
+        run: node --test tests/qarton-cinematic-pilot-contract-test.cjs tests/qarton-cinematic-scene-package-test.cjs tests/qarton-timeline-player-test.cjs tests/qarton-audio-cue-planner-test.cjs tests/qarton-audio-playback-test.cjs tests/qarton-g4-legacy-presentation-adapter-test.cjs tests/qarton-cinematic-browser-wiring-test.cjs tests/qarton-prepare-web-hook-contract-test.cjs tests/qarton-unified-id-registry-test.cjs tests/qarton-content-manifests-test.cjs tests/qarton-chapter-extraction-test.cjs tests/qarton-s1-source-parity-test.cjs tests/qarton-tn-locale-parity-test.cjs tests/qarton-g1-chapter02-contract-test.cjs tests/qarton-g1-chapter04-contract-test.cjs tests/qarton-g1-chapter10-11-contract-test.cjs tests/qarton-g1-36-chapter-coverage-test.cjs tests/qarton-g1-ending-route-contract-test.cjs tests/qarton-g1-cross-chapter-continuity-test.cjs tests/qarton-g1-draft-readiness-test.cjs tests/qarton-g1-chapter14-16-contract-test.cjs tests/qarton-g1-chapter19-21-contract-test.cjs tests/qarton-g1-chapter22-24-contract-test.cjs tests/qarton-g1-chapter26-27-contract-test.cjs tests/qarton-g1-chapter29-30-contract-test.cjs tests/qarton-g1-chapter31-32-contract-test.cjs tests/qarton-g1-chapter33-34-contract-test.cjs tests/qarton-g1-registry-and-effect-integrity-test.cjs tests/qarton-g1-cross-chapter-dataflow-test.cjs tests/qarton-g1-multi-choice-group-boundary-test.cjs tests/qarton-g1-draft-checkpoint-validation-test.cjs tests/qarton-g1-smoke-rescue-contract-test.cjs tests/qarton-g1-smoke-gate-continuity-test.cjs tests/qarton-g1-elias-conditional-evidence-test.cjs tests/qarton-g1-ch24-ending-authorization-test.cjs tests/qarton-g1-part2-to-part3-boundary-test.cjs tests/qarton-g1-final-handover-legacy-endings-test.cjs tests/qarton-g1-draft-resume-plan-test.cjs tests/qarton-g1-global-text-namespace-test.cjs tests/qarton-g1-draft-character-resolver-test.cjs tests/qarton-g1-draft-location-resolver-test.cjs tests/qarton-g1-all-draft-presentation-boundary-test.cjs tests/qarton-g1-draft-asset-locale-readiness-test.cjs tests/qarton-g1-draft-save-ending-isolation-test.cjs tests/qarton-g1-exhaustive-multigroup-resume-matrix-test.cjs tests/qarton-g1-legacy-save-nonmutation-matrix-test.cjs tests/qarton-pilot-capacitor-config-test.cjs tests/qarton-pilot-build-guard-test.cjs
       - name: Verify lab is isolated from production save keys
         run: |
           node -e "const fs=require('fs'); const s=fs.readFileSync('examples/qarton-single-load-lab.html','utf8'); if(/localStorage|sessionStorage|shiganshina-|__carthageSaveNow/.test(s)) process.exit(1); console.log('PASS: standalone lab does not access game saves')"

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-07",
+  "sceneIdx": 6,
+  "legacyChapter": 7,
+  "part": "part1",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-07.title",
+    "place": "story.legacy-07.place",
+    "hint": "story.legacy-07.hint",
+    "cardTitle": "story.legacy-07.card.cardTitle",
+    "cardSub": "story.legacy-07.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-07.line-001.speaker",
+      "text": "story.legacy-07.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-07.line-002.speaker",
+      "text": "story.legacy-07.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "role.elderly-woman",
+      "who": "story.legacy-07.line-003.speaker",
+      "text": "story.legacy-07.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-07.line-004.speaker",
+      "text": "story.legacy-07.line-004"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "plank",
+      "legacyId": "plank",
+      "texts": {
+        "label": "story.legacy-07.hotspot.plank.label",
+        "note": "story.legacy-07.hotspot.plank.note"
+      },
+      "effect": {
+        "x": 62,
+        "y": 66,
+        "courage": 6
+      }
+    },
+    {
+      "id": "river",
+      "legacyId": "river",
+      "texts": {
+        "label": "story.legacy-07.hotspot.river.label",
+        "note": "story.legacy-07.hotspot.river.note"
+      },
+      "effect": {
+        "x": 26,
+        "y": 72,
+        "health": 4
+      }
+    },
+    {
+      "id": "rope",
+      "legacyId": "rope",
+      "texts": {
+        "label": "story.legacy-07.hotspot.rope.label",
+        "note": "story.legacy-07.hotspot.rope.note"
+      },
+      "effect": {
+        "x": 44,
+        "y": 50,
+        "courage": 6
+      }
+    },
+    {
+      "id": "boat",
+      "legacyId": "boat",
+      "texts": {
+        "label": "story.legacy-07.hotspot.boat.label",
+        "note": "story.legacy-07.hotspot.boat.note"
+      },
+      "effect": {
+        "x": 84,
+        "y": 78,
+        "courage": 5
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "cross-fast",
+      "legacyId": "crossFast",
+      "texts": {
+        "label": "story.legacy-07.choice.cross-fast.label",
+        "sub": "story.legacy-07.choice.cross-fast.sub"
+      },
+      "effect": {
+        "time": 2,
+        "courage": 10,
+        "health": -12,
+        "flag": "crossedBridge"
+      }
+    },
+    {
+      "id": "help-woman",
+      "legacyId": "helpWoman",
+      "texts": {
+        "label": "story.legacy-07.choice.help-woman.label",
+        "sub": "story.legacy-07.choice.help-woman.sub"
+      },
+      "effect": {
+        "time": 4,
+        "courage": 15,
+        "health": -6,
+        "flag": "helpedWoman",
+        "trust": {
+          "nour": 10,
+          "lina": 8
+        }
+      }
+    },
+    {
+      "id": "go-back",
+      "legacyId": "goBack",
+      "texts": {
+        "label": "story.legacy-07.choice.go-back.label",
+        "sub": "story.legacy-07.choice.go-back.sub"
+      },
+      "effect": {
+        "time": 2,
+        "courage": -5,
+        "flag": "wentBack"
+      }
+    }
+  ],
+  "displayChapter": 9,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.bridge",
+  "backgroundVariable": "F8"
+}

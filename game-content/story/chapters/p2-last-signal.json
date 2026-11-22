@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "p2-last-signal",
+  "displayChapter": 21,
+  "part": "part2",
+  "source": {
+    "pr": 20,
+    "path": "docs/story/p2-ch21-last-signal.md",
+    "editorialState": "draft"
+  },
+  "entryAfter": "legacy-13",
+  "exitBefore": "p2-protection-cost",
+  "textKeys": [
+    "story.p2-last-signal.line-001",
+    "story.p2-last-signal.line-002",
+    "story.p2-last-signal.line-003",
+    "story.p2-last-signal.line-004",
+    "story.p2-last-signal.line-005",
+    "story.p2-last-signal.line-006",
+    "story.p2-last-signal.line-007",
+    "story.p2-last-signal.line-008",
+    "story.p2-last-signal.line-009",
+    "story.p2-last-signal.line-010",
+    "story.p2-last-signal.line-011",
+    "story.p2-last-signal.line-012",
+    "story.p2-last-signal.line-013",
+    "story.p2-last-signal.line-014",
+    "story.p2-last-signal.line-015",
+    "story.p2-last-signal.choice.sendAuthorizedSummary",
+    "story.p2-last-signal.line-016",
+    "story.p2-last-signal.line-017",
+    "story.p2-last-signal.line-018",
+    "story.p2-last-signal.line-019",
+    "story.p2-last-signal.choice.sendSealedCourier",
+    "story.p2-last-signal.line-020",
+    "story.p2-last-signal.line-021",
+    "story.p2-last-signal.line-022",
+    "story.p2-last-signal.line-023",
+    "story.p2-last-signal.choice.testOnly",
+    "story.p2-last-signal.line-024",
+    "story.p2-last-signal.line-025",
+    "story.p2-last-signal.line-026",
+    "story.p2-last-signal.line-027",
+    "story.p2-last-signal.line-028",
+    "story.p2-last-signal.line-029",
+    "story.p2-last-signal.line-030",
+    "story.p2-last-signal.line-031",
+    "story.p2-last-signal.line-032",
+    "story.p2-last-signal.line-033"
+  ],
+  "choiceTextKeys": [
+    "story.p2-last-signal.choice.sendAuthorizedSummary",
+    "story.p2-last-signal.choice.sendSealedCourier",
+    "story.p2-last-signal.choice.testOnly"
+  ],
+  "legacySaveIndex": null,
+  "missingLegacyStatePolicy": "unknown",
+  "runtimeIntegrated": false,
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "mariam",
+    "amin",
+    "lina",
+    "hadi"
+  ],
+  "location": {
+    "status": "proposed-unmapped",
+    "description": "signal room above abandoned workshop"
+  },
+  "inputs": [
+    "namesConsent",
+    "aminTestimony",
+    "signalDevice",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "signalDelivery",
+    "signalReceipt"
+  ],
+  "choices": [
+    {
+      "id": "sendAuthorizedSummary",
+      "textKey": "story.p2-last-signal.choice.sendAuthorizedSummary",
+      "proposedState": {
+        "signalDelivery": "radioSummary",
+        "signalReceipt": "confirmedSingleHouse"
+      },
+      "costMinutes": 2
+    },
+    {
+      "id": "sendSealedCourier",
+      "textKey": "story.p2-last-signal.choice.sendSealedCourier",
+      "proposedState": {
+        "signalDelivery": "courier",
+        "signalReceipt": "pending"
+      },
+      "costMinutes": 3
+    },
+    {
+      "id": "testOnly",
+      "textKey": "story.p2-last-signal.choice.testOnly",
+      "proposedState": {
+        "signalDelivery": "testOnly",
+        "signalReceipt": "confirmedSingleHouse"
+      },
+      "costMinutes": 1
+    }
+  ],
+  "continuity": {
+    "unknownConsent": "independent-facts-only",
+    "brokenDevice": "radio-choice-requires-paper-fallback-confirmation-no-false-receipt",
+    "missingMaryam": "paper-or-local-hearing-no-remote-voice",
+    "singleHouseReceipt": "not-public-broadcast",
+    "endingPolicy": "no-light-shadow-unlock",
+    "inventoryPolicy": "sealed-record-separate-from-legacy-inventory",
+    "decisionOnce": true
+  }
+}

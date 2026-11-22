@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "p2-protection-cost",
+  "displayChapter": 22,
+  "part": "part2",
+  "source": {
+    "pr": 20,
+    "path": "docs/story/p2-ch22-protection-cost.md",
+    "editorialState": "draft"
+  },
+  "entryAfter": "p2-last-signal",
+  "exitBefore": "legacy-14",
+  "textKeys": [
+    "story.p2-protection-cost.line-001",
+    "story.p2-protection-cost.line-002",
+    "story.p2-protection-cost.line-003",
+    "story.p2-protection-cost.line-004",
+    "story.p2-protection-cost.line-005",
+    "story.p2-protection-cost.line-006",
+    "story.p2-protection-cost.line-007",
+    "story.p2-protection-cost.line-008",
+    "story.p2-protection-cost.line-009",
+    "story.p2-protection-cost.line-010",
+    "story.p2-protection-cost.line-011",
+    "story.p2-protection-cost.choice.evacuateFamily",
+    "story.p2-protection-cost.line-012",
+    "story.p2-protection-cost.line-013",
+    "story.p2-protection-cost.line-014",
+    "story.p2-protection-cost.line-015",
+    "story.p2-protection-cost.choice.keepForWatch",
+    "story.p2-protection-cost.line-016",
+    "story.p2-protection-cost.line-017",
+    "story.p2-protection-cost.line-018",
+    "story.p2-protection-cost.line-019",
+    "story.p2-protection-cost.choice.publicReview",
+    "story.p2-protection-cost.line-020",
+    "story.p2-protection-cost.line-021",
+    "story.p2-protection-cost.line-022",
+    "story.p2-protection-cost.line-023",
+    "story.p2-protection-cost.line-024",
+    "story.p2-protection-cost.line-025",
+    "story.p2-protection-cost.line-026",
+    "story.p2-protection-cost.choice.holdConfidential",
+    "story.p2-protection-cost.line-027",
+    "story.p2-protection-cost.line-028",
+    "story.p2-protection-cost.choice.recordTestimony",
+    "story.p2-protection-cost.line-029",
+    "story.p2-protection-cost.line-030",
+    "story.p2-protection-cost.line-031",
+    "story.p2-protection-cost.choice.declineTerms",
+    "story.p2-protection-cost.line-032",
+    "story.p2-protection-cost.line-033",
+    "story.p2-protection-cost.line-034",
+    "story.p2-protection-cost.choice.publicReview.guard",
+    "story.p2-protection-cost.line-035",
+    "story.p2-protection-cost.line-036",
+    "story.p2-protection-cost.line-037",
+    "story.p2-protection-cost.line-038",
+    "story.p2-protection-cost.line-039"
+  ],
+  "choiceTextKeys": [
+    "story.p2-protection-cost.choice.evacuateFamily",
+    "story.p2-protection-cost.choice.keepForWatch",
+    "story.p2-protection-cost.choice.publicReview",
+    "story.p2-protection-cost.choice.holdConfidential",
+    "story.p2-protection-cost.choice.recordTestimony",
+    "story.p2-protection-cost.choice.declineTerms",
+    "story.p2-protection-cost.choice.publicReview.guard"
+  ],
+  "legacySaveIndex": null,
+  "missingLegacyStatePolicy": "unknown",
+  "runtimeIntegrated": false,
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "karim",
+    "elias",
+    "mariam"
+  ],
+  "inputs": [
+    "presentCharacters",
+    "noorManifest"
+  ],
+  "outputs": [
+    "boatDecision",
+    "familyEvacuation",
+    "dockWatch",
+    "eliasPage",
+    "eliasSourceConsent"
+  ],
+  "choiceGroups": [
+    {
+      "id": "boat",
+      "choiceIds": [
+        "evacuateFamily",
+        "keepForWatch",
+        "publicReview"
+      ],
+      "required": true
+    },
+    {
+      "id": "eliasPage",
+      "choiceIds": [
+        "holdConfidential",
+        "recordTestimony",
+        "declineTerms"
+      ],
+      "requiredIf": "elias-present"
+    }
+  ],
+  "choices": [
+    {
+      "id": "evacuateFamily",
+      "textKey": "story.p2-protection-cost.choice.evacuateFamily",
+      "group": "boat",
+      "proposedState": {
+        "boatDecision": "evacuateFamily",
+        "familyEvacuation": "attempted",
+        "dockWatch": "understaffed"
+      }
+    },
+    {
+      "id": "keepForWatch",
+      "textKey": "story.p2-protection-cost.choice.keepForWatch",
+      "group": "boat",
+      "proposedState": {
+        "boatDecision": "keepForWatch",
+        "familyEvacuation": "overlandPending",
+        "dockWatch": "staffed"
+      }
+    },
+    {
+      "id": "publicReview",
+      "textKey": "story.p2-protection-cost.choice.publicReview",
+      "group": "boat",
+      "proposedState": {
+        "boatDecision": "publicReview",
+        "familyEvacuation": "pendingReview",
+        "dockWatch": "disputed"
+      }
+    },
+    {
+      "id": "holdConfidential",
+      "textKey": "story.p2-protection-cost.choice.holdConfidential",
+      "group": "eliasPage",
+      "proposedState": {
+        "eliasPage": "heldConfidential",
+        "eliasSourceConsent": "withheld"
+      }
+    },
+    {
+      "id": "recordTestimony",
+      "textKey": "story.p2-protection-cost.choice.recordTestimony",
+      "group": "eliasPage",
+      "proposedState": {
+        "eliasPage": "testimonyRecorded",
+        "eliasSourceConsent": "forHearingOnly"
+      }
+    },
+    {
+      "id": "declineTerms",
+      "textKey": "story.p2-protection-cost.choice.declineTerms",
+      "group": "eliasPage",
+      "proposedState": {
+        "eliasPage": "notCollected",
+        "eliasSourceConsent": "none"
+      }
+    }
+  ],
+  "continuity": {
+    "missingElias": "skip-eliasPage-group-no-fabricated-testimony",
+    "familyEvacuation": "no-confirmed-arrival-until-later-evidence",
+    "pageEvidence": "redaction-only-no-orderer-identity",
+    "timeCost": "pending-editorial-balance",
+    "decisionOncePerGroup": true,
+    "endingPolicy": "no-light-shadow-unlock"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "p1-smoke-door",
+  "displayChapter": 10,
+  "part": "part1",
+  "source": {
+    "pr": 20,
+    "path": "docs/story/p1-ch10-smoke-door.md",
+    "editorialState": "draft"
+  },
+  "entryAfter": "legacy-07",
+  "exitBefore": "p1-gate-manifest",
+  "characters": [
+    "char.ryan",
+    "char.lina",
+    "char.sara",
+    "char.noor"
+  ],
+  "textKeys": [
+    "story.p1-smoke-door.line-001",
+    "story.p1-smoke-door.line-002",
+    "story.p1-smoke-door.line-003",
+    "story.p1-smoke-door.line-004",
+    "story.p1-smoke-door.line-005",
+    "story.p1-smoke-door.line-006",
+    "story.p1-smoke-door.line-007",
+    "story.p1-smoke-door.line-008",
+    "story.p1-smoke-door.line-009",
+    "story.p1-smoke-door.line-010",
+    "story.p1-smoke-door.line-011",
+    "story.p1-smoke-door.line-012",
+    "story.p1-smoke-door.line-013",
+    "story.p1-smoke-door.line-014",
+    "story.p1-smoke-door.line-015",
+    "story.p1-smoke-door.line-016",
+    "story.p1-smoke-door.line-017",
+    "story.p1-smoke-door.line-018",
+    "story.p1-smoke-door.choice.warnNoor",
+    "story.p1-smoke-door.line-019",
+    "story.p1-smoke-door.line-020",
+    "story.p1-smoke-door.choice.helpNearby",
+    "story.p1-smoke-door.line-021",
+    "story.p1-smoke-door.line-022",
+    "story.p1-smoke-door.line-023",
+    "story.p1-smoke-door.line-024"
+  ],
+  "choices": [
+    {
+      "id": "warnNoor",
+      "textKey": "story.p1-smoke-door.choice.warnNoor",
+      "proposedState": {
+        "smokeAftercare": "warnNoor"
+      },
+      "timeCostMinutes": 1,
+      "trust": {
+        "noor": 5
+      }
+    },
+    {
+      "id": "helpNearby",
+      "textKey": "story.p1-smoke-door.choice.helpNearby",
+      "proposedState": {
+        "smokeAftercare": "helpNearby"
+      },
+      "timeCostMinutes": 2,
+      "trust": {}
+    }
+  ],
+  "inputs": [
+    "familySignal",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "smokeRescue",
+    "smokeAftercare"
+  ],
+  "missingLegacyStatePolicy": "improvised",
+  "legacySaveIndex": null,
+  "runtimeIntegrated": false,
+  "choiceTextKeys": [
+    "story.p1-smoke-door.choice.warnNoor",
+    "story.p1-smoke-door.choice.helpNearby"
+  ],
+  "derivedOutputs": {
+    "smokeRescue": {
+      "from": "familySignal",
+      "cases": {
+        "knocks": "knocks",
+        "mother": "mother",
+        "unknown": "improvised"
+      },
+      "missingInput": "unknown",
+      "requiresOriginalPresenceCheck": "sara",
+      "missingSaraPolicy": "mother-route-without-sara-dialogue",
+      "application": "draft-only-not-runtime",
+      "oncePerChapter": true
+    }
+  }
+}
