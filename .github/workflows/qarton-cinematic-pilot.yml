@@ -35,6 +35,7 @@ on:
       - 'tests/qarton-g1-chapter22-24-contract-test.cjs'
       - 'tests/qarton-g1-chapter26-27-contract-test.cjs'
       - 'tests/qarton-g1-chapter29-30-contract-test.cjs'
+      - 'tests/qarton-g1-chapter31-32-contract-test.cjs'
       - 'tests/fixtures/qarton-g1-*.md'
       - 'tests/fixtures/qarton-g1-p1-smoke-door.md'
       - 'tests/fixtures/qarton-g1-p1-gate-manifest.md'
@@ -57,7 +58,7 @@ jobs:
         with:
           node-version: '22'
       - name: Verify standalone pilot contract
-        run: node --test tests/qarton-cinematic-pilot-contract-test.cjs tests/qarton-cinematic-scene-package-test.cjs tests/qarton-timeline-player-test.cjs tests/qarton-audio-cue-planner-test.cjs tests/qarton-audio-playback-test.cjs tests/qarton-g4-legacy-presentation-adapter-test.cjs tests/qarton-cinematic-browser-wiring-test.cjs tests/qarton-prepare-web-hook-contract-test.cjs tests/qarton-unified-id-registry-test.cjs tests/qarton-content-manifests-test.cjs tests/qarton-chapter-extraction-test.cjs tests/qarton-s1-source-parity-test.cjs tests/qarton-tn-locale-parity-test.cjs tests/qarton-g1-chapter02-contract-test.cjs tests/qarton-g1-chapter04-contract-test.cjs tests/qarton-g1-chapter10-11-contract-test.cjs tests/qarton-g1-36-chapter-coverage-test.cjs tests/qarton-g1-ending-route-contract-test.cjs tests/qarton-g1-cross-chapter-continuity-test.cjs tests/qarton-g1-draft-readiness-test.cjs tests/qarton-g1-chapter14-16-contract-test.cjs tests/qarton-g1-chapter19-21-contract-test.cjs tests/qarton-g1-chapter22-24-contract-test.cjs tests/qarton-g1-chapter26-27-contract-test.cjs tests/qarton-g1-chapter29-30-contract-test.cjs
+        run: node --test tests/qarton-cinematic-pilot-contract-test.cjs tests/qarton-cinematic-scene-package-test.cjs tests/qarton-timeline-player-test.cjs tests/qarton-audio-cue-planner-test.cjs tests/qarton-audio-playback-test.cjs tests/qarton-g4-legacy-presentation-adapter-test.cjs tests/qarton-cinematic-browser-wiring-test.cjs tests/qarton-prepare-web-hook-contract-test.cjs tests/qarton-unified-id-registry-test.cjs tests/qarton-content-manifests-test.cjs tests/qarton-chapter-extraction-test.cjs tests/qarton-s1-source-parity-test.cjs tests/qarton-tn-locale-parity-test.cjs tests/qarton-g1-chapter02-contract-test.cjs tests/qarton-g1-chapter04-contract-test.cjs tests/qarton-g1-chapter10-11-contract-test.cjs tests/qarton-g1-36-chapter-coverage-test.cjs tests/qarton-g1-ending-route-contract-test.cjs tests/qarton-g1-cross-chapter-continuity-test.cjs tests/qarton-g1-draft-readiness-test.cjs tests/qarton-g1-chapter14-16-contract-test.cjs tests/qarton-g1-chapter19-21-contract-test.cjs tests/qarton-g1-chapter22-24-contract-test.cjs tests/qarton-g1-chapter26-27-contract-test.cjs tests/qarton-g1-chapter29-30-contract-test.cjs tests/qarton-g1-chapter31-32-contract-test.cjs
       - name: Verify lab is isolated from production save keys
         run: |
           node -e "const fs=require('fs'); const s=fs.readFileSync('examples/qarton-single-load-lab.html','utf8'); if(/localStorage|sessionStorage|shiganshina-|__carthageSaveNow/.test(s)) process.exit(1); console.log('PASS: standalone lab does not access game saves')"
