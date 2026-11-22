@@ -66,7 +66,8 @@
         "lastSeat": "yielded"
       },
       "timeCostMinutes": 1,
-      "trust": {}
+      "trust": {},
+      "group": "seat"
     },
     {
       "id": "keepGroup",
@@ -75,7 +76,8 @@
         "lastSeat": "group"
       },
       "timeCostMinutes": 1,
-      "trust": {}
+      "trust": {},
+      "group": "seat"
     },
     {
       "id": "appealManifest",
@@ -85,7 +87,8 @@
         "manifestDisputed": true
       },
       "timeCostMinutes": 2,
-      "trust": {}
+      "trust": {},
+      "group": "seat"
     },
     {
       "id": "keepWithNoor",
@@ -94,7 +97,8 @@
         "manifestHolder": "noor"
       },
       "timeCostMinutes": 0,
-      "trust": {}
+      "trust": {},
+      "group": "manifestCustody"
     },
     {
       "id": "entrustSalim",
@@ -103,7 +107,8 @@
         "manifestHolder": "salim"
       },
       "timeCostMinutes": 0,
-      "trust": {}
+      "trust": {},
+      "group": "manifestCustody"
     },
     {
       "id": "entrustSara",
@@ -112,7 +117,8 @@
         "manifestHolder": "sara"
       },
       "timeCostMinutes": 0,
-      "trust": {}
+      "trust": {},
+      "group": "manifestCustody"
     }
   ],
   "inputs": [
@@ -127,5 +133,31 @@
   ],
   "missingLegacyStatePolicy": "unknown",
   "legacySaveIndex": null,
-  "runtimeIntegrated": false
+  "runtimeIntegrated": false,
+  "choiceGroups": [
+    {
+      "id": "seat",
+      "choiceIds": [
+        "yieldSeat",
+        "keepGroup",
+        "appealManifest"
+      ],
+      "required": true
+    },
+    {
+      "id": "manifestCustody",
+      "choiceIds": [
+        "keepWithNoor",
+        "entrustSalim",
+        "entrustSara"
+      ],
+      "required": true
+    }
+  ],
+  "continuity": {
+    "decisionOncePerGroup": true,
+    "checkpoint": "draft-sidecar-only-never-write-legacy-save",
+    "missingCustodian": "offer-present-valid-custodians-only",
+    "restore": "unknown-legacy-draft-state-never-assume-choice-made"
+  }
 }
