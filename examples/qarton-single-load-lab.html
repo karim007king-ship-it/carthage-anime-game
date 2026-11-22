@@ -60,7 +60,7 @@ button[disabled]{opacity:.5;cursor:not-allowed}.choices button{flex:1 1 170px}#r
  <button type="button" id="play">▶ تشغيل</button><button type="button" id="pause">⏸ إيقاف</button><button type="button" id="replay">↻ إعادة</button><label for="seek">تقدّم المشهد</label><input id="seek" type="range" min="0" max="21000" step="100" value="0" aria-label="تقدّم المشهد"><output id="clock" for="seek">0:00</output><button type="button" id="reduce" aria-pressed="false">تقليل الحركة</button>
 </div>
 <p>اختار شنوّة يصير للحمولة في التجربة فقط:</p>
-<div class="choices"><button type="button" data-choice="prioritizeBridge">الحمولة للجسر</button><button type="button" data-choice="prioritizeClinic">الحمولة للعيادة</button><button type="button" data-choice="splitWithLimits">نقسم الحمولة</button></div>
+<div class="choices"><button type="button" data-choice="prioritizeBridge" disabled>الحمولة للجسر</button><button type="button" data-choice="prioritizeClinic" disabled>الحمولة للعيادة</button><button type="button" data-choice="splitWithLimits" disabled>نقسم الحمولة</button></div>
 <div id="result" role="status" aria-live="polite"></div>
 </main>
 <script src="../scripts/qarton-timeline-player.js"></script>
