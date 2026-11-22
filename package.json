@@ -7,7 +7,8 @@
     "test": "node tests/smoke-test.cjs && node tests/save-recovery-test.cjs && node tests/story-integration-guard-test.cjs && node tests/chapter-display-map-test.cjs && node tests/chapter-display-adapter-test.cjs && node tests/chapter-route-contract-test.cjs",
     "prepare:web": "node scripts/prepare-web.cjs",
     "android:sync": "npm run prepare:web && cap sync android",
-    "audit:story": "node scripts/audit-story-integration.cjs"
+    "audit:story": "node scripts/audit-story-integration.cjs",
+    "report:chapters": "node scripts/report-chapter-readiness.cjs"
   },
   "dependencies": {
     "@capacitor/android": "8.6.0",
