@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-15",
+  "sceneIdx": 14,
+  "legacyChapter": 15,
+  "part": "part3",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-15.title",
+    "place": "story.legacy-15.place",
+    "hint": "story.legacy-15.hint",
+    "cardTitle": "story.legacy-15.card.cardTitle",
+    "cardSub": "story.legacy-15.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-15.line-001.speaker",
+      "text": "story.legacy-15.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.mariam",
+      "who": "story.legacy-15.line-002.speaker",
+      "text": "story.legacy-15.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "char.hadi",
+      "who": "story.legacy-15.line-003.speaker",
+      "text": "story.legacy-15.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "char.yasmin",
+      "who": "story.legacy-15.line-004.speaker",
+      "text": "story.legacy-15.line-004"
+    },
+    {
+      "id": "line-005",
+      "speakerId": "char.lina",
+      "who": "story.legacy-15.line-005.speaker",
+      "text": "story.legacy-15.line-005"
+    },
+    {
+      "id": "line-006",
+      "speakerId": "char.karim",
+      "who": "story.legacy-15.line-006.speaker",
+      "text": "story.legacy-15.line-006"
+    },
+    {
+      "id": "line-007",
+      "speakerId": "char.amin",
+      "who": "story.legacy-15.line-007.speaker",
+      "text": "story.legacy-15.line-007"
+    },
+    {
+      "id": "line-008",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-15.line-008.speaker",
+      "text": "story.legacy-15.line-008"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "square-crowd",
+      "legacyId": "squareCrowd",
+      "texts": {
+        "label": "story.legacy-15.hotspot.square-crowd.label",
+        "note": "story.legacy-15.hotspot.square-crowd.note"
+      },
+      "effect": {
+        "x": 24,
+        "y": 30,
+        "courage": 6,
+        "trust": {
+          "mariam": 8
+        }
+      }
+    },
+    {
+      "id": "broken-wall-rebuild",
+      "legacyId": "brokenWallRebuild",
+      "texts": {
+        "label": "story.legacy-15.hotspot.broken-wall-rebuild.label",
+        "note": "story.legacy-15.hotspot.broken-wall-rebuild.note"
+      },
+      "effect": {
+        "x": 52,
+        "y": 52,
+        "courage": 7,
+        "trust": {
+          "mariam": 10
+        }
+      }
+    },
+    {
+      "id": "yasmin-hope",
+      "legacyId": "yasminHope",
+      "texts": {
+        "label": "story.legacy-15.hotspot.yasmin-hope.label",
+        "note": "story.legacy-15.hotspot.yasmin-hope.note"
+      },
+      "effect": {
+        "x": 78,
+        "y": 68,
+        "courage": 8,
+        "trust": {
+          "yasmin": 10,
+          "lina": 5
+        }
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "build-together",
+      "legacyId": "buildTogether",
+      "texts": {
+        "label": "story.legacy-15.choice.build-together.label",
+        "sub": "story.legacy-15.choice.build-together.sub"
+      },
+      "effect": {
+        "time": 3,
+        "courage": 10,
+        "flag": "buildTogether",
+        "trust": {
+          "mariam": 12,
+          "hadi": 8,
+          "lina": 5
+        }
+      }
+    },
+    {
+      "id": "protect-village",
+      "legacyId": "protectVillage",
+      "texts": {
+        "label": "story.legacy-15.choice.protect-village.label",
+        "sub": "story.legacy-15.choice.protect-village.sub"
+      },
+      "effect": {
+        "time": 3,
+        "courage": 8,
+        "flag": "protectVillage",
+        "trust": {
+          "karim": 10,
+          "mariam": 5
+        }
+      }
+    }
+  ],
+  "displayChapter": 25,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.square",
+  "backgroundVariable": "lz"
+}
