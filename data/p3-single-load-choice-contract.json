@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "sceneId": "p3-single-load",
+  "displayChapter": 27,
+  "status": "isolated-contract-not-production",
+  "requiredInputs": ["registryMethod", "boatDecision", "presentCharacters"],
+  "choices": {
+    "prioritizeBridge": {
+      "supplyAllocation": "bridge",
+      "bridgeRepair": "started",
+      "clinicShelter": "improvised"
+    },
+    "prioritizeClinic": {
+      "supplyAllocation": "clinic",
+      "bridgeRepair": "delayed",
+      "clinicShelter": "reinforced"
+    },
+    "splitWithLimits": {
+      "supplyAllocation": "split",
+      "bridgeRepair": "footpathOnly",
+      "clinicShelter": "partial"
+    }
+  },
+  "constraints": {
+    "effectsMustApplyOnce": true,
+    "partThreeAutoUnlock": false,
+    "mayConfirmRescuedHouseholds": false,
+    "mayConfirmCompletedBridge": false,
+    "mayConfirmFullyRestoredClinic": false
+  }
+}
