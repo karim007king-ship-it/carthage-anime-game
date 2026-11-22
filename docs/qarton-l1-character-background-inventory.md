@@ -266,13 +266,13 @@ PR #20 is a draft story expansion. These mappings are editorial proposals, not a
 | `p3-survivor-register` | Temporary school near square | Square vicinity | `loc.survivor-school` (draft) | New place and visual needed |
 | `p3-single-load` | Crossroads between bridge route and medicine quay | Bridge/quay are separate legacy places | `loc.crossroads` (draft) | New production visual; pilot is not production art |
 | `p3-karim-key` | Iron dock gate / boat-storage passage | Quay geography not fully resolved | `loc.dock-gate` (draft) | New visual; parent location unresolved |
-| `p3-house-without-number` | Old sea-side street, unnumbered house | No exact original place | `unnumbered-house` | New place/visual needed |
+| `p3-house-without-number` | Old sea-side street, unnumbered house | No exact original match | `loc.unnumbered-house` (draft) | New place and visual needed |
 | `p3-medicine-cost` | Temporary quay-side clinic | Hospital and village quay are not assumed equivalent | `loc.temporary-clinic` (draft) | New visual; not established as original hospital |
 | `p3-mark-on-stone` | Stone steps between school and square | Square/school vicinity | `loc.school-steps` (draft) | New sublocation and visual needed |
-| `p3-hadi-hearing` | School yard used for a hearing | Proposed survivor school | `survivor-school` | Reuse school area with a hearing-yard state |
+| `p3-hadi-hearing` | School yard used for a hearing | School vicinity | `loc.hearing-yard` (draft) | Distinct hearing staging; no automatic background reuse |
 | `p3-key-handover` | Room between school and quay | School/quay relation is proposed | `loc.handover-room` (draft) | New sublocation and visual; parent unresolved |
 
-G1 names Hala (هالة) as Ryan's missing sister in the survivor registry, but the original `Gt` table has no Hala record or portrait. Candidate character ID: `hala` (draft-only until story approval and art exist). Backgrounds needed for the proposed new G1 places are not present as distinct original refs. The current 11 original backgrounds are not evidence that suitable visuals exist for these new locations.
+G1 names Hala (هالة) as the missing sister of a man in the survivor registry; the text does not establish that she is Ryan's sister, but the original `Gt` table has no Hala record or portrait. Candidate character ID: `hala` (draft-only until story approval and art exist). Backgrounds needed for the proposed new G1 places are not present as distinct original refs. The current 11 original backgrounds are not evidence that suitable visuals exist for these new locations.
 
 ### ID alignment and safe classification
 
@@ -282,7 +282,7 @@ The 13 source character IDs match the PR #23 character registry: ryan, sara, lin
 
 - **Confirmed duplicates/reuse:** three character portrait groups and three repeated-background groups are aliases to identical source payloads. They are referenced, not orphan files. Their design intent remains **unconfirmed**.
 - **Missing/needs new art:** no original distinct sunset background exists for Byrsa scene 18; PR #20 locations marked new above lack dedicated production art. The pilot crossroads drawing is experimental and is not approved as a production replacement.
-- **Missing character asset:** Hala is named only in G1 and has no source character record or portrait. Other unnamed crowd/ensemble roles lack dedicated portrait assets.
+- **Missing character asset:** Hala is named in G1 as a missing sister reported by a man, but the relationship to Ryan is not established; she has no source character record or portrait. Other unnamed crowd/ensemble roles lack dedicated portrait assets.
 - **Unused assets:** none identified among the 16 distinct production character payloads, 11 background payloads, or six referenced pilot SVGs. No deletion is proposed.
 - **Provenance/licensing:** no source URL, creator, or license evidence is present for the embedded production art. The pilot brief describes original silhouettes but gives no file-level author/license statement. All rights remain unverified; existing use is not treated as license evidence.
 - **Checksums and dimensions:** recorded above for 16 production character-art payloads, 11 production backgrounds, and six pilot SVG files.
@@ -313,7 +313,7 @@ The 18 new G1 chapters are draft content. A similar original place is only a con
 | 21 p2-last-signal | Ryan, Mariam, Amin, Lina, conditional Hadi | Records exist; three shared portrait groups affect the cast; no radio/hand poses | Abandoned workshop room, rooftop wire/antenna, signal device: loc.signal-workshop | P1 |
 | 22 p2-protection-cost | Ryan, Lina, Karim, Elias, Mariam, threatened mother and child | Named records exist; mother and child have no dedicated portraits | Stone quay at village edge with boat and threatened family: loc.village-quay; distinct from the legacy Punic harbor | P1 |
 | 24 p2-truth-gate | Ryan, Lina, Noor, Mariam, Amin, session clerk/witnesses | Named records exist; clerk and witnesses lack role visuals; shared-image intent unresolved | Night gate/evidence-table hearing: loc.sea-gate; not automatically original gate art | P0 |
-| 26 p3-survivor-register | Ryan, Lina, conditional Sara/Noor, neighbor, man searching for Hala | Named records exist; neighbor and searching man lack portraits; Hala is missing and has no portrait | Temporary school registration yard and ledgers: loc.survivor-school | P0 |
+| 26 p3-survivor-register | Ryan, Lina, conditional Sara/Noor, neighbor, man searching for Hala | Named records exist; neighbor and searching man lack portraits; Hala is reported missing and has no portrait | Temporary school registration yard and ledgers: loc.survivor-school | P0 |
 | 27 p3-single-load | Ryan, Lina, Noor, conditional Karim, Youssef or medic, bridge representative | Main records exist; medic and representative lack portraits; Youssef is inline SVG | Muddy fork, horse cart, bridge route and medicine quay: loc.crossroads; pilot drawing is procedural only | P0 |
 | 29 p3-karim-key | Ryan, Lina, conditional Karim, Noor or community representative, quay guard, searching mother | Named records exist; guard, representative and mother lack portraits | Iron dock gate, boat-store passage, brass key: loc.dock-gate; parent geography unresolved | P1 |
 | 30 p3-house-without-number | Ryan, Lina, neighbor, conditional Noor/Yasmin, searching woman | Records exist; neighbor and woman lack portraits; Lina/Yasmin image is shared | Damaged sea-side street, unnumbered houses, stairs/crescent stone: loc.unnumbered-house | P1 |
