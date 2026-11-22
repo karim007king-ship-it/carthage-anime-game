@@ -2,7 +2,7 @@
 // Pure, draft-only checkpoint inspector. No production runtime or storage integration.
 const hasOwn=(obj,key)=>Object.prototype.hasOwnProperty.call(obj,key);
 function inspectDraftCheckpoint(chapter,checkpoint){
- if(!chapter||!Array.isArray(chapter.choiceGroups)||!checkpoint||typeof checkpoint!=='object'||Array.isArray(checkpoint))return {valid:false,reason:'shape'};
+ if(!chapter||typeof chapter.id!=='string'||!Array.isArray(chapter.choiceGroups)||!checkpoint||typeof checkpoint!=='object'||Array.isArray(checkpoint))return {valid:false,reason:'shape'};
  if(Object.getPrototypeOf(checkpoint)!==Object.prototype)return {valid:false,reason:'shape'};
  const fields=Reflect.ownKeys(checkpoint);
  if(fields.length!==3||fields.some(k=>!['schemaVersion','chapterId','groups'].includes(k)))return {valid:false,reason:'fields'};
@@ -12,6 +12,7 @@ function inspectDraftCheckpoint(chapter,checkpoint){
  if(!groupValues||typeof groupValues!=='object'||Array.isArray(groupValues)||Object.getPrototypeOf(groupValues)!==Object.prototype)return {valid:false,reason:'groups'};
  const names=Reflect.ownKeys(groupValues);
  if(names.some(name=>typeof name!=='string'))return {valid:false,reason:'groups'};
+ if(chapter.choiceGroups.some(group=>!group||typeof group.id!=='string'))return {valid:false,reason:'chapter-groups'};
  const knownGroupIds=new Set(chapter.choiceGroups.map(group=>group.id));
  if(knownGroupIds.size!==chapter.choiceGroups.length)return {valid:false,reason:'chapter-groups'};
  const allowedChoices=new Map();
