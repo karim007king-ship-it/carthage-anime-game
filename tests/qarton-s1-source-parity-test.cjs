@@ -19,7 +19,8 @@ test('pinned S1 original-scene catalogue has immutable source identity',()=>{
 test('every extracted legacy chapter exactly matches S1 dialogue and choice data',()=>{
  const folder=path.join(root,'game-content/story/chapters');
  const files=fs.readdirSync(folder).filter(x=>/^legacy-[0-9]{2}[.]json$/.test(x)).sort();
- assert.ok(files.length>0);
+ assert.equal(files.length,18,'all original chapters must be extracted');
+ assert.deepEqual(files,Array.from({length:18},(_,i)=>'legacy-'+String(i+1).padStart(2,'0')+'.json'));
  for(const filename of files){
   const chapter=read('game-content/story/chapters/'+filename);
   const original=fixture.scenes.find(s=>s.id===chapter.id);
