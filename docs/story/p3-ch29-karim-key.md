@@ -31,6 +31,10 @@
 
 ## صدى حمولة الفصل 27
 
+*تحت الفانوس لينا تحلّ ورقة الحمولة إذا القرار مسجّل. إذا السجل ناقص، الحارس يفرش ورقة جرد بيضاء. حسب المسار تُستعمل لقطة واحدة من [ورقة 27–29–31](../qarton-g1-routes.md).*
+
+**عند غياب كريم:** الحارس يحطّ المفتاح ويقول «عندي من وقت المناوبة. كان باش يبقى عندي، اكتبوا وقتاش نرجّعو ولشكون». كل كلام يتعلّق بماضي كريم يتنحّى؛ الحارس يفسّر خدمتو اليوم. في الخيار الأول يظهر «يبقى عند الحارس بسجلّ» بنفس معرّف القرار.
+
 - `supplyAllocation=bridge`: يوجد ممرّ قيد الإصلاح؛ لا يُسمح بالعبور الجماعي حتى يثبت الحارس سلامته.
 - `supplyAllocation=clinic`: الجسر مؤجل؛ الممرّ البحري مطلوب لنقل الرسائل، لا لنقل حمولة غير موجودة.
 - `supplyAllocation=split`: يُتاح ممرّ مشاة محدود بعد تفقده، ولا تمرّ العربة.
@@ -114,7 +118,7 @@
   inputs: ["boatDecision", "familyEvacuation", "supplyAllocation", "bridgeRepair", "presentCharacters"],
   choices: ["karimLogged", "jointCommittee", "auditHold"],
   outputs: ["keyCustody", "dockOversight"],
-  next: "p3-unnumbered-house"
+  next: "p3-house-without-number"
 }
 ```
 

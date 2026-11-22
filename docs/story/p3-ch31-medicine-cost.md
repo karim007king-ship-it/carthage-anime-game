@@ -24,6 +24,8 @@
 
 ## مراجعة عواقب الفصل 27
 
+*لينا تخرج الورقة اللي تحلّت في الرصيف. الممرضة تثبّتها تحت الصحن. في الحالة المجهولة تستعمل ورقة جرد اليوم. نصّ كل لقطة ونسختها الثابتة في [ورقة الربط](../qarton-g1-routes.md).*
+
 ### `supplyAllocation=bridge`
 *يتساقط المطر قرب سريرين؛ الغطاء المؤقت لا يكفي.*
 
@@ -130,7 +132,7 @@
   storyId: "p3-medicine-cost",
   inputs: ["supplyAllocation", "clinicShelter", "bridgeRepair", "keyCustody", "presentCharacters"],
   choices: ["triageWater", "repairRequest", "referralNetwork"],
-  outputs: ["clinicRecovery", "clinicWait", "clinicRepair", "clinicTransfers"],
+  outputs: ["clinicRecovery", "clinicWait", "clinicMaterials", "clinicRepair", "clinicTransfers"],
   next: "p3-mark-on-stone"
 }
 ```

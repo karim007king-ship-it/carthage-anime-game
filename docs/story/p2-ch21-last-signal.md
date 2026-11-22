@@ -2,7 +2,7 @@
 
 **الحالة:** مسودة سردية قابلة للمراجعة؛ غير مدمجة في اللعبة.
 **الموضع:** بعد الفصل 20 «المختبر» وقبل الفصل 22 «ثمن الحماية».
-**هوية المشهد المقترحة:** `p2-signal-test`.
+**هوية المشهد المقترحة:** `p2-last-signal`.
 **الشخصيات:** ريان، مريم، أمين، لينا، الهادي بحسب حالة الجولة.
 **الهدف:** اختبار قناة اتصال موثوقة أو تسليم وثائق مختومة؛ فصل نقل الوقائع عن نشر أسماء الشهود، تمهيدًا للحسم في الفصل 24.
 
@@ -117,7 +117,7 @@
 
 ```js
 {
-  storyId: "p2-signal-test",
+  storyId: "p2-last-signal",
   inputs: ["namesConsent", "aminTestimony", "signalDevice"],
   choices: ["sendAuthorizedSummary", "sendSealedCourier", "testOnly"],
   outputs: ["signalDelivery", "signalReceipt"],

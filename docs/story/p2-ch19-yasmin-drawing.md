@@ -2,7 +2,7 @@
 
 **الحالة:** مسودة سردية للمراجعة، لم تُدمج بعد في اللعبة.
 **الموضع:** بعد الفصل 18 «القرية» وقبل الفصل 20 «المختبر».
-**هوية ثابتة مقترحة:** `p2-yasmin-map`.
+**هوية ثابتة مقترحة:** `p2-yasmin-drawing`.
 **النوع:** فصل جانبي اختياري؛ تجاوزه لا يمنع العثور على المختبر أو إنهاء الجزء.
 **الشخصيات:** ريان، لينا، ياسمين، مريم.
 **الهدف:** تحويل رسمة ياسمين إلى دليل مدني له أثر في الفصل 30، دون كشف عنوان أسرة من غير إذن.
@@ -105,7 +105,7 @@
 
 ```js
 {
-  storyId: "p2-yasmin-map",
+  storyId: "p2-yasmin-drawing",
   optional: true,
   choices: ["copyRouteWithConsent", "requestGuidedVisit", "keepDrawingPrivate"],
   outputs: ["yasminMapConsent", "yasminRouteCopy"],
