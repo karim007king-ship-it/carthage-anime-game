@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-13",
+  "sceneIdx": 12,
+  "legacyChapter": 13,
+  "part": "part2",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-13.title",
+    "place": "story.legacy-13.place",
+    "hint": "story.legacy-13.hint",
+    "cardTitle": "story.legacy-13.card.cardTitle",
+    "cardSub": "story.legacy-13.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-13.line-001.speaker",
+      "text": "story.legacy-13.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.hadi",
+      "who": "story.legacy-13.line-002.speaker",
+      "text": "story.legacy-13.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-13.line-003.speaker",
+      "text": "story.legacy-13.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "char.hadi",
+      "who": "story.legacy-13.line-004.speaker",
+      "text": "story.legacy-13.line-004"
+    },
+    {
+      "id": "line-005",
+      "speakerId": "char.mariam",
+      "who": "story.legacy-13.line-005.speaker",
+      "text": "story.legacy-13.line-005"
+    },
+    {
+      "id": "line-006",
+      "speakerId": "char.lina",
+      "who": "story.legacy-13.line-006.speaker",
+      "text": "story.legacy-13.line-006"
+    },
+    {
+      "id": "line-007",
+      "speakerId": "char.amin",
+      "who": "story.legacy-13.line-007.speaker",
+      "text": "story.legacy-13.line-007"
+    },
+    {
+      "id": "line-008",
+      "speakerId": "char.hadi",
+      "who": "story.legacy-13.line-008.speaker",
+      "text": "story.legacy-13.line-008"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "lab-papers",
+      "legacyId": "labPapers",
+      "texts": {
+        "label": "story.legacy-13.hotspot.lab-papers.label",
+        "note": "story.legacy-13.hotspot.lab-papers.note"
+      },
+      "effect": {
+        "x": 24,
+        "y": 30,
+        "courage": 8,
+        "trust": {
+          "hadi": 10
+        },
+        "clue": "labPaper"
+      }
+    },
+    {
+      "id": "signal-device",
+      "legacyId": "signalDevice",
+      "texts": {
+        "label": "story.legacy-13.hotspot.signal-device.label",
+        "note": "story.legacy-13.hotspot.signal-device.note"
+      },
+      "effect": {
+        "x": 52,
+        "y": 52,
+        "courage": 7,
+        "trust": {
+          "mariam": 10
+        }
+      }
+    },
+    {
+      "id": "hadi-letter",
+      "legacyId": "hadiLetter",
+      "texts": {
+        "label": "story.legacy-13.hotspot.hadi-letter.label",
+        "note": "story.legacy-13.hotspot.hadi-letter.note"
+      },
+      "effect": {
+        "x": 78,
+        "y": 68,
+        "courage": 8,
+        "trust": {
+          "hadi": 12
+        },
+        "clue": "hadiLetter"
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "fix-signal",
+      "legacyId": "fixSignal",
+      "texts": {
+        "label": "story.legacy-13.choice.fix-signal.label",
+        "sub": "story.legacy-13.choice.fix-signal.sub"
+      },
+      "effect": {
+        "time": 3,
+        "courage": 14,
+        "flag": "fixedSignal",
+        "trust": {
+          "mariam": 12,
+          "hadi": 10,
+          "lina": 5
+        }
+      }
+    },
+    {
+      "id": "hide-lab",
+      "legacyId": "hideLab",
+      "texts": {
+        "label": "story.legacy-13.choice.hide-lab.label",
+        "sub": "story.legacy-13.choice.hide-lab.sub"
+      },
+      "effect": {
+        "time": 3,
+        "courage": 8,
+        "flag": "hidLab",
+        "trust": {
+          "hadi": 5,
+          "mariam": 5
+        }
+      }
+    }
+  ],
+  "displayChapter": 20,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.laboratory",
+  "backgroundVariable": "I7"
+}
