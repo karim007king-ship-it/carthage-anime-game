@@ -1,3 +1,4 @@
+- [Stable ID integration gates](qarton-id-integration-gates-20261122.md) — verified tests, unresolved crosswalks and release conditions.
 # Project coordination
 - [Master work plan and cross-PR audit](qarton-master-work-plan-20261122.md) — owners, phases, CI and integration gates.
 
