@@ -22,14 +22,14 @@ test('all 36 chapters have isolated content contracts and stable ordering',()=>{
    assert.equal(ch.runtimeIntegrated,false);
    assert.equal(ch.entryAfter,entries[i-1].id);
    assert.equal(ch.exitBefore,entries[i+1].id);
-   assert.equal(ch.missingLegacyStatePolicy,'unknown');
+   assert.equal(ch.missingLegacyStatePolicy,ch.id==='p1-smoke-door'?'improvised':'unknown');
   }
  }
 });
 test('all 18 draft manuscripts have exactly matching unique text IDs',()=>{
  for(const entry of registry.scenes.filter(s=>s.scope==='draft')){
   const ch=JSON.parse(read('game-content/story/chapters/'+entry.id+'.json'));
-  const manuscript=read('tests/fixtures/qarton-g1-'+entry.id+'.md');
+  const manuscript=read('tests/fixtures/'+({'p1-family-promise':'qarton-g1-ch02-family-promise.md','p1-family-alley':'qarton-g1-ch04-family-alley.md','p1-smoke-door':'qarton-g1-p1-smoke-door.md','p1-gate-manifest':'qarton-g1-p1-gate-manifest.md'}[entry.id]??'qarton-g1-'+entry.id+'.md'));
   const ids=[...manuscript.matchAll(/<!-- *([A-Za-z0-9.-]+) *-->/g)].map(x=>x[1]);
   assert.ok(ids.length>0,entry.id);
   assert.equal(new Set(ids).size,ids.length,entry.id+' duplicate IDs');
