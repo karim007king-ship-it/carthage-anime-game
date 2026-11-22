@@ -47,5 +47,55 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "amin"
+  ],
+  "location": {
+    "status": "proposed-unmapped",
+    "description": "forest relay hut"
+  },
+  "inputs": [
+    "presentCharacters"
+  ],
+  "outputs": [
+    "relayHutAction",
+    "relayMessagePrivacy"
+  ],
+  "choices": [
+    {
+      "id": "returned",
+      "textKey": "story.p2-relay-hut.choice.returned",
+      "proposedState": {
+        "relayHutAction": "returned",
+        "relayMessagePrivacy": "anonymous"
+      },
+      "costMinutes": 1
+    },
+    {
+      "id": "message",
+      "textKey": "story.p2-relay-hut.choice.message",
+      "proposedState": {
+        "relayHutAction": "message",
+        "relayMessagePrivacy": "sealed"
+      },
+      "costMinutes": 1
+    },
+    {
+      "id": "untouched",
+      "textKey": "story.p2-relay-hut.choice.untouched",
+      "proposedState": {
+        "relayHutAction": "untouched"
+      },
+      "costMinutes": 0
+    }
+  ],
+  "continuity": {
+    "nextReception": "legacy-12",
+    "unknownLegacyState": "neutral-no-prior-visit",
+    "inventoryPolicy": "do-not-add-pot-to-legacy-inventory",
+    "decisionOnce": true
+  }
 }
