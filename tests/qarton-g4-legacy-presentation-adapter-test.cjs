@@ -76,3 +76,27 @@ test('presentation never exposes pilot chapter 27 through a legacy index',()=>{
     assert.equal(getDisplayChapterForLegacySave({sceneIdx}),null);
   }
 });
+
+test('restore, import and alternate entry paths remain presentation-only',()=>{
+  const entries=['new-game','resume','import','map-travel','result-continue','intro'];
+  for(const entry of entries){
+    const original=Object.freeze({sceneIdx:4,entry,part:1,flags:Object.freeze({}),choicesHistory:Object.freeze([])});
+    assert.equal(createLegacyPresentationSnapshot(original),null);
+    const snapshot=createLegacyPresentationSnapshot(original,true);
+    assert.equal(snapshot.sceneId,'legacy-05');
+    assert.deepEqual(Object.keys(snapshot).sort(),['accessibility','locale','sceneId','version','visualVariant'].sort());
+    assert.equal(Object.hasOwn(snapshot,'entry'),false);
+    assert.equal(Object.hasOwn(snapshot,'flags'),false);
+    assert.equal(Object.hasOwn(snapshot,'choicesHistory'),false);
+    assert.equal(original.sceneIdx,4);
+    assert.equal(original.entry,entry);
+    assert.equal(original.choicesHistory.length,0);
+  }
+});
+test('feature flag requires explicit boolean true even for valid saved scenes',()=>{
+  const saved=Object.freeze({sceneIdx:4,part:1});
+  for(const flag of [undefined,null,false,0,1,'true',{},[]]){
+    assert.equal(createLegacyPresentationSnapshot(saved,flag),null);
+  }
+  assert.equal(createLegacyPresentationSnapshot(saved,true).sceneId,'legacy-05');
+});
