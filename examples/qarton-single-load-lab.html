@@ -57,20 +57,22 @@ button[disabled]{opacity:.5;cursor:not-allowed}.choices button{flex:1 1 170px}#r
 </div>
 <div class="subtitle" id="subtitle" aria-live="polite"></div>
 <div class="controls">
- <button type="button" id="play">▶ تشغيل</button><button type="button" id="pause">⏸ إيقاف</button><button type="button" id="replay">↻ إعادة</button><label for="seek">تقدّم المشهد</label><input id="seek" type="range" min="0" max="21000" step="100" value="0" aria-label="تقدّم المشهد"><output id="clock" for="seek">0:00</output><button type="button" id="reduce" aria-pressed="false">تقليل الحركة</button>
+ <button type="button" id="play">▶ تشغيل</button><button type="button" id="pause">⏸ إيقاف</button><button type="button" id="replay">↻ إعادة</button><label for="seek">تقدّم المشهد</label><input id="seek" type="range" min="0" max="21000" step="100" value="0" aria-label="تقدّم المشهد"><output id="clock" for="seek">0:00</output><button type="button" id="reduce" aria-pressed="false">تقليل الحركة</button><button type="button" id="mute" aria-pressed="true">🔇 الصوت مكتوم</button><label for="volume">مستوى الصوت</label><input id="volume" type="range" min="0" max="100" step="5" value="70" aria-label="مستوى الصوت">
 </div>
 <p>اختار شنوّة يصير للحمولة في التجربة فقط:</p>
 <div class="choices"><button type="button" data-choice="prioritizeBridge" disabled>الحمولة للجسر</button><button type="button" data-choice="prioritizeClinic" disabled>الحمولة للعيادة</button><button type="button" data-choice="splitWithLimits" disabled>نقسم الحمولة</button></div>
 <div id="result" role="status" aria-live="polite"></div>
 </main>
 <script src="../scripts/qarton-timeline-player.js"></script>
+<script src="../scripts/qarton-audio-cue-planner.js"></script>
+<script src="../scripts/qarton-audio-playback.js"></script>
 <script>
 (()=>{'use strict';
 const outcomes={prioritizeBridge:'الجسر: إصلاح بدأ. العيادة: غطاء مؤقت.',prioritizeClinic:'العيادة: سقف أقوى. الجسر: الإصلاح تأجّل.',splitWithLimits:'الجسر: ممر مشاة فقط. العيادة: حماية جزئية.'};
 const subtitle=document.getElementById('subtitle'),result=document.getElementById('result'),stage=document.querySelector('.stage'),world=document.querySelector('.world'),seek=document.getElementById('seek'),clock=document.getElementById('clock');
-let player=null,frameId=null,lastFrame=null,isPlaying=false,reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,scene=null;
+let player=null,audio=null,frameId=null,lastFrame=null,isPlaying=false,reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,scene=null;
 function stopLoop(){isPlaying=false;if(frameId!==null){cancelAnimationFrame(frameId);frameId=null;}lastFrame=null;stage.dataset.playing='false';}
-function frame(t){if(!player||!player.state.playing){stopLoop();return;}if(lastFrame!==null)player.tick(Math.max(0,Math.min(100,t-lastFrame)));lastFrame=t;if(player.state.playing)frameId=requestAnimationFrame(frame);else stopLoop();}
+function frame(t){if(!player||!player.state.playing){stopLoop();return;}if(lastFrame!==null){player.tick(Math.max(0,Math.min(100,t-lastFrame)));if(audio&&audio.state.playing)audio.tick(player.state.positionMs);}lastFrame=t;if(player.state.playing)frameId=requestAnimationFrame(frame);else stopLoop();}
 function startLoop(){stopLoop();isPlaying=true;stage.dataset.playing='true';frameId=requestAnimationFrame(frame);}
 function render(view){
  seek.value=String(view.positionMs);clock.textContent='0:'+String(Math.floor(view.positionMs/1000)%60).padStart(2,'0');
@@ -84,17 +86,20 @@ function render(view){
 }
 async function init(){
  if(!window.QartonTimelinePlayer){result.textContent='تعذّر تحميل مشغّل المشهد.';return;}
- try{const response=await fetch('./qarton-single-load-scene.json');if(!response.ok)throw Error('HTTP '+response.status);scene=await response.json();player=window.QartonTimelinePlayer.createTimelinePlayer(scene,render);
- document.getElementById('play').addEventListener('click',()=>{player.play();startLoop();});
- document.getElementById('pause').addEventListener('click',()=>{player.pause();stopLoop();});
- document.getElementById('replay').addEventListener('click',()=>{player.replay();result.textContent='';startLoop();});
- seek.addEventListener('input',()=>{player.pause();stopLoop();player.seek(Number(seek.value));});
- document.getElementById('reduce').addEventListener('click',e=>{reduced=!reduced;e.currentTarget.setAttribute('aria-pressed',String(reduced));e.currentTarget.textContent=reduced?'الحركة قليلة':'تقليل الحركة';player.pause();stopLoop();player.seek(player.state.positionMs);});
- matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change',e=>{reduced=e.matches;player.pause();stopLoop();player.seek(player.state.positionMs);});
- document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{if(!player.state.positionMs||player.state.positionMs<20500)return;player.pause();stopLoop();result.textContent=outcomes[b.dataset.choice]||'اختيار غير معروف';}));
+ try{const response=await fetch('./qarton-single-load-scene.json');if(!response.ok)throw Error('HTTP '+response.status);scene=await response.json();audio=window.QartonAudioPlayback?.createAudioPlayback(scene);player=window.QartonTimelinePlayer.createTimelinePlayer(scene,render);
+ document.getElementById('play').addEventListener('click',()=>{player.play();audio?.play(player.state.positionMs);startLoop();});
+ document.getElementById('pause').addEventListener('click',()=>{player.pause();audio?.pause();stopLoop();});
+ document.getElementById('replay').addEventListener('click',()=>{player.replay();audio?.replay();audio?.play(0);result.textContent='';startLoop();});
+ seek.addEventListener('input',()=>{player.pause();audio?.pause();stopLoop();player.seek(Number(seek.value));audio?.seek(player.state.positionMs);});
+ document.getElementById('reduce').addEventListener('click',e=>{reduced=!reduced;audio?.pause();e.currentTarget.setAttribute('aria-pressed',String(reduced));e.currentTarget.textContent=reduced?'الحركة قليلة':'تقليل الحركة';player.pause();stopLoop();player.seek(player.state.positionMs);});
+ matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change',e=>{reduced=e.matches;audio?.pause();player.pause();stopLoop();player.seek(player.state.positionMs);});
+ document.getElementById('mute').addEventListener('click',e=>{if(!audio)return;const next=!audio.state.muted;audio.setMuted(next);e.currentTarget.setAttribute('aria-pressed',String(next));e.currentTarget.textContent=next?'🔇 الصوت مكتوم':'🔊 الصوت مفعّل';});
+ document.getElementById('volume').addEventListener('input',e=>audio?.setVolume(Number(e.target.value)/100));
+ audio?.setVolume(0.7);
+ document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{if(!player.state.positionMs||player.state.positionMs<20500)return;audio?.pause();player.pause();stopLoop();result.textContent=outcomes[b.dataset.choice]||'اختيار غير معروف';}));
  }catch(err){result.textContent='يلزم تشغيل التجربة عبر خادم ويب أو GitHub Pages. '+err.message;}
 }
-window.addEventListener('pagehide',()=>{stopLoop();if(player)player.destroy();});init();
+window.addEventListener('pagehide',()=>{stopLoop();if(player)player.destroy();audio?.destroy();});init();
 })();
 </script>
 </body>
