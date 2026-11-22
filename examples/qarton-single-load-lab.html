@@ -72,7 +72,7 @@ const outcomes={prioritizeBridge:'الجسر: إصلاح بدأ. العيادة:
 const subtitle=document.getElementById('subtitle'),result=document.getElementById('result'),stage=document.querySelector('.stage'),world=document.querySelector('.world'),seek=document.getElementById('seek'),clock=document.getElementById('clock');
 let player=null,audio=null,frameId=null,lastFrame=null,isPlaying=false,reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,scene=null;
 function stopLoop(){isPlaying=false;if(frameId!==null){cancelAnimationFrame(frameId);frameId=null;}lastFrame=null;stage.dataset.playing='false';}
-function frame(t){if(!player||!player.state.playing){stopLoop();return;}if(lastFrame!==null){player.tick(Math.max(0,Math.min(100,t-lastFrame)));if(audio&&audio.state.playing)audio.tick(player.state.positionMs);}lastFrame=t;if(player.state.playing)frameId=requestAnimationFrame(frame);else stopLoop();}
+function frame(t){if(!player||!player.state.playing){audio?.pause();stopLoop();return;}if(lastFrame!==null){player.tick(Math.max(0,Math.min(100,t-lastFrame)));if(audio&&audio.state.playing)audio.tick(player.state.positionMs);}lastFrame=t;if(player.state.playing)frameId=requestAnimationFrame(frame);else{audio?.pause();stopLoop();}}
 function startLoop(){stopLoop();isPlaying=true;stage.dataset.playing='true';frameId=requestAnimationFrame(frame);}
 function render(view){
  seek.value=String(view.positionMs);clock.textContent='0:'+String(Math.floor(view.positionMs/1000)%60).padStart(2,'0');
