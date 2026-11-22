@@ -16,8 +16,13 @@ function inspectDraftCheckpoint(chapter,checkpoint){
  const knownGroupIds=new Set(chapter.choiceGroups.map(group=>group.id));
  if(knownGroupIds.size!==chapter.choiceGroups.length)return {valid:false,reason:'chapter-groups'};
  const allowedChoices=new Map();
+ const globallyOwnedChoices=new Set();
  for(const group of chapter.choiceGroups){
   if(!group||typeof group.id!=='string'||!group.id||!Array.isArray(group.choiceIds)||!group.choiceIds.length||group.choiceIds.some(id=>typeof id!=='string'||!id)||new Set(group.choiceIds).size!==group.choiceIds.length)return {valid:false,reason:'chapter-groups'};
+  for(const choiceId of group.choiceIds){
+   if(globallyOwnedChoices.has(choiceId))return {valid:false,reason:'chapter-groups'};
+   globallyOwnedChoices.add(choiceId);
+  }
   allowedChoices.set(group.id,new Set(group.choiceIds));
  }
  for(const name of names){
