@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#171316">
+<title>QARTON TEST LAB — حمولة واحدة</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#100c0d;color:#f7e8ce}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 50% 0,#39252a,#100c0d 60%);display:grid;place-items:center}
+main{width:min(100%,760px);padding:clamp(12px,3vw,24px)}header{color:#e7bb65;letter-spacing:.14em;text-align:center;font-size:.8rem}
+h1{text-align:center;font-size:clamp(26px,5vw,40px);margin:8px 0}p{line-height:1.8}.stage{position:relative;overflow:hidden;height:clamp(245px,62vw,370px);max-height:42vh;min-height:245px;border:1px solid #98753c;border-radius:18px;background:#30242a;isolation:isolate;container-type:inline-size}
+.world{position:absolute;inset:0;overflow:hidden;transform-origin:50% 60%;will-change:transform}
+.sky{position:absolute;inset:0 0 43%;background:linear-gradient(180deg,#31212b,#9c6659 78%,#dfa978)}
+.sun{position:absolute;width:22cqw;aspect-ratio:1;border-radius:50%;top:8%;left:16%;background:radial-gradient(circle,#ffe5b0,#f4bb7a 55%,#ed956d00 72%);opacity:.83}
+.hill{position:absolute;bottom:40%;width:78%;height:33%;background:#5c4146;clip-path:polygon(0 100%,12% 44%,24% 72%,41% 13%,58% 60%,75% 24%,100% 100%);opacity:.85}
+.hill.back{left:30%;bottom:38%;background:#765156;transform:scale(.82)}
+.ground{position:absolute;inset:53% 0 0;background:linear-gradient(180deg,#594546,#272b30)}
+.road{position:absolute;bottom:-4%;left:27%;width:48%;height:54%;background:linear-gradient(90deg,#554344,#8a6555 50%,#554344);clip-path:polygon(43% 0,57% 0,100% 100%,0 100%)}
+.bridge,.clinic,.wagon,.character{position:absolute;transform-origin:center bottom}
+.bridge{left:6%;bottom:27%;width:29%;height:31%}.clinic{right:5%;bottom:26%;width:27%;height:34%}
+.wagon{left:40%;bottom:14%;width:22%;height:23%}
+.character{width:13%;height:35%;bottom:13%;z-index:3;filter:drop-shadow(0 5px 4px #100b0b99)}
+.character.ryan{left:57%}.character.lina{left:68%;width:10%;height:27%;bottom:13%}.character.nour{left:25%;height:38%}
+.character img,.place img,.wagon img{width:100%;height:100%;object-fit:contain}
+.place{position:absolute;inset:0}
+.stage[data-target=ryan] .character.ryan,.stage[data-target=nour] .character.nour{filter:drop-shadow(0 0 8px #ffe2a5) drop-shadow(0 5px 4px #100b0b99)}
+.stage[data-shot=medium] .world{transform:scale(1.09)}
+#camera{position:absolute;inset:0;pointer-events:none;z-index:5;box-shadow:inset 0 18px 34px #0c081340,inset 0 -45px 60px #0c081355}
+.stage[data-reduced-motion=false][data-playing=true] .character{animation:breathe 2.8s ease-in-out infinite}
+.stage[data-reduced-motion=false][data-playing=true] .character:nth-of-type(2){animation-delay:.45s}
+.stage[data-reduced-motion=false][data-playing=true] .character:nth-of-type(3){animation-delay:.8s}
+.stage[data-reduced-motion=false][data-playing=true] .wagon{animation:cartIdle 2.3s ease-in-out infinite alternate}
+@keyframes breathe{0%,100%{translate:0 0}50%{translate:0 -2px}}
+@keyframes cartIdle{to{translate:0 -2px}}
+.subtitle{margin:10px 0;min-height:56px;padding:10px 13px;background:#20171b;border-radius:10px;line-height:1.8}
+.controls,.choices{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;align-items:center}button{border:1px solid #b88e48;border-radius:10px;background:#332027;color:#fff0d6;padding:10px 13px;font:inherit;cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+button[disabled]{opacity:.5;cursor:not-allowed}.choices button{flex:1 1 170px}#result{white-space:pre-line;color:#f6d997;min-height:26px}
+@media(max-width:430px){main{padding:12px}.stage{height:260px}.controls{gap:6px}.controls button{padding:9px 10px}.controls label{width:100%}#seek{flex:1}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<main>
+<header>QARTON · CULTURE • POWER • CINEMA</header>
+<h1>حمولة واحدة</h1>
+<p>الفصل 27 — تجربة بصرية مستقلة، خارج مسار اللعبة وحفظها.</p>
+<div class="stage" role="img" aria-label="مشهد قرطاج: جسر وعيادة وعربة خشبية وشخصيات">
+ <div class="world">
+  <div class="sky"></div><div class="sun"></div><div class="hill"></div><div class="hill back"></div><div class="ground"></div><div class="road"></div>
+  <div class="place bridge"><img src="assets/bridge.svg" alt=""></div>
+  <div class="place clinic"><img src="assets/clinic.svg" alt=""></div>
+  <div class="wagon"><img src="assets/wagon.svg" alt=""></div>
+  <div class="character ryan" data-character="ryan"><img src="assets/ryan.svg" alt=""></div>
+  <div class="character lina" data-character="lina"><img src="assets/lina.svg" alt=""></div>
+  <div class="character nour" data-character="nour"><img src="assets/nour.svg" alt=""></div>
+ </div><div id="camera"></div>
+</div>
+<div class="subtitle" id="subtitle" aria-live="polite"></div>
+<div class="controls">
+ <button type="button" id="play">▶ تشغيل</button><button type="button" id="pause">⏸ إيقاف</button><button type="button" id="replay">↻ إعادة</button><label for="seek">تقدّم المشهد</label><input id="seek" type="range" min="0" max="21000" step="100" value="0" aria-label="تقدّم المشهد"><output id="clock" for="seek">0:00</output><button type="button" id="reduce" aria-pressed="false">تقليل الحركة</button><button type="button" id="mute" aria-pressed="true">🔇 الصوت مكتوم</button><label for="volume">مستوى الصوت</label><input id="volume" type="range" min="0" max="100" step="5" value="70" aria-label="مستوى الصوت">
+</div>
+<p>اختار شنوّة يصير للحمولة في التجربة فقط:</p>
+<div class="choices"><button type="button" data-choice="prioritizeBridge" disabled>الحمولة للجسر</button><button type="button" data-choice="prioritizeClinic" disabled>الحمولة للعيادة</button><button type="button" data-choice="splitWithLimits" disabled>نقسم الحمولة</button></div>
+<div id="result" role="status" aria-live="polite"></div>
+</main>
+<script src="../scripts/qarton-timeline-player.js"></script>
+<script src="../scripts/qarton-audio-cue-planner.js"></script>
+<script src="../scripts/qarton-audio-playback.js"></script>
+<script>
+(()=>{'use strict';
+const outcomes={prioritizeBridge:'الجسر: إصلاح بدأ. العيادة: غطاء مؤقت.',prioritizeClinic:'العيادة: سقف أقوى. الجسر: الإصلاح تأجّل.',splitWithLimits:'الجسر: ممر مشاة فقط. العيادة: حماية جزئية.'};
+const subtitle=document.getElementById('subtitle'),result=document.getElementById('result'),stage=document.querySelector('.stage'),world=document.querySelector('.world'),seek=document.getElementById('seek'),clock=document.getElementById('clock');
+let player=null,audio=null,frameId=null,lastFrame=null,isPlaying=false,reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,scene=null;
+function stopLoop(){isPlaying=false;if(frameId!==null){cancelAnimationFrame(frameId);frameId=null;}lastFrame=null;stage.dataset.playing='false';}
+function frame(t){if(!player||!player.state.playing){audio?.pause();stopLoop();return;}if(lastFrame!==null){player.tick(Math.max(0,Math.min(100,t-lastFrame)));if(audio&&audio.state.playing)audio.tick(player.state.positionMs);}lastFrame=t;if(player.state.playing)frameId=requestAnimationFrame(frame);else{audio?.pause();stopLoop();}}
+function startLoop(){stopLoop();isPlaying=true;stage.dataset.playing='true';frameId=requestAnimationFrame(frame);}
+function render(view){
+ seek.value=String(view.positionMs);clock.textContent='0:'+String(Math.floor(view.positionMs/1000)%60).padStart(2,'0');
+ stage.dataset.reducedMotion=String(reduced);stage.dataset.playing=String(isPlaying);
+ const d=view.dialogue;subtitle.textContent=d?({nour:'نور',ryan:'ريان',lina:'لينا'}[d.speaker]||d.speaker)+': '+d.text:'';
+ const camera=view.camera||{};stage.dataset.shot=camera.shot||'wide';stage.dataset.target=camera.target||'crossroads';
+ const ratio=reduced?0:Math.min(1,view.positionMs/scene.durationMs);
+ const offset=camera.target==='ryan'?ratio*1.2:camera.target==='nour'?-ratio*.8:0;
+ world.style.transform=reduced?'none':'translateX('+offset+'%) scale('+(camera.shot==='medium'?1.09:1)+')';
+ document.querySelectorAll('[data-choice]').forEach(b=>{b.disabled=!view.choices;});
+}
+async function init(){
+ if(!window.QartonTimelinePlayer){result.textContent='تعذّر تحميل مشغّل المشهد.';return;}
+ try{const response=await fetch('./qarton-single-load-scene.json');if(!response.ok)throw Error('HTTP '+response.status);scene=await response.json();audio=window.QartonAudioPlayback?.createAudioPlayback(scene);player=window.QartonTimelinePlayer.createTimelinePlayer(scene,render);
+ document.getElementById('play').addEventListener('click',()=>{player.play();audio?.play(player.state.positionMs);startLoop();});
+ document.getElementById('pause').addEventListener('click',()=>{player.pause();audio?.pause();stopLoop();});
+ document.getElementById('replay').addEventListener('click',()=>{player.replay();audio?.replay();audio?.play(0);result.textContent='';startLoop();});
+ seek.addEventListener('input',()=>{player.pause();audio?.pause();stopLoop();player.seek(Number(seek.value));audio?.seek(player.state.positionMs);});
+ document.getElementById('reduce').addEventListener('click',e=>{reduced=!reduced;audio?.pause();e.currentTarget.setAttribute('aria-pressed',String(reduced));e.currentTarget.textContent=reduced?'الحركة قليلة':'تقليل الحركة';player.pause();stopLoop();player.seek(player.state.positionMs);});
+ matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change',e=>{reduced=e.matches;audio?.pause();player.pause();stopLoop();player.seek(player.state.positionMs);});
+ document.getElementById('mute').addEventListener('click',e=>{if(!audio)return;const next=!audio.state.muted;audio.setMuted(next);e.currentTarget.setAttribute('aria-pressed',String(next));e.currentTarget.textContent=next?'🔇 الصوت مكتوم':'🔊 الصوت مفعّل';});
+ document.getElementById('volume').addEventListener('input',e=>audio?.setVolume(Number(e.target.value)/100));
+ audio?.setVolume(0.7);
+ document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{if(!player.state.positionMs||player.state.positionMs<20500)return;audio?.pause();player.pause();stopLoop();result.textContent=outcomes[b.dataset.choice]||'اختيار غير معروف';}));
+ }catch(err){result.textContent='يلزم تشغيل التجربة عبر خادم ويب أو GitHub Pages. '+err.message;}
+}
+window.addEventListener('pagehide',()=>{stopLoop();if(player)player.destroy();audio?.destroy();});init();
+})();
+</script>
+</body>
+</html>

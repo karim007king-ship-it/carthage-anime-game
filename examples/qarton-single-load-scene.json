@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "sceneId": "p3-single-load",
+  "chapter": 27,
+  "locale": "tn",
+  "durationMs": 21000,
+  "assets": {
+    "background": "procedural:crossroads",
+    "wagon": "assets/wagon.svg",
+    "characters": [
+      "assets/ryan.svg",
+      "assets/lina.svg",
+      "assets/nour.svg"
+    ],
+    "locations": [
+      "assets/bridge.svg",
+      "assets/clinic.svg"
+    ]
+  },
+  "layers": [
+    {
+      "id": "sky",
+      "depth": 0,
+      "parallax": 0.08
+    },
+    {
+      "id": "ground",
+      "depth": 1,
+      "parallax": 0.3
+    },
+    {
+      "id": "bridge",
+      "depth": 2,
+      "parallax": 0.16
+    },
+    {
+      "id": "clinic",
+      "depth": 2,
+      "parallax": 0.16
+    },
+    {
+      "id": "wagon",
+      "depth": 3,
+      "parallax": 0.55
+    },
+    {
+      "id": "ryan",
+      "depth": 4,
+      "parallax": 0.8
+    },
+    {
+      "id": "lina",
+      "depth": 4,
+      "parallax": 0.8
+    },
+    {
+      "id": "nour",
+      "depth": 4,
+      "parallax": 0.8
+    }
+  ],
+  "timeline": [
+    {
+      "atMs": 0,
+      "type": "camera",
+      "shot": "wide",
+      "target": "crossroads",
+      "durationMs": 3200
+    },
+    {
+      "atMs": 800,
+      "type": "dialogue",
+      "speaker": "nour",
+      "text": "هذه آخر حمولة نجموا نخرجوها اليوم.",
+      "durationMs": 4200
+    },
+    {
+      "atMs": 5000,
+      "type": "camera",
+      "shot": "medium",
+      "target": "ryan",
+      "durationMs": 2000
+    },
+    {
+      "atMs": 5400,
+      "type": "dialogue",
+      "speaker": "ryan",
+      "text": "نقسموا الخشب والدواء؟",
+      "durationMs": 3000
+    },
+    {
+      "atMs": 8700,
+      "type": "camera",
+      "shot": "medium",
+      "target": "nour",
+      "durationMs": 1900
+    },
+    {
+      "atMs": 9000,
+      "type": "dialogue",
+      "speaker": "nour",
+      "text": "نجموا نقسموا، أما وقتها لا الجسر يتصلّح مليح، لا العيادة تتغطّى كيف يلزم.",
+      "durationMs": 5200
+    },
+    {
+      "atMs": 14500,
+      "type": "camera",
+      "shot": "wide",
+      "target": "bridge-clinic",
+      "durationMs": 2500
+    },
+    {
+      "atMs": 15500,
+      "type": "dialogue",
+      "speaker": "lina",
+      "text": "وفي الزوز بلايص ثمّة ناس تستنّى.",
+      "durationMs": 4000
+    },
+    {
+      "atMs": 20500,
+      "type": "choice-prompt",
+      "choiceIds": [
+        "prioritizeBridge",
+        "prioritizeClinic",
+        "splitWithLimits"
+      ]
+    }
+  ],
+  "audio": {
+    "music": null,
+    "ambient": null,
+    "voice": null
+  },
+  "reducedMotion": {
+    "camera": "static",
+    "parallax": false,
+    "transitions": "instant"
+  },
+  "presentationOnly": true
+}
