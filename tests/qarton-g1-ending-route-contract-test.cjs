@@ -4,7 +4,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const load=id=>JSON.parse(fs.readFileSync(path.join(__dirname,'..','game-content/story/chapters',id+'.json'),'utf8'));
-const choices=id=>load(id).choiceTextKeys.map(key=>key.split('.choice.')[1]);
+const choices=id=>{const ch=load(id);return (ch.choiceTextKeys??ch.choices.map(c=>c.textKey)).map(key=>key.split('.choice.')[1]);};
 const mustInclude=(id,ids)=>{const actual=new Set(choices(id));for(const key of ids)assert.ok(actual.has(key),id+': missing '+key);};
 
 test('nine original ending keys are immutable and distinct from G1 draft route labels',()=>{
