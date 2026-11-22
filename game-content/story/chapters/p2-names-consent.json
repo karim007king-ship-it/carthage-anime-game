@@ -47,5 +47,55 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "amin"
+  ],
+  "location": {
+    "status": "proposed-unmapped",
+    "description": "forest path at fallen trunk"
+  },
+  "inputs": [
+    "presentCharacters",
+    "legacyInventory"
+  ],
+  "outputs": [
+    "namesConsent",
+    "aminTestimony"
+  ],
+  "choices": [
+    {
+      "id": "redactNames",
+      "textKey": "story.p2-names-consent.choice.redactNames",
+      "proposedState": {
+        "namesConsent": "redacted",
+        "aminTestimony": "eventsOnly"
+      }
+    },
+    {
+      "id": "aminOwnTestimony",
+      "textKey": "story.p2-names-consent.choice.aminOwnTestimony",
+      "proposedState": {
+        "namesConsent": "aminOnly",
+        "aminTestimony": "approvedPersonal"
+      }
+    },
+    {
+      "id": "holdInEscrow",
+      "textKey": "story.p2-names-consent.choice.holdInEscrow",
+      "proposedState": {
+        "namesConsent": "escrow",
+        "aminTestimony": "withheld"
+      }
+    }
+  ],
+  "continuity": {
+    "unknownLegacyState": "no-consent-assumed",
+    "aminAbsent": "no-consent-attributed",
+    "inventoryPolicy": "do-not-duplicate-legacy-notebook",
+    "endingPolicy": "no-light-shadow-unlock",
+    "decisionOnce": true
+  }
 }
