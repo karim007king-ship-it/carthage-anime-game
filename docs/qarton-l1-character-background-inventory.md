@@ -26,81 +26,83 @@ L1 follows the decisions: keep story, characters, backgrounds and locales as ind
 | `refactor/qarton-cleanup-cinematic` | Character performance styles; no character art catalog |
 | `feat/qarton-engine-adapter-pilot`, `feature/qarton-adapter-pilot` | Validation/resolver code and tests; no production art files |
 
-The production tree has no separate character or background asset directory. The original game renders its story visuals from the bundled `index.html`; the build/runtime code recognizes rendered story imagery, but does not provide a file-by-file art registry. Therefore this pass can record the original 18 scene/place labels and visual behavior, but cannot claim a complete count, source URL, resolution, or hash for every production-rendered image from the repository manifest alone.
+The original bundle was read as a Git blob: `index.html` Git blob `db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23`. Its `Gt` character table has 13 records, and its `an` array has 18 scene records with explicit place labels and image variables. Those references and aliases are catalogued below. The images are data URIs inside the monolithic source, not standalone production files. The original zero-based saved `sceneIdx` remains separate from each scene array's one-based `id`.
 
-The G0 map is a **proposed presentation mapping**, not a replacement for original `sceneIdx` and not proof that each scene has a unique background image. Its proposed chapter locations are used below only to seed a reviewable place-ID registry.
+The G0 map remains a **proposed presentation mapping**, not a replacement for original `sceneIdx`. Where G0 labels differ from the original array, this inventory uses source labels from `an` and retains the G0 chapter only as a cross-reference.
 
 ## Character inventory
 
-### Characters referenced by the original-scene mapping / narrative audit
+### Character records found in the original `Gt` table
 
-The IDs below are stable authoring candidates based on the reviewed names. Confirm spelling, aliases, and actual source occurrence against the original `Gt` character table before connecting any content loader. IDs must never be used as save keys or substitute original indices.
+The production source contains 13 character records and 9 distinct image variables. These are read-only catalog IDs based on the source `id` values. They are not save keys.
 
-| Proposed ID | Display name | Alias/source note | Production portrait / expression / movement evidence |
-|---|---|---|---|
-| `char.ryan` | ريان | Main character; G0 narrative audit identifies Ryan as 16 | Original story portrait is rendered from the monolith; separate source file and expression sheet not inventoried |
-| `char.lina` | لينا | Named in original-scene mapping and pilot | Same production evidence limit; lab has one static silhouette, `examples/assets/lina.svg` |
-| `char.yusuf` | يوسف | G0 narrative audit identifies him as Ryan’s father; proposed alias: `father` / الأب | No standalone production portrait file found |
-| `char.salim` | سليم | Also transliterated Salim in G0 draft | No standalone production portrait file found |
-| `char.elias` | إيلاس | Also appears as Elias in the draft audit | No standalone production portrait file found |
-| `char.nour` | نور | Also transliterated Noor/Noor in draft material; choose one display transliteration, keep ID | One static lab silhouette: `examples/assets/nour.svg`; no separate expressions/poses |
-| `char.mansour` | منصور | Uncle Mansour / عم منصور | No standalone production portrait file found |
-| `char.amin` | أمين | Also transliterated Amin | No standalone production portrait file found |
-| `char.maryam` | مريم | Also transliterated Maryam | No standalone production portrait file found |
-| `char.hadi` | الهادي | Also transliterated Hadi | No standalone production portrait file found |
-| `char.yasmin` | ياسمين | Also transliterated Yasmin | No standalone production portrait file found |
-| `char.karim` | كريم | Also transliterated Karim | No standalone production portrait file found |
+| Proposed ID | Original source ID | Display name / role | Embedded portrait ref | Repeat / notes |
+|---|---|---|---|---|
+| `char.ryan` | `ryan` | ريان — البطل، 16 سنة | `S7` (WebP data URI) | Shared with Hadi and Karim |
+| `char.sara` | `sara` | سارة — الأم | `UA` (WebP data URI) | Shared with Mariam |
+| `char.lina` | `lina` | لينا — الأخت، 8 سنوات | `_A` (WebP data URI) | Shared with Yasmin |
+| `char.salim` | `salim` | سليم — الصاحب الذكي | `$A` (WebP data URI) | One source ref |
+| `char.mansour` | `mansour` | عم منصور — الجندي القديم | `fz` (WebP data URI) | One source ref |
+| `char.noor` | `noor` | القائدة نور — قائدة البوابة، 29 سنة | `nz` (WebP data URI) | Trust key is `nour`; preserve as an alias |
+| `char.youssef` | `youssef` | الأب يوسف — طبيب المستشفى، 42 سنة | `MH` (inline SVG data URI, 320×400) | Trust key is `father`; alias الأب |
+| `char.elias` | `elias` | إيلاس — الغامض المقنّع | `vz` (WebP data URI) | One source ref |
+| `char.amin` | `amin` | أمين — الناجي من وراء السور، 23 سنة | `G8` (inline SVG data URI, 240×300) | One source ref |
+| `char.mariam` | `mariam` | مريم — المهندسة، 17 سنة | `UA` (WebP data URI) | Shared with Sara |
+| `char.hadi` | `hadi` | عم الهادي — حارس الأرشيف، 62 سنة | `S7` (WebP data URI) | Shared with Ryan and Karim |
+| `char.yasmin` | `yasmin` | ياسمين — اليتيمة، 10 سنوات | `_A` (WebP data URI) | Shared with Lina |
+| `char.karim` | `karim` | القائد كريم — قائد المجموعة الثانية، 35 سنة | `S7` (WebP data URI) | Shared with Ryan and Hadi |
 
-### Unresolved names and roles
+The source also has a name-label map whose trust keys and display aliases do not always match character IDs (for example `noor` / `nour`, `youssef` / `father`). Preserve those as aliases; never silently rename the original save keys. Three groups use the same portrait variable for multiple records: `S7` = Ryan/Hadi/Karim, `UA` = Sara/Mariam, and `_A` = Lina/Yasmin. This is confirmed source reuse, but intent (shared identity, placeholder, or accidental reuse) is not documented, so it is not labeled a defect.
 
-| Candidate | Why held separately |
-|---|---|
-| `char.sarah` — سارة | Named in the draft audit’s opening scene; confirm whether this is the same person as the player’s mother before aliasing |
-| `char.mother` — الأم | Dialogue refers to “أمي”; relationship/name mapping needs source confirmation |
-| `char.father` — الأب | Relationship alias appears in the narrative audit; map to `char.yusuf` only after confirming the original character object |
-| Unnamed woman, child, refugees, market residents and other incidental roles | Mentioned in draft summaries; no individually verified production portrait IDs |
+### Other roles without a dedicated `Gt` record
 
-### Existing image and motion variants
+The original scene dialogue and interaction text mention incidental people (including an older woman, a lost child, refugees, market residents, guards and patients). The current `Gt` table has no dedicated character record or separate portrait reference for these roles. Record them under an explicit role/ensemble ID only if a future extraction needs one; do not invent individual portrait IDs from dialogue mentions.
 
-- **Production characters:** current source/build code targets existing rendered portraits through `.stage-slide .stage-breath`; it does not identify portraits by stable character ID or provide an asset manifest. The injected presentation pass describes idle breathing (4.8 s), grief when `.tear-drop` is present (3.8 s), tension on `.expression-shake` (0.65 s), and memory/light treatment when `.candle-flame` is present (6.2 s). Reduced-motion mode disables these portrait animations. These are presentation effects over existing imagery, not alternate image files.
-- **Production scene image:** the cinematic pilot code can apply slow drift to a loaded dominant scene image (26 s) and a short transition when the background URL changes. This does not establish which character or location asset is being shown.
-- **PR #21 lab characters:** Ryan, Lina and Nour each have one SVG silhouette. They contain simple fixed face shapes; no alternate expression, blink frame, hand gesture, clothing variant or pose sheet is present. The G2 brief describes breathing/gesture work as acceptance requirements; the checked-in art files themselves do not supply those variants. The HTML applies CSS idle bob/breathing while playing.
-- **Motion and picture distinction:** CSS movement does not count as a new character image or background version. Do not duplicate an SVG merely to represent an animation state; future animation metadata should refer to the same character ID and be kept separate from the source artwork.
+### Existing image, expression and movement variants
+
+- **Portrait files in production:** each character record points to one image variable in the monolithic source. Seven refs are WebP data URIs and two refs (`MH`, `G8`) are inline SVGs. No standalone production portrait files or alternate portrait sheets exist in the tracked tree. The shared portrait refs above are the only repeated character-image references observed.
+- **Base portrait effects in original CSS:** `.stage-slide` enters over 0.4 s; `.stage-breath` scales gently on a 5.4 s cycle; `.stage-blink` applies a brief brightness dip around 94% of a 5.2 s cycle. The speaking portrait receives a border/highlight (`.stage-speaking`); the listening portrait dims (`.stage-listening`).
+- **Android build presentation effects:** `scripts/prepare-web.cjs` applies idle breathing (4.8 s), grief when `.tear-drop` is present (3.8 s), tension on `.expression-shake` (0.65 s), and a memory/light variation when `.candle-flame` is present (6.2 s). Reduced-motion mode disables the added movement. These are CSS treatments over the same portrait, not alternate image files.
+- **Scene backgrounds:** the pilot cinematic code adds slow drift (26 s) to the detected active background and a short transition when its URL changes. This is a camera/presentation effect, not a new background asset.
+- **PR #21 lab characters:** Ryan, Lina and Nour each have one static SVG silhouette; those files contain simple fixed face shapes and no separate blink frame, expression sheet, hand-gesture frame or clothing/pose variant. The lab HTML adds CSS idle breathing/bobbing while playing. The G2 brief's blink/gesture requirements are future acceptance items, not included art variants.
 
 ## Place and background inventory
 
-The first 18 rows are the original-scene names as mapped by G0, in original-scene order. Place IDs are proposed authoring IDs. Art availability means a separate, attributable file was found in the reviewed trees; it does not assert that the original scene has no rendered art.
+The following rows pair each original `an` record with its one-based scene `id`, zero-based legacy `sceneIdx` (= id − 1), G0 display chapter and exact image variable. A variable repeated in several rows is the same embedded image reference, not a separately stored variant.
 
-| Original `sceneIdx` | G0 display chapter / place label | Proposed place ID | Separate production background file / visual versions |
-|---:|---|---|---|
-| 0 | 01 — الدار | `loc.home` | No separate file in tracked production tree; versions unverified |
-| 1 | 03 — سوق قرطاج | `loc.market` | No separate file; versions unverified |
-| 2 | 05 — السور العظيم | `loc.wall` | No separate file; versions unverified |
-| 3 | 06 — شارع النار | `loc.fire-street` | No separate file; versions unverified |
-| 4 | 07 — دار منصور | `loc.mansour-house` | No separate file; versions unverified |
-| 5 | 08 — المستشفى | `loc.hospital` | No separate file; versions unverified |
-| 6 | 09 — الجسر | `loc.bridge` | No separate production file; lab-only `examples/assets/bridge.svg` |
-| 7 | 12 — البوابة | `loc.gate` | No separate file; versions unverified |
-| 8 | 13 — العبور | `loc.crossing` | No separate file; versions unverified |
-| 9 | 15 — الغابة | `loc.forest` | No separate file; versions unverified |
-| 10 | 17 — السهول | `loc.plains` | No separate file; versions unverified |
-| 11 | 18 — القرية | `loc.village` | No separate file; versions unverified |
-| 12 | 20 — المختبر القديم | `loc.laboratory` | No separate file; versions unverified |
-| 13 | 23 — أطلال قرطاج | `loc.ruins` | No separate file; versions unverified |
-| 14 | 25 — ساحة قرطاج | `loc.square` | No separate file; versions unverified |
-| 15 | 28 — الميناء البونيقي | `loc.punic-harbor` | No separate file; versions unverified |
-| 16 | 35 — هضبة بيرصا / الفجر | `loc.byrsa-plateau` | Same place ID as scene 17; proposed visual variant `dawn`, not independently verified |
-| 17 | 36 — هضبة بيرصا / الغروب | `loc.byrsa-plateau` | Proposed visual variant `sunset`, not independently verified |
+| `sceneIdx` | Scene / place from original source | G0 display chapter | Proposed place ID | Embedded background ref |
+|---:|---|---:|---|---|
+| 0 | 01 — الدار — قرطاج | 01 | `loc.home` | `N8` (WebP data URI) |
+| 1 | 02 — سوق قرطاج — الصباح | 03 | `loc.market` | `ht` (WebP data URI) |
+| 2 | 03 — السور العظيم — لحظة الكسر | 05 | `loc.wall` | `s8` (WebP data URI) |
+| 3 | 04 — شارع النار — الهروب | 06 | `loc.fire-street` | `Wt` (WebP data URI) |
+| 4 | 05 — دار عم منصور — الجندي القديم | 07 | `loc.mansour-house` | `C7` (WebP data URI) |
+| 5 | 06 — المستشفى — الدخان والجرحى | 08 | `loc.hospital` | `E7` (WebP data URI) |
+| 6 | 07 — الجسر — فوق النهر | 09 | `loc.bridge` | `F8` (WebP data URI) |
+| 7 | 08 — البوابة — مكسورة، نار، عمالقة في البعيد | 12 | `loc.gate` | `n9` (WebP data URI) |
+| 8 | 09 — العبور — ما وراء السور | 13 | `loc.crossing` | `I7` (WebP data URI) |
+| 9 | 10 — الغابة — ضباب وظلال | 15 | `loc.forest` | `uz` (WebP data URI) |
+| 10 | 11 — السهول المحطمة — الحقيقة الكبرى | 17 | `loc.plains` | `lz` (WebP data URI) |
+| 11 | 12 — القرية المخفية — غابة زغوان | 18 | `loc.hidden-village` | `uz` (same as scene 10) |
+| 12 | 13 — المختبر القديم — تحت قرطاج | 20 | `loc.laboratory` | `I7` (same as scene 8) |
+| 13 | 14 — أطلال قرطاج — الرجوع للبوابة | 23 | `loc.ruins` | `lz` (same as scene 10) |
+| 14 | 15 — ساحة قرطاج — ما بعد الحقيقة | 25 | `loc.square` | `lz` (same as scene 10) |
+| 15 | 16 — الميناء البونيقي — البناء | 28 | `loc.punic-harbor` | `I7` (same as scene 8) |
+| 16 | 17 — هضبة بيرصا — قرطاج الجديدة | 35 | `loc.byrsa-plateau` | `lz` (same as scene 10) |
+| 17 | 18 — هضبة بيرصا — الغروب | 36 | `loc.byrsa-plateau` | `lz` (same as scene 10; same source ref) |
 
-Do not infer 18 unique production backdrops from the 18 scene indices: G0 repeats Byrsa for the last two scenes, and the original tree does not split pictures into location files.
+There are 18 scene records but only 11 distinct background image variables. Source reuse groups: `I7` is used for crossing, laboratory and harbor; `uz` for forest and hidden village; `lz` for broken plains, ruins, square and both Byrsa endings. Scene 17 has a sunset place label but the source points to the same `lz` data URI as scene 16; no separate sunset image variant is present in `an`. These repeated refs are confirmed in the original source. Do not delete or duplicate them until an art review determines whether they are intentional reuse or placeholders.
 
-### Pilot-only background and place artwork
+The ID `loc.crossroads` is reserved for the PR #21 pilot only. Its background is declared `procedural:crossroads` and drawn in the lab HTML with CSS sky, sun, hills, ground and road; it is not an original production scene.
 
-The PR #21 scene package names its background as `procedural:crossroads`. The lab HTML creates sky, sun, hills, ground and road with CSS gradients/shapes, not an image asset. It layers bridge, clinic and wagon SVGs over that generated scene. These are test-lab visuals and are not production background variants.
+### Production visuals embedded in the original bundle
 
-Proposed pilot place ID: `loc.crossroads` (scope: `examples/qarton-single-load-lab.html` only).
+- `Gt`: 13 character records, 9 distinct image variables (7 WebP data URIs and 2 inline SVG data URIs); repeated portrait refs are listed above.
+- `an`: 18 scene records, 11 distinct WebP background variables. The per-scene mapping is listed above.
+- The image variables are stored in the monolithic `index.html`, not as separately tracked production files. The source blob is `db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23`. The source does not provide author, external source URL or license metadata for these embedded images.
+- Repeated background refs are source-level reuse in several scene records, not unreferenced files. This inventory cannot infer whether reuse is artistic intent or a placeholder.
 
-## File inventory, repetition and missing evidence
+### Pilot SVGs
 
 All six pilot SVG files have direct references from the lab HTML and are also listed in the scene JSON. None is an unreferenced/orphaned file in the reviewed PR #21 package.
 
@@ -115,9 +117,9 @@ All six pilot SVG files have direct references from the lab HTML and are also li
 
 “Repeated across PRs” means the same tracked path/content occurs in each branch snapshot; it is not evidence of duplicate files in one checkout. Git reports identical blob objects, so there is no reason to delete or consolidate these files.
 
-**Not found / incomplete, rather than declared missing:** a production character/background directory or manifest; individually attributable production images; a complete list of production scene image URLs and variants; character-ID-to-image mapping; alternate expression/pose artwork; image dimensions and SHA-256 values; source/license statements for the original production visuals; formal license metadata for the six lab SVGs. The PR #21 G2 brief calls for original, lightweight SVG silhouettes, but the repository does not include a per-file author/license statement. Treat provenance as project-created per brief but license as **unspecified** until recorded.
+**Still unverified:** pixel dimensions and decoded SHA-256 per embedded production image; whether shared character portraits and repeated scene backgrounds are deliberate or placeholders; and the original author/source/license of production art. The G2 brief calls the six pilot SVGs original lightweight silhouettes, but no per-file license/author statement is checked in. Treat them as project-created per brief, lab-only, with formal license unspecified until recorded.
 
-The original production images may be referenced or embedded inside the monolithic bundle. Their exact bytes, URLs, duplicates and non-use cannot be proven from the tracked file tree. No production art is labeled “unused” by this inventory.
+No production visual is labeled “unused” by this inventory: every source character record and scene record points to an image variable. No exact duplicate files exist among the separate pilot art in one reviewed branch.
 
 ## Stable ID proposal and safe folder shape
 
@@ -153,12 +155,13 @@ No file should be moved until a repository-wide exact-path and content-reference
 
 | Asset group | Source evidence | License / use status |
 |---|---|---|
-| Original production visuals | Runtime story visuals are part of or referenced by the `index.html` application; no standalone catalog or attribution ledger found in reviewed production tree | Source and license not recorded here; production use pre-exists, reuse/extraction needs a provenance review |
+| Original character portraits | `Gt` records in production `index.html`; seven WebP data URIs and two inline SVG data URIs referenced by 13 characters | Original author/source/license not recorded; pre-existing production use is not proof of a reusable license |
+| Original scene backgrounds | `an` scene array in production `index.html`; 11 WebP data URIs referenced across 18 scenes | Original author/source/license not recorded; repeated refs are source-level reuse, not separate files |
 | Six pilot SVGs | First tracked in PR #21 under `examples/assets/`; G2 brief requests original lightweight SVG silhouettes | Lab-only; brief supports project-created intent, but no explicit per-file license/author line; do not treat as cleared production art |
 | CSS crossroads environment | Written in `examples/qarton-single-load-lab.html` for the pilot | Repository-authored lab code; no external media source identified |
 | Background manager fallback gradients | `fix/qarton-background-manager` branch runtime code | Code-generated fallback, not a reusable background asset; no external image source |
 
-Git blob IDs above are content identifiers, **not** SHA-256 checksums. Compute and record SHA-256 plus dimensions from the exact files before any release or migration.
+Pilot Git blob IDs above are content identifiers, **not** SHA-256 checksums. The production image data URIs need a decode step to record each image's SHA-256 and pixel dimensions before any release or migration.
 
 ## Reviewed organization outcome and next gate
 
