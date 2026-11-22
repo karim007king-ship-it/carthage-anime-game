@@ -27,7 +27,10 @@ function QartonHome({ game }) {
   const importInput = y.useRef(null);
   const modalRef = y.useRef(null);
   y.useLayoutEffect(() => {
-    if (dialog) modalRef.current.showModal();
+    const element = modalRef.current;
+    if (!dialog || !element) return;
+    if (!element.open) element.showModal();
+    return () => { if (element.open) element.close(); };
   }, [dialog]);
   const heading = y.useRef(null);
   const lastView = y.useRef('home');
