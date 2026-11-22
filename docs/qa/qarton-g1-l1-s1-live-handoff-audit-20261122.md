@@ -15,9 +15,9 @@
 
 ### 1. Localization snapshot drift — ACTION REQUIRED
 
-G1 editorial review at #20 head reports **589 unique new-story text keys** after adding eight keys to the previous 581. S1 README at #25 head reports **583 new-story keys** based on Astra revision `c507bb3` and #23 revision `cb4127f`. Thus S1's expansion inventory is **six keys behind the current G1 total**. This is a comparison of documented totals, not yet a per-key diff; do not assume which six keys are missing. Re-run S1's chapter-key extraction against the current #20 head, compare exact key sets, identify added/removed/renamed IDs, and refresh coverage tests. Keep the original 848 Tunisian inventory keys and 562 UI source occurrences distinct from new-story keys.
+**Exact-key comparison completed against all 18 manuscript files on G1 #20 head `cc48f570c` and S1's 18 `draft[].textKeys` arrays on #25 head `f186843f4`: 583 unique manuscript keys and 583 indexed S1 keys, with zero missing and zero extra IDs.** G1 editorial review claims **589** keys, but that figure is inconsistent with the currently tagged manuscript key set. This is **documentation-count drift, not six missing S1 keys**. G1 should reconcile its 589 claim with actual manuscript annotations, explaining whether six keys are planned but not annotated; do not invent keys or modify original text solely to match the claimed total. Keep the original 848 Tunisian inventory keys and 562 UI source occurrences distinct from new-story keys.
 
-**Gate:** exact new-story key-set parity between current G1 and S1, with zero collisions with original keys, before claiming translation coverage. The `ar/en/fr` values remain untranslated; a placeholder `null` is not a completed translation.
+**Gate:** exact current new-story key-set parity is satisfied (583/583); confirm original-key collision checks and correct the G1 documented total before claiming a final editorial inventory. The `ar/en/fr` values remain untranslated; a placeholder `null` is not a completed translation.
 
 ### 2. Character IDs — PROVISIONALLY ALIGNED
 
@@ -45,8 +45,8 @@ The 36 display positions must not overwrite original `sceneIdx` 0–17, `lineIdx
 
 ## Immediate owners and sequence
 
-1. **Sol / #25:** compare exact new-story keys against current Astra #20 head and report six-key documented-count drift; update tests only on #25.
-2. **Astra / #20:** confirm final 589-key manifest, resolve editorial choices, publish explicit decisions without changing original endings.
+1. **Sol / #25:** maintain the verified 583/583 exact-key parity and recheck if Astra changes manuscripts; do not add six fictitious keys.
+2. **Astra / #20:** reconcile the reported 589-key count with 583 actually tagged manuscript keys, resolve editorial choices, and publish decisions without changing original endings.
 3. **Luna / #24:** mark unresolved visual identity collisions and P0 art/provenance blockers; no unlicensed asset promotion.
 4. **GPT-6 / #23:** keep read-only QA, cross-check new source revisions, prepare isolated acceptance tests; do not change the production runtime or merge Draft PRs.
 
