@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "status": "display-only-not-playable",
+  "source": "PR #20 docs/qarton-g0-canonical-36-scene-map.md",
+  "chapters": [
+    {
+      "displayChapter": 1,
+      "id": "legacy-01",
+      "kind": "legacy",
+      "legacySceneIdx": 0
+    },
+    {
+      "displayChapter": 2,
+      "id": "p1-family-promise",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 3,
+      "id": "legacy-02",
+      "kind": "legacy",
+      "legacySceneIdx": 1
+    },
+    {
+      "displayChapter": 4,
+      "id": "p1-family-alley",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 5,
+      "id": "legacy-03",
+      "kind": "legacy",
+      "legacySceneIdx": 2
+    },
+    {
+      "displayChapter": 6,
+      "id": "legacy-04",
+      "kind": "legacy",
+      "legacySceneIdx": 3
+    },
+    {
+      "displayChapter": 7,
+      "id": "legacy-05",
+      "kind": "legacy",
+      "legacySceneIdx": 4
+    },
+    {
+      "displayChapter": 8,
+      "id": "legacy-06",
+      "kind": "legacy",
+      "legacySceneIdx": 5
+    },
+    {
+      "displayChapter": 9,
+      "id": "legacy-07",
+      "kind": "legacy",
+      "legacySceneIdx": 6
+    },
+    {
+      "displayChapter": 10,
+      "id": "p1-smoke-door",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 11,
+      "id": "p1-gate-manifest",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 12,
+      "id": "legacy-08",
+      "kind": "legacy",
+      "legacySceneIdx": 7
+    },
+    {
+      "displayChapter": 13,
+      "id": "legacy-09",
+      "kind": "legacy",
+      "legacySceneIdx": 8
+    },
+    {
+      "displayChapter": 14,
+      "id": "p2-relay-hut",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 15,
+      "id": "legacy-10",
+      "kind": "legacy",
+      "legacySceneIdx": 9
+    },
+    {
+      "displayChapter": 16,
+      "id": "p2-names-consent",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 17,
+      "id": "legacy-11",
+      "kind": "legacy",
+      "legacySceneIdx": 10
+    },
+    {
+      "displayChapter": 18,
+      "id": "legacy-12",
+      "kind": "legacy",
+      "legacySceneIdx": 11
+    },
+    {
+      "displayChapter": 19,
+      "id": "p2-yasmin-drawing",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 20,
+      "id": "legacy-13",
+      "kind": "legacy",
+      "legacySceneIdx": 12
+    },
+    {
+      "displayChapter": 21,
+      "id": "p2-last-signal",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 22,
+      "id": "p2-protection-cost",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 23,
+      "id": "legacy-14",
+      "kind": "legacy",
+      "legacySceneIdx": 13
+    },
+    {
+      "displayChapter": 24,
+      "id": "p2-truth-gate",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 25,
+      "id": "legacy-15",
+      "kind": "legacy",
+      "legacySceneIdx": 14
+    },
+    {
+      "displayChapter": 26,
+      "id": "p3-survivor-register",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 27,
+      "id": "p3-single-load",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 28,
+      "id": "legacy-16",
+      "kind": "legacy",
+      "legacySceneIdx": 15
+    },
+    {
+      "displayChapter": 29,
+      "id": "p3-karim-key",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 30,
+      "id": "p3-house-without-number",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 31,
+      "id": "p3-medicine-cost",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 32,
+      "id": "p3-mark-on-stone",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 33,
+      "id": "p3-hadi-hearing",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 34,
+      "id": "p3-key-handover",
+      "kind": "draft",
+      "legacySceneIdx": null
+    },
+    {
+      "displayChapter": 35,
+      "id": "legacy-17",
+      "kind": "legacy",
+      "legacySceneIdx": 16
+    },
+    {
+      "displayChapter": 36,
+      "id": "legacy-18",
+      "kind": "legacy",
+      "legacySceneIdx": 17
+    }
+  ]
+}
