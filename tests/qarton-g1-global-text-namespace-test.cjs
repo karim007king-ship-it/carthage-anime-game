@@ -20,14 +20,17 @@ test('all draft manuscript text markers have globally unique IDs owned by their 
    local.add(key);seen.set(key,scene.id);count++;
   }
   const choices=chapter.choices.map(c=>c.textKey);
-  assert.deepEqual(chapter.choiceTextKeys.slice(0,choices.length),choices,scene.id+': primary choice text order differs');
-  for(const extra of chapter.choiceTextKeys.slice(choices.length)){
-   assert.ok(local.has(extra),scene.id+': supplemental choice key absent from manuscript '+extra);
-   assert.ok(extra.startsWith('story.'+scene.id+'.choice.'),scene.id+': invalid supplemental choice key '+extra);
-  }
+  const listed=chapter.choiceTextKeys;
+  assert.equal(new Set(listed).size,listed.length,scene.id+': duplicate choice text key');
   for(const key of choices){
+   assert.ok(listed.includes(key),scene.id+': primary choice missing from choiceTextKeys '+key);
    assert.ok(local.has(key),scene.id+': choice without chapter text '+key);
    assert.ok(key.startsWith('story.'+scene.id+'.choice.'),scene.id+': non-choice label '+key);
+  }
+  for(const key of listed){
+   assert.ok(local.has(key),scene.id+': listed choice key absent from manuscript '+key);
+   assert.ok(key.startsWith('story.'+scene.id+'.choice.'),scene.id+': invalid choice key '+key);
+   if(!choices.includes(key))assert.ok(key.endsWith('.guard'),scene.id+': unexpected non-decision choice text '+key);
   }
  }
  assert.equal(count,583,'Current pinned 18-chapter draft key count; revise only with verified manuscript update');
