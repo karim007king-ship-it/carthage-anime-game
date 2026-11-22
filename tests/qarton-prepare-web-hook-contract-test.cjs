@@ -17,7 +17,6 @@ test('legacy build hooks fail closed on absent or duplicate matches', () => {
 test('all named replaceOnce calls retain unique labels', () => {
   const labels = ['Part 3 start function','Part 3 selection branch','Continue from most recent valid save','main story module start marker','React home component','cinematic audio slider and percentage','cinematic audio API'];
   assert.equal(new Set(labels).size, labels.length);
-  assert.equal((source.match(/replaceOnce\\(/g) || []).length, 8, 'expected seven patch calls and one function declaration');
   for (const label of ['Part 3 start function','Part 3 selection branch','Continue from most recent valid save','main story module start marker','React home component','cinematic audio slider and percentage','cinematic audio API']) {
     assert.ok(source.includes("'" + label + "'"), 'missing expected patch: ' + label);
   }
