@@ -19,6 +19,10 @@
 - `docs/qarton-g0-g1-integration-gates-20261122.md` — narrative integration gates (PR #20, not in this branch).
 - `docs/story/` — proposed story chapters (PR #20, not in this branch).
 
+## Quality and asset tracking
+- [QA coverage matrix](qa/coverage-matrix.md) — automated coverage versus outstanding device checks.
+- [Asset provenance inventory](assets/README.md) — intro, lab art and audio provenance gates.
+
 ## Test entry points
 - `npm test` — original smoke, save recovery and intro packaging only.
 - `.github/workflows/qarton-cinematic-pilot.yml` — pilot/contract checks.
