@@ -60,5 +60,12 @@
   ],
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
-  "runtimeIntegrated": false
+  "runtimeIntegrated": false,
+  "choiceTextKeys": [
+    "story.p1-family-promise.choice.knocks",
+    "story.p1-family-promise.choice.mother"
+  ],
+  "outputs": [
+    "familySignal"
+  ]
 }
