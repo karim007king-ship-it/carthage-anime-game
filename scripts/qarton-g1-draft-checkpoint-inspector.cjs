@@ -12,11 +12,17 @@ function inspectDraftCheckpoint(chapter,checkpoint){
  if(!groupValues||typeof groupValues!=='object'||Array.isArray(groupValues)||Object.getPrototypeOf(groupValues)!==Object.prototype)return {valid:false,reason:'groups'};
  const names=Reflect.ownKeys(groupValues);
  if(names.some(name=>typeof name!=='string'))return {valid:false,reason:'groups'};
+ const knownGroupIds=new Set(chapter.choiceGroups.map(group=>group.id));
+ if(knownGroupIds.size!==chapter.choiceGroups.length)return {valid:false,reason:'chapter-groups'};
+ const allowedChoices=new Map();
+ for(const group of chapter.choiceGroups){
+  if(!group||typeof group.id!=='string'||!Array.isArray(group.choiceIds)||!group.choiceIds.length||new Set(group.choiceIds).size!==group.choiceIds.length)return {valid:false,reason:'chapter-groups'};
+  allowedChoices.set(group.id,new Set(group.choiceIds));
+ }
  for(const name of names){
-  const group=chapter.choiceGroups.find(g=>g.id===name);
-  if(!group)return {valid:false,reason:'unknown-group'};
+  if(!allowedChoices.has(name))return {valid:false,reason:'unknown-group'};
   const desc=Object.getOwnPropertyDescriptor(groupValues,name);
-  if(!desc||!hasOwn(desc,'value')||typeof desc.value!=='string'||!group.choiceIds.includes(desc.value))return {valid:false,reason:'choice'};
+  if(!desc||!hasOwn(desc,'value')||typeof desc.value!=='string'||!allowedChoices.get(name).has(desc.value))return {valid:false,reason:'choice'};
  }
  return {valid:true,completeGroups:names};
 }
