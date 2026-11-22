@@ -21,6 +21,8 @@ on:
       - 'tests/qarton-unified-id-registry-test.cjs'
       - 'tests/qarton-content-manifests-test.cjs'
       - 'tests/qarton-chapter-extraction-test.cjs'
+      - 'tests/qarton-s1-source-parity-test.cjs'
+      - 'tests/fixtures/qarton-s1-original-scenes.snapshot.json'
       - 'game-content/**'
       - 'docs/qarton-unified-id-registry.proposal.json'
       - 'tests/qarton-timeline-player-test.cjs'
@@ -36,7 +38,7 @@ jobs:
         with:
           node-version: '22'
       - name: Verify standalone pilot contract
-        run: node --test tests/qarton-cinematic-pilot-contract-test.cjs tests/qarton-cinematic-scene-package-test.cjs tests/qarton-timeline-player-test.cjs tests/qarton-audio-cue-planner-test.cjs tests/qarton-audio-playback-test.cjs tests/qarton-g4-legacy-presentation-adapter-test.cjs tests/qarton-cinematic-browser-wiring-test.cjs tests/qarton-prepare-web-hook-contract-test.cjs tests/qarton-unified-id-registry-test.cjs tests/qarton-content-manifests-test.cjs tests/qarton-chapter-extraction-test.cjs
+        run: node --test tests/qarton-cinematic-pilot-contract-test.cjs tests/qarton-cinematic-scene-package-test.cjs tests/qarton-timeline-player-test.cjs tests/qarton-audio-cue-planner-test.cjs tests/qarton-audio-playback-test.cjs tests/qarton-g4-legacy-presentation-adapter-test.cjs tests/qarton-cinematic-browser-wiring-test.cjs tests/qarton-prepare-web-hook-contract-test.cjs tests/qarton-unified-id-registry-test.cjs tests/qarton-content-manifests-test.cjs tests/qarton-chapter-extraction-test.cjs tests/qarton-s1-source-parity-test.cjs
       - name: Verify lab is isolated from production save keys
         run: |
           node -e "const fs=require('fs'); const s=fs.readFileSync('examples/qarton-single-load-lab.html','utf8'); if(/localStorage|sessionStorage|shiganshina-|__carthageSaveNow/.test(s)) process.exit(1); console.log('PASS: standalone lab does not access game saves')"
