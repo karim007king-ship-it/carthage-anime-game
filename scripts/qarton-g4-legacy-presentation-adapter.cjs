@@ -6,7 +6,7 @@ const { SCENE_IDS, LEGACY_DISPLAY_CHAPTERS, validatePresentationSnapshot } = req
 const SUPPORTED_LOCALES = new Set(['tn', 'ar', 'en', 'fr']);
 function createLegacyPresentationSnapshot(input, featureEnabled = false) {
   if (featureEnabled !== true) return null; // default-OFF; no accidental auto-unlock
-  if (!input || typeof input !== 'object' || Array.isArray(input)) return null;
+  if (!input || typeof input !== 'object' || Array.isArray(input) || !Object.prototype.hasOwnProperty.call(input, 'sceneIdx')) return null;
   const { sceneIdx, locale = 'tn', reducedMotion = false } = input;
   if (!Number.isInteger(sceneIdx) || sceneIdx < 0 || sceneIdx >= LEGACY_DISPLAY_CHAPTERS.length) return null;
   if (!SUPPORTED_LOCALES.has(locale) || typeof reducedMotion !== 'boolean') return null;
@@ -20,7 +20,7 @@ function createLegacyPresentationSnapshot(input, featureEnabled = false) {
   return validatePresentationSnapshot(snapshot) ? snapshot : null;
 }
 function getDisplayChapterForLegacySave(save) {
-  if (!save || typeof save !== 'object' || !Number.isInteger(save.sceneIdx)) return null;
+  if (!save || typeof save !== 'object' || Array.isArray(save) || !Object.prototype.hasOwnProperty.call(save, 'sceneIdx') || !Number.isInteger(save.sceneIdx)) return null;
   return LEGACY_DISPLAY_CHAPTERS[save.sceneIdx] ?? null;
 }
 module.exports = { createLegacyPresentationSnapshot, getDisplayChapterForLegacySave };
