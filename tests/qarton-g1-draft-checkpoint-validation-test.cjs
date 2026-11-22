@@ -97,3 +97,16 @@ test('non-enumerable and symbol checkpoint properties are not silently accepted'
  symbolGroup.groups[Symbol('hidden-choice')]='keepWithNoor';
  assert.equal(inspectCheckpoint(c,symbolGroup).valid,false);
 });
+
+
+test('ambiguous draft group definitions cannot validate a partial checkpoint',()=>{
+ const c=read('p1-gate-manifest');
+ const sample={schemaVersion:1,chapterId:c.id,groups:{seat:'yieldSeat'}};
+ const duplicateGroup={...c,choiceGroups:[...c.choiceGroups,c.choiceGroups[0]]};
+ assert.equal(inspectCheckpoint(duplicateGroup,sample).valid,false);
+ const duplicateChoice={...c,choiceGroups:c.choiceGroups.map(g=>g.id==='seat'?{...g,choiceIds:[...g.choiceIds,g.choiceIds[0]]}:g)};
+ assert.equal(inspectCheckpoint(duplicateChoice,sample).valid,false);
+ const emptyChoice={...c,choiceGroups:c.choiceGroups.map(g=>g.id==='seat'?{...g,choiceIds:[]}:g)};
+ assert.equal(inspectCheckpoint(emptyChoice,sample).valid,false);
+ assert.deepEqual(inspectCheckpoint(c,sample),{valid:true,completeGroups:['seat']});
+});
