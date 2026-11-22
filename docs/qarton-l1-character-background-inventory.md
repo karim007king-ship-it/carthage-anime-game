@@ -38,19 +38,19 @@ The production source contains 13 character records and 9 distinct image variabl
 
 | Proposed ID | Original source ID | Display name / role | Embedded portrait ref | Repeat / notes |
 |---|---|---|---|---|
-| `char.ryan` | `ryan` | ريان — البطل، 16 سنة | `S7` (WebP data URI) | Shared with Hadi and Karim |
-| `char.sara` | `sara` | سارة — الأم | `UA` (WebP data URI) | Shared with Mariam |
-| `char.lina` | `lina` | لينا — الأخت، 8 سنوات | `_A` (WebP data URI) | Shared with Yasmin |
-| `char.salim` | `salim` | سليم — الصاحب الذكي | `$A` (WebP data URI) | One source ref |
-| `char.mansour` | `mansour` | عم منصور — الجندي القديم | `fz` (WebP data URI) | One source ref |
-| `char.noor` | `noor` | القائدة نور — قائدة البوابة، 29 سنة | `nz` (WebP data URI) | Trust key is `nour`; preserve as an alias |
-| `char.youssef` | `youssef` | الأب يوسف — طبيب المستشفى، 42 سنة | `MH` (inline SVG data URI, 320×400) | Trust key is `father`; alias الأب |
-| `char.elias` | `elias` | إيلاس — الغامض المقنّع | `vz` (WebP data URI) | One source ref |
-| `char.amin` | `amin` | أمين — الناجي من وراء السور، 23 سنة | `G8` (inline SVG data URI, 240×300) | One source ref |
-| `char.mariam` | `mariam` | مريم — المهندسة، 17 سنة | `UA` (WebP data URI) | Shared with Sara |
-| `char.hadi` | `hadi` | عم الهادي — حارس الأرشيف، 62 سنة | `S7` (WebP data URI) | Shared with Ryan and Karim |
-| `char.yasmin` | `yasmin` | ياسمين — اليتيمة، 10 سنوات | `_A` (WebP data URI) | Shared with Lina |
-| `char.karim` | `karim` | القائد كريم — قائد المجموعة الثانية، 35 سنة | `S7` (WebP data URI) | Shared with Ryan and Hadi |
+| `ryan` | `ryan` | ريان — البطل، 16 سنة | `S7` (WebP data URI) | Shared with Hadi and Karim |
+| `sara` | `sara` | سارة — الأم | `UA` (WebP data URI) | Shared with Mariam |
+| `lina` | `lina` | لينا — الأخت، 8 سنوات | `_A` (WebP data URI) | Shared with Yasmin |
+| `salim` | `salim` | سليم — الصاحب الذكي | `$A` (WebP data URI) | One source ref |
+| `mansour` | `mansour` | عم منصور — الجندي القديم | `fz` (WebP data URI) | One source ref |
+| `noor` | `noor` | القائدة نور — قائدة البوابة، 29 سنة | `nz` (WebP data URI) | Trust key is `nour`; preserve as an alias |
+| `youssef` | `youssef` | الأب يوسف — طبيب المستشفى، 42 سنة | `MH` (inline SVG data URI, 320×400) | Trust key is `father`; alias الأب |
+| `elias` | `elias` | إيلاس — الغامض المقنّع | `vz` (WebP data URI) | One source ref |
+| `amin` | `amin` | أمين — الناجي من وراء السور، 23 سنة | `G8` (inline SVG data URI, 240×300) | One source ref |
+| `mariam` | `mariam` | مريم — المهندسة، 17 سنة | `UA` (WebP data URI) | Shared with Sara |
+| `hadi` | `hadi` | عم الهادي — حارس الأرشيف، 62 سنة | `S7` (WebP data URI) | Shared with Ryan and Karim |
+| `yasmin` | `yasmin` | ياسمين — اليتيمة، 10 سنوات | `_A` (WebP data URI) | Shared with Lina |
+| `karim` | `karim` | القائد كريم — قائد المجموعة الثانية، 35 سنة | `S7` (WebP data URI) | Shared with Ryan and Hadi |
 
 The source also has a name-label map whose trust keys and display aliases do not always match character IDs (for example `noor` / `nour`, `youssef` / `father`). Preserve those as aliases; never silently rename the original save keys. Three groups use the same portrait variable for multiple records: `S7` = Ryan/Hadi/Karim, `UA` = Sara/Mariam, and `_A` = Lina/Yasmin. This is confirmed source reuse, but intent (shared identity, placeholder, or accidental reuse) is not documented, so it is not labeled a defect.
 
@@ -92,28 +92,28 @@ The following rows pair each original `an` record with its one-based scene `id`,
 
 | `sceneIdx` | Scene / place from original source | G0 display chapter | Proposed place ID | Embedded background ref |
 |---:|---|---:|---|---|
-| 0 | 01 — الدار — قرطاج | 01 | `loc.home` | `N8` (WebP data URI) |
-| 1 | 02 — سوق قرطاج — الصباح | 03 | `loc.market` | `ht` (WebP data URI) |
-| 2 | 03 — السور العظيم — لحظة الكسر | 05 | `loc.wall` | `s8` (WebP data URI) |
-| 3 | 04 — شارع النار — الهروب | 06 | `loc.fire-street` | `Wt` (WebP data URI) |
-| 4 | 05 — دار عم منصور — الجندي القديم | 07 | `loc.mansour-house` | `C7` (WebP data URI) |
-| 5 | 06 — المستشفى — الدخان والجرحى | 08 | `loc.hospital` | `E7` (WebP data URI) |
-| 6 | 07 — الجسر — فوق النهر | 09 | `loc.bridge` | `F8` (WebP data URI) |
-| 7 | 08 — البوابة — مكسورة، نار، عمالقة في البعيد | 12 | `loc.gate` | `n9` (WebP data URI) |
-| 8 | 09 — العبور — ما وراء السور | 13 | `loc.crossing` | `I7` (WebP data URI) |
-| 9 | 10 — الغابة — ضباب وظلال | 15 | `loc.forest` | `uz` (WebP data URI) |
-| 10 | 11 — السهول المحطمة — الحقيقة الكبرى | 17 | `loc.plains` | `lz` (WebP data URI) |
-| 11 | 12 — القرية المخفية — غابة زغوان | 18 | `loc.hidden-village` | `uz` (same as scene 10) |
-| 12 | 13 — المختبر القديم — تحت قرطاج | 20 | `loc.laboratory` | `I7` (same as scene 8) |
-| 13 | 14 — أطلال قرطاج — الرجوع للبوابة | 23 | `loc.ruins` | `lz` (same as scene 10) |
-| 14 | 15 — ساحة قرطاج — ما بعد الحقيقة | 25 | `loc.square` | `lz` (same as scene 10) |
-| 15 | 16 — الميناء البونيقي — البناء | 28 | `loc.punic-harbor` | `I7` (same as scene 8) |
-| 16 | 17 — هضبة بيرصا — قرطاج الجديدة | 35 | `loc.byrsa-plateau` | `lz` (same as scene 10) |
-| 17 | 18 — هضبة بيرصا — الغروب | 36 | `loc.byrsa-plateau` | `lz` (same as scene 10; same source ref) |
+| 0 | 01 — الدار — قرطاج | 01 | `home` | `N8` (WebP data URI) |
+| 1 | 02 — سوق قرطاج — الصباح | 03 | `market` | `ht` (WebP data URI) |
+| 2 | 03 — السور العظيم — لحظة الكسر | 05 | `wall` | `s8` (WebP data URI) |
+| 3 | 04 — شارع النار — الهروب | 06 | `fire-street` | `Wt` (WebP data URI) |
+| 4 | 05 — دار عم منصور — الجندي القديم | 07 | `mansour-house` | `C7` (WebP data URI) |
+| 5 | 06 — المستشفى — الدخان والجرحى | 08 | `hospital` | `E7` (WebP data URI) |
+| 6 | 07 — الجسر — فوق النهر | 09 | `bridge` | `F8` (WebP data URI) |
+| 7 | 08 — البوابة — مكسورة، نار، عمالقة في البعيد | 12 | `gate` | `n9` (WebP data URI) |
+| 8 | 09 — العبور — ما وراء السور | 13 | `crossing` | `I7` (WebP data URI) |
+| 9 | 10 — الغابة — ضباب وظلال | 15 | `forest` | `uz` (WebP data URI) |
+| 10 | 11 — السهول المحطمة — الحقيقة الكبرى | 17 | `plains` | `lz` (WebP data URI) |
+| 11 | 12 — القرية المخفية — غابة زغوان | 18 | `hidden-village` | `uz` (same as scene 10) |
+| 12 | 13 — المختبر القديم — تحت قرطاج | 20 | `laboratory` | `I7` (same as scene 8) |
+| 13 | 14 — أطلال قرطاج — الرجوع للبوابة | 23 | `ruins` | `lz` (same as scene 10) |
+| 14 | 15 — ساحة قرطاج — ما بعد الحقيقة | 25 | `square` | `lz` (same as scene 10) |
+| 15 | 16 — الميناء البونيقي — البناء | 28 | `punic-harbor` | `I7` (same as scene 8) |
+| 16 | 17 — هضبة بيرصا — قرطاج الجديدة | 35 | `byrsa-plateau` | `lz` (same as scene 10) |
+| 17 | 18 — هضبة بيرصا — الغروب | 36 | `byrsa-plateau` | `lz` (same as scene 10; same source ref) |
 
 There are 18 scene records but only 11 distinct background image variables. Source reuse groups: `I7` is used for crossing, laboratory and harbor; `uz` for forest and hidden village; `lz` for broken plains, ruins, square and both Byrsa endings. Scene 17 has a sunset place label but the source points to the same `lz` data URI as scene 16; no separate sunset image variant is present in `an`. These repeated refs are confirmed in the original source. Do not delete or duplicate them until an art review determines whether they are intentional reuse or placeholders.
 
-The ID `loc.crossroads` is reserved for the PR #21 pilot only. Its background is declared `procedural:crossroads` and drawn in the lab HTML with CSS sky, sun, hills, ground and road; it is not an original production scene.
+The ID `crossroads` is reserved for the PR #21 pilot only. Its background is declared `procedural:crossroads` and drawn in the lab HTML with CSS sky, sun, hills, ground and road; it is not an original production scene.
 
 ### Production visuals embedded in the original bundle
 
@@ -137,13 +137,13 @@ All six pilot SVG files have direct references from the lab HTML and are also li
 
 “Repeated across PRs” means the same tracked path/content occurs in each branch snapshot; it is not evidence of duplicate files in one checkout. Git reports identical blob objects, so there is no reason to delete or consolidate these files.
 
-**Still unverified:** pixel dimensions and decoded SHA-256 per embedded production image; whether shared character portraits and repeated scene backgrounds are deliberate or placeholders; and the original author/source/license of production art. The G2 brief calls the six pilot SVGs original lightweight silhouettes, but no per-file license/author statement is checked in. Treat them as project-created per brief, lab-only, with formal license unspecified until recorded.
+**Still unverified:** whether shared character portraits and repeated scene backgrounds are deliberate or placeholders; and the original author/source/license of production art. Decoded dimensions and SHA-256 values are now recorded below. The G2 brief calls the six pilot SVGs original lightweight silhouettes, but no per-file license/author statement is checked in. Treat them as project-created per brief, lab-only, with formal license unspecified until recorded.
 
 No production visual is labeled “unused” by this inventory: every source character record and scene record points to an image variable. No exact duplicate files exist among the separate pilot art in one reviewed branch.
 
 ## Stable ID proposal and safe folder shape
 
-IDs are lowercase ASCII slugs with class prefixes: `char.<slug>` and `loc.<slug>`. Once approved, IDs are immutable and independent of spelling/localization, display order, `sceneIdx`, file paths and translated titles. Names and aliases belong in metadata/locales. Never write these IDs into the original save format as part of L1.
+IDs are lowercase ASCII slugs without class prefixes, matching the `speakerId: "mansour"` / `locationId: "mansour-house"` examples in PR #23 and scene IDs in PR #20. Record type is carried by the separate `characters/` and `backgrounds/` registries, not by the ID string. Once approved, IDs are immutable and independent of localized spelling, display order, `sceneIdx`, paths and translated titles. Names and aliases belong in metadata/locales. Never write these IDs into the original save format as part of L1.
 
 Future organization target (not created or wired by this PR):
 
@@ -182,8 +182,108 @@ No file should be moved until a repository-wide exact-path and content-reference
 | CSS crossroads environment | Written in `examples/qarton-single-load-lab.html` for the pilot | Repository-authored lab code; no external media source identified |
 | Background manager fallback gradients | `fix/qarton-background-manager` branch runtime code | Code-generated fallback, not a reusable background asset; no external image source |
 
-Pilot Git blob IDs above are content identifiers, **not** SHA-256 checksums. The production image data URIs need a decode step to record each image's SHA-256 and pixel dimensions before any release or migration.
+Pilot Git blob IDs above are content identifiers, **not** SHA-256 checksums. Decoded media dimensions and raw-byte SHA-256 values are recorded in the L1 follow-up tables below.
 
 ## Reviewed organization outcome and next gate
 
 The current layout should remain unchanged. This inventory is the read-only prerequisite. Next, confirm names/aliases and production art references against the original bundle in a source-readable review; then approve the ID registry and a provenance manifest. Only after that should a separate, reversible extraction PR be considered, with all file usages mapped and production/save behavior covered by the existing gates.
+
+
+## L1 follow-up — decoded fingerprints, ID reconciliation and G1 places
+
+This follow-up records the missing image evidence requested in the PR #24 review. Dimensions are intrinsic decoded raster dimensions; the two production SVG portraits and pilot SVGs use their declared `viewBox` dimensions. SHA-256 is computed over the decoded image/file bytes (not the base64 text or Git blob ID). Production images remain embedded in the original source and were not extracted into the repository.
+
+### Character artwork fingerprints
+
+| Source ref | Used by / state | Format | Dimensions | Bytes | SHA-256 |
+|---|---|---|---:|---:|---|
+| `S7` | Ryan, Hadi, Karim; Ryan normal | WebP | 550×1100 | 36,426 | `0454237b885e59503d4f95223f37c906ee42672ebe505a3eb31077c7074cfaf5` |
+| `UA` | Sara, Mariam | WebP | 960×960 | 65,754 | `a8e664b85fefb2416bb07d0995a4b09f8f8c4bd8e7eff5320ed2057a6c6b8855` |
+| `_A` | Lina, Yasmin | WebP | 960×960 | 51,586 | `8cb0c530f57c0a4db0f1c81919d805f9bf6e6da261320dacaad67465d17785bc` |
+| `$A` | Salim | WebP | 960×960 | 75,936 | `66445acb7a635efbbaec38aba3be07002edb83c63f23bff9f888fd332437dd3b` |
+| `fz` | Mansour | WebP | 550×1100 | 49,796 | `773cab08bb82ae707d31492ff84b9f0a41554de97821310c4e6d954e21ff2555` |
+| `nz` | Noor | WebP | 960×960 | 48,608 | `f3ef718de80fc34a367ed0fd2dd59babe4964daaab2f65b82b6f3fb6d30dd1b4` |
+| `MH` | Youssef | SVG | 320×400 | 4,443 | `8779427d5db2bf059058cefdfeb4a8d262a3383bb6df9d966f888ab08b3d990d` |
+| `vz` | Elias | WebP | 960×960 | 69,134 | `3ca984294b025095b5e092cd3393da5da923136ae3466f3be58cd99541871902` |
+| `G8` | Amin and four tinted/glow moods | SVG | 240×300 | 1,612 | `a308590bdaf340cd2ac7e6b6a937b368c4580705714c15729083d68b713b5552` |
+| `ez` | Ryan fear | WebP | 960×960 | 68,668 | `afa395a19aa355b9e7ab44547f559ca47c7eed01d643f61aced764b388636512` |
+| `tz` | Ryan brave | WebP | 960×960 | 53,526 | `3056c3c5085098f4fc45ba2051a4cd87ee25b49960abeadd0c2f81518f3efb83` |
+| `rz` | Lina crying | WebP | 960×960 | 49,492 | `a639595cfb50d0368c7715bfef425a7551429760270d2fa6a67c797d057d3f01` |
+| `Pz` | Elias sly | WebP | 960×960 | 52,494 | `868d8a8fd21e4992aaf1c301f11b69b64e3d440481d24a005d880b910c2013f7` |
+| `Az` | Sara worried | WebP | 960×960 | 63,062 | `baf86f6864b075c436373c2b632f1e7b612ae894f246f741cda47ab950cc4b9c` |
+| `zz` | Noor angry | WebP | 960×960 | 69,518 | `dad8f1fe968e505bfa6981169e13e3fd5c9ef17ac2ab1cc08e3c1d7565854001` |
+| `Xz` | Mansour wise | WebP | 550×1100 | 51,002 | `af9644216ee2b4779f3bfa77e81b2ec313921f1f68cd3030c530d7438294e7f8` |
+
+There are 16 distinct production character-art byte payloads: 9 base portrait refs and 7 separate expression images. The four Amin mood keys and Ryan normal do not add distinct payloads.
+
+### Original background fingerprints
+
+All 11 distinct original background payloads decode as 960×640 WebP. The complete source-scene mapping is above; this table records each unique payload once.
+
+| Source ref | Original scenes using it | Dimensions | Bytes | SHA-256 |
+|---|---|---:|---:|---|
+| `N8` | 01 — Home | 960×640 | 64,818 | `3bcaf22aab46e43a08e9ad1dd20161f84f294b324188eb1f2c481eefa66b65be` |
+| `ht` | 02 — Carthage market | 960×640 | 93,006 | `812e57792e5f0565a43897d51d86222600ba308c0161a9cd5172440c666d8113` |
+| `s8` | 03 — Great Wall | 960×640 | 92,190 | `8b2e17486eb04265e82fb824f8d6855df6466dff97fdbbe53574100d98a61dba` |
+| `Wt` | 04 — Fire Street | 960×640 | 122,880 | `c0132f2caaba0d2fa9b647526395224950124d3de0f77adeaab98983402d639e` |
+| `C7` | 05 — Mansour house | 960×640 | 60,264 | `e763fba48fdeec4a7ef846fb03cdedd793ebc6a3955ddfeff403124effda80b1` |
+| `E7` | 06 — Hospital | 960×640 | 73,010 | `e8e5ca668f40a58d1f2d329cd6ab87596773550ee9d6aa9acf06dd1862f459c2` |
+| `F8` | 07 — Bridge | 960×640 | 110,556 | `14cf8d073a89ff25214f15837f63a284706e0585e01cf698ed25d25fc9cf8f1e` |
+| `n9` | 08 — Gate | 960×640 | 97,462 | `c4224aab7d52fca27a2096d47d0049e3976498e77bd3b625fbc10876a40f4d9a` |
+| `I7` | 09 Crossing, 13 Laboratory, 16 Harbor | 960×640 | 89,136 | `ee8258c0e74d0355f5a3837c339297f099019a98068521cbd5b68d49d93835f4` |
+| `uz` | 10 Forest, 12 Hidden village | 960×640 | 88,016 | `7cf1f997e9e0e2adc9fee31abd64bfa57ecb3d69e5d823e66369896ae2114355` |
+| `lz` | 11 Plains, 14 Ruins, 15 Square, 17–18 Byrsa | 960×640 | 63,282 | `f437b596977f54f7048ea2fa2ab7a2cdf50c784c6d8ee568f11f7a69b1de6c43` |
+
+### Pilot SVG fingerprints
+
+These records apply only to the six lab files listed earlier. Dimensions come from each SVG `viewBox`; SHA-256 covers exact UTF-8 file bytes including the tracked final newline.
+
+| File | Dimensions | Bytes | SHA-256 |
+|---|---:|---:|---|
+| `examples/assets/ryan.svg` | 100×230 | 669 | `c5fd136658c79d8f85e7f64358f68ed348c5575762624a5d0a9e0d36b971ff64` |
+| `examples/assets/lina.svg` | 90×190 | 514 | `3135e43b326339198593ba5e349a685e5458985e48d0e3f5ae563f7064de23c0` |
+| `examples/assets/nour.svg` | 110×240 | 565 | `6dff5fd2fa51a1b77bdb68ed0ee19d0ad7b0c0f02119b714eecf3c3641f6c19f` |
+| `examples/assets/bridge.svg` | 230×150 | 421 | `a9b4f0e0e398a54628c918366d2b2a48b4107b2f02080d4bfc3ce9545275f7c7` |
+| `examples/assets/clinic.svg` | 210×180 | 478 | `2b0f61df3ce8c282ef501a72b965ab303a25716174b0825918cc00d326a36105` |
+| `examples/assets/wagon.svg` | 180×120 | 556 | `a1dfa91d4d07b3c216f3944acbd5365c89641d65aa858c4c74fa169987038500` |
+
+### PR #20 proposed locations compared with original places
+
+PR #20 is a draft story expansion. These mappings are editorial proposals, not approved production art assignments. “Reuse area” means a story location may be under an existing place ID; it does not assert the existing background image is visually adequate.
+
+| PR #20 scene ID | Proposed place / description | Original place relation | Stable place ID proposal | Review state |
+|---|---|---|---|---|
+| `p1-family-promise` | Stair inside family home | Home | `home-stair` | Reuse home area; stair-specific art not confirmed |
+| `p1-family-alley` | Alley outside the market | Market | `market-alley` | New sublocation/visual needed |
+| `p1-smoke-door` | Road toward gate and collapsed warehouse door | Fire Street / Gate | `smoke-door` | New sublocation; exact continuity uncertain |
+| `p1-gate-manifest` | Gate square | Gate | `gate` | Reuse candidate |
+| `p2-relay-hut` | Relay hut in wet forest | Forest | `relay-hut` | New sublocation/visual needed |
+| `p2-names-consent` | Shaded forest path | Forest | `forest` | Reuse candidate |
+| `p2-yasmin-drawing` | Small house in hidden village | Hidden village | `hidden-village-home` | New sublocation; existing scene only names village |
+| `p2-last-signal` | Room above abandoned workshop / antenna | None exact | `signal-workshop` | New place and visual needed |
+| `p2-protection-cost` | Stone quay at village edge | Punic harbor is original but elsewhere | `village-quay` | New place; do not equate to original harbor |
+| `p2-truth-gate` | Sea gate at night | Gate | `sea-gate` | Separate ID pending story continuity approval |
+| `p3-survivor-register` | Temporary school near square | Square | `survivor-school` | New place/visual needed |
+| `p3-single-load` | Crossroads between bridge route and medicine quay | Pilot has procedural crossroads only | `crossroads` | New production visual needed; pilot is not production art |
+| `p3-karim-key` | Iron dock gate / boat-storage passage | Village quay / harbor vicinity uncertain | `dock-gate` | New visual; parent location unresolved |
+| `p3-house-without-number` | Old sea-side street, unnumbered house | No exact original place | `unnumbered-house` | New place/visual needed |
+| `p3-medicine-cost` | Temporary quay-side clinic | Hospital / village quay | `temporary-clinic` | New visual; not established as original hospital |
+| `p3-mark-on-stone` | Stone steps between school and square | Square / proposed school | `school-steps` | New sublocation; visual needed |
+| `p3-hadi-hearing` | School yard used for a hearing | Proposed survivor school | `survivor-school` | Reuse school area with a hearing-yard state |
+| `p3-key-handover` | Room between school and quay | Proposed school / quay | `handover-room` | New sublocation; parent and art unresolved |
+
+G1 names Hala (هالة) as Ryan's missing sister in the survivor registry, but the original `Gt` table has no Hala record or portrait. Candidate character ID: `hala` (draft-only until story approval and art exist). Backgrounds needed for the proposed new G1 places are not present as distinct original refs. The current 11 original backgrounds are not evidence that suitable visuals exist for these new locations.
+
+### ID alignment and safe classification
+
+The source character IDs are retained as unprefixed lowercase IDs: `ryan`, `sara`, `lina`, `salim`, `mansour`, `noor`, `youssef`, `elias`, `amin`, `mariam`, `hadi`, `yasmin`, `karim`. The existing architecture's examples use `mansour` and `mansour-house`, and PR #20 scene IDs are already stable slugs. Use separate character and place registries to distinguish namespaces; do not introduce `char.`/`loc.` prefixes. Aliases `nour` for trust-facing Noor and `father` for Youssef remain aliases, not replacement IDs. Proposed new place slugs above remain unapproved until G1 continuity review. No save identifier or original scene index was changed.
+
+### Updated findings and open evidence
+
+- **Confirmed duplicates/reuse:** three character portrait groups and three repeated-background groups are aliases to identical source payloads. They are referenced, not orphan files. Their design intent remains **unconfirmed**.
+- **Missing/needs new art:** no original distinct sunset background exists for Byrsa scene 18; PR #20 locations marked new above lack dedicated production art. The pilot crossroads drawing is experimental and is not approved as a production replacement.
+- **Missing character asset:** Hala is named only in G1 and has no source character record or portrait. Other unnamed crowd/ensemble roles lack dedicated portrait assets.
+- **Unused assets:** none identified among the 16 distinct production character payloads, 11 background payloads, or six referenced pilot SVGs. No deletion is proposed.
+- **Provenance/licensing:** no source URL, creator, or license evidence is present for the embedded production art. The pilot brief describes original silhouettes but gives no file-level author/license statement. All rights remain unverified; existing use is not treated as license evidence.
+- **Checksums and dimensions:** recorded above for 16 production character-art payloads, 11 production backgrounds, and six pilot SVG files.
+- **PR #23 cross-review note:** PR #24's GPT-6 comment points to `docs/qarton-l1-s1-g1-cross-review-20261122.md`, but that path is absent from the reviewed PR #23, PR #20, PR #24 and PR #19 snapshots checked. This report therefore follows the available PR #23 organization decisions and the comment itself; any unpublished Sol/Astra registry not attached to those snapshots remains unverified.
