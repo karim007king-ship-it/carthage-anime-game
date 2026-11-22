@@ -58,5 +58,62 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "optional": true,
+  "characters": [
+    "ryan",
+    "lina",
+    "noor",
+    "yasmin"
+  ],
+  "inputs": [
+    "yasminMapConsent",
+    "yasminRouteCopy",
+    "registryMethod",
+    "missingHousehold",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "houseClaim",
+    "houseEvidence",
+    "houseAccess"
+  ],
+  "choices": [
+    {
+      "id": "formalReview",
+      "textKey": "story.p3-house-without-number.choice.formalReview",
+      "proposedState": {
+        "houseClaim": "formalReview",
+        "houseEvidence": "partialCorroboration",
+        "houseAccess": "deferred"
+      }
+    },
+    {
+      "id": "temporaryShelter",
+      "textKey": "story.p3-house-without-number.choice.temporaryShelter",
+      "proposedState": {
+        "houseClaim": "temporaryShelter",
+        "houseEvidence": "unresolved",
+        "houseAccess": "temporaryOnly"
+      }
+    },
+    {
+      "id": "communityHearing",
+      "textKey": "story.p3-house-without-number.choice.communityHearing",
+      "proposedState": {
+        "houseClaim": "communityHearing",
+        "houseEvidence": "publicRouteCorroboration",
+        "houseAccess": "pendingHearing"
+      }
+    }
+  ],
+  "continuity": {
+    "missingYasmin": "no-forced-presence-neighbor-and-register-alternative",
+    "privateDrawing": "no-address-or-drawing-disclosure",
+    "unknownRegistry": "no-fabricated-appeal-or-record",
+    "property": "route-or-oral-testimony-is-not-title",
+    "temporaryShelter": "not-waiver-of-property-claim",
+    "decisionOnce": true,
+    "timeCost": "pending-editorial-balance"
+  }
 }
