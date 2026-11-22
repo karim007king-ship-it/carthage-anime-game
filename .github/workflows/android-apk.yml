@@ -65,10 +65,11 @@ jobs:
             echo "::error::Add CARTHAGE_KEYSTORE_BASE64 under Settings > Secrets and variables > Actions > New repository secret."
             exit 1
           fi
-          mkdir -p "$HOME/.android"
-          printf '%s' "$CARTHAGE_KEYSTORE_BASE64" | base64 --decode > "$HOME/.android/debug.keystore"
-          keytool -list -keystore "$HOME/.android/debug.keystore" -storepass android -alias androiddebugkey >/dev/null
-          chmod 600 "$HOME/.android/debug.keystore"
+          umask 077
+          keystore="$RUNNER_TEMP/carthage-debug.keystore"
+          printf '%s' "$CARTHAGE_KEYSTORE_BASE64" | base64 --decode > "$keystore"
+          keytool -list -keystore "$keystore" -storepass android -alias androiddebugkey >/dev/null
+          echo "CARTHAGE_DEBUG_KEYSTORE=$keystore" >> "$GITHUB_ENV"
           echo "Stable Carthage debug signing key installed and validated."
 
       - name: Install JavaScript dependencies
@@ -172,9 +173,26 @@ jobs:
       - name: Apply Carthage launcher icon
         run: node scripts/apply-android-branding.cjs
 
-      - name: Build debug APK
+      - name: Build debug APK with the configured Carthage key
         working-directory: android
-        run: ./gradlew assembleDebug --no-daemon
+        run: |
+          cat >> app/build.gradle <<'GRADLE'
+
+          android.signingConfigs.debug.storeFile = new File(System.getenv('CARTHAGE_DEBUG_KEYSTORE'))
+          GRADLE
+          ./gradlew assembleDebug --no-daemon
+
+      - name: Verify APK signing certificate
+        run: |
+          set -euo pipefail
+          expected=$(keytool -exportcert -keystore "$CARTHAGE_DEBUG_KEYSTORE" -storepass android -alias androiddebugkey | sha256sum | cut -d' ' -f1)
+          actual=$("$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --print-certs android/app/build/outputs/apk/debug/app-debug.apk)
+          fingerprint=$(awk '/^Signer #1 certificate SHA-256 digest:/ {print $NF}' <<< "$actual")
+          if [ "$expected" != "$fingerprint" ]; then
+            echo "::error::APK signing certificate does not match the configured Carthage key."
+            exit 1
+          fi
+          echo "Verified Carthage APK signing certificate SHA-256: $fingerprint"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
