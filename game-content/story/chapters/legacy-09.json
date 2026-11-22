@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-09",
+  "sceneIdx": 8,
+  "legacyChapter": 9,
+  "part": "part2",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-09.title",
+    "place": "story.legacy-09.place",
+    "hint": "story.legacy-09.hint",
+    "cardTitle": "story.legacy-09.card.cardTitle",
+    "cardSub": "story.legacy-09.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-09.line-001.speaker",
+      "text": "story.legacy-09.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.elias",
+      "who": "story.legacy-09.line-002.speaker",
+      "text": "story.legacy-09.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "char.lina",
+      "who": "story.legacy-09.line-003.speaker",
+      "text": "story.legacy-09.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-09.line-004.speaker",
+      "text": "story.legacy-09.line-004"
+    },
+    {
+      "id": "line-005",
+      "speakerId": "char.amin",
+      "who": "story.legacy-09.line-005.speaker",
+      "text": "story.legacy-09.line-005"
+    },
+    {
+      "id": "line-006",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-09.line-006.speaker",
+      "text": "story.legacy-09.line-006"
+    },
+    {
+      "id": "line-007",
+      "speakerId": "char.amin",
+      "who": "story.legacy-09.line-007.speaker",
+      "text": "story.legacy-09.line-007"
+    },
+    {
+      "id": "line-008",
+      "speakerId": "char.amin",
+      "who": "story.legacy-09.line-008.speaker",
+      "text": "story.legacy-09.line-008"
+    },
+    {
+      "id": "line-009",
+      "speakerId": "char.lina",
+      "who": "story.legacy-09.line-009.speaker",
+      "text": "story.legacy-09.line-009"
+    },
+    {
+      "id": "line-010",
+      "speakerId": "char.amin",
+      "who": "story.legacy-09.line-010.speaker",
+      "text": "story.legacy-09.line-010"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "amin-notebook-page",
+      "legacyId": "aminNotebookPage",
+      "texts": {
+        "label": "story.legacy-09.hotspot.amin-notebook-page.label",
+        "note": "story.legacy-09.hotspot.amin-notebook-page.note"
+      },
+      "effect": {
+        "x": 24,
+        "y": 30,
+        "courage": 8,
+        "trust": {
+          "amin": 10
+        },
+        "clue": "aminNotebookPage"
+      }
+    },
+    {
+      "id": "broken-compass",
+      "legacyId": "brokenCompass",
+      "texts": {
+        "label": "story.legacy-09.hotspot.broken-compass.label",
+        "note": "story.legacy-09.hotspot.broken-compass.note"
+      },
+      "effect": {
+        "x": 52,
+        "y": 52,
+        "courage": 6,
+        "clue": "brokenCompass"
+      }
+    },
+    {
+      "id": "giant-footprints",
+      "legacyId": "giantFootprints",
+      "texts": {
+        "label": "story.legacy-09.hotspot.giant-footprints.label",
+        "note": "story.legacy-09.hotspot.giant-footprints.note"
+      },
+      "effect": {
+        "x": 78,
+        "y": 68,
+        "courage": 7,
+        "clue": "footprints"
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "trust-amin",
+      "legacyId": "trustAmin",
+      "texts": {
+        "label": "story.legacy-09.choice.trust-amin.label",
+        "sub": "story.legacy-09.choice.trust-amin.sub"
+      },
+      "effect": {
+        "time": 3,
+        "courage": 10,
+        "flag": "trustedAmin",
+        "trust": {
+          "amin": 30,
+          "lina": 5
+        }
+      }
+    },
+    {
+      "id": "doubt-amin",
+      "legacyId": "doubtAmin",
+      "texts": {
+        "label": "story.legacy-09.choice.doubt-amin.label",
+        "sub": "story.legacy-09.choice.doubt-amin.sub"
+      },
+      "effect": {
+        "time": 3,
+        "courage": 6,
+        "flag": "doubtedAmin",
+        "trust": {
+          "amin": -15,
+          "lina": 5
+        }
+      }
+    }
+  ],
+  "displayChapter": 13,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.crossing",
+  "backgroundVariable": "I7"
+}
