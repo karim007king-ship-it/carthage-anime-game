@@ -1,0 +1,42 @@
+{
+  "canonicalLocale": "tn",
+  "status": "draft",
+  "packs": {
+    "tn": {
+      "direction": "rtl",
+      "messages": {
+        "story.legacy-01.title": "الفصل 1",
+        "ending.hero.gallery.title": "النهاية 1 — البطل",
+        "ui.gameplay.text-094": "الحوار {line} من {total}",
+        "ui.map.text-007": "وين تمشي توا؟"
+      }
+    },
+    "ar": {
+      "direction": "rtl",
+      "messages": {
+        "story.legacy-01.title": null,
+        "ending.hero.gallery.title": null,
+        "ui.gameplay.text-094": null,
+        "ui.map.text-007": null
+      }
+    },
+    "en": {
+      "direction": "ltr",
+      "messages": {
+        "story.legacy-01.title": null,
+        "ending.hero.gallery.title": null,
+        "ui.gameplay.text-094": null,
+        "ui.map.text-007": null
+      }
+    },
+    "fr": {
+      "direction": "ltr",
+      "messages": {
+        "story.legacy-01.title": null,
+        "ending.hero.gallery.title": null,
+        "ui.gameplay.text-094": null,
+        "ui.map.text-007": null
+      }
+    }
+  }
+}

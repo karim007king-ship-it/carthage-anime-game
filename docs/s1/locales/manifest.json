@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "canonical": "tn",
+  "languages": ["tn", "ar", "en", "fr"],
+  "directions": {"tn": "rtl", "ar": "rtl", "en": "ltr", "fr": "ltr"},
+  "fallback": "tn for display only",
+  "source": "../catalogue.json",
+  "draftChapterKeys": "chapter-keys.json"
+}
