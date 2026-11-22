@@ -7,14 +7,14 @@ const root=path.join(__dirname,'..');
 const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),'utf8'));
 const scenes=read('docs/qarton-unified-id-registry.proposal.json').scenes.filter(s=>s.scope==='draft');
 const drafts=scenes.map(s=>read('game-content/story/chapters/'+s.id+'.json'));
-const external=new Set(['presentCharacters','legacyInventory','routeSafety','signalDevice','noorManifest','smokeRescue']);
-const implicitLegacyDraft=new Set(['familySignal','alleyFamilies']);
+const external=new Set(['presentCharacters','legacyInventory','routeSafety','signalDevice','noorManifest']);
 
 test('all declared inputs have an earlier draft producer or explicit external source',()=>{
  const produced=new Map();
  for(const chapter of drafts){
+  assert.equal(chapter.displayChapter,scenes.find(s=>s.id===chapter.id).displayChapter,chapter.id+': display order mismatch');
   for(const input of chapter.inputs||[]){
-   assert.ok(produced.has(input)||external.has(input)||implicitLegacyDraft.has(input),chapter.id+': ungrounded input '+input);
+   assert.ok(produced.has(input)||external.has(input),chapter.id+': ungrounded input '+input);
    if(produced.has(input))assert.ok(produced.get(input)<chapter.displayChapter,chapter.id+': forward dependency '+input);
   }
   const effects=new Set((chapter.choices||[]).flatMap(choice=>Object.keys(choice.proposedState||{})));
