@@ -19,6 +19,10 @@
 - `docs/qarton-g0-g1-integration-gates-20261122.md` — narrative integration gates (PR #20, not in this branch).
 - `docs/story/` — proposed story chapters (PR #20, not in this branch).
 
+## Standing organization policy
+- [Organization decisions](qarton-organization-decisions.md) — persistent module boundaries and no-regression rules.
+- [Content migration checklist](qarton-content-migration-checklist.md) — review gates before extracting any original data.
+
 ## Future game-content organization
 - [Story, characters, backgrounds and localization architecture](qarton-content-localization-architecture.md) — proposed contracts, not a production migration.
 
