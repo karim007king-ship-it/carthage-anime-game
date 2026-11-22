@@ -39,3 +39,12 @@
 **Current decision: NO-GO for building/distributing a 36-chapter pilot from PR #23.** It contains static contracts and draft content, not a fully wired runtime. A separate opt-in implementation and approval of G1/L1/S1 handoff gates are required. The existing `android-apk.yml` output must not be represented as the 36-chapter pilot.
 
 When pilot implementation exists, run `docs/qa/qarton-36-chapter-android-acceptance-protocol-20261122.md` and attach actual test evidence. Keep PR #23 Draft; do not merge automatically.
+
+## First isolated APK build evidence (2026-11-22)
+
+- Workflow: [QARTON isolated pilot APK run 45055616995](https://github.com/karim007king-ship-it/carthage-anime-game/actions/runs/45055616995), commit `cb0f06c8c`, **success**.
+- Published artifact: `qarton-pilot-legacy-runtime-debug`, artifact ID `14766694817`, ZIP size `9,153,900` bytes at inspection; not expired then.
+- The workflow passed the `aapt dump badging` check for `com.qarton.carthage.pilot` and a visible `PILOT` label, and uploaded the experimental debug APK.
+- The separate cinematic contract and isolated preflight workflows also passed for that commit.
+- **Not tested:** physical-device installation, Android WebView functionality, coexistence with the installed production app, save import/export, process death, 36-chapter runtime integration, or nine-ending reachability. The artifact is an isolated package containing the current legacy runtime, not a 36-chapter build.
+- Download from the run's **Artifacts** section (GitHub login may be required). Do not replace the production APK.
