@@ -35,7 +35,8 @@ jobs:
           echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
           echo "$ANDROID_HOME/platform-tools" >> "$GITHUB_PATH"
       - name: Validate isolated pilot generator and guard
-        run: node --test tests/qarton-pilot-capacitor-config-test.cjs tests/qarton-pilot-build-guard-test.cjs
+        run: |
+          node --test tests/qarton-pilot-capacitor-config-test.cjs tests/qarton-pilot-build-guard-test.cjs tests/qarton-pilot-chapter-navigator-test.cjs tests/qarton-pilot-checkpoint-codec-test.cjs tests/qarton-pilot-chapter-preview-test.cjs tests/qarton-pilot-preview-text-test.cjs tests/qarton-pilot-preview-html-test.cjs tests/qarton-pilot-preview-export-test.cjs tests/qarton-pilot-preview-install-test.cjs
       - name: Create isolated workspace (never edit checked-in production config)
         run: |
           set -euo pipefail
