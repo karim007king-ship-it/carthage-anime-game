@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "legacy-05",
+  "sceneIdx": 4,
+  "legacyChapter": 5,
+  "part": "part1",
+  "after": "map",
+  "timed": false,
+  "texts": {
+    "title": "story.legacy-05.title",
+    "place": "story.legacy-05.place",
+    "hint": "story.legacy-05.hint",
+    "cardTitle": "story.legacy-05.card.cardTitle",
+    "cardSub": "story.legacy-05.card.cardSub"
+  },
+  "lines": [
+    {
+      "id": "line-001",
+      "speakerId": "role.narrator",
+      "who": "story.legacy-05.line-001.speaker",
+      "text": "story.legacy-05.line-001"
+    },
+    {
+      "id": "line-002",
+      "speakerId": "char.mansour",
+      "who": "story.legacy-05.line-002.speaker",
+      "text": "story.legacy-05.line-002"
+    },
+    {
+      "id": "line-003",
+      "speakerId": "char.ryan",
+      "who": "story.legacy-05.line-003.speaker",
+      "text": "story.legacy-05.line-003"
+    },
+    {
+      "id": "line-004",
+      "speakerId": "char.mansour",
+      "who": "story.legacy-05.line-004.speaker",
+      "text": "story.legacy-05.line-004"
+    }
+  ],
+  "hotspots": [
+    {
+      "id": "sword",
+      "legacyId": "sword",
+      "texts": {
+        "label": "story.legacy-05.hotspot.sword.label",
+        "note": "story.legacy-05.hotspot.sword.note",
+        "item": "story.legacy-05.hotspot.sword.item"
+      },
+      "effect": {
+        "x": 30,
+        "y": 42,
+        "courage": 20
+      },
+      "itemId": "mansour-sword",
+      "legacyItemValue": "سيف عم منصور",
+      "lock": {
+        "who": "mansour",
+        "min": 30,
+        "whoLabel": "story.legacy-05.hotspot.sword.trust-name"
+      }
+    },
+    {
+      "id": "oldmap",
+      "legacyId": "oldmap",
+      "texts": {
+        "label": "story.legacy-05.hotspot.oldmap.label",
+        "note": "story.legacy-05.hotspot.oldmap.note"
+      },
+      "effect": {
+        "x": 68,
+        "y": 38,
+        "clue": "oldmap",
+        "trust": {
+          "mansour": 8
+        }
+      }
+    },
+    {
+      "id": "uniform",
+      "legacyId": "uniform",
+      "texts": {
+        "label": "story.legacy-05.hotspot.uniform.label",
+        "note": "story.legacy-05.hotspot.uniform.note"
+      },
+      "effect": {
+        "x": 50,
+        "y": 72,
+        "courage": 6,
+        "trust": {
+          "mansour": 12
+        }
+      }
+    }
+  ],
+  "choices": [
+    {
+      "id": "help-mansour",
+      "legacyId": "helpMansour",
+      "texts": {
+        "label": "story.legacy-05.choice.help-mansour.label",
+        "sub": "story.legacy-05.choice.help-mansour.sub"
+      },
+      "effect": {
+        "time": 2,
+        "courage": 8,
+        "flag": "helpedMansour",
+        "trust": {
+          "mansour": 30,
+          "nour": 5
+        }
+      }
+    },
+    {
+      "id": "take-sword",
+      "legacyId": "takeSword",
+      "texts": {
+        "label": "story.legacy-05.choice.take-sword.label",
+        "sub": "story.legacy-05.choice.take-sword.sub"
+      },
+      "effect": {
+        "time": 1,
+        "courage": 10,
+        "flag": "tookSword",
+        "trust": {
+          "mansour": -8
+        }
+      }
+    }
+  ],
+  "displayChapter": 7,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.mansour-house",
+  "backgroundVariable": "C7"
+}
