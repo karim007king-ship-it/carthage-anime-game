@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "id": "p1-family-alley",
+  "displayChapter": 4,
+  "part": "part1",
+  "source": {
+    "pr": 20,
+    "path": "docs/story/p1-ch04-family-alley.md",
+    "editorialState": "draft"
+  },
+  "entryAfter": "legacy-02",
+  "exitBefore": "legacy-03",
+  "optional": true,
+  "location": {
+    "label": "ممرّ وراء عربة الخضرة، خارج السوق",
+    "locationRef": null,
+    "artStatus": "not-approved"
+  },
+  "characters": [
+    "char.ryan",
+    "char.salim"
+  ],
+  "additionalRoles": [
+    "role.market-woman",
+    "role.market-child"
+  ],
+  "textKeys": [
+    "story.p1-family-alley.line-001",
+    "story.p1-family-alley.line-002",
+    "story.p1-family-alley.line-003",
+    "story.p1-family-alley.line-004",
+    "story.p1-family-alley.line-005",
+    "story.p1-family-alley.line-006",
+    "story.p1-family-alley.line-007",
+    "story.p1-family-alley.line-008",
+    "story.p1-family-alley.line-009",
+    "story.p1-family-alley.line-010",
+    "story.p1-family-alley.line-011",
+    "story.p1-family-alley.line-012",
+    "story.p1-family-alley.line-013",
+    "story.p1-family-alley.line-014",
+    "story.p1-family-alley.line-015",
+    "story.p1-family-alley.line-016",
+    "story.p1-family-alley.line-017"
+  ],
+  "choices": [
+    {
+      "id": "escortFamilies",
+      "textKey": "story.p1-family-alley.choice.escortFamilies",
+      "proposedState": {
+        "alleyFamilies": "escorted",
+        "salimWitness": "present"
+      },
+      "timeCostMinutes": 3,
+      "trust": {
+        "salim": 8
+      }
+    },
+    {
+      "id": "markAlley",
+      "textKey": "story.p1-family-alley.choice.markAlley",
+      "proposedState": {
+        "alleyFamilies": "guided",
+        "salimWitness": "delayed"
+      },
+      "timeCostMinutes": 1,
+      "trust": {
+        "salim": 4
+      }
+    },
+    {
+      "id": "leaveAlley",
+      "textKey": "story.p1-family-alley.choice.leaveAlley",
+      "proposedState": {
+        "alleyFamilies": "unknown"
+      },
+      "timeCostMinutes": 0,
+      "trust": {}
+    }
+  ],
+  "legacySaveIndex": null,
+  "missingLegacyStatePolicy": "unknown",
+  "runtimeIntegrated": false
+}
