@@ -79,3 +79,21 @@ test('top-level accessors and unexpected metadata fail closed without executing 
  assert.equal(reads,0);
  assert.equal(inspectCheckpoint(c,{schemaVersion:1,chapterId:c.id,groups:{seat:'yieldSeat'},sceneIdx:10}).valid,false);
 });
+
+
+test('non-enumerable and symbol checkpoint properties are not silently accepted',()=>{
+ const c=read('p1-gate-manifest');
+ const base=()=>({schemaVersion:1,chapterId:c.id,groups:{seat:'yieldSeat'}});
+ const hidden=base();
+ Object.defineProperty(hidden,'sceneIdx',{value:10,enumerable:false});
+ assert.equal(inspectCheckpoint(c,hidden).valid,false);
+ const symbol=base();
+ symbol[Symbol('hidden-save-index')]=10;
+ assert.equal(inspectCheckpoint(c,symbol).valid,false);
+ const hiddenGroup=base();
+ Object.defineProperty(hiddenGroup.groups,'manifestCustody',{value:'keepWithNoor',enumerable:false});
+ assert.deepEqual(inspectCheckpoint(c,hiddenGroup),{valid:true,completeGroups:['seat','manifestCustody']});
+ const symbolGroup=base();
+ symbolGroup.groups[Symbol('hidden-choice')]='keepWithNoor';
+ assert.equal(inspectCheckpoint(c,symbolGroup).valid,false);
+});
