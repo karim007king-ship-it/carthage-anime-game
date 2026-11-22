@@ -19,6 +19,9 @@
 - `docs/qarton-g0-g1-integration-gates-20261122.md` — narrative integration gates (PR #20, not in this branch).
 - `docs/story/` — proposed story chapters (PR #20, not in this branch).
 
+## Legacy build safety
+- [prepare-web safe refactor boundary](qarton-prepare-web-safe-refactor-boundary.md) — staged extraction and golden-master gates; no production refactor yet.
+
 ## Standing organization policy
 - [Organization decisions](qarton-organization-decisions.md) — persistent module boundaries and no-regression rules.
 - [Content migration checklist](qarton-content-migration-checklist.md) — review gates before extracting any original data.
