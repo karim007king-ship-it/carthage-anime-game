@@ -10,7 +10,10 @@ This is a coordination document, not a production release or evidence of device 
 | #20 | G1 narrative 36-scene proposal | based on #19 | Draft; reconcile source text, choices and nine endings; no runtime merge |
 | #21 | G2 cinematic pilot | based on #19 | Draft; standalone lab, no production scene hooks |
 | #22 | Audio lifecycle review | based on #21 | Draft; verify mobile audio gesture and teardown |
-| #23 | G4 read-only adapter, regression tests, architecture docs | based on #21 | Draft; do not merge before G4 event contract and QA |
+| #23 | G4 read-only adapter, G1 dataflow/choice/checkpoint tests, architecture docs | based on #21 | Draft; static contract CI green; no runtime integration or merge |
+| #24 | L1 visual inventory | based on #21 | Draft; no asset moves/deletions |
+| #25 | S1 text inventory | based on main | Draft; original Tunisian text canonical |
+| #26 | Android APK in-place update packaging | based on main | Draft; APK CI green; device upgrade and installed certificate match pending |
 
 ## Ownership and no-overlap rules
 - **GPT-6 / G4 and integration:** CI, source contracts, build stability, save/restore boundary, cross-PR review and final integration order.
@@ -21,9 +24,11 @@ This is a coordination document, not a production release or evidence of device 
 
 ## Phases and gates
 ### P0 — CI integrity (blocking)
-1. Fix the new `qarton-prepare-web-hook-contract-test.cjs` syntax failure.
-2. Confirm GitHub Actions passes at the current head; static checks alone do not prove production behavior.
-3. Add clean-build output determinism verification without changing the original source.
+1. [x] Earlier `qarton-prepare-web-hook-contract-test.cjs` syntax failure corrected.
+2. [x] G4/G1 static contract CI green through commit `59dfb7b3d` (2026-11-22).
+3. [ ] Verify deterministic clean-build output without changing original source.
+4. [x] Separate Android update packaging into PR #26; Android APK workflow succeeded at `2518b5ac7` (run 45020828677).
+5. [ ] Verify real in-place install and preservation of saved progress on Android; CI cannot prove certificate continuity with an already installed APK.
 
 ### P1 — Read-only inventories (parallel)
 1. Luna L1 inventory characters/backgrounds/poses/locations, path references and licenses.
@@ -53,7 +58,14 @@ This is a coordination document, not a production release or evidence of device 
 ## Definition of done for this audit
 - [x] PR workstreams and ownership recorded.
 - [x] CI failure isolated to a newly added test syntax error; corrective commit made.
-- [ ] Corrective commit CI confirmed successful.
+- [x] Corrective commits and later G1/G4 static CI confirmed successful.
 - [ ] Deterministic clean build confirmed.
 - [ ] L1/S1/G1 reports reviewed and integrated.
 - [ ] Android regression and production hook acceptance completed.
+
+## 2026-11-22 workstream freeze and handoff
+
+- **Do not mix #26 with #23:** #26 owns Android packaging (`android-apk.yml`, generated Gradle versionCode, APK signature checks). #23 owns proposed content contracts, read-only adapter, and non-production regression tests. Avoid cherry-picking Android changes into the G4 branch.
+- **APK update:** Existing stable signing secret is required. An APK signed with a different historical key cannot update in place; back up the save before any uninstall. Current GitHub APK CI success is build evidence, not device installation evidence.
+- **Content gate:** 18 proposed chapters structured, 18 original scenes and nine ending keys retained. No new chapter has an original `sceneIdx`; all draft checkpoints remain outside the production save.
+- **Next isolated G4 action:** inspect missing input provenance and test contracts, without editing `index.html`, `scripts/prepare-web.cjs`, or Android workflow.
