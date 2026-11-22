@@ -143,7 +143,7 @@ No production visual is labeled “unused” by this inventory: every source cha
 
 ## Stable ID proposal and safe folder shape
 
-IDs are lowercase ASCII slugs without class prefixes, matching the `speakerId: "mansour"` / `locationId: "mansour-house"` examples in PR #23 and scene IDs in PR #20. Record type is carried by the separate `characters/` and `backgrounds/` registries, not by the ID string. Once approved, IDs are immutable and independent of localized spelling, display order, `sceneIdx`, paths and translated titles. Names and aliases belong in metadata/locales. Never write these IDs into the original save format as part of L1.
+Registry entity IDs are unprefixed lowercase slugs; typed references use char.<id>, loc.<id>, and role.<id>, as specified by PR #23 unified registry proposal. For example, character id mansour is referenced as char.mansour, while background id mansour-house is loc.mansour-house. Keep the separate characters/ and backgrounds/ manifests. IDs do not depend on localized spelling, display order, sceneIdx, paths or translated titles. Names and aliases belong in metadata/locales. Never write these IDs into the original save format as part of L1.
 
 Future organization target (not created or wired by this PR):
 
@@ -276,7 +276,7 @@ G1 names Hala (هالة) as Ryan's missing sister in the survivor registry, but 
 
 ### ID alignment and safe classification
 
-The source character IDs are retained as unprefixed lowercase IDs: `ryan`, `sara`, `lina`, `salim`, `mansour`, `noor`, `youssef`, `elias`, `amin`, `mariam`, `hadi`, `yasmin`, `karim`. The existing architecture's examples use `mansour` and `mansour-house`, and PR #20 scene IDs are already stable slugs. Use separate character and place registries to distinguish namespaces; do not introduce `char.`/`loc.` prefixes. Aliases `nour` for trust-facing Noor and `father` for Youssef remain aliases, not replacement IDs. Proposed new place slugs above remain unapproved until G1 continuity review. No save identifier or original scene index was changed.
+The source character IDs are retained as unprefixed lowercase IDs: `ryan`, `sara`, `lina`, `salim`, `mansour`, `noor`, `youssef`, `elias`, `amin`, `mariam`, `hadi`, `yasmin`, `karim`. The existing architecture's examples use `mansour` and `mansour-house`, and PR #20 scene IDs are already stable slugs. Use separate character and place registries to distinguish namespaces; store entity IDs unprefixed and use typed references `char.<id>` / `loc.<id>`, as required by PR #23. Aliases `nour` for trust-facing Noor and `father` for Youssef remain aliases, not replacement IDs. Proposed new place slugs above remain unapproved until G1 continuity review. No save identifier or original scene index was changed.
 
 ### Updated findings and open evidence
 
@@ -286,4 +286,75 @@ The source character IDs are retained as unprefixed lowercase IDs: `ryan`, `sara
 - **Unused assets:** none identified among the 16 distinct production character payloads, 11 background payloads, or six referenced pilot SVGs. No deletion is proposed.
 - **Provenance/licensing:** no source URL, creator, or license evidence is present for the embedded production art. The pilot brief describes original silhouettes but gives no file-level author/license statement. All rights remain unverified; existing use is not treated as license evidence.
 - **Checksums and dimensions:** recorded above for 16 production character-art payloads, 11 production backgrounds, and six pilot SVG files.
-- **PR #23 cross-review note:** PR #24's GPT-6 comment points to `docs/qarton-l1-s1-g1-cross-review-20261122.md`, but that path is absent from the reviewed PR #23, PR #20, PR #24 and PR #19 snapshots checked. This report therefore follows the available PR #23 organization decisions and the comment itself; any unpublished Sol/Astra registry not attached to those snapshots remains unverified.
+- **PR #23 cross-review reconciliation:** latest PR #23 head contains the referenced cross-review, unified ID registry proposal, and characters/backgrounds manifests. The registry confirms unprefixed entity IDs with qualified char./loc./role. references, preserved legacy aliases, and draft-only new scenes. Its cross-review requires G1 locations to remain draft and forbids automatic reuse claims. The continuation below adds chapter-level art coverage and corrects reference guidance. These files are proposals, not runtime data.
+
+
+## L1 continuation — visual coverage for all 36 chapters
+
+### ID contract against PR #23
+
+Reviewed PR #23 head cb4127f78d6e4e0897b0e17e97c72297b154f846, including its cross-review, unified registry proposal, characters/backgrounds manifests and organization decisions. The contract uses unprefixed manifest IDs and typed references char.<id>, loc.<id>, and role.<id>. All 13 original character IDs and 17 original place IDs listed in this report match that proposal. Preserve noor/nour and youssef/father aliases and all legacy sceneIdx values.
+
+The 18 new G1 chapters are draft content. A similar original place is only a continuity hint; it does not establish permission or visual suitability to reuse its background. Every candidate place below is draft-scoped and should use a loc.<candidate> reference only after editorial approval.
+
+### Chapter-by-chapter asset readiness
+
+“Existing portrait” means a source character record exists. It does not guarantee a distinct approved portrait: three groups reuse source images and intent remains unconfirmed. Incidental people can remain off-screen or be represented as a crowd; individual art is needed only if storyboards show them.
+
+| Chapter / scene ID | Characters in G1 draft | Existing coverage and character gaps | New background/visual need; draft place ID | Priority |
+|---|---|---|---|---|
+| 02 p1-family-promise | Ryan, Lina, Sara | Records exist, but all three are in shared-image groups; unique faces and reassurance/fear expressions need review | Interior stair, morning light: loc.home-stair; not auto-reused from original home | P1 |
+| 04 p1-family-alley | Ryan, Salim, market woman, child | Ryan/Salim records exist; woman and child have no dedicated portraits | Blocked alley, overturned cart, escape passage: loc.market-alley | P1 |
+| 10 p1-smoke-door | Ryan, Lina, conditional Sara, Noor off-screen | Records exist; shared-face intent unresolved; need smoke/fire poses | Collapsed storehouse, smoke, shutter and passages: loc.smoke-door | P0 |
+| 11 p1-gate-manifest | Ryan, Lina, Noor, conditional Salim/woman, Elias, child and mother | Named records exist; incidental woman, child and mother lack portraits; optional crowd silhouettes | Gate queue, wet paper, red firelight: loc.gate-queue-square; distinct staging, no automatic reuse | P0 |
+| 14 p2-relay-hut | Ryan, Lina, Amin; Mariam appears only through a written trace | Records exist; pilot Ryan/Lina SVGs are lab-only; Amin has one portrait with tint/glow moods | Wet forest, roofless hut and blue-thread prop: loc.relay-hut | P1 |
+| 16 p2-names-consent | Ryan, Amin, Lina | Records exist; shared portrait identity unresolved; no distinct Amin emotion sheet | Night path, fallen trunk, notebook close-up: loc.forest-path | P2 |
+| 19 p2-yasmin-drawing | Ryan, Lina, Yasmin, Mariam | Records exist, but Lina/Yasmin share an image and Sara/Mariam another; identity collision needs resolution | Village-house interior, table and maps: loc.hidden-village-home; new visual | P1 |
+| 21 p2-last-signal | Ryan, Mariam, Amin, Lina, conditional Hadi | Records exist; three shared portrait groups affect the cast; no radio/hand poses | Abandoned workshop room, rooftop wire/antenna, signal device: loc.signal-workshop | P1 |
+| 22 p2-protection-cost | Ryan, Lina, Karim, Elias, Mariam, threatened mother and child | Named records exist; mother and child have no dedicated portraits | Threatened-household setting: loc.protection-site; manuscript staging must decide home or quay | P1 |
+| 24 p2-truth-gate | Ryan, Lina, Noor, Mariam, Amin, session clerk/witnesses | Named records exist; clerk and witnesses lack role visuals; shared-image intent unresolved | Night gate/evidence-table hearing: loc.sea-gate; not automatically original gate art | P0 |
+| 26 p3-survivor-register | Ryan, Lina, conditional Sara/Noor, neighbor, man searching for Hala | Named records exist; neighbor and searching man lack portraits; Hala is missing and has no portrait | Temporary school registration yard and ledgers: loc.survivor-school | P0 |
+| 27 p3-single-load | Ryan, Lina, Noor, conditional Karim, Youssef or medic, bridge representative | Main records exist; medic and representative lack portraits; Youssef is inline SVG | Muddy fork, horse cart, bridge route and medicine quay: loc.crossroads; pilot drawing is procedural only | P0 |
+| 29 p3-karim-key | Ryan, Lina, conditional Karim, Noor or community representative, quay guard, searching mother | Named records exist; guard, representative and mother lack portraits | Iron dock gate, boat-store passage, brass key: loc.dock-gate; parent geography unresolved | P1 |
+| 30 p3-house-without-number | Ryan, Lina, neighbor, conditional Noor/Yasmin, searching woman | Records exist; neighbor and woman lack portraits; Lina/Yasmin image is shared | Damaged sea-side street, unnumbered houses, stairs/crescent stone: loc.unnumbered-house-street | P1 |
+| 31 p3-medicine-cost | Ryan, Lina, conditional Youssef/alternate nurse, Noor, injured woman, coughing boy, quay guard | Main records exist; nurse, patient, child and guard lack portraits | Temporary leaking clinic, treatment table, curtain and medicine boxes: loc.temporary-clinic | P0 |
+| 32 p3-mark-on-stone | Ryan, Lina, conditional Sara, family mother, construction worker | Main records exist; mother and worker lack portraits; repair/tool props missing | Stone steps between school and square at last light: loc.school-steps | P2 |
+| 33 p3-hadi-hearing | Ryan, Lina, conditional Hadi, Mariam, Noor or clerk, conditional Youssef, affected woman, family representative | Records exist; clerk, affected woman and representative lack role portraits; support empty-chair state if Hadi absent | School yard arranged for hearing with evidence/witness/request tables: loc.hearing-yard | P0 |
+| 34 p3-key-handover | Ryan, Lina, conditional Karim, Noor/clerk, conditional Mariam, community representative | Main records exist; clerk and representative lack portraits; key/ledger/mailbox props absent | Dawn handover room between school and quay, repair work outside: loc.handover-room | P1 |
+
+Priority guide: P0 covers plot-critical or recurring settings; P1 covers key continuity and new environments; P2 is polish. These are production recommendations, not approval to create or integrate assets.
+
+### Coverage across all 36 chapters
+
+The 18 original display chapters (01, 03, 05–09, 12–13, 15, 17–18, 20, 23, 25, 28, 35–36) have source image references in the original index.html; the exact sceneIdx and background crosswalk is above. This does not establish distinct art or cleared provenance. Shared portraits and backgrounds remain unresolved. Chapter 36 is labeled sunset but reuses chapter 35 image bytes. The remaining 18 are draft manuscripts; their character and location needs are detailed above. Hala is draft-only and has no source record or portrait.
+
+### Reusable visual package for QARTON cinematic engine
+
+| Separate content area | Reusable asset family | Suggested contract |
+|---|---|---|
+| characters/ | Identity portrait, neutral pose, approved facial expressions, optional body/hand poses | char.<id>, transparent edges, consistent scale/anchor, expression key, provenance/hash/license; no story or save state |
+| backgrounds/ | Base scene, parallax layers, foreground occluders, approved light/fog/weather/time variants | loc.<id>, canvas ratio, focal point, layer order/depth and visual-state key; distinct files required for distinct variants |
+| Role manifest | Reusable civilian, guard, medic, clerk and crowd silhouettes | role.<id>; keep anonymous extras distinct from named characters |
+| Prop manifest | Cart, key, ledger, signal device, map, medicine, bridge repair and clinic equipment | Stable prop IDs, scale and anchor; pilot wagon/bridge/clinic SVGs remain lab-only |
+| Provenance | Creator, source/commission record, license, permission evidence, hash, dimensions, approval | No production use until rights and origin are documented |
+
+This is an asset-contract proposal only. Verify cinematic-engine loader support for WebP/SVG/alpha and resource cleanup before integration. Keep character and background folders separate, lazy-load per-scene art, and compose layers instead of baking every camera move into large duplicate images.
+
+### Android size and memory review
+
+The compressed production image payloads total about 1.76 MB: roughly 0.81 MB of character artwork and 0.95 MB of backgrounds, before data-URI/base64 and HTML overhead. Largest source is background Wt at 122,880 bytes. Raster dimensions are 960×960, 550×1100, and 960×640.
+
+Approximate RGBA decode costs before WebView/GPU copies and cache overhead: 960×960 is 3.52 MiB; 550×1100 is 2.31 MiB; 960×640 is 2.34 MiB. If all 25 unique raster payloads were decoded together, they would occupy about 71.4 MiB. This is an estimate, not a measurement on the target phone, and excludes SVG, runtime and texture duplication.
+
+For Android, keep 960px originals as the current compatibility baseline, decode lazily per scene, release off-screen textures, and do not preload art for all 36 chapters. Profile WebView and GPU memory on device before integration. New layers or expressions add decoded memory even when compressed files are small. Do not re-encode or resize existing embedded artwork in L1.
+
+### Readiness and production order
+
+| Priority | Ready | Missing / gate |
+|---|---|---|
+| P0 | Original 13 records, nine base refs, seven expression images, eleven background refs, hashes/dimensions and legacy crosswalk | Decide portrait reuse; produce/approve smoke-door, gate-queue, sea-gate, survivor-school, crossroads and clinic art; add visible role art only if storyboards require it |
+| P1 | Stable IDs and typed references match PR #23 proposal; pilot assets catalogued as lab-only | Relay hut, village interior, signal workshop, protection site, dock gate, unnumbered street and handover room; resolve Mariam/Yasmin/Hadi/Ryan shared identities |
+| P2 | Existing CSS breathing/blink/shake/tear/candle effects and named expressions are inventoried | Scene expressions, hand/repair closeups, safe crowd silhouettes and optional time/weather variants |
+| Release gate | This PR remains documentation-only | Confirm creators/sources/licenses, G1 place continuity, engine format/lifecycle support, Android performance; map all references before any extraction |
+
+Rights stay unresolved: production art has no checked-in source/creator/license evidence. The pilot brief describes original silhouettes but gives no per-file license statement. Existing use is not a license.
