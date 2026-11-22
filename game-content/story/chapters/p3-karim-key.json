@@ -56,5 +56,57 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "karim",
+    "noor"
+  ],
+  "inputs": [
+    "boatDecision",
+    "familyEvacuation",
+    "supplyAllocation",
+    "bridgeRepair",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "keyCustody",
+    "dockOversight"
+  ],
+  "choices": [
+    {
+      "id": "karimLogged",
+      "textKey": "story.p3-karim-key.choice.karimLogged",
+      "proposedState": {
+        "keyCustody": "karimLogged",
+        "dockOversight": "publicLogPrivateDetails"
+      }
+    },
+    {
+      "id": "jointCommittee",
+      "textKey": "story.p3-karim-key.choice.jointCommittee",
+      "proposedState": {
+        "keyCustody": "jointCommittee",
+        "dockOversight": "dualApprovalEmergencyException"
+      }
+    },
+    {
+      "id": "auditHold",
+      "textKey": "story.p3-karim-key.choice.auditHold",
+      "proposedState": {
+        "keyCustody": "auditHold",
+        "dockOversight": "timedAudit"
+      }
+    }
+  ],
+  "continuity": {
+    "missingKarim": "present-duty-guard-replaces-karim-no-past-testimony",
+    "unknownBoat": "no-inferred-return-or-survival",
+    "splitRepair": "pedestrians-only-after-inspection",
+    "auditHold": "independent-emergency-supplies-remain-accessible",
+    "publicLog": "no-patient-names-or-family-addresses",
+    "decisionOnce": true,
+    "timeCost": "pending-editorial-balance"
+  }
 }
