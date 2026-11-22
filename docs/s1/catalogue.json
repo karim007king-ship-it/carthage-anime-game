@@ -35,31 +35,31 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-01.line-001.speaker",
           "text": "story.legacy-01.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-01.line-002.speaker",
           "text": "story.legacy-01.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "sara",
+          "speakerId": "char.sara",
           "who": "story.legacy-01.line-003.speaker",
           "text": "story.legacy-01.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-01.line-004.speaker",
           "text": "story.legacy-01.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-01.line-005.speaker",
           "text": "story.legacy-01.line-005"
         }
@@ -179,31 +179,31 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-02.line-001.speaker",
           "text": "story.legacy-02.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "salim",
+          "speakerId": "char.salim",
           "who": "story.legacy-02.line-002.speaker",
           "text": "story.legacy-02.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "elias",
+          "speakerId": "char.elias",
           "who": "story.legacy-02.line-003.speaker",
           "text": "story.legacy-02.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "salim",
+          "speakerId": "char.salim",
           "who": "story.legacy-02.line-004.speaker",
           "text": "story.legacy-02.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-02.line-005.speaker",
           "text": "story.legacy-02.line-005"
         }
@@ -325,25 +325,25 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-03.line-001.speaker",
           "text": "story.legacy-03.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "elias",
+          "speakerId": "char.elias",
           "who": "story.legacy-03.line-002.speaker",
           "text": "story.legacy-03.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-03.line-003.speaker",
           "text": "story.legacy-03.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-03.line-004.speaker",
           "text": "story.legacy-03.line-004"
         }
@@ -479,19 +479,19 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-04.line-001.speaker",
           "text": "story.legacy-04.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-04.line-002.speaker",
           "text": "story.legacy-04.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-04.line-003.speaker",
           "text": "story.legacy-04.line-003"
         }
@@ -573,25 +573,25 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-05.line-001.speaker",
           "text": "story.legacy-05.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "mansour",
+          "speakerId": "char.mansour",
           "who": "story.legacy-05.line-002.speaker",
           "text": "story.legacy-05.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-05.line-003.speaker",
           "text": "story.legacy-05.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "mansour",
+          "speakerId": "char.mansour",
           "who": "story.legacy-05.line-004.speaker",
           "text": "story.legacy-05.line-004"
         }
@@ -704,25 +704,25 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-06.line-001.speaker",
           "text": "story.legacy-06.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "youssef",
+          "speakerId": "char.youssef",
           "who": "story.legacy-06.line-002.speaker",
           "text": "story.legacy-06.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-06.line-003.speaker",
           "text": "story.legacy-06.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "youssef",
+          "speakerId": "char.youssef",
           "who": "story.legacy-06.line-004.speaker",
           "text": "story.legacy-06.line-004"
         }
@@ -832,25 +832,25 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-07.line-001.speaker",
           "text": "story.legacy-07.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-07.line-002.speaker",
           "text": "story.legacy-07.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "elderly-woman",
+          "speakerId": "role.elderly-woman",
           "who": "story.legacy-07.line-003.speaker",
           "text": "story.legacy-07.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-07.line-004.speaker",
           "text": "story.legacy-07.line-004"
         }
@@ -974,67 +974,67 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-08.line-001.speaker",
           "text": "story.legacy-08.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "noor",
+          "speakerId": "char.noor",
           "who": "story.legacy-08.line-002.speaker",
           "text": "story.legacy-08.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-08.line-003.speaker",
           "text": "story.legacy-08.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "mansour",
+          "speakerId": "char.mansour",
           "who": "story.legacy-08.line-004.speaker",
           "text": "story.legacy-08.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "elias",
+          "speakerId": "char.elias",
           "who": "story.legacy-08.line-005.speaker",
           "text": "story.legacy-08.line-005"
         },
         {
           "id": "line-006",
-          "speakerId": "noor",
+          "speakerId": "char.noor",
           "who": "story.legacy-08.line-006.speaker",
           "text": "story.legacy-08.line-006"
         },
         {
           "id": "line-007",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-08.line-007.speaker",
           "text": "story.legacy-08.line-007"
         },
         {
           "id": "line-008",
-          "speakerId": "mansour",
+          "speakerId": "char.mansour",
           "who": "story.legacy-08.line-008.speaker",
           "text": "story.legacy-08.line-008"
         },
         {
           "id": "line-009",
-          "speakerId": "elias",
+          "speakerId": "char.elias",
           "who": "story.legacy-08.line-009.speaker",
           "text": "story.legacy-08.line-009"
         },
         {
           "id": "line-010",
-          "speakerId": "noor",
+          "speakerId": "char.noor",
           "who": "story.legacy-08.line-010.speaker",
           "text": "story.legacy-08.line-010"
         },
         {
           "id": "line-011",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-08.line-011.speaker",
           "text": "story.legacy-08.line-011"
         }
@@ -1164,61 +1164,61 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-09.line-001.speaker",
           "text": "story.legacy-09.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "elias",
+          "speakerId": "char.elias",
           "who": "story.legacy-09.line-002.speaker",
           "text": "story.legacy-09.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-09.line-003.speaker",
           "text": "story.legacy-09.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-09.line-004.speaker",
           "text": "story.legacy-09.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-09.line-005.speaker",
           "text": "story.legacy-09.line-005"
         },
         {
           "id": "line-006",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-09.line-006.speaker",
           "text": "story.legacy-09.line-006"
         },
         {
           "id": "line-007",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-09.line-007.speaker",
           "text": "story.legacy-09.line-007"
         },
         {
           "id": "line-008",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-09.line-008.speaker",
           "text": "story.legacy-09.line-008"
         },
         {
           "id": "line-009",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-09.line-009.speaker",
           "text": "story.legacy-09.line-009"
         },
         {
           "id": "line-010",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-09.line-010.speaker",
           "text": "story.legacy-09.line-010"
         }
@@ -1324,73 +1324,73 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-10.line-001.speaker",
           "text": "story.legacy-10.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-10.line-002.speaker",
           "text": "story.legacy-10.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-10.line-003.speaker",
           "text": "story.legacy-10.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-10.line-004.speaker",
           "text": "story.legacy-10.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-10.line-005.speaker",
           "text": "story.legacy-10.line-005"
         },
         {
           "id": "line-006",
-          "speakerId": "elias",
+          "speakerId": "char.elias",
           "who": "story.legacy-10.line-006.speaker",
           "text": "story.legacy-10.line-006"
         },
         {
           "id": "line-007",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-10.line-007.speaker",
           "text": "story.legacy-10.line-007"
         },
         {
           "id": "line-008",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-10.line-008.speaker",
           "text": "story.legacy-10.line-008"
         },
         {
           "id": "line-009",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-10.line-009.speaker",
           "text": "story.legacy-10.line-009"
         },
         {
           "id": "line-010",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-10.line-010.speaker",
           "text": "story.legacy-10.line-010"
         },
         {
           "id": "line-011",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-10.line-011.speaker",
           "text": "story.legacy-10.line-011"
         },
         {
           "id": "line-012",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-10.line-012.speaker",
           "text": "story.legacy-10.line-012"
         }
@@ -1502,79 +1502,79 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-11.line-001.speaker",
           "text": "story.legacy-11.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-11.line-002.speaker",
           "text": "story.legacy-11.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-11.line-003.speaker",
           "text": "story.legacy-11.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "elias",
+          "speakerId": "char.elias",
           "who": "story.legacy-11.line-004.speaker",
           "text": "story.legacy-11.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-11.line-005.speaker",
           "text": "story.legacy-11.line-005"
         },
         {
           "id": "line-006",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-11.line-006.speaker",
           "text": "story.legacy-11.line-006"
         },
         {
           "id": "line-007",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-11.line-007.speaker",
           "text": "story.legacy-11.line-007"
         },
         {
           "id": "line-008",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-11.line-008.speaker",
           "text": "story.legacy-11.line-008"
         },
         {
           "id": "line-009",
-          "speakerId": "elias",
+          "speakerId": "char.elias",
           "who": "story.legacy-11.line-009.speaker",
           "text": "story.legacy-11.line-009"
         },
         {
           "id": "line-010",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-11.line-010.speaker",
           "text": "story.legacy-11.line-010"
         },
         {
           "id": "line-011",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-11.line-011.speaker",
           "text": "story.legacy-11.line-011"
         },
         {
           "id": "line-012",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-11.line-012.speaker",
           "text": "story.legacy-11.line-012"
         },
         {
           "id": "line-013",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-11.line-013.speaker",
           "text": "story.legacy-11.line-013"
         }
@@ -1677,49 +1677,49 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-12.line-001.speaker",
           "text": "story.legacy-12.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "mariam",
+          "speakerId": "char.mariam",
           "who": "story.legacy-12.line-002.speaker",
           "text": "story.legacy-12.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-12.line-003.speaker",
           "text": "story.legacy-12.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "yasmin",
+          "speakerId": "char.yasmin",
           "who": "story.legacy-12.line-004.speaker",
           "text": "story.legacy-12.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-12.line-005.speaker",
           "text": "story.legacy-12.line-005"
         },
         {
           "id": "line-006",
-          "speakerId": "mariam",
+          "speakerId": "char.mariam",
           "who": "story.legacy-12.line-006.speaker",
           "text": "story.legacy-12.line-006"
         },
         {
           "id": "line-007",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-12.line-007.speaker",
           "text": "story.legacy-12.line-007"
         },
         {
           "id": "line-008",
-          "speakerId": "mariam",
+          "speakerId": "char.mariam",
           "who": "story.legacy-12.line-008.speaker",
           "text": "story.legacy-12.line-008"
         }
@@ -1832,49 +1832,49 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-13.line-001.speaker",
           "text": "story.legacy-13.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "hadi",
+          "speakerId": "char.hadi",
           "who": "story.legacy-13.line-002.speaker",
           "text": "story.legacy-13.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-13.line-003.speaker",
           "text": "story.legacy-13.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "hadi",
+          "speakerId": "char.hadi",
           "who": "story.legacy-13.line-004.speaker",
           "text": "story.legacy-13.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "mariam",
+          "speakerId": "char.mariam",
           "who": "story.legacy-13.line-005.speaker",
           "text": "story.legacy-13.line-005"
         },
         {
           "id": "line-006",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-13.line-006.speaker",
           "text": "story.legacy-13.line-006"
         },
         {
           "id": "line-007",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-13.line-007.speaker",
           "text": "story.legacy-13.line-007"
         },
         {
           "id": "line-008",
-          "speakerId": "hadi",
+          "speakerId": "char.hadi",
           "who": "story.legacy-13.line-008.speaker",
           "text": "story.legacy-13.line-008"
         }
@@ -1986,61 +1986,61 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-14.line-001.speaker",
           "text": "story.legacy-14.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "karim",
+          "speakerId": "char.karim",
           "who": "story.legacy-14.line-002.speaker",
           "text": "story.legacy-14.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-14.line-003.speaker",
           "text": "story.legacy-14.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "karim",
+          "speakerId": "char.karim",
           "who": "story.legacy-14.line-004.speaker",
           "text": "story.legacy-14.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "mariam",
+          "speakerId": "char.mariam",
           "who": "story.legacy-14.line-005.speaker",
           "text": "story.legacy-14.line-005"
         },
         {
           "id": "line-006",
-          "speakerId": "hadi",
+          "speakerId": "char.hadi",
           "who": "story.legacy-14.line-006.speaker",
           "text": "story.legacy-14.line-006"
         },
         {
           "id": "line-007",
-          "speakerId": "yasmin",
+          "speakerId": "char.yasmin",
           "who": "story.legacy-14.line-007.speaker",
           "text": "story.legacy-14.line-007"
         },
         {
           "id": "line-008",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-14.line-008.speaker",
           "text": "story.legacy-14.line-008"
         },
         {
           "id": "line-009",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-14.line-009.speaker",
           "text": "story.legacy-14.line-009"
         },
         {
           "id": "line-010",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-14.line-010.speaker",
           "text": "story.legacy-14.line-010"
         }
@@ -2146,49 +2146,49 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-15.line-001.speaker",
           "text": "story.legacy-15.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "mariam",
+          "speakerId": "char.mariam",
           "who": "story.legacy-15.line-002.speaker",
           "text": "story.legacy-15.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "hadi",
+          "speakerId": "char.hadi",
           "who": "story.legacy-15.line-003.speaker",
           "text": "story.legacy-15.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "yasmin",
+          "speakerId": "char.yasmin",
           "who": "story.legacy-15.line-004.speaker",
           "text": "story.legacy-15.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-15.line-005.speaker",
           "text": "story.legacy-15.line-005"
         },
         {
           "id": "line-006",
-          "speakerId": "karim",
+          "speakerId": "char.karim",
           "who": "story.legacy-15.line-006.speaker",
           "text": "story.legacy-15.line-006"
         },
         {
           "id": "line-007",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-15.line-007.speaker",
           "text": "story.legacy-15.line-007"
         },
         {
           "id": "line-008",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-15.line-008.speaker",
           "text": "story.legacy-15.line-008"
         }
@@ -2299,49 +2299,49 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-16.line-001.speaker",
           "text": "story.legacy-16.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "mariam",
+          "speakerId": "char.mariam",
           "who": "story.legacy-16.line-002.speaker",
           "text": "story.legacy-16.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "hadi",
+          "speakerId": "char.hadi",
           "who": "story.legacy-16.line-003.speaker",
           "text": "story.legacy-16.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "karim",
+          "speakerId": "char.karim",
           "who": "story.legacy-16.line-004.speaker",
           "text": "story.legacy-16.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "yasmin",
+          "speakerId": "char.yasmin",
           "who": "story.legacy-16.line-005.speaker",
           "text": "story.legacy-16.line-005"
         },
         {
           "id": "line-006",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-16.line-006.speaker",
           "text": "story.legacy-16.line-006"
         },
         {
           "id": "line-007",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-16.line-007.speaker",
           "text": "story.legacy-16.line-007"
         },
         {
           "id": "line-008",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-16.line-008.speaker",
           "text": "story.legacy-16.line-008"
         }
@@ -2450,49 +2450,49 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-17.line-001.speaker",
           "text": "story.legacy-17.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "mariam",
+          "speakerId": "char.mariam",
           "who": "story.legacy-17.line-002.speaker",
           "text": "story.legacy-17.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "hadi",
+          "speakerId": "char.hadi",
           "who": "story.legacy-17.line-003.speaker",
           "text": "story.legacy-17.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "yasmin",
+          "speakerId": "char.yasmin",
           "who": "story.legacy-17.line-004.speaker",
           "text": "story.legacy-17.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-17.line-005.speaker",
           "text": "story.legacy-17.line-005"
         },
         {
           "id": "line-006",
-          "speakerId": "karim",
+          "speakerId": "char.karim",
           "who": "story.legacy-17.line-006.speaker",
           "text": "story.legacy-17.line-006"
         },
         {
           "id": "line-007",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-17.line-007.speaker",
           "text": "story.legacy-17.line-007"
         },
         {
           "id": "line-008",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-17.line-008.speaker",
           "text": "story.legacy-17.line-008"
         }
@@ -2598,55 +2598,55 @@
       "lines": [
         {
           "id": "line-001",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-18.line-001.speaker",
           "text": "story.legacy-18.line-001"
         },
         {
           "id": "line-002",
-          "speakerId": "ryan",
+          "speakerId": "char.ryan",
           "who": "story.legacy-18.line-002.speaker",
           "text": "story.legacy-18.line-002"
         },
         {
           "id": "line-003",
-          "speakerId": "lina",
+          "speakerId": "char.lina",
           "who": "story.legacy-18.line-003.speaker",
           "text": "story.legacy-18.line-003"
         },
         {
           "id": "line-004",
-          "speakerId": "mariam",
+          "speakerId": "char.mariam",
           "who": "story.legacy-18.line-004.speaker",
           "text": "story.legacy-18.line-004"
         },
         {
           "id": "line-005",
-          "speakerId": "hadi",
+          "speakerId": "char.hadi",
           "who": "story.legacy-18.line-005.speaker",
           "text": "story.legacy-18.line-005"
         },
         {
           "id": "line-006",
-          "speakerId": "yasmin",
+          "speakerId": "char.yasmin",
           "who": "story.legacy-18.line-006.speaker",
           "text": "story.legacy-18.line-006"
         },
         {
           "id": "line-007",
-          "speakerId": "karim",
+          "speakerId": "char.karim",
           "who": "story.legacy-18.line-007.speaker",
           "text": "story.legacy-18.line-007"
         },
         {
           "id": "line-008",
-          "speakerId": "amin",
+          "speakerId": "char.amin",
           "who": "story.legacy-18.line-008.speaker",
           "text": "story.legacy-18.line-008"
         },
         {
           "id": "line-009",
-          "speakerId": "narrator",
+          "speakerId": "role.narrator",
           "who": "story.legacy-18.line-009.speaker",
           "text": "story.legacy-18.line-009"
         }
@@ -2732,139 +2732,152 @@
   ],
   "characters": [
     {
-      "id": "ryan",
+      "id": "char.ryan",
       "texts": {
         "name": "characters.ryan.name",
         "role": "characters.ryan.role",
         "desc": "characters.ryan.desc",
         "secret": "characters.ryan.secret"
-      }
+      },
+      "legacyId": "ryan"
     },
     {
-      "id": "sara",
+      "id": "char.sara",
       "texts": {
         "name": "characters.sara.name",
         "role": "characters.sara.role",
         "desc": "characters.sara.desc",
         "secret": "characters.sara.secret"
-      }
+      },
+      "legacyId": "sara"
     },
     {
-      "id": "lina",
+      "id": "char.lina",
       "trustKey": "lina",
       "texts": {
         "name": "characters.lina.name",
         "role": "characters.lina.role",
         "desc": "characters.lina.desc",
         "secret": "characters.lina.secret"
-      }
+      },
+      "legacyId": "lina"
     },
     {
-      "id": "salim",
+      "id": "char.salim",
       "trustKey": "salim",
       "texts": {
         "name": "characters.salim.name",
         "role": "characters.salim.role",
         "desc": "characters.salim.desc",
         "secret": "characters.salim.secret"
-      }
+      },
+      "legacyId": "salim"
     },
     {
-      "id": "mansour",
+      "id": "char.mansour",
       "trustKey": "mansour",
       "texts": {
         "name": "characters.mansour.name",
         "role": "characters.mansour.role",
         "desc": "characters.mansour.desc",
         "secret": "characters.mansour.secret"
-      }
+      },
+      "legacyId": "mansour"
     },
     {
-      "id": "noor",
+      "id": "char.noor",
       "trustKey": "nour",
       "texts": {
         "name": "characters.noor.name",
         "role": "characters.noor.role",
         "desc": "characters.noor.desc",
         "secret": "characters.noor.secret"
-      }
+      },
+      "legacyId": "noor"
     },
     {
-      "id": "youssef",
+      "id": "char.youssef",
       "trustKey": "father",
       "texts": {
         "name": "characters.youssef.name",
         "role": "characters.youssef.role",
         "desc": "characters.youssef.desc",
         "secret": "characters.youssef.secret"
-      }
+      },
+      "legacyId": "youssef"
     },
     {
-      "id": "elias",
+      "id": "char.elias",
       "trustKey": "elias",
       "texts": {
         "name": "characters.elias.name",
         "role": "characters.elias.role",
         "desc": "characters.elias.desc",
         "secret": "characters.elias.secret"
-      }
+      },
+      "legacyId": "elias"
     },
     {
-      "id": "amin",
+      "id": "char.amin",
       "trustKey": "amin",
       "texts": {
         "name": "characters.amin.name",
         "role": "characters.amin.role",
         "desc": "characters.amin.desc",
         "secret": "characters.amin.secret"
-      }
+      },
+      "legacyId": "amin"
     },
     {
-      "id": "mariam",
+      "id": "char.mariam",
       "trustKey": "mariam",
       "texts": {
         "name": "characters.mariam.name",
         "role": "characters.mariam.role",
         "desc": "characters.mariam.desc",
         "secret": "characters.mariam.secret"
-      }
+      },
+      "legacyId": "mariam"
     },
     {
-      "id": "hadi",
+      "id": "char.hadi",
       "trustKey": "hadi",
       "texts": {
         "name": "characters.hadi.name",
         "role": "characters.hadi.role",
         "desc": "characters.hadi.desc",
         "secret": "characters.hadi.secret"
-      }
+      },
+      "legacyId": "hadi"
     },
     {
-      "id": "yasmin",
+      "id": "char.yasmin",
       "trustKey": "yasmin",
       "texts": {
         "name": "characters.yasmin.name",
         "role": "characters.yasmin.role",
         "desc": "characters.yasmin.desc",
         "secret": "characters.yasmin.secret"
-      }
+      },
+      "legacyId": "yasmin"
     },
     {
-      "id": "karim",
+      "id": "char.karim",
       "trustKey": "karim",
       "texts": {
         "name": "characters.karim.name",
         "role": "characters.karim.role",
         "desc": "characters.karim.desc",
         "secret": "characters.karim.secret"
-      }
+      },
+      "legacyId": "karim"
     },
     {
-      "id": "narrator",
+      "id": "role.narrator",
       "kind": "narrative-voice"
     },
     {
-      "id": "elderly-woman",
+      "id": "role.elderly-woman",
       "kind": "dialogue-only"
     }
   ],
@@ -2896,37 +2909,37 @@
         "lines": [
           {
             "id": "line-001",
-            "speakerId": "narrator",
+            "speakerId": "role.narrator",
             "who": "ending.hero.cinematic.line-001.speaker",
             "text": "ending.hero.cinematic.line-001"
           },
           {
             "id": "line-002",
-            "speakerId": "ryan",
+            "speakerId": "char.ryan",
             "who": "ending.hero.cinematic.line-002.speaker",
             "text": "ending.hero.cinematic.line-002"
           },
           {
             "id": "line-003",
-            "speakerId": "noor",
+            "speakerId": "char.noor",
             "who": "ending.hero.cinematic.line-003.speaker",
             "text": "ending.hero.cinematic.line-003"
           },
           {
             "id": "line-004",
-            "speakerId": "mansour",
+            "speakerId": "char.mansour",
             "who": "ending.hero.cinematic.line-004.speaker",
             "text": "ending.hero.cinematic.line-004"
           },
           {
             "id": "line-005",
-            "speakerId": "lina",
+            "speakerId": "char.lina",
             "who": "ending.hero.cinematic.line-005.speaker",
             "text": "ending.hero.cinematic.line-005"
           },
           {
             "id": "line-006",
-            "speakerId": "ryan",
+            "speakerId": "char.ryan",
             "who": "ending.hero.cinematic.line-006.speaker",
             "text": "ending.hero.cinematic.line-006"
           }
@@ -2951,37 +2964,37 @@
         "lines": [
           {
             "id": "line-001",
-            "speakerId": "narrator",
+            "speakerId": "role.narrator",
             "who": "ending.survivor.cinematic.line-001.speaker",
             "text": "ending.survivor.cinematic.line-001"
           },
           {
             "id": "line-002",
-            "speakerId": "mansour",
+            "speakerId": "char.mansour",
             "who": "ending.survivor.cinematic.line-002.speaker",
             "text": "ending.survivor.cinematic.line-002"
           },
           {
             "id": "line-003",
-            "speakerId": "ryan",
+            "speakerId": "char.ryan",
             "who": "ending.survivor.cinematic.line-003.speaker",
             "text": "ending.survivor.cinematic.line-003"
           },
           {
             "id": "line-004",
-            "speakerId": "mansour",
+            "speakerId": "char.mansour",
             "who": "ending.survivor.cinematic.line-004.speaker",
             "text": "ending.survivor.cinematic.line-004"
           },
           {
             "id": "line-005",
-            "speakerId": "lina",
+            "speakerId": "char.lina",
             "who": "ending.survivor.cinematic.line-005.speaker",
             "text": "ending.survivor.cinematic.line-005"
           },
           {
             "id": "line-006",
-            "speakerId": "ryan",
+            "speakerId": "char.ryan",
             "who": "ending.survivor.cinematic.line-006.speaker",
             "text": "ending.survivor.cinematic.line-006"
           }
@@ -3007,37 +3020,37 @@
         "lines": [
           {
             "id": "line-001",
-            "speakerId": "narrator",
+            "speakerId": "role.narrator",
             "who": "ending.sacrifice.cinematic.line-001.speaker",
             "text": "ending.sacrifice.cinematic.line-001"
           },
           {
             "id": "line-002",
-            "speakerId": "ryan",
+            "speakerId": "char.ryan",
             "who": "ending.sacrifice.cinematic.line-002.speaker",
             "text": "ending.sacrifice.cinematic.line-002"
           },
           {
             "id": "line-003",
-            "speakerId": "sara",
+            "speakerId": "char.sara",
             "who": "ending.sacrifice.cinematic.line-003.speaker",
             "text": "ending.sacrifice.cinematic.line-003"
           },
           {
             "id": "line-004",
-            "speakerId": "lina",
+            "speakerId": "char.lina",
             "who": "ending.sacrifice.cinematic.line-004.speaker",
             "text": "ending.sacrifice.cinematic.line-004"
           },
           {
             "id": "line-005",
-            "speakerId": "noor",
+            "speakerId": "char.noor",
             "who": "ending.sacrifice.cinematic.line-005.speaker",
             "text": "ending.sacrifice.cinematic.line-005"
           },
           {
             "id": "line-006",
-            "speakerId": "narrator",
+            "speakerId": "role.narrator",
             "who": "ending.sacrifice.cinematic.line-006.speaker",
             "text": "ending.sacrifice.cinematic.line-006"
           }
@@ -3062,37 +3075,37 @@
         "lines": [
           {
             "id": "line-001",
-            "speakerId": "elias",
+            "speakerId": "char.elias",
             "who": "ending.traitor.cinematic.line-001.speaker",
             "text": "ending.traitor.cinematic.line-001"
           },
           {
             "id": "line-002",
-            "speakerId": "ryan",
+            "speakerId": "char.ryan",
             "who": "ending.traitor.cinematic.line-002.speaker",
             "text": "ending.traitor.cinematic.line-002"
           },
           {
             "id": "line-003",
-            "speakerId": "elias",
+            "speakerId": "char.elias",
             "who": "ending.traitor.cinematic.line-003.speaker",
             "text": "ending.traitor.cinematic.line-003"
           },
           {
             "id": "line-004",
-            "speakerId": "noor",
+            "speakerId": "char.noor",
             "who": "ending.traitor.cinematic.line-004.speaker",
             "text": "ending.traitor.cinematic.line-004"
           },
           {
             "id": "line-005",
-            "speakerId": "lina",
+            "speakerId": "char.lina",
             "who": "ending.traitor.cinematic.line-005.speaker",
             "text": "ending.traitor.cinematic.line-005"
           },
           {
             "id": "line-006",
-            "speakerId": "ryan",
+            "speakerId": "char.ryan",
             "who": "ending.traitor.cinematic.line-006.speaker",
             "text": "ending.traitor.cinematic.line-006"
           }
@@ -3118,49 +3131,49 @@
         "lines": [
           {
             "id": "line-001",
-            "speakerId": "narrator",
+            "speakerId": "role.narrator",
             "who": "ending.secret.cinematic.line-001.speaker",
             "text": "ending.secret.cinematic.line-001"
           },
           {
             "id": "line-002",
-            "speakerId": "ryan",
+            "speakerId": "char.ryan",
             "who": "ending.secret.cinematic.line-002.speaker",
             "text": "ending.secret.cinematic.line-002"
           },
           {
             "id": "line-003",
-            "speakerId": "elias",
+            "speakerId": "char.elias",
             "who": "ending.secret.cinematic.line-003.speaker",
             "text": "ending.secret.cinematic.line-003"
           },
           {
             "id": "line-004",
-            "speakerId": "mansour",
+            "speakerId": "char.mansour",
             "who": "ending.secret.cinematic.line-004.speaker",
             "text": "ending.secret.cinematic.line-004"
           },
           {
             "id": "line-005",
-            "speakerId": "elias",
+            "speakerId": "char.elias",
             "who": "ending.secret.cinematic.line-005.speaker",
             "text": "ending.secret.cinematic.line-005"
           },
           {
             "id": "line-006",
-            "speakerId": "lina",
+            "speakerId": "char.lina",
             "who": "ending.secret.cinematic.line-006.speaker",
             "text": "ending.secret.cinematic.line-006"
           },
           {
             "id": "line-007",
-            "speakerId": "elias",
+            "speakerId": "char.elias",
             "who": "ending.secret.cinematic.line-007.speaker",
             "text": "ending.secret.cinematic.line-007"
           },
           {
             "id": "line-008",
-            "speakerId": "ryan",
+            "speakerId": "char.ryan",
             "who": "ending.secret.cinematic.line-008.speaker",
             "text": "ending.secret.cinematic.line-008"
           }
