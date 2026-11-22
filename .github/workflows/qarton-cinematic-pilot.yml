@@ -41,6 +41,7 @@ on:
       - 'tests/qarton-g1-cross-chapter-dataflow-test.cjs'
       - 'tests/qarton-g1-multi-choice-group-boundary-test.cjs'
       - 'tests/qarton-g1-draft-checkpoint-validation-test.cjs'
+      - 'scripts/qarton-g1-draft-checkpoint-inspector.cjs'
       - 'tests/fixtures/qarton-g1-*.md'
       - 'tests/fixtures/qarton-g1-p1-smoke-door.md'
       - 'tests/fixtures/qarton-g1-p1-gate-manifest.md'
