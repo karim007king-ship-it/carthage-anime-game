@@ -53,5 +53,62 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "youssef",
+    "noor"
+  ],
+  "inputs": [
+    "supplyAllocation",
+    "clinicShelter",
+    "bridgeRepair",
+    "keyCustody",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "clinicRecovery",
+    "clinicWait",
+    "clinicMaterials",
+    "clinicRepair",
+    "clinicTransfers"
+  ],
+  "choices": [
+    {
+      "id": "triageWater",
+      "textKey": "story.p3-medicine-cost.choice.triageWater",
+      "proposedState": {
+        "clinicRecovery": "triageWater",
+        "clinicWait": "tracked",
+        "clinicMaterials": "unchanged"
+      }
+    },
+    {
+      "id": "repairRequest",
+      "textKey": "story.p3-medicine-cost.choice.repairRequest",
+      "proposedState": {
+        "clinicRecovery": "repairRequest",
+        "clinicRepair": "pendingMaterials",
+        "clinicWait": "extended"
+      }
+    },
+    {
+      "id": "referralNetwork",
+      "textKey": "story.p3-medicine-cost.choice.referralNetwork",
+      "proposedState": {
+        "clinicRecovery": "referralNetwork",
+        "clinicTransfers": "pendingSafetyCheck"
+      }
+    }
+  ],
+  "continuity": {
+    "missingYoussef": "nurse-reads-signed-records-no-absent-testimony",
+    "repair": "request-not-completed-until-material-arrival",
+    "referral": "requires-safe-route-and-confirmed-arrival",
+    "auditHold": "emergency-kit-remains-accessible",
+    "unknownSupply": "no-inferred-repair-or-delivery",
+    "decisionOnce": true,
+    "timeCost": "pending-editorial-balance"
+  }
 }
