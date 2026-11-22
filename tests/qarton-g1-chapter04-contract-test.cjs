@@ -17,9 +17,9 @@ test('chapter 04 keeps its optional, unintegrated legacy boundary',()=>{
  assert.equal(chapter.exitBefore,'legacy-03');
 });
 test('chapter 04 text keys match exactly the Astra manuscript',()=>{
- const ids=[...manuscript.matchAll(/<!-- *([a-z0-9.-]+) *-->/g)].map(m=>m[1]);
- assert.equal(ids.length,17);
- assert.equal(new Set(ids).size,17);
+ const ids=[...manuscript.matchAll(/<!-- *([A-Za-z0-9.-]+) *-->/g)].map(m=>m[1]);
+ assert.equal(ids.length,20);
+ assert.equal(new Set(ids).size,20);
  assert.deepEqual(chapter.textKeys,ids);
  assert.deepEqual(chapter.choices.map(c=>c.textKey),ids.filter(x=>x.includes('.choice.')));
 });
