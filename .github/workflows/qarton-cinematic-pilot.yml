@@ -10,6 +10,8 @@ on:
       - 'examples/qarton-single-load-lab.html'
       - 'examples/qarton-single-load-scene.json'
       - 'tests/qarton-cinematic-scene-package-test.cjs'
+      - 'scripts/qarton-timeline-player.js'
+      - 'tests/qarton-timeline-player-test.cjs'
       - '.github/workflows/qarton-cinematic-pilot.yml'
 jobs:
   contract:
@@ -20,7 +22,7 @@ jobs:
         with:
           node-version: '22'
       - name: Verify standalone pilot contract
-        run: node --test tests/qarton-cinematic-pilot-contract-test.cjs tests/qarton-cinematic-scene-package-test.cjs
+        run: node --test tests/qarton-cinematic-pilot-contract-test.cjs tests/qarton-cinematic-scene-package-test.cjs tests/qarton-timeline-player-test.cjs
       - name: Verify lab is isolated from production save keys
         run: |
           node -e "const fs=require('fs'); const s=fs.readFileSync('examples/qarton-single-load-lab.html','utf8'); if(/localStorage|sessionStorage|shiganshina-|__carthageSaveNow/.test(s)) process.exit(1); console.log('PASS: standalone lab does not access game saves')"
