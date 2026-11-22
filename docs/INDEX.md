@@ -1,3 +1,6 @@
+# Project coordination
+- [Master work plan and cross-PR audit](qarton-master-work-plan-20261122.md) — owners, phases, CI and integration gates.
+
 # QARTON documentation index
 
 **Authority:** this index is organizational, not an approval to merge experimental branches or rewrite the original game.
