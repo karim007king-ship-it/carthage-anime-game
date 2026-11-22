@@ -59,5 +59,68 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "karim",
+    "noor",
+    "maryam"
+  ],
+  "inputs": [
+    "keyCustody",
+    "dockOversight",
+    "registryMethod",
+    "missingHousehold",
+    "supplyAllocation",
+    "clinicRecovery",
+    "houseClaim",
+    "hadiHearing",
+    "part2Resolution",
+    "stoneMark",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "handoverModel",
+    "handoverAudit",
+    "handoverStatus"
+  ],
+  "choices": [
+    {
+      "id": "civicCouncil",
+      "textKey": "story.p3-key-handover.choice.civicCouncil",
+      "proposedState": {
+        "handoverModel": "civicCouncil",
+        "handoverAudit": "publicAppealPrivateRecords",
+        "handoverStatus": "acceptedWithReview"
+      }
+    },
+    {
+      "id": "temporaryTrustees",
+      "textKey": "story.p3-key-handover.choice.temporaryTrustees",
+      "proposedState": {
+        "handoverModel": "temporaryTrustees",
+        "handoverAudit": "datedMandate",
+        "handoverStatus": "pendingElection"
+      }
+    },
+    {
+      "id": "separatedCustody",
+      "textKey": "story.p3-key-handover.choice.separatedCustody",
+      "proposedState": {
+        "handoverModel": "separatedCustody",
+        "handoverAudit": "crossOfficeRequests",
+        "handoverStatus": "distributedWithChecks"
+      }
+    }
+  ],
+  "continuity": {
+    "missingCustodians": "present-verified-records-or-available-alternates-only",
+    "privateRecords": "no-witness-names-patient-names-or-yasmin-address",
+    "unknownLegacyState": "neutral-inventory-no-fabricated-handover-history",
+    "emergencyAccess": "always-available-through-documented-route",
+    "endingPolicy": "legacy-17-then-legacy-18-original-nine-endings-unchanged",
+    "decisionOnce": true,
+    "timeCost": "pending-editorial-balance"
+  }
 }
