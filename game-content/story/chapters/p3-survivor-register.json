@@ -52,5 +52,55 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "sara",
+    "noor"
+  ],
+  "inputs": [
+    "part2Resolution",
+    "alleyFamilies",
+    "manifestHolder",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "registryMethod",
+    "missingHousehold"
+  ],
+  "choices": [
+    {
+      "id": "manifestAppeal",
+      "textKey": "story.p3-survivor-register.choice.manifestAppeal",
+      "proposedState": {
+        "registryMethod": "manifestAppeal",
+        "missingHousehold": "appealFiled"
+      }
+    },
+    {
+      "id": "oralWitness",
+      "textKey": "story.p3-survivor-register.choice.oralWitness",
+      "proposedState": {
+        "registryMethod": "oralWitness",
+        "missingHousehold": "oralPending"
+      }
+    },
+    {
+      "id": "dualDesk",
+      "textKey": "story.p3-survivor-register.choice.dualDesk",
+      "proposedState": {
+        "registryMethod": "dualDesk",
+        "missingHousehold": "searchOpen"
+      }
+    }
+  ],
+  "continuity": {
+    "missingSara": "do-not-render-sara-use-present-alternative",
+    "unknownPart2": "neutral-introduction-no-inferred-ending",
+    "missingPerson": "not-equivalent-to-death",
+    "houseProof": "independent-proof-required-in-ch30",
+    "decisionOnce": true,
+    "timeCost": "pending-editorial-balance"
+  }
 }
