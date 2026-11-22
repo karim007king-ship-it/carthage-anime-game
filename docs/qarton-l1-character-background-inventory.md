@@ -60,8 +60,28 @@ The original scene dialogue and interaction text mention incidental people (incl
 
 ### Existing image, expression and movement variants
 
-- **Portrait files in production:** each character record points to one image variable in the monolithic source. Seven refs are WebP data URIs and two refs (`MH`, `G8`) are inline SVGs. No standalone production portrait files or alternate portrait sheets exist in the tracked tree. The shared portrait refs above are the only repeated character-image references observed.
+- **Portrait files in production:** each of the 13 character records points to one image variable in the monolithic source. There are 9 distinct base portrait refs: seven WebP data URIs and two inline SVGs (`MH`, 320×400, for Yusuf; `G8`, 240×300, for Amin). No standalone production portrait files or alternate portrait sheets exist in the tracked tree. Shared portrait refs are listed in the character table.
+- **Named expression states in the source:** `KH` lists 11 non-normal states. Seven have their own WebP image data URI; four Amin states share his `G8` portrait and differ by tint/glow. `normal` reuses Ryan's `S7`. No separate expression file exists outside the bundle.
+
+| Expression key | Display label | Character | Image ref | Distinct expression image? |
+|---|---|---|---|---|
+| `fear` | خايف | Ryan (`ryan`) | `ez` (WebP data URI) | Yes |
+| `brave` | غاضب / شجاع | Ryan (`ryan`) | `tz` (WebP data URI) | Yes |
+| `crying` | تبكي | Lina (`lina`) | `rz` (WebP data URI) | Yes |
+| `sly` | ماكر | Elias (`elias`) | `Pz` (WebP data URI) | Yes |
+| `worried` | قلقانة / حزينة | Sara (`sara`) | `Az` (WebP data URI) | Yes |
+| `angry` | غاضبة / حازمة | Noor (`noor`) | `zz` (WebP data URI) | Yes |
+| `wise` | حزين / حكيم | Mansour (`mansour`) | `Xz` (WebP data URI) | Yes |
+| `aminCautious` | حذر | Amin (`amin`) | `G8` (inline SVG portrait) | No; shared portrait with tint/glow |
+| `aminSad` | حزين | Amin (`amin`) | `G8` (inline SVG portrait) | No; shared portrait with tint/glow |
+| `aminSerious` | جاد | Amin (`amin`) | `G8` (inline SVG portrait) | No; shared portrait with tint/glow |
+| `aminShocked` | مصدوم | Amin (`amin`) | `G8` (inline SVG portrait) | No; shared portrait with tint/glow |
+| `normal` | عادي | Ryan (`ryan`) | `S7` (WebP portrait) | No; reuses base portrait |
+
+The source chooses expression keys from dialogue text and has scene defaults for Sara (`worried`, sceneIdx 0), Noor (`angry`, 7), Mansour (`wise`, 4) and Amin (`aminCautious`, 8). Treat the expression keys and image refs as presentation data, not story or save identifiers.
+
 - **Base portrait effects in original CSS:** `.stage-slide` enters over 0.4 s; `.stage-breath` scales gently on a 5.4 s cycle; `.stage-blink` applies a brief brightness dip around 94% of a 5.2 s cycle. The speaking portrait receives a border/highlight (`.stage-speaking`); the listening portrait dims (`.stage-listening`).
+- **Expression overlays and movement:** fear/anger can apply `.expression-shake` (0.45 s loop in source CSS). Crying/worried states add animated tear overlays; wise scenes add a flickering candle and glow. The production source has reduced-motion rules for portrait movement, expression shake, tears and candle animation.
 - **Android build presentation effects:** `scripts/prepare-web.cjs` applies idle breathing (4.8 s), grief when `.tear-drop` is present (3.8 s), tension on `.expression-shake` (0.65 s), and a memory/light variation when `.candle-flame` is present (6.2 s). Reduced-motion mode disables the added movement. These are CSS treatments over the same portrait, not alternate image files.
 - **Scene backgrounds:** the pilot cinematic code adds slow drift (26 s) to the detected active background and a short transition when its URL changes. This is a camera/presentation effect, not a new background asset.
 - **PR #21 lab characters:** Ryan, Lina and Nour each have one static SVG silhouette; those files contain simple fixed face shapes and no separate blink frame, expression sheet, hand-gesture frame or clothing/pose variant. The lab HTML adds CSS idle breathing/bobbing while playing. The G2 brief's blink/gesture requirements are future acceptance items, not included art variants.
@@ -97,7 +117,7 @@ The ID `loc.crossroads` is reserved for the PR #21 pilot only. Its background is
 
 ### Production visuals embedded in the original bundle
 
-- `Gt`: 13 character records, 9 distinct image variables (7 WebP data URIs and 2 inline SVG data URIs); repeated portrait refs are listed above.
+- `Gt`: 13 character records, 9 distinct base portrait refs (7 WebP data URIs and 2 inline SVG data URIs). The expression map adds 7 distinct WebP data URIs; Amin's 4 named moods and Ryan's normal state reuse portrait refs. Total distinct embedded character-art refs: 16.
 - `an`: 18 scene records, 11 distinct WebP background variables. The per-scene mapping is listed above.
 - The image variables are stored in the monolithic `index.html`, not as separately tracked production files. The source blob is `db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23`. The source does not provide author, external source URL or license metadata for these embedded images.
 - Repeated background refs are source-level reuse in several scene records, not unreferenced files. This inventory cannot infer whether reuse is artistic intent or a placeholder.
@@ -156,6 +176,7 @@ No file should be moved until a repository-wide exact-path and content-reference
 | Asset group | Source evidence | License / use status |
 |---|---|---|
 | Original character portraits | `Gt` records in production `index.html`; seven WebP data URIs and two inline SVG data URIs referenced by 13 characters | Original author/source/license not recorded; pre-existing production use is not proof of a reusable license |
+| Original expression artwork | Expression map in production `index.html`; seven additional WebP data URIs for fear, brave, crying, sly, worried, angry and wise states | Original author/source/license not recorded; pre-existing production use is not proof of a reusable license |
 | Original scene backgrounds | `an` scene array in production `index.html`; 11 WebP data URIs referenced across 18 scenes | Original author/source/license not recorded; repeated refs are source-level reuse, not separate files |
 | Six pilot SVGs | First tracked in PR #21 under `examples/assets/`; G2 brief requests original lightweight SVG silhouettes | Lab-only; brief supports project-created intent, but no explicit per-file license/author line; do not treat as cleared production art |
 | CSS crossroads environment | Written in `examples/qarton-single-load-lab.html` for the pilot | Repository-authored lab code; no external media source identified |
