@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 1,
+  "kind": "proposal-only",
+  "sourcePRs": [
+    20,
+    24,
+    25
+  ],
+  "contract": {
+    "entityId": "unprefixed lowercase slug within typed manifest",
+    "qualifiedReference": "char.<id> / loc.<id> / role.<id>",
+    "save": "legacy sceneIdx, trust keys and inventory strings remain unchanged",
+    "draftScenes": "display-only, never persisted as legacy sceneIdx"
+  },
+  "characters": [
+    {
+      "id": "ryan",
+      "ref": "char.ryan",
+      "scope": "legacy",
+      "legacyId": "ryan"
+    },
+    {
+      "id": "sara",
+      "ref": "char.sara",
+      "scope": "legacy",
+      "legacyId": "sara"
+    },
+    {
+      "id": "lina",
+      "ref": "char.lina",
+      "scope": "legacy",
+      "legacyId": "lina"
+    },
+    {
+      "id": "salim",
+      "ref": "char.salim",
+      "scope": "legacy",
+      "legacyId": "salim"
+    },
+    {
+      "id": "mansour",
+      "ref": "char.mansour",
+      "scope": "legacy",
+      "legacyId": "mansour"
+    },
+    {
+      "id": "noor",
+      "ref": "char.noor",
+      "scope": "legacy",
+      "legacyId": "noor",
+      "trustKey": "nour"
+    },
+    {
+      "id": "youssef",
+      "ref": "char.youssef",
+      "scope": "legacy",
+      "legacyId": "youssef",
+      "trustKey": "father"
+    },
+    {
+      "id": "elias",
+      "ref": "char.elias",
+      "scope": "legacy",
+      "legacyId": "elias"
+    },
+    {
+      "id": "amin",
+      "ref": "char.amin",
+      "scope": "legacy",
+      "legacyId": "amin"
+    },
+    {
+      "id": "mariam",
+      "ref": "char.mariam",
+      "scope": "legacy",
+      "legacyId": "mariam"
+    },
+    {
+      "id": "hadi",
+      "ref": "char.hadi",
+      "scope": "legacy",
+      "legacyId": "hadi"
+    },
+    {
+      "id": "yasmin",
+      "ref": "char.yasmin",
+      "scope": "legacy",
+      "legacyId": "yasmin"
+    },
+    {
+      "id": "karim",
+      "ref": "char.karim",
+      "scope": "legacy",
+      "legacyId": "karim"
+    }
+  ],
+  "roles": [
+    {
+      "id": "narrator",
+      "ref": "role.narrator"
+    },
+    {
+      "id": "elderly-woman",
+      "ref": "role.elderly-woman"
+    }
+  ],
+  "locations": [
+    {
+      "id": "home",
+      "ref": "loc.home",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "market",
+      "ref": "loc.market",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "wall",
+      "ref": "loc.wall",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "fire-street",
+      "ref": "loc.fire-street",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "mansour-house",
+      "ref": "loc.mansour-house",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "hospital",
+      "ref": "loc.hospital",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "bridge",
+      "ref": "loc.bridge",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "gate",
+      "ref": "loc.gate",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "crossing",
+      "ref": "loc.crossing",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "forest",
+      "ref": "loc.forest",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "plains",
+      "ref": "loc.plains",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "hidden-village",
+      "ref": "loc.hidden-village",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "laboratory",
+      "ref": "loc.laboratory",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "ruins",
+      "ref": "loc.ruins",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "square",
+      "ref": "loc.square",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "harbor",
+      "ref": "loc.harbor",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    },
+    {
+      "id": "byrsa",
+      "ref": "loc.byrsa",
+      "scope": "legacy",
+      "visualStatus": "existing-embedded-art"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "legacy-01",
+      "displayChapter": 1,
+      "scope": "legacy",
+      "sceneIdx": 0
+    },
+    {
+      "id": "p1-family-promise",
+      "displayChapter": 2,
+      "scope": "draft"
+    },
+    {
+      "id": "legacy-02",
+      "displayChapter": 3,
+      "scope": "legacy",
+      "sceneIdx": 1
+    },
+    {
+      "id": "p1-family-alley",
+      "displayChapter": 4,
+      "scope": "draft"
+    },
+    {
+      "id": "legacy-03",
+      "displayChapter": 5,
+      "scope": "legacy",
+      "sceneIdx": 2
+    },
+    {
+      "id": "legacy-04",
+      "displayChapter": 6,
+      "scope": "legacy",
+      "sceneIdx": 3
+    },
+    {
+      "id": "legacy-05",
+      "displayChapter": 7,
+      "scope": "legacy",
+      "sceneIdx": 4
+    },
+    {
+      "id": "legacy-06",
+      "displayChapter": 8,
+      "scope": "legacy",
+      "sceneIdx": 5
+    },
+    {
+      "id": "legacy-07",
+      "displayChapter": 9,
+      "scope": "legacy",
+      "sceneIdx": 6
+    },
+    {
+      "id": "p1-smoke-door",
+      "displayChapter": 10,
+      "scope": "draft"
+    },
+    {
+      "id": "p1-gate-manifest",
+      "displayChapter": 11,
+      "scope": "draft"
+    },
+    {
+      "id": "legacy-08",
+      "displayChapter": 12,
+      "scope": "legacy",
+      "sceneIdx": 7
+    },
+    {
+      "id": "legacy-09",
+      "displayChapter": 13,
+      "scope": "legacy",
+      "sceneIdx": 8
+    },
+    {
+      "id": "p2-relay-hut",
+      "displayChapter": 14,
+      "scope": "draft"
+    },
+    {
+      "id": "legacy-10",
+      "displayChapter": 15,
+      "scope": "legacy",
+      "sceneIdx": 9
+    },
+    {
+      "id": "p2-names-consent",
+      "displayChapter": 16,
+      "scope": "draft"
+    },
+    {
+      "id": "legacy-11",
+      "displayChapter": 17,
+      "scope": "legacy",
+      "sceneIdx": 10
+    },
+    {
+      "id": "legacy-12",
+      "displayChapter": 18,
+      "scope": "legacy",
+      "sceneIdx": 11
+    },
+    {
+      "id": "p2-yasmin-drawing",
+      "displayChapter": 19,
+      "scope": "draft"
+    },
+    {
+      "id": "legacy-13",
+      "displayChapter": 20,
+      "scope": "legacy",
+      "sceneIdx": 12
+    },
+    {
+      "id": "p2-last-signal",
+      "displayChapter": 21,
+      "scope": "draft"
+    },
+    {
+      "id": "p2-protection-cost",
+      "displayChapter": 22,
+      "scope": "draft"
+    },
+    {
+      "id": "legacy-14",
+      "displayChapter": 23,
+      "scope": "legacy",
+      "sceneIdx": 13
+    },
+    {
+      "id": "p2-truth-gate",
+      "displayChapter": 24,
+      "scope": "draft"
+    },
+    {
+      "id": "legacy-15",
+      "displayChapter": 25,
+      "scope": "legacy",
+      "sceneIdx": 14
+    },
+    {
+      "id": "p3-survivor-register",
+      "displayChapter": 26,
+      "scope": "draft"
+    },
+    {
+      "id": "p3-single-load",
+      "displayChapter": 27,
+      "scope": "draft"
+    },
+    {
+      "id": "legacy-16",
+      "displayChapter": 28,
+      "scope": "legacy",
+      "sceneIdx": 15
+    },
+    {
+      "id": "p3-karim-key",
+      "displayChapter": 29,
+      "scope": "draft"
+    },
+    {
+      "id": "p3-house-without-number",
+      "displayChapter": 30,
+      "scope": "draft"
+    },
+    {
+      "id": "p3-medicine-cost",
+      "displayChapter": 31,
+      "scope": "draft"
+    },
+    {
+      "id": "p3-mark-on-stone",
+      "displayChapter": 32,
+      "scope": "draft"
+    },
+    {
+      "id": "p3-hadi-hearing",
+      "displayChapter": 33,
+      "scope": "draft"
+    },
+    {
+      "id": "p3-key-handover",
+      "displayChapter": 34,
+      "scope": "draft"
+    },
+    {
+      "id": "legacy-17",
+      "displayChapter": 35,
+      "scope": "legacy",
+      "sceneIdx": 16
+    },
+    {
+      "id": "legacy-18",
+      "displayChapter": 36,
+      "scope": "legacy",
+      "sceneIdx": 17
+    }
+  ],
+  "proposedCharacters": [
+    {
+      "id": "hala",
+      "ref": "char.hala",
+      "scope": "draft",
+      "assetStatus": "missing"
+    }
+  ]
+}
