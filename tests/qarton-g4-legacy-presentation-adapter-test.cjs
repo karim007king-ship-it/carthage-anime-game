@@ -100,3 +100,17 @@ test('feature flag requires explicit boolean true even for valid saved scenes',(
   }
   assert.equal(createLegacyPresentationSnapshot(saved,true).sceneId,'legacy-05');
 });
+
+test('G4 adapter has no storage, DOM, or host mutation dependency',()=>{
+  const fs=require('node:fs');
+  const path=require('node:path');
+  const source=fs.readFileSync(path.join(__dirname,'../scripts/qarton-g4-legacy-presentation-adapter.cjs'),'utf8');
+  for(const forbidden of [
+    /\blocalStorage\b/,/\bsessionStorage\b/,/\bdocument\b/,/\bwindow\b/,
+    /\bfetch\s*\(/,/\bXMLHttpRequest\b/,/\bMutationObserver\b/,
+    /__carthageSaveNow/,/__carthageContinue/,/shiganshina-/,
+    /\bsetItem\s*\(/,/\bremoveItem\s*\(/
+  ]){
+    assert.doesNotMatch(source,forbidden,`forbidden production dependency: ${forbidden}`);
+  }
+});
