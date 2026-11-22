@@ -36,3 +36,18 @@ test('trust aliases and missing draft art stay explicit', () => {
   assert.equal(registry.characters.find(c=>c.id==='youssef').trustKey,'father');
   assert.equal(registry.proposedCharacters.find(c=>c.id==='hala').assetStatus,'missing');
 });
+
+test('original scene-to-visual crosswalk matches L1 and preserves shared images', () => {
+  const rows = registry.legacySceneVisualCrosswalk;
+  assert.equal(rows.length,18);
+  assert.deepEqual(rows.map(r=>r.sceneIdx),Array.from({length:18},(_,i)=>i));
+  assert.equal(new Set(rows.map(r=>r.embeddedBackgroundVariable)).size,11);
+  const locationRefs = new Set(registry.locations.map(l=>l.ref));
+  for (const row of rows) {
+    assert.equal(row.sceneId,'legacy-'+String(row.sceneIdx+1).padStart(2,'0'));
+    assert.ok(locationRefs.has(row.locationRef),row.locationRef);
+  }
+  assert.equal(rows[4].locationRef,'loc.mansour-house');
+  assert.equal(rows[4].embeddedBackgroundVariable,'C7');
+  assert.equal(rows[16].embeddedBackgroundVariable,rows[17].embeddedBackgroundVariable);
+});
