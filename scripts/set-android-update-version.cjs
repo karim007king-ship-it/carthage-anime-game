@@ -1,0 +1,28 @@
+'use strict';
+// Patch only the ephemeral Capacitor-generated Android project. Do not change appId or signing.
+const fs=require('node:fs');
+const path=require('node:path');
+const gradlePath=path.join('android','app','build.gradle');
+const manifestPath=path.join('android','app','src','main','AndroidManifest.xml');
+const appId=JSON.parse(fs.readFileSync('capacitor.config.json','utf8')).appId;
+if(appId!=='com.qarton.carthage')throw Error('Refusing unexpected appId: '+appId);
+const run=Number(process.env.GITHUB_RUN_NUMBER);
+const attempt=Number(process.env.GITHUB_RUN_ATTEMPT||1);
+if(!Number.isSafeInteger(run)||run<1||!Number.isSafeInteger(attempt)||attempt<1||attempt>9)throw Error('Valid GitHub run number and attempt required');
+const versionCode=100000+run*10+attempt;
+if(versionCode>2100000000)throw Error('Android versionCode limit reached');
+let gradle=fs.readFileSync(gradlePath,'utf8');
+const appIdMatches=[...gradle.matchAll(/applicationId\s+['\"]([^'\"]+)['\"]/g)];
+if(appIdMatches.length!==1||appIdMatches[0][1]!==appId)throw Error('Unexpected applicationId in generated Gradle');
+const codeMatches=[...gradle.matchAll(/\bversionCode\s+\d+\b/g)];
+if(codeMatches.length!==1)throw Error('Expected exactly one generated versionCode');
+gradle=gradle.replace(/\bversionCode\s+\d+\b/,'versionCode '+versionCode);
+const nameMatches=[...gradle.matchAll(/\bversionName\s+['\"][^'\"]+['\"]/g)];
+if(nameMatches.length!==1)throw Error('Expected exactly one generated versionName');
+const name=JSON.parse(fs.readFileSync('package.json','utf8')).version;
+if(!/^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/.test(name))throw Error('Invalid package version');
+gradle=gradle.replace(/\bversionName\s+['\"][^'\"]+['\"]/,'versionName "'+name+'"');
+fs.writeFileSync(gradlePath,gradle);
+const manifest=fs.readFileSync(manifestPath,'utf8');
+if(!manifest.includes('<manifest'))throw Error('Android manifest missing');
+console.log('Upgrade identity:',appId,'versionCode:',versionCode,'versionName:',name);
