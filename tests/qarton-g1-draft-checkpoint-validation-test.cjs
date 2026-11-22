@@ -134,3 +134,15 @@ test('malformed chapter group contracts fail closed rather than throwing',()=>{
   assert.equal(inspectCheckpoint(bad,sample).valid,false);
  }
 });
+
+
+test('empty and non-string chapter choice identifiers never validate a checkpoint',()=>{
+ const c=read('p1-gate-manifest');
+ const sample={schemaVersion:1,chapterId:c.id,groups:{seat:'yieldSeat'}};
+ const badGroups=[[],[{id:'seat',choiceIds:[]}],[{id:'seat',choiceIds:['']}],[{id:'seat',choiceIds:[null]}],[{id:'',choiceIds:['yieldSeat']}]];
+ for(const choiceGroups of badGroups){
+  assert.equal(inspectCheckpoint({...c,choiceGroups},sample).valid,false);
+ }
+ assert.equal(inspectCheckpoint({...c,id:''},sample).valid,false);
+ assert.deepEqual(inspectCheckpoint(c,sample),{valid:true,completeGroups:['seat']});
+});
