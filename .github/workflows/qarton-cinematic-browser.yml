@@ -13,6 +13,8 @@ on:
 jobs:
   chromium:
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.58.2-noble
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
@@ -20,7 +22,6 @@ jobs:
         with:
           node-version: '22'
       - run: npm install --no-package-lock --ignore-scripts
-      - run: npx playwright install --with-deps chromium
       - name: Start isolated test server
         run: node scripts/qarton-lab-server.cjs > /tmp/qarton-lab.log 2>&1 &
       - name: Run Chromium test
