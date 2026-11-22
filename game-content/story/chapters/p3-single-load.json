@@ -57,5 +57,59 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "noor",
+    "karim",
+    "youssef"
+  ],
+  "inputs": [
+    "registryMethod",
+    "boatDecision",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "supplyAllocation",
+    "bridgeRepair",
+    "clinicShelter"
+  ],
+  "choices": [
+    {
+      "id": "prioritizeBridge",
+      "textKey": "story.p3-single-load.choice.prioritizeBridge",
+      "proposedState": {
+        "supplyAllocation": "bridge",
+        "bridgeRepair": "started",
+        "clinicShelter": "improvised"
+      }
+    },
+    {
+      "id": "prioritizeClinic",
+      "textKey": "story.p3-single-load.choice.prioritizeClinic",
+      "proposedState": {
+        "supplyAllocation": "clinic",
+        "bridgeRepair": "delayed",
+        "clinicShelter": "reinforced"
+      }
+    },
+    {
+      "id": "splitWithLimits",
+      "textKey": "story.p3-single-load.choice.splitWithLimits",
+      "proposedState": {
+        "supplyAllocation": "split",
+        "bridgeRepair": "footpathOnly",
+        "clinicShelter": "partial"
+      }
+    }
+  ],
+  "continuity": {
+    "unknownAllocation": "no-retroactive-repair-or-shelter",
+    "missingBoat": "no-extra-transport-resource",
+    "split": "footpath-only-not-two-full-repairs",
+    "outcome": "rescue-and-treatment-require-later-confirmation",
+    "decisionOnce": true,
+    "timeCost": "pending-editorial-balance"
+  }
 }
