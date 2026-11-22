@@ -5,6 +5,9 @@ const path=require('node:path');
 const {exportPilotPreview}=require('./qarton-pilot-preview-export.cjs');
 function installPilotPreview(workspace){
  const root=path.resolve(workspace);
+ if(process.env.QARTON_ISOLATED_PILOT!=='1') throw new Error('Isolated pilot environment required');
+ const config=JSON.parse(fs.readFileSync(path.join(root,'capacitor.config.json'),'utf8'));
+ if(config.appId!=='com.qarton.carthage.pilot') throw new Error('Refusing production Android package');
  const www=path.join(root,'www');
  const index=path.join(www,'index.html');
  if(!fs.existsSync(index)) throw new Error('Prepared isolated www/index.html required');
