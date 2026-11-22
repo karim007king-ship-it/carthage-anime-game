@@ -6,6 +6,7 @@ on:
     paths:
       - 'scripts/qarton-pilot-capacitor-config.cjs'
       - 'scripts/qarton-pilot-build-guard.cjs'
+      - 'scripts/qarton-pilot-content-gate.cjs'
       - 'tests/qarton-pilot-capacitor-config-test.cjs'
       - 'tests/qarton-pilot-build-guard-test.cjs'
       - '.github/workflows/qarton-isolated-pilot-preflight.yml'
@@ -24,6 +25,8 @@ jobs:
           node-version: '22'
       - name: Test pilot configuration isolation
         run: node --test tests/qarton-pilot-capacitor-config-test.cjs tests/qarton-pilot-build-guard-test.cjs
+      - name: Validate 36 chapter draft manifest without runtime integration
+        run: node scripts/qarton-pilot-content-gate.cjs
       - name: Generate isolated config outside source tree
         run: |
           mkdir -p "$RUNNER_TEMP/qarton-pilot"
