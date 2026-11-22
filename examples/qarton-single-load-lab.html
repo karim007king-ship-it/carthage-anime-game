@@ -39,25 +39,49 @@ button[disabled]{opacity:.5;cursor:not-allowed}.choices button{flex:1 1 180px}#r
 </div>
 <div id="result" role="status" aria-live="polite"></div>
 </main>
+<script src="../scripts/qarton-timeline-player.js"></script>
 <script>
 (()=>{'use strict';
-const lines=['نور: هذه آخر حمولة نجموا نخرجوها اليوم.','ريان: نجموا نقسموا الخشب والدواء؟','نور: وقتها لا الجسر يتصلّح مليح، لا العيادة تتغطّى كيف يلزم.','لينا: وفي الزوز بلايص ثمّة ناس تستنّى.'];
 const outcomes={
  prioritizeBridge:'الجسر: إصلاح بدأ. العيادة: غطاء مؤقت.',
  prioritizeClinic:'العيادة: سقف أقوى. الجسر: الإصلاح تأجّل.',
  splitWithLimits:'الجسر: ممر مشاة فقط. العيادة: حماية جزئية.'
 };
-let index=0,timer=null,reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const subtitle=document.getElementById('subtitle'),result=document.getElementById('result');
-function stop(){if(timer!==null){clearInterval(timer);timer=null;}}
-function show(){subtitle.textContent=lines[index];}
-function play(){stop();if(reduced){index=lines.length-1;show();return;}timer=setInterval(()=>{if(index===lines.length-1){stop();return;}index++;show();},2500);}
-document.getElementById('play').addEventListener('click',play);
-document.getElementById('pause').addEventListener('click',stop);
-document.getElementById('replay').addEventListener('click',()=>{stop();index=0;show();result.textContent='';});
-document.getElementById('reduce').addEventListener('click',()=>{reduced=!reduced;stop();document.querySelector('.stage').style.animation='none';result.textContent=reduced?'تقليل الحركة مفعل':'تقليل الحركة معطل';});
-document.querySelectorAll('[data-choice]').forEach(button=>button.addEventListener('click',()=>{stop();result.textContent=outcomes[button.dataset.choice]||'اختيار غير معروف';}));
-window.addEventListener('pagehide',stop);show();
+const stage=document.querySelector('.stage'),wagon=document.querySelector('.wagon');
+let player=null,frameId=null,lastFrame=null;
+let reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function stopLoop(){if(frameId!==null){cancelAnimationFrame(frameId);frameId=null;}lastFrame=null;}
+function frame(t){if(!player||!player.state.playing){stopLoop();return;}if(lastFrame!==null)player.tick(Math.max(0,Math.min(250,t-lastFrame)));lastFrame=t;if(player.state.playing)frameId=requestAnimationFrame(frame);else stopLoop();}
+function startLoop(){stopLoop();frameId=requestAnimationFrame(frame);}
+function render(view){
+ const d=view.dialogue;
+ subtitle.textContent=d?({nour:'نور',ryan:'ريان',lina:'لينا'}[d.speaker]||d.speaker)+': '+d.text:'...';
+ const shot=view.camera?.shot||'wide';
+ stage.dataset.shot=shot;
+ const movement=reduced?0:Math.min(12,view.positionMs/2200);
+ wagon.style.transform='translateX('+movement+'px) scale('+(reduced?1:shot==='medium'?1.12:1)+')';
+ document.querySelectorAll('[data-choice]').forEach(b=>{b.disabled=!view.choices;});
+}
+async function init(){
+ if(!window.QartonTimelinePlayer){result.textContent='تعذّر تحميل مشغّل المشهد.';return;}
+ try{
+  const response=await fetch('./qarton-single-load-scene.json');
+  if(!response.ok)throw Error('HTTP '+response.status);
+  const scene=await response.json();
+  player=window.QartonTimelinePlayer.createTimelinePlayer(scene,render);
+  document.getElementById('play').addEventListener('click',()=>{player.play();startLoop();});
+  document.getElementById('pause').addEventListener('click',()=>{player.pause();stopLoop();});
+  document.getElementById('replay').addEventListener('click',()=>{player.replay();result.textContent='';startLoop();});
+  document.getElementById('reduce').addEventListener('click',()=>{reduced=!reduced;player.pause();stopLoop();render({camera:null,dialogue:null,choices:null,positionMs:0});result.textContent=reduced?'تقليل الحركة مفعل':'تقليل الحركة معطل';});
+  document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{
+   if(!player.state.positionMs||player.state.positionMs<20500)return;
+   player.pause();stopLoop();result.textContent=outcomes[b.dataset.choice]||'اختيار غير معروف';
+  }));
+ }catch(err){result.textContent='يلزم تشغيل التجربة عبر خادم ويب محلي أو GitHub Pages، موش فتح الملف مباشرة. '+err.message;}
+}
+window.addEventListener('pagehide',()=>{stopLoop();if(player)player.destroy();});
+init();
 })();
 </script>
 </body>
