@@ -40,6 +40,8 @@
 - [QA coverage matrix](qa/coverage-matrix.md) — automated coverage versus outstanding device checks.
 - [Asset provenance inventory](assets/README.md) — intro, lab art and audio provenance gates.
 
+- [G1 save/resume and Android acceptance matrix](qa/qarton-g1-save-resume-acceptance-matrix.md) — once-only decisions, v1 fallback, 27 resource combinations and device acceptance gates.
+
 ## Test entry points
 - `npm test` — original smoke, save recovery and intro packaging only.
 - `.github/workflows/qarton-cinematic-pilot.yml` — pilot/contract checks.
