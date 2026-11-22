@@ -80,11 +80,11 @@ jobs:
 
       - name: Prepare web assets
         env:
-          QARTON_INTRO_ENABLE: ${{ (github.event_name == 'pull_request' || inputs.qarton_intro == true) && '1' || '0' }}
+          QARTON_INTRO_ENABLE: '1'
         run: npm run prepare:web
 
       - name: Run portrait home browser regressions
-        if: github.event_name == 'pull_request' || inputs.qarton_intro == true
+        if: github.event_name == 'pull_request' || github.event_name == 'push' || inputs.qarton_intro == true
         env:
           QARTON_BROWSER_EXECUTABLE: /usr/bin/google-chrome
         run: npm run test:home
@@ -204,7 +204,7 @@ jobs:
 
   android-webview:
     needs: build
-    if: github.event_name == 'pull_request' || inputs.qarton_intro == true
+    if: github.event_name == 'pull_request' || github.event_name == 'push' || inputs.qarton_intro == true
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
