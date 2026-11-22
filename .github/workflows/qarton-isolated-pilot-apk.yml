@@ -2,6 +2,9 @@ name: QARTON isolated pilot APK (manual, experimental)
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/qarton-isolated-pilot-apk.yml'
 
 permissions:
   contents: read
