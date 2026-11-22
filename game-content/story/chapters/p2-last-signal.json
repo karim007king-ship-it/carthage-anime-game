@@ -57,5 +57,64 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "maryam",
+    "amin",
+    "lina",
+    "hadi"
+  ],
+  "location": {
+    "status": "proposed-unmapped",
+    "description": "signal room above abandoned workshop"
+  },
+  "inputs": [
+    "namesConsent",
+    "aminTestimony",
+    "signalDevice",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "signalDelivery",
+    "signalReceipt"
+  ],
+  "choices": [
+    {
+      "id": "sendAuthorizedSummary",
+      "textKey": "story.p2-last-signal.choice.sendAuthorizedSummary",
+      "proposedState": {
+        "signalDelivery": "radioSummary",
+        "signalReceipt": "confirmedSingleHouse"
+      },
+      "costMinutes": 2
+    },
+    {
+      "id": "sendSealedCourier",
+      "textKey": "story.p2-last-signal.choice.sendSealedCourier",
+      "proposedState": {
+        "signalDelivery": "courier",
+        "signalReceipt": "pending"
+      },
+      "costMinutes": 3
+    },
+    {
+      "id": "testOnly",
+      "textKey": "story.p2-last-signal.choice.testOnly",
+      "proposedState": {
+        "signalDelivery": "testOnly",
+        "signalReceipt": "confirmedSingleHouse"
+      },
+      "costMinutes": 1
+    }
+  ],
+  "continuity": {
+    "unknownConsent": "independent-facts-only",
+    "brokenDevice": "radio-choice-requires-paper-fallback-confirmation-no-false-receipt",
+    "missingMaryam": "paper-or-local-hearing-no-remote-voice",
+    "singleHouseReceipt": "not-public-broadcast",
+    "endingPolicy": "no-light-shadow-unlock",
+    "inventoryPolicy": "sealed-record-separate-from-legacy-inventory",
+    "decisionOnce": true
+  }
 }
