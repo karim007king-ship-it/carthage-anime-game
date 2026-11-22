@@ -2,7 +2,7 @@
 // Pure, draft-only checkpoint inspector. No production runtime or storage integration.
 const hasOwn=(obj,key)=>Object.prototype.hasOwnProperty.call(obj,key);
 function inspectDraftCheckpoint(chapter,checkpoint){
- if(!chapter||typeof chapter.id!=='string'||!Array.isArray(chapter.choiceGroups)||!checkpoint||typeof checkpoint!=='object'||Array.isArray(checkpoint))return {valid:false,reason:'shape'};
+ if(!chapter||typeof chapter.id!=='string'||!chapter.id||!Array.isArray(chapter.choiceGroups)||!chapter.choiceGroups.length||!checkpoint||typeof checkpoint!=='object'||Array.isArray(checkpoint))return {valid:false,reason:'shape'};
  if(Object.getPrototypeOf(checkpoint)!==Object.prototype)return {valid:false,reason:'shape'};
  const fields=Reflect.ownKeys(checkpoint);
  if(fields.length!==3||fields.some(k=>!['schemaVersion','chapterId','groups'].includes(k)))return {valid:false,reason:'fields'};
@@ -17,7 +17,7 @@ function inspectDraftCheckpoint(chapter,checkpoint){
  if(knownGroupIds.size!==chapter.choiceGroups.length)return {valid:false,reason:'chapter-groups'};
  const allowedChoices=new Map();
  for(const group of chapter.choiceGroups){
-  if(!group||typeof group.id!=='string'||!Array.isArray(group.choiceIds)||!group.choiceIds.length||new Set(group.choiceIds).size!==group.choiceIds.length)return {valid:false,reason:'chapter-groups'};
+  if(!group||typeof group.id!=='string'||!group.id||!Array.isArray(group.choiceIds)||!group.choiceIds.length||group.choiceIds.some(id=>typeof id!=='string'||!id)||new Set(group.choiceIds).size!==group.choiceIds.length)return {valid:false,reason:'chapter-groups'};
   allowedChoices.set(group.id,new Set(group.choiceIds));
  }
  for(const name of names){
