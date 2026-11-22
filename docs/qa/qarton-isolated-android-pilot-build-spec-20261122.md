@@ -1,0 +1,41 @@
+# QARTON — Isolated Android pilot build specification
+
+**Status:** Engineering handoff; NOT an APK, NOT a claim of on-device testing. Applies to Draft PR #23 and future opt-in pilot branch only. Production game and original save schema remain unchanged.
+
+## Verified existing build path
+
+- `capacitor.config.json` uses production `appId: com.qarton.carthage`, `appName: قرطاج`, and `webDir: www`.
+- `.github/workflows/android-apk.yml` runs `npm test`, `npm run prepare:web`, `npx cap add android`, `npx cap sync android`, Gradle debug assembly and emulator tests. It requires the `CARTHAGE_KEYSTORE_BASE64` repository secret and verifies the stable Carthage signing certificate.
+- That workflow creates the **production-ID** APK; it is **not** an isolated 36-chapter pilot builder. Do not dispatch it as a pilot, or distribute its output as the pilot.
+- PR #23 has 132 changed files (checked across both GitHub pagination pages) and none are `index.html`, `scripts/prepare-web.cjs`, `android/`, or `app/`. CI run `45043126296` succeeded after the protected-file boundary gate was introduced.
+
+## Required opt-in pilot separation
+
+1. Use a **separate future pilot branch/PR** and a separate workflow; do not modify the production build workflow in this Draft PR.
+2. After copying the prepared `www` assets into an isolated workspace, generate a **pilot-only Capacitor config** with a distinct application ID such as `com.qarton.carthage.pilot` and a clearly different launcher name. Never overwrite the checked-in production `capacitor.config.json`.
+3. Use a **dedicated pilot signing key**; never reuse, expose, or rotate the stable production signing secret. Keep signing material in repository secrets and avoid logging it.
+4. Require an explicit opt-in feature flag to load draft chapters. The default route must keep the 18 original chapters. Do not silently alter `sceneIdx`, `lineIdx`, original endings, or the legacy save JSON.
+5. Store draft checkpoints only in a **pilot namespace**. Do not import pilot checkpoint fields into original saves. Export original saves first and verify their hashes and critical fields before/after the trial.
+6. Add a visible PILOT label and distinct package ID to any generated artifact; confirm via Android tooling that both apps can be installed simultaneously without uninstalling the original.
+7. Run existing HTML/home and static contract tests, then emulator tests on the actual pilot APK. Only after those pass, test on a physical Android device.
+8. Preserve the official QARTON intro and licensed assets only; never promote missing or rights-unverified draft art as production imagery.
+
+## Implementation gates
+
+| Gate | Acceptance |
+| --- | --- |
+| Package isolation | `applicationId` differs from `com.qarton.carthage`; installed production app remains untouched |
+| Build reproducibility | Commit SHA, Node/Java/SDK versions, asset hashes and signing certificate fingerprint recorded |
+| Draft gating | No draft chapters when opt-in flag is off; pilot cannot mutate original save storage |
+| Save integrity | Export/import original save, including chapter 5; compare `sceneIdx`, `lineIdx`, trust, inventory, flags, history and ending state |
+| Partial checkpoint | Chapter 11 seat/custody and chapter 22 boat/Elias groups survive process death without applying a choice twice |
+| Content and visuals | 36 display positions mapped, absent characters hidden, missing/unlicensed art visibly marked |
+| Ending authorization | All nine original ending routes tested without draft shortcuts |
+| Language | First-open and reopened settings in `tn/ar/en/fr`, including mixed-language regression |
+| Android lifecycle | Background/foreground, forced termination, repeated scene navigation, memory and audio cleanup |
+
+## Stop/go
+
+**Current decision: NO-GO for building/distributing a 36-chapter pilot from PR #23.** It contains static contracts and draft content, not a fully wired runtime. A separate opt-in implementation and approval of G1/L1/S1 handoff gates are required. The existing `android-apk.yml` output must not be represented as the 36-chapter pilot.
+
+When pilot implementation exists, run `docs/qa/qarton-36-chapter-android-acceptance-protocol-20261122.md` and attach actual test evidence. Keep PR #23 Draft; do not merge automatically.
