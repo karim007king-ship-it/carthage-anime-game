@@ -84,3 +84,23 @@ test('explicit null audio constructor keeps fallback silent',()=>{
   assert.equal(a.state.activeCount,0);
   a.destroy();
 });
+
+test('repeated mute state does not restart active loop, and disposed controls are inert',()=>{
+  FakeAudio.instances=[];
+  const a=createAudioPlayback(scene,{AudioCtor:FakeAudio,muted:false});
+  a.play(1500);
+  assert.equal(FakeAudio.instances.length,1);
+  a.setMuted(false);
+  assert.equal(FakeAudio.instances.length,1);
+  a.setMuted(true);
+  assert.equal(a.state.activeCount,0);
+  a.setMuted(true);
+  a.setMuted(false); // user-initiated unmute may restart current loop
+  assert.equal(FakeAudio.instances.length,2);
+  a.destroy();
+  a.setMuted(false);
+  a.setVolume(0.2);
+  assert.equal(a.state.disposed,true);
+  assert.equal(a.state.activeCount,0);
+  assert.equal(a.state.volume,1);
+});
