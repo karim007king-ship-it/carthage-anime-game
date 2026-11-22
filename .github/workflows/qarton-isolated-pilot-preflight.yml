@@ -9,6 +9,8 @@ on:
       - 'scripts/qarton-pilot-content-gate.cjs'
       - 'scripts/qarton-pilot-chapter-navigator.cjs'
       - 'tests/qarton-pilot-chapter-navigator-test.cjs'
+      - 'scripts/qarton-pilot-checkpoint-codec.cjs'
+      - 'tests/qarton-pilot-checkpoint-codec-test.cjs'
       - 'tests/qarton-pilot-capacitor-config-test.cjs'
       - 'tests/qarton-pilot-build-guard-test.cjs'
       - '.github/workflows/qarton-isolated-pilot-preflight.yml'
@@ -30,7 +32,7 @@ jobs:
       - name: Validate 36 chapter draft manifest without runtime integration
         run: |
           node scripts/qarton-pilot-content-gate.cjs
-          node --test tests/qarton-pilot-chapter-navigator-test.cjs
+          node --test tests/qarton-pilot-chapter-navigator-test.cjs tests/qarton-pilot-checkpoint-codec-test.cjs
       - name: Generate isolated config outside source tree
         run: |
           mkdir -p "$RUNNER_TEMP/qarton-pilot"
