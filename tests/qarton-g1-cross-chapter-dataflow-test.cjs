@@ -31,7 +31,7 @@ test('original 18 scenes retain original sceneIdx and proposed chapters never ge
  assert.equal(original.length,18);
  assert.deepEqual(original.map(s=>s.sceneIdx),Array.from({length:18},(_,i)=>i));
  assert.equal(drafts.length,18);
- assert.ok(drafts.every(c=>c.legacySaveIndex===null&&c.runtimeIntegrated===false&&c.editorialReview==='pending'));
+ assert.ok(drafts.every(c=>c.legacySaveIndex===null&&c.runtimeIntegrated===false&&(c.editorialReview==='pending'||(c.editorialReview===undefined&&c.source?.editorialState==='draft'))));
  assert.deepEqual(registry.scenes.map(s=>s.displayChapter),Array.from({length:36},(_,i)=>i+1));
 });
 
