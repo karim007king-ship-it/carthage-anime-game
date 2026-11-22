@@ -43,3 +43,28 @@ test('scene uses original isolated SVG artwork for all six stage elements', asyn
     assert.match(fs.readFileSync(file, 'utf8'), /<svg/);
   }
 });
+
+test('audio controls stay opt-in, muted initially and do not affect choices', async () => {
+  const browser = await chromium.launch({ headless: true });
+  try {
+    const page = await browser.newPage();
+    const errors = [];
+    page.on('pageerror', error => errors.push(error.message));
+    await page.goto('http://127.0.0.1:41739/examples/qarton-single-load-lab.html');
+    await page.locator('#mute').waitFor();
+    assert.equal(await page.locator('#mute').getAttribute('aria-pressed'), 'true');
+    assert.match(await page.locator('#mute').innerText(), /مكتوم/);
+    await page.locator('#mute').click();
+    assert.equal(await page.locator('#mute').getAttribute('aria-pressed'), 'false');
+    await page.locator('#volume').fill('35');
+    await page.locator('#play').click();
+    await page.locator('#pause').click();
+    await page.locator('#seek').fill('20500');
+    assert.equal(await page.locator('[data-choice="prioritizeClinic"]').isEnabled(), true);
+    await page.locator('[data-choice="prioritizeClinic"]').click();
+    assert.match(await page.locator('#result').innerText(), /العيادة/);
+    await page.locator('#mute').click();
+    assert.equal(await page.locator('#mute').getAttribute('aria-pressed'), 'true');
+    assert.deepEqual(errors, []);
+  } finally { await browser.close(); }
+});
