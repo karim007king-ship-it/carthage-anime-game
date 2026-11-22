@@ -11,7 +11,7 @@ h1{text-align:center;font-size:clamp(26px,5vw,40px);margin:12px 0}
 p{line-height:1.8}.stage{position:relative;overflow:hidden;height:280px;border:1px solid #98753c;border-radius:18px;background:linear-gradient(#3b2026 0 48%,#614b40 49% 65%,#292f38 66%);isolation:isolate}
 .stage:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 20%,#f0c57c22 50%,transparent 75%);animation:glow 6s ease-in-out infinite alternate}
 @keyframes glow{to{transform:translateX(28%)}}.road{position:absolute;bottom:0;left:18%;width:64%;height:40%;clip-path:polygon(35% 0,65% 0,100% 100%,0 100%);background:#665047}
-.bridge,.clinic{position:absolute;bottom:28%;padding:12px 18px;background:#171317b8;border:1px solid #cba25d;border-radius:10px}
+.stage[data-reduced-motion=true]::before,.stage[data-reduced-motion=true] .wagon{animation:none!important}.stage[data-shot=medium]{box-shadow:inset 0 0 40px #e6b76d25}.bridge,.clinic{position:absolute;bottom:28%;padding:12px 18px;background:#171317b8;border:1px solid #cba25d;border-radius:10px}
 .bridge{left:6%}.clinic{right:6%}.wagon{position:absolute;bottom:13%;left:40%;font-size:62px;animation:drift 4s ease-in-out infinite alternate}
 @keyframes drift{to{transform:translateY(-5px)}}.subtitle{margin:12px 0;min-height:60px;padding:12px;background:#20171b;border-radius:10px}
 .controls,.choices{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}button{border:1px solid #b88e48;border-radius:10px;background:#332027;color:#fff0d6;padding:12px 14px;font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #fff}
@@ -29,7 +29,7 @@ button[disabled]{opacity:.5;cursor:not-allowed}.choices button{flex:1 1 180px}#r
 </div>
 <div class="subtitle" id="subtitle" aria-live="polite">نور: هذه آخر حمولة نجموا نخرجوها اليوم.</div>
 <div class="controls">
-<button type="button" id="play">▶ تشغيل</button><button type="button" id="pause">⏸ إيقاف</button><button type="button" id="replay">↻ إعادة</button><button type="button" id="reduce">تقليل الحركة</button>
+<button type="button" id="play">▶ تشغيل</button><button type="button" id="pause">⏸ إيقاف</button><button type="button" id="replay">↻ إعادة</button><label for="seek">تقدّم المشهد</label><input id="seek" type="range" min="0" max="21000" step="100" value="0" aria-label="تقدّم المشهد"><output id="clock" for="seek">0:00</output><button type="button" id="reduce">تقليل الحركة</button>
 </div>
 <p>اختار شنوّة يصير للحمولة في التجربة فقط:</p>
 <div class="choices">
@@ -49,12 +49,15 @@ const outcomes={
 };
 const subtitle=document.getElementById('subtitle'),result=document.getElementById('result');
 const stage=document.querySelector('.stage'),wagon=document.querySelector('.wagon');
+const seek=document.getElementById('seek'),clock=document.getElementById('clock');
 let player=null,frameId=null,lastFrame=null;
 let reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function stopLoop(){if(frameId!==null){cancelAnimationFrame(frameId);frameId=null;}lastFrame=null;}
 function frame(t){if(!player||!player.state.playing){stopLoop();return;}if(lastFrame!==null)player.tick(Math.max(0,Math.min(250,t-lastFrame)));lastFrame=t;if(player.state.playing)frameId=requestAnimationFrame(frame);else stopLoop();}
 function startLoop(){stopLoop();frameId=requestAnimationFrame(frame);}
 function render(view){
+ seek.value=String(view.positionMs);clock.textContent=Math.floor(view.positionMs/60000)+':'+String(Math.floor(view.positionMs/1000)%60).padStart(2,'0');
+ stage.dataset.reducedMotion=String(reduced);
  const d=view.dialogue;
  subtitle.textContent=d?({nour:'نور',ryan:'ريان',lina:'لينا'}[d.speaker]||d.speaker)+': '+d.text:'...';
  const shot=view.camera?.shot||'wide';
@@ -73,7 +76,8 @@ async function init(){
   document.getElementById('play').addEventListener('click',()=>{player.play();startLoop();});
   document.getElementById('pause').addEventListener('click',()=>{player.pause();stopLoop();});
   document.getElementById('replay').addEventListener('click',()=>{player.replay();result.textContent='';startLoop();});
-  document.getElementById('reduce').addEventListener('click',()=>{reduced=!reduced;player.pause();stopLoop();render({camera:null,dialogue:null,choices:null,positionMs:0});result.textContent=reduced?'تقليل الحركة مفعل':'تقليل الحركة معطل';});
+  seek.addEventListener('input',()=>{player.pause();stopLoop();player.seek(Number(seek.value));});
+  document.getElementById('reduce').addEventListener('click',()=>{reduced=!reduced;player.pause();stopLoop();player.seek(player.state.positionMs);result.textContent=reduced?'تقليل الحركة مفعل':'تقليل الحركة معطل';});
   document.querySelectorAll('[data-choice]').forEach(b=>b.addEventListener('click',()=>{
    if(!player.state.positionMs||player.state.positionMs<20500)return;
    player.pause();stopLoop();result.textContent=outcomes[b.dataset.choice]||'اختيار غير معروف';
