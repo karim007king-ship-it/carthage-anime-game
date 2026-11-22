@@ -7,7 +7,7 @@ function createAudioPlayback(scene, options = {}) {
     ? require('./qarton-audio-cue-planner.js')
     : window.QartonAudioCuePlanner;
   const cues = plannerApi.validateAudioCues(scene);
-  const AudioCtor = options.AudioCtor || (typeof Audio !== 'undefined' ? Audio : null);
+  const AudioCtor = options.AudioCtor === undefined ? (typeof Audio !== 'undefined' ? Audio : null) : options.AudioCtor;
   let muted = options.muted !== false;
   let volume = 1, playing = false, disposed = false, positionMs = 0;
   const active = new Map();
@@ -20,13 +20,14 @@ function createAudioPlayback(scene, options = {}) {
   function startCue(cue, offsetMs = 0) {
     if (muted || !AudioCtor || disposed || !playing) return;
     try {
+      if (active.has(cue.id)) return;
       const sound = new AudioCtor(cue.src);
       sound.loop = cue.loop;
       sound.volume = Math.max(0, Math.min(1, cue.gain * volume));
       sound.currentTime = offsetMs / 1000;
       active.set(cue.id, sound);
       const result = sound.play();
-      if (result && typeof result.catch === 'function') result.catch(() => { if (active.get(cue.id) === sound) { try { sound.pause(); } catch (_) {} active.delete(cue.id); } });
+      if (result && typeof result.catch === 'function') result.catch(() => { if (active.get(cue.id) === sound) { try { sound.pause(); sound.src = ''; } catch (_) {} active.delete(cue.id); } });
     } catch (_) { active.delete(cue.id); } // audio failure must not block subtitles or choices
   }
   function syncAt(ms, includeLoops) {
