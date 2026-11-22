@@ -11,7 +11,7 @@ Scope: read-only cross-review of draft PR #20 (Astra), #24 (Luna), #25 (Sol) aga
 
 ## Cross-team discrepancies requiring reconciliation
 
-1. **G1/S1 new text-key counts:** latest G1 editorial report says 589 unique new keys, while S1's chapter-key report documents 583 keys against an earlier G1 revision. The two snapshots are not equivalent. Before generating locale packs, compare actual key sets by ID and manuscript revision; classify missing, retired and renamed keys. Do not silently renumber or infer that the six-key difference is the complete delta.
+1. **G1/S1 new text-key counts — direct reconciliation:** G1's editorial report claims 589 unique new keys, but a direct comparison of the current 18 G1 manuscript `story.*` annotations against S1's `docs/s1/locales/chapter-keys.json` finds **583 distinct keys on each side, with zero missing and zero extra keys**. All 18 chapter-level counts match. Thus the *current chapter manuscripts and S1 index agree*; the 589 figure remains a documentation/counting discrepancy (possibly counting keys outside the chapter annotation scope), not six proven missing translations. Confirm the definition and source of 589 with G1 before revising the published count. Do not renumber or delete keys.
 2. **Draft locations versus production art:** G1 location names and L1 candidate loc.* IDs are proposals. The current 17 original location IDs are stable, but no new background should be auto-aliased to an original background on geographic similarity alone.
 3. **Identity and legacy aliases:** char.noor is associated with legacy trust key nour; char.youssef with father. S1's narrator/elderly-woman role IDs are not named-character art approvals. Avoid fabricating portraits for unnamed witnesses.
 4. **Narrative ending acceptance:** G1 still requests editorial decisions on continuation after the truth gate, survivor gallery-versus-scene inconsistency and eligibility to start part 3. Keep all nine original endings unchanged until a real-playthrough acceptance matrix is signed off.
@@ -20,7 +20,7 @@ Scope: read-only cross-review of draft PR #20 (Astra), #24 (Luna), #25 (Sol) aga
 
 ## Proposed next gates
 
-- G1 and S1 reconcile actual key lists (not just counts) and submit an additive/retired key report; keep Tunisian originals immutable.
+- G1 clarify why the editorial report states 589 when the current manuscript annotations and S1's chapter index both contain 583 keys. Preserve the exact matching key sets and Tunisian originals; verify whether any additional six keys are intentionally outside chapter annotations.
 - L1 submit production asset license/provenance evidence and mark P0 visual gaps separately from lab-only graphics.
 - G1 editorial owner decide truth-gate continuation, survivor wording and hard-mode costs.
 - GPT-6 verify schema/locale/ID alignment in isolated tests, then prepare a **separate opt-in prototype** for resume and presentation tests, with no production save access.
