@@ -23,6 +23,9 @@
 - `docs/qarton-g0-g1-integration-gates-20261122.md` — narrative integration gates (PR #20, not in this branch).
 - `docs/story/` — proposed story chapters (PR #20, not in this branch).
 
+## G1 narrative audit
+- [Nine-ending reachability and continuity audit](qarton-g1-ending-reachability-audit-20261122.md) — separates source/gallery keys from verified fresh-playthrough routes; documents cross-chapter dependencies and remaining gates.
+
 ## Legacy build safety
 - [prepare-web safe refactor boundary](qarton-prepare-web-safe-refactor-boundary.md) — staged extraction and golden-master gates; no production refactor yet.
 
