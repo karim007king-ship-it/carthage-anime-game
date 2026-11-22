@@ -55,3 +55,12 @@ When pilot implementation exists, run `docs/qa/qarton-36-chapter-android-accepta
 - User separately confirms **both the production Carthage app and QARTON PILOT are installed concurrently** on the same device. This is user-reported coexistence evidence, not an automated Android instrumentation result.
 - This closes the manual install/launch/coexistence smoke-test gate only. It does **not** establish save-data integrity, all gameplay paths, nine ending reachability, or 36-chapter runtime integration.
 - Next implementation must be opt-in, pilot-only, and preserve original save fields and original production workflow.
+
+## Static preview isolation follow-up (2026-11-22, commit `cb7e98ba8`)
+
+- Latest verified PR #23 checks: isolated preflight run `45071219600` and cinematic contract run `45071219642`, both successful.
+- A new manual-only workflow, `.github/workflows/qarton-isolated-pilot-apk.yml`, generates a separate `com.qarton.carthage.pilot` debug APK in a temporary workspace and validates its package label before uploading.
+- Its build process inserts **144 static preview HTML files** into the isolated pilot workspace; the checked-in production source and its normal APK workflow are not the preview destination.
+- These static HTML previews are **not playable chapter runtime integration**. A successful preflight does not prove that the manual APK workflow completed or that the latest APK was installed on a device.
+- Do not treat previous physical-device installation of an earlier pilot APK as a test of this later preview build. A fresh workflow dispatch and separate device verification are needed.
+- Next manual gate: dispatch the isolated pilot APK workflow from the intended branch, verify artifact ID and package metadata, install alongside the production app, inspect preview links and verify original save remains unchanged. Never uninstall the production app for this test.
