@@ -53,6 +53,13 @@ jobs:
           npm install
           npm test
           npm run prepare:web
+      - name: Install static chapter preview into isolated pilot only
+        working-directory: ${{ env.PILOT_WORK }}
+        run: |
+          node scripts/qarton-pilot-preview-install.cjs "$PILOT_WORK"
+          test -s www/pilot-preview/tn/p1-family-promise.html
+          test "$(find www/pilot-preview -name '*.html' | wc -l)" -eq 144
+          grep -q 'qarton-pilot-preview-entry' www/index.html
       - name: Generate and sync pilot Android project
         working-directory: ${{ env.PILOT_WORK }}
         run: |
@@ -75,7 +82,7 @@ jobs:
           fi
           grep -q 'PILOT' "$RUNNER_TEMP/pilot-badging.txt"
           sha256sum "$APK"
-          echo "Experimental APK contains current legacy web runtime; 36-chapter runtime is NOT integrated."
+          echo "Experimental APK contains legacy runtime plus static read-only chapter previews; 36-chapter gameplay is NOT integrated."
           mkdir -p "$RUNNER_TEMP/pilot-artifact"
           cp "$APK" "$RUNNER_TEMP/pilot-artifact/qarton-pilot-legacy-runtime-debug.apk"
       - name: Upload isolated experimental APK
