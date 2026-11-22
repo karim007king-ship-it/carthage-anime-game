@@ -13,6 +13,7 @@ test('chapter 27 lab renders JSON timeline and controls without errors', async (
     assert.match(await page.locator('h1').innerText(), /حمولة واحدة/);
     assert.equal(await page.locator('[data-choice="prioritizeBridge"]').isDisabled(),true);
     await page.locator('#play').click();
+    await page.waitForFunction(() => document.querySelector('#subtitle')?.textContent?.includes('نور'), { timeout: 5000 });
     assert.match(await page.locator('#subtitle').innerText(), /نور/);
     await page.locator('#pause').click();
     await page.locator('#replay').click();
