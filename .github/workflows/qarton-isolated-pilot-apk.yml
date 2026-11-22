@@ -1,0 +1,75 @@
+name: QARTON isolated pilot APK (manual, experimental)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-isolated-pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+      - name: Install Android SDK
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - name: Validate isolated pilot generator and guard
+        run: node --test tests/qarton-pilot-capacitor-config-test.cjs tests/qarton-pilot-build-guard-test.cjs
+      - name: Create isolated workspace (never edit checked-in production config)
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/qarton-pilot-work"
+          tar --exclude=.git -cf - . | tar -xf - -C "$RUNNER_TEMP/qarton-pilot-work"
+          node scripts/qarton-pilot-capacitor-config.cjs capacitor.config.json "$RUNNER_TEMP/pilot-config.json"
+          node scripts/qarton-pilot-build-guard.cjs "$RUNNER_TEMP/pilot-config.json" capacitor.config.json
+          cp "$RUNNER_TEMP/pilot-config.json" "$RUNNER_TEMP/qarton-pilot-work/capacitor.config.json"
+          echo "PILOT_WORK=$RUNNER_TEMP/qarton-pilot-work" >> "$GITHUB_ENV"
+      - name: Install dependencies and prepare legacy web app in isolated workspace
+        working-directory: ${{ env.PILOT_WORK }}
+        env:
+          QARTON_INTRO_ENABLE: '1'
+        run: |
+          npm install
+          npm test
+          npm run prepare:web
+      - name: Generate and sync pilot Android project
+        working-directory: ${{ env.PILOT_WORK }}
+        run: |
+          npx cap add android
+          npx cap sync android
+          node scripts/qarton-pilot-build-guard.cjs capacitor.config.json "$GITHUB_WORKSPACE/capacitor.config.json"
+      - name: Assemble experimental debug APK (ephemeral debug key)
+        working-directory: ${{ env.PILOT_WORK }}/android
+        run: ./gradlew assembleDebug --no-daemon
+      - name: Verify package ID and label before publishing artifact
+        run: |
+          set -euo pipefail
+          APK="$PILOT_WORK/android/app/build/outputs/apk/debug/app-debug.apk"
+          test -s "$APK"
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging "$APK" > "$RUNNER_TEMP/pilot-badging.txt"
+          grep -q "^package: name='com.qarton.carthage.pilot'" "$RUNNER_TEMP/pilot-badging.txt"
+          if grep -q "^package: name='com.qarton.carthage'" "$RUNNER_TEMP/pilot-badging.txt"; then
+            echo "::error::Production package ID detected"
+            exit 1
+          fi
+          grep -q 'PILOT' "$RUNNER_TEMP/pilot-badging.txt"
+          sha256sum "$APK"
+          echo "Experimental APK contains current legacy web runtime; 36-chapter runtime is NOT integrated."
+          mkdir -p "$RUNNER_TEMP/pilot-artifact"
+          cp "$APK" "$RUNNER_TEMP/pilot-artifact/qarton-pilot-legacy-runtime-debug.apk"
+      - name: Upload isolated experimental APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: qarton-pilot-legacy-runtime-debug
+          path: ${{ runner.temp }}/pilot-artifact/qarton-pilot-legacy-runtime-debug.apk
+          if-no-files-found: error
+          retention-days: 7
