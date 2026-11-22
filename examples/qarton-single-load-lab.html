@@ -11,7 +11,7 @@ h1{text-align:center;font-size:clamp(26px,5vw,40px);margin:12px 0}
 p{line-height:1.8}.stage{position:relative;overflow:hidden;height:280px;border:1px solid #98753c;border-radius:18px;background:linear-gradient(#3b2026 0 48%,#614b40 49% 65%,#292f38 66%);isolation:isolate}
 .stage:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 20%,#f0c57c22 50%,transparent 75%);animation:glow 6s ease-in-out infinite alternate}
 @keyframes glow{to{transform:translateX(28%)}}.road{position:absolute;bottom:0;left:18%;width:64%;height:40%;clip-path:polygon(35% 0,65% 0,100% 100%,0 100%);background:#665047}
-.stage[data-reduced-motion=true]::before,.stage[data-reduced-motion=true] .wagon{animation:none!important}.stage[data-shot=medium]{box-shadow:inset 0 0 40px #e6b76d25}.bridge,.clinic{position:absolute;bottom:28%;padding:12px 18px;background:#171317b8;border:1px solid #cba25d;border-radius:10px}
+.stage[data-reduced-motion=true]::before,.stage[data-reduced-motion=true] .wagon{animation:none!important}.stage[data-shot=medium]{box-shadow:inset 0 0 40px #e6b76d25}.stage .road,.stage .bridge,.stage .clinic,.stage .wagon{will-change:transform}.stage[data-reduced-motion=true] .road,.stage[data-reduced-motion=true] .bridge,.stage[data-reduced-motion=true] .clinic{transition:none!important}.bridge,.clinic{position:absolute;bottom:28%;padding:12px 18px;background:#171317b8;border:1px solid #cba25d;border-radius:10px}
 .bridge{left:6%}.clinic{right:6%}.wagon{position:absolute;bottom:13%;left:40%;font-size:62px;animation:drift 4s ease-in-out infinite alternate}
 @keyframes drift{to{transform:translateY(-5px)}}.subtitle{margin:12px 0;min-height:60px;padding:12px;background:#20171b;border-radius:10px}
 .controls,.choices{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}button{border:1px solid #b88e48;border-radius:10px;background:#332027;color:#fff0d6;padding:12px 14px;font:inherit;cursor:pointer}button:focus-visible{outline:3px solid #fff}
@@ -63,7 +63,12 @@ function render(view){
  const shot=view.camera?.shot||'wide';
  stage.dataset.shot=shot;
  const movement=reduced?0:Math.min(12,view.positionMs/2200);
- wagon.style.transform='translateX('+movement+'px) scale('+(reduced?1:shot==='medium'?1.12:1)+')';
+ const pan=reduced?0:shot==='medium'?Math.min(16,view.positionMs/650):0;
+ const road=stage.querySelector('.road'),bridge=stage.querySelector('.bridge'),clinic=stage.querySelector('.clinic');
+ road.style.transform='translateX('+(-pan*.3)+'px) scale('+(reduced?1:shot==='medium'?1.04:1)+')';
+ bridge.style.transform='translateX('+(-pan*.08)+'px)';
+ clinic.style.transform='translateX('+(-pan*.08)+'px)';
+ wagon.style.transform='translateX('+(movement-pan*.55)+'px) scale('+(reduced?1:shot==='medium'?1.12:1)+')';
  document.querySelectorAll('[data-choice]').forEach(b=>{b.disabled=!view.choices;});
 }
 async function init(){
