@@ -22,7 +22,7 @@ test('G1 chapter 02 is a draft with no legacy save index',()=>{
 });
 
 test('G1 chapter 02 manuscript markers match extracted IDs exactly',()=>{
- const markers=[...manuscript.matchAll(/<!--\\s*(story[.]p1-family-promise[.][a-z0-9.-]+)\\s*-->/g)].map(x=>x[1]);
+ const markers=[...manuscript.matchAll(/<!--[ ]*(story[.]p1-family-promise[.][a-z0-9.-]+)[ ]*-->/g)].map(x=>x[1]);
  assert.equal(markers.length,19);
  assert.equal(new Set(markers).size,19);
  assert.deepEqual(chapter.textKeys,markers);
