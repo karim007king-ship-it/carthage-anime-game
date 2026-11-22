@@ -67,3 +67,15 @@ test('missing Elias cannot be represented as a fabricated completed testimony gr
  assert.deepEqual(inspectCheckpoint(c,boatOnly),{valid:true,completeGroups:['boat']});
  assert.equal(c.choiceGroups.find(x=>x.id==='eliasPage').requiredIf,'elias-present');
 });
+
+test('top-level accessors and unexpected metadata fail closed without executing getters',()=>{
+ const c=read('p1-gate-manifest');
+ let reads=0;
+ for(const field of ['schemaVersion','chapterId','groups']){
+  const sample={schemaVersion:1,chapterId:c.id,groups:{seat:'yieldSeat'}};
+  Object.defineProperty(sample,field,{enumerable:true,get(){reads++;throw Error('getter must not run');}});
+  assert.equal(inspectCheckpoint(c,sample).valid,false,field);
+ }
+ assert.equal(reads,0);
+ assert.equal(inspectCheckpoint(c,{schemaVersion:1,chapterId:c.id,groups:{seat:'yieldSeat'},sceneIdx:10}).valid,false);
+});
