@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "namespace": "characters",
+  "characters": [
+    {
+      "id": "ryan",
+      "ref": "char.ryan",
+      "scope": "legacy"
+    },
+    {
+      "id": "sara",
+      "ref": "char.sara",
+      "scope": "legacy"
+    },
+    {
+      "id": "lina",
+      "ref": "char.lina",
+      "scope": "legacy"
+    },
+    {
+      "id": "salim",
+      "ref": "char.salim",
+      "scope": "legacy"
+    },
+    {
+      "id": "mansour",
+      "ref": "char.mansour",
+      "scope": "legacy"
+    },
+    {
+      "id": "noor",
+      "ref": "char.noor",
+      "scope": "legacy",
+      "legacyTrustKey": "nour"
+    },
+    {
+      "id": "youssef",
+      "ref": "char.youssef",
+      "scope": "legacy",
+      "legacyTrustKey": "father"
+    },
+    {
+      "id": "elias",
+      "ref": "char.elias",
+      "scope": "legacy"
+    },
+    {
+      "id": "amin",
+      "ref": "char.amin",
+      "scope": "legacy"
+    },
+    {
+      "id": "mariam",
+      "ref": "char.mariam",
+      "scope": "legacy"
+    },
+    {
+      "id": "hadi",
+      "ref": "char.hadi",
+      "scope": "legacy"
+    },
+    {
+      "id": "yasmin",
+      "ref": "char.yasmin",
+      "scope": "legacy"
+    },
+    {
+      "id": "karim",
+      "ref": "char.karim",
+      "scope": "legacy"
+    }
+  ],
+  "proposed": [
+    {
+      "id": "hala",
+      "ref": "char.hala",
+      "scope": "draft",
+      "assetStatus": "missing"
+    }
+  ]
+}
