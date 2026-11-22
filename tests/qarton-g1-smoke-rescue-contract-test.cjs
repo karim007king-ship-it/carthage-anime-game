@@ -21,5 +21,6 @@ test('mother route requires a Sara absence fallback and old saves cannot invent 
  assert.equal(d.missingSaraPolicy,'mother-route-without-sara-dialogue');
  assert.equal(chapter.legacySaveIndex,null);
  assert.equal(chapter.runtimeIntegrated,false);
- assert.equal(chapter.missingLegacyStatePolicy,'unknown');
+ assert.equal(chapter.missingLegacyStatePolicy,'improvised');
+ assert.equal(d.cases.unknown,'improvised');
 });
