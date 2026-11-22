@@ -44,3 +44,25 @@ test('missing media and invalid positions fail safely',()=>{
   assert.throws(()=>a.setVolume(2),RangeError);
   a.destroy();
 });
+
+test('audio ends exactly at scene boundary and releases loop media',()=>{
+  FakeAudio.instances=[];
+  const a=createAudioPlayback(scene,{AudioCtor:FakeAudio,muted:false});
+  a.play(1500);
+  assert.equal(a.state.activeCount,1);
+  a.tick(9000);
+  assert.equal(a.state.activeCount,0);
+  assert.ok(FakeAudio.instances.every(x=>x.paused));
+  a.pause();
+  a.destroy();
+  assert.equal(a.state.activeCount,0);
+});
+test('audio adapter ignores calls after disposal and does not mutate scene',()=>{
+  const before=JSON.stringify(scene);
+  const a=createAudioPlayback(scene,{AudioCtor:FakeAudio,muted:false});
+  a.destroy();
+  a.play(1000);a.seek(3000);a.tick(9000);a.replay();
+  assert.equal(a.state.disposed,true);
+  assert.equal(a.state.activeCount,0);
+  assert.equal(JSON.stringify(scene),before);
+});
