@@ -159,5 +159,13 @@
     "checkpoint": "draft-sidecar-only-never-write-legacy-save",
     "missingCustodian": "offer-present-valid-custodians-only",
     "restore": "unknown-legacy-draft-state-never-assume-choice-made"
-  }
+  },
+  "choiceTextKeys": [
+    "story.p1-gate-manifest.choice.yieldSeat",
+    "story.p1-gate-manifest.choice.keepGroup",
+    "story.p1-gate-manifest.choice.appealManifest",
+    "story.p1-gate-manifest.choice.keepWithNoor",
+    "story.p1-gate-manifest.choice.entrustSalim",
+    "story.p1-gate-manifest.choice.entrustSara"
+  ]
 }
