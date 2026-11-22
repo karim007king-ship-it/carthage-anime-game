@@ -78,6 +78,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Guard original production files on PR #23
+        if: github.event_name == 'pull_request' && github.event.pull_request.number == 23
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git diff --name-only "$BASE_SHA" HEAD > /tmp/qarton-pr23-changed-files.txt
+          node -e "const fs=require('fs'); const files=fs.readFileSync('/tmp/qarton-pr23-changed-files.txt','utf8').trim().split('\\n').filter(Boolean); const protectedFiles=files.filter(f=>f==='index.html'||f==='scripts/prepare-web.cjs'||f.startsWith('android/')||f.startsWith('app/')); if(protectedFiles.length){console.error('PR #23 production boundary violation:',protectedFiles);process.exit(1)} console.log('PASS: no protected production files changed in PR #23 ('+files.length+' files)')"
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
