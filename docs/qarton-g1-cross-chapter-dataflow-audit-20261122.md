@@ -40,4 +40,4 @@ Only `presentCharacters`, `legacyInventory`, `routeSafety`, `signalDevice`, and 
 - CI run `45021310096` passed the uniform choice/output contract on commit `cc895e7c0`.
 - CI run `45021659528` passed stricter input provenance and chapter display-order checks on commit `faf761b6a`.
 - `familySignal` now resolves to chapter 2 `p1-family-promise`; `alleyFamilies` to chapter 4 `p1-family-alley`; `smokeRescue` to chapter 10 `p1-smoke-door`. This is declaration order only, **not** proof that a value is present after a conditional choice or when loading an older save.
-- Chapter 30 `optional:true` currently describes an entire draft chapter despite a 36-chapter display sequence. Whether only Yasmin's participation is optional is an **editorial decision pending manuscript confirmation**; do not silently change scene routing or the test assertion.
+- Chapter 30 manuscript on PR #20 explicitly states that Yasmin and Noor may be absent while **every route continues to chapter 31**. Corrected the draft manifest from `optional:true` to `optional:false`, added an optional-presence contract, and updated the chapter 29–30 test. This does not change runtime scene routing.
