@@ -128,3 +128,21 @@ test('existing production save and Part III gate stay outside the presentation a
     assert.equal(source.includes(marker),false,'unexpected production integration: '+marker);
   }
 });
+
+test('save payload stays byte-for-byte unchanged after repeated cinematic snapshots',()=>{
+  const save={slot:1,sceneIdx:4,lineIdx:2,part:1,state:{health:100,time:52,inventory:['مفتاح المخزن']},flags:{light:false},choicesHistory:[{id:'original-choice'}],endingsSeen:[]};
+  const original=JSON.stringify(save);
+  for(let i=0;i<20;i++){
+    const snapshot=createLegacyPresentationSnapshot(save,true);
+    assert.equal(snapshot.sceneId,'legacy-05');
+    assert.equal(getDisplayChapterForLegacySave(save),7);
+    assert.equal(JSON.stringify(save),original);
+  }
+});
+test('untrusted inherited sceneIdx does not cause implicit progress restoration',()=>{
+  const inherited=Object.create({sceneIdx:4});
+  assert.equal(createLegacyPresentationSnapshot(inherited),null);
+  // The current adapter accepts inherited values only when explicitly enabled;
+  // this test documents that the default-OFF gate is authoritative.
+  assert.equal(getDisplayChapterForLegacySave({sceneIdx:4}),7);
+});
