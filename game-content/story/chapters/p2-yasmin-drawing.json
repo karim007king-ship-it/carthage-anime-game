@@ -51,5 +51,59 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "optional": true,
+  "characters": [
+    "ryan",
+    "lina",
+    "yasmin",
+    "maryam"
+  ],
+  "location": {
+    "status": "proposed-unmapped",
+    "description": "village home with two drawings"
+  },
+  "inputs": [
+    "presentCharacters",
+    "routeSafety"
+  ],
+  "outputs": [
+    "yasminMapConsent",
+    "yasminRouteCopy"
+  ],
+  "choices": [
+    {
+      "id": "copyRouteWithConsent",
+      "textKey": "story.p2-yasmin-drawing.choice.copyRouteWithConsent",
+      "proposedState": {
+        "yasminMapConsent": "routeOnly",
+        "yasminRouteCopy": true
+      }
+    },
+    {
+      "id": "requestGuidedVisit",
+      "textKey": "story.p2-yasmin-drawing.choice.requestGuidedVisit",
+      "proposedState": {
+        "yasminMapConsent": "guidedVisit",
+        "yasminRouteCopy": false
+      }
+    },
+    {
+      "id": "keepDrawingPrivate",
+      "textKey": "story.p2-yasmin-drawing.choice.keepDrawingPrivate",
+      "proposedState": {
+        "yasminMapConsent": "private",
+        "yasminRouteCopy": false
+      }
+    }
+  ],
+  "continuity": {
+    "unknownLegacyState": "no-consent-assumed",
+    "bypass": "no-route-copy-or-permission",
+    "guidedVisit": "requires-yasmin-present-and-safe-route",
+    "houseProof": "independent-witness-or-civic-record",
+    "inventoryPolicy": "do-not-duplicate-drawing",
+    "timeCost": "pending-editorial-balance",
+    "decisionOnce": true
+  }
 }
