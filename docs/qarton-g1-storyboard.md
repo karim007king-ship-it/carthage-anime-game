@@ -204,7 +204,7 @@
 
 الدخول من `p3-karim-key`، والخروج إلى `p3-medicine-cost`.
 
-معرّفات القرارات بالترتيب: `formalReview`، `temporaryShelter`، `communityHearing`. جانبي. الجارة بديل من غير عنوان منشور. التجاوز يخلّي الملف بلا حسم.
+معرّفات القرارات بالترتيب: `formalReview`، `temporaryShelter`، `communityHearing`. المشهد لازم في الجولة الجديدة. إذا غابت ياسمين، الجارة تورّيهم الزنقة. إذا غابت نور، كاتبة السجل تقيّد المطلب. القرارات الثلاثة توصل للعيادة.
 
 ### 31 · [ثمن الدواء](story/p3-ch31-medicine-cost.md) · `p3-medicine-cost`
 
