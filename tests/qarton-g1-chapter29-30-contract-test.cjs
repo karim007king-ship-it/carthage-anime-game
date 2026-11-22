@@ -17,7 +17,9 @@ test('chapter 29 keeps key custody accountable and emergency care open',()=>{
 
 test('chapter 30 never converts route evidence into ownership or shelter into waiver',()=>{
  const c=load('p3-house-without-number');
- assert.equal(c.optional,true);
+ assert.equal(c.optional,false);
+ assert.equal(c.continuity.optionalPresence,'yasmin-and-noor-only-chapter-30-always-continues-to-chapter-31');
+ assert.equal(c.exitBefore,'p3-medicine-cost');
  assert.deepEqual(c.choices.map(x=>x.id),['formalReview','temporaryShelter','communityHearing']);
  assert.deepEqual(c.choices.map(x=>x.proposedState),[{houseClaim:'formalReview',houseEvidence:'partialCorroboration',houseAccess:'deferred'},{houseClaim:'temporaryShelter',houseEvidence:'unresolved',houseAccess:'temporaryOnly'},{houseClaim:'communityHearing',houseEvidence:'publicRouteCorroboration',houseAccess:'pendingHearing'}]);
  assert.equal(c.continuity.property,'route-or-oral-testimony-is-not-title');
