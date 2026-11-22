@@ -48,3 +48,10 @@ When pilot implementation exists, run `docs/qa/qarton-36-chapter-android-accepta
 - The separate cinematic contract and isolated preflight workflows also passed for that commit.
 - **Not tested:** physical-device installation, Android WebView functionality, coexistence with the installed production app, save import/export, process death, 36-chapter runtime integration, or nine-ending reachability. The artifact is an isolated package containing the current legacy runtime, not a 36-chapter build.
 - Download from the run's **Artifacts** section (GitHub login may be required). Do not replace the production APK.
+
+## User-reported physical Android smoke test (2026-11-22)
+
+- User confirms the isolated QARTON PILOT APK **installs and launches** on their Android phone.
+- User separately confirms **both the production Carthage app and QARTON PILOT are installed concurrently** on the same device. This is user-reported coexistence evidence, not an automated Android instrumentation result.
+- This closes the manual install/launch/coexistence smoke-test gate only. It does **not** establish save-data integrity, all gameplay paths, nine ending reachability, or 36-chapter runtime integration.
+- Next implementation must be opt-in, pilot-only, and preserve original save fields and original production workflow.
