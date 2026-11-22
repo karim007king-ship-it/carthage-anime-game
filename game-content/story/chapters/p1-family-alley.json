@@ -84,5 +84,14 @@
   ],
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
-  "runtimeIntegrated": false
+  "runtimeIntegrated": false,
+  "choiceTextKeys": [
+    "story.p1-family-alley.choice.escortFamilies",
+    "story.p1-family-alley.choice.markAlley",
+    "story.p1-family-alley.choice.leaveAlley"
+  ],
+  "outputs": [
+    "alleyFamilies",
+    "salimWitness"
+  ]
 }
