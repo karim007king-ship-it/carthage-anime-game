@@ -81,5 +81,20 @@
   "choiceTextKeys": [
     "story.p1-smoke-door.choice.warnNoor",
     "story.p1-smoke-door.choice.helpNearby"
-  ]
+  ],
+  "derivedOutputs": {
+    "smokeRescue": {
+      "from": "familySignal",
+      "cases": {
+        "knocks": "knocks",
+        "mother": "mother",
+        "unknown": "improvised"
+      },
+      "missingInput": "unknown",
+      "requiresOriginalPresenceCheck": "sara",
+      "missingSaraPolicy": "mother-route-without-sara-dialogue",
+      "application": "draft-only-not-runtime",
+      "oncePerChapter": true
+    }
+  }
 }
