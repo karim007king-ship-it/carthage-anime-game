@@ -146,3 +146,13 @@ test('untrusted inherited sceneIdx does not cause implicit progress restoration'
   // this test documents that the default-OFF gate is authoritative.
   assert.equal(getDisplayChapterForLegacySave({sceneIdx:4}),7);
 });
+
+test('prototype-inherited scene index cannot enter the G4 presentation boundary',()=>{
+  const inherited=Object.create({sceneIdx:4});
+  inherited.locale='tn';
+  assert.equal(createLegacyPresentationSnapshot(inherited,true),null);
+  assert.equal(getDisplayChapterForLegacySave(inherited),null);
+  const own=Object.assign(Object.create(null),{sceneIdx:4,locale:'tn'});
+  assert.equal(createLegacyPresentationSnapshot(own,true).sceneId,'legacy-05');
+  assert.equal(getDisplayChapterForLegacySave(own),7);
+});
