@@ -19,6 +19,9 @@
 - `docs/qarton-g0-g1-integration-gates-20261122.md` — narrative integration gates (PR #20, not in this branch).
 - `docs/story/` — proposed story chapters (PR #20, not in this branch).
 
+## Future game-content organization
+- [Story, characters, backgrounds and localization architecture](qarton-content-localization-architecture.md) — proposed contracts, not a production migration.
+
 ## Quality and asset tracking
 - [QA coverage matrix](qa/coverage-matrix.md) — automated coverage versus outstanding device checks.
 - [Asset provenance inventory](assets/README.md) — intro, lab art and audio provenance gates.
