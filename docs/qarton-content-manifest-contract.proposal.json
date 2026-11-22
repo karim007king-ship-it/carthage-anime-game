@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "kind": "draft-content-manifests-not-runtime",
+  "characterManifest": {
+    "namespace": "characters",
+    "idFormat": "unprefixed slug",
+    "referenceFormat": "char.<id>",
+    "source": "docs/qarton-unified-id-registry.proposal.json",
+    "count": 13,
+    "saveAliasesImmutable": true
+  },
+  "backgroundManifest": {
+    "namespace": "backgrounds",
+    "idFormat": "unprefixed slug",
+    "referenceFormat": "loc.<id>",
+    "source": "docs/qarton-unified-id-registry.proposal.json",
+    "legacySceneCount": 18,
+    "uniqueEmbeddedImages": 11,
+    "assetExtraction": "blocked-pending-provenance"
+  },
+  "storyManifest": {
+    "namespace": "story",
+    "displayChapters": 36,
+    "legacyScenes": 18,
+    "draftScenes": 18,
+    "legacyIndexPersistence": "unchanged",
+    "newChapterPersistence": "not-implemented"
+  },
+  "locales": {
+    "canonical": "tn",
+    "planned": [
+      "tn",
+      "ar",
+      "en",
+      "fr"
+    ],
+    "source": "PR #25",
+    "runtimeStatus": "not-integrated"
+  },
+  "approval": {
+    "state": "draft",
+    "androidSmoke": "pending",
+    "nineEndings": "pending",
+    "licenseReview": "pending"
+  }
+}
