@@ -10,6 +10,8 @@ test('chapter 27 lab renders JSON timeline and controls without errors', async (
     page.on('pageerror',error=>errors.push(error.message));
     await page.goto('http://127.0.0.1:41739/examples/qarton-single-load-lab.html');
     await page.locator('h1').waitFor();
+    await page.waitForFunction(() => document.querySelector('#result')?.textContent !== '' || document.querySelector('#subtitle')?.textContent === '');
+    assert.equal(await page.locator('#result').innerText(), '');
     assert.match(await page.locator('h1').innerText(), /حمولة واحدة/);
     assert.equal(await page.locator('[data-choice="prioritizeBridge"]').isDisabled(),true);
     await page.locator('#play').click();
