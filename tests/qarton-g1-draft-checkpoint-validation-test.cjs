@@ -110,3 +110,27 @@ test('ambiguous draft group definitions cannot validate a partial checkpoint',()
  assert.equal(inspectCheckpoint(emptyChoice,sample).valid,false);
  assert.deepEqual(inspectCheckpoint(c,sample),{valid:true,completeGroups:['seat']});
 });
+
+
+test('chapter 11 and 22 restore only recorded groups and never synthesize conditional decisions',()=>{
+ for(const id of groups){
+  const chapter=read(id);
+  const first=chapter.choiceGroups[0],second=chapter.choiceGroups[1];
+  const partial={schemaVersion:1,chapterId:id,groups:{[first.id]:first.choiceIds[0]}};
+  const restored=inspectCheckpoint(chapter,JSON.parse(JSON.stringify(partial)));
+  assert.deepEqual(restored,{valid:true,completeGroups:[first.id]});
+  assert.equal(restored.completeGroups.includes(second.id),false);
+  const full={schemaVersion:1,chapterId:id,groups:{[first.id]:first.choiceIds[0],[second.id]:second.choiceIds[0]}};
+  assert.deepEqual(inspectCheckpoint(chapter,full),{valid:true,completeGroups:[first.id,second.id]});
+  const swapped={schemaVersion:1,chapterId:id,groups:{[first.id]:second.choiceIds[0]}};
+  assert.equal(inspectCheckpoint(chapter,swapped).valid,false);
+ }
+});
+
+test('malformed chapter group contracts fail closed rather than throwing',()=>{
+ const c=read('p1-gate-manifest');
+ const sample={schemaVersion:1,chapterId:c.id,groups:{seat:'yieldSeat'}};
+ for(const bad of [{...c,choiceGroups:[null]}, {...c,choiceGroups:[{choiceIds:['yieldSeat']}]}, {...c,choiceGroups:[]}, {...c,id:null}]){
+  assert.equal(inspectCheckpoint(bad,sample).valid,false);
+ }
+});
