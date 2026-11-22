@@ -66,3 +66,21 @@ test('audio adapter ignores calls after disposal and does not mutate scene',()=>
   assert.equal(a.state.activeCount,0);
   assert.equal(JSON.stringify(scene),before);
 });
+
+test('duplicate overlapping cues never allocate a second audio element',()=>{
+  FakeAudio.instances=[];
+  const a=createAudioPlayback(scene,{AudioCtor:FakeAudio,muted:false});
+  a.play(0);
+  a.tick(1000);
+  a.tick(3000);
+  const count=FakeAudio.instances.length;
+  a.tick(3500);
+  assert.equal(FakeAudio.instances.length,count);
+  a.destroy();
+});
+test('explicit null audio constructor keeps fallback silent',()=>{
+  const a=createAudioPlayback(scene,{AudioCtor:null,muted:false});
+  a.play(0);a.tick(4000);
+  assert.equal(a.state.activeCount,0);
+  a.destroy();
+});
