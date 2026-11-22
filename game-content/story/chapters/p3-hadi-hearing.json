@@ -57,5 +57,66 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "hadi",
+    "maryam",
+    "noor",
+    "youssef"
+  ],
+  "inputs": [
+    "part2Resolution",
+    "namesConsent",
+    "eliasPage",
+    "eliasSourceConsent",
+    "houseClaim",
+    "clinicRecovery",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "hadiHearing",
+    "accountability",
+    "gateOrderStatus"
+  ],
+  "choices": [
+    {
+      "id": "publicFindings",
+      "textKey": "story.p3-hadi-hearing.choice.publicFindings",
+      "proposedState": {
+        "hadiHearing": "publicFindings",
+        "accountability": "publishedWithOpenQuestions",
+        "gateOrderStatus": "unproven"
+      }
+    },
+    {
+      "id": "independentInquiry",
+      "textKey": "story.p3-hadi-hearing.choice.independentInquiry",
+      "proposedState": {
+        "hadiHearing": "independentInquiry",
+        "accountability": "scheduledReview",
+        "gateOrderStatus": "unproven"
+      }
+    },
+    {
+      "id": "reparationFirst",
+      "textKey": "story.p3-hadi-hearing.choice.reparationFirst",
+      "proposedState": {
+        "hadiHearing": "reparationFirst",
+        "accountability": "investigationOpen",
+        "gateOrderStatus": "unproven"
+      }
+    }
+  ],
+  "continuity": {
+    "missingHadi": "signed-prior-evidence-only-no-direct-admission",
+    "missingYoussef": "signed-report-only-no-direct-testimony",
+    "shadow": "review-escrow-within-consent-boundary",
+    "light": "public-facts-not-blanket-witness-disclosure",
+    "reparation": "not-waiver-of-claims",
+    "endingPolicy": "no-part3-completion-or-legacy-ending-here",
+    "decisionOnce": true,
+    "timeCost": "pending-editorial-balance"
+  }
 }
