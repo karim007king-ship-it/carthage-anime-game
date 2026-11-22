@@ -156,3 +156,14 @@ test('prototype-inherited scene index cannot enter the G4 presentation boundary'
   assert.equal(createLegacyPresentationSnapshot(own,true).sceneId,'legacy-05');
   assert.equal(getDisplayChapterForLegacySave(own),7);
 });
+
+test('accessor-backed save indices are rejected without executing getters',()=>{
+  let calls=0;
+  const save={get sceneIdx(){calls++;throw new Error('getter must not run');}};
+  assert.equal(createLegacyPresentationSnapshot(save,true),null);
+  assert.equal(getDisplayChapterForLegacySave(save),null);
+  assert.equal(calls,0);
+  const ordinary=Object.freeze({sceneIdx:4,locale:'tn'});
+  assert.equal(createLegacyPresentationSnapshot(ordinary,true).sceneId,'legacy-05');
+  assert.equal(getDisplayChapterForLegacySave(ordinary),7);
+});
