@@ -3,14 +3,10 @@
   "status": "draft-not-runtime",
   "id": "legacy-01",
   "sceneIdx": 0,
-  "displayChapter": 1,
+  "legacyChapter": 1,
   "part": "part1",
-  "source": {
-    "catalogue": "PR #25 docs/s1/catalogue.json",
-    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
-  },
-  "locationRef": "loc.home",
-  "backgroundVariable": "N8",
+  "after": "linear",
+  "timed": false,
   "texts": {
     "title": "story.legacy-01.title",
     "place": "story.legacy-01.place",
@@ -146,5 +142,12 @@
         }
       }
     }
-  ]
+  ],
+  "displayChapter": 1,
+  "source": {
+    "catalogue": "PR #25 docs/s1/catalogue.json",
+    "originalBlob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23"
+  },
+  "locationRef": "loc.home",
+  "backgroundVariable": "N8"
 }
