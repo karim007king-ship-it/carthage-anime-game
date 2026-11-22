@@ -23,9 +23,17 @@ function installPilotPreview(workspace){
   const output=path.join(temp,'pages');
   const result=exportPilotPreview(output,root);
   fs.cpSync(output,preview,{recursive:true,errorOnExist:true,force:false});
-  const link='<a id="qarton-pilot-preview-entry" href="./pilot-preview/tn/p1-family-promise.html" style="position:fixed;bottom:12px;right:12px;z-index:2147483647;background:#221b16;color:#e8c17a;padding:9px 12px;border:1px solid #e8c17a;border-radius:8px;font:13px system-ui;text-decoration:none" aria-label="QARTON PILOT read-only chapter preview">PILOT · معاينة الفصول</a>';
-  fs.writeFileSync(index,html.replace(/<\/body\s*>/i,link+'</body>'),'utf8');
-  return Object.freeze({pages:result.files,entry:'pilot-preview/tn/p1-family-promise.html'});
+  // Launch the preview index first in the *pilot-only* package. The legacy game
+  // stays available at index.html?game=1, without changing its save/runtime.
+  const entries=JSON.parse(fs.readFileSync(path.join(root,'docs/qarton-unified-id-registry.proposal.json'),'utf8')).scenes;
+  const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const links=entries.map(e=>'<li><a href="./tn/'+encodeURIComponent(e.id)+'.html">الفصل '+e.displayChapter+' — '+escape(e.id)+'</a></li>').join('');
+  const landing='<!doctype html><html lang="tn" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QARTON PILOT — معاينة الفصول</title><style>body{background:#12131a;color:#f5f1e8;font:16px system-ui;padding:20px;line-height:1.8}a{color:#e8c17a}li{padding:5px 0}nav{display:flex;gap:12px;flex-wrap:wrap}nav a{padding:7px;border:1px solid #947b55}</style></head><body><h1>QARTON PILOT — معاينة الفصول</h1><p>36 فصل للمعاينة فقط؛ موش لعبة كاملة. لا توجد كتابة في الحفظ.</p><nav><a href="../index.html?game=1">فتح اللعبة الأصلية داخل PILOT</a><a href="./ar/p1-family-promise.html">العربية</a><a href="./en/p1-family-promise.html">English</a><a href="./fr/p1-family-promise.html">Français</a></nav><ol>'+links+'</ol></body></html>';
+  fs.writeFileSync(path.join(preview,'index.html'),landing,'utf8');
+  const link='<a id="qarton-pilot-preview-entry" href="./pilot-preview/index.html" style="position:fixed;bottom:12px;right:12px;z-index:2147483647;background:#221b16;color:#e8c17a;padding:9px 12px;border:1px solid #e8c17a;border-radius:8px;font:13px system-ui;text-decoration:none">PILOT · معاينة الفصول</a>';
+  const gate='<script id="qarton-pilot-preview-launch">if(new URLSearchParams(location.search).get("game")!=="1"){location.replace("./pilot-preview/index.html");}</script>';
+  fs.writeFileSync(index,html.replace(/<\\/head\\s*>/i,gate+'</head>').replace(/<\\/body\\s*>/i,link+'</body>'),'utf8');
+  return Object.freeze({pages:result.files,entry:'pilot-preview/index.html'});
  }finally{fs.rmSync(temp,{recursive:true,force:true});}
 }
 if(require.main===module) console.log(JSON.stringify(installPilotPreview(process.argv[2]||'')));
