@@ -71,5 +71,110 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "karim",
+    "elias",
+    "maryam"
+  ],
+  "inputs": [
+    "presentCharacters",
+    "noorManifest"
+  ],
+  "outputs": [
+    "boatDecision",
+    "familyEvacuation",
+    "dockWatch",
+    "eliasPage",
+    "eliasSourceConsent"
+  ],
+  "choiceGroups": [
+    {
+      "id": "boat",
+      "choiceIds": [
+        "evacuateFamily",
+        "keepForWatch",
+        "publicReview"
+      ],
+      "required": true
+    },
+    {
+      "id": "eliasPage",
+      "choiceIds": [
+        "holdConfidential",
+        "recordTestimony",
+        "declineTerms"
+      ],
+      "requiredIf": "elias-present"
+    }
+  ],
+  "choices": [
+    {
+      "id": "evacuateFamily",
+      "textKey": "story.p2-protection-cost.choice.evacuateFamily",
+      "group": "boat",
+      "proposedState": {
+        "boatDecision": "evacuateFamily",
+        "familyEvacuation": "attempted",
+        "dockWatch": "understaffed"
+      }
+    },
+    {
+      "id": "keepForWatch",
+      "textKey": "story.p2-protection-cost.choice.keepForWatch",
+      "group": "boat",
+      "proposedState": {
+        "boatDecision": "keepForWatch",
+        "familyEvacuation": "overlandPending",
+        "dockWatch": "staffed"
+      }
+    },
+    {
+      "id": "publicReview",
+      "textKey": "story.p2-protection-cost.choice.publicReview",
+      "group": "boat",
+      "proposedState": {
+        "boatDecision": "publicReview",
+        "familyEvacuation": "pendingReview",
+        "dockWatch": "disputed"
+      }
+    },
+    {
+      "id": "holdConfidential",
+      "textKey": "story.p2-protection-cost.choice.holdConfidential",
+      "group": "eliasPage",
+      "proposedState": {
+        "eliasPage": "heldConfidential",
+        "eliasSourceConsent": "withheld"
+      }
+    },
+    {
+      "id": "recordTestimony",
+      "textKey": "story.p2-protection-cost.choice.recordTestimony",
+      "group": "eliasPage",
+      "proposedState": {
+        "eliasPage": "testimonyRecorded",
+        "eliasSourceConsent": "forHearingOnly"
+      }
+    },
+    {
+      "id": "declineTerms",
+      "textKey": "story.p2-protection-cost.choice.declineTerms",
+      "group": "eliasPage",
+      "proposedState": {
+        "eliasPage": "notCollected",
+        "eliasSourceConsent": "none"
+      }
+    }
+  ],
+  "continuity": {
+    "missingElias": "skip-eliasPage-group-no-fabricated-testimony",
+    "familyEvacuation": "no-confirmed-arrival-until-later-evidence",
+    "pageEvidence": "redaction-only-no-orderer-identity",
+    "timeCost": "pending-editorial-balance",
+    "decisionOncePerGroup": true,
+    "endingPolicy": "no-light-shadow-unlock"
+  }
 }
