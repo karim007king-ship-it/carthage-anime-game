@@ -72,8 +72,16 @@ function createAudioPlayback(scene, options = {}) {
     }
   }
   function replay() { if (disposed) return; pause(); positionMs = 0; }
-  function setMuted(value) { muted = Boolean(value); if (muted) stopAll(); else syncAt(positionMs, true); }
+  function setMuted(value) {
+    if (disposed) return;
+    const nextMuted = Boolean(value);
+    if (nextMuted === muted) return; // no unnecessary restart of an active loop
+    muted = nextMuted;
+    if (muted) stopAll();
+    else syncAt(positionMs, true); // caller must invoke unmute from a user gesture
+  }
   function setVolume(value) {
+    if (disposed) return;
     if (!Number.isFinite(value) || value < 0 || value > 1) throw new RangeError('Invalid volume');
     volume = value;
     for (const cue of cues) if (active.has(cue.id)) active.get(cue.id).volume = cue.gain * volume;
