@@ -249,34 +249,34 @@ These records apply only to the six lab files listed earlier. Dimensions come fr
 
 ### PR #20 proposed locations compared with original places
 
-PR #20 is a draft story expansion. These mappings are editorial proposals, not approved production art assignments. “Reuse area” means a story location may be under an existing place ID; it does not assert the existing background image is visually adequate.
+PR #20 is a draft story expansion. These mappings are editorial proposals, not approved production art assignments. Every proposed G1 place remains draft-scoped. The original place relation is a continuity comparison only; it does not approve reuse of a legacy place ID or background.
 
 | PR #20 scene ID | Proposed place / description | Original place relation | Stable place ID proposal | Review state |
 |---|---|---|---|---|
-| `p1-family-promise` | Stair inside family home | Home | `home-stair` | Reuse home area; stair-specific art not confirmed |
-| `p1-family-alley` | Alley outside the market | Market | `market-alley` | New sublocation/visual needed |
-| `p1-smoke-door` | Road toward gate and collapsed warehouse door | Fire Street / Gate | `smoke-door` | New sublocation; exact continuity uncertain |
-| `p1-gate-manifest` | Gate square | Gate | `gate` | Reuse candidate |
-| `p2-relay-hut` | Relay hut in wet forest | Forest | `relay-hut` | New sublocation/visual needed |
-| `p2-names-consent` | Shaded forest path | Forest | `forest` | Reuse candidate |
-| `p2-yasmin-drawing` | Small house in hidden village | Hidden village | `hidden-village-home` | New sublocation; existing scene only names village |
-| `p2-last-signal` | Room above abandoned workshop / antenna | None exact | `signal-workshop` | New place and visual needed |
-| `p2-protection-cost` | Stone quay at village edge | Punic harbor is original but elsewhere | `village-quay` | New place; do not equate to original harbor |
-| `p2-truth-gate` | Sea gate at night | Gate | `sea-gate` | Separate ID pending story continuity approval |
-| `p3-survivor-register` | Temporary school near square | Square | `survivor-school` | New place/visual needed |
-| `p3-single-load` | Crossroads between bridge route and medicine quay | Pilot has procedural crossroads only | `crossroads` | New production visual needed; pilot is not production art |
-| `p3-karim-key` | Iron dock gate / boat-storage passage | Village quay / harbor vicinity uncertain | `dock-gate` | New visual; parent location unresolved |
+| `p1-family-promise` | Stair inside family home | Home vicinity | `loc.home-stair` (draft) | New sublocation candidate; no original background reuse approved |
+| `p1-family-alley` | Alley outside the market | Market vicinity | `loc.market-alley` (draft) | New sublocation and visual needed |
+| `p1-smoke-door` | Road toward gate and collapsed warehouse door | Fire Street / Gate vicinity | `loc.smoke-door` (draft) | New sublocation and visual; exact continuity uncertain |
+| `p1-gate-manifest` | Gate square | Gate vicinity | `loc.gate-queue-square` (draft) | New queue staging; no reuse of original gate background approved |
+| `p2-relay-hut` | Relay hut in wet forest | Forest vicinity | `loc.relay-hut` (draft) | New sublocation and visual needed |
+| `p2-names-consent` | Shaded forest path | Forest vicinity | `loc.forest-path` (draft) | New time/staging variant; no reuse approved |
+| `p2-yasmin-drawing` | Small house in hidden village | Hidden village vicinity | `loc.hidden-village-home` (draft) | New interior sublocation and visual needed |
+| `p2-last-signal` | Room above abandoned workshop / antenna | No exact original match | `loc.signal-workshop` (draft) | New place and visual needed |
+| `p2-protection-cost` | Stone quay at village edge | Original Punic harbor is a different place | `loc.village-quay` (draft) | New quay visual; do not reuse harbor art automatically |
+| `p2-truth-gate` | Sea gate at night | Gate is only a broad relation | `loc.sea-gate` (draft) | Distinct night visual; no reuse approved |
+| `p3-survivor-register` | Temporary school near square | Square vicinity | `loc.survivor-school` (draft) | New place and visual needed |
+| `p3-single-load` | Crossroads between bridge route and medicine quay | Bridge/quay are separate legacy places | `loc.crossroads` (draft) | New production visual; pilot is not production art |
+| `p3-karim-key` | Iron dock gate / boat-storage passage | Quay geography not fully resolved | `loc.dock-gate` (draft) | New visual; parent location unresolved |
 | `p3-house-without-number` | Old sea-side street, unnumbered house | No exact original place | `unnumbered-house` | New place/visual needed |
-| `p3-medicine-cost` | Temporary quay-side clinic | Hospital / village quay | `temporary-clinic` | New visual; not established as original hospital |
-| `p3-mark-on-stone` | Stone steps between school and square | Square / proposed school | `school-steps` | New sublocation; visual needed |
+| `p3-medicine-cost` | Temporary quay-side clinic | Hospital and village quay are not assumed equivalent | `loc.temporary-clinic` (draft) | New visual; not established as original hospital |
+| `p3-mark-on-stone` | Stone steps between school and square | Square/school vicinity | `loc.school-steps` (draft) | New sublocation and visual needed |
 | `p3-hadi-hearing` | School yard used for a hearing | Proposed survivor school | `survivor-school` | Reuse school area with a hearing-yard state |
-| `p3-key-handover` | Room between school and quay | Proposed school / quay | `handover-room` | New sublocation; parent and art unresolved |
+| `p3-key-handover` | Room between school and quay | School/quay relation is proposed | `loc.handover-room` (draft) | New sublocation and visual; parent unresolved |
 
 G1 names Hala (هالة) as Ryan's missing sister in the survivor registry, but the original `Gt` table has no Hala record or portrait. Candidate character ID: `hala` (draft-only until story approval and art exist). Backgrounds needed for the proposed new G1 places are not present as distinct original refs. The current 11 original backgrounds are not evidence that suitable visuals exist for these new locations.
 
 ### ID alignment and safe classification
 
-The source character IDs are retained as unprefixed lowercase IDs: `ryan`, `sara`, `lina`, `salim`, `mansour`, `noor`, `youssef`, `elias`, `amin`, `mariam`, `hadi`, `yasmin`, `karim`. The existing architecture's examples use `mansour` and `mansour-house`, and PR #20 scene IDs are already stable slugs. Use separate character and place registries to distinguish namespaces; store entity IDs unprefixed and use typed references `char.<id>` / `loc.<id>`, as required by PR #23. Aliases `nour` for trust-facing Noor and `father` for Youssef remain aliases, not replacement IDs. Proposed new place slugs above remain unapproved until G1 continuity review. No save identifier or original scene index was changed.
+The 13 source character IDs match the PR #23 character registry: ryan, sara, lina, salim, mansour, noor, youssef, elias, amin, mariam, hadi, yasmin, karim. Their qualified references are char.<id>. The 17 original location IDs also match the PR #23 background registry: home, market, wall, fire-street, mansour-house, hospital, bridge, gate, crossing, forest, plains, hidden-village, laboratory, ruins, square, punic-harbor, byrsa-plateau; references use loc.<id>. All new G1 candidates are draft-scoped loc.<id> references in this report, not approved aliases/reuse instructions. Aliases nour for trust-facing Noor and father for Youssef remain unchanged. No save identifier or original scene index was changed.
 
 ### Updated findings and open evidence
 
@@ -311,12 +311,12 @@ The 18 new G1 chapters are draft content. A similar original place is only a con
 | 16 p2-names-consent | Ryan, Amin, Lina | Records exist; shared portrait identity unresolved; no distinct Amin emotion sheet | Night path, fallen trunk, notebook close-up: loc.forest-path | P2 |
 | 19 p2-yasmin-drawing | Ryan, Lina, Yasmin, Mariam | Records exist, but Lina/Yasmin share an image and Sara/Mariam another; identity collision needs resolution | Village-house interior, table and maps: loc.hidden-village-home; new visual | P1 |
 | 21 p2-last-signal | Ryan, Mariam, Amin, Lina, conditional Hadi | Records exist; three shared portrait groups affect the cast; no radio/hand poses | Abandoned workshop room, rooftop wire/antenna, signal device: loc.signal-workshop | P1 |
-| 22 p2-protection-cost | Ryan, Lina, Karim, Elias, Mariam, threatened mother and child | Named records exist; mother and child have no dedicated portraits | Threatened-household setting: loc.protection-site; manuscript staging must decide home or quay | P1 |
+| 22 p2-protection-cost | Ryan, Lina, Karim, Elias, Mariam, threatened mother and child | Named records exist; mother and child have no dedicated portraits | Stone quay at village edge with boat and threatened family: loc.village-quay; distinct from the legacy Punic harbor | P1 |
 | 24 p2-truth-gate | Ryan, Lina, Noor, Mariam, Amin, session clerk/witnesses | Named records exist; clerk and witnesses lack role visuals; shared-image intent unresolved | Night gate/evidence-table hearing: loc.sea-gate; not automatically original gate art | P0 |
 | 26 p3-survivor-register | Ryan, Lina, conditional Sara/Noor, neighbor, man searching for Hala | Named records exist; neighbor and searching man lack portraits; Hala is missing and has no portrait | Temporary school registration yard and ledgers: loc.survivor-school | P0 |
 | 27 p3-single-load | Ryan, Lina, Noor, conditional Karim, Youssef or medic, bridge representative | Main records exist; medic and representative lack portraits; Youssef is inline SVG | Muddy fork, horse cart, bridge route and medicine quay: loc.crossroads; pilot drawing is procedural only | P0 |
 | 29 p3-karim-key | Ryan, Lina, conditional Karim, Noor or community representative, quay guard, searching mother | Named records exist; guard, representative and mother lack portraits | Iron dock gate, boat-store passage, brass key: loc.dock-gate; parent geography unresolved | P1 |
-| 30 p3-house-without-number | Ryan, Lina, neighbor, conditional Noor/Yasmin, searching woman | Records exist; neighbor and woman lack portraits; Lina/Yasmin image is shared | Damaged sea-side street, unnumbered houses, stairs/crescent stone: loc.unnumbered-house-street | P1 |
+| 30 p3-house-without-number | Ryan, Lina, neighbor, conditional Noor/Yasmin, searching woman | Records exist; neighbor and woman lack portraits; Lina/Yasmin image is shared | Damaged sea-side street, unnumbered houses, stairs/crescent stone: loc.unnumbered-house | P1 |
 | 31 p3-medicine-cost | Ryan, Lina, conditional Youssef/alternate nurse, Noor, injured woman, coughing boy, quay guard | Main records exist; nurse, patient, child and guard lack portraits | Temporary leaking clinic, treatment table, curtain and medicine boxes: loc.temporary-clinic | P0 |
 | 32 p3-mark-on-stone | Ryan, Lina, conditional Sara, family mother, construction worker | Main records exist; mother and worker lack portraits; repair/tool props missing | Stone steps between school and square at last light: loc.school-steps | P2 |
 | 33 p3-hadi-hearing | Ryan, Lina, conditional Hadi, Mariam, Noor or clerk, conditional Youssef, affected woman, family representative | Records exist; clerk, affected woman and representative lack role portraits; support empty-chair state if Hadi absent | School yard arranged for hearing with evidence/witness/request tables: loc.hearing-yard | P0 |
