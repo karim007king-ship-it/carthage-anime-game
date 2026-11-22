@@ -58,3 +58,21 @@ test('malformed and boundary saves cannot expose new chapters or mutate state',(
   assert.equal(createLegacyPresentationSnapshot(save,true).sceneId,'legacy-18');
   assert.deepEqual(save,{sceneIdx:17,part:3,flags:{light:true}});
 });
+
+test('canonical G0 display chapter map never persists a display index as sceneIdx',()=>{
+  const canonical=[1,3,5,6,7,8,9,12,13,15,17,18,20,23,25,28,35,36];
+  for (let sceneIdx=0;sceneIdx<canonical.length;sceneIdx++) {
+    const original=Object.freeze({sceneIdx,part:sceneIdx<8?1:sceneIdx<15?2:3});
+    const snapshot=createLegacyPresentationSnapshot(original,true);
+    assert.equal(getDisplayChapterForLegacySave(original),canonical[sceneIdx]);
+    assert.equal(snapshot.sceneId,'legacy-'+String(sceneIdx+1).padStart(2,'0'));
+    assert.equal(Object.hasOwn(snapshot,'sceneIdx'),false);
+    assert.equal(original.sceneIdx,sceneIdx);
+  }
+});
+test('presentation never exposes pilot chapter 27 through a legacy index',()=>{
+  for (const sceneIdx of [18,26,27,35]) {
+    assert.equal(createLegacyPresentationSnapshot({sceneIdx},true),null);
+    assert.equal(getDisplayChapterForLegacySave({sceneIdx}),null);
+  }
+});
