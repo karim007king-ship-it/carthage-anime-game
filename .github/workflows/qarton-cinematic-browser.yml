@@ -7,6 +7,10 @@ on:
     paths:
       - 'examples/qarton-single-load-*'
       - 'scripts/qarton-timeline-player.js'
+      - 'scripts/qarton-audio-playback.js'
+      - 'scripts/qarton-audio-cue-planner.js'
+      - 'tests/qarton-audio-playback-test.cjs'
+      - 'tests/qarton-audio-cue-planner-test.cjs'
       - 'scripts/qarton-lab-server.cjs'
       - 'tests/qarton-cinematic-lab.spec.cjs'
       - '.github/workflows/qarton-cinematic-browser.yml'
