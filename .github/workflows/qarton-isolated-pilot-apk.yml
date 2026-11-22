@@ -55,6 +55,8 @@ jobs:
           npm run prepare:web
       - name: Install static chapter preview into isolated pilot only
         working-directory: ${{ env.PILOT_WORK }}
+        env:
+          QARTON_ISOLATED_PILOT: '1'
         run: |
           node scripts/qarton-pilot-preview-install.cjs "$PILOT_WORK"
           test -s www/pilot-preview/tn/p1-family-promise.html
