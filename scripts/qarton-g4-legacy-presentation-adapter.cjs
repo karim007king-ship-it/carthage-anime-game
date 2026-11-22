@@ -23,7 +23,7 @@ function createLegacyPresentationSnapshot(input, featureEnabled = false) {
   return validatePresentationSnapshot(snapshot) ? snapshot : null;
 }
 function getDisplayChapterForLegacySave(save) {
-  if (!save || typeof save !== 'object' || Array.isArray(save) || !Object.prototype.hasOwnProperty.call(save, 'sceneIdx') || !Number.isInteger(save.sceneIdx)) return null;
+  if (!save || typeof save !== 'object' || Array.isArray(save) || !Object.prototype.hasOwnProperty.call(save, 'sceneIdx') ) return null;
   const descriptor = Object.getOwnPropertyDescriptor(save, 'sceneIdx');
   if (!descriptor || !Object.prototype.hasOwnProperty.call(descriptor, 'value')) return null;
   if (!Number.isInteger(descriptor.value)) return null;
