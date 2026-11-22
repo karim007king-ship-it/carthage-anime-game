@@ -114,3 +114,17 @@ test('G4 adapter has no storage, DOM, or host mutation dependency',()=>{
     assert.doesNotMatch(source,forbidden,`forbidden production dependency: ${forbidden}`);
   }
 });
+
+test('existing production save and Part III gate stay outside the presentation adapter',()=>{
+  const fs=require('node:fs');
+  const path=require('node:path');
+  const source=fs.readFileSync(path.join(__dirname,'../scripts/prepare-web.cjs'),'utf8');
+  for(const key of ['sceneIdx:T','lineIdx:B','state:L','flags:K','part:cu','choicesHistory:yu','endingsSeen:[...Zn]','shiganshina-slots-v1','shiganshina-autosave-v1']) {
+    assert.ok(source.includes(key),'missing existing save field: '+key);
+  }
+  assert.ok(source.includes('if(!Zn.includes("light")&&!Zn.includes("shadow"))'));
+  assert.ok(source.includes('carthageStartPart3'));
+  for(const marker of ['qarton-g4-legacy-presentation-adapter','createLegacyPresentationSnapshot','p3-single-load']) {
+    assert.equal(source.includes(marker),false,'unexpected production integration: '+marker);
+  }
+});
