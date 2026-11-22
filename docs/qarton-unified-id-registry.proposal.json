@@ -196,14 +196,14 @@
       "visualStatus": "existing-embedded-art"
     },
     {
-      "id": "harbor",
-      "ref": "loc.harbor",
+      "id": "punic-harbor",
+      "ref": "loc.punic-harbor",
       "scope": "legacy",
       "visualStatus": "existing-embedded-art"
     },
     {
-      "id": "byrsa",
-      "ref": "loc.byrsa",
+      "id": "byrsa-plateau",
+      "ref": "loc.byrsa-plateau",
       "scope": "legacy",
       "visualStatus": "existing-embedded-art"
     }
@@ -414,6 +414,134 @@
       "ref": "char.hala",
       "scope": "draft",
       "assetStatus": "missing"
+    }
+  ],
+  "legacySceneVisualCrosswalk": [
+    {
+      "sceneIdx": 0,
+      "sceneId": "legacy-01",
+      "locationRef": "loc.home",
+      "embeddedBackgroundVariable": "N8",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 1,
+      "sceneId": "legacy-02",
+      "locationRef": "loc.market",
+      "embeddedBackgroundVariable": "ht",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 2,
+      "sceneId": "legacy-03",
+      "locationRef": "loc.wall",
+      "embeddedBackgroundVariable": "s8",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 3,
+      "sceneId": "legacy-04",
+      "locationRef": "loc.fire-street",
+      "embeddedBackgroundVariable": "Wt",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 4,
+      "sceneId": "legacy-05",
+      "locationRef": "loc.mansour-house",
+      "embeddedBackgroundVariable": "C7",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 5,
+      "sceneId": "legacy-06",
+      "locationRef": "loc.hospital",
+      "embeddedBackgroundVariable": "E7",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 6,
+      "sceneId": "legacy-07",
+      "locationRef": "loc.bridge",
+      "embeddedBackgroundVariable": "F8",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 7,
+      "sceneId": "legacy-08",
+      "locationRef": "loc.gate",
+      "embeddedBackgroundVariable": "n9",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 8,
+      "sceneId": "legacy-09",
+      "locationRef": "loc.crossing",
+      "embeddedBackgroundVariable": "I7",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 9,
+      "sceneId": "legacy-10",
+      "locationRef": "loc.forest",
+      "embeddedBackgroundVariable": "uz",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 10,
+      "sceneId": "legacy-11",
+      "locationRef": "loc.plains",
+      "embeddedBackgroundVariable": "lz",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 11,
+      "sceneId": "legacy-12",
+      "locationRef": "loc.hidden-village",
+      "embeddedBackgroundVariable": "uz",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 12,
+      "sceneId": "legacy-13",
+      "locationRef": "loc.laboratory",
+      "embeddedBackgroundVariable": "I7",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 13,
+      "sceneId": "legacy-14",
+      "locationRef": "loc.ruins",
+      "embeddedBackgroundVariable": "lz",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 14,
+      "sceneId": "legacy-15",
+      "locationRef": "loc.square",
+      "embeddedBackgroundVariable": "lz",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 15,
+      "sceneId": "legacy-16",
+      "locationRef": "loc.punic-harbor",
+      "embeddedBackgroundVariable": "I7",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 16,
+      "sceneId": "legacy-17",
+      "locationRef": "loc.byrsa-plateau",
+      "embeddedBackgroundVariable": "lz",
+      "source": "L1 PR #24 original an array"
+    },
+    {
+      "sceneIdx": 17,
+      "sceneId": "legacy-18",
+      "locationRef": "loc.byrsa-plateau",
+      "embeddedBackgroundVariable": "lz",
+      "source": "L1 PR #24 original an array"
     }
   ]
 }
