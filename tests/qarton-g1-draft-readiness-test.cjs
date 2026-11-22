@@ -23,8 +23,8 @@ test('all 18 proposed chapters remain non-runtime with no original save index',(
 test('part 1 structured effects and part 2/3 ID-only contracts are explicit, not mistaken for runtime readiness',()=>{
  const structured=drafts.filter(s=>Array.isArray(read('game-content/story/chapters/'+s.id+'.json').choices));
  const idOnly=drafts.filter(s=>!Array.isArray(read('game-content/story/chapters/'+s.id+'.json').choices));
- assert.deepEqual(structured.map(s=>s.id),['p1-family-promise','p1-family-alley','p1-smoke-door','p1-gate-manifest','p2-relay-hut','p2-names-consent','p2-yasmin-drawing','p2-last-signal','p2-protection-cost','p2-truth-gate','p3-survivor-register','p3-single-load','p3-karim-key','p3-house-without-number']);
- assert.equal(idOnly.length,4);
+ assert.deepEqual(structured.map(s=>s.id),['p1-family-promise','p1-family-alley','p1-smoke-door','p1-gate-manifest','p2-relay-hut','p2-names-consent','p2-yasmin-drawing','p2-last-signal','p2-protection-cost','p2-truth-gate','p3-survivor-register','p3-single-load','p3-karim-key','p3-house-without-number','p3-medicine-cost','p3-mark-on-stone']);
+ assert.equal(idOnly.length,2);
  for(const s of idOnly){
   const ch=read('game-content/story/chapters/'+s.id+'.json');
   assert.ok(!Array.isArray(ch.choices),s.id+' must not masquerade as executable choices');
