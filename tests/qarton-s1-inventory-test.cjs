@@ -11,25 +11,7 @@ const read = file => readFileSync(path.join(root, file), 'utf8');
 const sorted = values => [...values].sort();
 const own = (object, key) => Object.hasOwn(object, key);
 
-function parseInventoryJson(source) {
-  const value = JSON.parse(source);
-  const containers = [];
-  // JSON.parse already validated the grammar. Scan key tokens before they can be
-  // collapsed into the same property by the parser.
-  const tokens = /"(?:\\.|[^"\\])*"\s*:?|[{}\[\]]/gs;
-  for (const [token] of source.matchAll(tokens)) {
-    if (token === '{') containers.push(new Set());
-    else if (token === '[') containers.push(null);
-    else if (token === '}' || token === ']') containers.pop();
-    else if (token.endsWith(':')) {
-      const keys = containers.at(-1);
-      const key = JSON.parse(token.slice(0, -1));
-      assert(!keys.has(key), `Duplicate JSON key: ${key}`);
-      keys.add(key);
-    }
-  }
-  return value;
-}
+const { parseInventoryJson } = require('../docs/s1/locales/audit.cjs');
 
 const inventory = name => parseInventoryJson(read(`docs/s1/${name}.json`));
 const catalogue = inventory('catalogue');
