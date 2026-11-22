@@ -1,0 +1,4732 @@
+{
+  "source": {
+    "path": "index.html",
+    "commit": "094a1246a17923d4bb788d30c8e9c09b5db77cd2",
+    "blob": "db83f1d7bf8b5b457a82f6cd5c4f06fa14299b23",
+    "position": "1-based UTF-16 line and column"
+  },
+  "scope": "Arabic-bearing strings and template literals in the main module after Lz, excluding occurrences already indexed in catalogue.json. Keys are reserved proposals for visible messages. Review-context entries can include helpers, save payloads or control fragments. Appendix in README covers the legacy overlays and Android packaging.",
+  "texts": {
+    "ui.shared.text-001": {
+      "templateSource": "`ثقة ${jn[v]} ${e>0?\"+\":\"\"}${e}`",
+      "source": {
+        "line": 4505,
+        "column": 3488583
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-002": {
+      "templateSource": "`شجاعة ${f.courage>0?\"+\":\"\"}${f.courage}`",
+      "source": {
+        "line": 4505,
+        "column": 3488639
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-003": {
+      "templateSource": "`صحة ${f.health>0?\"+\":\"\"}${f.health}`",
+      "source": {
+        "line": 4505,
+        "column": 3488701
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-004": {
+      "templateSource": "`وقت -${f.time} دق`",
+      "source": {
+        "line": 4505,
+        "column": 3488757
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-005": {
+      "templateSource": "`أداة: ${f.item}`",
+      "source": {
+        "line": 4505,
+        "column": 3488795
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-006": {
+      "tn": "دليل جديد",
+      "source": {
+        "line": 4505,
+        "column": 3488831
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-007": {
+      "templateSource": "`تأثير: ${n.join(\" • \")}`",
+      "source": {
+        "line": 4505,
+        "column": 3488896
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-008": {
+      "tn": "قرار أخير — يحدد النهاية",
+      "source": {
+        "line": 4505,
+        "column": 3488922
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-009": {
+      "templateSource": "`نتيجة اختيارك: ${n.join(\" • \")}.`",
+      "source": {
+        "line": 4505,
+        "column": 3488992
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-010": {
+      "templateSource": "`اخترت: ${f.label}.`",
+      "source": {
+        "line": 4505,
+        "column": 3489027
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-011": {
+      "tn": "سيف عم منصور",
+      "source": {
+        "line": 4505,
+        "column": 3491852
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-012": {
+      "tn": "خريطة الأزقة",
+      "source": {
+        "line": 4505,
+        "column": 3491867
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-013": {
+      "tn": "صورة العائلة",
+      "source": {
+        "line": 4505,
+        "column": 3491882
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-014": {
+      "tn": "الجزء الثاني — ما وراء السور",
+      "source": {
+        "line": 4505,
+        "column": 3492338
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-015": {
+      "tn": "ابدأ الجزء الثاني",
+      "source": {
+        "line": 4505,
+        "column": 3492374
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-016": {
+      "tn": "🌲 الجزء الثاني — ما وراء السور • 45 دقيقة",
+      "source": {
+        "line": 4505,
+        "column": 3492439
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-017": {
+      "tn": "جاري فتح الجزء الثاني...",
+      "source": {
+        "line": 4505,
+        "column": 3492633
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-018": {
+      "tn": "قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3494006
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-019": {
+      "templateSource": "`تم الحفظ في الخانة ${P} — ${c.sceneName} • ${nn(L.time)} (محفوظ في جهازك)`",
+      "source": {
+        "line": 4505,
+        "column": 3494266
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-020": {
+      "templateSource": "`▶️ كملت من ${P.sceneName} — خانة ${P.slot}`",
+      "source": {
+        "line": 4505,
+        "column": 3495348
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-021": {
+      "tn": "ما فماش حفظ، ابدأ لعبة جديدة",
+      "source": {
+        "line": 4505,
+        "column": 3495444
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-022": {
+      "tn": "🗑️ تمسحت كل الحفظات من جهازك",
+      "source": {
+        "line": 4505,
+        "column": 3495796
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-023": {
+      "templateSource": "`\\uD83D\\uDDD1️ تمسحت الخانة ${P} من جهازك`",
+      "source": {
+        "line": 4505,
+        "column": 3496081
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-024": {
+      "templateSource": "`حفظ قرطاج — خانة ${P.slot} • ${P.sceneName} • الفصل ${P.sceneIdx+1} • وقت متبقي ${nn(P.state.time)} • صحة ${P.state.health} • شجاعة ${P.state.courage} • أدلة ${P.state.clues.filter((x)=>JH.includes(x)).length}/5 • إنجازات ${(P.achievements||vn).length}/7 • صعوبة ${Ff[P.difficulty].label} • ${P.savedAt} (نسخة محلية محفوظة في جهازك)`",
+      "source": {
+        "line": 4505,
+        "column": 3496141
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-025": {
+      "tn": "📋 تنسخت ملخص الحفظ — الصقو وين تحب",
+      "source": {
+        "line": 4505,
+        "column": 3496676
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-026": {
+      "tn": "ما نجمتش ننسخ — حدّد النص يدوياً",
+      "source": {
+        "line": 4505,
+        "column": 3496733
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-027": {
+      "tn": "إنجاز جديد!",
+      "source": {
+        "line": 4505,
+        "column": 3506470
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-028": {
+      "tn": "إنجاز جديد! ",
+      "source": {
+        "line": 4505,
+        "column": 3506552
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-029": {
+      "tn": "✅ انفتح",
+      "source": {
+        "line": 4505,
+        "column": 3507173
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-030": {
+      "templateSource": "`تركت: ${P} — بلاصة فرغت في الحقيبة`",
+      "source": {
+        "line": 4505,
+        "column": 3508222
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-031": {
+      "tn": "💡 تلميح: −1 دقيقة (صعبة)",
+      "source": {
+        "line": 4505,
+        "column": 3508361
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-032": {
+      "tn": "💡 تلميح مجاني",
+      "source": {
+        "line": 4505,
+        "column": 3508399
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-033": {
+      "tn": "🏆 أسطورة قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3508537
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-034": {
+      "tn": "⭐ بطل قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3508573
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-035": {
+      "tn": "🛡️ ناجي شجاع",
+      "source": {
+        "line": 4505,
+        "column": 3508595
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-036": {
+      "tn": "🎒 ناجي",
+      "source": {
+        "line": 4505,
+        "column": 3508629
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-037": {
+      "tn": "🌱 بداية النجاة",
+      "source": {
+        "line": 4505,
+        "column": 3508649
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-038": {
+      "templateSource": "`نتيجتي في آخر يوم في قرطاج: ${nl} — النقاط ${oe} • وقت متبقي ${nn(L.time)} • شجاعة ${L.courage} • أدلة ${L.clues.filter((x)=>JH.includes(x)).length}/5 • ثقة ${br}`",
+      "source": {
+        "line": 4505,
+        "column": 3508691
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-039": {
+      "tn": "📋 تنسخت نتيجتك — الصقها وين تحب",
+      "source": {
+        "line": 4505,
+        "column": 3509063
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-040": {
+      "tn": "ما نجمتش ننسخ — حدّد النص يدوياً",
+      "source": {
+        "line": 4505,
+        "column": 3509117
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-041": {
+      "tn": "قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3509902
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-042": {
+      "tn": "ما فماش تقدم باش تحفظو — ابدأ اللعب أولاً",
+      "source": {
+        "line": 4505,
+        "column": 3510336
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-043": {
+      "tn": "ما فماش تقدم باش تحفظو",
+      "source": {
+        "line": 4505,
+        "column": 3510500
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-044": {
+      "tn": "تم الحفظ! 💾",
+      "source": {
+        "line": 4505,
+        "column": 3510822
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-045": {
+      "tn": "ما نجمتش نحمّل الملف — جرّب مرة أخرى",
+      "source": {
+        "line": 4505,
+        "column": 3510856
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-046": {
+      "tn": "رجعت من وين وقفت! 🎉",
+      "source": {
+        "line": 4505,
+        "column": 3513227
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-047": {
+      "tn": "الملف موش صحيح",
+      "source": {
+        "line": 4505,
+        "column": 3513376
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-048": {
+      "tn": "الملف موش صحيح",
+      "source": {
+        "line": 4505,
+        "column": 3513412
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-049": {
+      "tn": "💾 حفظ دائم بملف — يبقى حتى بعد ما تسكّر الصفحة",
+      "source": {
+        "line": 4505,
+        "column": 3513614
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-050": {
+      "tn": "الحفظ التلقائي يروح للخانة 1 ويتحفظ في جهازك. حمّل ملف الحفظ كنسخة احتياطية — احتفظ بيه وارجع منو وقت ما تحب.",
+      "source": {
+        "line": 4505,
+        "column": 3513743
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-051": {
+      "tn": "تحميل ملف الحفظ 📥",
+      "source": {
+        "line": 4505,
+        "column": 3514144
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-052": {
+      "tn": "ارجع من ملف حفظ 📂",
+      "source": {
+        "line": 4505,
+        "column": 3514379
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-053": {
+      "tn": "ارجع من ملف حفظ",
+      "source": {
+        "line": 4505,
+        "column": 3514478
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.shared.text-054": {
+      "tn": "الملف: shiganshina-save.json • يحتوي الفصل، البلاصة، الوقت، الصحة، الشجاعة، الثقة، الحقيبة، الأدلة، الصعوبة، النقاط وتاريخ اختياراتك. بلا سيرفر.",
+      "source": {
+        "line": 4505,
+        "column": 3514649
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-055": {
+      "tn": "ما فماش حفظ في جهازك — احفظ في خانة أولاً",
+      "source": {
+        "line": 4505,
+        "column": 3514928
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-056": {
+      "tn": "📋 نسخ ملخص الحفظ",
+      "source": {
+        "line": 4505,
+        "column": 3515066
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-057": {
+      "tn": "الوقت وفا... أما القرار يبقى ليك — اختار وقت ما تحب.",
+      "source": {
+        "line": 4505,
+        "column": 3516147
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-058": {
+      "templateSource": "`تنقلت للـ ${an[P].place}  •  -3 دق`",
+      "source": {
+        "line": 4505,
+        "column": 3518151
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-059": {
+      "tn": "هالاختيار ما زال مسكّر.",
+      "source": {
+        "line": 4505,
+        "column": 3518502
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-060": {
+      "tn": "الحقيبة معبية (4/4) — فرّغ بلاصة من الخريطة قبل ما تاخذ أداة جديدة.",
+      "source": {
+        "line": 4505,
+        "column": 3519097
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-061": {
+      "templateSource": "`دليل جديد! ${ev.find((i)=>i.id===P.clue)?.title} • ${JH.includes(P.clue)?`أدلة: ${[...new Set([...L.clues,P.clue])].filter((x)=>JH.includes(x)).length}/5`:\"دليل ثانوي\"}`",
+      "source": {
+        "line": 4505,
+        "column": 3519229
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-062": {
+      "templateSource": "`أدلة: ${[...new Set([...L.clues,P.clue])].filter((x)=>JH.includes(x)).length}/5`",
+      "source": {
+        "line": 4505,
+        "column": 3519303
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-063": {
+      "tn": "دليل ثانوي",
+      "source": {
+        "line": 4505,
+        "column": 3519385
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-064": {
+      "templateSource": "`${P.health>0?\"+\":\"−\"}${Math.abs(P.health)} صحة`",
+      "source": {
+        "line": 4505,
+        "column": 3519540
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-065": {
+      "templateSource": "`لقيت: ${P.item}`",
+      "source": {
+        "line": 4505,
+        "column": 3520351
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-066": {
+      "tn": "اختيار تلقائي",
+      "source": {
+        "line": 4505,
+        "column": 3520382
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-067": {
+      "templateSource": "`${P.label}  •  -${P.time} دق`",
+      "source": {
+        "line": 4505,
+        "column": 3520406
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-068": {
+      "templateSource": "`ثقة ${P.needsTrust.whoLabel} ما زالت ${L.trust[P.needsTrust.who]} — يلزم ${P.needsTrust.min}+. عاونو أولاً.`",
+      "source": {
+        "line": 4505,
+        "column": 3521135
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-069": {
+      "tn": "مفتاح",
+      "source": {
+        "line": 4505,
+        "column": 3521285
+      },
+      "kind": "control-match"
+    },
+    "ui.shared.text-070": {
+      "tn": "سيف",
+      "source": {
+        "line": 4505,
+        "column": 3521311
+      },
+      "kind": "control-match"
+    },
+    "ui.shared.text-071": {
+      "templateSource": "`لقيت دليل: ${c} • ${i}/${j.hotspots.length}`",
+      "source": {
+        "line": 4505,
+        "column": 3522034
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-072": {
+      "templateSource": "`لقيت دليل: ${c} • ${i}/${j.hotspots.length}`",
+      "source": {
+        "line": 4505,
+        "column": 3522093
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-073": {
+      "templateSource": "`الحقيبة معبية 4/4 — ما نجمش نهز: ${P.item} — فرّغ بلاصة أولاً`",
+      "source": {
+        "line": 4505,
+        "column": 3522159
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-074": {
+      "templateSource": "`لقيت: ${P.item}`",
+      "source": {
+        "line": 4505,
+        "column": 3522223
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-075": {
+      "templateSource": "`${P.label}  •  +${P.courage||0} شجاعة`",
+      "source": {
+        "line": 4505,
+        "column": 3522249
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-076": {
+      "tn": "إعدادات الصوت",
+      "source": {
+        "line": 4505,
+        "column": 3523111
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.shared.text-077": {
+      "tn": "🔊 صوت: تشغيل",
+      "source": {
+        "line": 4505,
+        "column": 3523438
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-078": {
+      "tn": "🔇 ساكت: إيقاف",
+      "source": {
+        "line": 4505,
+        "column": 3523464
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-079": {
+      "tn": "اضغط مطولاً لسماع نغمة — اتركها لتتوقف",
+      "source": {
+        "line": 4505,
+        "column": 3523584
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.shared.text-080": {
+      "tn": "🎵 اضغط مطولاً للصوت",
+      "source": {
+        "line": 4505,
+        "column": 3523885
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-081": {
+      "tn": "موسيقى: تشغيل",
+      "source": {
+        "line": 4505,
+        "column": 3524193
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-082": {
+      "tn": "موسيقى: إيقاف",
+      "source": {
+        "line": 4505,
+        "column": 3524209
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-083": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3524329
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-084": {
+      "tn": "أصوات الشخصيات 🔊",
+      "source": {
+        "line": 4505,
+        "column": 3524488
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-085": {
+      "tn": "أصوات الشخصيات 🔇",
+      "source": {
+        "line": 4505,
+        "column": 3524518
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-086": {
+      "tn": "صوت الشخصيات ",
+      "source": {
+        "line": 4505,
+        "column": 3524685
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-087": {
+      "tn": "مستوى صوت الشخصيات",
+      "source": {
+        "line": 4505,
+        "column": 3524725
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.shared.text-088": {
+      "tn": "الصوت ",
+      "source": {
+        "line": 4505,
+        "column": 3525022
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-089": {
+      "tn": "مستوى الصوت",
+      "source": {
+        "line": 4505,
+        "column": 3525055
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.shared.text-090": {
+      "tn": "جودة الحركة",
+      "source": {
+        "line": 4505,
+        "column": 3525299
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.shared.text-091": {
+      "tn": " جودة الحركة:",
+      "source": {
+        "line": 4505,
+        "column": 3525427
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-092": {
+      "tn": "✅ جودة: عادية — جسيمات أقل واهتزاز أخف",
+      "source": {
+        "line": 4505,
+        "column": 3525562
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-093": {
+      "tn": "✅ جودة: سينمائية ثقيلة — جسيمات واهتزاز كامل",
+      "source": {
+        "line": 4505,
+        "column": 3525603
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-094": {
+      "tn": "عادية",
+      "source": {
+        "line": 4505,
+        "column": 3525887
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-095": {
+      "tn": "سينمائية ثقيلة",
+      "source": {
+        "line": 4505,
+        "column": 3525895
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-096": {
+      "tn": " تخطي المشهد",
+      "source": {
+        "line": 4505,
+        "column": 3526850
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-097": {
+      "tn": "قرطاج في الصباح",
+      "source": {
+        "line": 4505,
+        "column": 3527075
+      },
+      "kind": "display",
+      "property": "alt"
+    },
+    "ui.shared.text-098": {
+      "tn": "قرطاج — 10:00 صباحا",
+      "source": {
+        "line": 4505,
+        "column": 3527381
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-099": {
+      "tn": "كان صباح عادي في قرطاج...",
+      "source": {
+        "line": 4505,
+        "column": 3527452
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-100": {
+      "tn": "كمّل ←",
+      "source": {
+        "line": 4505,
+        "column": 3527662
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-101": {
+      "tn": "سوق قرطاج في الصباح",
+      "source": {
+        "line": 4505,
+        "column": 3527868
+      },
+      "kind": "display",
+      "property": "alt"
+    },
+    "ui.shared.text-102": {
+      "tn": "الناس تضحك... أما الهدوء موش طبيعي.",
+      "source": {
+        "line": 4505,
+        "column": 3528176
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-103": {
+      "tn": "كمّل ←",
+      "source": {
+        "line": 4505,
+        "column": 3528395
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-104": {
+      "tn": "سور قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3528601
+      },
+      "kind": "display",
+      "property": "alt"
+    },
+    "ui.shared.text-105": {
+      "tn": "سور قرطاج — 3000 سنة يحمينا",
+      "source": {
+        "line": 4505,
+        "column": 3528901
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-106": {
+      "tn": "حنبعل بناه... وأحنا لازم نحميوه.",
+      "source": {
+        "line": 4505,
+        "column": 3528980
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-107": {
+      "tn": "كمّل ←",
+      "source": {
+        "line": 4505,
+        "column": 3529197
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-108": {
+      "tn": "حتى سمعنا الصوت...",
+      "source": {
+        "line": 4505,
+        "column": 3529614
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-109": {
+      "tn": "الصمت هذا، هو الصوت متاع العاصفة قبل ما تجي.",
+      "source": {
+        "line": 4505,
+        "column": 3529684
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-110": {
+      "tn": "ادخل للدار ←",
+      "source": {
+        "line": 4505,
+        "column": 3529872
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-111": {
+      "tn": "السور يتكسر",
+      "source": {
+        "line": 4505,
+        "column": 3530145
+      },
+      "kind": "display",
+      "property": "alt"
+    },
+    "ui.shared.text-112": {
+      "tn": "السور... يتكسر!",
+      "source": {
+        "line": 4505,
+        "column": 3531095
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-113": {
+      "tn": "الأرض تهتز... تمسك بشيء!",
+      "source": {
+        "line": 4505,
+        "column": 3531172
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-114": {
+      "tn": "الجسر يهتز",
+      "source": {
+        "line": 4505,
+        "column": 3531459
+      },
+      "kind": "display",
+      "property": "alt"
+    },
+    "ui.shared.text-115": {
+      "tn": "الجسر يهتز...",
+      "source": {
+        "line": 4505,
+        "column": 3531900
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-116": {
+      "tn": "كل خطوة... ولوح يصرّ.",
+      "source": {
+        "line": 4505,
+        "column": 3531965
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-117": {
+      "tn": "البوابة الأخيرة",
+      "source": {
+        "line": 4505,
+        "column": 3532195
+      },
+      "kind": "display",
+      "property": "alt"
+    },
+    "ui.shared.text-118": {
+      "tn": "البوابة... آخر أمل.",
+      "source": {
+        "line": 4505,
+        "column": 3532678
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-119": {
+      "tn": "القوارب تستنى... والقرار ليك.",
+      "source": {
+        "line": 4505,
+        "column": 3532749
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-120": {
+      "tn": "الحقيقة أكبر من السور...",
+      "source": {
+        "line": 4505,
+        "column": 3533523
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-121": {
+      "tn": "نور ذهبي... بعد ليلة طويلة",
+      "source": {
+        "line": 4505,
+        "column": 3533735
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-122": {
+      "tn": "رسالة توصل... حتى بعد الرحيل",
+      "source": {
+        "line": 4505,
+        "column": 3533780
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-123": {
+      "tn": "الباب يتسكر... والاسم يبقى",
+      "source": {
+        "line": 4505,
+        "column": 3533825
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-124": {
+      "tn": "إشارة مشوّشة... الحقيقة تتكشف",
+      "source": {
+        "line": 4505,
+        "column": 3533867
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-125": {
+      "tn": "نجيت... أما الثمن ثقيل",
+      "source": {
+        "line": 4505,
+        "column": 3533899
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-001": {
+      "tn": "دار في قرطاج قبل الكارثة",
+      "source": {
+        "line": 4505,
+        "column": 3534140
+      },
+      "kind": "display",
+      "property": "alt"
+    },
+    "ui.home.text-002": {
+      "tn": "بالأنمي",
+      "source": {
+        "line": 4505,
+        "column": 3534817
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-003": {
+      "tn": "قَرْطَاج",
+      "source": {
+        "line": 4505,
+        "column": 3534896
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-004": {
+      "tn": "آخر يوم",
+      "source": {
+        "line": 4505,
+        "column": 3534997
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-005": {
+      "tn": "في قرطاج",
+      "source": {
+        "line": 4505,
+        "column": 3535064
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-006": {
+      "tn": "60 دقيقة... ومدينة كاملة باش طيح. خريطة، ثقة، 5 أدلة، و9 نهايات.",
+      "source": {
+        "line": 4505,
+        "column": 3535174
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-007": {
+      "tn": "اختار الصعوبة",
+      "source": {
+        "line": 4505,
+        "column": 3535325
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.home.text-008": {
+      "templateSource": "`✅ صعوبة: ${Ff[P].label}`",
+      "source": {
+        "line": 4505,
+        "column": 3535456
+      },
+      "kind": "display"
+    },
+    "ui.home.text-009": {
+      "tn": "🏅 إنجازاتي ",
+      "source": {
+        "line": 4505,
+        "column": 3535978
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-010": {
+      "tn": "👑 أسطورة السور!",
+      "source": {
+        "line": 4505,
+        "column": 3536098
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-011": {
+      "tn": "كمّل النهايات والأدلة",
+      "source": {
+        "line": 4505,
+        "column": 3536127
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-012": {
+      "tn": "ما فتحت حتى إنجاز بعد — ابدأ القصة.",
+      "source": {
+        "line": 4505,
+        "column": 3536433
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-013": {
+      "tn": " ابدأ الجزء الأول",
+      "source": {
+        "line": 4505,
+        "column": 3536803
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-014": {
+      "tn": "متابعة آخر حفظ",
+      "source": {
+        "line": 4505,
+        "column": 3537082
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-015": {
+      "tn": "🌲 الجزء الثاني — ما وراء السور ",
+      "source": {
+        "line": 4505,
+        "column": 3537462
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-016": {
+      "tn": "• مفتوح",
+      "source": {
+        "line": 4505,
+        "column": 3537510
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-017": {
+      "tn": "• مقفل",
+      "source": {
+        "line": 4505,
+        "column": 3537520
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-018": {
+      "tn": "📂 ارجع من ملف",
+      "source": {
+        "line": 4505,
+        "column": 3537724
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-019": {
+      "tn": "ارجع من ملف حفظ",
+      "source": {
+        "line": 4505,
+        "column": 3537819
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.home.text-020": {
+      "tn": "⚙️ الإعدادات والصوت",
+      "source": {
+        "line": 4505,
+        "column": 3538077
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-021": {
+      "tn": "وضع الاختبار 🧪",
+      "source": {
+        "line": 4505,
+        "column": 3538519
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-022": {
+      "tn": "💾 حفظ",
+      "source": {
+        "line": 4505,
+        "column": 3538693
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-023": {
+      "tn": "🗂️ خانات الجلسة",
+      "source": {
+        "line": 4505,
+        "column": 3538883
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-024": {
+      "tn": "🔍 خط كبير",
+      "source": {
+        "line": 4505,
+        "column": 3539067
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-025": {
+      "tn": "🛡️ أقل اهتزاز",
+      "source": {
+        "line": 4505,
+        "column": 3539245
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-026": {
+      "tn": " كيفاش تلعب؟",
+      "source": {
+        "line": 4505,
+        "column": 3539668
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-027": {
+      "tn": "⏱️ عندك 60 دقيقة. كل اختيار ينقص من الوقت.",
+      "source": {
+        "line": 4505,
+        "column": 3539815
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-028": {
+      "tn": "✦ اضغط على النقاط المضيئة باش تلقى أدوات وأسرار.",
+      "source": {
+        "line": 4505,
+        "column": 3539879
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-029": {
+      "tn": "💬 اقرا الحوار، اضغط عليه باش تكمل.",
+      "source": {
+        "line": 4505,
+        "column": 3539949
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-030": {
+      "tn": "⚠️ في السوق والجسر عندك ثواني معدودة برك (حسب الصعوبة).",
+      "source": {
+        "line": 4505,
+        "column": 3540016
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-031": {
+      "tn": "👥 الشخصيات",
+      "source": {
+        "line": 4505,
+        "column": 3540306
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-032": {
+      "tn": "🏆 النهايات",
+      "source": {
+        "line": 4505,
+        "column": 3540801
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-033": {
+      "tn": "لعبة جديدة؟",
+      "source": {
+        "line": 4505,
+        "column": 3541212
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-034": {
+      "tn": "إيه، ابدأ",
+      "source": {
+        "line": 4505,
+        "column": 3541389
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-035": {
+      "tn": "لا",
+      "source": {
+        "line": 4505,
+        "column": 3541519
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-036": {
+      "tn": "خانات الجلسة",
+      "source": {
+        "line": 4505,
+        "column": 3541692
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-037": {
+      "tn": "خانة ",
+      "source": {
+        "line": 4505,
+        "column": 3541912
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-038": {
+      "tn": "خانة ",
+      "source": {
+        "line": 4505,
+        "column": 3542028
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-039": {
+      "tn": " — فارغة",
+      "source": {
+        "line": 4505,
+        "column": 3542040
+      },
+      "kind": "review-context"
+    },
+    "ui.home.text-040": {
+      "tn": "سكّر",
+      "source": {
+        "line": 4505,
+        "column": 3542182
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-041": {
+      "tn": "تمسح كل حفظات الجلسة؟",
+      "source": {
+        "line": 4505,
+        "column": 3542353
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-042": {
+      "tn": "إيه، امسح",
+      "source": {
+        "line": 4505,
+        "column": 3542527
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-043": {
+      "tn": "لا",
+      "source": {
+        "line": 4505,
+        "column": 3542659
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-044": {
+      "tn": "🗑️ مسح الحفظ",
+      "source": {
+        "line": 4505,
+        "column": 3542884
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-045": {
+      "tn": "الجزء الثاني مقفل",
+      "source": {
+        "line": 4505,
+        "column": 3542978
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.home.text-046": {
+      "tn": "الجزء الثاني مقفل — كمل النهاية السرية باش تحلو",
+      "source": {
+        "line": 4505,
+        "column": 3543383
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-047": {
+      "tn": "جمع 5/5 أدلة في الجزء الأول واكشف الحقيقة في البوابة، وبعدها ينفتح ما وراء السور.",
+      "source": {
+        "line": 4505,
+        "column": 3543500
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-048": {
+      "tn": "العب الجزء الأول",
+      "source": {
+        "line": 4505,
+        "column": 3543872
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-049": {
+      "tn": "جرب في وضع الاختبار",
+      "source": {
+        "line": 4505,
+        "column": 3544180
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.home.text-050": {
+      "tn": "سكّر",
+      "source": {
+        "line": 4505,
+        "column": 3544434
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.intro.text-001": {
+      "tn": "← ارجع",
+      "source": {
+        "line": 4505,
+        "column": 3545180
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.intro.text-002": {
+      "tn": "اضغط للمتابعة • ",
+      "source": {
+        "line": 4505,
+        "column": 3545561
+      },
+      "kind": "review-context"
+    },
+    "ui.intro.text-003": {
+      "tn": "كمّل...",
+      "source": {
+        "line": 4505,
+        "column": 3545740
+      },
+      "kind": "review-context"
+    },
+    "ui.intro.text-004": {
+      "tn": "ادخل للدار ←",
+      "source": {
+        "line": 4505,
+        "column": 3545750
+      },
+      "kind": "review-context"
+    },
+    "ui.test-only.text-001": {
+      "tn": "وضع الاختبار 🧪",
+      "source": {
+        "line": 4505,
+        "column": 3546426
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.test-only.text-002": {
+      "tn": "ارجع",
+      "source": {
+        "line": 4505,
+        "column": 3546659
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.test-only.text-003": {
+      "tn": "جرّب كل التعبيرات والنهايات من غير ما تلعب القصة كاملة. الصور هنا هي نفس الصور المستعملة في اللعبة — بلا تكرار.",
+      "source": {
+        "line": 4505,
+        "column": 3546736
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.test-only.text-004": {
+      "tn": "التعبيرات — ",
+      "source": {
+        "line": 4505,
+        "column": 3547089
+      },
+      "kind": "dev-screen"
+    },
+    "ui.test-only.text-005": {
+      "tn": "الشارة تظهر في المسرح وقت الحوار: ",
+      "source": {
+        "line": 4505,
+        "column": 3547795
+      },
+      "kind": "dev-screen"
+    },
+    "ui.test-only.text-006": {
+      "tn": ". التعبير يجي من نفس كائن EXPRESSIONS المستعمل في اللعبة.",
+      "source": {
+        "line": 4505,
+        "column": 3547890
+      },
+      "kind": "dev-screen"
+    },
+    "ui.test-only.text-007": {
+      "tn": "→ اللي قبل",
+      "source": {
+        "line": 4505,
+        "column": 3548180
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.test-only.text-008": {
+      "tn": "اللي بعد ←",
+      "source": {
+        "line": 4505,
+        "column": 3548384
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.test-only.text-009": {
+      "tn": "كل النهايات — 9 نهايات",
+      "source": {
+        "line": 4505,
+        "column": 3548846
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.test-only.text-010": {
+      "tn": "المختارة الآن: ",
+      "source": {
+        "line": 4505,
+        "column": 3549391
+      },
+      "kind": "dev-screen"
+    },
+    "ui.test-only.text-011": {
+      "tn": "شوف شاشة النهاية المختارة ←",
+      "source": {
+        "line": 4505,
+        "column": 3549615
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.test-only.text-012": {
+      "tn": "ملاحظة: شاشة النهاية تعرض الحالة الحالية (وقت/شجاعة/أدلة) — في وضع الاختبار هي حالة البداية، وهذا مقصود للمعاينة فقط.",
+      "source": {
+        "line": 4505,
+        "column": 3549702
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.test-only.text-013": {
+      "tn": "قائمة الفصول",
+      "source": {
+        "line": 4505,
+        "column": 3550005
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.test-only.text-014": {
+      "tn": "الجزء الأول: فصول 1–8 • الجزء الثاني: فصول 9–11 • المجموع 18 فصلاً، 9 نهايات، خريطة، ثقة 5 شخصيات، 7 أدلة، مؤقّت، وضع بحث يخفي الحوار.",
+      "source": {
+        "line": 4505,
+        "column": 3550055
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.test-only.text-015": {
+      "tn": "جرّب الفصل 1 في المسرح ←",
+      "source": {
+        "line": 4505,
+        "column": 3550417
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.test-only.text-016": {
+      "tn": "جاري الفتح...",
+      "source": {
+        "line": 4505,
+        "column": 3550487
+      },
+      "kind": "dev-screen"
+    },
+    "ui.test-only.text-017": {
+      "tn": "🌲 جرّب الجزء الثاني — الفصل 9",
+      "source": {
+        "line": 4505,
+        "column": 3550697
+      },
+      "kind": "dev-screen",
+      "property": "children"
+    },
+    "ui.ending.text-001": {
+      "tn": "الفصل 8 • ",
+      "source": {
+        "line": 4505,
+        "column": 3554199
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-002": {
+      "tn": "مشهد النهاية ",
+      "source": {
+        "line": 4505,
+        "column": 3554336
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-003": {
+      "tn": "🏅 إنجاز انفتح: ",
+      "source": {
+        "line": 4505,
+        "column": 3554764
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-004": {
+      "tn": "• إنجازاتي ",
+      "source": {
+        "line": 4505,
+        "column": 3554861
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-005": {
+      "tn": " • ضاع",
+      "source": {
+        "line": 4505,
+        "column": 3555328
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-006": {
+      "tn": "شوف نتيجة النهاية ←",
+      "source": {
+        "line": 4505,
+        "column": 3556458
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-007": {
+      "tn": "كمّل ←",
+      "source": {
+        "line": 4505,
+        "column": 3556480
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-008": {
+      "tn": "تخطي المشهد ⏭",
+      "source": {
+        "line": 4505,
+        "column": 3556625
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-009": {
+      "tn": "ما وراء السور... قريبا — الجزء الثاني مفتوح 🌲",
+      "source": {
+        "line": 4505,
+        "column": 3556956
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-010": {
+      "tn": "🎺 موسيقى بطولية — نور تحيّي، وعم منصور فخور",
+      "source": {
+        "line": 4505,
+        "column": 3557111
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-011": {
+      "tn": "شريط الأحداث — مشهد النهاية",
+      "source": {
+        "line": 4505,
+        "column": 3557241
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.ending.text-012": {
+      "tn": "شارع محترق بعد هروب ريان",
+      "source": {
+        "line": 4505,
+        "column": 3558317
+      },
+      "kind": "display",
+      "property": "alt"
+    },
+    "ui.ending.text-013": {
+      "tn": "الجزء الثاني • الفصل 11 / 11",
+      "source": {
+        "line": 4505,
+        "column": 3558776
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-014": {
+      "tn": "نهاية اللعبة الكاملة • الفصل 8 / 8",
+      "source": {
+        "line": 4505,
+        "column": 3558807
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-015": {
+      "tn": "الشخصيات في النهاية",
+      "source": {
+        "line": 4505,
+        "column": 3559269
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-016": {
+      "tn": "ملوّن = نجا • رمادي = ضاع في هالمسار",
+      "source": {
+        "line": 4505,
+        "column": 3559348
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-017": {
+      "tn": "نجا",
+      "source": {
+        "line": 4505,
+        "column": 3560244
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-018": {
+      "tn": "ضاع",
+      "source": {
+        "line": 4505,
+        "column": 3560250
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-019": {
+      "tn": "رسالة ريان — إلى لينا",
+      "source": {
+        "line": 4505,
+        "column": 3560572
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-020": {
+      "tn": "«يا لينا، كان قريت هالرسالة، اعرفي راني ما خليتكش... خليت بلاصتي لحد كان محتاجها أكثر. احمي بابا، واحكي لعم منصور راني وفيت بوعدي.»",
+      "source": {
+        "line": 4505,
+        "column": 3560655
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-021": {
+      "tn": "تشويق • يختفي بعد ",
+      "source": {
+        "line": 4505,
+        "column": 3561050
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-022": {
+      "tn": " ثواني",
+      "source": {
+        "line": 4505,
+        "column": 3561074
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-023": {
+      "tn": "الجزء الثاني — ما وراء السور... قريبا",
+      "source": {
+        "line": 4505,
+        "column": 3561140
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-024": {
+      "tn": "الحقيقة طلعت أكبر من السور. وشكون كان يعرف؟ وشكون سكت؟ الجواب ورا السور.",
+      "source": {
+        "line": 4505,
+        "column": 3561239
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-025": {
+      "tn": "العب من جديد",
+      "source": {
+        "line": 4505,
+        "column": 3561569
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-026": {
+      "tn": "سكّر التشويق",
+      "source": {
+        "line": 4505,
+        "column": 3561712
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-027": {
+      "tn": "الوقت المتبقي",
+      "source": {
+        "line": 4505,
+        "column": 3561821
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-028": {
+      "tn": "الصحة",
+      "source": {
+        "line": 4505,
+        "column": 3561850
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-029": {
+      "tn": "الشجاعة",
+      "source": {
+        "line": 4505,
+        "column": 3561875
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-030": {
+      "tn": "أدلة",
+      "source": {
+        "line": 4505,
+        "column": 3561903
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-031": {
+      "tn": "ثقة ",
+      "source": {
+        "line": 4505,
+        "column": 3562474
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-032": {
+      "tn": " الأدوات اللي لقيتها",
+      "source": {
+        "line": 4505,
+        "column": 3562941
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-033": {
+      "tn": "ما لقيت حتى أداة... المرة الجاية استكشف النقاط المضيئة قبل ما تختار.",
+      "source": {
+        "line": 4505,
+        "column": 3563067
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-034": {
+      "tn": "مسارك: ",
+      "source": {
+        "line": 4505,
+        "column": 3563196
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-035": {
+      "tn": "حماية لينا • ",
+      "source": {
+        "line": 4505,
+        "column": 3563234
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-036": {
+      "tn": "اتباع إيلاس • ",
+      "source": {
+        "line": 4505,
+        "column": 3563281
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-037": {
+      "tn": "إنقاذ الأب • ",
+      "source": {
+        "line": 4505,
+        "column": 3563327
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-038": {
+      "tn": "مساعدة عم منصور • ",
+      "source": {
+        "line": 4505,
+        "column": 3563374
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-039": {
+      "tn": "اختيارك الأخير: ",
+      "source": {
+        "line": 4505,
+        "column": 3563398
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-040": {
+      "tn": "الأدلة: ",
+      "source": {
+        "line": 4505,
+        "column": 3563479
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-041": {
+      "tn": "ما لقيت حتى دليل.",
+      "source": {
+        "line": 4505,
+        "column": 3563565
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-042": {
+      "tn": "نتيجتك الشخصية",
+      "source": {
+        "line": 4505,
+        "column": 3563769
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-043": {
+      "tn": "نقطة",
+      "source": {
+        "line": 4505,
+        "column": 3563977
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-044": {
+      "tn": "الحساب: وقت متبقي ",
+      "source": {
+        "line": 4505,
+        "column": 3564055
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-045": {
+      "tn": " + شجاعة ",
+      "source": {
+        "line": 4505,
+        "column": 3564104
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-046": {
+      "tn": " + أدلة ",
+      "source": {
+        "line": 4505,
+        "column": 3564126
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-047": {
+      "tn": " + مجموع الثقة ",
+      "source": {
+        "line": 4505,
+        "column": 3564181
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-048": {
+      "tn": " • صعوبة: ",
+      "source": {
+        "line": 4505,
+        "column": 3564202
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-049": {
+      "tn": " • تلميحات: ",
+      "source": {
+        "line": 4505,
+        "column": 3564244
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-050": {
+      "tn": "✅ تنسخت!",
+      "source": {
+        "line": 4505,
+        "column": 3564404
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-051": {
+      "tn": "📋 شارك نتيجتك (نسخ)",
+      "source": {
+        "line": 4505,
+        "column": 3564415
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-052": {
+      "tn": "🏅 تحديث الإنجازات — ",
+      "source": {
+        "line": 4505,
+        "column": 3564661
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-053": {
+      "tn": "أمين وقف معاك للآخر، ودفترو صار جزء من حكايتك. ",
+      "source": {
+        "line": 4505,
+        "column": 3564819
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-054": {
+      "tn": "فتحت دفتر أمين في الفصل 9. ",
+      "source": {
+        "line": 4505,
+        "column": 3564901
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-055": {
+      "tn": "/3 صفحات من يوميات أمين لقيتها في الغابة.",
+      "source": {
+        "line": 4505,
+        "column": 3565015
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-056": {
+      "tn": "تشويق • الجزء الثالث",
+      "source": {
+        "line": 4505,
+        "column": 3565280
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-057": {
+      "tn": "الجزء الثالث — ما بعد الحقيقة...",
+      "source": {
+        "line": 4505,
+        "column": 3565359
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-058": {
+      "tn": "الحقيقة طلعت للنور — أو بقات في الظل. أما اللي صنعو العمالقة ما زالو موجودين. القصة ما كملتش... استنى الجزء الثالث.",
+      "source": {
+        "line": 4505,
+        "column": 3565461
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-059": {
+      "tn": "كيف كانت اللعبة؟",
+      "source": {
+        "line": 4505,
+        "column": 3565710
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-060": {
+      "tn": "شكراً برشا! رأيك وصلنا وفرّحنا ❤️ (محلي، بلا إرسال)",
+      "source": {
+        "line": 4505,
+        "column": 3565824
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-061": {
+      "tn": "عجبتني برشا",
+      "source": {
+        "line": 4505,
+        "column": 3565958
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-062": {
+      "tn": "حماس",
+      "source": {
+        "line": 4505,
+        "column": 3565989
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-063": {
+      "tn": "عادية",
+      "source": {
+        "line": 4505,
+        "column": 3566013
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-064": {
+      "templateSource": "`شكراً! اخترت ${b}`",
+      "source": {
+        "line": 4505,
+        "column": 3566069
+      },
+      "kind": "display"
+    },
+    "ui.ending.text-065": {
+      "tn": "🏅 إنجاز هالنهاية — ",
+      "source": {
+        "line": 4505,
+        "column": 3566447
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-066": {
+      "tn": "✅ انفتح",
+      "source": {
+        "line": 4505,
+        "column": 3566576
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-067": {
+      "tn": "• يتسجّل في ملف الحفظ",
+      "source": {
+        "line": 4505,
+        "column": 3566586
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-068": {
+      "tn": "هالنهاية تحفظت في «إنجازاتي» وفي ملف الحفظ — ارجع للصفحة الرئيسية باش تشوف العداد محدّث.",
+      "source": {
+        "line": 4505,
+        "column": 3566678
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-069": {
+      "tn": "💾 تحفظت النهاية في ملف الحفظ — إنجازاتي محدّثة",
+      "source": {
+        "line": 4505,
+        "column": 3566810
+      },
+      "kind": "display"
+    },
+    "ui.ending.text-070": {
+      "tn": "✅ تحفظت في الملف",
+      "source": {
+        "line": 4505,
+        "column": 3566990
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-071": {
+      "tn": "💾 حفظ النهاية في ملف",
+      "source": {
+        "line": 4505,
+        "column": 3567009
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-072": {
+      "tn": "الجزء الثاني مفتوح",
+      "source": {
+        "line": 4505,
+        "column": 3567248
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-073": {
+      "tn": "ما وراء السور... قريبا — أما الباب تحلّ",
+      "source": {
+        "line": 4505,
+        "column": 3567325
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-074": {
+      "tn": "كشفت الحقيقة وفتحت الجزء الثاني. نجم تدخل توا من الصفحة الرئيسية.",
+      "source": {
+        "line": 4505,
+        "column": 3567434
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-075": {
+      "tn": "🌲 ادخل للجزء الثاني ←",
+      "source": {
+        "line": 4505,
+        "column": 3567687
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-076": {
+      "tn": " العب مرة أخرى",
+      "source": {
+        "line": 4505,
+        "column": 3568031
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-077": {
+      "tn": "شوف النهايات الأخرى ",
+      "source": {
+        "line": 4505,
+        "column": 3568292
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-078": {
+      "tn": "🏠 ارجع للصفحة الرئيسية",
+      "source": {
+        "line": 4505,
+        "column": 3568525
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-079": {
+      "tn": "النهايات الخمسة — الفصل 8 • شفت ",
+      "source": {
+        "line": 4505,
+        "column": 3568741
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-080": {
+      "tn": "مشهد: ",
+      "source": {
+        "line": 4505,
+        "column": 3569296
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-081": {
+      "tn": " أسطر • ",
+      "source": {
+        "line": 4505,
+        "column": 3569324
+      },
+      "kind": "review-context"
+    },
+    "ui.ending.text-082": {
+      "tn": "شوف مشهد هالنهاية ←",
+      "source": {
+        "line": 4505,
+        "column": 3569507
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-083": {
+      "tn": "هاذي النهاية اللي شفتها توا",
+      "source": {
+        "line": 4505,
+        "column": 3569600
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-084": {
+      "tn": "مازلت مقفلة — العب ووصّل لها من البوابة.",
+      "source": {
+        "line": 4505,
+        "column": 3569687
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-085": {
+      "tn": "النهايات تتفتح من اختيارات البوابة: البطل وحدو، الناجي مع منصور، التضحية، الخائن مع إيلاس، والحقيقة بـ 5/5 أدلة.",
+      "source": {
+        "line": 4505,
+        "column": 3569806
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-086": {
+      "tn": "تبدأ لعبة جديدة؟",
+      "source": {
+        "line": 4505,
+        "column": 3570088
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-087": {
+      "tn": "إيه، ابدأ",
+      "source": {
+        "line": 4505,
+        "column": 3570262
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.ending.text-088": {
+      "tn": "لا",
+      "source": {
+        "line": 4505,
+        "column": 3570384
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.game-over.text-001": {
+      "tn": "فات الوقت",
+      "source": {
+        "line": 4505,
+        "column": 3570777
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.game-over.text-002": {
+      "tn": "الوقت وفا قبل ما توصل للبوابة. قرطاج ما تستنى حد... أما القصة تنجم تتعاود.",
+      "source": {
+        "line": 4505,
+        "column": 3570955
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.game-over.text-003": {
+      "tn": "أدلة: ",
+      "source": {
+        "line": 4505,
+        "column": 3571215
+      },
+      "kind": "review-context"
+    },
+    "ui.game-over.text-004": {
+      "tn": "شجاعة: ",
+      "source": {
+        "line": 4505,
+        "column": 3571366
+      },
+      "kind": "review-context"
+    },
+    "ui.game-over.text-005": {
+      "tn": "بلايص زرتها: ",
+      "source": {
+        "line": 4505,
+        "column": 3571484
+      },
+      "kind": "review-context"
+    },
+    "ui.game-over.text-006": {
+      "tn": " العب مرة أخرى",
+      "source": {
+        "line": 4505,
+        "column": 3571677
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-001": {
+      "tn": "← ارجع",
+      "source": {
+        "line": 4505,
+        "column": 3572762
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-002": {
+      "tn": "الفصل ",
+      "source": {
+        "line": 4505,
+        "column": 3572863
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-003": {
+      "tn": " · خريطة المدينة",
+      "source": {
+        "line": 4505,
+        "column": 3572877
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-004": {
+      "tn": "أدلة: ",
+      "source": {
+        "line": 4505,
+        "column": 3573132
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-005": {
+      "tn": "الحقيبة: ",
+      "source": {
+        "line": 4505,
+        "column": 3573323
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-006": {
+      "tn": "خريطة المدينة",
+      "source": {
+        "line": 4505,
+        "column": 3573561
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-007": {
+      "tn": "وين تمشي توا؟",
+      "source": {
+        "line": 4505,
+        "column": 3573676
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-008": {
+      "tn": "كل تنقل يكلف ",
+      "source": {
+        "line": 4505,
+        "column": 3573742
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-009": {
+      "tn": "-3 دقائق",
+      "source": {
+        "line": 4505,
+        "column": 3573801
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-010": {
+      "tn": ". البوابة هي النهاية — امشي لها كانك واجد.",
+      "source": {
+        "line": 4505,
+        "column": 3573814
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-011": {
+      "tn": "خريطة قرطاج — البوابة والمدينة",
+      "source": {
+        "line": 4505,
+        "column": 3573982
+      },
+      "kind": "display",
+      "property": "alt"
+    },
+    "ui.map.text-012": {
+      "tn": "خريطة قرطاج — اختار بلاصة من القائمة اللي تحت الصورة",
+      "source": {
+        "line": 4505,
+        "column": 3574157
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-013": {
+      "tn": "📍 الأماكن",
+      "source": {
+        "line": 4505,
+        "column": 3574400
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-014": {
+      "tn": "❤️ الثقة",
+      "source": {
+        "line": 4505,
+        "column": 3574524
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-015": {
+      "tn": "🔍 الأدلة ",
+      "source": {
+        "line": 4505,
+        "column": 3574647
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-016": {
+      "tn": "🎒 الحقيبة ",
+      "source": {
+        "line": 4505,
+        "column": 3574817
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-017": {
+      "tn": "أنت هنا — ارجع للمشهد",
+      "source": {
+        "line": 4505,
+        "column": 3575455
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-018": {
+      "tn": "تنقل: -3 دق",
+      "source": {
+        "line": 4505,
+        "column": 3575479
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-019": {
+      "tn": " زرتها",
+      "source": {
+        "line": 4505,
+        "column": 3575656
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-020": {
+      "tn": " الثقة",
+      "source": {
+        "line": 4505,
+        "column": 3575948
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-021": {
+      "tn": " الأدلة ",
+      "source": {
+        "line": 4505,
+        "column": 3576586
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-022": {
+      "tn": " — ما زال متخبي",
+      "source": {
+        "line": 4505,
+        "column": 3576968
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-023": {
+      "tn": "النهاية السرية تحلت في البوابة!",
+      "source": {
+        "line": 4505,
+        "column": 3577134
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-024": {
+      "tn": " الحقيبة ",
+      "source": {
+        "line": 4505,
+        "column": 3577377
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-025": {
+      "tn": "اضغط باش تترك الأداة",
+      "source": {
+        "line": 4505,
+        "column": 3577699
+      },
+      "kind": "display",
+      "property": "title"
+    },
+    "ui.map.text-026": {
+      "tn": "الحقيبة فارغة — استكشف النقاط المضيئة.",
+      "source": {
+        "line": 4505,
+        "column": 3577837
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-027": {
+      "tn": "اضغط على أداة باش تتركها وتفرغ بلاصة. البطل يلزم: لينا + بابا + عم منصور، شجاعة >70، وقت >5.",
+      "source": {
+        "line": 4505,
+        "column": 3577947
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-028": {
+      "tn": "حالة البطل: ",
+      "source": {
+        "line": 4505,
+        "column": 3578096
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-029": {
+      "tn": "✅ واجد",
+      "source": {
+        "line": 4505,
+        "column": 3578114
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-030": {
+      "tn": "⏳ ما زال",
+      "source": {
+        "line": 4505,
+        "column": 3578123
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-031": {
+      "tn": " • حالة السر: ",
+      "source": {
+        "line": 4505,
+        "column": 3578134
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-032": {
+      "tn": "✅ واجد",
+      "source": {
+        "line": 4505,
+        "column": 3578154
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-033": {
+      "tn": "⏳ ما زال",
+      "source": {
+        "line": 4505,
+        "column": 3578163
+      },
+      "kind": "review-context"
+    },
+    "ui.map.text-034": {
+      "tn": "🗺️ أول مرة في الخريطة؟",
+      "source": {
+        "line": 4505,
+        "column": 3578394
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-035": {
+      "tn": "اضغط على أي بلاصة باش تمشي، كل تنقل -3 دقايق",
+      "source": {
+        "line": 4505,
+        "column": 3578483
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.map.text-036": {
+      "tn": "فهمت، كمّل",
+      "source": {
+        "line": 4505,
+        "column": 3578655
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-001": {
+      "tn": "نور",
+      "source": {
+        "line": 4505,
+        "column": 3579081
+      },
+      "kind": "control-match"
+    },
+    "ui.gameplay.text-002": {
+      "tn": "ن",
+      "source": {
+        "line": 4505,
+        "column": 3579088
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-003": {
+      "tn": "منصور",
+      "source": {
+        "line": 4505,
+        "column": 3579103
+      },
+      "kind": "control-match"
+    },
+    "ui.gameplay.text-004": {
+      "tn": "م",
+      "source": {
+        "line": 4505,
+        "column": 3579112
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-005": {
+      "tn": "يوسف",
+      "source": {
+        "line": 4505,
+        "column": 3579127
+      },
+      "kind": "control-match"
+    },
+    "ui.gameplay.text-006": {
+      "tn": "ي",
+      "source": {
+        "line": 4505,
+        "column": 3579135
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-007": {
+      "tn": "إيلاس",
+      "source": {
+        "line": 4505,
+        "column": 3579150
+      },
+      "kind": "control-match"
+    },
+    "ui.gameplay.text-008": {
+      "tn": "إ",
+      "source": {
+        "line": 4505,
+        "column": 3579159
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-009": {
+      "tn": "ا",
+      "source": {
+        "line": 4505,
+        "column": 3579183
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-010": {
+      "tn": "🔍 وضع البحث",
+      "source": {
+        "line": 4505,
+        "column": 3582123
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-011": {
+      "tn": "أدلة: ",
+      "source": {
+        "line": 4505,
+        "column": 3582268
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-012": {
+      "tn": " ثواني",
+      "source": {
+        "line": 4505,
+        "column": 3582480
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-013": {
+      "tn": "لقيت كل أدلة الفصل!",
+      "source": {
+        "line": 4505,
+        "column": 3582597
+      },
+      "kind": "display"
+    },
+    "ui.gameplay.text-014": {
+      "tn": "شوف النهاية ←",
+      "source": {
+        "line": 4505,
+        "column": 3582765
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-015": {
+      "tn": "📖 ارجع للقصة · تعدى للاختيارات ←",
+      "source": {
+        "line": 4505,
+        "column": 3582781
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-016": {
+      "tn": "تعدى ⏭",
+      "source": {
+        "line": 4505,
+        "column": 3583022
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-017": {
+      "templateSource": "`اجمع دليل ${O.label}`",
+      "source": {
+        "line": 4505,
+        "column": 3583263
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-018": {
+      "tn": "اكتشاف · ",
+      "source": {
+        "line": 4505,
+        "column": 3583978
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-019": {
+      "templateSource": "`لقيت دليل: ${ev.find((O)=>O.id===Pv.clue)?.title||Pv.label}`",
+      "source": {
+        "line": 4505,
+        "column": 3584063
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-020": {
+      "templateSource": "`لقيت: ${Pv.label}`",
+      "source": {
+        "line": 4505,
+        "column": 3584125
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-021": {
+      "tn": "أدلة الفصل: ",
+      "source": {
+        "line": 4505,
+        "column": 3584215
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-022": {
+      "tn": " • لقيت كل أدلة الفصل!",
+      "source": {
+        "line": 4505,
+        "column": 3584275
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-023": {
+      "tn": "شوف النهاية ←",
+      "source": {
+        "line": 4505,
+        "column": 3584712
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-024": {
+      "tn": "تعدى للاختيارات ←",
+      "source": {
+        "line": 4505,
+        "column": 3584728
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-025": {
+      "tn": "كمّل البحث",
+      "source": {
+        "line": 4505,
+        "column": 3584912
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-026": {
+      "tn": "سكّر",
+      "source": {
+        "line": 4505,
+        "column": 3585062
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-027": {
+      "tn": "مازلت ما لقيتش كل الأدلة...",
+      "source": {
+        "line": 4505,
+        "column": 3585312
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-028": {
+      "tn": "لقيت ",
+      "source": {
+        "line": 4505,
+        "column": 3585410
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-029": {
+      "tn": " من ",
+      "source": {
+        "line": 4505,
+        "column": 3585420
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-030": {
+      "tn": ". تحب تعدى من غير ما تكمل البحث؟",
+      "source": {
+        "line": 4505,
+        "column": 3585445
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-031": {
+      "tn": "إيه، كمّل للنهاية",
+      "source": {
+        "line": 4505,
+        "column": 3585737
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-032": {
+      "tn": "إيه، تعدى من غير ما نكمل",
+      "source": {
+        "line": 4505,
+        "column": 3585757
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-033": {
+      "tn": "لا، كمّل البحث",
+      "source": {
+        "line": 4505,
+        "column": 3585908
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-034": {
+      "tn": "شريط الأحداث — وضع البحث",
+      "source": {
+        "line": 4505,
+        "column": 3586026
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-035": {
+      "tn": "الوقت المتبقي",
+      "source": {
+        "line": 4505,
+        "column": 3586102
+      },
+      "kind": "display",
+      "property": "title"
+    },
+    "ui.gameplay.text-036": {
+      "tn": "الصحة",
+      "source": {
+        "line": 4505,
+        "column": 3586264
+      },
+      "kind": "display",
+      "property": "title"
+    },
+    "ui.gameplay.text-037": {
+      "tn": "الشجاعة",
+      "source": {
+        "line": 4505,
+        "column": 3586391
+      },
+      "kind": "display",
+      "property": "title"
+    },
+    "ui.gameplay.text-038": {
+      "tn": "الأدلة",
+      "source": {
+        "line": 4505,
+        "column": 3586521
+      },
+      "kind": "display",
+      "property": "title"
+    },
+    "ui.gameplay.text-039": {
+      "templateSource": "`مسرح الشخصية — ${(W8(z)||mf((nu[j.id]||[\"ryan\"])[0])).name}`",
+      "source": {
+        "line": 4505,
+        "column": 3586914
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-040": {
+      "tn": "يتكلم الآن",
+      "source": {
+        "line": 4505,
+        "column": 3590106
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-041": {
+      "templateSource": "`الشخصية الثانية: ${of.name}`",
+      "source": {
+        "line": 4505,
+        "column": 3590700
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-042": {
+      "tn": "😨 خايف",
+      "source": {
+        "line": 4505,
+        "column": 3591509
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-043": {
+      "tn": "😡 غاضب",
+      "source": {
+        "line": 4505,
+        "column": 3591541
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-044": {
+      "tn": "😔 حزين",
+      "source": {
+        "line": 4505,
+        "column": 3591571
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-045": {
+      "tn": "✨ عادي",
+      "source": {
+        "line": 4505,
+        "column": 3591591
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-046": {
+      "tn": "ثقة ",
+      "source": {
+        "line": 4505,
+        "column": 3591760
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-047": {
+      "templateSource": "`نص ${j.place}`",
+      "source": {
+        "line": 4505,
+        "column": 3592045
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-048": {
+      "tn": "الوقت والإيقاف والقائمة",
+      "source": {
+        "line": 4505,
+        "column": 3592121
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-049": {
+      "tn": "القائمة والإعدادات",
+      "source": {
+        "line": 4505,
+        "column": 3592457
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-050": {
+      "tn": "مرة تكمل الجملة، مرتين تتعدى المشهد",
+      "source": {
+        "line": 4505,
+        "column": 3592548
+      },
+      "kind": "display",
+      "property": "title"
+    },
+    "ui.gameplay.text-051": {
+      "tn": "تخطي الحوار: مرة تكمل الجملة، مرتين تتعدى المشهد",
+      "source": {
+        "line": 4505,
+        "column": 3592599
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-052": {
+      "tn": "تخطي",
+      "source": {
+        "line": 4505,
+        "column": 3592694
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-053": {
+      "tn": "مرة تكمل الجملة، مرتين تتعدى المشهد",
+      "source": {
+        "line": 4505,
+        "column": 3592855
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-054": {
+      "tn": "الفصل ",
+      "source": {
+        "line": 4505,
+        "column": 3593076
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-055": {
+      "tn": "صحة ",
+      "source": {
+        "line": 4505,
+        "column": 3593187
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-056": {
+      "tn": "% • شجاعة ",
+      "source": {
+        "line": 4505,
+        "column": 3593203
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-057": {
+      "tn": "% • الحقيبة ",
+      "source": {
+        "line": 4505,
+        "column": 3593226
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-058": {
+      "tn": "🔊 الصوت: ",
+      "source": {
+        "line": 4505,
+        "column": 3593451
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-059": {
+      "tn": "تشغيل",
+      "source": {
+        "line": 4505,
+        "column": 3593477
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-060": {
+      "tn": "إيقاف",
+      "source": {
+        "line": 4505,
+        "column": 3593485
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-061": {
+      "tn": "ريان",
+      "source": {
+        "line": 4505,
+        "column": 3593597
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-062": {
+      "tn": "أصوات الشخصيات 🔊",
+      "source": {
+        "line": 4505,
+        "column": 3593701
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-063": {
+      "tn": "أصوات الشخصيات 🔇",
+      "source": {
+        "line": 4505,
+        "column": 3593731
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-064": {
+      "tn": "صوت الشخصيات ",
+      "source": {
+        "line": 4505,
+        "column": 3593878
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-065": {
+      "tn": "مستوى صوت الشخصيات",
+      "source": {
+        "line": 4505,
+        "column": 3593974
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-066": {
+      "tn": "❤️ الثقة ",
+      "source": {
+        "line": 4505,
+        "column": 3594325
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-067": {
+      "tn": "· مفتوحة",
+      "source": {
+        "line": 4505,
+        "column": 3594340
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-068": {
+      "tn": "👥 الشخصيات",
+      "source": {
+        "line": 4505,
+        "column": 3594485
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-069": {
+      "tn": "🔍 الأدلة: ",
+      "source": {
+        "line": 4505,
+        "column": 3594638
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-070": {
+      "tn": "· مفتوحة",
+      "source": {
+        "line": 4505,
+        "column": 3594714
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-071": {
+      "tn": "💡 تلميح (",
+      "source": {
+        "line": 4505,
+        "column": 3594851
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-072": {
+      "tn": "💾 حفظ اللعبة",
+      "source": {
+        "line": 4505,
+        "column": 3595012
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-073": {
+      "tn": "🔍 خط كبير: ",
+      "source": {
+        "line": 4505,
+        "column": 3595167
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-074": {
+      "tn": "تشغيل",
+      "source": {
+        "line": 4505,
+        "column": 3595195
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-075": {
+      "tn": "إيقاف",
+      "source": {
+        "line": 4505,
+        "column": 3595203
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-076": {
+      "tn": "🛡️ تقليل الاهتزاز: ",
+      "source": {
+        "line": 4505,
+        "column": 3595341
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-077": {
+      "tn": "تشغيل",
+      "source": {
+        "line": 4505,
+        "column": 3595377
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-078": {
+      "tn": "إيقاف",
+      "source": {
+        "line": 4505,
+        "column": 3595385
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-079": {
+      "tn": "جودة: عادية",
+      "source": {
+        "line": 4505,
+        "column": 3595474
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-080": {
+      "tn": "جودة: سينمائية ثقيلة",
+      "source": {
+        "line": 4505,
+        "column": 3595488
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-081": {
+      "tn": "🎬 جودة: ",
+      "source": {
+        "line": 4505,
+        "column": 3595602
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-082": {
+      "tn": "سينمائية ثقيلة",
+      "source": {
+        "line": 4505,
+        "column": 3595637
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-083": {
+      "tn": "عادية",
+      "source": {
+        "line": 4505,
+        "column": 3595654
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-084": {
+      "tn": "الموسيقى: تشغيل",
+      "source": {
+        "line": 4505,
+        "column": 3595726
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-085": {
+      "tn": "الموسيقى: إيقاف",
+      "source": {
+        "line": 4505,
+        "column": 3595744
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-086": {
+      "tn": "🎵 الموسيقى: ",
+      "source": {
+        "line": 4505,
+        "column": 3595853
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-087": {
+      "tn": "تشغيل",
+      "source": {
+        "line": 4505,
+        "column": 3595882
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-088": {
+      "tn": "إيقاف",
+      "source": {
+        "line": 4505,
+        "column": 3595890
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-089": {
+      "tn": "الخريطة تتحل بعد الفصل 2.",
+      "source": {
+        "line": 4505,
+        "column": 3595955
+      },
+      "kind": "display"
+    },
+    "ui.gameplay.text-090": {
+      "tn": "🗺️ خريطة المدينة ",
+      "source": {
+        "line": 4505,
+        "column": 3596081
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-091": {
+      "tn": "· مقفلة",
+      "source": {
+        "line": 4505,
+        "column": 3596118
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-092": {
+      "tn": "سكّر القائمة",
+      "source": {
+        "line": 4505,
+        "column": 3596277
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-093": {
+      "tn": "💡 تلميح: ",
+      "source": {
+        "line": 4505,
+        "column": 3597076
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-094": {
+      "templateSource": "`الحوار ${B+1} من ${j.lines.length}`",
+      "source": {
+        "line": 4505,
+        "column": 3597238
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-095": {
+      "tn": "الحقيبة ",
+      "source": {
+        "line": 4505,
+        "column": 3597665
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-096": {
+      "tn": "آخر المشهد · ",
+      "source": {
+        "line": 4505,
+        "column": 3597925
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-097": {
+      "tn": "وصلت لآخر المشهد - تحب تبحث؟",
+      "source": {
+        "line": 4505,
+        "column": 3598006
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-098": {
+      "tn": "لقيت ",
+      "source": {
+        "line": 4505,
+        "column": 3598115
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-099": {
+      "tn": " من ",
+      "source": {
+        "line": 4505,
+        "column": 3598125
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-100": {
+      "tn": " في هالفصل. فتّش قبل ما تعدّي، خاطر بعض الأدلة ما ترجعش.",
+      "source": {
+        "line": 4505,
+        "column": 3598150
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-101": {
+      "tn": "🔍 بحث عن الأدلة",
+      "source": {
+        "line": 4505,
+        "column": 3598449
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-102": {
+      "tn": "تعدى ←",
+      "source": {
+        "line": 4505,
+        "column": 3598671
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-103": {
+      "tn": "ما زال عندك ",
+      "source": {
+        "line": 4505,
+        "column": 3598853
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-104": {
+      "tn": " من الأدلة — تعدى من غير ما تكمل؟",
+      "source": {
+        "line": 4505,
+        "column": 3598888
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-105": {
+      "tn": "إيه، تعدى من غير ما نكمل",
+      "source": {
+        "line": 4505,
+        "column": 3599141
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-106": {
+      "tn": "لا، كمّل البحث",
+      "source": {
+        "line": 4505,
+        "column": 3599308
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-107": {
+      "tn": "لقيت: ",
+      "source": {
+        "line": 4505,
+        "column": 3599405
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-108": {
+      "tn": "اكتشاف · ",
+      "source": {
+        "line": 4505,
+        "column": 3599710
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-109": {
+      "tn": "خذ / اكتشف",
+      "source": {
+        "line": 4505,
+        "column": 3600119
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-110": {
+      "tn": "رجوع",
+      "source": {
+        "line": 4505,
+        "column": 3600269
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-111": {
+      "tn": "السور... يتكسر!",
+      "source": {
+        "line": 4505,
+        "column": 3600580
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-112": {
+      "tn": "اسمع... الصوت هذا؟",
+      "source": {
+        "line": 4505,
+        "column": 3600598
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-113": {
+      "tn": "قلبك يدق... والأرض قاعدة تتنفس تحتك.",
+      "source": {
+        "line": 4505,
+        "column": 3600678
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-114": {
+      "tn": "اضغط للمتابعة ←",
+      "source": {
+        "line": 4505,
+        "column": 3601789
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-115": {
+      "tn": "قاعد يتكتب...",
+      "source": {
+        "line": 4505,
+        "column": 3601807
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-116": {
+      "tn": "تابع...",
+      "source": {
+        "line": 4505,
+        "column": 3602079
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-117": {
+      "tn": "اختصار ↑",
+      "source": {
+        "line": 4505,
+        "column": 3602267
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-118": {
+      "tn": "الفصل ",
+      "source": {
+        "line": 4505,
+        "column": 3602526
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-119": {
+      "tn": " / 11 · قرارك",
+      "source": {
+        "line": 4505,
+        "column": 3602540
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-120": {
+      "tn": "شنو باش تعمل توا؟",
+      "source": {
+        "line": 4505,
+        "column": 3602613
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-121": {
+      "tn": "⚡ اختيارك يأثر — كل اختيار يبدّل الثقة والصحة والشجاعة والنهاية. القرار يستناك، ما يتعداش وحدو.",
+      "source": {
+        "line": 4505,
+        "column": 3602789
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-122": {
+      "tn": " قرر بسرعة! (",
+      "source": {
+        "line": 4505,
+        "column": 3603169
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-123": {
+      "tn": " ثواني)",
+      "source": {
+        "line": 4505,
+        "column": 3603188
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-124": {
+      "tn": " ثواني",
+      "source": {
+        "line": 4505,
+        "column": 3603224
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-125": {
+      "tn": " مرحلة البحث وفاة — بقات ",
+      "source": {
+        "line": 4505,
+        "column": 3603564
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-126": {
+      "tn": " نقطة ما لقيتهاش في ",
+      "source": {
+        "line": 4505,
+        "column": 3603602
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-127": {
+      "tn": "🔍 بحث عن الأدلة قبل ما تختار — ترجع للاختيارات بعدها",
+      "source": {
+        "line": 4505,
+        "column": 3603830
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-128": {
+      "tn": "ما زال مسكّر",
+      "source": {
+        "line": 4505,
+        "column": 3604846
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-129": {
+      "tn": "قرار أخير",
+      "source": {
+        "line": 4505,
+        "column": 3605016
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-130": {
+      "templateSource": "`-${O.time} دق`",
+      "source": {
+        "line": 4505,
+        "column": 3605028
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-131": {
+      "tn": "كل اختيار يبدّل الوقت والشجاعة • الحقيبة ",
+      "source": {
+        "line": 4505,
+        "column": 3605139
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-132": {
+      "tn": "نتيجة اختيارك · ",
+      "source": {
+        "line": 4505,
+        "column": 3605457
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-133": {
+      "tn": "الحوار الجاي باش يكمل من هنا — ما فماش قفزة مباشرة للفصل اللي بعدو من غير ما تشوف النتيجة.",
+      "source": {
+        "line": 4505,
+        "column": 3605712
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-134": {
+      "tn": "شوف النهاية ←",
+      "source": {
+        "line": 4505,
+        "column": 3605982
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-135": {
+      "tn": "كمّل للبحث في البوابة ←",
+      "source": {
+        "line": 4505,
+        "column": 3606020
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-136": {
+      "tn": "ارجع للاختيارات ←",
+      "source": {
+        "line": 4505,
+        "column": 3606065
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-137": {
+      "tn": "كمّل للحوار الجاي ←",
+      "source": {
+        "line": 4505,
+        "column": 3606101
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-138": {
+      "tn": "كمّل ←",
+      "source": {
+        "line": 4505,
+        "column": 3606143
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-139": {
+      "tn": "كمّل للخريطة ←",
+      "source": {
+        "line": 4505,
+        "column": 3606152
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-140": {
+      "tn": "شريط الأحداث",
+      "source": {
+        "line": 4505,
+        "column": 3606242
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-141": {
+      "tn": "الوقت المتبقي",
+      "source": {
+        "line": 4505,
+        "column": 3606306
+      },
+      "kind": "display",
+      "property": "title"
+    },
+    "ui.gameplay.text-142": {
+      "tn": "الصحة",
+      "source": {
+        "line": 4505,
+        "column": 3606468
+      },
+      "kind": "display",
+      "property": "title"
+    },
+    "ui.gameplay.text-143": {
+      "tn": "الشجاعة",
+      "source": {
+        "line": 4505,
+        "column": 3606595
+      },
+      "kind": "display",
+      "property": "title"
+    },
+    "ui.gameplay.text-144": {
+      "tn": "الأدلة",
+      "source": {
+        "line": 4505,
+        "column": 3606725
+      },
+      "kind": "display",
+      "property": "title"
+    },
+    "ui.gameplay.text-145": {
+      "tn": "حفظ اللعبة",
+      "source": {
+        "line": 4505,
+        "column": 3607238
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-146": {
+      "tn": "الحفظ — خانات الجلسة + ملف دائم",
+      "source": {
+        "line": 4505,
+        "column": 3607535
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-147": {
+      "tn": "سكّر نافذة الحفظ",
+      "source": {
+        "line": 4505,
+        "column": 3607615
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-148": {
+      "tn": "الحفظ التلقائي يروح للخانة 1 بعد كل اختيار مهم ويتحفظ في جهازك، ويبقى حتى بعد ما تسكّر الصفحة — حمّل ملف الحفظ كنسخة احتياطية.",
+      "source": {
+        "line": 4505,
+        "column": 3607845
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-149": {
+      "tn": "خانة ",
+      "source": {
+        "line": 4505,
+        "column": 3608333
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-150": {
+      "tn": "— فارغة",
+      "source": {
+        "line": 4505,
+        "column": 3608405
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-151": {
+      "tn": "💾 حفظ هنا",
+      "source": {
+        "line": 4505,
+        "column": 3608535
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-152": {
+      "tn": "▶️ تحميل",
+      "source": {
+        "line": 4505,
+        "column": 3608749
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-153": {
+      "tn": "📥 تصدير ملف",
+      "source": {
+        "line": 4505,
+        "column": 3608879
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-154": {
+      "tn": "📋 نسخ الملخص",
+      "source": {
+        "line": 4505,
+        "column": 3609023
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-155": {
+      "tn": "🗑️ مسح الخانة",
+      "source": {
+        "line": 4505,
+        "column": 3609187
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-156": {
+      "tn": "🗑️ مسح كل الحفظ",
+      "source": {
+        "line": 4505,
+        "column": 3609401
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-157": {
+      "tn": "سكّر",
+      "source": {
+        "line": 4505,
+        "column": 3609559
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-158": {
+      "tn": "معرض الشخصيات",
+      "source": {
+        "line": 4505,
+        "column": 3609776
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-159": {
+      "tn": "👥 الشخصيات",
+      "source": {
+        "line": 4505,
+        "column": 3610096
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-160": {
+      "tn": "8 شخصيات • كل شخصية تستعمل نفس الصورة في كل الفصول، بلا تكرار. السر يبان كان اكتشفتو في القصة.",
+      "source": {
+        "line": 4505,
+        "column": 3610177
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-161": {
+      "tn": "سكّر معرض الشخصيات",
+      "source": {
+        "line": 4505,
+        "column": 3610323
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-162": {
+      "tn": "صورة العائلة",
+      "source": {
+        "line": 4505,
+        "column": 3610731
+      },
+      "kind": "control-match"
+    },
+    "ui.gameplay.text-163": {
+      "tn": "خريطة الأزقة",
+      "source": {
+        "line": 4505,
+        "column": 3610825
+      },
+      "kind": "control-match"
+    },
+    "ui.gameplay.text-164": {
+      "tn": "تعبير خاص — الخطوة 2",
+      "source": {
+        "line": 4505,
+        "column": 3611733
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-165": {
+      "templateSource": "`تعبير ${O.name} المقفل`",
+      "source": {
+        "line": 4505,
+        "column": 3611875
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-166": {
+      "tn": "🔓 انفتح — شفتو في القصة",
+      "source": {
+        "line": 4505,
+        "column": 3612230
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-167": {
+      "tn": "🔒 مقفل — كمّل القصة باش تكشفو",
+      "source": {
+        "line": 4505,
+        "column": 3612267
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-168": {
+      "tn": "الثقة",
+      "source": {
+        "line": 4505,
+        "column": 3612464
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-169": {
+      "templateSource": "`\\uD83D\\uDD13 سر مكشوف: ${O.secret}`",
+      "source": {
+        "line": 4505,
+        "column": 3612754
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-170": {
+      "tn": "🔒 سر ما زال متخبي — كمّل القصة باش تكشفو.",
+      "source": {
+        "line": 4505,
+        "column": 3612791
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-171": {
+      "tn": "سكّر المعرض",
+      "source": {
+        "line": 4505,
+        "column": 3612987
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-172": {
+      "tn": "قَرطَاج • الفصل ",
+      "source": {
+        "line": 4505,
+        "column": 3613280
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-173": {
+      "tn": "تخطي المقدمة ←",
+      "source": {
+        "line": 4505,
+        "column": 3613860
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-174": {
+      "tn": "تنبيه أدلة ناقصة",
+      "source": {
+        "line": 4505,
+        "column": 3614025
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.gameplay.text-175": {
+      "tn": "مازلت ما لقيتش كل الأدلة؟",
+      "source": {
+        "line": 4505,
+        "column": 3614276
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-176": {
+      "tn": "مازلت ما لقيتش كل الأدلة في هالفصل (",
+      "source": {
+        "line": 4505,
+        "column": 3614364
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-177": {
+      "tn": " من ",
+      "source": {
+        "line": 4505,
+        "column": 3614405
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-178": {
+      "tn": "). تحب تتعدى ولا ترجع تبحث؟",
+      "source": {
+        "line": 4505,
+        "column": 3614430
+      },
+      "kind": "review-context"
+    },
+    "ui.gameplay.text-179": {
+      "tn": "ارجع نبحث 🔍",
+      "source": {
+        "line": 4505,
+        "column": 3614707
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-180": {
+      "tn": "تعدى رغم ذلك ←",
+      "source": {
+        "line": 4505,
+        "column": 3614896
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-181": {
+      "tn": "اللعبة متوقفة — المؤقّت والحوار واقفين في بلاصتهم",
+      "source": {
+        "line": 4505,
+        "column": 3615187
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.gameplay.text-182": {
+      "tn": "الوقت ينقص...",
+      "source": {
+        "line": 4505,
+        "column": 3615870
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-126": {
+      "tn": " • الفصل ",
+      "source": {
+        "line": 4505,
+        "column": 3617516
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-127": {
+      "tn": "❤️ ثقة",
+      "source": {
+        "line": 4505,
+        "column": 3617748
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-128": {
+      "tn": "🔍 أدلة: ",
+      "source": {
+        "line": 4505,
+        "column": 3617874
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-129": {
+      "tn": "💾 حفظ",
+      "source": {
+        "line": 4505,
+        "column": 3618056
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-130": {
+      "tn": "💡 تلميح (",
+      "source": {
+        "line": 4505,
+        "column": 3618179
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-131": {
+      "tn": "خط عادي",
+      "source": {
+        "line": 4505,
+        "column": 3618272
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-132": {
+      "tn": "✅ خط كبير",
+      "source": {
+        "line": 4505,
+        "column": 3618282
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-133": {
+      "tn": "🔍 خط كبير",
+      "source": {
+        "line": 4505,
+        "column": 3618374
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-134": {
+      "tn": "اهتزاز عادي",
+      "source": {
+        "line": 4505,
+        "column": 3618459
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-135": {
+      "tn": "✅ تقليل الاهتزاز",
+      "source": {
+        "line": 4505,
+        "column": 3618473
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-136": {
+      "tn": "🛡️ اهتزاز أقل",
+      "source": {
+        "line": 4505,
+        "column": 3618572
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-137": {
+      "tn": "الخريطة تتحل بعد الفصل 2.",
+      "source": {
+        "line": 4505,
+        "column": 3618648
+      },
+      "kind": "display"
+    },
+    "ui.shared.text-138": {
+      "tn": " خريطة المدينة",
+      "source": {
+        "line": 4505,
+        "column": 3618819
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-139": {
+      "tn": " الحقيبة ",
+      "source": {
+        "line": 4505,
+        "column": 3619068
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-140": {
+      "tn": "فارغة",
+      "source": {
+        "line": 4505,
+        "column": 3619196
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-141": {
+      "tn": "💡 تلميح ",
+      "source": {
+        "line": 4505,
+        "column": 3619941
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-142": {
+      "tn": "(−1 دقيقة)",
+      "source": {
+        "line": 4505,
+        "column": 3619975
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-143": {
+      "tn": "(مجاني)",
+      "source": {
+        "line": 4505,
+        "column": 3619988
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-144": {
+      "tn": " • فتّش النقاط المضيئة قبل ما تختار، وكل نقطة تنجم تبدّل مسارك.",
+      "source": {
+        "line": 4505,
+        "column": 3620022
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-145": {
+      "tn": "حفظ اللعبة",
+      "source": {
+        "line": 4505,
+        "column": 3620297
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.shared.text-146": {
+      "tn": "حفظ في خانة — محفوظ في جهازك",
+      "source": {
+        "line": 4505,
+        "column": 3620594
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-147": {
+      "tn": "سكّر نافذة الحفظ",
+      "source": {
+        "line": 4505,
+        "column": 3620671
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.shared.text-148": {
+      "tn": "الحفظ التلقائي يروح للخانة 1 بعد كل اختيار مهم. الحفظ ما يبقاش بعد ما تسكّر الصفحة.",
+      "source": {
+        "line": 4505,
+        "column": 3620901
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-149": {
+      "tn": "حفظ في خانة ",
+      "source": {
+        "line": 4505,
+        "column": 3621191
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-150": {
+      "tn": "🗑️ مسح الحفظ",
+      "source": {
+        "line": 4505,
+        "column": 3621389
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-151": {
+      "tn": "سكّر",
+      "source": {
+        "line": 4505,
+        "column": 3621544
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-152": {
+      "tn": "خانة ",
+      "source": {
+        "line": 4505,
+        "column": 3621710
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-153": {
+      "tn": " • الوقت المتبقي ",
+      "source": {
+        "line": 4505,
+        "column": 3621742
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-154": {
+      "tn": " • تحفظ في: ",
+      "source": {
+        "line": 4505,
+        "column": 3621779
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-155": {
+      "tn": "إعدادات العرض والصوت",
+      "source": {
+        "line": 4505,
+        "column": 3621959
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-156": {
+      "tn": "اسمع... الصوت هذا؟",
+      "source": {
+        "line": 4505,
+        "column": 3622375
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-157": {
+      "tn": "قلبك يدق... والأرض قاعدة تتنفس تحتك.",
+      "source": {
+        "line": 4505,
+        "column": 3622445
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-158": {
+      "tn": "السور... يتكسر!",
+      "source": {
+        "line": 4505,
+        "column": 3624397
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-159": {
+      "tn": "سكّر بطاقة النقطة",
+      "source": {
+        "line": 4505,
+        "column": 3625274
+      },
+      "kind": "display",
+      "property": "aria-label"
+    },
+    "ui.shared.text-160": {
+      "tn": "خذ / اكتشف",
+      "source": {
+        "line": 4505,
+        "column": 3625676
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-161": {
+      "tn": "خلّيها بعد",
+      "source": {
+        "line": 4505,
+        "column": 3625805
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-162": {
+      "tn": "اضغط للمتابعة ←",
+      "source": {
+        "line": 4505,
+        "column": 3626602
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-163": {
+      "tn": "قاعد يتكتب...",
+      "source": {
+        "line": 4505,
+        "column": 3626620
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-164": {
+      "tn": "شنو باش تعمل توا؟",
+      "source": {
+        "line": 4505,
+        "column": 3626811
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-165": {
+      "tn": " قرر بسرعة! (",
+      "source": {
+        "line": 4505,
+        "column": 3627126
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-166": {
+      "tn": " ثواني)",
+      "source": {
+        "line": 4505,
+        "column": 3627145
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-167": {
+      "tn": " ثواني",
+      "source": {
+        "line": 4505,
+        "column": 3627181
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-168": {
+      "tn": " قبل ما تختار... اضغط على النقاط المضيئة في الصورة",
+      "source": {
+        "line": 4505,
+        "column": 3627498
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-169": {
+      "tn": "اختيار ",
+      "source": {
+        "line": 4505,
+        "column": 3627971
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-170": {
+      "tn": "أ",
+      "source": {
+        "line": 4505,
+        "column": 3627982
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-171": {
+      "tn": "ب",
+      "source": {
+        "line": 4505,
+        "column": 3627986
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-172": {
+      "tn": "ج",
+      "source": {
+        "line": 4505,
+        "column": 3627990
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-173": {
+      "tn": " دق",
+      "source": {
+        "line": 4505,
+        "column": 3628100
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-174": {
+      "tn": " الوقت ينقص مع كل اختيار • الشجاعة والصحة تتبدل حسب قرارك",
+      "source": {
+        "line": 4505,
+        "column": 3628422
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-175": {
+      "tn": "الأرض تهتز... تمسك بشيء!",
+      "source": {
+        "line": 4505,
+        "column": 3628626
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-176": {
+      "tn": "الوقت ينقص...",
+      "source": {
+        "line": 4505,
+        "column": 3629126
+      },
+      "kind": "display",
+      "property": "children"
+    },
+    "ui.shared.text-177": {
+      "tn": " قرطاج • الفصل ",
+      "source": {
+        "line": 4505,
+        "column": 3629357
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-178": {
+      "tn": " استعمل السماعات لتجربة سينمائية",
+      "source": {
+        "line": 4505,
+        "column": 3629455
+      },
+      "kind": "review-context"
+    },
+    "ui.shared.text-179": {
+      "tn": "اضغط على الصورة / الحوار للمتابعة",
+      "source": {
+        "line": 4505,
+        "column": 3629541
+      },
+      "kind": "display",
+      "property": "children"
+    }
+  }
+}
