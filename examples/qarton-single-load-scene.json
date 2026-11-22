@@ -5,12 +5,16 @@
   "locale": "tn",
   "durationMs": 21000,
   "assets": {
-    "background": "placeholder:crossroads",
-    "wagon": "placeholder:wagon",
+    "background": "procedural:crossroads",
+    "wagon": "assets/wagon.svg",
     "characters": [
-      "placeholder:ryan",
-      "placeholder:lina",
-      "placeholder:nour"
+      "assets/ryan.svg",
+      "assets/lina.svg",
+      "assets/nour.svg"
+    ],
+    "locations": [
+      "assets/bridge.svg",
+      "assets/clinic.svg"
     ]
   },
   "layers": [
@@ -20,18 +24,38 @@
       "parallax": 0.08
     },
     {
-      "id": "road",
+      "id": "ground",
       "depth": 1,
       "parallax": 0.3
     },
     {
-      "id": "wagon",
+      "id": "bridge",
       "depth": 2,
+      "parallax": 0.16
+    },
+    {
+      "id": "clinic",
+      "depth": 2,
+      "parallax": 0.16
+    },
+    {
+      "id": "wagon",
+      "depth": 3,
       "parallax": 0.55
     },
     {
-      "id": "characters",
-      "depth": 3,
+      "id": "ryan",
+      "depth": 4,
+      "parallax": 0.8
+    },
+    {
+      "id": "lina",
+      "depth": 4,
+      "parallax": 0.8
+    },
+    {
+      "id": "nour",
+      "depth": 4,
       "parallax": 0.8
     }
   ],
