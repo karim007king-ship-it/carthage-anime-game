@@ -58,5 +58,61 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "noor",
+    "maryam",
+    "amin"
+  ],
+  "inputs": [
+    "namesConsent",
+    "aminTestimony",
+    "signalDelivery",
+    "signalReceipt",
+    "manifestHolder",
+    "eliasPage",
+    "eliasSourceConsent",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "part2Resolution",
+    "publicHearingOpened",
+    "escrowEstablished",
+    "escrowReviewDue"
+  ],
+  "choices": [
+    {
+      "id": "openPublicHearing",
+      "textKey": "story.p2-truth-gate.choice.openPublicHearing",
+      "proposedState": {
+        "part2Resolution": "light",
+        "publicHearingOpened": true
+      },
+      "proposedEnding": "light",
+      "confirmationRequired": true
+    },
+    {
+      "id": "establishEscrow",
+      "textKey": "story.p2-truth-gate.choice.establishEscrow",
+      "proposedState": {
+        "part2Resolution": "shadow",
+        "escrowEstablished": true,
+        "escrowReviewDue": "part3-ch33"
+      },
+      "proposedEnding": "shadow",
+      "confirmationRequired": true,
+      "guard": "named-custodian-two-present-witnesses-review-date"
+    }
+  ],
+  "continuity": {
+    "unknownConsent": "independent-facts-only",
+    "receipt": "single-house-not-publication",
+    "brokenDevice": "local-hearing-or-escrow-still-available",
+    "endingTrigger": "confirmed-in-playthrough-only-no-preview",
+    "part3Gate": "unchanged-game-owned-completion-guard",
+    "oldSave": "do-not-infer-part2-resolution",
+    "decisionOnce": true
+  }
 }
