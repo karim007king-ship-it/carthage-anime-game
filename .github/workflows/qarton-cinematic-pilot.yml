@@ -1,0 +1,24 @@
+name: QARTON Cinematic Pilot Contract
+on:
+  push:
+    branches:
+      - feature/qarton-cinematic-pilot-foundation-20261122
+  pull_request:
+    paths:
+      - 'scripts/qarton-cinematic-pilot-contract.cjs'
+      - 'tests/qarton-cinematic-pilot-contract-test.cjs'
+      - 'examples/qarton-single-load-lab.html'
+      - '.github/workflows/qarton-cinematic-pilot.yml'
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify standalone pilot contract
+        run: node --test tests/qarton-cinematic-pilot-contract-test.cjs
+      - name: Verify lab is isolated from production save keys
+        run: |
+          node -e "const fs=require('fs'); const s=fs.readFileSync('examples/qarton-single-load-lab.html','utf8'); if(/localStorage|sessionStorage|shiganshina-|__carthageSaveNow/.test(s)) process.exit(1); console.log('PASS: standalone lab does not access game saves')"
