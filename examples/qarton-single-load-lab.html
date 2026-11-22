@@ -68,13 +68,13 @@ button[disabled]{opacity:.5;cursor:not-allowed}.choices button{flex:1 1 170px}#r
 (()=>{'use strict';
 const outcomes={prioritizeBridge:'الجسر: إصلاح بدأ. العيادة: غطاء مؤقت.',prioritizeClinic:'العيادة: سقف أقوى. الجسر: الإصلاح تأجّل.',splitWithLimits:'الجسر: ممر مشاة فقط. العيادة: حماية جزئية.'};
 const subtitle=document.getElementById('subtitle'),result=document.getElementById('result'),stage=document.querySelector('.stage'),world=document.querySelector('.world'),seek=document.getElementById('seek'),clock=document.getElementById('clock');
-let player=null,frameId=null,lastFrame=null,reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,scene=null;
-function stopLoop(){if(frameId!==null){cancelAnimationFrame(frameId);frameId=null;}lastFrame=null;stage.dataset.playing='false';}
+let player=null,frameId=null,lastFrame=null,isPlaying=false,reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,scene=null;
+function stopLoop(){isPlaying=false;if(frameId!==null){cancelAnimationFrame(frameId);frameId=null;}lastFrame=null;stage.dataset.playing='false';}
 function frame(t){if(!player||!player.state.playing){stopLoop();return;}if(lastFrame!==null)player.tick(Math.max(0,Math.min(100,t-lastFrame)));lastFrame=t;if(player.state.playing)frameId=requestAnimationFrame(frame);else stopLoop();}
-function startLoop(){stopLoop();stage.dataset.playing='true';frameId=requestAnimationFrame(frame);}
+function startLoop(){stopLoop();isPlaying=true;stage.dataset.playing='true';frameId=requestAnimationFrame(frame);}
 function render(view){
  seek.value=String(view.positionMs);clock.textContent='0:'+String(Math.floor(view.positionMs/1000)%60).padStart(2,'0');
- stage.dataset.reducedMotion=String(reduced);stage.dataset.playing=String(player.state.playing);
+ stage.dataset.reducedMotion=String(reduced);stage.dataset.playing=String(isPlaying);
  const d=view.dialogue;subtitle.textContent=d?({nour:'نور',ryan:'ريان',lina:'لينا'}[d.speaker]||d.speaker)+': '+d.text:'';
  const camera=view.camera||{};stage.dataset.shot=camera.shot||'wide';stage.dataset.target=camera.target||'crossroads';
  const ratio=reduced?0:Math.min(1,view.positionMs/scene.durationMs);
