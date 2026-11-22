@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-not-runtime",
+  "canonical": "tn",
+  "languages": [
+    "tn",
+    "ar",
+    "en",
+    "fr"
+  ],
+  "translationContent": "not included; see PR #25",
+  "fallback": "tn for display only"
+}
