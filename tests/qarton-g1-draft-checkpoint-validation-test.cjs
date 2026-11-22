@@ -146,3 +146,14 @@ test('empty and non-string chapter choice identifiers never validate a checkpoin
  assert.equal(inspectCheckpoint({...c,id:''},sample).valid,false);
  assert.deepEqual(inspectCheckpoint(c,sample),{valid:true,completeGroups:['seat']});
 });
+
+
+test('a choice ID assigned to two draft decision groups invalidates the entire checkpoint contract',()=>{
+ for(const id of groups){
+  const c=read(id),first=c.choiceGroups[0],second=c.choiceGroups[1];
+  const sample={schemaVersion:1,chapterId:id,groups:{[first.id]:first.choiceIds[0]}};
+  const overlapping={...c,choiceGroups:[first,{...second,choiceIds:[...second.choiceIds,first.choiceIds[0]]}]};
+  assert.equal(inspectCheckpoint(overlapping,sample).valid,false,id);
+  assert.deepEqual(inspectCheckpoint(c,sample),{valid:true,completeGroups:[first.id]});
+ }
+});
