@@ -59,7 +59,7 @@
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
   "editorialReview": "pending",
-  "optional": true,
+  "optional": false,
   "characters": [
     "ryan",
     "lina",
@@ -114,6 +114,7 @@
     "property": "route-or-oral-testimony-is-not-title",
     "temporaryShelter": "not-waiver-of-property-claim",
     "decisionOnce": true,
-    "timeCost": "pending-editorial-balance"
+    "timeCost": "pending-editorial-balance",
+    "optionalPresence": "yasmin-and-noor-only-chapter-30-always-continues-to-chapter-31"
   }
 }
