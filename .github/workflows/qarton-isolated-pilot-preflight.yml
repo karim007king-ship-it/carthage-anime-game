@@ -19,6 +19,8 @@ on:
       - 'tests/qarton-pilot-preview-html-test.cjs'
       - 'scripts/qarton-pilot-preview-export.cjs'
       - 'tests/qarton-pilot-preview-export-test.cjs'
+      - 'scripts/qarton-pilot-preview-install.cjs'
+      - 'tests/qarton-pilot-preview-install-test.cjs'
       - 'tests/qarton-pilot-capacitor-config-test.cjs'
       - 'tests/qarton-pilot-build-guard-test.cjs'
       - '.github/workflows/qarton-isolated-pilot-preflight.yml'
