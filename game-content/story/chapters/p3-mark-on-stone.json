@@ -56,5 +56,56 @@
   "legacySaveIndex": null,
   "missingLegacyStatePolicy": "unknown",
   "runtimeIntegrated": false,
-  "editorialReview": "pending"
+  "editorialReview": "pending",
+  "characters": [
+    "ryan",
+    "lina",
+    "sara"
+  ],
+  "inputs": [
+    "familySignal",
+    "smokeRescue",
+    "presentCharacters"
+  ],
+  "outputs": [
+    "stoneMark",
+    "familySignalPrivacy",
+    "wayfindingReview"
+  ],
+  "choices": [
+    {
+      "id": "publicWayfinding",
+      "textKey": "story.p3-mark-on-stone.choice.publicWayfinding",
+      "proposedState": {
+        "stoneMark": "publicWayfinding",
+        "familySignalPrivacy": "protected",
+        "wayfindingReview": "scheduled"
+      }
+    },
+    {
+      "id": "privateMemorial",
+      "textKey": "story.p3-mark-on-stone.choice.privateMemorial",
+      "proposedState": {
+        "stoneMark": "privateMemorial",
+        "familySignalPrivacy": "protected"
+      }
+    },
+    {
+      "id": "communityDesign",
+      "textKey": "story.p3-mark-on-stone.choice.communityDesign",
+      "proposedState": {
+        "stoneMark": "communityDesign",
+        "familySignalPrivacy": "protected",
+        "wayfindingReview": "pendingTest"
+      }
+    }
+  ],
+  "continuity": {
+    "unknownFamilySignal": "no-invented-knocks-or-thread",
+    "missingSara": "no-appearance-or-attributed-dialogue",
+    "publicSign": "civilian-services-only-no-hideout-or-family-code",
+    "communityDesign": "pending-test-not-installed",
+    "decisionOnce": true,
+    "timeCost": "pending-editorial-balance"
+  }
 }
