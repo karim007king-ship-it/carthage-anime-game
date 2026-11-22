@@ -33,3 +33,28 @@ test('invalid and new chapter indices are rejected; no Part III unlock',()=>{
   assert.equal(createLegacyPresentationSnapshot({sceneIdx:4,locale:'xx'},true),null);
   assert.equal(createLegacyPresentationSnapshot({sceneIdx:4,reducedMotion:'no'},true),null);
 });
+
+test('read-only snapshots support all four locales and remain deeply immutable',()=>{
+  for (const locale of ['tn','ar','en','fr']) {
+    const input={sceneIdx:4,locale,reducedMotion:true};
+    const before=JSON.stringify(input);
+    const snapshot=createLegacyPresentationSnapshot(input,true);
+    assert.equal(snapshot.locale,locale);
+    assert.equal(snapshot.sceneId,'legacy-05');
+    assert.equal(snapshot.accessibility.reducedMotion,true);
+    assert.equal(Object.isFrozen(snapshot),true);
+    assert.equal(Object.isFrozen(snapshot.accessibility),true);
+    assert.equal(JSON.stringify(input),before);
+    assert.throws(()=>{snapshot.sceneId='injected';},TypeError);
+    assert.throws(()=>{snapshot.accessibility.reducedMotion=false;},TypeError);
+  }
+});
+test('malformed and boundary saves cannot expose new chapters or mutate state',()=>{
+  for (const save of [null,{},[],{sceneIdx:-1},{sceneIdx:18},{sceneIdx:4.5},{sceneIdx:'4'}]) {
+    assert.equal(getDisplayChapterForLegacySave(save),null);
+  }
+  const save=Object.freeze({sceneIdx:17,part:3,flags:Object.freeze({light:true})});
+  assert.equal(getDisplayChapterForLegacySave(save),36);
+  assert.equal(createLegacyPresentationSnapshot(save,true).sceneId,'legacy-18');
+  assert.deepEqual(save,{sceneIdx:17,part:3,flags:{light:true}});
+});
