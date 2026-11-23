@@ -50,6 +50,11 @@ async function main() {
       throw new Error(`Start screen did not appear. Body: ${body}\nRuntime errors: ${pageErrors.join(' | ')}`);
     }
     await start.click();
+    const confirmNewGame = page.locator('button').filter({ hasText: 'إيه، ابدأ' }).first();
+    try {
+      await confirmNewGame.waitFor({ state: 'visible', timeout: 5000 });
+      await confirmNewGame.click();
+    } catch {}
     const skipIntro = page.getByRole('button', { name: /تخطي المقدمة/ });
     try {
       await skipIntro.waitFor({ state: 'visible', timeout: 5000 });
