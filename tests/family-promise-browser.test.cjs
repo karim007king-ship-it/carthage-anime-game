@@ -79,7 +79,11 @@ async function main() {
       const target = page.getByRole('button', { name: new RegExp(expectedLabel) });
       if (await target.count()) return target.first();
       const dialogue = page.locator('.dialogue-panel button').first();
-      if (!(await dialogue.count())) throw new Error(`dialogue control missing while waiting for ${expectedLabel}`);
+      if (!(await dialogue.count())) {
+        const body = (await page.locator('body').innerText()).slice(0, 1800);
+        const buttons = (await page.locator('button').allTextContents()).slice(0, 20).join(' | ');
+        throw new Error(`dialogue control missing while waiting for ${expectedLabel}. Body: ${body}\nButtons: ${buttons}`);
+      }
       await dialogue.click({ timeout: 5000 });
       await page.waitForTimeout(340);
     }
