@@ -127,7 +127,7 @@ async function main() {
     assert.deepEqual(midSave.flags.filter(flag => flag.startsWith('familySignal:')), ['familySignal:knocks']);
     assert.equal(midSave.state.time, beforeBranch.state.time - 1, 'choice charge is recorded once');
     await page.reload({ waitUntil: 'domcontentloaded' });
-    await page.getByRole('button', { name: /متابعة آخر حفظ/ }).click();
+    await page.locator('#carthage-continue-last').click();
     await page.getByText('ونجاوبك كيفاش؟', { exact: false }).waitFor({ state: 'visible', timeout: 15000 });
     const afterReload = await page.evaluate(() => JSON.parse(localStorage.getItem('shiganshina-autosave-v1')));
     assert.equal(afterReload.sceneIdx, 18);
