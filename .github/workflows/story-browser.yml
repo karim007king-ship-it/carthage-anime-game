@@ -1,0 +1,45 @@
+name: QARTON story browser test
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "package.json"
+      - "scripts/**"
+      - "tests/**"
+      - ".github/workflows/story-browser.yml"
+  push:
+    branches: [feature/luna-first-playable-chapter]
+    paths:
+      - "index.html"
+      - "package.json"
+      - "scripts/**"
+      - "tests/**"
+      - ".github/workflows/story-browser.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  browser-playthrough:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install project dependencies
+        run: npm install
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Run story and save tests
+        run: npm test
+      - name: Prepare standalone web build
+        run: npm run prepare:web
+      - name: Play the chapter in Chromium
+        run: npm run test:browser
