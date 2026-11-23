@@ -146,7 +146,7 @@ async function main() {
     await secondRun.page.getByText('ريان... تسمع؟ حتى الدار ولات تتنفّس بصعوبة.').waitFor({ state: 'visible', timeout: 15000 });
     await revealChoice(secondRun.page, 'نخلّي لينا تشدّ يد سارة');
     await secondRun.page.getByRole('button', { name: /نخلّي لينا تشدّ يد سارة/ }).click();
-    await secondRun.page.getByText('ونعلّق الخيط الأحمر', { exact: false }).waitFor({ state: 'visible', timeout: 10000 });
+    await secondRun.page.getByText('كان نغيب عليك', { exact: false }).waitFor({ state: 'visible', timeout: 10000 });
     const motherSave = await secondRun.page.evaluate(() => JSON.parse(localStorage.getItem('shiganshina-autosave-v1')));
     assert.equal(motherSave.sceneIdx, 18);
     assert.deepEqual(motherSave.flags.filter(flag => flag.startsWith('familySignal:')), ['familySignal:mother']);
