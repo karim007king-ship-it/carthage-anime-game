@@ -1,0 +1,13 @@
+'use strict';
+const assert = require('node:assert/strict');
+const audit = require('../data/ending-registry-audit.json');
+const tracked = new Set(audit.trackedEndingIds);
+const additional = new Set(audit.additionalChoiceFinalIds);
+assert.equal(audit.trackedCount, 7);
+assert.equal(tracked.size, audit.trackedCount);
+assert.equal(additional.size, 2);
+assert.equal([...additional].filter(id=>tracked.has(id)).length, 0);
+assert.equal(tracked.size + additional.size, audit.candidateTotalCount);
+assert.equal(audit.status, 'requires-runtime-verification');
+assert.ok(audit.releaseBlockers.length >= 3);
+console.log('Ending registry audit: 7 tracked + 2 candidate; reachability NOT verified');
