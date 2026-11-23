@@ -16,6 +16,35 @@ function replaceOnce(needle, replacement, label) {
   html = html.slice(0, index) + replacement + html.slice(index + needle.length);
 }
 
+// Keep the story bridge readable and unit-testable, while embedding the exact same
+// implementation into the standalone web/Android build before the React module.
+const storyRuntimePath = path.join(__dirname, 'p1-family-promise-runtime.cjs');
+const storyRuntimeSource = fs.readFileSync(storyRuntimePath, 'utf8');
+replaceOnce('<script type="module">', `<script id="qarton-story-runtime">${storyRuntimeSource}</script>\n<script type="module">`, 'story runtime script entry');
+
+// Append the new record after all 18 original records. Stored legacy indexes 0–17
+// therefore continue to address exactly the same scene objects.
+replaceOnce('final:"guardian"}]}],Lz=', 'final:"guardian"}]},window.__qartonStoryRuntime.createScene(N8)],Lz=', 'append p1-family-promise scene');
+
+// Resolve branch-specific dialogue from existing save flags; do not add a save field.
+replaceOnce('let j=an[T],Zf=j?.lines[B]', 'let familyChoiceRef=y.useRef(Object.create(null)),j=window.__qartonStoryRuntime.resolveScene(an[T],K),Zf=j?.lines[B]', 'dynamic story scene resolver');
+replaceOnce('else if(j.id>=7&&j.id<9)Hf(!1),Bf(!1),p("choices")', 'else if(j.storyKey==="p1-family-promise"||j.id>=7&&j.id<9)Hf(!1),Bf(!1),p("choices")', 'promise choice gate in dialogue advance');
+replaceOnce('if(j.id>=7&&j.id<9)Hf(!1),Bf(!1),p("choices")', 'if(j.storyKey==="p1-family-promise"||j.id>=7&&j.id<9)Hf(!1),Bf(!1),p("choices")', 'promise choice gate in accelerated dialogue');
+
+// A branch choice is claimed synchronously before any React state update, charged once,
+// then rendered from the saved flag. The free continuation returns to legacy index 1.
+replaceOnce('rl=(P,z=!1)=>{if(zf)return;', 'rl=(P,z=!1)=>{if(zf)return;if(j.storyKey==="p1-family-promise"){let key=String(P.id||"");if(familyChoiceRef.current[key])return;let result=window.__qartonStoryRuntime.selectChoice(P.id,K,L.time);if(!result.accepted)return;familyChoiceRef.current[key]=!0;K8(P.label);f3((items)=>[...items,P.label]);if(result.kind==="branch"){q(result.flags),W((state)=>({...state,time:result.time})),x(0),U(""),w(!1),Hf(!1),Bf(!1),p("dialogue");return}if(result.kind==="continue"){window.setTimeout(()=>L9(1),250);return}return}', 'family promise choice handler');
+
+// Keep the old linear route intact around the inserted runtime record.
+replaceOnce('else if(T<an.length-1)window.setTimeout(()=>L9(T+1),z?300:850);else window.setTimeout(()=>n("map"),900)', 'else if(T===0)window.setTimeout(()=>L9(18),z?300:850);else if(T<17)window.setTimeout(()=>L9(T+1),z?300:850);else window.setTimeout(()=>n("map"),900)', 'route legacy chapter 1 through promise');
+replaceOnce('if(T<an.length-1)L9(T+1);else n("map")', 'if(T<17)L9(T+1);else n("map")', 'preserve legacy final scene route');
+replaceOnce('L9=(P)=>{if(P>=8)e3("part2");', 'L9=(P)=>{if(P===18)familyChoiceRef.current=Object.create(null);if(P>=8&&P<18)e3("part2");', 'avoid treating appended first-part chapter as part 2');
+
+// Branch dialogue can be longer than the opening. Restore against the resolved data.
+replaceOnce('x(Math.min(P.lineIdx||0,Math.max(0,(an[P.sceneIdx]?.lines.length||1)-1)))', 'x(Math.min(P.lineIdx||0,Math.max(0,(window.__qartonStoryRuntime.resolveScene(an[P.sceneIdx],P.flags||[] )?.lines.length||1)-1)))', 'restore dynamic promise line index');
+replaceOnce('P3=(P)=>{let z=[...new Set', 'P3=(P)=>{familyChoiceRef.current=Object.create(null);let z=[...new Set', 'reset promise click claims on restore');
+replaceOnce('" قرطاج • الفصل ",j.id', '" قرطاج • الفصل ",j.displayChapter||window.__qartonStoryRuntime.displayChapter(T)', 'show stable display chapter number');
+
 // Android-native JSON save export. Browser builds retain Web Share / download fallbacks.
 const exportStart = 'X3=(P)=>{';
 const exportEnd = ',n6=(P)=>{';
@@ -32,7 +61,7 @@ const us = html.indexOf(saveStart);
 const ue = us < 0 ? -1 : html.indexOf(saveEnd, us);
 if (us < 0 || ue < 0) throw new Error('Could not locate the in-game save-slot handler.');
 const saveHandler = `ur=(P,z=!1)=>{let c={slot:P,savedAt:fu(new Date),savedAtMs:Date.now(),sceneIdx:T,sceneName:an[T]?.place||"قرطاج",state:L,flags:K,visited:v9,usedHotspots:af,difficulty:jf,hintsUsed:A9,choicesHistory:yu,lineIdx:B,mapUnlocked:e9,lastChoice:Qt,part:cu,secretUnlocked:mu,achievements:[...tv.current],endingsSeen:[...Zn]};$8((b)=>b.map((i,R)=>R===P-1?c:i)),te(P);try{let slots=JSON.parse(localStorage.getItem("shiganshina-slots-v1")||"[null,null,null]");slots[P-1]=c;localStorage.setItem("shiganshina-slots-v1",JSON.stringify(slots));localStorage.setItem("shiganshina-autosave-v1",JSON.stringify(c));localStorage.setItem("shiganshina-autosave-time-v1",String(Date.now()));let verify=JSON.parse(localStorage.getItem("shiganshina-slots-v1")||"[]");if(!verify[P-1]||verify[P-1].sceneIdx!==c.sceneIdx)throw new Error("storage verification failed");if(!z)G("تم الحفظ في الخانة "+P+" — "+c.sceneName+" • "+nn(L.time)+" (محفوظ في جهازك)");return c}catch(e){G("تعذر حفظ التقدم في الجهاز. تأكد من مساحة التخزين ثم أعد المحاولة.");return false}}`;
-const autosaveHook = `;window.__carthageSaveNow=()=>ur(cz,!1);y.useEffect(()=>{if(f!=="game")return;let timer=window.setTimeout(()=>{try{ur(cz,!0)}catch(e){}},300);return()=>window.clearTimeout(timer)},[f,T,B,L,K,cu]);let P3=(P)=>{`;
+const autosaveHook = `;window.__carthageSaveNow=()=>ur(cz,!1);y.useEffect(()=>{if(f!=="game"&&f!=="ending")return;let timer=window.setTimeout(()=>{try{ur(cz,!0)}catch(e){}},300);return()=>window.clearTimeout(timer)},[f,T,B,L,K,cu,k,Zn]);let P3=(P)=>{`;
 html = html.slice(0, us) + saveHandler + autosaveHook + html.slice(ue + saveEnd.length);
 
 // Expose a genuine Part 3 start action, beginning at story chapter 15.
