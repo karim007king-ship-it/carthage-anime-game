@@ -51,8 +51,16 @@ async function main() {
     }
     await start.click();
     const skipIntro = page.getByRole('button', { name: /تخطي المقدمة/ });
-    if (await skipIntro.count()) await skipIntro.click();
-    await page.getByText(/قرطاج\.\.\. 10:00 صباحا/).waitFor({ state: 'visible', timeout: 15000 });
+    try {
+      await skipIntro.waitFor({ state: 'visible', timeout: 5000 });
+      await skipIntro.click();
+    } catch {}
+    try {
+      await page.getByText(/قرطاج\.\.\. 10:00 صباحا/).waitFor({ state: 'visible', timeout: 20000 });
+    } catch {
+      const body = (await page.locator('body').innerText()).slice(0, 1800);
+      throw new Error(`Opening scene did not appear. Body: ${body}\nRuntime errors: ${pageErrors.join(' | ')}`);
+    }
     return { page, pageErrors };
   }
 
