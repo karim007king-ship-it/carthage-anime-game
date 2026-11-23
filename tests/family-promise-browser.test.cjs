@@ -135,7 +135,7 @@ async function main() {
     assert.equal(afterReload.state.time, midSave.state.time, 'restoring does not charge the branch again');
     await revealChoice(page, 'نمشيوا للسوق');
     await page.getByRole('button', { name: /نمشيوا للسوق/ }).click();
-    await page.getByText(/السوق — قرطاج/).waitFor({ state: 'visible', timeout: 15000 });
+    await page.getByText(/سوق قرطاج — الصباح/).waitFor({ state: 'visible', timeout: 15000 });
     assert.deepEqual(pageErrors, [], 'browser run has no uncaught runtime errors');
     await context.close();
 
@@ -152,7 +152,7 @@ async function main() {
     assert.deepEqual(motherSave.flags.filter(flag => flag.startsWith('familySignal:')), ['familySignal:mother']);
     await revealChoice(secondRun.page, 'نمشيوا للسوق');
     await secondRun.page.getByRole('button', { name: /نمشيوا للسوق/ }).click();
-    await secondRun.page.getByText(/السوق — قرطاج/).waitFor({ state: 'visible', timeout: 15000 });
+    await secondRun.page.getByText(/سوق قرطاج — الصباح/).waitFor({ state: 'visible', timeout: 15000 });
     assert.deepEqual(secondRun.pageErrors, [], 'alternate browser route has no uncaught runtime errors');
     await secondContext.close();
 
