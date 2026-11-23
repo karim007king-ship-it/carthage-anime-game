@@ -78,6 +78,12 @@ async function main() {
     for (let step = 0; step < 32; step++) {
       const target = page.getByRole('button', { name: new RegExp(expectedLabel) });
       if (await target.count()) return target.first();
+      const skipSearch = page.getByRole('button', { name: /تعدى ←/ });
+      if (await skipSearch.count()) {
+        await skipSearch.first().click();
+        await page.waitForTimeout(400);
+        continue;
+      }
       const dialogue = page.locator('button').filter({ hasText: /قاعد يتكتب|اضغط للمتابعة/ }).first();
       if (!(await dialogue.count())) {
         const body = (await page.locator('body').innerText()).slice(0, 1800);
