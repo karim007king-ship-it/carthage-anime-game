@@ -1,0 +1,16 @@
+'use strict';
+const assert = require('node:assert/strict');
+const map = require('../data/qarton-36-chapter-display-map.json');
+assert.equal(map.status, 'display-only-not-playable');
+assert.equal(map.chapters.length, 36);
+assert.equal(new Set(map.chapters.map(x => x.id)).size, 36);
+assert.deepEqual(map.chapters.map(x => x.displayChapter), Array.from({length:36}, (_,i)=>i+1));
+const legacy = map.chapters.filter(x => x.kind === 'legacy');
+const draft = map.chapters.filter(x => x.kind === 'draft');
+assert.equal(legacy.length, 18);
+assert.equal(draft.length, 18);
+assert.deepEqual(legacy.map(x => x.legacySceneIdx), Array.from({length:18}, (_,i)=>i));
+assert.ok(draft.every(x => x.legacySceneIdx === null));
+assert.equal(map.chapters.find(x => x.id === 'legacy-05').displayChapter, 7);
+assert.equal(map.chapters.find(x => x.id === 'p3-single-load').displayChapter, 27);
+console.log('Canonical display map: 18 legacy + 18 draft chapters; save indices preserved');
