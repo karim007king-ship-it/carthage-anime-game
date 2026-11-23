@@ -60,6 +60,11 @@ async function main() {
       await skipIntro.waitFor({ state: 'visible', timeout: 5000 });
       await skipIntro.click();
     } catch {}
+    const skipCinematic = page.getByRole('button', { name: /تخطي المشهد/ });
+    try {
+      await skipCinematic.waitFor({ state: 'visible', timeout: 5000 });
+      await skipCinematic.click();
+    } catch {}
     try {
       await page.getByText(/قرطاج\.\.\. 10:00 صباحا/).waitFor({ state: 'visible', timeout: 20000 });
     } catch {
