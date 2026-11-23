@@ -20,6 +20,7 @@ const scenes = [...legacy.map(([, id, title, place]) => ({ id: Number(id), title
 assert.equal(scenes.length, 19);
 assert.deepEqual(scenes.slice(0, 18).map((scene, index) => scene.id), Array.from({ length: 18 }, (_, index) => index + 1));
 assert.equal(scenes[18].storyKey, 'p1-family-promise');
+assert.equal(scenes[18].id, 19, 'appended scene id is unique and does not collide with legacy id 2');
 assert.equal(runtime.resolveNext(0), 18, 'original chapter one leads to appended promise at index 18');
 assert.equal(runtime.resolveNext(18, 'continue'), 1, 'promise continues to original chapter two at index 1');
 assert.equal(runtime.resolveNext(17), null, 'old final scene does not fall through to the appended chapter');
