@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "source": "Luna PR #28 audit of main index.html",
+  "status": "requires-runtime-verification",
+  "trackedEndingIds": ["hero", "survivor", "sacrifice", "traitor", "secret", "light", "shadow"],
+  "additionalChoiceFinalIds": ["guardian", "rebuild"],
+  "trackedCount": 7,
+  "candidateTotalCount": 9,
+  "warning": "Presence of final choice IDs does not prove they are tracked or reachable. Do not change legacy ending keys until source-level route tests confirm behavior.",
+  "releaseBlockers": [
+    "Verify _7 ending registry and all final choice handlers in original bundle",
+    "Determine whether guardian and rebuild are intentionally separate ending records",
+    "Test all reachable ending routes and ending gallery persistence",
+    "Retain original ending identifiers and saved ending history"
+  ]
+}
