@@ -37,13 +37,15 @@ async function main() {
   const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
 
   async function startFresh(context) {
-    const page = await context.newPage({ viewport: { width: 412, height: 915 } });
+    const page = await context.newPage();
     const pageErrors = [];
     page.on('pageerror', error => pageErrors.push(error.message));
     await page.goto(`http://127.0.0.1:${address.port}`, { waitUntil: 'domcontentloaded' });
     const start = page.getByRole('button', { name: /ابدأ الجزء الأول/ });
     await start.waitFor({ state: 'visible', timeout: 30000 });
     await start.click();
+    const skipIntro = page.getByRole('button', { name: /تخطي المقدمة/ });
+    if (await skipIntro.count()) await skipIntro.click();
     await page.getByText(/قرطاج\.\.\. 10:00 صباحا/).waitFor({ state: 'visible', timeout: 15000 });
     return { page, pageErrors };
   }
@@ -62,7 +64,7 @@ async function main() {
 
   try {
     // Route the existing opening scene into the inserted scene, then choose the knocks branch.
-    const context = await browser.newContext();
+    const context = await browser.newContext({ viewport: { width: 412, height: 915 } });
     const { page, pageErrors } = await startFresh(context);
     const originalChoice = await revealChoice(page, 'نبقى مع لينا ونحميها');
     await originalChoice.click();
@@ -98,7 +100,7 @@ async function main() {
     await context.close();
 
     // A separate new game verifies the alternate mother/string branch and the shared exit.
-    const secondContext = await browser.newContext();
+    const secondContext = await browser.newContext({ viewport: { width: 412, height: 915 } });
     const secondRun = await startFresh(secondContext);
     await (await revealChoice(secondRun.page, 'نبقى مع لينا ونحميها')).click();
     await secondRun.page.getByText('ريان... تسمع؟ حتى الدار ولات تتنفّس بصعوبة.').waitFor({ state: 'visible', timeout: 15000 });

@@ -72,10 +72,7 @@
   }
 
   function resolveScene(scene, flags) {
-    if (!scene || scene.storyKey !== KEY) {
-      const idx = Array.isArray(scene) ? -1 : -1;
-      return scene;
-    }
+    if (!scene || scene.storyKey !== KEY) return scene;
     const signal = signalFrom(flags);
     if (signal === 'unknown') return scene;
     return {
