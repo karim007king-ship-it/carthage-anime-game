@@ -40,9 +40,15 @@ async function main() {
     const page = await context.newPage();
     const pageErrors = [];
     page.on('pageerror', error => pageErrors.push(error.message));
+    page.on('console', message => { if (message.type() === 'error') pageErrors.push(`console: ${message.text()}`); });
     await page.goto(`http://127.0.0.1:${address.port}`, { waitUntil: 'domcontentloaded' });
     const start = page.getByRole('button', { name: /ابدأ الجزء الأول/ });
-    await start.waitFor({ state: 'visible', timeout: 30000 });
+    try {
+      await start.waitFor({ state: 'visible', timeout: 30000 });
+    } catch {
+      const body = (await page.locator('body').innerText()).slice(0, 1800);
+      throw new Error(`Start screen did not appear. Body: ${body}\nRuntime errors: ${pageErrors.join(' | ')}`);
+    }
     await start.click();
     const skipIntro = page.getByRole('button', { name: /تخطي المقدمة/ });
     if (await skipIntro.count()) await skipIntro.click();
