@@ -1,0 +1,10 @@
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const source=fs.readFileSync(path.join(__dirname,'../scripts/prepare-web.cjs'),'utf8');
+assert.ok(source.includes('if(f!=="game"&&f!=="ending")return;'),'Ending screen must trigger autosave');
+assert.ok(source.includes('[f,T,B,L,K,cu,k,Zn]'),'Ending id and seen endings must trigger autosave');
+assert.ok(source.includes('route legacy chapter 1 through promise'),'Luna first-chapter route must remain installed');
+assert.ok(source.includes('restore dynamic promise line index'),'Luna chapter save restore must remain installed');
+console.log('Combined chapter and ending autosave static regression: PASS');
