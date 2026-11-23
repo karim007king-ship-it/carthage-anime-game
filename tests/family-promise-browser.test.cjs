@@ -42,7 +42,7 @@ async function main() {
     page.on('pageerror', error => pageErrors.push(error.message));
     page.on('console', message => { if (message.type() === 'error') pageErrors.push(`console: ${message.text()}`); });
     await page.goto(`http://127.0.0.1:${address.port}`, { waitUntil: 'domcontentloaded' });
-    const start = page.getByRole('button', { name: /ابدأ الجزء الأول/ });
+    const start = page.locator('button').filter({ hasText: 'ابدأ الجزء الأول' }).first();
     try {
       await start.waitFor({ state: 'visible', timeout: 30000 });
     } catch {
