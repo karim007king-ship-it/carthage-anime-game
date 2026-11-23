@@ -78,6 +78,12 @@ async function main() {
     for (let step = 0; step < 32; step++) {
       const target = page.getByRole('button', { name: new RegExp(expectedLabel) });
       if (await target.count()) return target.first();
+      const confirmSkip = page.getByRole('button', { name: /تعدى رغم ذلك/ });
+      if (await confirmSkip.count()) {
+        await confirmSkip.first().click();
+        await page.waitForTimeout(400);
+        continue;
+      }
       const skipSearch = page.getByRole('button', { name: /تعدى ←/ });
       if (await skipSearch.count()) {
         await skipSearch.first().click();
