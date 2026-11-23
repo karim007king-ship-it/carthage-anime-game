@@ -78,7 +78,7 @@ async function main() {
     for (let step = 0; step < 32; step++) {
       const target = page.getByRole('button', { name: new RegExp(expectedLabel) });
       if (await target.count()) return target.first();
-      const dialogue = page.locator('.dialogue-panel button').first();
+      const dialogue = page.locator('button').filter({ hasText: /قاعد يتكتب|اضغط للمتابعة/ }).first();
       if (!(await dialogue.count())) {
         const body = (await page.locator('body').innerText()).slice(0, 1800);
         const buttons = (await page.locator('button').allTextContents()).slice(0, 20).join(' | ');
@@ -103,7 +103,7 @@ async function main() {
     assert.ok(!beforeBranch.flags.some(flag => flag.startsWith('familySignal:')));
     await page.getByRole('button', { name: /نعلّم لينا ثلاث نقرات/ }).click();
     await page.getByText('اسمعي: دقّة... دقّة... دقّة.', { exact: false }).waitFor({ state: 'visible', timeout: 10000 });
-    const secondLine = page.locator('.dialogue-panel button').first();
+    const secondLine = page.locator('button').filter({ hasText: /قاعد يتكتب|اضغط للمتابعة/ }).first();
     await secondLine.click();
     await page.waitForTimeout(350);
     await secondLine.click();
